@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.4](https://github.com/leboncoin/spark-web/compare/v10.0.3...v10.0.4) (2025-03-24)
+
+**Note:** Version bump only for package @spark-ui/use-combined-state
+
 ## [10.0.3](https://github.com/leboncoin/spark-web/compare/v10.0.2...v10.0.3) (2025-03-24)
 
 **Note:** Version bump only for package @spark-ui/use-combined-state
