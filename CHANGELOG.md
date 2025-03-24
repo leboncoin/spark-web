@@ -15,8 +15,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### BREAKING CHANGES
 
-- new package is @spark-ui/ui and enables individual imports by doing
-  @spark-ui/ui/button
+- new package is @spark-ui/components and enables individual imports by doing
+  @spark-ui/components/button
 
 ## [9.4.8](https://github.com/leboncoin/spark-web/compare/v9.4.7...v9.4.8) (2025-03-19)
 
