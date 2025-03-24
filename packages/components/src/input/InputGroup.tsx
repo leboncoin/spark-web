@@ -1,5 +1,6 @@
 /* eslint-disable complexity */
 
+import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { useCombinedState } from '@spark-ui/use-combined-state'
 import { useMergeRefs } from '@spark-ui/use-merge-refs'
 import {
@@ -19,7 +20,6 @@ import {
   useRef,
 } from 'react'
 
-import { useFormFieldControl } from '../form-field'
 import { InputProps } from './Input'
 import { inputGroupStyles, InputGroupStylesProps } from './InputGroup.styles'
 import { InputGroupContext } from './InputGroupContext'

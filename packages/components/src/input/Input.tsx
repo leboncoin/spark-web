@@ -1,6 +1,6 @@
+import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { ChangeEventHandler, ComponentPropsWithoutRef, KeyboardEventHandler, Ref } from 'react'
 
-import { useFormFieldControl } from '../form-field'
 import { Slot } from '../slot'
 import { inputStyles } from './Input.styles'
 import { useInputGroup } from './InputGroupContext'

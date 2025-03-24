@@ -1,3 +1,4 @@
+import { useFormFieldControl } from '@spark-ui/components/form-field'
 import {
   createContext,
   Dispatch,
@@ -10,7 +11,6 @@ import {
   useState,
 } from 'react'
 
-import { useFormFieldControl } from '../form-field'
 import { Popover } from '../popover'
 import { type DownshiftState, type DropdownItem, type ItemsMap } from './types'
 import { useDropdown } from './useDropdown'

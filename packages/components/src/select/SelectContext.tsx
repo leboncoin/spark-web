@@ -1,3 +1,4 @@
+import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { useCombinedState } from '@spark-ui/use-combined-state'
 import {
   createContext,
@@ -11,7 +12,6 @@ import {
   useState,
 } from 'react'
 
-import { useFormFieldControl } from '../form-field'
 import { type ItemsMap, SelectItem } from './types'
 import { getItemsFromChildren } from './utils'
 

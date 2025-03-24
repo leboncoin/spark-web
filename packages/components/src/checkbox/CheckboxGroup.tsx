@@ -1,7 +1,7 @@
+import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { useCombinedState } from '@spark-ui/use-combined-state'
 import { ComponentPropsWithoutRef, Ref, useEffect, useMemo, useRef } from 'react'
 
-import { useFormFieldControl } from '../form-field'
 import { checkboxGroupStyles, CheckboxGroupStylesProps } from './CheckboxGroup.styles'
 import { CheckboxGroupContext, CheckboxGroupContextState } from './CheckboxGroupContext'
 

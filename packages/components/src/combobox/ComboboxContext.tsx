@@ -1,5 +1,6 @@
 /* eslint-disable complexity */
 /* eslint-disable max-lines-per-function */
+import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { useCombinedState } from '@spark-ui/use-combined-state'
 import { useCombobox, useMultipleSelection } from 'downshift'
 import {
@@ -16,7 +17,6 @@ import {
   useState,
 } from 'react'
 
-import { useFormFieldControl } from '../form-field'
 import { Popover } from '../popover'
 import { type ComboboxItem, type DownshiftState, type ItemsMap } from './types'
 import { multipleSelectionReducer } from './useCombobox/multipleSelectionReducer'

@@ -1,9 +1,9 @@
 /* eslint-disable complexity */
+import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { useMergeRefs } from '@spark-ui/use-merge-refs'
 import { cx } from 'class-variance-authority'
 import { Ref, useId, useMemo, useRef } from 'react'
 
-import { useFormFieldControl } from '../form-field'
 import { CheckboxGroupContextState, useCheckboxGroup } from './CheckboxGroupContext'
 import { CheckboxInput, CheckboxInputProps } from './CheckboxInput'
 import { CheckboxLabel } from './CheckboxLabel'
