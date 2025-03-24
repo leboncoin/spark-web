@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.3](https://github.com/leboncoin/spark-web/compare/v10.0.2...v10.0.3) (2025-03-24)
+
+### Bug Fixes
+
+- isolate form-field code to be shared across components ([350d9a6](https://github.com/leboncoin/spark-web/commit/350d9a65afc4e8be9e6ee1c9949bb762dbd4c481))
+
 ## [10.0.2](https://github.com/leboncoin/spark-web/compare/v10.0.1...v10.0.2) (2025-03-24)
 
 ### Bug Fixes
