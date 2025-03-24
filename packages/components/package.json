@@ -4,6 +4,16 @@
   "license": "MIT",
   "description": "Spark (Leboncoin design system) components.",
   "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./form-field": {
+      "types": "./dist/form-field/index.d.ts",
+      "import": "./dist/form-field/index.mjs",
+      "require": "./dist/form-field/index.js"
+    },
     "./*": {
       "types": "./dist/*/index.d.ts",
       "import": "./dist/*/index.mjs",

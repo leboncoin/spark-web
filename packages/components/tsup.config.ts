@@ -6,6 +6,7 @@ export default defineConfig(() => {
     format: ['cjs', 'esm'],
     dts: true,
     sourcemap: true,
-    external: ['react'],
+    external: ['react', '@spark-ui/components/form-field'],
+    noExternal: ['!@spark-ui/components/form-field'],
   }
 })
