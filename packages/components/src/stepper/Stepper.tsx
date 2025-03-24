@@ -1,6 +1,6 @@
+import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { createContext, type PropsWithChildren, RefObject, useContext, useRef } from 'react'
 
-import { useFormFieldControl } from '../form-field'
 import { InputGroup } from '../input'
 import type { StepperProps, UseStepperReturn } from './types'
 import { useStepper } from './useStepper'

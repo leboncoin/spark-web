@@ -1,7 +1,7 @@
+import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { RadioGroup as RadixRadioGroup } from 'radix-ui'
 import { ButtonHTMLAttributes, Ref } from 'react'
 
-import { useFormFieldControl } from '../form-field'
 import { RadioIndicator } from './RadioIndicator'
 import { radioInputVariants, RadioInputVariantsProps } from './RadioInput.styles'
 
