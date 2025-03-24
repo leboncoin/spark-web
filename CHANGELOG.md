@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.2](https://github.com/leboncoin/spark-web/compare/v10.0.1...v10.0.2) (2025-03-24)
+
+### Bug Fixes
+
+- form-field context in input components was lost after build ([ebfc456](https://github.com/leboncoin/spark-web/commit/ebfc45675f63a1b85025ecd37ff6282984eeb604))
+
 ## [10.0.1](https://github.com/leboncoin/spark-web/compare/v10.0.0...v10.0.1) (2025-03-24)
 
 **Note:** Version bump only for package spark
