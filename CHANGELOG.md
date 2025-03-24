@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.0.0](https://github.com/leboncoin/spark-web/compare/v9.4.8...v10.0.0) (2025-03-24)
+
+### Bug Fixes
+
+- workaround to optimize vercel publish ([2de233a](https://github.com/leboncoin/spark-web/commit/2de233a9fa697a2d9bc7ad9ab97a39244459ed60))
+
+### Code Refactoring
+
+- grouped all components into a single package ([d521202](https://github.com/leboncoin/spark-web/commit/d5212023e4db8b88bc565deb3b6b92d23d894793))
+
+### BREAKING CHANGES
+
+- new package is @spark-ui/ui and enables individual imports by doing
+  @spark-ui/ui/button
+
 ## [9.4.8](https://github.com/leboncoin/spark-web/compare/v9.4.7...v9.4.8) (2025-03-19)
 
 **Note:** Version bump only for package spark
