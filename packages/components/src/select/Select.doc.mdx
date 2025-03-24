@@ -1,0 +1,175 @@
+import { Meta, Canvas } from '@storybook/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { ArgTypes as ExtendedArgTypes } from '@docs/helpers/ArgTypes'
+import { Callout } from '@docs/helpers/Callout'
+
+import { Select } from '.'
+
+import * as stories from './Select.stories'
+
+<Meta of={stories} />
+
+# Select
+
+Select is an interactive element
+that allows users to select an option from a list of choices presented in a collapsible menu.
+It saves space on the interface by concealing the options until the user interacts with the component.
+
+Displays a **closed** list of options for the user to pick triggered by a button.
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { Select } from '@spark-ui/components/select'
+
+export default () => (
+  <Select>
+    <Select.Trigger>
+      <Select.LeadingIcon />
+      <Select.Value />
+    </Select.Trigger>
+    <Select.Items>
+      <Select.Placeholder />
+      <Select.Group>
+        <Select.Label />
+        <Select.Item />
+      </Select.Group>
+    </Select.Items>
+  </Select>
+);
+```
+
+## Examples
+
+### Controlled
+
+Use `value` and `onValueChange` props to control the value of the Select.
+
+<Canvas of={stories.Controlled} />
+
+### Disabled
+
+Use `disabled` on the root component to disable the Select entirely.
+
+<Canvas of={stories.Disabled} />
+
+### Disabled Item
+
+Use `disabled` on individual `Select.Item` to disable them.
+
+<Canvas of={stories.DisabledItem} />
+
+### Groups
+
+Similar to `optgroup` HTML tag, you can gather your items in groups.
+
+It is important to use `Select.Label` inside each `Select.Group` to give it an accessible name.
+
+<Canvas of={stories.Grouped} />
+
+### Read only
+
+Use `readOnly` prop to indicate the Select is only readable.
+
+<Canvas of={stories.ReadOnly} />
+
+### Status
+
+Use `state` prop to assign a specific state to the Select, choosing from: `error`, `alert` and `success`. By doing so, the outline styles will be updated.
+
+You could also wrap `Select` with a `FormField` and pass the prop to `Formfield` instead.
+
+<Canvas of={stories.Statuses} />
+
+### Trigger leading icon
+
+Use `Select.LeadingIcon` inside `Select.Trigger` to prefix your trigger with an icon.
+
+<Canvas of={stories.LeadingIcon} />
+
+## Form field
+
+### Label
+
+Use `FormField.Label` to add a label to the input.
+
+<Canvas of={stories.FormFieldLabel} />
+
+### Hidden label
+
+In certain cases, a visible label may not be necessary. To achieve this behavior, use the `VisuallyHidden` component.
+
+<Canvas of={stories.FormFieldHiddenLabel} />
+
+### Required
+
+Use the `isRequired` prop of the `FormField` to indicate that the Select is required.
+
+<Canvas of={stories.FormFieldRequired} />
+
+### Disabled
+
+The Select `disabled` field status can be managed by the FormField `disabled` flag.
+
+<Canvas of={stories.FormFieldDisabled} />
+
+### ReadOnly
+
+Apply `readOnly` to the wrapping `FormField` to indicate the Select is only readable.
+
+<Canvas of={stories.FormFieldReadOnly} />
+
+### Validation
+
+Set the `state` prop of the `FormField` to `error` to indicate that the Select is invalid. Optionally use the `FormField.ErrorMessage` to describe why the Select is invalid.
+
+<Canvas of={stories.FormFieldValidation} />
+
+## API Reference
+
+<ExtendedArgTypes
+  of={Select}
+  description="A form input used for selecting a value: when collapsed it shows the currently selected option and when expanded, it shows a scrollable list of predefined options for the user to choose from."
+  subcomponents={{
+    'Select.Trigger': {
+      of: Select.Trigger,
+      description:
+        'The button that toggles the select. The Select.Items will position itself by aligning over the trigger.',
+    },
+    'Select.Value': {
+      of: Select.Value,
+      description:
+        "The part that reflects the selected value. By default the selected item's text will be rendered. if you require more control, you can instead control the select and pass your own children. It should not be styled to ensure correct positioning. An optional placeholder prop is also available for when the select has no value.",
+    },
+    'Select.LeadingIcon': {
+      of: Select.LeadingIcon,
+      description: 'Prepend a decorative icon inside the input (to the left).',
+    },
+    'Select.Items': {
+      of: Select.Items,
+      description: 'The wrapper which contains all the options.',
+    },
+    'Select.Item': { of: Select.Item, description: 'Each option of the element field' },
+    'Select.Group': {
+      of: Select.Group,
+      description:
+        'A wrapper for grouping a subset of options (Select.Item) when needed. Use in conjunction with Select.Label to ensure good accessibility via automatic labelling.',
+    },
+    'Select.Label': {
+      of: Select.Label,
+      description: "Used to render the label of a group. It won't be focusable using arrow keys.",
+    },
+  }}
+/>
+
+## Accessibility
+
+<A11yReport of="select" />

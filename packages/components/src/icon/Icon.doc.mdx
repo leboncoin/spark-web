@@ -1,0 +1,61 @@
+import { Meta, Canvas } from '@storybook/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Icon } from '.'
+import * as IconStories from './Icon.stories'
+
+<Meta of={IconStories} />
+
+# Icon
+
+Accessible icon wrapper
+
+<Canvas of={IconStories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { Icon } from '@spark-ui/components/icon'
+
+export default () => (
+  <Icon />
+);
+```
+
+
+
+## Examples
+
+### Intent
+
+Use `intent` prop to change the color of the icon. If `current` is set the current font color will be used.
+
+<Canvas of={IconStories.Intent} />
+
+### Label
+
+Use `label` prop so it could be announced correctly by screen readers. There is no visual difference.
+
+<Canvas of={IconStories.Label} />
+
+### Sizes
+
+Use `size` prop to change the size of the icon. If `current` is set the current font size will be used.
+
+<Canvas of={IconStories.Sizes} />
+
+## API Reference
+
+<ArgTypes of={Icon} />
+
+## Accessibility
+
+<A11yReport of="icon" />
+
+Most icons or icon systems come with no accessibility built-in. For example, the same visual cross icon may in fact mean "close" or "delete". This component lets you give meaning to icons used throughout your app.

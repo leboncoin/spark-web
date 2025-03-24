@@ -1,6 +1,6 @@
-import { Button } from '@spark-ui/button'
-import { Icon } from '@spark-ui/icon'
-import { FavoriteOutline } from '@spark-ui/icons/dist/icons/FavoriteOutline'
+import { FavoriteOutline } from '@spark-ui/icons/FavoriteOutline'
+import { Button } from '@spark-ui/components/button'
+import { Icon } from '@spark-ui/components/icon'
 import React from 'react'
 
 export const A11yButton = () => (

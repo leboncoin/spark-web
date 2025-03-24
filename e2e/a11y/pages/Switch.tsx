@@ -1,4 +1,4 @@
-import { Switch } from '@spark-ui/switch'
+import { Switch } from '@spark-ui/components/switch'
 import React from 'react'
 
 export const A11ySwitch = () => (

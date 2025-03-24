@@ -1,5 +1,5 @@
-import { Button } from '@spark-ui/button'
-import { Drawer } from '@spark-ui/drawer'
+import { Button } from '@spark-ui/components/button'
+import { Drawer } from '@spark-ui/components/drawer'
 import React from 'react'
 
 export const A11yDrawer = () => (
@@ -30,12 +30,12 @@ export const A11yDrawer = () => (
             </p>
           </Drawer.Body>
 
-          <Drawer.Footer className="flex justify-between gap-md">
+          <Drawer.Footer className="gap-md flex justify-between">
             <Button intent="basic" design="ghost">
               Cancel
             </Button>
 
-            <div className="flex gap-md">
+            <div className="gap-md flex">
               <Button intent="basic" design="outlined">
                 Disagree
               </Button>

@@ -1,0 +1,160 @@
+import { Meta, Canvas } from '@storybook/addon-docs'
+import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Kbd } from '@spark-ui/components/kbd'
+
+import { ScrollingList } from '.'
+
+import * as stories from './ScrollingList.stories'
+
+<Meta of={stories} />
+
+# ScrollingList
+
+A scrolling list presents a series of items arranged horizontally or vertically, allowing users to explore the content by scrolling.
+
+Each item maintains its natural size, which can result in varying dimensions and the possibility of partial visibility.
+
+This format is suitable when offering an overview of available content, enabling users to quickly browse through a collection without a predefined structure.
+
+<Canvas of={stories.Default} />
+
+By default, the scrolling-list will preserve the natural width of every item, and calculate its pagination from it.
+The first cropped item on the right side will be the next snap point when using controls).
+
+It optimizes how many click are necessary to traverse the full list of items.
+
+**a11y**: `ScrollingList.SkipButton` must be used to offer keyboard users to skip past the list entirely.
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { ScrollingList } from '@spark-ui/components/scrolling-list'
+
+return () => (
+  <ScrollingList>
+    <ScrollingList.SkipButton />
+    <ScrollingList.Items>
+      <ScrollingList.Item />
+    <ScrollingList.Controls>
+      <ScrollingList.PrevButton />
+      <ScrollingList.NextButton />
+    </ScrollingList.Controls>
+  </ScrollingList>
+)
+```
+
+## Examples
+
+### Controls visibility
+
+Set `visibility` to `hover` on `ScrollingList.Controls` if you wish the navigation buttons to be hidden by default.
+
+**a11y**: this impacts the accessibility on touch screens as the controls become ivisible. When using this, you must provide an alternative control close to the list that replaces them. 
+
+<Canvas of={stories.ControlsVisibility} />
+
+### Fade effect
+
+Use `withFade` to add a fade effect to indicate content overflow. It uses an alpha css mask to be compatible no matter wich background is behind your list.
+
+<Canvas of={stories.Fade} />
+
+### Gap
+
+To customize spacing between items, set the `gap` property. Value in pixels (integer).
+
+<Canvas of={stories.Gap} />
+
+### Loop
+
+To allow looping of slides, set the `loop` property to `true`. The navigation controls will remain accessible even when you reach the edge of the list.
+
+<Canvas of={stories.Loop} />
+
+### Scroll behavior
+
+Use `snap type`, `snapStop` and `scrollBehavior` props to control the scrolling behaviour.
+
+**1. snapType**:
+
+- `mandatory` (default): The visual viewport of this scroll container must snap to a snap position if it isn't currently scrolled.
+- `proximity`: The visual viewport of this scroll container may snap to a snap position if it isn't currently scrolled. The user agent decides if it snaps or not based on scroll parameters. This is the default snap strictness if any snap axis is specified.
+- `none`: When the visual viewport of this scroll container is scrolled, it must ignore snap points.
+
+**2. snap stop**:
+
+- `normal` (default): When the visual viewport of this element's scroll container is scrolled, it may "pass over" possible snap positions.
+- `always`: The scroll container must not "pass over" a possible snap position; and must snap to the first of this elements' snap positions.
+
+**3. scroll behaviour**:
+
+- `smooth` (default): The scrolling box scrolls in a smooth fashion using a user-agent-defined easing function over a user-agent-defined period of time. User agents should follow platform conventions, if any.
+- `instant`: The scrolling box scrolls instantly when interacting with the scrolling-list controls.
+
+<Canvas of={stories.ScrollBehavior} />
+
+### Scroll padding
+
+Use `scrollPadding` to always display the right-most part of the previous page to the user, highlighting that there is more content to the left.
+
+<Canvas of={stories.ScrollPadding} />
+
+## API Reference
+
+<ArgTypes
+  of={ScrollingList}
+  description="Presents a set of slides, by sequentially displaying a subset of one or more items."
+  subcomponents={{
+    'ScrollingList.Items': {
+      of: ScrollingList.Items,
+      description:
+        'The scroll area of the scrolling list, contains all items to display in slides.',
+    },
+    'ScrollingList.Item': {
+      of: ScrollingList.Item,
+      description:
+        'A single content container within a set of content containers that hold the content to be presented by the scrolling list.',
+    },
+    'ScrollingList.Controls': {
+      of: ScrollingList.Controls,
+      description:
+        'Two interactive elements, styled as arrow buttons, that displays the next or previous slide in the rotation sequence.',
+    },
+    'ScrollingList.PrevButton': {
+      of: ScrollingList.PrevButton,
+      description:
+        'Button that scroll to previous set of items.',
+    },
+    'ScrollingList.NextButton': {
+      of: ScrollingList.NextButton,
+      description:
+        'Button that scroll to next set of items.',
+    },
+    'ScrollingList.SkipButton': {
+      of: ScrollingList.SkipButton,
+      description:
+        'A button only visible for keyboard users. Allow them to skip the content of the scrolling list entirely.',
+    },
+  }}
+/>
+
+## Accessibility
+
+We consider this component to be closer to a `list` role than a `carousel` pattern, as the `carousel` pattern was made with the intention of displaying one slide at a time and do not crop items when they overflow.
+
+### Recommandations
+
+- It is advised to add an accessible name to `ScrollingList.Items`, either using an `aria-label` or an `aria-labelledby` attribute.
+- Because the controls are only displayed when hovering by default, it means they won't appear on mobile devices. Consider using `ScrollingList.Gradient` to show the user that content is overflowing and that they are able to scroll.
+- `aria-label` are mandatory on `ScrollingList.NextButton` and `ScrollingList.PrevButton`.
+
+### Keyboard Interactions
+
+- <Kbd>Tab</Kbd> and <Kbd>Shift + Tab</Kbd>: Move focus through the interactive elements of the list.
+

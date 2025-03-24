@@ -1,0 +1,126 @@
+import { Kbd } from '@spark-ui/components/kbd'
+import { Canvas, Meta } from '@storybook/blocks'
+import { Source } from '@storybook/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Callout } from '@docs/helpers/Callout'
+import { Button } from '.'
+import * as ButtonStories from './Button.stories'
+
+<Meta of={ButtonStories} />
+
+# Button
+
+Button component is used to trigger an action or event, such as submitting a form, opening a Dialog, canceling an action, or performing a delete operation.
+
+<Canvas of={ButtonStories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```js
+import { Button } from '@spark-ui/components/button'
+
+export default () => (
+  <Button />
+);
+```
+
+## Examples
+
+### Design
+
+Use `design` prop to set the different look and feels of a button.
+
+<Canvas of={ButtonStories.Design} />
+
+### Disabled
+
+Use `disable` prop to disable the element.
+
+<Canvas of={ButtonStories.Disabled} />
+
+### Icons
+
+Compose the content of the button using the `Icon` component to add an icon to the left or right.
+
+<Canvas of={ButtonStories.Icons} />
+
+### Intent
+
+Use `intent` prop to set the color intent of a button.
+
+<Canvas of={ButtonStories.Intent} />
+
+### Loading
+
+Use the `isLoading` prop to render the button in loading state.
+This will prepend a spinner inside the button.
+
+It preserves the width of your button to avoid content layout shifting.
+
+**a11y tip: use `loadingLabel` to set an accessible aria-label for when the button is in loading state.**
+
+<Canvas of={ButtonStories.Loading} />
+
+#### Loading with text
+
+Alternatively, use `loadingText` if you prefer the loading text to be visible to the user (**Warning: using this might cause layout shifting**)
+
+<Canvas of={ButtonStories.LoadingWithText} />
+
+### Shapes
+
+Use `shape` prop to set the shape of a button.
+
+<Canvas of={ButtonStories.Shapes} />
+
+### Sizes
+
+Use `size` prop to set the size of a button.
+
+<Canvas of={ButtonStories.Sizes} />
+
+## Advanced Examples
+
+### Link
+
+Use `asChild` so that the button takes the html tag and props of its direct child element.
+In this example, if you need your button to be a link.
+
+This polymorphic behaviour can be used with any type of HTML element.
+
+<Callout kind="warning">
+  If you do decide to change the underlying element type, it is your responsibility to ensure it
+  remains accessible and functional. In the case of Tooltip.Trigger for example, it must be a
+  focusable element that can respond to pointer and keyboard events. If you were to switch it to a
+  div, it would no longer be accessible.
+</Callout>
+
+<Canvas of={ButtonStories.Link} />
+
+### Toggle
+
+Use `aria-pressed` to transform the button into a toggle button.
+
+<Canvas of={ButtonStories.Toggle} />
+
+## API Reference
+
+<ArgTypes of={Button} />
+
+## Accessibility
+
+<A11yReport of="button" />
+
+This component adheres to the [`button` role requirements](https://www.w3.org/WAI/ARIA/apg/patterns/button).
+
+### Keyboard Interactions
+
+- <Kbd>Space</Kbd>: Activates the button
+- <Kbd>Enter</Kbd>: Activates the button

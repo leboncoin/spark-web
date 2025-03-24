@@ -1,5 +1,5 @@
-import { BookmarkFill } from '@spark-ui/icons/dist/icons/BookmarkFill'
-import { Select } from '@spark-ui/select'
+import { BookmarkFill } from '@spark-ui/icons/BookmarkFill'
+import { Select } from '@spark-ui/components/select'
 import React from 'react'
 
 export const A11ySelect = () => (

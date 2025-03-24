@@ -1,5 +1,5 @@
 {
-  "@spark-ui/kbd": {
+  "@spark-ui/components/kbd": {
     "timestamp": "2024-11-06T15:04:52.443Z",
     "url": "http://localhost:3002/a11y/kbd",
     "incomplete": [],

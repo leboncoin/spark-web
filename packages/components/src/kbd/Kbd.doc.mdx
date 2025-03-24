@@ -1,0 +1,67 @@
+import { Meta, Canvas } from '@storybook/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { ArgTypes } from '@docs/helpers/ArgTypes'
+
+import { Kbd } from '.'
+
+import * as stories from './Kbd.stories'
+
+<Meta of={stories} />
+
+# Keyboard Key
+
+The keyboard key component exists to show which key or combination of keys performs a given action.
+
+All shortcuts should do their best to match what appears on the user’s keyboard.
+
+- All single letters A-Z are uppercase.
+  - Do NOT use [Glyph unicode representations](https://en.wikipedia.org/wiki/List_of_Unicode_characters) for the special key symbols.
+- For non-letter keys such as enter, esc and shift, stick to lowercase.
+- Use the arrow symbol as opposed to spelling things out.
+- For function keys, stick to uppercase.
+- For combination between keys and mouse events type the mouse event name upper-cased preceded by the 🖱️unicode glyph.
+
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { Kbd } from '@spark-ui/components/kbd'
+
+export default () => <Kbd />;
+```
+
+## Examples
+
+### Combinations
+
+The only punctuation you should need is the + to indicate that a combination of keys will activate the shortcut.
+
+<Canvas of={stories.ShiftPlusH} />
+
+For a sequence of keys where one must follow the other, write "then" in between. Stick to lowercase to match the non-letter keys.
+
+<Canvas of={stories.ShiftThenH} />
+
+If two different keys can execute the same action or the shortcut itself may look different on the user’s keyboard, write "or" in between.
+
+<Canvas of={stories.ShiftOrH} />
+
+When combining a keyboard key and a mouse action combine it using the previous rules and the action name bold and uppercase preceded by the 🖱symbol glyph.
+
+<Canvas of={stories.OptionPlusScroll} />
+
+## API Reference
+
+<ArgTypes of={Kbd} />
+
+## Accessibility
+
+<A11yReport of="kbd" />

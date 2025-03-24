@@ -1,6 +1,6 @@
-import { Button } from '@spark-ui/button'
-import { Dropdown } from '@spark-ui/dropdown'
-import { FormField } from '@spark-ui/form-field'
+import { Button } from '@spark-ui/components/button'
+import { Dropdown } from '@spark-ui/components/dropdown'
+import { FormField } from '@spark-ui/components/form-field'
 import React from 'react'
 
 export function DropdownWithAdjacentButtons() {

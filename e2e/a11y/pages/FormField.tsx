@@ -1,4 +1,4 @@
-import { FormField } from '@spark-ui/form-field'
+import { FormField } from '@spark-ui/components/form-field'
 import React from 'react'
 
 export const A11yFormField = () => (
@@ -14,7 +14,7 @@ export const A11yFormField = () => (
               id={id}
               name={name}
               aria-describedby={description}
-              className="rounded-sm border-md border-neutral p-md outline-none"
+              className="border-md border-neutral p-md rounded-sm outline-none"
             />
           )}
         </FormField.Control>
@@ -36,7 +36,7 @@ export const A11yFormField = () => (
               aria-describedby={description}
               aria-required={isRequired}
               required={isRequired}
-              className="rounded-sm border-md border-neutral p-md outline-none"
+              className="border-md border-neutral p-md rounded-sm outline-none"
             />
           )}
         </FormField.Control>

@@ -1,4 +1,4 @@
-import { Accordion } from '@spark-ui/accordion'
+import { Accordion } from '@spark-ui/components/accordion'
 import React from 'react'
 
 export const A11yAccordion = () => (

@@ -37,9 +37,9 @@
   },
   "dependencies": {
     "@rollup/plugin-terser": "^0.4.4",
-    "@spark-ui/tabs": "^2.0.0",
     "@spark-ui/theme-utils": "^4.0.0",
-    "@storybook/test": "^8.5.8"
+    "@storybook/test": "^8.5.8",
+    "@spark-ui/components": "*"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.9.1",
@@ -120,6 +120,7 @@
     "storybook-addon-tag-badges": "^1.2.0",
     "tailwindcss": "^4.0.0",
     "ts-node": "10.9.2",
+    "tsup": "^8.4.0",
     "type-fest": "3.13.1",
     "typescript": "5.5.4",
     "vite": "^4.3.9",
@@ -132,9 +133,10 @@
     "lightningcss-linux-x64-gnu": "^1.29.1"
   },
   "workspaces": [
-    "packages/components/*",
     "packages/hooks/*",
-    "packages/utils/*"
+    "packages/utils/*",
+    "packages/components",
+    "packages/icons"
   ],
   "browserslist": [
     "> 0.5% or > 0.1% and last 2 years, not dead, not Firefox ESR, not and_qq > 0, not and_uc > 0, not and_ff >0"

@@ -1,5 +1,5 @@
-import { Combobox } from '@spark-ui/combobox'
-import { PenOutline } from '@spark-ui/icons/dist/icons/PenOutline'
+import { PenOutline } from '@spark-ui/icons/PenOutline'
+import { Combobox } from '@spark-ui/components/combobox'
 import React from 'react'
 
 export const A11yCombobox = () => (

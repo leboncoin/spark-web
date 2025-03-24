@@ -1,5 +1,5 @@
-import { Button } from '@spark-ui/button'
-import { addSnackbar, Snackbar } from '@spark-ui/snackbar'
+import { Button } from '@spark-ui/components/button'
+import { addSnackbar, Snackbar } from '@spark-ui/components/snackbar'
 import React from 'react'
 
 export const A11ySnackbar = () => (

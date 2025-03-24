@@ -1,0 +1,95 @@
+import { Meta, Canvas } from '@storybook/blocks'
+import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { Kbd } from '@spark-ui/components/kbd'
+
+import { Breadcrumb } from '.'
+
+import * as stories from './Breadcrumb.stories'
+
+<Meta of={stories} />
+
+# Breadcrumb
+
+Navigation pattern that helps users understand the hierarchy of a website
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { Breadcrumb } from '@spark-ui/breadcrumb'
+
+export default () => (
+  <Breadcrumb>
+    <Breadcrumb.Item>
+      <Breadcrumb.Link /> // or <Breadcrumb.CurrentPage />
+    </Breadcrumb.Item>
+    <Breadcrumb.Separator />
+  </Breadcrumb>
+);
+```
+
+## Examples
+
+### Custom Separator
+
+Use the `children` property of `Breadcrumb.Separator` to use a different icon for the separator. You can also use raw text.
+
+<Canvas of={stories.CustomSeparator} />
+
+### Truncate
+
+Apply a maximum width on an element to truncate it automatically.
+
+<Canvas of={stories.Truncate} />
+
+## API Reference
+
+<ArgTypes
+  of={Breadcrumb}
+  description="Contains all the parts of a breakpoint. Navigation area."
+  subcomponents={{
+    'Breadcrumb.Item': {
+      of: Breadcrumb.Item,
+      description: 'List item to use inside of `Breadcrumb` directly.',
+    },
+    'Breadcrumb.Link': {
+      of: Breadcrumb.Link,
+      description: 'Use inside `Breadcrumb.Item` if your item must be a link.',
+    },
+    'Breadcrumb.CurrentPage': {
+      of: Breadcrumb.CurrentPage,
+      description:
+        'Use inside `Breadcrumb.Item` if your item is the current page (non-interactive link).',
+    },
+    'Breadcrumb.Separator': {
+      of: Breadcrumb.Separator,
+      description: 'Separator to use between each `Breadcrumb.Item`. Content can be customized.',
+    },
+  }}
+/>
+
+## Accessibility
+
+<A11yReport of="breadcrumb" />
+
+Adheres to the [Breadcrumb WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/).
+
+### Keyboard Interaction
+
+- <Kbd>Tab</Kbd>: Focuses the next item.
+- <Kbd>Shift</Kbd> + <Kbd>Tab</Kbd>: Focuses the previous item.
+- <Kbd>Enter</Kbd>: Triggers an item link.
+
+### WAI-ARIA Roles, States, and Properties
+
+- Breadcrumb trail is contained within a navigation landmark region.
+- The landmark region is labelled via [aria-label](https://w3c.github.io/aria/#aria-label) or [aria-labelledby](https://w3c.github.io/aria/#aria-labelledby).
+- The link to the current page has [aria-current](https://w3c.github.io/aria/#aria-current) set to `page`. If the element representing the current page is not a link, aria-current is optional.

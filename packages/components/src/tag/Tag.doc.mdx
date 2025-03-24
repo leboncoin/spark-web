@@ -1,0 +1,56 @@
+import { Canvas, Meta } from '@storybook/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Tag } from '.'
+import * as TagStories from './Tag.stories'
+
+<Meta of={TagStories} />
+
+# Tag
+
+A **Tag** is a visual indicator generally appearing inside or in close-proximity to another larger interface component,
+representing or highlighting its status, property, or some other metadata for quick recognition.
+
+<Canvas of={TagStories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```js
+import { Tag } from '@spark-ui/components/tag'
+
+export default () => <Tag />;
+```
+
+## Examples
+
+### Design
+
+Use `design` prop to set the different look and feels of a tag.
+
+<Canvas of={TagStories.Design} />
+
+### Icons
+
+Compose the content of the tag using the `Icon` component to add an icon to the left or right.
+
+<Canvas of={TagStories.Icons} />
+
+### Intent
+
+Use `intent` prop to set the color intent of a tag.
+
+<Canvas of={TagStories.Intent} />
+
+## API Reference
+
+<ArgTypes of={Tag} />
+
+## Accessibility
+
+<A11yReport of="tag" />

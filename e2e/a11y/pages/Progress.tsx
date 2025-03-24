@@ -1,4 +1,4 @@
-import { Progress } from '@spark-ui/progress'
+import { Progress } from '@spark-ui/components/progress'
 import React from 'react'
 
 export const A11yProgress = () => (

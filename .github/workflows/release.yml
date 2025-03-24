@@ -45,7 +45,7 @@ jobs:
       - name: Build Storybook
         run: npm run storybook:build
       - name: Deploy Storybook to Vercel
-        run: vercel deploy --token $VERCEL_TOKEN --prod --yes
+        run: vercel deploy --token $VERCEL_TOKEN --prod --yes --archive=tgz
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}

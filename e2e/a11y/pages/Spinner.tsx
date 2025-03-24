@@ -1,4 +1,4 @@
-import { Spinner } from '@spark-ui/spinner'
+import { Spinner } from '@spark-ui/components/spinner'
 import React from 'react'
 
 export const A11ySpinner = () => (

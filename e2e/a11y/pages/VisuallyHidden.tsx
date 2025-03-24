@@ -1,5 +1,5 @@
-import { Check } from '@spark-ui/icons/dist/icons/Check'
-import { VisuallyHidden } from '@spark-ui/visually-hidden'
+import { Check } from '@spark-ui/icons/Check'
+import { VisuallyHidden } from '@spark-ui/components/visually-hidden'
 import React from 'react'
 
 export const A11yVisuallyHidden = () => (

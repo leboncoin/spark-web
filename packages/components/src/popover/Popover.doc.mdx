@@ -1,0 +1,165 @@
+import { Meta, Canvas } from '@storybook/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Kbd } from '@spark-ui/components/kbd'
+
+import { Popover } from '.'
+
+import * as stories from './Popover.stories'
+
+<Meta of={stories} />
+
+# Popover
+
+Displays rich content in a portal, triggered by a button.
+
+
+A basic popover should have a trigger element and a content element.
+
+The trigger is the element that should toggle the popover.
+The content is the popover itself.
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { Popover } from '@spark-ui/components/popover'
+
+export default () => (
+  <Popover>
+    <Popover.Trigger />
+    <Popover.Portal>
+      <Popover.Content>
+        <Popover.Header />
+        <Popover.Arrow />
+        <Popover.CloseButton />
+      </Popover.Content>
+    </Popover.Portal>
+    <Popover.Anchor />
+  </Popover.Portal>
+);
+```
+
+## Examples
+
+### Inset
+
+When set to `true`, this option will remove the internal padding of the `Popover.Content` component. This allows you to have an image or any content that occupies the full width, for example.
+
+<Canvas of={stories.Inset} />
+
+### Uncontrolled
+
+By default, `Popover` doesn't need external state to open/close itself.
+You can use `defaultOpen` if you need to make it open by default.
+
+<Canvas of={stories.Uncontrolled} />
+
+### Controlled
+
+You can use state to have better control over the behaviour of the Popover.
+It allows you to open/close it from the outside.
+
+Please note that is example is using `Popover.Anchor` to attach the Popover to a specific element.
+
+<Canvas of={stories.Controlled} />
+
+### Anchored
+
+When you need to attach the popover to a different element than its `Popover.Trigger`, you must use `Popover.Anchor`.
+
+If not used, then `Popover.Trigger` will be both the trigger element and the anchor for the popover.
+
+When using `Popover.Anchor`, you can have multiple `Popover.Trigger` to trigger the same `Popover` in different ways
+
+<Canvas of={stories.Anchored} />
+
+### Boundaries
+
+You can restrict the popover to stay inside a container (ref).
+In this example, the Popover remains inside the grey container.
+
+<Canvas of={stories.Boundaries} />
+
+### Intents
+
+Use `intent` prop to set the color intent of the popover.
+
+<Canvas of={stories.Intents} />
+
+### Match trigger width
+
+Use this prop to make the Popover width match its trigger element width.
+
+<Canvas of={stories.MatchTriggerWidth} />
+
+### Positionning
+
+By combining `side` and `align` you can achieve many positions for the popover.
+
+- `side`: The preferred side of the anchor to render against when open. Will be reversed when collisions occur and avoidCollisions is enabled.
+- `align`: The preferred alignment against the anchor. May change when collisions occur.
+
+<Canvas of={stories.Positionning} />
+
+## API Reference
+
+<ArgTypes
+  of={Popover}
+  description="Contains all the parts of a popover."
+  subcomponents={{
+    'Popover.Trigger': {
+      of: Popover.Trigger,
+      description:
+        'The button that toggles the popover. By default, the Popover.Content will position itself against the trigger.',
+    },
+    'Popover.Anchor': {
+      of: Popover.Anchor,
+      description:
+        'An optional element to position the Popover.Content against. If this part is not used, the content will position alongside the Popover.Trigger.',
+    },
+    'Popover.Portal': {
+      of: Popover.Portal,
+      description: 'When used, portals the content part into the body.',
+    },
+    'Popover.Content': {
+      of: Popover.Content,
+      description: 'The component that pops out when the popover is open.',
+    },
+    'Popover.Header': {
+      of: Popover.Header,
+      description:
+        'Header for the popover content. Also serve as an accessible name for the Popover. Must be rendered inside Popover.Content.',
+    },
+    'Popover.CloseButton': {
+      of: Popover.CloseButton,
+      description: 'The button that closes an open popover.',
+    },
+    'Popover.Arrow': {
+      of: Popover.Arrow,
+      description:
+        'An optional arrow element to render alongside the popover. This can be used to help visually link the anchor with the Popover.Content. Must be rendered inside Popover.Content.',
+    },
+  }}
+/>
+
+## Accessibility
+
+<A11yReport of="popover" />
+
+Adheres to the [`Dialog WAI-ARIA design pattern`](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal).
+
+### Keyboard Interactions
+
+- <Kbd>Space</Kbd>: Open/Closes the popover.
+- <Kbd>Enter</Kbd>: Open/Closes the popover.
+- <Kbd>Tab</Kbd>: Moves focus to the next focusable element.
+- <Kbd>Shift</Kbd> + <Kbd>Tab</Kbd>: Moves focus to the previous focusable element.
+- <Kbd>Esc</Kbd>: Closes the popover and moves focus back to `Popover.Trigger`.

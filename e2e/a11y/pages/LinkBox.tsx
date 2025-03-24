@@ -1,8 +1,8 @@
-import { Icon } from '@spark-ui/icon'
-import { IconButton } from '@spark-ui/icon-button'
-import { FavoriteOutline } from '@spark-ui/icons/dist/icons/FavoriteOutline'
-import { LinkBox } from '@spark-ui/link-box'
-import { TextLink } from '@spark-ui/text-link'
+import { FavoriteOutline } from '@spark-ui/icons/FavoriteOutline'
+import { Icon } from '@spark-ui/components/icon'
+import { IconButton } from '@spark-ui/components/icon-button'
+import { LinkBox } from '@spark-ui/components/link-box'
+import { TextLink } from '@spark-ui/components/text-link'
 import React from 'react'
 
 export const A11yLinkBox = () => (
@@ -10,11 +10,11 @@ export const A11yLinkBox = () => (
     <div>
       <LinkBox asChild>
         <article className="space-y-md">
-          <div className="relative aspect-square w-full overflow-hidden rounded-md bg-neutral shadow-md">
+          <div className="bg-neutral relative aspect-square w-full overflow-hidden rounded-md shadow-md">
             <img className="size-full" src="https://picsum.photos/200/200" alt="Card image" />
 
             <LinkBox.Raised>
-              <IconButton shape="pill" aria-label="Like" className="!absolute bottom-md right-md">
+              <IconButton shape="pill" aria-label="Like" className="bottom-md right-md !absolute">
                 <Icon>
                   <FavoriteOutline />
                 </Icon>
@@ -24,7 +24,7 @@ export const A11yLinkBox = () => (
 
           <div className="space-y-0">
             <h2>
-              <LinkBox.Link className="line-clamp-1 text-headline-2" href="#">
+              <LinkBox.Link className="text-headline-2 line-clamp-1" href="#">
                 Title
               </LinkBox.Link>
             </h2>

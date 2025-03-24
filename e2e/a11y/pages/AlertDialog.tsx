@@ -1,5 +1,5 @@
-import { AlertDialog } from '@spark-ui/alert-dialog'
-import { Button } from '@spark-ui/button'
+import { AlertDialog } from '@spark-ui/components/alert-dialog'
+import { Button } from '@spark-ui/components/button'
 import React from 'react'
 
 export const A11yAlertDialog = () => (
@@ -23,7 +23,7 @@ export const A11yAlertDialog = () => (
             </AlertDialog.Description>
           </AlertDialog.Body>
 
-          <AlertDialog.Footer className="flex justify-end gap-md">
+          <AlertDialog.Footer className="gap-md flex justify-end">
             <AlertDialog.Cancel asChild>
               <Button intent="neutral" design="ghost">
                 Cancel

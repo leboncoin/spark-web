@@ -1,0 +1,17 @@
+.git
+.github
+node_modules
+e2e
+test-results
+playwright-report
+.storybook
+.nx
+.vscode
+.husky
+**/test
+**/*.test.*
+**/*.spec.*
+.DS_Store
+*.log
+tsconfig.tsbuildinfo
+coverage 

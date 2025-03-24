@@ -144,7 +144,7 @@ jobs:
       - name: Deploy Storybook to Vercel
         id: deployment
         run: |
-          DEPLOYMENT_URL=$(vercel deploy --token $VERCEL_TOKEN --yes)
+          DEPLOYMENT_URL=$(vercel deploy --token $VERCEL_TOKEN --yes --archive=tgz)
           echo "::set-output name=url::$(echo $DEPLOYMENT_URL)"
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}

@@ -1,0 +1,111 @@
+import { Meta, Canvas } from '@storybook/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { ArgTypes as ExtendedArgTypes } from '@docs/helpers/ArgTypes'
+
+import { Divider } from '.'
+
+import * as stories from './Divider.stories'
+
+<Meta of={stories} />
+
+# Divider
+
+A separator between two elements, usually consisting of a horizontal line.
+
+A few common uses are:
+
+- Separating sections on a page
+- Separating items in a list
+- Creating a visual contrast between 2 sides of a page
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { Divider } from '@spark-ui/components/divider'
+
+export default () => (
+  <Divider>
+    <Divider.Content />
+  </Divider>
+);
+```
+
+## Examples
+
+### Content
+
+Spark-ui gives you the opportunity
+to place an item on top of the divider by using its `Divider.Content` component as a children.
+
+<Canvas of={stories.Content} />
+
+### asChild
+
+The `Divider` component is a `separator` rolled `div` unless you include an `asChild` boolean flag, and pass the element you prefer it becomes as an immediate child.
+It can also work combined with `Divider.Content` inside of it.
+
+<Canvas of={stories.asChild} />
+
+### Decorative
+
+Using `isDecorative` boolean flag prop makes the Divider only visual in terms of accessibility, not adding any role to the html element.
+
+<Canvas of={stories.Decorative} />
+
+### Alignment
+
+When adding a `Divider.Content` element as a children you can align it using the `alignment` prop in the `Divider` component.
+
+<Canvas of={stories.Alignment} />
+
+### Orientation
+
+The divider can set its orientation setting it as a prop.
+
+<Canvas of={stories.Orientation} />
+
+### Intent
+
+The divider can set its intent setting it as a prop.
+
+<Canvas of={stories.Intent} />
+
+## Advanced Examples
+
+### Wrapped Content
+
+Users can also rotate the text to achieve the proper design.
+
+<Canvas of={stories.WrappedContent} />
+
+### Card Content
+
+<Canvas of={stories.Card} />
+
+## API Reference
+
+<ExtendedArgTypes
+  of={Divider}
+  description="Visually or semantically separates content."
+  subcomponents={{
+    'Divider.Content': {
+      of: Divider.Content,
+      description: 'A label appearing on top of the divider if necessary.',
+    },
+  }}
+/>
+
+
+## Accessibility
+
+<A11yReport of="divider" />
+
+This component is based on the native <code>hr</code> element which has a non-focusable `role="separator"` natively.

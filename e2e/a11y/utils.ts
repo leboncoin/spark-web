@@ -25,7 +25,7 @@ export const buildComponentReport = async ({
   const { timestamp, url, incomplete, violations } = results
 
   const report: Record<string, Report> = {
-    [`@spark-ui/${component}`]: {
+    [`@spark-ui/components/${component}`]: {
       timestamp,
       url,
       incomplete,

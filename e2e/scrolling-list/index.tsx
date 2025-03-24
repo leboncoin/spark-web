@@ -1,5 +1,5 @@
-import { Button } from '@spark-ui/button'
-import { ScrollingList } from '@spark-ui/scrolling-list'
+import { Button } from '@spark-ui/components/button'
+import { ScrollingList } from '@spark-ui/components/scrolling-list'
 import React from 'react'
 import { useSearchParams } from 'react-router-dom'
 

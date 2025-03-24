@@ -1,8 +1,8 @@
-import { Icon } from '@spark-ui/icon'
-import { ConversationFill } from '@spark-ui/icons/dist/icons/ConversationFill'
-import { FireFill } from '@spark-ui/icons/dist/icons/FireFill'
-import { MailFill } from '@spark-ui/icons/dist/icons/MailFill'
-import { Tabs } from '@spark-ui/tabs'
+import { ConversationFill } from '@spark-ui/icons/ConversationFill'
+import { FireFill } from '@spark-ui/icons/FireFill'
+import { MailFill } from '@spark-ui/icons/MailFill'
+import { Icon } from '@spark-ui/components/icon'
+import { Tabs } from '@spark-ui/components/tabs'
 import React from 'react'
 
 export const A11yTabs = () => (

@@ -1,5 +1,5 @@
-import { FormField, FormFieldProps } from '@spark-ui/form-field'
-import { Input } from '@spark-ui/input'
+import { FormField, FormFieldProps } from '@spark-ui/components/form-field'
+import { Input } from '@spark-ui/components/input'
 import React from 'react'
 
 interface InputFieldProps extends FormFieldProps {

@@ -1,15 +1,15 @@
-import { Collapsible } from '@spark-ui/collapsible'
-import { Icon } from '@spark-ui/icon'
-import { IconButton } from '@spark-ui/icon-button'
-import { Close } from '@spark-ui/icons/dist/icons/Close'
-import { MapExpand } from '@spark-ui/icons/dist/icons/MapExpand'
+import { Close } from '@spark-ui/icons/Close'
+import { MapExpand } from '@spark-ui/icons/MapExpand'
+import { Collapsible } from '@spark-ui/components/collapsible'
+import { Icon } from '@spark-ui/components/icon'
+import { IconButton } from '@spark-ui/components/icon-button'
 import React from 'react'
 
 export const A11yCollapsible = () => (
   <section>
     <div>
       <Collapsible defaultOpen>
-        <div className="mb-lg flex items-center gap-md">
+        <div className="mb-lg gap-md flex items-center">
           <p className="font-bold">Terms and conditions</p>
           <Collapsible.Trigger asChild>
             <IconButton size="sm" aria-label="Collapse terms and conditions">
@@ -20,7 +20,7 @@ export const A11yCollapsible = () => (
           </Collapsible.Trigger>
         </div>
 
-        <Collapsible.Content className="flex flex-col gap-md">
+        <Collapsible.Content className="gap-md flex flex-col">
           <p>
             By accessing or using our services, you agree to comply with the following terms and
             conditions. These terms govern your use of our website, mobile applications, and other
@@ -35,7 +35,7 @@ export const A11yCollapsible = () => (
 
     <div>
       <Collapsible>
-        <div className="mb-lg flex items-center gap-md">
+        <div className="mb-lg gap-md flex items-center">
           <p className="font-bold">Terms and conditions</p>
           <Collapsible.Trigger asChild>
             <IconButton size="sm" aria-label="Expand terms and conditions">
@@ -46,7 +46,7 @@ export const A11yCollapsible = () => (
           </Collapsible.Trigger>
         </div>
 
-        <Collapsible.Content className="flex flex-col gap-md">
+        <Collapsible.Content className="gap-md flex flex-col">
           <p>
             By accessing or using our services, you agree to comply with the following terms and
             conditions. These terms govern your use of our website, mobile applications, and other

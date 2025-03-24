@@ -1,5 +1,5 @@
-import { Dropdown } from '@spark-ui/dropdown'
-import { FormField, FormFieldProps } from '@spark-ui/form-field'
+import { Dropdown } from '@spark-ui/components/dropdown'
+import { FormField, FormFieldProps } from '@spark-ui/components/form-field'
 import React from 'react'
 
 interface DropdownMultipleFieldProps extends FormFieldProps {
@@ -26,19 +26,19 @@ export const DropdownMultipleField = ({
 
         <Dropdown.Popover>
           <Dropdown.Items>
-            <Dropdown.Item value="cooking" className="flex items-center gap-md">
+            <Dropdown.Item value="cooking" className="gap-md flex items-center">
               <Dropdown.ItemIndicator />
               <Dropdown.ItemText>Cooking</Dropdown.ItemText>
             </Dropdown.Item>
-            <Dropdown.Item value="gaming" className="flex items-center gap-md">
+            <Dropdown.Item value="gaming" className="gap-md flex items-center">
               <Dropdown.ItemIndicator />
               <Dropdown.ItemText>Gaming</Dropdown.ItemText>
             </Dropdown.Item>
-            <Dropdown.Item value="reading" className="flex items-center gap-md">
+            <Dropdown.Item value="reading" className="gap-md flex items-center">
               <Dropdown.ItemIndicator />
               <Dropdown.ItemText>Reading</Dropdown.ItemText>
             </Dropdown.Item>
-            <Dropdown.Item value="sport" className="flex items-center gap-md">
+            <Dropdown.Item value="sport" className="gap-md flex items-center">
               <Dropdown.ItemIndicator />
               <Dropdown.ItemText>Sport</Dropdown.ItemText>
             </Dropdown.Item>

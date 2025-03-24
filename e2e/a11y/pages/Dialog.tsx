@@ -1,7 +1,7 @@
-import { Button } from '@spark-ui/button'
-import { Dialog } from '@spark-ui/dialog'
-import { FormField } from '@spark-ui/form-field'
-import { Input } from '@spark-ui/input'
+import { Button } from '@spark-ui/components/button'
+import { Dialog } from '@spark-ui/components/dialog'
+import { FormField } from '@spark-ui/components/form-field'
+import { Input } from '@spark-ui/components/input'
 import React from 'react'
 
 export const A11yDialog = () => (
@@ -20,14 +20,14 @@ export const A11yDialog = () => (
               <Dialog.Title>Create account</Dialog.Title>
             </Dialog.Header>
 
-            <Dialog.Body className="flex flex-col gap-lg">
+            <Dialog.Body className="gap-lg flex flex-col">
               <FormField name="pseudo" isRequired className="flex-1">
                 <FormField.Label>Pseudo</FormField.Label>
                 <Input placeholder="Luke" />
               </FormField>
             </Dialog.Body>
 
-            <Dialog.Footer className="flex justify-end gap-md">
+            <Dialog.Footer className="gap-md flex justify-end">
               <Button type="submit">Submit</Button>
             </Dialog.Footer>
           </form>

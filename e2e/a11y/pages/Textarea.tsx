@@ -1,6 +1,6 @@
-import { Check } from '@spark-ui/icons/dist/icons/Check'
-import { PenOutline } from '@spark-ui/icons/dist/icons/PenOutline'
-import { Textarea, TextareaGroup } from '@spark-ui/textarea'
+import { Check } from '@spark-ui/icons/Check'
+import { PenOutline } from '@spark-ui/icons/PenOutline'
+import { Textarea, TextareaGroup } from '@spark-ui/components/textarea'
 import React from 'react'
 
 export const A11yTextarea = () => (

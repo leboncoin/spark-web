@@ -1,0 +1,334 @@
+import { Meta, Canvas } from '@storybook/blocks'
+import { ArgTypes as ExtendedArgTypes } from '@docs/helpers/ArgTypes'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { Callout } from '@docs/helpers/Callout'
+
+import { Combobox } from '.'
+
+import * as stories from './Combobox.stories'
+
+<Meta of={stories} />
+
+# Combobox
+
+A combobox is an input widget that has an associated popup.
+
+The popup enables users to choose one or multiple values for the input from a collection. The popup itself contains a listbox of items.
+
+AutoComplete is used as the default behaviour. The user can only type a value that exists in the list of suggestions.
+
+<Canvas of={stories.Default} />
+
+#### ComboBox is not a Dropdown
+
+<Callout kind="warning">
+  Dropdowns and Comboboxes are similar in that every both provide visual selectable options for
+  users. However, there are important distinctions to be aware of.
+</Callout>
+
+#### Dropdown, Select and Combobox
+
+Dropdown, Select and Combobox are visually similar when its options are not displayed
+(unfocused closed trigger element).
+All of them also share the same behavior on its options/items, toggling its own item's
+value to its parent selected state.
+
+However, they have different behaviors and purposes:
+
+- Dropdown:
+  - **Closed** list of options for the user to pick triggered by a button.
+  - The trigger element is rolled as a **button**.
+  - The options are displayed fully customizable inside a **popover** (normally).
+- Select:
+  - **Closed** list of options for the user to pick triggered by a button.
+  - The structural select role, an abstract role, is superclass role for four form widgets, `listbox`, `menu`,
+    `radiogroup`, and `tree`, which allow users to make selections from a set of choices.
+  - The options can only be text and are its look and feel is managed by the browser natively.
+  - Cannot be used for multiple selections.
+- Combobox
+  - **Open** list of options for the user to pick triggered by a button.
+  - The trigger element is rolled as an **input**.
+  - The options can be text or any other JSX markup.
+  - Can be used for multiple selections.
+  - Can be used inside a form.
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { Combobox } from '@spark-ui/components/combobox'
+
+export default () => (
+  <Combobox>
+    <Combobox.Trigger>
+      <Combobox.LeadingIcon />
+      <ComboBox.SelectedItems /> // only when multiple selection is used
+      <Combobox.Input />
+      <Combobox.TrailingIcon />
+      <Combobox.ClearButton />
+      <Combobox.Disclosure />
+    </Combobox.Trigger>
+    <ComboBox.Popover>
+      <Combobox.Items>
+        <Combobox.Empty />
+        <Combobox.Group>
+          <Combobox.Label />
+          <Combobox.Item>
+            <ComboBox.ItemIndicator />
+            <ComboBox.ItemText />
+          </Combobox.Item>
+        </Combobox.Group>
+      </Combobox.Items>
+    </ComboBox.Popover>
+  </Combobox>
+);
+```
+
+## Examples
+
+### Controlled
+
+Use `value` and `onValueChange` props to control the selected item of the combobox.
+
+Use `open` and `onOpenChange` props to control the opened state of the combobox menu.
+
+<Canvas of={stories.Controlled} />
+
+### Custom value entry
+
+Combobox can be configured to allow typing custom values that aren’t included in the list of options.
+
+<Canvas of={stories.CustomValueEntry} />
+
+### Disabled
+
+Use `disabled` on the root component to disable the combobox entirely.
+
+<Canvas of={stories.Disabled} />
+
+### Disabled Item
+
+Use `disabled` on individual `Combobox.Item` to disable them.
+
+<Canvas of={stories.DisabledItem} />
+
+### Filtering
+
+By default, `filtering` is set to `auto` and will only filter items when the user is typing.
+
+Set it to `none` to disabled item filtering (you can then implement your own filtering logic).
+
+Set it to `strict` to filter items based on the input value, even when the user is not typing.
+
+<Canvas of={stories.Filtering} />
+
+### Groups
+
+Similar to `optgroup` HTML tag, you can gather your items in groups.
+
+It is important to use `Combobox.Label` inside each `Combobox.Group` to give it an accessible name.
+
+<Canvas of={stories.Grouped} />
+
+### Item indicator
+
+Renders when the parent `ComboboxMenu.Item` is selected.
+
+You can style this element directly, or you can use it as a wrapper to put an icon into, or both.
+
+<Canvas of={stories.ItemIndicator} />
+
+### Leading icon
+
+Use `Combobox.LeadingIcon` inside `Combobox.Trigger` to prefix your trigger with an icon.
+
+<Canvas of={stories.LeadingIcon} />
+
+### Read only
+
+Use `readOnly` prop to indicate the combobox is only readable.
+
+<Canvas of={stories.ReadOnly} />
+
+### isLoading
+
+Use the `isLoading` prop to render the combobox in loading state.
+This will prepend a spinner inside the items-list.
+
+<Canvas of={stories.IsLoading} />
+
+### Status
+
+Use `state` prop to assign a specific state to the combobox, choosing from: `error`, `alert` and `success`. By doing so, the outline styles will be updated.
+
+You could also wrap `Combobox` with a `FormField` and pass the prop to `Formfield` instead.
+
+<Canvas of={stories.Statuses} />
+
+## Multiple selection
+
+### Default
+
+When using `multiple` mode, the component manages an array of values and no longer a single value.
+
+It means you must adapt `value`, `onValueChange` and `defaultValue` accordingly.
+
+In `multiple` mode, the combobox won't close when the user selects an item, and it is possible to unselect every item.
+
+In multiple selection mode, the input will go back to empty state after each selection in the list.
+This is up to the developer to make it clear to the user which items are selected, by using other components such as chips, for example.
+
+<Canvas of={stories.MultipleSelection} />
+
+### Controlled
+
+Use `value` and `onValueChange` props to control the selected items of the combobox.
+
+Use `open` and `onOpenChange` props to control the opened state of the combobox menu.
+
+<Canvas of={stories.MultipleSelectionControlled} />
+
+### Disabled
+
+Use `disabled` on the root component to disable the combobox entirely.
+
+<Canvas of={stories.MultipleSelectionDisabled} />
+
+### Read only
+
+Use `readOnly` prop to indicate the combobox is only readable.
+
+<Canvas of={stories.MultipleSelectionReadonly} />
+
+### Single line
+
+Set `wrap` property to `false` if you wish to keep the component on a single line.
+This can be useful when the component is used inside a sticky navbar.
+
+<Canvas of={stories.MultipleSelectionNoWrap} />
+
+## Advanced Examples
+
+### Custom item
+
+If your `Combobox.Item` contains anything else than raw text, you may use any JSX markup to customize it.
+
+**If you do so, you MUST use `Combobox.ItemText` inside of your item to give it a proper accessible name.**
+
+<Canvas of={stories.CustomItem} />
+
+### Search Modal
+
+<Canvas of={stories.ModalSearch} />
+
+## Form field
+
+### Label
+
+Use `FormField.Label` to add a label to the input.
+
+<Canvas of={stories.FormFieldLabel} />
+
+### Hidden label
+
+In certain cases, a visible label may not be necessary. To achieve this behavior, use the `VisuallyHidden` component.
+
+<Canvas of={stories.FormFieldHiddenLabel} />
+
+### Required
+
+Use the `isRequired` prop of the `FormField` to indicate that the combobox is required.
+
+<Canvas of={stories.FormFieldRequired} />
+
+### Disabled
+
+The combobox `disabled` field status can be managed by the FormField `disabled` flag.
+
+<Canvas of={stories.FormFieldDisabled} />
+
+### ReadOnly
+
+Apply `readOnly` to the wrapping `FormField` to indicate the combobox is only readable.
+
+<Canvas of={stories.FormFieldReadOnly} />
+
+### Validation
+
+Set the `state` prop of the `FormField` to `error` to indicate that the combobox is invalid. Optionally use the `FormField.ErrorMessage` to describe why the combobox is invalid.
+
+<Canvas of={stories.FormFieldValidation} />
+
+## API Reference
+
+<ExtendedArgTypes
+  of={Combobox}
+  description="A form input used for selecting a value: when collapsed it shows the currently selected option and when expanded, it shows a scrollable list of predefined options for the user to choose from."
+  subcomponents={{
+    'Combobox.Trigger': {
+      of: Combobox.Trigger,
+      description:
+        'The area that toggles the combobox popover. The Select.Popover will position itself by aligning with its trigger.',
+    },
+    'Combobox.SelectedItems': {
+      of: Combobox.SelectedItems,
+      description: 'Multiple selection only. Displays selected items as chips inside the trigger.',
+    },
+    'Combobox.Input': {
+      of: Combobox.Input,
+      description:
+        'The typing area in which the user can type. The input behaviour will differ if `autoComplete` is used or not.',
+    },
+    'Combobox.LeadingIcon': {
+      of: Combobox.LeadingIcon,
+      description: 'Prepend a decorative icon inside the input (to the left).',
+    },
+    'Combobox.Disclosure': {
+      of: Combobox.Disclosure,
+      description: 'Optional visual button to open and close the combobox items list.',
+    },
+    'Combobox.Portal': {
+      of: Combobox.Portal,
+      description: 'When used, portals the content part into the body.',
+    },
+    'Combobox.Popover': {
+      of: Combobox.Popover,
+      description: 'The part that is toggled and portaled when the trigger element is clicked.',
+    },
+    'Combobox.Items': {
+      of: Combobox.Items,
+      description: 'The wrapper which contains all the options.',
+    },
+    'Combobox.Item': { of: Combobox.Item, description: 'Each option of the element field' },
+    'Combobox.ItemText': {
+      of: Combobox.ItemText,
+      description:
+        'The textual part of the item. It should only contain the text you want to see in the trigger when that item is selected. It should not be styled to ensure correct positioning.',
+    },
+    'Combobox.ItemIndicator': {
+      of: Combobox.ItemIndicator,
+      description:
+        'Renders when the item is selected. You can style this element directly, or you can use it as a wrapper to put an icon into, or both.',
+    },
+    'Combobox.Group': {
+      of: Combobox.Group,
+      description:
+        'A wrapper for grouping a subset of options (Combobox.Item) when needed. Use in conjunction with Combobox.Label to ensure good accessibility via automatic labelling.',
+    },
+    'Combobox.Label': {
+      of: Combobox.Label,
+      description: "Used to render the label of a group. It won't be focusable using arrow keys.",
+    },
+  }}
+/>
+
+## Accessibility
+
+<A11yReport of="combobox" />
+
+This component adheres to the [Combobox WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/).

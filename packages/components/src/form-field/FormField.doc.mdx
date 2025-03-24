@@ -1,0 +1,121 @@
+import { Meta, Canvas } from '@storybook/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { ArgTypes } from '@docs/helpers/ArgTypes'
+
+import { FormField } from '.'
+
+import * as stories from './FormField.stories'
+
+<Meta of={stories} />
+
+# FormField
+
+Provide context to your form elements easily.
+
+By default, all Spark input components use `FormField.Control` behind the scenes. However, if you want to use a custom input component, or if you need more fine-grained control over the state of a form control, it can be used.
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { FormField } from '@spark-ui/components/form-field'
+
+export default () => (
+  <FormField>
+    <FormField.Label />
+    /**
+     * FormField.Control can be replaced by any Spark component that is an input:
+     * - Checkbox, Combobox, Dropdown, TextInput, RadioGroup, Select, Stepper, Switch, etc
+     */
+    <FormField.Control /> 
+
+    <FormField.HelperMessage>We will never share your email</FormField.HelperMessage>
+  </FormField>
+)
+```
+
+
+## Examples
+
+### Characters count
+
+Use `FormField.CharactersCount` to show users how many characters they have left. Can be used in combination with all types of text inputs.
+
+<Canvas of={stories.CharactersCount} />
+
+### Required
+
+Set `isRequired` prop to `true` to mark the input as required and display a required indicator. The default indicator is an asterisk `*`.
+
+<Canvas of={stories.Required} />
+
+#### Custom required indicator
+
+Configure the required indicator using the `requiredIndicator` prop and the `FormRequiredIndicator` component.
+
+<Canvas of={stories.CustomRequired} />
+
+### State
+
+Use the `state` prop to set the visual validation state. Choose between `error`, `success` and `alert`.
+
+<Canvas of={stories.State} />
+
+## API Reference
+
+<ArgTypes
+  of={FormField}
+  description="Wrap any type of input (Input, Checkbox, RadioGroup, etc.) to add contextual information to it and build accessible forms."
+  subcomponents={{
+    'FormField.Label': {
+      of: FormField.Label,
+      description:
+        'Label to attach to the associated input to describe it and give it an accessible name.',
+    },
+    'FormField.HelperMessage': {
+      of: FormField.HelperMessage,
+      description: 'Help users by showing an helper message below an input.',
+    },
+    'FormField.SuccessMessage': {
+      of: FormField.SuccessMessage,
+      description:
+        'Help users by showing an success message below an input. Indicates the input has been successfully filled in by the user.',
+    },
+    'FormField.AlertMessage': {
+      of: FormField.AlertMessage,
+      description:
+        'Help users by showing an alert message (warning) below an input. For example: a password input with an insecure password.',
+    },
+    'FormField.ErrorMessage': {
+      of: FormField.ErrorMessage,
+      description:
+        'Help users by showing an error message below an input. Indicated the input has not been successfully filled in by the user.',
+    },
+    'FormField.Control': {
+      of: FormField.Control,
+      description:
+        'This higher order component gives you access to the internal state of the field. Wrap an input with it to get access to the state. It can be used to build complex custom inputs.',
+    },
+    'FormField.RequiredIndicator': {
+      of: FormField.RequiredIndicator,
+      description: 'Render it inside the FormField.Label to mark the field as mandatory (required)',
+    },
+    'FormField.CharactersCount': {
+      of: FormField.CharactersCount,
+      description:
+        'Displays characters count for text inputs and textareas, and the max length allowed in these components.',
+    },
+  }}
+/>
+
+
+## Accessibility
+
+<A11yReport of="form-field" />

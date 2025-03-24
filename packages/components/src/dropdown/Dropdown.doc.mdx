@@ -1,0 +1,279 @@
+import { Meta, Canvas } from '@storybook/blocks'
+import { ArgTypes as ExtendedArgTypes } from '@docs/helpers/ArgTypes'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { Callout } from '@docs/helpers/Callout'
+
+import { Dropdown } from '.'
+
+import * as stories from './Dropdown.stories'
+
+<Meta of={stories} />
+
+# Dropdown
+
+Dropdown is an interactive element
+that allows users to select an option from a list of choices presented in a collapsible menu.
+It saves space on the interface by concealing the options until the user interacts with the component.
+
+Displays a **closed** list of options for the user to pick triggered by a button.
+
+<Canvas of={stories.Default} />
+
+#### Dropdown is not a ComboBox
+
+<Callout kind="warning">
+  Dropdowns and Comboboxes are similar in that every both provide visual selectable options for
+  users. However, there are important distinctions to be aware of.
+</Callout>
+
+#### Dropdown, Select and Combobox
+
+Dropdown, Select and Combobox are visually similar when its options are not displayed
+(unfocused closed trigger element).
+All of them also share the same behavior on its options/items, toggling its own item's
+value to its parent selected state.
+
+However, they have different behaviors and purposes:
+
+- Dropdown:
+  - **Closed** list of options for the user to pick triggered by a button.
+  - The trigger element is rolled as a **button**.
+  - The options are displayed fully customizable inside a **popover** (normally).
+- Select:
+  - **Closed** list of options for the user to pick triggered by a button.
+  - The structural select role, an abstract role, is superclass role for four form widgets, `listbox`, `menu`,
+    `radiogroup`, and `tree`, which allow users to make selections from a set of choices.
+  - The options can only be text and are its look and feel is managed by the browser natively.
+  - Cannot be used for multiple selections.
+- Combobox
+  - **Open** list of options for the user to pick triggered by a button.
+  - The trigger element is rolled as an **input**.
+  - The options can be text or any other JSX markup.
+  - Can be used for multiple selections.
+  - Can be used inside a form.
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { Dropdown } from '@spark-ui/components/dropdown'
+
+export default () => (
+  <Dropdown>
+    <Dropdown.Trigger>
+      <Dropdown.LeadingIcon />
+      <Dropdown.Value />
+    </Dropdown.Trigger>
+    <Dropdown.Popover>
+      <Dropdown.Items>
+        <Dropdown.Group>
+          <Dropdown.Label />
+          <Dropdown.Item>
+            <Dropdown.ItemIndicator />
+            <Dropdown.ItemText />
+          </Dropdown.Item>
+        </Dropdown.Group>
+        <Dropdown.Divider />
+      </Dropdown.Items>
+    </Dropdown.Popover>
+  </Dropdown>
+);
+```
+
+## Examples
+
+### Controlled
+
+Use `value` and `onValueChange` props to control the value of the dropdown.
+
+<Canvas of={stories.Controlled} />
+
+### Controlled open state
+
+Use `open` and `onOpenChange` props to control when the dropdown is opened or closed.
+
+<Canvas of={stories.ControlledOpenState} />
+
+### Disabled
+
+Use `disabled` on the root component to disable the dropdown entirely.
+
+<Canvas of={stories.Disabled} />
+
+### Disabled Item
+
+Use `disabled` on individual `Dropdown.Item` to disable them.
+
+<Canvas of={stories.DisabledItem} />
+
+### Groups
+
+Similar to `optgroup` HTML tag, you can gather your items in groups.
+
+It is important to use `Dropdown.Label` inside each `Dropdown.Group` to give it an accessible name.
+
+<Canvas of={stories.Grouped} />
+
+### Item indicator
+
+Renders when the parent `DropdownMenu.Item` is selected.
+
+You can style this element directly, or you can use it as a wrapper to put an icon into, or both.
+
+<Canvas of={stories.ItemIndicator} />
+
+### Read only
+
+Use `readOnly` prop to indicate the dropdown is only readable.
+
+<Canvas of={stories.ReadOnly} />
+
+### Status
+
+Use `state` prop to assign a specific state to the dropdown, choosing from: `error`, `alert` and `success`. By doing so, the outline styles will be updated.
+
+You could also wrap `Dropdown` with a `FormField` and pass the prop to `Formfield` instead.
+
+<Canvas of={stories.Statuses} />
+
+### Trigger leading icon
+
+Use `Dropdown.LeadingIcon` inside `Dropdown.Trigger` to prefix your trigger with an icon.
+
+<Canvas of={stories.LeadingIcon} />
+
+## Multiple selection
+
+When using `multiple` mode, the component manages an array of values and no longer a single value.
+
+It means you must adapt `value`, `onValueChange` and `defaultValue` accordingly.
+
+In `multiple` mode, the dropdown won't close when the user selects an item, and it is possible to unselect every item.
+
+### Default
+
+<Canvas of={stories.MultipleSelection} />
+
+### Controlled - multiple selection
+
+Use `value` and `onValueChange` props to control the value of the dropdown.
+
+<Canvas of={stories.MultipleSelectionControlled} />
+
+## Advanced Examples
+
+### Custom item
+
+If your `Dropdown.Item` contains anything else than raw text, you may use any JSX markup to customize it.
+
+**If you do so, you MUST use `Dropdown.ItemText` inside of your item to give it a proper accessible name.**
+
+<Canvas of={stories.CustomItem} />
+
+## Form field
+
+### Label
+
+Use `FormField.Label` to add a label to the input.
+
+<Canvas of={stories.FormFieldLabel} />
+
+### Hidden label
+
+In certain cases, a visible label may not be necessary. To achieve this behavior, use the `VisuallyHidden` component.
+
+<Canvas of={stories.FormFieldHiddenLabel} />
+
+### Required
+
+Use the `isRequired` prop of the `FormField` to indicate that the dropdown is required.
+
+<Canvas of={stories.FormFieldRequired} />
+
+### Disabled
+
+The dropdown `disabled` field status can be managed by the FormField `disabled` flag.
+
+<Canvas of={stories.FormFieldDisabled} />
+
+### ReadOnly
+
+Apply `readOnly` to the wrapping `FormField` to indicate the dropdown is only readable.
+
+<Canvas of={stories.FormFieldReadOnly} />
+
+### Validation
+
+Set the `state` prop of the `FormField` to `error` to indicate that the dropdown is invalid. Optionally use the `FormField.ErrorMessage` to describe why the dropdown is invalid.
+
+<Canvas of={stories.FormFieldValidation} />
+
+
+## API Reference
+
+<ExtendedArgTypes
+  of={Dropdown}
+  description="A form input used for selecting a value: when collapsed it shows the currently selected option and when expanded, it shows a scrollable list of predefined options for the user to choose from."
+  subcomponents={{
+    'Dropdown.Trigger': {
+      of: Dropdown.Trigger,
+      description:
+        'The button that toggles the select. The Select.Popover will position itself by aligning over the trigger.',
+    },
+    'Dropdown.Value': {
+      of: Dropdown.Value,
+      description:
+        "The part that reflects the selected value. By default the selected item's text will be rendered. if you require more control, you can instead control the select and pass your own children. It should not be styled to ensure correct positioning. An optional placeholder prop is also available for when the select has no value.",
+    },
+    'Dropdown.LeadingIcon': {
+      of: Dropdown.LeadingIcon,
+      description: 'Prepend a decorative icon inside the input (to the left).',
+    },
+    'Dropdown.Portal': {
+      of: Dropdown.Portal,
+      description: 'When used, portals the content part into the body.',
+    },
+    'Dropdown.Popover': {
+      of: Dropdown.Popover,
+      description: 'The part that is toggled and portaled when the trigger element is clicked.',
+    },
+    'Dropdown.Items': {
+      of: Dropdown.Items,
+      description: 'The wrapper which contains all the options.',
+    },
+    'Dropdown.Item': { of: Dropdown.Item, description: 'Each option of the element field' },
+    'Dropdown.ItemText': {
+      of: Dropdown.ItemText,
+      description:
+        'The textual part of the item. It should only contain the text you want to see in the trigger when that item is selected. It should not be styled to ensure correct positioning.',
+    },
+    'Dropdown.ItemIndicator': {
+      of: Dropdown.ItemIndicator,
+      description:
+        'Renders when the item is selected. You can style this element directly, or you can use it as a wrapper to put an icon into, or both.',
+    },
+    'Dropdown.Group': {
+      of: Dropdown.Group,
+      description:
+        'A wrapper for grouping a subset of options (Dropdown.Item) when needed. Use in conjunction with Dropdown.Label to ensure good accessibility via automatic labelling.',
+    },
+    'Dropdown.Label': {
+      of: Dropdown.Label,
+      description: "Used to render the label of a group. It won't be focusable using arrow keys.",
+    },
+    'Dropdown.Divider': {
+      of: Dropdown.Divider,
+      description: 'Used to visually separate items in the select.',
+    },
+  }}
+/>
+
+
+## Accessibility
+
+<A11yReport of="dropdown" />

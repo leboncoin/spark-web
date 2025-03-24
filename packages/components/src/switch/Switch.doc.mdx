@@ -1,0 +1,104 @@
+import { Canvas, Meta } from '@storybook/blocks'
+import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { Kbd } from '@spark-ui/components/kbd'
+import { Switch } from '.'
+import * as stories from './Switch.stories'
+
+<Meta of={stories} />
+
+# Switch
+
+A control that allows the user to toggle between checked and not checked.
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { Switch } from '@spark-ui/components/switch'
+
+export default () => <Switch />;
+```
+
+## Examples
+
+### Uncontrolled
+
+Use `defaultChecked` prop to set the default state of the switch. Optionally `onCheckedChange` prop can be used to know when the state of the switch changes.
+
+<Canvas of={stories.Uncontrolled} />
+
+### Controlled
+
+Use `checked` and `onCheckedChange` props to control the state of the switch.
+
+<Canvas of={stories.Controlled} />
+
+### Disabled
+
+Use the `disabled` prop to indicate that the switch is disabled.
+
+<Canvas of={stories.Disabled} />
+
+### Reverse
+
+Use the `reverse` prop if you want the label to be placed on the left side of the Switch
+
+<Canvas of={stories.Reverse} />
+
+### Icons
+
+Use `checkedIcon` and `uncheckedIcon` props to change the default checked and unchecked icons.
+
+<Canvas of={stories.Icons} />
+
+### Intent
+
+<Canvas of={stories.Intent} />
+
+### Sizes
+
+<Canvas of={stories.Sizes} />
+
+## Form field
+
+When using the `Switch` component you might want to use it in combination with `FormField`.
+
+### Helper message
+
+Use the `FormField.HelperMessage` component to provide a description to the switch.
+
+<Canvas of={stories.FieldHelperMessage} />
+
+### Validation
+
+set the `state` prop of the `FormField` to `error` to indicate that the input is invalid. Optionally use the `FormField.ErrorMessage` to describe why the input is invalid.
+
+<Canvas of={stories.FieldInvalid} />
+
+## API Reference
+
+<ArgTypes of={Switch} />
+
+## Accessibility
+
+<A11yReport of="switch" />
+
+Adheres to the [Switch WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/switch).
+
+### Guidelines
+
+- This component should always have a label either directly declared through the children prop or inherited from the FormField wrapper.
+- If no label is set, the aria-label attribute will be required to comply with accessibility requirements.
+
+### Keyboard Interactions
+
+- <Kbd>Space</Kbd> - Toggles the component's state.
+- <Kbd>Enter</Kbd> - Toggles the component's state.

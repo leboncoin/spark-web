@@ -1,0 +1,69 @@
+import { Meta, Canvas } from '@storybook/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { ArgTypes } from '@docs/helpers/ArgTypes'
+
+import { LinkBox } from '.'
+
+import * as stories from './LinkBox.stories'
+
+<Meta of={stories} />
+
+# LinkBox
+
+Semantic component used to wrap elements (cards, blog posts, articles, etc.) in a link.
+
+Simply wrapping an entire component in an `a` tag may seem convenient for linking, but it's considered unsemantic and incorrect. This is because the component might include other clickable elements like tags, timestamps, or buttons.
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { LinkBox } from '@spark-ui/components/link-box'
+
+export default () => (
+  <LinkBox>
+    <LinkBox.Link /> 
+    <LinkBox.Raised />
+  </LinkBox>
+);
+```
+
+## Examples
+
+### Nesting
+
+If your linkbox contains interactive elements inside of it, wrap them with `LinkBox.Raised`.
+
+It will raise their `z-index` to stay above the main link of your `LinkBox`.
+
+<Canvas of={stories.Nesting} />
+
+## API Reference
+
+<ArgTypes
+  of={LinkBox}
+  description="Contains all the parts of a LinkBox."
+  subcomponents={{
+    'LinkBox.Link': {
+      of: LinkBox.Link,
+      description:
+        'Main link of the link box. A single LinkBox must contain only one LinkBox.Link.',
+    },
+    'LinkBox.Raised': {
+      of: LinkBox.Raised,
+      description:
+        'If your LinkBox contains others links or interactive elements, wrap them with LinkBox.Raised to keep them on top of the LinkBox overlay.',
+    },
+  }}
+/>
+
+## Accessibility
+
+<A11yReport of="link-box" />

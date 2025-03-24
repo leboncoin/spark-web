@@ -5,8 +5,6 @@ import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import browserslistToEsbuild from 'browserslist-to-esbuild'
 
-const NOT_VALID_COMPONENTS_PATTERN = 'bar'
-
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [tsconfigPaths(), react()],
@@ -18,11 +16,7 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: 'vitest.setup.ts',
-    exclude: [
-      ...configDefaults.exclude,
-      `**/components/${NOT_VALID_COMPONENTS_PATTERN}/**`,
-      'e2e/**',
-    ],
+    exclude: [...configDefaults.exclude, 'e2e/**'],
     // you might want to disable it, if you don't have tests that rely on CSS
     // since parsing CSS is slow
     css: true,

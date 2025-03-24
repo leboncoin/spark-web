@@ -34,16 +34,12 @@ describe('CLI `spark generate` (component package)', () => {
     )
 
     ;[
-      '/.npmignore',
-      '/package.json',
-      '/src/index.ts',
-      '/src/Bar.styles.ts',
-      '/src/Bar.tsx',
-      '/vite.config.ts',
-      '/src/Bar.doc.mdx',
-      '/src/Bar.test.tsx',
-      '/src/Bar.stories.tsx',
-      '/tsconfig.json',
+      '/index.ts',
+      '/Bar.styles.ts',
+      '/Bar.tsx',
+      '/Bar.doc.mdx',
+      '/Bar.test.tsx',
+      '/Bar.stories.tsx',
     ].forEach((filePath: string) => {
       expect(response.toString()).toContain(`Created ${packagePath}${filePath}`)
       expect(fse.pathExistsSync(`${packagePath}${filePath}`)).toBe(true)

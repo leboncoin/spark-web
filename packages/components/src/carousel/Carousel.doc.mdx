@@ -1,0 +1,199 @@
+import { Meta, Canvas } from '@storybook/addon-docs'
+import { Kbd } from '@spark-ui/components/kbd'
+import { ArgTypes } from '@docs/helpers/ArgTypes'
+
+import { Carousel } from '.'
+
+import * as stories from './Carousel.stories'
+
+<Meta of={stories} />
+
+# Carousel
+
+A carousel is a user interface component that displays a collection of items, such as images or content cards, one (or a few) at a time within a single frame.
+
+Users navigate through these items using controls like "Previous" and "Next" buttons or a page picker below the carousel.
+
+Carousels are ideal for presenting content sequentially, guiding users to focus on one item or group of items at a time.
+
+**a11y**: items outside of the carousel viewport will be considered inert/unreachable with keyboard navigation and screen readers.
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { Carousel } from '@spark-ui/components/carousel'
+
+export default () => (
+  <Carousel>
+    <CarouselViewport>
+      <CarouselSlides>
+        <CarouselSlide />
+      </CarouselSlides>
+      <CarouselControls>
+        <CarouselPrevButton />
+        <CarouselNextButton />
+      </CarouselControls>
+    </CarouselViewport>
+    <CarouselPagePicker />
+  </Carousel>
+)
+```
+
+
+
+## Examples
+
+### Controlled
+
+In this example you can control the carousel using picture thumbnails instead of dots.
+
+<Canvas of={stories.Controlled} />
+
+### Default page
+
+To set the default page of the carousel, pass the `defaultPage` prop.
+
+The page corresponds to the scroll snap position index based on the layout. It does not necessarily correspond to the index of the slide in the carousel.
+
+<Canvas of={stories.DefaultPage} />
+
+### Gap
+
+To customize spacing between slides, set the `gap` property. Value in pixels (integer).
+
+<Canvas of={stories.Gap} />
+
+### Loop
+
+To allow looping of slides, set the `loop` property to `true`.
+
+<Canvas of={stories.Loop} />
+
+### Scroll behavior
+
+Use `snap type`, `snapStop` and `scrollBehavior` props to control the scrolling behaviour.
+
+**1. snapType**:
+
+- `mandatory` (default): The visual viewport of this scroll container must snap to a snap position if it isn't currently scrolled.
+- `proximity`: The visual viewport of this scroll container may snap to a snap position if it isn't currently scrolled. The user agent decides if it snaps or not based on scroll parameters. This is the default snap strictness if any snap axis is specified.
+- `none`: When the visual viewport of this scroll container is scrolled, it must ignore snap points.
+
+**2. snap stop**:
+
+- `normal` (default): When the visual viewport of this element's scroll container is scrolled, it may "pass over" possible snap positions.
+- `always`: The scroll container must not "pass over" a possible snap position; and must snap to the first of this elements' snap positions.
+
+**3. scroll behaviour**:
+
+- `smooth` (default): The scrolling box scrolls in a smooth fashion using a user-agent-defined easing function over a user-agent-defined period of time. User agents should follow platform conventions, if any.
+- `instant`: The scrolling box scrolls instantly when interacting with the carousel controls.
+
+<Canvas of={stories.ScrollBehavior} />
+
+### Slides per page
+
+To customize number of slides to show at a time, pass the `slidesPerPage` prop. The value must be an integer.
+
+<Canvas of={stories.SlidesPerPage} />
+
+### Slides per move
+
+To customize number of slides to move at a time, set the `slidesPerMove` property in the machine's context. The value must be an integer or auto.
+
+<Canvas of={stories.SlidesPerMove} />
+
+## Advanced Examples
+
+### Custom page indicators
+
+The `unstyled` prop of `Carousel.PageIndicator` allows you to use your own styles for the page indicators.
+
+<Canvas of={stories.CustomPageIndicators} />
+
+## API Reference
+
+<ArgTypes
+  of={Carousel}
+  description="Presents a set of slides, by sequentially displaying a subset of one or more items."
+  subcomponents={{
+    'Carousel.Viewport': {
+      of: Carousel.Viewport,
+      description:
+        'Container for both the carousel items and the carousel controls. The carousel slide picker should remain outside of it.',
+    },
+    'Carousel.Slides': {
+      of: Carousel.Slides,
+      description: 'The scroll area of the carousel, contains all items to display in slides.',
+    },
+    'Carousel.Slide': {
+      of: Carousel.Slide,
+      description:
+        'A single content container within a set of content containers that hold the content to be presented by the carousel.',
+    },
+    'Carousel.Controls': {
+      of: Carousel.Controls,
+      description:
+        'Two interactive elements, styled as arrow buttons, that displays the next or previous slide in the rotation sequence.',
+    },
+    'Carousel.PrevButton': {
+      of: Carousel.PrevButton,
+      description:
+        'Button that scroll to previous set of slides.',
+    },
+    'Carousel.NextButton': {
+      of: Carousel.NextButton,
+      description:
+        'Button that scroll to next set of slides.',
+    },
+    'Carousel.PagePicker': {
+      of: Carousel.PagePicker,
+      description:
+        'A group of elements, styled as small dots, that enable the user to pick a specific page in the rotation sequence to display. Behave like a radiogroup',
+    },
+    'Carousel.PageIndicator': {
+      of: Carousel.PageIndicator,
+      description:
+        'A button with "radio" role that takes you to a specific page in the carousel. You can customize it.',
+    },
+  }}
+/>
+
+## Accessibility
+
+This component adheres to the [`carousel` pattern](https://www.w3.org/WAI/ARIA/apg/patterns/carousel/).
+
+### Recommandations
+
+- Each `Carousel.Slide` should be given either an `aria-label` or an `aria-labelledby` attribute to be fully accessible.
+- Please use either/both `Carousel.PagePicker` and `Carousel.Controls` if your slides are not focusable (ex: an image carousel).
+- `aria-label` are mandatory on `Carousel.NextButton`, `Carousel.PrevButton` and `Carousel.PageIndicator`.
+
+### Keyboard Interactions
+
+- <Kbd>Tab</Kbd> and <Kbd>Shift + Tab</Kbd>: Move focus through the interactive elements of the carousel as specified by the component tab sequence:
+- <Kbd>LeftArrow</Kbd> or <Kbd>RightArrow</Kbd>: Go to the previous/next page while focused on the carousel OR page picker.
+
+### Keyboard Tab Sequence
+
+**Note: slides outside of the viewport are considered `inert` and cannot be accessed with the keyboard until you reach their page.**
+
+1 - Carousel scrollable area. Once focused, press <Kbd>LeftArrow</Kbd> or <Kbd>RightArrow</Kbd> to go to the next/previous page.
+
+2 - Visible slides, if focusable (a slide may or may not be focusable. Ex: a "link" slide is focusable, an "image" slide is not).
+
+3 - Focusable elements inside visible slides (if any)
+
+4 - "Next" button (if visible). It takes focus before the "Previous" button to facilitate traversing the carousel contents.
+
+5 - "Previous" button (if visible)
+
+6 - Active page indicator. Once focused, press <Kbd>LeftArrow</Kbd> or <Kbd>RightArrow</Kbd> to go to the next/previous page, as the page picker behave like a radio group. This is to limit how many <Kbd>Tab</Kbd> press are necessary to traverse the whole carousel.

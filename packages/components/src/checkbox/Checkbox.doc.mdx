@@ -1,0 +1,203 @@
+import { Meta, Canvas } from '@storybook/blocks'
+import { Kbd } from '@spark-ui/components/kbd'
+import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { StoryLabel } from '@docs/helpers/StoryLabel'
+import { Checkbox, CheckboxGroup } from '.'
+import * as stories from './Checkbox.stories'
+
+<Meta of={stories} />
+
+# Checkbox
+
+A control that allows the user to toggle between checked and not checked.
+It is used in forms when a user needs to select multiple values from several options.
+
+Checkbox label can be multiline. Still you should care of not using elements (for the label) with greater line height than the checkbox input height, to preserve vertical alignment.
+
+<StoryLabel>Standalone</StoryLabel>
+<Canvas of={stories.Default} />
+
+<StoryLabel>Group</StoryLabel>
+<Canvas of={stories.DefaultGroup} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { Checkbox, CheckboxGroup } from '@spark-ui/components/checkbox'
+
+// Standalone
+export default () => <Checkbox />;
+
+// Group
+export default () => (
+  <CheckboxGroup>
+    <Checkbox />
+  </CheckboxGroup>
+);
+```
+
+## Examples
+
+### Uncontrolled
+
+<StoryLabel>Standalone</StoryLabel>
+
+Use `defaultChecked` prop to set the default state of the checkbox. Optionally `onCheckedChange` prop can be used to know when the state of the checkbox changes.
+
+<Canvas of={stories.Uncontrolled} />
+
+<StoryLabel>Group</StoryLabel>
+
+The `defaultValue` prop can be used to set the default state of the group. Optionally `onCheckedChange`
+prop can be used to get the current state of the checkbox group.
+
+<Canvas of={stories.UncontrolledGroup} />
+
+### Controlled
+
+<StoryLabel>Standalone</StoryLabel>
+
+Use `checked` and `onCheckedChange` props to control the state of the checkbox. The `checked` prop can also be set to indeterminate.
+
+<Canvas of={stories.Controlled} />
+
+<StoryLabel>Group</StoryLabel>
+
+Use `value` and `onCheckedChange` props to control the state of the checkbox.
+
+<Canvas of={stories.ControlledGroup} />
+
+### Disabled
+
+Use the `disabled` prop to indicate that the checkbox is disabled.
+
+<Canvas of={stories.Disabled} />
+
+### Reverse
+
+<StoryLabel>Standalone</StoryLabel>
+
+Use the `reverse` prop if you want the label to be placed on the left side of the Checkbox
+
+<Canvas of={stories.Reverse} />
+
+<StoryLabel>Group</StoryLabel>
+
+Use the `reverse` prop if you want the label to be placed on the left side of the Checkbox
+
+<Canvas of={stories.ReverseGroup} />
+
+### Icon
+
+Use `icon` prop to change the default checked icon.
+
+<Canvas of={stories.Icon} />
+
+### Intent
+
+Use `intent` prop to change the color of the checkbox.
+
+**Note: set `intent` on the `CheckboxGroup` if you want to apply the same intent to every checkbox within a group**
+
+<Canvas of={stories.Intent} />
+
+### Orientation
+
+**Only for `CheckboxGroup`**
+
+Use `orientation` prop to set the orientation of the checkbox group which could be `vertical` or `horizontal`.
+
+<Canvas of={stories.GroupOrientation} />
+
+## Advanced Examples
+
+### Indeterminate
+
+You can set the checkbox to indeterminate by taking control of its state.
+
+<Canvas of={stories.Indeterminate} />
+
+### Custom implementation
+
+Below is an implementation of a custom checkbox that might provide guidance if you need to implement something custom as well.
+
+When implementing a custom checkbox, it is important to be careful to properly handle **accessibility (a11y) requirements**, as a11y considerations will not be handled behind the scenes as they would be when using a regular checkbox implementation
+
+<Canvas of={stories.CustomImplementation} />
+
+### Invisible checkbox
+
+We can go even further by completely hiding the checkbox using our [`VisuallyHidden`](?path=/docs/components-visuallyhidden--docs#visuallyhidden) component. This way, you end up with a component that shares all the intrinsic behaviors of a checkbox, but does not look like one.
+
+When implementing a custom checkbox, it is important to be careful to properly handle **accessibility (a11y) requirements**, as a11y considerations will not be handled behind the scenes as they would be when using a regular checkbox implementation
+
+<Canvas of={stories.InvisibleCheckbox} />
+
+## Form field
+
+When using the `Checkbox` component you might want to use it in combination with `FormField` to add a proper label, error message, etc.
+
+### Helper message
+
+Use the `FormField.HelperMessage` component to provide a description to the input.
+
+<Canvas of={stories.FieldHelperMessage} />
+
+#### Hidden label
+
+In certain cases, a visible label may not be necessary, such as when using an input as a searcher. To achieve this behavior, use the `VisuallyHidden` component.
+
+<Canvas of={stories.FieldHiddenLabel} />
+
+### Label
+
+Use `FormField.Label` to add a label to the input.
+
+<Canvas of={stories.FieldLabel} />
+
+### Required
+
+Use the `isRequired` prop of the `FormField` to indicate that the input is required.
+
+<Canvas of={stories.FieldRequired} />
+
+### Validation
+
+set the `state` prop of the `FormField` to `error` to indicate that the input is invalid. Optionally use the `FormField.ErrorMessage` to describe why the input is invalid.
+
+<Canvas of={stories.FieldInvalid} />
+
+## API Reference
+
+<ArgTypes
+  of={Checkbox}
+  description="A control that allows the user to toggle between checked and not checked."
+  subcomponents={{
+    CheckboxGroup: {
+      of: CheckboxGroup,
+      description:
+        'A checkbox group allows users to select one or more items from a list of choices.',
+    },
+  }}
+/>
+
+## Accessibility
+
+<A11yReport of="checkbox" />
+
+This component should always have a label, directly declared through the `children` prop or inherited from the `FormField` wrapper. If none of those are available it is strongly recommended to define an `aria-label` attribute, to comply to accessibility requirements.
+
+Adheres to the [tri-state Checkbox WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox).
+
+### Keyboard Interactions
+
+- <Kbd>Space</Kbd>: Checks/unchecks the checkbox.
+- <Kbd>Tab</Kbd>: Inside a `CheckboxGroup`, goes to the next checkbox.
+- <Kbd>Shift</Kbd> + <Kbd>Tab</Kbd>: Inside a `CheckboxGroup`, goes to the previous checkbox.

@@ -1,0 +1,116 @@
+import { Meta, Canvas } from '@storybook/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Kbd } from '@spark-ui/components/kbd'
+
+import { ProgressTracker } from '.'
+
+import * as stories from './ProgressTracker.stories'
+
+<Meta of={stories} />
+
+# ProgressTracker
+
+A progress tracker component is a visual navigation element typically used to display progress or guide user through a multi-step process.
+
+Step indicator content defaults to step index, or checkmark icon when completed. Use `StepIndicator` to customize this content, through `complete` and `incomplete` props.
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { ProgressTracker } from '@spark-ui/components/progress-tracker'
+
+export default () => (
+  <ProgressTracker>
+    <ProgressTracker.Step>
+      <ProgressTracker.StepIndicator />
+      <ProgressTracker.StepLabel />
+    </ProgressTracker.Step>
+  </ProgressTracker.Step>
+);
+```
+
+## Examples
+
+### Controlled
+
+Use `onStepClick` prop to control component's state.
+
+<Canvas of={stories.Controlled} />
+
+### Readonly
+
+Use `readOnly` prop to indicate that the component is not interactive.
+
+<Canvas of={stories.Readonly} />
+
+### Disabled
+
+Use `disabled` prop on a step to disable it.
+
+<Canvas of={stories.Disabled} />
+
+### Sizes
+
+Use `size` prop to set the size of the progress indicators. Smallest size doesn't get any content.
+
+<Canvas of={stories.Size} />
+
+### Intent
+
+Use `intent` prop to set the color of the progress indicators.
+
+<Canvas of={stories.Intent} />
+
+### Design
+
+Use `design` prop to set the look and feel.
+
+<Canvas of={stories.Design} />
+
+### Orientation
+
+Use `orientation` prop to set `horizontal|vertical` orientation.
+
+<Canvas of={stories.Orientation} />
+
+## API Reference
+
+<ArgTypes
+  of={ProgressTracker}
+  description="Contains all the progress tracker component parts."
+  subcomponents={{
+    'ProgressTracker.Step': {
+      of: ProgressTracker.Step,
+      description: 'Contains the button associated to a step.',
+    },
+    'ProgressTracker.StepLabel': {
+      of: ProgressTracker.StepLabel,
+      description: 'The label describing the step.',
+    },
+    'ProgressTracker.StepIndicator': {
+      of: ProgressTracker.StepIndicator,
+      description: 'Contains the custom content of a step, for complete and incomplete states.',
+    },
+  }}
+/>
+
+## Accessibility
+
+<A11yReport of="progress-tracker" />
+
+To enforce your implementation's accessibility we recommend using a specific `aria-label` on `ProgressTracker` root component.
+
+### Keyboard Interactions
+
+- <Kbd>Tab</Kbd>: Moves focus to the next step depending on `orientation`.
+- <Kbd>Space</Kbd>: Activates the step.
+- <Kbd>Enter</Kbd>: Activates the step.

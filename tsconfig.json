@@ -8,7 +8,10 @@
     "noEmit": true,
     "module": "ESNext",
     "paths": {
-      "@docs/*": ["./documentation/*"]
+      "@docs/*": ["./documentation/*"],
+      "@spark-ui/components/*": ["packages/components/src/*"],  // Ajoutez cette ligne spécifique
+      "@spark-ui/*": ["packages/*/src"],
+      "@/*": ["src/*"]
     }
   },
   "exclude": ["node_modules"]

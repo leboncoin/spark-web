@@ -1,0 +1,154 @@
+import { Meta, Canvas } from '@storybook/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Kbd } from '@spark-ui/components/kbd'
+
+import { Stepper } from '.'
+
+import * as stories from './Stepper.stories'
+
+<Meta of={stories} />
+
+# Stepper
+
+Stepper allows a user to enter a number, and increment or decrement the value using dedicated buttons.
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { Stepper } from '@spark-ui/components/stepper'
+
+export default () => (
+  <Stepper>
+    <Stepper.DecrementButton />
+    <Stepper.Input />
+    <Stepper.IncrementButton />
+  </Stepper>
+);
+```
+
+## Examples
+
+### Uncontrolled
+
+Use `defaultValue` prop to set the default value of the stepper. Optionally `onValueChange` prop can be used to know when the value of the stepper changes.
+
+<Canvas of={stories.Uncontrolled} />
+
+### Controlled
+
+Use `value` and `onValueChange` props to control the value of the input.
+
+<Canvas of={stories.Controlled} />
+
+### Disabled
+
+Use `disabled` prop to indicate that the stepper is disabled and not interactive.
+
+<Canvas of={stories.Disabled} />
+
+### Read Only
+
+Use `readOnly` prop to indicate that the stepper is only for display and not interactive.
+
+<Canvas of={stories.ReadOnly} />
+
+### State
+
+Use `state` prop to assign a specific state to the group, choosing from: `error`, `alert` and `success`. By doing so, the outline styles will be updated.
+
+<Canvas of={stories.State} />
+
+### Step
+
+Use `step` prop to snap the value to certain increments, starting from the minimum if defined (from zero if not). If the user types a value that is beween two steps and blurs the input, the value will be snapped to the nearest step.
+
+<Canvas of={stories.Step} />
+
+### Minimum and maximum values
+
+Use `minValue|maxValue` props to limit the entered value to a specific range. Ranges can be open ended by only providing either `minValue` or `maxValue` rather than both.
+
+Increment and decrement buttons will be disabled when the value is within one step value from the bounds.
+
+If the user types a value that is beyond range bounds and blurs the input, the value will be clamped.
+
+<Canvas of={stories.MinMaxValues} />
+
+### Format Options
+
+Use `formatOptions` prop to adapt your value display to your needs (percentages, currency, ...). All options supported by [Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat) are supported, including configuration of minimum and maximum fraction digits, sign display, grouping separators, etc.
+
+**Note:** the `unit` style is not currently supported in Safari. A [polyfill](https://formatjs.io/docs/polyfills/intl-numberformat/) may be necessary.
+
+<Canvas of={stories.FormatOptions} />
+
+## Advanced Examples
+
+### Custom implementation
+
+Below is an implementation of a `Stepper` with custom **increment** and **decrement** buttons that might provide guidance if you need to implement something custom as well.
+
+<Canvas of={stories.Custom} />
+
+## Form field
+
+When using the `Stepper` component you might want to use it in combination with `FormField` to add a proper label, error message, etc.
+
+<Canvas of={stories.WithFormField} />
+
+## API Reference
+
+<ArgTypes
+  of={Stepper}
+  description="A container for all the stepper component parts."
+  exclude={[
+    'onPress',
+    'onPressStart',
+    'onPressEnd',
+    'onPressChange',
+    'onPressUp',
+    'onFocusChange',
+    'aria-labelledby',
+    'aria-describedby',
+    'aria-details',
+    'onKeyDown',
+    'onKeyUp',
+    'placeholder',
+  ]}
+  subcomponents={{
+    'Stepper.Input': {
+      of: Stepper.Input,
+      description: 'The input field to display and change the value.',
+    },
+    'Stepper.IncrementButton': {
+      of: Stepper.IncrementButton,
+      description: 'The button to increment the value of the input.',
+    },
+    'Stepper.DecrementButton': {
+      of: Stepper.DecrementButton,
+      description: 'The button to decrement the value of the input.',
+    },
+  }}
+/>
+
+## Accessibility
+
+<A11yReport of="stepper" />
+
+Adheres to the [Spinbutton WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/).
+
+### Keyboard Interactions
+
+- <Kbd>ArrowUp</Kbd>: Increases the value
+- <Kbd>ArrowDown</Kbd>: Decreases the value
+- <Kbd>Home</Kbd>: If the component has a minimum value, sets the value to its minimum.
+- <Kbd>End</Kbd>: If the component has a maximum value, sets the value to its maximum.

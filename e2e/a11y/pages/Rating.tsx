@@ -1,4 +1,4 @@
-import { Rating } from '@spark-ui/rating'
+import { Rating } from '@spark-ui/components/rating'
 import React from 'react'
 
 export const A11yRating = () => (

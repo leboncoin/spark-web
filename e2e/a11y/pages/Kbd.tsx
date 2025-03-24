@@ -1,4 +1,4 @@
-import { Kbd } from '@spark-ui/kbd'
+import { Kbd } from '@spark-ui/components/kbd'
 import React from 'react'
 
 export const A11yKbd = () => (

@@ -1,4 +1,4 @@
-import { Breadcrumb } from '@spark-ui/breadcrumb'
+import { Breadcrumb } from '@spark-ui/components/breadcrumb'
 import React from 'react'
 
 export const A11yBreadcrumb = () => (

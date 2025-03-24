@@ -1,7 +1,7 @@
-import { Button } from '@spark-ui/button'
-import { Dropdown } from '@spark-ui/dropdown'
-import { Dialog } from '@spark-ui/dialog'
-import { FormField } from '@spark-ui/form-field'
+import { Button } from '@spark-ui/components/button'
+import { Dropdown } from '@spark-ui/components/dropdown'
+import { Dialog } from '@spark-ui/components/dialog'
+import { FormField } from '@spark-ui/components/form-field'
 import React from 'react'
 
 export function DropdownWithinDialog() {
@@ -13,7 +13,7 @@ export function DropdownWithinDialog() {
   }
 
   return (
-    <div className="grid h-full place-items-center gap-y-3xl p-lg">
+    <div className="gap-y-3xl p-lg grid h-full place-items-center">
       <Dialog open={open} onOpenChange={handleOpenChange}>
         <Dialog.Trigger asChild>
           <Button>Create account</Button>
@@ -27,7 +27,7 @@ export function DropdownWithinDialog() {
               <Dialog.Title>Create account</Dialog.Title>
             </Dialog.Header>
 
-            <Dialog.Body className="flex flex-col gap-lg">
+            <Dialog.Body className="gap-lg flex flex-col">
               <FormField name="books">
                 <FormField.Label className="text-body-2">books</FormField.Label>
                 <Dropdown>

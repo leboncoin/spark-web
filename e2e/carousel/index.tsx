@@ -1,4 +1,4 @@
-import { Carousel } from '@spark-ui/carousel'
+import { Carousel } from '@spark-ui/components/carousel'
 import React, { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 

@@ -1,11 +1,11 @@
-import { Icon } from '@spark-ui/icon'
-import { BookmarkFill } from '@spark-ui/icons/dist/icons/BookmarkFill'
-import { ProgressTracker } from '@spark-ui/progress-tracker'
+import { BookmarkFill } from '@spark-ui/icons/BookmarkFill'
+import { Icon } from '@spark-ui/components/icon'
+import { ProgressTracker } from '@spark-ui/components/progress-tracker'
 import React from 'react'
 
 export const A11yProgressTracker = () => (
   <section>
-    <div className="flex flex-wrap items-center gap-2xl">
+    <div className="gap-2xl flex flex-wrap items-center">
       <ProgressTracker aria-label="Default progress tracker" stepIndex={1}>
         <ProgressTracker.Step>
           <ProgressTracker.StepIndicator />

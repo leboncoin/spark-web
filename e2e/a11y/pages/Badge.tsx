@@ -1,12 +1,12 @@
-import { Badge } from '@spark-ui/badge'
-import { Button } from '@spark-ui/button'
+import { Badge } from '@spark-ui/components/badge'
+import { Button } from '@spark-ui/components/button'
 import React from 'react'
 
 export const A11yBadge = () => (
   <section>
     <div>
       <Badge count={1}>
-        <div className="size-sz-40 rounded-sm bg-outline" />
+        <div className="size-sz-40 bg-outline rounded-sm" />
       </Badge>
     </div>
 

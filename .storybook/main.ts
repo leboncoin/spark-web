@@ -8,6 +8,13 @@ const config: StorybookConfig = {
     // This is where we can override vite config for Storybook
     return mergeConfig(config, {
       plugins: [],
+      resolve: {
+        ...config.resolve,
+        alias: {
+          ...config.resolve?.alias,
+          '@spark-ui/components': '/packages/components/src',
+        },
+      },
     })
   },
   core: {
@@ -18,8 +25,8 @@ const config: StorybookConfig = {
     '../documentation/**/*.mdx',
     '../packages/**/*.doc.mdx',
     '../packages/**/*.stories.tsx',
-    '!..packages/components/icons/**/*.doc.mdx',
-    '!..packages/components/icons/**/*.stories.tsx',
+    '!..packages/icons/**/*.doc.mdx',
+    '!..packages/icons/**/*.stories.tsx',
   ],
   addons: [
     'storybook-addon-tag-badges',

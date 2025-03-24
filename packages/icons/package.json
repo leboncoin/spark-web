@@ -1,0 +1,63 @@
+{
+  "name": "@spark-ui/icons",
+  "version": "9.4.8",
+  "description": "spark-ui icons",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./dist/icons/*.d.ts",
+      "import": "./dist/icons/*.mjs",
+      "require": "./dist/icons/*.js"
+    }
+  },
+  "scripts": {
+    "generate": "node ./scripts/build.mjs",
+    "build": "tsup"
+  },
+  "sideEffects": false,
+  "keywords": [
+    "@spark-ui",
+    "react",
+    "component",
+    "accessible",
+    "accessibility",
+    "wai-aria",
+    "aria",
+    "a11y",
+    "icons"
+  ],
+  "devDependencies": {
+    "change-case": "4.1.2",
+    "minimatch": "7.4.6",
+    "path-that-svg": "1.2.4",
+    "svgo": "3.3.2",
+    "svgson": "5.3.1",
+    "tsup": "^8.4.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0",
+    "react-dom": "^19.0",
+    "tailwindcss": "^4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leboncoin/spark-web.git",
+    "directory": "packages/icons"
+  },
+  "config": {
+    "title": "icons",
+    "category": "components"
+  },
+  "bugs": {
+    "url": "https://github.com/leboncoin/spark-web/issues?q=is%3Aopen+label%3A%22Component%3A+icons%22"
+  },
+  "homepage": "https://sparkui.vercel.app",
+  "license": "MIT"
+}

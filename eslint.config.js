@@ -1,11 +1,10 @@
 // eslint.config.js
+import nx from '@nx/eslint-plugin'
 import ts from '@typescript-eslint/eslint-plugin'
 import tsParser from '@typescript-eslint/parser'
-import react from 'eslint-plugin-react'
-import reactHooks from 'eslint-plugin-react-hooks'
 import prettier from 'eslint-plugin-prettier'
+import reactHooks from 'eslint-plugin-react-hooks'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
-import nx from '@nx/eslint-plugin'
 
 export default [
   {
@@ -32,14 +31,6 @@ export default [
       '@nx': nx,
     },
     rules: {
-      // NX
-      '@nx/enforce-module-boundaries': [
-        'error',
-        {
-          /* options */
-        },
-      ],
-
       // Prettier
       'prettier/prettier': ['warn', { endOfLine: 'auto' }],
 
@@ -120,15 +111,9 @@ export default [
     },
   },
   {
-    files: ['packages/components/icons/src/tags.ts', 'packages/components/icons/src/index.ts'],
+    files: ['packages/icons/src/tags.ts', 'packages/icons/src/index.ts'],
     rules: {
       'max-lines': 'off',
-    },
-  },
-  {
-    files: ['*.stories.tsx', '*.stories.ts'],
-    rules: {
-      '@nx/enforce-module-boundaries': 'off',
     },
   },
 ]

@@ -1,0 +1,65 @@
+import { Meta, Canvas } from '@storybook/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Label } from '.'
+import * as stories from './Label.stories'
+
+<Meta of={stories} />
+
+# Label
+
+Renders an accessible label associated with controls.
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { Label } from '@spark-ui/components/label'
+
+export default () => (
+  <Label>
+    <Label.RequiredIndicator />
+  </Label>
+);
+```
+
+## Examples
+
+### Required
+
+Use `Label.RequiredIndicator` component to display a required indicator inside the label. By default `*` is used as indicator.
+
+<Canvas of={stories.Required} />
+
+#### Custom required indicator
+
+Optionally use the `children` prop to change the indicator.
+
+<Canvas of={stories.RequiredIndicator} />
+
+## API Reference
+
+<ArgTypes
+  of={Label}
+  description="A label that can be used to describe a field"
+  subcomponents={{
+    'Label.RequiredIndicator': {
+      of: Label.RequiredIndicator,
+      description:
+        'An optional indicator to display a field as required. Must be rendered inside Label.',
+    },
+  }}
+/>
+
+## Accessibility
+
+<A11yReport of="label" />
+
+This component is based on the native `label` element, it will automatically apply the correct labelling when wrapping controls or using the `htmlFor` attribute. For your own custom controls to work correctly, ensure they use native elements such as `button` or `input` as a base.

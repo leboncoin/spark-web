@@ -1,10 +1,10 @@
-import { Button } from '@spark-ui/button'
-import { Popover } from '@spark-ui/popover'
+import { Button } from '@spark-ui/components/button'
+import { Popover } from '@spark-ui/components/popover'
 import React from 'react'
 
 export const A11yPopover = () => (
   <section>
-    <div className="flex h-sz-240 items-center justify-center rounded-sm border-md border-dashed border-neutral bg-neutral-container p-lg">
+    <div className="h-sz-240 border-md border-neutral bg-neutral-container p-lg flex items-center justify-center rounded-sm border-dashed">
       <Popover defaultOpen>
         <Popover.Trigger asChild>
           <Button>Trigger popover</Button>
@@ -20,7 +20,7 @@ export const A11yPopover = () => (
       </Popover>
     </div>
 
-    <div className="flex h-sz-240 items-center justify-center rounded-sm border-md border-dashed border-neutral bg-neutral-container p-lg">
+    <div className="h-sz-240 border-md border-neutral bg-neutral-container p-lg flex items-center justify-center rounded-sm border-dashed">
       <Popover defaultOpen>
         <Popover.Trigger asChild>
           <Button>Trigger popover</Button>

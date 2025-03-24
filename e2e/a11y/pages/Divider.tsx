@@ -1,4 +1,4 @@
-import { Divider } from '@spark-ui/divider'
+import { Divider } from '@spark-ui/components/divider'
 import React from 'react'
 
 export const A11yDivider = () => (

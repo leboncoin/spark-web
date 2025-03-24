@@ -1,0 +1,124 @@
+import { Meta, Canvas } from '@storybook/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Tabs } from '.'
+import { Kbd } from '@spark-ui/components/kbd'
+
+import * as stories from './Tabs.stories'
+
+<Meta of={stories} />
+
+# Tabs
+
+A set of layered sections of content—known as tab panels—that are displayed one at a time.
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { Tabs } from "@spark-ui/components/tabs"
+
+export default () => (
+  <Tabs>
+    <Tabs.List> 
+      <Tabs.Trigger />
+    </Tabs.List>
+    <Tabs.Content />
+  </Tabs.Content>
+);
+```
+
+## Examples
+
+### Disabled
+
+Use `disabled` prop on item to set related state to it. Other states (`:hover|:focus|...`) are automatically managed.
+
+<Canvas of={stories.State} />
+
+### Icons
+
+You can use `Icons` inside your `Tabs.Trigger` elements.
+
+<Canvas of={stories.Icons} />
+
+### Intent
+
+Use `intent` prop to set the color of active tab item.
+
+<Canvas of={stories.Intent} />
+
+### Orientation
+
+Use `orientation` prop to set `horizontal|vertical` orientation.
+
+<Canvas of={stories.Orientation} />
+
+### Overflow
+
+For `horizontal` orientation only, navigation arrows are automatically displayed to help user browse tabs on content overflow. Use then `loop` prop on list to allow navigation loop from last tab to first, and vice versa.
+
+<Canvas of={stories.Overflow} />
+
+### Size
+
+Use `size` prop to set the size of items.
+
+<Canvas of={stories.Size} />
+
+### forceMount
+
+Use `forceMount` on `Tabs` when you want the content of your inactive tabs to remain in the DOM, instead of being removed.
+
+This can be useful if your tabs load heavy resources on mount, such as heavy images, videos, iframes, etc...
+
+<Canvas of={stories.ForceMount} />
+
+## API Reference
+
+<ArgTypes
+  of={Tabs}
+  description="Contains all the tabs component parts."
+  subcomponents={{
+    'Tabs.List': {
+      of: Tabs.List,
+      description: 'Contains the triggers that are aligned along the edge of the active content.',
+    },
+    'Tabs.Trigger': {
+      of: Tabs.Trigger,
+      description: 'The button that activates its associated content.',
+    },
+    'Tabs.Content': {
+      of: Tabs.Content,
+      description: 'Contains the content associated with each trigger.',
+    },
+  }}
+/>
+
+## Accessibility
+
+<A11yReport of="tabs" />
+
+Adheres to the [Tabs WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs).
+
+### Keyboard Interactions
+
+- <Kbd>Tab</Kbd>: When focus moves onto the tabs, focuses the active trigger. When a trigger is
+  focused, moves focus to the active content.
+- <Kbd>ArrowDown</Kbd>: Moves focus to the next trigger depending on `orientation` and activates its
+  associated content.
+- <Kbd>ArrowRight</Kbd>: Moves focus to the next trigger depending on `orientation` and activates
+  its associated content.
+- <Kbd>ArrowUp</Kbd>: Moves focus to the previous trigger depending on `orientation` and activates
+  its associated content.
+- <Kbd>ArrowLeft</Kbd>: Moves focus to the previous trigger depending on `orientation` and activates
+  its associated content.
+- <Kbd>Home</Kbd>: Moves focus to the first trigger and activates its associated content.
+- <Kbd>End</Kbd>: Moves focus to the last trigger and activates its associated content.
