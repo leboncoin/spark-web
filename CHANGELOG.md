@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.7](https://github.com/leboncoin/spark-web/compare/v10.0.6...v10.0.7) (2025-03-25)
+
+### Bug Fixes
+
+- **components:** removed inherited form-field require attr from combobox ([970c956](https://github.com/leboncoin/spark-web/commit/970c956b1212c30bc6561c232c5dcbbaff6e8cec))
+
 ## [10.0.6](https://github.com/leboncoin/spark-web/compare/v10.0.5...v10.0.6) (2025-03-25)
 
 ### Bug Fixes
