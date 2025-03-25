@@ -40,7 +40,7 @@ export const Input = ({
   const field = useFormFieldControl()
   const [inputValue] = useCombinedState(value, defaultValue)
 
-  const { isInvalid, isRequired, description } = field
+  const { isInvalid, description } = field
 
   useEffect(() => {
     if (inputValue != null) {
@@ -136,7 +136,6 @@ export const Input = ({
           readOnly={ctx.readOnly}
           // FormField
           aria-invalid={isInvalid}
-          required={isRequired}
           aria-describedby={description}
         />
       </PopoverTrigger>
