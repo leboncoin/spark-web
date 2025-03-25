@@ -10,7 +10,7 @@ describe('Combobox', () => {
   describe('with FormField', () => {
     it('should render error message when field is in error', () => {
       render(
-        <FormField state="error">
+        <FormField state="error" isRequired>
           <FormField.Label>Book</FormField.Label>
           <Combobox>
             <Combobox.Trigger>
@@ -28,9 +28,11 @@ describe('Combobox', () => {
         </FormField>
       )
 
-      expect(getInput('Book')).toBeInTheDocument()
+      const input = getInput('Book')
 
-      expect(screen.getByText('You forgot to select a book')).toBeInTheDocument()
+      expect(input).toHaveAttribute('aria-invalid', 'true')
+      expect(input).toHaveAttribute('required')
+      expect(input).toHaveAccessibleDescription('You forgot to select a book')
     })
 
     it('should move focus to the input field when the corresponding label is clicked', async () => {
