@@ -13,20 +13,20 @@ Returns a function that will return `true` if the component is mounted and `fals
 ## Install
 
 ```
-npm install @spark-ui/components
+npm install @spark-ui/hooks
 ```
 
 ## Import
 
 ```
-import { useMountedState } from "@spark-ui/use-mounted-state"
+import { useMountedState } from "@spark-ui/hooks/use-mounted-state"
 ```
 
 ## Usage
 
 ```jsx
 import * as React from 'react'
-import { useMountedState } from 'react-use'
+import { useMountedState } from "@spark-ui/hooks/use-mounted-state"
 
 const Demo = () => {
   const isMounted = useMountedState()

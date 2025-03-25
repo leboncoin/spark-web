@@ -1,0 +1,52 @@
+{
+  "name": "@spark-ui/hooks",
+  "version": "10.0.5",
+  "description": "Common hooks for Spark UI",
+  "exports": {
+    "./*": {
+      "types": "./dist/*/index.d.ts",
+      "import": "./dist/*/index.mjs",
+      "require": "./dist/*/index.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*/index.d.ts"
+      ]
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "@spark-ui",
+    "react",
+    "hook"
+  ],
+  "scripts": {
+    "build": "tsup"
+  },
+  "dependencies": {
+    "@types/lodash.isequal": "4.5.8",
+    "lodash.isequal": "4.5.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0",
+    "react-dom": "^19.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leboncoin/spark-web.git",
+    "directory": "packages/hooks"
+  },
+  "config": {
+    "title": "use-merge-refs",
+    "category": "hooks"
+  },
+  "bugs": {
+    "url": "https://github.com/leboncoin/spark-web/issues?q=is%3Aopen+label%3Ahooks"
+  },
+  "homepage": "https://sparkui.vercel.app",
+  "license": "MIT"
+}

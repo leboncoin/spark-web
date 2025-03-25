@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": [".", "../../global.d.ts", "./global.d.ts"],
+  "exclude": ["dist", "build", "node_modules"],
+  "compilerOptions" : {
+    "incremental": false,
+    "jsx": "react-jsx"
+  }
+}

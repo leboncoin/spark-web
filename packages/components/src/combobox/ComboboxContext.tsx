@@ -1,7 +1,7 @@
 /* eslint-disable complexity */
 /* eslint-disable max-lines-per-function */
 import { useFormFieldControl } from '@spark-ui/components/form-field'
-import { useCombinedState } from '@spark-ui/use-combined-state'
+import { useCombinedState } from '@spark-ui/hooks/use-combined-state'
 import { useCombobox, useMultipleSelection } from 'downshift'
 import {
   createContext,

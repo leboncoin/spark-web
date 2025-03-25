@@ -1,4 +1,4 @@
-import { useMergeRefs } from '@spark-ui/use-merge-refs'
+import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
 import { cva, cx } from 'class-variance-authority'
 import { type HTMLAttributes, type ReactNode, Ref } from 'react'
 

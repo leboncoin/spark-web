@@ -1,5 +1,5 @@
 import { useFormFieldControl } from '@spark-ui/components/form-field'
-import { useMergeRefs } from '@spark-ui/use-merge-refs'
+import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
 import { cx } from 'class-variance-authority'
 import { Fragment, ReactNode, Ref, useEffect, useRef } from 'react'
 

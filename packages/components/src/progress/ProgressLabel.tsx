@@ -1,4 +1,4 @@
-import { useMergeRefs } from '@spark-ui/use-merge-refs'
+import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
 import { ComponentPropsWithRef, useCallback, useId } from 'react'
 
 import { ID_PREFIX, useProgress } from './ProgressContext'

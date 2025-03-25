@@ -9,20 +9,20 @@ import { Meta, Story } from '@storybook/blocks'
 ## Install
 
 ```
-npm install @spark-ui/components
+npm install @spark-ui/hooks
 ```
 
 ## Import
 
 ```
-import { useMergeRefs } from "@spark-ui/use-merge-refs"
+import { useMergeRefs } from "@spark-ui/hooks/use-merge-refs"
 ```
 
 ## Usage
 
 ```jsx
 import * as React from 'react'
-import { useMergeRefs } from '@spark-ui/use-merge-refs'
+import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
 
 const Demo = ({ ref: forwardedRef, ...props }) => {
   const innerRef = useRef()
