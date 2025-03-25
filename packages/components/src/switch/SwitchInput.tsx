@@ -1,7 +1,7 @@
 import { useFormFieldControl } from '@spark-ui/components/form-field'
+import { useCombinedState } from '@spark-ui/hooks/use-combined-state'
 import { Check } from '@spark-ui/icons/Check'
 import { Close } from '@spark-ui/icons/Close'
-import { useCombinedState } from '@spark-ui/use-combined-state'
 import { Switch as RadixSwitch } from 'radix-ui'
 import { type ComponentPropsWithRef, type ReactNode } from 'react'
 

@@ -1,4 +1,4 @@
-import { useCombinedState } from '@spark-ui/use-combined-state'
+import { useCombinedState } from '@spark-ui/hooks/use-combined-state'
 import { cx } from 'class-variance-authority'
 import {
   type ChangeEvent,

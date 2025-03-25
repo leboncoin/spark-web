@@ -133,7 +133,7 @@
     "lightningcss-linux-x64-gnu": "^1.29.1"
   },
   "workspaces": [
-    "packages/hooks/*",
+    "packages/hooks",
     "packages/utils/*",
     "packages/components",
     "packages/icons"

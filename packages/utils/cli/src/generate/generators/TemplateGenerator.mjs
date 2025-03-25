@@ -30,6 +30,10 @@ export class TemplateGenerator extends Generator {
     const basePath = this.system.getBasePath()
     const context = TemplateGenerator.CONTEXTS[type]
 
+    if (type === TemplateGenerator.TYPES.COMPONENT || type === TemplateGenerator.TYPES.HOOK) {
+      return `${basePath}/packages/${context}/src/${name}`
+    }
+
     return `${basePath}/packages/${context}/${name}`
   }
 

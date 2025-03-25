@@ -1,4 +1,4 @@
-import { useMergeRefs } from '@spark-ui/use-merge-refs'
+import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
 
 import { Input as SparkInput } from '../input'
 import { useStepperContext } from './Stepper'

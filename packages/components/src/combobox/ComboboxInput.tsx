@@ -1,6 +1,6 @@
 import { useFormFieldControl } from '@spark-ui/components/form-field'
-import { useCombinedState } from '@spark-ui/use-combined-state'
-import { useMergeRefs } from '@spark-ui/use-merge-refs'
+import { useCombinedState } from '@spark-ui/hooks/use-combined-state'
+import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
 import { cx } from 'class-variance-authority'
 import {
   ChangeEvent,

@@ -16,7 +16,7 @@ describe('CLI `spark generate` (component package)', () => {
 
   const contextPath = TemplateGenerator.CONTEXTS[packageType] as string
 
-  const packagePath = path.join(process.cwd(), 'packages', contextPath, 'bar')
+  const packagePath = path.join(process.cwd(), 'packages', contextPath, 'src', 'bar')
   const invalidPackagePath = path.join(process.cwd(), 'packages', contextPath, '123')
 
   beforeEach(() => {

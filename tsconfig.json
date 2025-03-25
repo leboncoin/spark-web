@@ -10,6 +10,7 @@
     "paths": {
       "@docs/*": ["./documentation/*"],
       "@spark-ui/components/*": ["packages/components/src/*"],  // Ajoutez cette ligne spécifique
+      "@spark-ui/hooks/*": ["packages/hooks/src/*"],  // Ajoutez cette ligne spécifique
       "@spark-ui/*": ["packages/*/src"],
       "@/*": ["src/*"]
     }

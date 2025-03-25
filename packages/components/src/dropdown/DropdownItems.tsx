@@ -1,4 +1,4 @@
-import { useMergeRefs } from '@spark-ui/use-merge-refs'
+import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
 import { cx } from 'class-variance-authority'
 import { ReactNode, Ref, useLayoutEffect, useRef } from 'react'
 
