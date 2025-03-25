@@ -180,7 +180,6 @@ describe('FormField error message', () => {
 
     expect(inputEl).toHaveAttribute('aria-invalid', 'true')
     expect(inputEl).toHaveAttribute('aria-describedby', errorTextEl.getAttribute('id'))
-    expect(errorTextEl).toHaveAttribute('aria-live', 'polite')
   })
 
   it('should render error and helper message when is invalid', () => {

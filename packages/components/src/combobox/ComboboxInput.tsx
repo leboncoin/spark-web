@@ -1,3 +1,4 @@
+import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { useCombinedState } from '@spark-ui/use-combined-state'
 import { useMergeRefs } from '@spark-ui/use-merge-refs'
 import { cx } from 'class-variance-authority'
@@ -36,7 +37,10 @@ export const Input = ({
   ...props
 }: InputProps) => {
   const ctx = useComboboxContext()
+  const field = useFormFieldControl()
   const [inputValue] = useCombinedState(value, defaultValue)
+
+  const { isInvalid, isRequired, description } = field
 
   useEffect(() => {
     if (inputValue != null) {
@@ -130,6 +134,10 @@ export const Input = ({
           aria-label={ariaLabel}
           disabled={ctx.disabled}
           readOnly={ctx.readOnly}
+          // FormField
+          aria-invalid={isInvalid}
+          required={isRequired}
+          aria-describedby={description}
         />
       </PopoverTrigger>
     </>
