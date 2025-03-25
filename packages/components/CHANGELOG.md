@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.5](https://github.com/leboncoin/spark-web/compare/v10.0.4...v10.0.5) (2025-03-25)
+
+### Bug Fixes
+
+- **components:** fixed accessible description on combobox input ([678d449](https://github.com/leboncoin/spark-web/commit/678d4491b58a097ed04d2cbd93170650655ba97b))
+
 ## [10.0.4](https://github.com/leboncoin/spark-web/compare/v10.0.3...v10.0.4) (2025-03-24)
 
 **Note:** Version bump only for package @spark-ui/components
