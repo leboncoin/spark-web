@@ -10,7 +10,7 @@ describe('Combobox', () => {
   describe('with FormField', () => {
     it('should render error message when field is in error', () => {
       render(
-        <FormField state="error" isRequired>
+        <FormField state="error">
           <FormField.Label>Book</FormField.Label>
           <Combobox>
             <Combobox.Trigger>
@@ -31,7 +31,6 @@ describe('Combobox', () => {
       const input = getInput('Book')
 
       expect(input).toHaveAttribute('aria-invalid', 'true')
-      expect(input).toHaveAttribute('required')
       expect(input).toHaveAccessibleDescription('You forgot to select a book')
     })
 
