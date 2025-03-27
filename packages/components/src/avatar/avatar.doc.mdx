@@ -1,0 +1,123 @@
+import { Meta, Canvas } from '@storybook/blocks'
+import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { Avatar } from '.'
+import * as stories from './avatar.stories'
+
+<Meta of={stories} />
+
+# Avatar
+
+The Avatar component displays a circular profile image with an optional online status badge and a customizable edit button.
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { Avatar } from '@spark-ui/components/avatar'
+
+export default () => (
+  <Avatar>
+    <Avatar.User>
+      <Avatar.Image />
+      <Avatar.Placeholder />
+    </Avatar.User>
+    <Avatar.Action />
+    <Avatar.OnlineBadge />
+  </Avatar>
+);
+```
+
+## Examples
+
+### Action
+
+Use the `Avatar.Action` component to display an action button on the avatar.
+
+Use `children` to use a custom icon.
+
+Use the `asChild` prop to replace with a custom element.
+
+We advise using Avatar.Action with the lg and above sizes.
+
+<Canvas of={stories.Actions} />
+
+### As a link
+
+Use the `asChild` on `Avatar.User` prop to turn into a link (or a button).
+
+<Canvas of={stories.AsLink} />
+
+### Online Status
+
+Use the `isOnline` prop to display a badge indicating this user is online.
+
+<Canvas of={stories.WithOnlineStatus} />
+
+### Placeholder
+
+Use the `Avatar.Placeholder` to display a placeholder avatar.
+
+By default it will use the first letter of the username, but you can use the `children` prop to display an icon or a custom element.
+
+<Canvas of={stories.Placeholder} />
+
+### Shapes
+
+Use the `design` prop to display a square avatar.
+
+<Canvas of={stories.Shapes} />
+
+### Sizes
+
+The Avatar component comes in 5 different sizes.
+
+<Canvas of={stories.Sizes} />
+
+## API Reference
+
+<ArgTypes
+  of={Avatar}
+  description="Main container for the avatar."
+  subcomponents={{
+    'Avatar.User': {
+      of: Avatar.User,
+      description: 'Preview section of the user (either a profile pic or a placeholder)',
+    },
+    'Avatar.Image': {
+      of: Avatar.Image,
+      description: 'Component to display the avatar image.',
+    },
+    'Avatar.Placeholder': {
+      of: Avatar.Placeholder,
+      description: 'Placeholder to display in case there is no image or the image is not available.',
+    },
+    'Avatar.OnlineBadge': {
+      of: Avatar.OnlineBadge,
+      description: 'Badge to display the online status of the user.',
+    },
+    'Avatar.Action': {
+      of: Avatar.Action,
+      description: 'Edit button positioned on the avatar border.',
+    },
+  }}
+/>
+
+
+## Accessibility
+
+<A11yReport of="avatar" />
+
+The Avatar component follows accessibility best practices:
+
+- The avatar image has an `alt` attribute that uses the provided username
+- The edit button has an accessible label
+- The online status badge uses semantic colors
+- Sizes are sufficient to be clickable on mobile 

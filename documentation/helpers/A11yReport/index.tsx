@@ -35,7 +35,7 @@ export const A11yReport = ({ of }: { of: string }) => {
   if (errors === 404) {
     return (
       <Callout kind="error" marginY="large">
-        <p>No accessibility report were find for this component.</p>
+        <p>No accessibility report were found for this component.</p>
       </Callout>
     )
   }
