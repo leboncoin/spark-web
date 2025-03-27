@@ -2,7 +2,12 @@ import { makeVariants } from '@spark-ui/internal-utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 export const styles = cva(
-  ['inline-flex h-fit', 'empty:p-0', 'text-center font-bold', 'rounded-full box-content'],
+  [
+    'inline-flex h-fit',
+    'empty:p-0',
+    'text-center font-bold default:border-surface',
+    'rounded-full box-content',
+  ],
   {
     variants: {
       /**
@@ -24,16 +29,16 @@ export const styles = cva(
           'basic',
         ]
       >({
-        main: ['bg-main', 'text-on-main', 'border-surface'],
-        support: ['bg-support', 'text-on-support', 'border-surface'],
-        accent: ['bg-accent', 'text-on-accent', 'border-surface'],
-        success: ['bg-success', 'text-on-success', 'border-surface'],
-        alert: ['bg-alert', 'text-on-alert', 'border-surface'],
-        danger: ['bg-error', 'text-on-error', 'border-surface'],
-        info: ['bg-info', 'text-on-info', 'border-surface'],
-        neutral: ['bg-neutral', 'text-on-neutral', 'border-surface'],
-        surface: ['bg-surface', 'text-on-surface', 'border-surface'],
-        basic: ['bg-basic', 'text-on-basic', 'border-surface'],
+        main: ['bg-main text-on-main'],
+        support: ['bg-support text-on-support'],
+        accent: ['bg-accent text-on-accent'],
+        success: ['bg-success text-on-success'],
+        alert: ['bg-alert text-on-alert'],
+        danger: ['bg-error text-on-error'],
+        info: ['bg-info text-on-info'],
+        neutral: ['bg-neutral text-on-neutral'],
+        surface: ['bg-surface text-on-surface'],
+        basic: ['bg-basic text-on-basic'],
       }),
       /**
        * Size of the component.
@@ -48,10 +53,22 @@ export const styles = cva(
        * @default 'relative'
        */
       type: {
-        relative: ['absolute right-0 border-md', 'translate-x-1/2 -translate-y-1/2'],
-        standalone: [],
+        relative: ['absolute right-0 default:border-md', 'translate-x-1/2 -translate-y-1/2'],
+        standalone: ['border-surface'],
       },
     },
+    compoundVariants: [
+      {
+        size: 'sm',
+        type: 'standalone',
+        className: 'border-md',
+      },
+      {
+        size: 'md',
+        type: 'standalone',
+        className: 'border-lg',
+      },
+    ],
     defaultVariants: {
       intent: 'danger',
       size: 'md',

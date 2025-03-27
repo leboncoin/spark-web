@@ -89,9 +89,9 @@ export const CountThreshold: StoryFn = _args => (
 export const Sizes: StoryFn = _args => (
   <div className="gap-xl flex">
     {sizes.map(size => (
-      <div className="gap-xl flex" key={size}>
+      <div className="gap-xl flex flex-col" key={size}>
         <div className="text-center">
-          <StoryLabel className="mb-xl">{`
+          <StoryLabel className="mb-md">{`
             ${size}
             ${size === 'md' ? ' (default)' : ''}
           `}</StoryLabel>
@@ -102,7 +102,7 @@ export const Sizes: StoryFn = _args => (
         </div>
 
         <div className="text-center">
-          <StoryLabel className="mb-xl">{`
+          <StoryLabel className="mb-md">{`
             ${size}
             ${size === 'md' ? ' (default)' : ''}
             empty
@@ -111,6 +111,30 @@ export const Sizes: StoryFn = _args => (
           <Badge key={size} size={size}>
             {fakeAvatar}
           </Badge>
+        </div>
+
+        <div className="text-center">
+          <StoryLabel className="mb-md">{`
+            ${size}
+            ${size === 'md' ? ' (default)' : ''}
+            standalone with count
+          `}</StoryLabel>
+
+          <div className="bg-overlay/dim-3 p-md flex items-center justify-center">
+            <Badge key={size} size={size} count={25} />
+          </div>
+        </div>
+
+        <div className="text-center">
+          <StoryLabel className="mb-md">{`
+            ${size}
+            ${size === 'md' ? ' (default)' : ''}
+            standalone
+          `}</StoryLabel>
+
+          <div className="bg-overlay/dim-3 p-md flex items-center justify-center">
+            <Badge key={size} size={size} />
+          </div>
         </div>
       </div>
     ))}
