@@ -1,6 +1,8 @@
 import { DocsContainer, DocsContainerProps } from '@storybook/blocks'
 import { Icon } from '@spark-ui/components/icon'
 import { ShareExpand } from '@spark-ui/icons/ShareExpand'
+import type { Preview } from '@storybook/react'
+import { RandomFish } from '../src/components/RandomFish'
 
 import '../src/tailwind.css'
 import './sb-theming.css'
@@ -34,6 +36,7 @@ const ExampleContainer = ({ children, ...props }: Props) => {
       </div>
 
       <ToC />
+      <RandomFish />
     </DocsContainer>
   )
 }
@@ -71,7 +74,7 @@ export const parameters = {
   },
 }
 
-const preview = {
+const preview: Preview = {
   globalTypes: {
     theme: {
       name: 'Theme',
@@ -90,6 +93,7 @@ const preview = {
   initialGlobals: {
     theme: 'light',
   },
+  decorators: [Story => <Story />],
 }
 
 export default preview

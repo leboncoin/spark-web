@@ -1,4 +1,16 @@
 @theme {
+  @keyframes subtle-wobble {
+    0% {
+      transform: rotate(0.3deg);
+    }
+    50% {
+      transform: rotate(-0.3deg);
+    }
+    100% {
+      transform: rotate(0.3deg);
+    }
+  }
+
   --animate-fade-in: fade-in 0.25s cubic-bezier(0.2, 0, 0, 1);
   @keyframes fade-in {
     0% {
