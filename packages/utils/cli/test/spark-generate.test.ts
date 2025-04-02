@@ -2,7 +2,7 @@ import path from 'node:path'
 
 import fse from 'fs-extra'
 import { fileURLToPath } from 'url'
-import { describe, expect, it } from 'vitest'
+import { afterAll, beforeEach, describe, expect, it } from 'vitest'
 
 import { TemplateGenerator } from '../src/generate/generators/TemplateGenerator.mjs'
 import cmd, { ENTER } from './utils/cmd'

@@ -1,6 +1,5 @@
 import { designs, intents, shapes, sizes } from './constants'
 
-/* eslint-disable-next-line @typescript-eslint/ban-types */
 type Picks<T extends object, PickedItems extends (keyof T)[], Acc = {}> = PickedItems extends [
   infer Head,
   ...infer Rest,

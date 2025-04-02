@@ -66,6 +66,7 @@ export const useDropdown = ({
 
     const { selectedItems, removeSelectedItem, addSelectedItem } = downshiftMultipleSelection
 
+    // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
     switch (type) {
       case useSelect.stateChangeTypes.ToggleButtonKeyDownEnter:
       case useSelect.stateChangeTypes.ToggleButtonKeyDownSpaceButton:

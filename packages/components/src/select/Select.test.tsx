@@ -2,7 +2,7 @@ import { BookmarkFill } from '@spark-ui/icons/BookmarkFill'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { useState } from 'react'
-import { describe, expect, it, vitest } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { FormField } from '../form-field'
 import { Select } from '.'
@@ -304,9 +304,9 @@ describe('Select', () => {
   })
 
   describe('onValueChange', () => {
-    beforeEach(vitest.clearAllMocks)
+    beforeEach(vi.clearAllMocks)
 
-    const onValueChangeSpy = vitest.fn()
+    const onValueChangeSpy = vi.fn()
 
     const ControlledImplementation = () => {
       const [value, setValue] = useState('book-1')

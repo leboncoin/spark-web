@@ -1,4 +1,4 @@
-import { cva, cx, type VariantProps } from 'class-variance-authority'
+import { cva, cx, VariantProps } from 'class-variance-authority'
 
 const emptyRemainingStarsOnHoverClass = cx('[&_>_div]:peer-hover:w-0!')
 

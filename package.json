@@ -16,7 +16,7 @@
     "test": "vitest",
     "test:ui": "vitest watch --ui",
     "test:run": "vitest run",
-    "test:coverage": "rm -rf ./dist/coverage && vitest run --coverage",
+    "test:coverage": "rm -rf ./dist/coverage && vitest run --coverage --coverage.provider=v8",
     "test:coverage:open": "npx open-cli ./dist/coverage/index.html",
     "test:e2e": "npx playwright install && npx playwright test -gv 'should not have any accessibility issues'",
     "test:e2e:visual": "npx playwright install && npx playwright test --ui",
@@ -37,9 +37,9 @@
   },
   "dependencies": {
     "@rollup/plugin-terser": "^0.4.4",
+    "@spark-ui/components": "*",
     "@spark-ui/theme-utils": "^4.0.0",
-    "@storybook/test": "^8.5.8",
-    "@spark-ui/components": "*"
+    "@storybook/test": "^8.5.8"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.9.1",
@@ -74,8 +74,8 @@
     "@types/react-dom": "19.0.2",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
     "@typescript-eslint/parser": "^8.26.1",
-    "@vitejs/plugin-react": "3.1.0",
-    "@vitest/coverage-istanbul": "^3.0.9",
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/coverage-v8": "^3.0.9",
     "@vitest/ui": "3.0.9",
     "babel-loader": "8.4.1",
     "browserslist-to-esbuild": "1.2.0",

@@ -1,4 +1,4 @@
-import { cva, type VariantProps } from 'class-variance-authority'
+import { cva, VariantProps } from 'class-variance-authority'
 
 export const trackVariants = cva(['relative grow h-sz-4 bg-on-background/dim-4'], {
   variants: {

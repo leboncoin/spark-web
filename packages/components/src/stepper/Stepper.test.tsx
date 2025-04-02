@@ -1,7 +1,7 @@
 import { ArrowHorizontalUp } from '@spark-ui/icons/ArrowHorizontalUp'
 import { act, fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { FormField } from '../form-field'
 import { Icon } from '../icon'
