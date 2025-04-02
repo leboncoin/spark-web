@@ -1,6 +1,6 @@
 {
-  "@spark-ui/dialog": {
-    "timestamp": "2024-11-06T15:04:55.760Z",
+  "@spark-ui/components/dialog": {
+    "timestamp": "2025-04-02T08:03:00.743Z",
     "url": "http://localhost:3002/a11y/dialog",
     "incomplete": [
       {
@@ -92,16 +92,16 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "controlsWithinPopup",
-                  "needsReview": "aria-controls=\"radix-:r3:\""
+                  "needsReview": "aria-controls=\"radix-:r0:\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-:r3:\""
+                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-:r0:\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"button\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap px-lg text-body-1 font-bold focus-visible:outline-none focus-visible:u-ring [&amp;:not(:focus-visible)]:ring-inset min-w-sz-44 h-sz-44 rounded-lg bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-:r3:\" data-state=\"open\">",
+            "html": "<button data-spark-component=\"button\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-:r0:\" data-state=\"open\">",
             "target": [
               "button[aria-haspopup=\"dialog\"]"
             ]
@@ -113,18 +113,18 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "noId",
-                  "needsReview": "aria-describedby=\"radix-:r5:\""
+                  "needsReview": "aria-describedby=\"radix-:r2:\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "ARIA attribute element ID does not exist on the page: aria-describedby=\"radix-:r5:\""
+                "message": "ARIA attribute element ID does not exist on the page: aria-describedby=\"radix-:r2:\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<div role=\"dialog\" id=\"radix-:r3:\" aria-describedby=\"radix-:r5:\" aria-labelledby=\"radix-:r4:\" data-state=\"open\" data-spark-component=\"dialog-content\" class=\"z-modal flex flex-col bg-surface group focus-visible:outline-none focus-visible:u-ring [&amp;:not(:has(footer))]:pb-lg [&amp;:not(:has(header))]:pt-lg max-w-sz-672 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[80%] shadow-md rounded-lg data-[state=open]:animate-fade-in data-[state=closed]:animate-fade-out w-full\" tabindex=\"-1\" style=\"pointer-events: auto;\">",
+            "html": "<div role=\"dialog\" id=\"radix-:r0:\" aria-describedby=\"radix-:r2:\" aria-labelledby=\"radix-:r1:\" data-state=\"open\" data-spark-component=\"dialog-content\" class=\"z-modal flex flex-col bg-surface group focus-visible:outline-hidden focus-visible:u-outline [&amp;:not(:has(footer))]:pb-lg [&amp;:not(:has(header))]:pt-lg max-w-sz-672 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[80%] shadow-md rounded-lg data-[state=open]:animate-fade-in data-[state=closed]:animate-fade-out w-full\" tabindex=\"-1\" style=\"pointer-events: auto;\">",
             "target": [
-              "#radix-\\:r3\\:"
+              "#radix-\\:r0\\:"
             ]
           }
         ]
