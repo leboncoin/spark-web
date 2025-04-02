@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.9](https://github.com/leboncoin/spark-web/compare/v10.0.8...v10.0.9) (2025-04-02)
+
+### Reverts
+
+- Revert "fix: improved the aquarium" ([526d494](https://github.com/leboncoin/spark-web/commit/526d49427094d0cb9a2fadb818493a0ff27d48cb))
+
 ## [10.0.8](https://github.com/leboncoin/spark-web/compare/v10.0.7...v10.0.8) (2025-04-01)
 
 ### Bug Fixes
