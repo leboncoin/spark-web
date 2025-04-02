@@ -1,6 +1,6 @@
 {
-  "@spark-ui/tag": {
-    "timestamp": "2024-11-06T15:04:51.411Z",
+  "@spark-ui/components/tag": {
+    "timestamp": "2025-04-02T08:03:02.708Z",
     "url": "http://localhost:3002/a11y/tag",
     "incomplete": [],
     "violations": []

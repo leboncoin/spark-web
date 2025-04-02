@@ -1,6 +1,6 @@
 {
-  "@spark-ui/checkbox": {
-    "timestamp": "2024-11-06T15:04:49.855Z",
+  "@spark-ui/components/checkbox": {
+    "timestamp": "2025-04-02T08:03:08.781Z",
     "url": "http://localhost:3002/a11y/checkbox",
     "incomplete": [],
     "violations": []

@@ -1,6 +1,6 @@
 {
-  "@spark-ui/snackbar": {
-    "timestamp": "2024-11-06T15:04:56.990Z",
+  "@spark-ui/components/snackbar": {
+    "timestamp": "2025-04-02T08:03:08.918Z",
     "url": "http://localhost:3002/a11y/snackbar",
     "incomplete": [],
     "violations": []

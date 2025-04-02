@@ -1,6 +1,6 @@
 {
-  "@spark-ui/radio-group": {
-    "timestamp": "2024-11-06T15:04:50.450Z",
+  "@spark-ui/components/radio-group": {
+    "timestamp": "2025-04-02T08:02:58.473Z",
     "url": "http://localhost:3002/a11y/radio-group",
     "incomplete": [],
     "violations": []

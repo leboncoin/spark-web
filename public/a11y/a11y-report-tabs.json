@@ -1,6 +1,6 @@
 {
-  "@spark-ui/tabs": {
-    "timestamp": "2024-11-06T15:04:50.041Z",
+  "@spark-ui/components/tabs": {
+    "timestamp": "2025-04-02T08:03:00.868Z",
     "url": "http://localhost:3002/a11y/tabs",
     "incomplete": [],
     "violations": []

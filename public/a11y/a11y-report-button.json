@@ -1,6 +1,6 @@
 {
-  "@spark-ui/button": {
-    "timestamp": "2024-11-06T15:04:48.291Z",
+  "@spark-ui/components/button": {
+    "timestamp": "2025-04-02T08:03:06.780Z",
     "url": "http://localhost:3002/a11y/button",
     "incomplete": [],
     "violations": []
