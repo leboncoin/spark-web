@@ -1,6 +1,6 @@
 {
-  "@spark-ui/accordion": {
-    "timestamp": "2024-11-06T15:04:41.612Z",
+  "@spark-ui/components/accordion": {
+    "timestamp": "2025-04-02T08:02:56.439Z",
     "url": "http://localhost:3002/a11y/accordion",
     "incomplete": [],
     "violations": []

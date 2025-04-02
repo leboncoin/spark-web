@@ -1,6 +1,6 @@
 {
-  "@spark-ui/visually-hidden": {
-    "timestamp": "2024-11-06T15:04:55.375Z",
+  "@spark-ui/components/visually-hidden": {
+    "timestamp": "2025-04-02T08:03:08.969Z",
     "url": "http://localhost:3002/a11y/visually-hidden",
     "incomplete": [],
     "violations": []
