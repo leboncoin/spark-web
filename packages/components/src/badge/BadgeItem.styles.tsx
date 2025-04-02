@@ -1,5 +1,5 @@
 import { makeVariants } from '@spark-ui/internal-utils'
-import { cva, type VariantProps } from 'class-variance-authority'
+import { cva, VariantProps } from 'class-variance-authority'
 
 export const styles = cva(
   ['inline-flex h-fit', 'empty:p-0', 'text-center font-bold', 'rounded-full box-content'],

@@ -2,7 +2,7 @@ import { FavoriteFill } from '@spark-ui/icons/FavoriteFill'
 import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import type { ReactElement } from 'react'
-import { describe, expect, it, vi } from 'vitest'
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import {
   addSnackbar,
@@ -42,11 +42,7 @@ describe('Snackbar', () => {
   })
 
   const animateAndClose = () => {
-    /**
-     * onanimationend is not supported by `user-event` library,
-     * and has to be triggered programmatically with `fireEvent`.
-     */
-    fireEvent.animationEnd(screen.getByRole('alertdialog', { hidden: true }))
+    fireEvent.animationEnd(screen.getByRole('alert'))
   }
 
   it('should render a snackbar item when adding one to the queue', async () => {
@@ -60,17 +56,24 @@ describe('Snackbar', () => {
   })
 
   it('should remove snackbar item from DOM after closure', async () => {
-    const user = userEvent.setup({ advanceTimers: vi.runOnlyPendingTimers })
-    vi.useFakeTimers()
+    const user = userEvent.setup()
 
-    render(<SnackbarImplementation />)
+    render(<SnackbarImplementation isClosable />)
 
     await user.click(screen.getByText('Show me a snackbar'))
 
-    animateAndClose()
-    expect(screen.queryByText('You did it!')).not.toBeInTheDocument()
+    // Wait for the snackbar to be visible
+    const snackbar = await screen.findByText('You did it!')
+    expect(snackbar).toBeInTheDocument()
 
-    vi.useRealTimers()
+    // Click the close button to trigger the exiting state
+    await user.click(screen.getByLabelText('Close'))
+
+    // Use the animateAndClose helper function
+    animateAndClose()
+
+    // Verify the snackbar is removed
+    expect(screen.queryByText('You did it!')).not.toBeInTheDocument()
   })
 
   it('should only render one snackbar container', async () => {
@@ -114,9 +117,7 @@ describe('Snackbar', () => {
   })
 
   it('should close snackbar on right/left swipe gestures', async () => {
-    const user = userEvent.setup({ advanceTimers: vi.runOnlyPendingTimers })
-
-    vi.useFakeTimers()
+    const user = userEvent.setup()
 
     render(<SnackbarImplementation />)
 
@@ -131,6 +132,7 @@ describe('Snackbar', () => {
      */
     fireEvent.pointerDown(snackBarItem, { clientX: 0, clientY: 0 })
     fireEvent.pointerMove(snackBarItem, { clientX: -100, clientY: 0 })
+    fireEvent.pointerUp(snackBarItem)
 
     expect(screen.getByText('You did it!').parentNode?.parentNode).toHaveAttribute(
       'data-swipe-direction',
@@ -146,6 +148,7 @@ describe('Snackbar', () => {
 
     fireEvent.pointerDown(snackBarItem, { clientX: 0, clientY: 0 })
     fireEvent.pointerMove(snackBarItem, { clientX: 100, clientY: 0 })
+    fireEvent.pointerUp(snackBarItem)
 
     expect(screen.getByText('You did it!').parentNode?.parentNode).toHaveAttribute(
       'data-swipe-direction',
@@ -154,8 +157,6 @@ describe('Snackbar', () => {
 
     animateAndClose()
     expect(screen.queryByText('You did it!')).not.toBeInTheDocument()
-
-    vi.useRealTimers()
   })
 
   describe('Icon', () => {
@@ -217,6 +218,10 @@ describe('Snackbar', () => {
 
       await user.click(screen.getByText('Show me a snackbar'))
 
+      // Wait for the snackbar to be visible
+      const snackbar = await screen.findByText('You did it!')
+      expect(snackbar).toBeInTheDocument()
+
       /**
        * If no children item (aka `Snackbar.ItemIcon`) is provided, then props from parent (aka `Snackbar.Item`)
        * will be used in priority over function options.
@@ -227,6 +232,8 @@ describe('Snackbar', () => {
 
       expect(props.onAction).toHaveBeenCalledTimes(1)
 
+      // Wait for the snackbar to be in exiting state before triggering animation
+      await new Promise(resolve => setTimeout(resolve, 0))
       animateAndClose()
       expect(screen.queryByText('Undo')).not.toBeInTheDocument()
     })
@@ -263,8 +270,7 @@ describe('Snackbar', () => {
     })
 
     it('should not dismiss automatically when an action is defined', async () => {
-      const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime })
-      vi.useFakeTimers()
+      const user = userEvent.setup()
 
       const props = {
         onAction: vi.fn(),
@@ -275,12 +281,15 @@ describe('Snackbar', () => {
 
       await user.click(screen.getByText('Show me a snackbar'))
 
-      vi.advanceTimersByTime(DEFAULT_TIMEOUT)
+      // Wait for the snackbar to be visible
+      const snackbar = await screen.findByText('You did it!')
+      expect(snackbar).toBeInTheDocument()
+
+      // Wait for the timeout
+      await new Promise(resolve => setTimeout(resolve, DEFAULT_TIMEOUT))
 
       expect(screen.getByText('You did it!')).toBeInTheDocument()
       expect(props.onClose).not.toHaveBeenCalled()
-
-      vi.useRealTimers()
     })
   })
 

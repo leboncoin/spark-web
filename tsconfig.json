@@ -9,11 +9,17 @@
     "module": "ESNext",
     "paths": {
       "@docs/*": ["./documentation/*"],
-      "@spark-ui/components/*": ["packages/components/src/*"],  // Ajoutez cette ligne spécifique
-      "@spark-ui/hooks/*": ["packages/hooks/src/*"],  // Ajoutez cette ligne spécifique
+      "@spark-ui/components/*": ["packages/components/src/*"],
+      "@spark-ui/hooks/*": ["packages/hooks/src/*"],
       "@spark-ui/*": ["packages/*/src"],
       "@/*": ["src/*"]
     }
   },
+  "include": [
+    "vitest.setup.ts",
+    "global.d.ts",
+    "packages/**/*.ts",
+    "packages/**/*.tsx"
+  ],
   "exclude": ["node_modules"]
 }

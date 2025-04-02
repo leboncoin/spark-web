@@ -1,4 +1,4 @@
-import { cva, type VariantProps } from 'class-variance-authority'
+import { cva, VariantProps } from 'class-variance-authority'
 
 import { outlineVariants, tintedVariants } from './stepIndicatorVariants'
 

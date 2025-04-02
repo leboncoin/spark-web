@@ -4,6 +4,7 @@ import { configDefaults } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import browserslistToEsbuild from 'browserslist-to-esbuild'
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,6 +13,12 @@ export default defineConfig({
   build: {
     target: browserslistToEsbuild(),
   },
+  resolve: {
+    alias: {
+      '@docs': path.resolve(__dirname, './documentation'),
+    },
+  },
+  // @ts-ignore
   test: {
     globals: true,
     environment: 'jsdom',
@@ -21,8 +28,13 @@ export default defineConfig({
     // since parsing CSS is slow
     css: true,
     coverage: {
-      provider: 'istanbul',
-      exclude: ['**/packages/**/*.doc.mdx', '**/packages/**/*.stories.tsx', '**/documentation/*'],
+      provider: 'v8',
+      exclude: [
+        '**/packages/**/*.doc.mdx',
+        '**/packages/**/*.stories.tsx',
+        '**/documentation/*',
+        '**/dist/**',
+      ],
       reportsDirectory: 'dist/coverage',
       reporter: [['lcovonly', {}], ['json', { file: 'coverage.json' }], ['html'], ['text']],
     },

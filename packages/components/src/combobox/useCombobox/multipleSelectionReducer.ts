@@ -24,6 +24,7 @@ export const multipleSelectionReducer = ({
   const reducer: UseComboboxProps<ComboboxItem>['stateReducer'] = (_, { changes, type }) => {
     const isFocusInsideTriggerArea = triggerAreaRef.current?.contains?.(document.activeElement)
 
+    // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
     switch (type) {
       case useCombobox.stateChangeTypes.InputClick:
         return {

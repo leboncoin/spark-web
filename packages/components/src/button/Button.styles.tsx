@@ -1,5 +1,5 @@
 import { makeVariants } from '@spark-ui/internal-utils'
-import { cva, type VariantProps } from 'class-variance-authority'
+import { cva, VariantProps } from 'class-variance-authority'
 
 import {
   contrastVariants,

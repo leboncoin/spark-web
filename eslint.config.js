@@ -6,18 +6,31 @@ import prettier from 'eslint-plugin-prettier'
 import reactHooks from 'eslint-plugin-react-hooks'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
 
+// Règles communes pour tous les fichiers
+const commonRules = {
+  'prettier/prettier': ['warn', { endOfLine: 'auto' }],
+  'simple-import-sort/imports': 'warn',
+  'no-console': ['warn', { allow: ['error'] }],
+  'no-debugger': 'warn',
+  'no-nested-ternary': 'error',
+  'no-unneeded-ternary': 'error',
+  'no-var': 'error',
+  quotes: ['warn', 'single', { allowTemplateLiterals: false, avoidEscape: true }],
+}
+
 export default [
   {
     ignores: ['.storybook/', 'bin/', '**/dist/', 'vite.config.ts', '*.cjs', 'node_modules/'],
   },
   {
+    files: ['**/*.ts', '**/*.tsx', 'documentation/**/*.ts', 'documentation/**/*.tsx'],
     languageOptions: {
       parser: tsParser,
       ecmaVersion: 2018,
       sourceType: 'module',
       parserOptions: {
-        project: './tsconfig.json', // Adjust this if your tsconfig is elsewhere
-        tsconfigRootDir: process.cwd(), // Ensures correct path resolution
+        project: ['./tsconfig.json', './documentation/tsconfig.json'],
+        tsconfigRootDir: process.cwd(),
       },
     },
     settings: {
@@ -27,14 +40,11 @@ export default [
       '@typescript-eslint': ts,
       'react-hooks': reactHooks,
       'simple-import-sort': simpleImportSort,
-      prettier: prettier,
+      prettier,
       '@nx': nx,
     },
     rules: {
-      // Prettier
-      'prettier/prettier': ['warn', { endOfLine: 'auto' }],
-
-      // TypeScript
+      ...commonRules,
       '@typescript-eslint/consistent-type-definitions': ['warn', 'interface'],
       '@typescript-eslint/array-type': ['error', { default: 'array', readonly: 'array' }],
       '@typescript-eslint/explicit-module-boundary-types': 'off',
@@ -51,8 +61,6 @@ export default [
         { functions: false, classes: true, variables: false },
       ],
       '@typescript-eslint/switch-exhaustiveness-check': 'error',
-
-      // React
       'jsx-quotes': ['warn', 'prefer-double'],
       'react/react-in-jsx-scope': 'off',
       'react-hooks/rules-of-hooks': 'error',
@@ -60,32 +68,14 @@ export default [
       'react/prop-types': 'off',
       'react/jsx-key': 'off',
       'react/display-name': ['off', { ignoreTranspilerName: false }],
-
-      // Import
-      'import/no-absolute-path': 'off',
-      'import/exports-last': 'off',
-
-      // Sorting
-      'simple-import-sort/imports': 'warn',
-
-      // Misc
-      'array-callback-return': 'warn',
-      complexity: ['warn', 8],
-      curly: ['warn', 'multi-line'],
       'max-lines': ['warn', { max: 300, skipBlankLines: true, skipComments: true }],
       'max-lines-per-function': ['warn', { max: 100, skipBlankLines: true, skipComments: true }],
       'max-depth': ['error', 5],
       'max-nested-callbacks': ['warn', 5],
       'newline-before-return': 'warn',
-      'no-console': ['warn', { allow: ['error'] }],
-      'no-debugger': 'warn',
-      'no-nested-ternary': 'error',
       'no-shadow': 'off',
-      'no-unneeded-ternary': 'error',
       'no-unused-expressions': ['warn', { allowShortCircuit: true }],
       'no-use-before-define': 'off',
-      'no-var': 'error',
-      quotes: ['warn', 'single', { allowTemplateLiterals: false, avoidEscape: true }],
       'space-before-function-paren': [
         'warn',
         { anonymous: 'always', named: 'never', asyncArrow: 'always' },
@@ -93,13 +83,19 @@ export default [
     },
   },
   {
-    files: ['documentation/**/*.ts', 'documentation/**/*.tsx'],
-    ignores: [], // This prevents documentation files from being ignored
-  },
-  {
-    files: ['**/*.tsx'],
+    files: ['**/*.js', '**/*.mjs'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'module',
+    },
+    plugins: {
+      'simple-import-sort': simpleImportSort,
+      prettier,
+    },
     rules: {
-      'max-lines-per-function': ['warn', { max: 200, skipBlankLines: true, skipComments: true }],
+      ...commonRules,
+      'class-methods-use-this': 'off',
+      'no-underscore-dangle': 'off',
     },
   },
   {

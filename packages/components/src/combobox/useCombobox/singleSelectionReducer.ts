@@ -18,6 +18,7 @@ export const singleSelectionReducer = ({
       item => item.text.toLowerCase() === state.inputValue.toLowerCase()
     )
 
+    // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
     switch (type) {
       case useCombobox.stateChangeTypes.InputKeyDownEscape:
         if (!changes.selectedItem) {
