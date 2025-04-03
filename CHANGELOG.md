@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.13](https://github.com/leboncoin/spark-web/compare/v10.0.12...v10.0.13) (2025-04-03)
+
+### Bug Fixes
+
+- vite 5 ([60792db](https://github.com/leboncoin/spark-web/commit/60792dbb6f6543cbf5f2ede2268710220641a000))
+
 ## [10.0.12](https://github.com/leboncoin/spark-web/compare/v10.0.11...v10.0.12) (2025-04-03)
 
 **Note:** Version bump only for package spark
