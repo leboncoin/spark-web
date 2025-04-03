@@ -95,7 +95,7 @@ export const SelectProvider = ({
   const [ariaLabel, setAriaLabel] = useState<string>()
 
   // Computed state
-  const firstItem = itemsMap.entries().next().value[1]
+  const firstItem = itemsMap.entries().next()?.value?.[1]
   const selectedItem = typeof value === 'string' ? itemsMap.get(value) : firstItem
   const isControlled = valueProp != null
 
