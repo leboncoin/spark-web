@@ -19,7 +19,9 @@
     "vitest.setup.ts",
     "global.d.ts",
     "packages/**/*.ts",
-    "packages/**/*.tsx"
+    "packages/**/*.tsx",
+    "e2e/**/*.ts",
+    "e2e/**/*.tsx"
   ],
   "exclude": ["node_modules"]
 }
