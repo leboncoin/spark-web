@@ -53,8 +53,8 @@ const ArgTypesDialog = ({
   return (
     <Drawer>
       <Drawer.Trigger asChild>
-        <Button className="top-md right-md z-raised" design="filled" intent="support">
-          {componentName} API
+        <Button className="top-md right-md z-raised" intent="info" size="sm">
+          Props
         </Button>
       </Drawer.Trigger>
 

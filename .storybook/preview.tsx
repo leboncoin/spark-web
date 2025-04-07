@@ -1,6 +1,7 @@
 import { DocsContainer, DocsContainerProps } from '@storybook/blocks'
 import { Icon } from '@spark-ui/components/icon'
 import { ShareExpand } from '@spark-ui/icons/ShareExpand'
+import { WarningOutline } from '@spark-ui/icons/WarningOutline'
 
 import '../src/tailwind.css'
 import './sb-theming.css'
@@ -25,7 +26,10 @@ const ExampleContainer = ({ children, ...props }: Props) => {
     <DocsContainer {...props}>
       <div id="spark-doc-container">
         {shouldDisplayExperimentalBanner && (
-          <p id="experimental-banner">
+          <p className="gap-md py-sm px-lg z-sticky bg-alert-container text-on-alert-container border-l-alert sticky top-0 flex items-center border-l-[4px] font-bold">
+            <Icon size="lg" label="warning" intent="alert">
+              <WarningOutline />
+            </Icon>
             This component is still experimental. Avoid usage in production features
           </p>
         )}

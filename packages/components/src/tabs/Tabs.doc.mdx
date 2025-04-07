@@ -47,6 +47,8 @@ Use `disabled` prop on item to set related state to it. Other states (`:hover|:f
 
 You can use `Icons` inside your `Tabs.Trigger` elements.
 
+If your `Tabs.Trigger` contains only an icon, you must think about the `aria-label` prop to describe the trigger.
+
 <Canvas of={stories.Icons} />
 
 ### Intent
@@ -107,6 +109,8 @@ This can be useful if your tabs load heavy resources on mount, such as heavy ima
 <A11yReport of="tabs" />
 
 Adheres to the [Tabs WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs).
+
+### Tips
 
 ### Keyboard Interactions
 
