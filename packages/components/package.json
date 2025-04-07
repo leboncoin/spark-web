@@ -48,7 +48,7 @@
     "@react-aria/numberfield": "3.11.12",
     "@react-aria/toast": "^3.0.0-beta.18",
     "@react-stately/numberfield": "3.9.10",
-    "@react-stately/toast": "3.0.0-beta.7",
+    "@react-stately/toast": "3.0.0",
     "@spark-ui/hooks": "^10.0.13",
     "@spark-ui/icons": "^10.0.13",
     "@spark-ui/internal-utils": "^10.0.13",
@@ -57,7 +57,7 @@
     "@zag-js/pagination": "1.7.0",
     "@zag-js/react": "1.7.0",
     "class-variance-authority": "0.7.1",
-    "downshift": "9.0.8",
+    "downshift": "9.0.9",
     "emulate-tab": "^1.2.1",
     "radix-ui": "1.1.3",
     "react-snap-carousel": "^0.5.1"
