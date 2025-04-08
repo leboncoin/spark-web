@@ -1,6 +1,6 @@
 {
-  "@spark-ui/components/text-link": {
-    "timestamp": "2025-04-02T08:03:06.781Z",
+  "@spark-ui/text-link": {
+    "timestamp": "2024-11-06T15:04:54.062Z",
     "url": "http://localhost:3002/a11y/text-link",
     "incomplete": [
       {

@@ -99,7 +99,11 @@ export const AsLink: StoryFn = () => {
         <StoryLabel>Link</StoryLabel>
         <Avatar size="xl" username="John Doe">
           <Avatar.User asChild>
-            <a href="#">
+            <a
+              href="/iframe.html?id=components-avatar--as-link&viewMode=story"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Avatar.Placeholder />
               <Avatar.Image src={avatarImg} />
             </a>
@@ -118,6 +122,27 @@ export const AsLink: StoryFn = () => {
           </Avatar.User>
         </Avatar>
       </div>
+    </div>
+  )
+}
+
+export const CustomBorder: StoryFn = () => {
+  return (
+    <div className="gap-3xl from-main to-support p-xl flex bg-gradient-to-br">
+      <Avatar design="circle" username="John Doe" isOnline onlineText="Online">
+        <Avatar.User className="border-lg border-surface">
+          <Avatar.Placeholder />
+          <Avatar.Image src={avatarImg} />
+        </Avatar.User>
+        <Avatar.OnlineBadge />
+      </Avatar>
+      <Avatar design="circle" username="John Doe" isOnline onlineText="Online">
+        <Avatar.User className="border-lg border-outline">
+          <Avatar.Placeholder />
+          <Avatar.Image src={avatarImg} />
+        </Avatar.User>
+        <Avatar.OnlineBadge />
+      </Avatar>
     </div>
   )
 }

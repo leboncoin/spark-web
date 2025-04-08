@@ -15,6 +15,7 @@ export const AvatarUser = ({ asChild, children, className, ...props }: AvatarIma
 
   return (
     <Comp
+      {...(!asChild && { role: 'img' })}
       aria-label={accessibleName}
       title={accessibleName}
       className={cx(

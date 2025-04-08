@@ -1,6 +1,6 @@
 {
-  "@spark-ui/components/stepper": {
-    "timestamp": "2025-04-02T08:02:56.526Z",
+  "@spark-ui/stepper": {
+    "timestamp": "2024-11-06T15:04:46.858Z",
     "url": "http://localhost:3002/a11y/stepper",
     "incomplete": [],
     "violations": []

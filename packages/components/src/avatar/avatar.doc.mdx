@@ -1,6 +1,7 @@
 import { Meta, Canvas } from '@storybook/blocks'
 import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { A11yReport } from '@docs/helpers/A11yReport'
+import { Callout } from '@docs/helpers/Callout'
 import { Avatar } from '.'
 import * as stories from './avatar.stories'
 
@@ -55,9 +56,21 @@ Use the `asChild` on `Avatar.User` prop to turn into a link (or a button).
 
 <Canvas of={stories.AsLink} />
 
+### Custom border
+
+Use tailwind to add a border to the avatar. Rely on the border tokens and use either `surface` or `outline` for the border colors.
+
+<Canvas of={stories.CustomBorder} />
+
 ### Online Status
 
 Use the `isOnline` prop to display a badge indicating this user is online.
+
+<Callout kind="warning" marginY="large">
+  <p>
+    a11y: think about using `onlineText` prop to provide a more accessible way to display the online status.
+  </p>
+</Callout>
 
 <Canvas of={stories.WithOnlineStatus} />
 

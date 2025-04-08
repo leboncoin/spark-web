@@ -1,6 +1,6 @@
 {
   "@spark-ui/components/avatar": {
-    "timestamp": "2025-04-02T08:03:00.728Z",
+    "timestamp": "2025-04-08T12:28:00.188Z",
     "url": "http://localhost:3002/a11y/avatar",
     "incomplete": [
       {
@@ -37,7 +37,7 @@
               }
             ],
             "impact": "serious",
-            "html": "<div aria-label=\"John Doe\" title=\"John Doe\" class=\"group border-outline relative size-full overflow-hidden focus-visible:u-outline default:rounded-full\">",
+            "html": "<div aria-label=\"John Doe\" title=\"John Doe\" class=\"group default:border-outline relative size-full overflow-hidden focus-visible:u-outline default:rounded-full\">",
             "target": [
               "div[aria-label=\"John Doe\"]"
             ]
@@ -62,7 +62,7 @@
               }
             ],
             "impact": "serious",
-            "html": "<div aria-label=\"John Doe (Online)\" title=\"John Doe (Online)\" class=\"group border-outline relative size-full overflow-hidden focus-visible:u-outline default:rounded-full\">",
+            "html": "<div aria-label=\"John Doe (Online)\" title=\"John Doe (Online)\" class=\"group default:border-outline relative size-full overflow-hidden focus-visible:u-outline default:rounded-full\">",
             "target": [
               "div[aria-label=\"John Doe (Online)\"]"
             ]

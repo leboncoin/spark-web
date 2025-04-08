@@ -18,6 +18,7 @@ export const AvatarImage = ({ className, asChild, src, ...props }: AvatarImagePr
 
   return (
     <Comp
+      aria-hidden
       className={cx(
         'absolute inset-0 size-full',
         'object-cover',

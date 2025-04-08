@@ -1,6 +1,6 @@
 {
-  "@spark-ui/components/input": {
-    "timestamp": "2025-04-02T08:02:58.409Z",
+  "@spark-ui/input": {
+    "timestamp": "2024-11-06T15:04:51.135Z",
     "url": "http://localhost:3002/a11y/input",
     "incomplete": [],
     "violations": []

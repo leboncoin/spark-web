@@ -1,6 +1,6 @@
 {
-  "@spark-ui/components/skeleton": {
-    "timestamp": "2025-04-02T08:03:04.562Z",
+  "@spark-ui/skeleton": {
+    "timestamp": "2024-11-06T15:04:54.550Z",
     "url": "http://localhost:3002/a11y/skeleton",
     "incomplete": [],
     "violations": []

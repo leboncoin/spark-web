@@ -28,7 +28,7 @@ describe('Avatar', () => {
     )
 
     expect(document.querySelector('[data-spark-component="avatar"]')).toBeInTheDocument()
-    expect(screen.getByRole('img', { name: 'John Doe' })).toBeInTheDocument()
+    expect(screen.getByAltText('John Doe')).toBeInTheDocument()
   })
 
   describe('Polymorphism', () => {
@@ -109,7 +109,7 @@ describe('Avatar', () => {
         </Avatar>
       )
 
-      expect(screen.getByRole('img', { name: 'John Doe (Online)' })).toBeInTheDocument()
+      expect(screen.getByTitle('John Doe (Online)')).toBeInTheDocument()
     })
   })
 
@@ -176,8 +176,8 @@ describe('Avatar', () => {
         </Avatar>
       )
 
-      const userElement = screen.getByRole('img', { name: 'John Doe' }).parentElement
-      expect(userElement).toHaveClass('default:rounded-full')
+      // const userElement = screen.getByRole('img', { name: 'John Doe' }).parentElement
+      expect(screen.getByTitle('John Doe')).toHaveClass('default:rounded-full')
     })
 
     it('should render with square design when specified', () => {
@@ -190,8 +190,7 @@ describe('Avatar', () => {
         </Avatar>
       )
 
-      const userElement = screen.getByRole('img', { name: 'John Doe' }).parentElement
-      expect(userElement).toHaveClass('default:rounded-md')
+      expect(screen.getByTitle('John Doe')).toHaveClass('default:rounded-md')
     })
 
     it('should render with all available sizes', () => {

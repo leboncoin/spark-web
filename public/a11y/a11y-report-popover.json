@@ -1,6 +1,6 @@
 {
-  "@spark-ui/components/popover": {
-    "timestamp": "2025-04-02T08:03:09.030Z",
+  "@spark-ui/popover": {
+    "timestamp": "2024-11-06T15:04:45.601Z",
     "url": "http://localhost:3002/a11y/popover",
     "incomplete": [
       {
@@ -24,27 +24,6 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "controlsWithinPopup",
-                  "needsReview": "aria-controls=\"radix-:r0:\""
-                },
-                "relatedNodes": [],
-                "impact": "critical",
-                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-:r0:\""
-              }
-            ],
-            "none": [],
-            "impact": "critical",
-            "html": "<button data-spark-component=\"popover-trigger\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"false\" aria-controls=\"radix-:r0:\" data-state=\"closed\">",
-            "target": [
-              "button[aria-controls=\"radix-:r0:\"]"
-            ]
-          },
-          {
-            "any": [],
-            "all": [
-              {
-                "id": "aria-valid-attr-value",
-                "data": {
-                  "messageKey": "controlsWithinPopup",
                   "needsReview": "aria-controls=\"radix-:r1:\""
                 },
                 "relatedNodes": [],
@@ -54,9 +33,30 @@
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"popover-trigger\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"false\" aria-controls=\"radix-:r1:\" data-state=\"closed\">",
+            "html": "<button data-spark-component=\"popover-trigger\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap px-lg text-body-1 font-bold focus-visible:outline-none focus-visible:u-ring [&amp;:not(:focus-visible)]:ring-inset min-w-sz-44 h-sz-44 rounded-lg bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"false\" aria-controls=\"radix-:r1:\" data-state=\"closed\">",
             "target": [
               "button[aria-controls=\"radix-:r1:\"]"
+            ]
+          },
+          {
+            "any": [],
+            "all": [
+              {
+                "id": "aria-valid-attr-value",
+                "data": {
+                  "messageKey": "controlsWithinPopup",
+                  "needsReview": "aria-controls=\"radix-:r3:\""
+                },
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-:r3:\""
+              }
+            ],
+            "none": [],
+            "impact": "critical",
+            "html": "<button data-spark-component=\"popover-trigger\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap px-lg text-body-1 font-bold focus-visible:outline-none focus-visible:u-ring [&amp;:not(:focus-visible)]:ring-inset min-w-sz-44 h-sz-44 rounded-lg bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"false\" aria-controls=\"radix-:r3:\" data-state=\"closed\">",
+            "target": [
+              "button[aria-controls=\"radix-:r3:\"]"
             ]
           }
         ]

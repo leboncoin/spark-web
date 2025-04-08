@@ -14,6 +14,7 @@ export const AvatarPlaceholder = ({ className, children, ...props }: AvatarPlace
 
   return (
     <div
+      aria-hidden
       className={cx(
         'absolute inset-0 flex size-full items-center justify-center',
         'default:bg-neutral default:text-on-neutral',
