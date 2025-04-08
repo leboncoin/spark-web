@@ -159,12 +159,7 @@ export const createTabs = ({
   )
 }
 
-export const Default: StoryFn = _args => (
-  <div>
-    <StoryLabel>basic</StoryLabel>
-    {createTabs()}
-  </div>
-)
+export const Default: StoryFn = _args => <div>{createTabs()}</div>
 
 export const Icons: StoryFn = _args => (
   <div className="gap-lg flex flex-col">
