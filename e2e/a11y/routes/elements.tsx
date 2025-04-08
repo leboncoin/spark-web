@@ -2,6 +2,7 @@ import React, { type ReactNode } from 'react'
 
 import { A11yAccordion } from '../pages/Accordion'
 import { A11yAlertDialog } from '../pages/AlertDialog'
+import { A11yAvatar } from '../pages/Avatar'
 import { A11yBadge } from '../pages/Badge'
 import { A11yBreadcrumb } from '../pages/Breadcrumb'
 import { A11yButton } from '../pages/Button'
@@ -49,6 +50,7 @@ import { type A11yComponentsKey } from './components'
 export const a11yElements: Record<A11yComponentsKey, ReactNode> = {
   accordion: <A11yAccordion />,
   'alert-dialog': <A11yAlertDialog />,
+  avatar: <A11yAvatar />,
   badge: <A11yBadge />,
   breadcrumb: <A11yBreadcrumb />,
   button: <A11yButton />,
