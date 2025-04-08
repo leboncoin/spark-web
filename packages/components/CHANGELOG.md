@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.1.1](https://github.com/leboncoin/spark-web/compare/v10.1.0...v10.1.1) (2025-04-08)
+
+### Bug Fixes
+
+- **components:** improved tabs trigger focus speed ([71a1ef7](https://github.com/leboncoin/spark-web/commit/71a1ef75efb87100ec9e301ecf0a5ba13a62d8e3))
+
 # [10.1.0](https://github.com/leboncoin/spark-web/compare/v10.0.13...v10.1.0) (2025-04-08)
 
 ### Bug Fixes
