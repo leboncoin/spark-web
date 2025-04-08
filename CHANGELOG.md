@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.1.0](https://github.com/leboncoin/spark-web/compare/v10.0.13...v10.1.0) (2025-04-08)
+
+### Bug Fixes
+
+- **components:** avatar feedbacks after testing session ([4dcd7cb](https://github.com/leboncoin/spark-web/commit/4dcd7cb80b4285107877f7501794fd5dd41736c2))
+- **components:** updated a11y reports ([b471cef](https://github.com/leboncoin/spark-web/commit/b471cef0431d8184615c9930f3a192535ec21482))
+
+### Features
+
+- **components:** avatar component ([ef7c3e2](https://github.com/leboncoin/spark-web/commit/ef7c3e2ced314d11285ad83d4cf7228028e7f781))
+
 ## [10.0.13](https://github.com/leboncoin/spark-web/compare/v10.0.12...v10.0.13) (2025-04-03)
 
 ### Bug Fixes
