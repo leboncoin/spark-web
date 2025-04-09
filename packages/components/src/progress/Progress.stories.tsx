@@ -1,5 +1,6 @@
+import { Button } from '@spark-ui/components/button'
 import { Meta, StoryFn } from '@storybook/react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { Progress, ProgressProps } from '.'
 
@@ -18,8 +19,60 @@ const meta: Meta<typeof Progress> = {
 
 export default meta
 
-export const Default: StoryFn = _args => {
-  return <Progress value={20} aria-label="Loading" />
+export const Default: StoryFn = () => {
+  const [value, setValue] = useState(0)
+
+  const progressRef = useRef<HTMLDivElement>(null)
+  const loadedSectionRef = useRef<HTMLDivElement>(null)
+  const intervalRef = useRef<ReturnType<typeof setInterval>>(null)
+
+  const max = 100
+  const step = 10
+
+  const onLoadStart = () => {
+    intervalRef.current && clearInterval(intervalRef.current)
+    setValue(0)
+    progressRef.current?.focus()
+  }
+
+  const onLoadComplete = () => {
+    intervalRef.current && clearInterval(intervalRef.current)
+    loadedSectionRef.current?.focus()
+  }
+
+  const startLoading = () => {
+    onLoadStart()
+
+    intervalRef.current = setInterval(() => {
+      setValue(v => {
+        const newValue = v + step
+
+        if (newValue === max) onLoadComplete()
+
+        return newValue
+      })
+    }, 500)
+  }
+
+  return (
+    <div className="gap-lg flex flex-col">
+      <Progress max={max} value={value} aria-label="Loading" ref={progressRef} />
+
+      {value !== 0 && (
+        <div
+          ref={loadedSectionRef}
+          tabIndex={-1}
+          className="p-lg bg-surface text-on-surface border-sm border-outline gap-md flex rounded-md"
+        >
+          <span>{value < max ? 'Loading...' : 'Section loaded !'}</span>
+        </div>
+      )}
+
+      <Button onClick={startLoading} className="self-start">
+        {value === 0 ? 'Load section' : 'Reload section'}
+      </Button>
+    </div>
+  )
 }
 
 export const Value: StoryFn = () => {
@@ -30,7 +83,7 @@ export const Value: StoryFn = () => {
       const step = 10
 
       setValue(value => (value + step) % (100 + step))
-    }, 500)
+    }, 2000)
 
     return () => clearInterval(interval)
   }, [])
