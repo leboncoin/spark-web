@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.2.0](https://github.com/leboncoin/spark-web/compare/v10.1.1...v10.2.0) (2025-04-09)
+
+### Features
+
+- **components:** progress - screen reader optimization ([9541840](https://github.com/leboncoin/spark-web/commit/9541840cce1acc14c39beebd8774817704f6b132))
+
 ## [10.1.1](https://github.com/leboncoin/spark-web/compare/v10.1.0...v10.1.1) (2025-04-08)
 
 ### Bug Fixes
