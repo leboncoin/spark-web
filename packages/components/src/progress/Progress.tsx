@@ -35,10 +35,11 @@ export const Progress = ({
     <ProgressContext.Provider data-spark-component="progress" value={value}>
       <RadixProgress.Progress
         ref={ref}
-        className={cx('gap-sm flex flex-col', className)}
+        className={cx('gap-sm focus-visible:u-outline flex flex-col', className)}
         value={valueProp}
         aria-labelledby={labelId}
         max={max}
+        tabIndex={-1}
         {...others}
       >
         {children}

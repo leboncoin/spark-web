@@ -1,6 +1,8 @@
 import { Meta, Canvas } from '@storybook/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
 import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Callout } from '@docs/helpers/Callout'
+import { TextLink } from '@spark-ui/components/text-link'
 
 import { Progress } from '.'
 
@@ -10,7 +12,15 @@ import * as stories from './Progress.stories'
 
 # Progress
 
-Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
+A progressbar indicates that the user's request has been received and the application is making progress toward completing the requested action.
+
+<Callout kind="warning">
+  <p>
+    Do not use this component as a step indicator. It indicates a timed event with a beginning and an end.
+  </p>
+  <p>This component is also different than the <TextLink href="https://www.w3.org/WAI/ARIA/apg/patterns/meter/">Meter</TextLink> pattern.</p>
+</Callout>
+
 
 <Canvas of={stories.Default} />
 
@@ -113,8 +123,21 @@ Displaying the progress value as text is possible by composing the different com
 
 <A11yReport of="progress" />
 
-Adheres to the [Meter WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/meter/).
+Adheres to the [progressbar WAI-ARIA role](https://www.w3.org/TR/wai-aria-1.1/#progressbar). There is no pattern for the progressbar.
 
 ### Guidelines
 
 - Usage of `aria-label` or `Progress.Label` is **mandatory**. It serves as the accessible name for the progress.
+
+- The author **SHOULD** supply values for `aria-valuenow`, `aria-valuemin`, and `aria-valuemax`, unless the value is indeterminate, in which case the author **SHOULD** omit the `aria-valuenow` attribute. 
+
+- Authors **SHOULD** update these values when the visual progress indicator is updated. 
+
+- If the progressbar is describing the loading progress of a particular region of a page, the author **SHOULD** use `aria-describedby` to point to the status, and set the `aria-busy` attribute to `true` on the region until it is finished loading. 
+
+- It is not possible for the user to alter the value of a progressbar because it is always readonly.
+
+### Screen reader
+
+ - As your loading start, the focus must be forwarded to the progressbar (use a ref).
+ - When the loading is finished, the focus must be forwarded to loaded region or first focusable element inside the loaded region.
