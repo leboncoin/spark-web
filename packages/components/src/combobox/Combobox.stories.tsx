@@ -497,8 +497,8 @@ export const MultipleSelectionControlled: StoryFn = () => {
   const [inputValue, setInputValue] = useState<string>('')
 
   return (
-    <div className="gap-lg flex flex-wrap pb-[300px]">
-      <div className="gap-lg flex flex-col">
+    <div className="gap-lg flex pb-[300px]">
+      <div className="gap-lg flex shrink-0 flex-col">
         <FormField>
           <FormField.Label className="font-bold">Opened state:</FormField.Label>
           <Switch checked={open} onCheckedChange={setOpen}>
@@ -536,6 +536,7 @@ export const MultipleSelectionControlled: StoryFn = () => {
         onValueChange={setValue}
         open={open}
         onOpenChange={setOpen}
+        allowCustomValue
       >
         <Combobox.Trigger>
           <Combobox.SelectedItems />
@@ -831,9 +832,38 @@ export const FormFieldValidation: StoryFn = () => {
 }
 
 export const IsLoading: StoryFn = _args => {
+  const [books, setBooks] = useState<Record<string, string>>({})
+  const [isLoading, setIsLoading] = useState(false)
+
+  const reloadOptions = () => {
+    setIsLoading(true)
+    setBooks({})
+
+    setTimeout(() => {
+      setIsLoading(false)
+
+      setBooks({
+        'book-1': 'To Kill a Mockingbird',
+        'book-2': 'War and Peace',
+        'book-3': 'The Idiot',
+        'book-4': 'A Picture of Dorian Gray',
+        'book-5': '1984',
+        'book-6': 'Pride and Prejudice',
+      })
+    }, 2000)
+  }
+
   return (
-    <div className="pb-[300px]">
-      <Combobox isLoading>
+    <div className="gap-lg flex flex-col pb-[300px]">
+      <Button
+        onClick={reloadOptions}
+        isLoading={isLoading}
+        loadingLabel="Loading"
+        className="self-start"
+      >
+        Load options
+      </Button>
+      <Combobox defaultValue="book-2" isLoading={isLoading}>
         <Combobox.Trigger>
           <Combobox.LeadingIcon>
             <PenOutline />
@@ -846,14 +876,11 @@ export const IsLoading: StoryFn = _args => {
         <Combobox.Popover>
           <Combobox.Items>
             <Combobox.Empty>No results found</Combobox.Empty>
-            <Combobox.Item value="book-1">To Kill a Mockingbird</Combobox.Item>
-            <Combobox.Item value="book-2">War and Peace</Combobox.Item>
-            <Combobox.Item value="book-3">The Idiot</Combobox.Item>
-            <Combobox.Item value="book-4">A Picture of Dorian Gray</Combobox.Item>
-            <Combobox.Item value="book-5">1984</Combobox.Item>
-            <Combobox.Item value="book-6">
-              Pride and Prejudice but it is an extremely long title
-            </Combobox.Item>
+            {Object.entries(books).map(([key, label]) => (
+              <Combobox.Item key={key} value={key}>
+                {label}
+              </Combobox.Item>
+            ))}
           </Combobox.Items>
         </Combobox.Popover>
       </Combobox>
