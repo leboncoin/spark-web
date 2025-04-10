@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.2.1](https://github.com/leboncoin/spark-web/compare/v10.2.0...v10.2.1) (2025-04-10)
+
+### Bug Fixes
+
+- **components:** combobox - sync async options load with input ([1f48f9e](https://github.com/leboncoin/spark-web/commit/1f48f9e69e26f886a0b1f8ace6819b98acd47b89))
+
 # [10.2.0](https://github.com/leboncoin/spark-web/compare/v10.1.1...v10.2.0) (2025-04-09)
 
 ### Features
