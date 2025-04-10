@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 /* eslint-disable max-lines-per-function */
 import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { useCombinedState } from '@spark-ui/hooks/use-combined-state'
@@ -224,12 +223,11 @@ export const ComboboxProvider = ({
         },
         []
       )
-
       setSelectedItems(comboboxValue ? newSelectedItems : [])
     } else {
       setSelectedItem(itemsMap.get(comboboxValue as string) || null)
     }
-  }, [multiple ? JSON.stringify(comboboxValue) : comboboxValue])
+  }, [multiple ? JSON.stringify(comboboxValue) : comboboxValue, itemsMap])
 
   // Form field state
   const field = useFormFieldControl()
