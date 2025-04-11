@@ -1,6 +1,7 @@
 import { Meta, Canvas } from '@storybook/blocks'
 import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { A11yReport } from '@docs/helpers/A11yReport'
+import { AriaRoles } from '@docs/helpers/AriaRoles'
 import { Kbd } from '../kbd'
 import { Accordion } from '.'
 
@@ -143,7 +144,7 @@ Adheres to the [Accordion Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/acco
 - <Kbd>End</Kbd> (Optional): When focus is on an accordion header, moves focus to the last accordion
   header.
 
-### WAI-ARIA Roles, States, and Properties
+### Pattern
 
 - The element that shows and hides the content has role [button](https://w3c.github.io/aria/#button).
 - When the content is visible, the element with role button has [aria-expanded](https://w3c.github.io/aria/#aria-expanded) set to `true`. When the content area is hidden, it is set to `false`.
@@ -159,3 +160,24 @@ Adheres to the [Accordion Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/acco
 - Optionally, each element that serves as a container for panel content has role [region](https://w3c.github.io/aria/#region) and [aria-labelledby](https://w3c.github.io/aria/#aria-labelledby) with a value that refers to the button that controls display of the panel.
   - Avoid using the `region` role in circumstances that create landmark region proliferation, e.g., in an accordion that contains more than approximately 6 panels that can be expanded at the same time.
   - Role `region` is especially helpful to the perception of structure by screen reader users when panels contain heading elements or a nested accordion.
+
+### Roles
+
+<AriaRoles of={Accordion} role="none" subcomponents={{
+  'Accordion.Item': {
+    of: Accordion.Item,
+    role: 'none',
+  },
+    'Accordion.ItemHeader': {
+      of: Accordion.ItemHeader,
+      role: 'heading',
+    },
+    'Accordion.ItemTrigger': {
+      of: Accordion.ItemTrigger,
+      role: 'button',
+    },
+    'Accordion.ItemContent': {
+      of: Accordion.ItemContent,
+      role: 'region',
+    },
+}} />
