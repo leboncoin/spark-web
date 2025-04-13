@@ -4,10 +4,12 @@ import { Source } from '@storybook/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
 import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { Callout } from '@docs/helpers/Callout'
+import { AriaRoles } from '@docs/helpers/AriaRoles'
 import { Button } from '.'
 import * as ButtonStories from './Button.stories'
 
 <Meta of={ButtonStories} />
+
 
 # Button
 
@@ -124,3 +126,7 @@ This component adheres to the [`button` role requirements](https://www.w3.org/WA
 
 - <Kbd>Space</Kbd>: Activates the button
 - <Kbd>Enter</Kbd>: Activates the button
+
+### Roles
+
+<AriaRoles of={Button} role="button" />
