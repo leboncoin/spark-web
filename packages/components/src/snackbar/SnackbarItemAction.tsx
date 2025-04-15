@@ -31,7 +31,7 @@ export const SnackbarItemAction = ({
       shape="rounded"
       {...(intent === 'inverse'
         ? {
-            design: 'ghost',
+            design: 'underlined',
             intent: 'surface',
           }
         : {

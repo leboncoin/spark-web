@@ -11,7 +11,7 @@ import type { StepperButtonProps } from './types'
 
 const IncrementButton = ({
   children,
-  design = 'ghost',
+  design = 'underlined',
   intent = 'neutral',
   className,
   ref: forwardedRef,
@@ -46,7 +46,7 @@ const IncrementButton = ({
 
 const DecrementButton = ({
   children,
-  design = 'ghost',
+  design = 'underlined',
   intent = 'neutral',
   className,
   ref: forwardedRef,
