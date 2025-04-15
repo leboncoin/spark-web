@@ -3,7 +3,7 @@ import { tw } from '@spark-ui/internal-utils'
 export const ghostVariants = [
   {
     intent: 'main',
-    design: 'ghost',
+    design: 'underlined',
     class: tw([
       'text-main',
       'hover:bg-main/dim-5',
@@ -13,7 +13,7 @@ export const ghostVariants = [
   },
   {
     intent: 'support',
-    design: 'ghost',
+    design: 'underlined',
     class: tw([
       'text-support',
       'hover:bg-support/dim-5',
@@ -23,7 +23,7 @@ export const ghostVariants = [
   },
   {
     intent: 'accent',
-    design: 'ghost',
+    design: 'underlined',
     class: tw([
       'text-accent',
       'hover:bg-accent/dim-5',
@@ -33,7 +33,7 @@ export const ghostVariants = [
   },
   {
     intent: 'basic',
-    design: 'ghost',
+    design: 'underlined',
     class: tw([
       'text-basic',
       'hover:bg-basic/dim-5',
@@ -43,7 +43,7 @@ export const ghostVariants = [
   },
   {
     intent: 'success',
-    design: 'ghost',
+    design: 'underlined',
     class: tw([
       'text-success',
       'hover:bg-success/dim-5',
@@ -53,7 +53,7 @@ export const ghostVariants = [
   },
   {
     intent: 'alert',
-    design: 'ghost',
+    design: 'underlined',
     class: tw([
       'text-alert',
       'hover:bg-alert/dim-5',
@@ -63,7 +63,7 @@ export const ghostVariants = [
   },
   {
     intent: 'danger',
-    design: 'ghost',
+    design: 'underlined',
     class: tw([
       'text-error',
       'hover:bg-error/dim-5',
@@ -73,7 +73,7 @@ export const ghostVariants = [
   },
   {
     intent: 'info',
-    design: 'ghost',
+    design: 'underlined',
     class: tw([
       'text-info',
       'hover:bg-info/dim-5',
@@ -83,7 +83,7 @@ export const ghostVariants = [
   },
   {
     intent: 'neutral',
-    design: 'ghost',
+    design: 'underlined',
     class: tw([
       'text-neutral',
       'hover:bg-neutral/dim-5',
@@ -93,7 +93,7 @@ export const ghostVariants = [
   },
   {
     intent: 'surface',
-    design: 'ghost',
+    design: 'underlined',
     class: tw([
       'text-surface',
       'hover:bg-surface/dim-5',

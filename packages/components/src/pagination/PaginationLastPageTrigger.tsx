@@ -38,7 +38,7 @@ export const LastPageTrigger = ({
   const localProps = {
     'data-spark-component': 'pagination-last-page-trigger',
     intent: 'support',
-    design: 'ghost',
+    design: 'underlined',
     ...props,
     className,
     ...(shouldDisableLink && {

@@ -13,7 +13,7 @@ export const buttonStyles = cva(
   [
     'u-shadow-border-transition',
     'box-border inline-flex items-center justify-center gap-md whitespace-nowrap',
-    'px-lg',
+    'default:px-lg',
     'text-body-1 font-bold',
     'focus-visible:u-outline',
   ],
@@ -28,16 +28,16 @@ export const buttonStyles = cva(
        *
        * - `tinted`: Button will be filled but using a lighter color scheme.
        *
-       * - `ghost`: Button will look like a link. No borders, plain text.
+       * - `underlined`: Button will look like a link. No borders, plain text.
        *
        * - `contrast`: Button will be surface filled. No borders, plain text.
        *
        */
-      design: makeVariants<'design', ['filled', 'outlined', 'tinted', 'ghost', 'contrast']>({
+      design: makeVariants<'design', ['filled', 'outlined', 'tinted', 'underlined', 'contrast']>({
         filled: [],
         outlined: ['bg-transparent', 'border-sm', 'border-current'],
         tinted: [],
-        ghost: [],
+        underlined: ['-mx-md px-md underline hover:bg-main/dim-5'],
         contrast: ['bg-surface'],
       }),
       /**

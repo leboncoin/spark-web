@@ -86,7 +86,7 @@ export const Disabled: StoryFn = _args => {
           </InputGroup.LeadingIcon>
           <Input aria-label="Website" defaultValue="Hello world" />
           <InputGroup.TrailingAddon asChild>
-            <IconButton intent="neutral" design="ghost" aria-label="Search">
+            <IconButton intent="neutral" design="underlined" aria-label="Search">
               <Icon>
                 <EyeOutline />
               </Icon>
@@ -177,7 +177,7 @@ export const ReadOnly: StoryFn = _args => {
           <Input aria-label="Website" defaultValue="Hello world" />
 
           <InputGroup.TrailingAddon asChild>
-            <IconButton intent="neutral" design="ghost" aria-label="Search">
+            <IconButton intent="neutral" design="underlined" aria-label="Search">
               <Icon>
                 <EyeOutline />
               </Icon>
@@ -241,13 +241,13 @@ export const Addons: StoryFn = _args => {
         <StoryLabel>Solid</StoryLabel>
         <InputGroup className="max-w-sz-320">
           <InputGroup.LeadingAddon asChild>
-            <Button design="ghost" intent="neutral">
+            <Button design="underlined" intent="neutral">
               Click
             </Button>
           </InputGroup.LeadingAddon>
           <Input aria-label="Website" />
           <InputGroup.TrailingAddon asChild>
-            <IconButton intent="neutral" design="ghost" aria-label="Search">
+            <IconButton intent="neutral" design="underlined" aria-label="Search">
               <Icon>
                 <Search />
               </Icon>
@@ -317,7 +317,7 @@ export const PasswordExample: StoryFn = () => {
       <InputGroup.TrailingAddon asChild>
         <IconButton
           intent="neutral"
-          design="ghost"
+          design="underlined"
           aria-label={isVisible ? 'Hide password' : 'Show password'}
           onClick={handleToggle}
         >
