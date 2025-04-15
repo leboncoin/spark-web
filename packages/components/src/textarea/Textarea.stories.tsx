@@ -23,7 +23,18 @@ const meta: Meta<typeof Textarea> = {
 export default meta
 
 export const Default: StoryFn = _args => (
-  <Textarea rows={2} placeholder="Describe what you want to sell" aria-label="Description" />
+  <TextareaGroup>
+    <TextareaGroup.LeadingIcon>
+      <PenOutline />
+    </TextareaGroup.LeadingIcon>
+
+    <Textarea rows={1} defaultValue="IPhone 12 in good condition" aria-label="Message" />
+
+    <TextareaGroup.TrailingIcon>
+      <Check />
+    </TextareaGroup.TrailingIcon>
+    <TextareaGroup.ClearButton aria-label="Clear" />
+  </TextareaGroup>
 )
 
 export const Uncontrolled: StoryFn = _args => (
