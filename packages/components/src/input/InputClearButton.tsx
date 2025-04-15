@@ -7,10 +7,18 @@ import { useInputGroup } from './InputGroupContext'
 
 export interface InputClearButtonProps extends ComponentPropsWithoutRef<'button'> {
   'aria-label': string
+  inline?: boolean
   ref?: Ref<HTMLButtonElement>
 }
 
-const Root = ({ className, tabIndex = -1, onClick, ref, ...others }: InputClearButtonProps) => {
+const Root = ({
+  className,
+  tabIndex = -1,
+  onClick,
+  inline = false,
+  ref,
+  ...others
+}: InputClearButtonProps) => {
   const { onClear, hasTrailingIcon } = useInputGroup()
 
   const handleClick: MouseEventHandler<HTMLButtonElement> = event => {
@@ -28,7 +36,8 @@ const Root = ({ className, tabIndex = -1, onClick, ref, ...others }: InputClearB
       ref={ref}
       className={cx(
         className,
-        'pointer-events-auto absolute top-1/2 -translate-y-1/2',
+        'pointer-events-auto absolute',
+        inline ? 'h-sz-44 top-0 -translate-y-0' : 'top-1/2 -translate-y-1/2',
         'inline-flex h-full items-center justify-center outline-hidden',
         'text-neutral hover:text-neutral-hovered',
         hasTrailingIcon ? 'right-3xl px-sz-12' : 'pl-md pr-lg right-0'
