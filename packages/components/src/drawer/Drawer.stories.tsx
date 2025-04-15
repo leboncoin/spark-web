@@ -53,7 +53,7 @@ export const Usage: StoryFn = () => {
           </Drawer.Body>
 
           <Drawer.Footer className="gap-md flex justify-between">
-            <Button intent="basic" design="ghost" onClick={() => setOpen(false)}>
+            <Button intent="basic" design="underlined" onClick={() => setOpen(false)}>
               Cancel
             </Button>
 
