@@ -1,6 +1,7 @@
 import { Check } from '@spark-ui/icons/Check'
 import { FavoriteOutline } from '@spark-ui/icons/FavoriteOutline'
 import { Meta, StoryFn, StoryObj } from '@storybook/react'
+import { cx } from 'class-variance-authority'
 import { type ComponentProps, useState } from 'react'
 
 import { Checkbox } from '../checkbox'
@@ -37,7 +38,7 @@ const intents: ButtonProps['intent'][] = [
   'neutral',
   'surface',
 ]
-const designs: ButtonProps['design'][] = ['filled', 'outlined', 'tinted', 'ghost', 'contrast']
+const designs: ButtonProps['design'][] = ['filled', 'outlined', 'tinted', 'contrast', 'underlined']
 const shapes: ButtonProps['shape'][] = ['rounded', 'square', 'pill']
 
 export const Default: StoryObj = {
@@ -45,7 +46,7 @@ export const Default: StoryObj = {
 }
 
 export const Sizes: StoryFn = _args => (
-  <div className="gap-md flex flex-wrap items-center">
+  <div className="gap-lg flex flex-wrap items-center">
     {sizes.map(size => {
       return (
         <Button key={size} size={size}>
@@ -57,7 +58,7 @@ export const Sizes: StoryFn = _args => (
 )
 
 export const Shapes: StoryFn = _args => (
-  <div className="gap-md flex flex-wrap items-center">
+  <div className="gap-lg flex flex-wrap items-center">
     {shapes.map(shape => {
       return (
         <Button key={shape} shape={shape}>
@@ -68,30 +69,46 @@ export const Shapes: StoryFn = _args => (
   </div>
 )
 
+export const DesignAndIntentTable: StoryFn = _args => (
+  <div className="overflow-x-auto">
+    <table className="border-collapse">
+      <thead>
+        <tr>
+          <th className="border-outline p-md bg-surface text-on-surface border">Intent \ Design</th>
+          {designs.map(design => (
+            <th key={design} className="border-outline p-md bg-surface text-on-surface border">
+              {design}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {intents.map(intent => (
+          <tr
+            key={intent}
+            className={cx({
+              'bg-overlay/dim-3': intent === 'surface',
+            })}
+          >
+            <td className="border-outline p-md bg-surface text-on-surface border">{intent}</td>
+            {designs.map(design => (
+              <td key={`${intent}-${design}`} className={'border-outline p-md border'}>
+                <Button intent={intent} design={design}>
+                  Click me
+                </Button>
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)
+
 export const Disabled: StoryFn = _args => <Button disabled>Disabled button</Button>
 
-export const Design: StoryFn = _args => (
-  <div className="gap-md flex flex-wrap">
-    {designs.map(design => (
-      <Button key={design} design={design}>
-        {design} button
-      </Button>
-    ))}
-  </div>
-)
-
-export const Intent: StoryFn = _args => (
-  <div className="gap-md flex flex-wrap">
-    {intents.map(intent => (
-      <Button key={intent} intent={intent}>
-        {intent} button
-      </Button>
-    ))}
-  </div>
-)
-
 export const Icons: StoryFn = _args => (
-  <div className="gap-md flex flex-wrap">
+  <div className="gap-lg flex flex-wrap">
     <Button>
       Button
       <Icon>
