@@ -19,7 +19,7 @@ export const Disclosure = ({
   closedLabel,
   openedLabel,
   intent = 'neutral',
-  design = 'ghost',
+  design = 'underlined',
   size = 'sm',
   ref: forwardedRef,
   ...props

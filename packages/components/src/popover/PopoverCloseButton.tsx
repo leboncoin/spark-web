@@ -25,7 +25,7 @@ export const CloseButton = ({
       asChild
       {...rest}
     >
-      <IconButton size="sm" intent="neutral" design="ghost" aria-label={ariaLabel}>
+      <IconButton size="sm" intent="neutral" design="underlined" aria-label={ariaLabel}>
         <Icon>
           <CloseSVG />
         </Icon>
