@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.2.4](https://github.com/leboncoin/spark-web/compare/v10.2.3...v10.2.4) (2025-04-15)
+
+### Bug Fixes
+
+- **components:** fixed text color of input native autocomplete text ([7bcb387](https://github.com/leboncoin/spark-web/commit/7bcb3873d855193753105fde304a16493df5d62f))
+
 ## [10.2.3](https://github.com/leboncoin/spark-web/compare/v10.2.2...v10.2.3) (2025-04-13)
 
 **Note:** Version bump only for package @spark-ui/components
