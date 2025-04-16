@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.2.5](https://github.com/leboncoin/spark-web/compare/v10.2.4...v10.2.5) (2025-04-16)
+
+### Bug Fixes
+
+- **components:** disabling aria-live polite on carousel with multiple slides per page ([3c32ace](https://github.com/leboncoin/spark-web/commit/3c32ace5d1fb63f8c5a8af2e4ec224bb2584fc2f))
+- **components:** fixed markup of Combobox.Empty ([a0335b9](https://github.com/leboncoin/spark-web/commit/a0335b9f246907b1178b3ae66126f675ade6d11f))
+- **components:** removed redundant aria-haspopup from combobox ([5692b9e](https://github.com/leboncoin/spark-web/commit/5692b9e90f6797e8639ee329eb4be867bb472955))
+
 ## [10.2.4](https://github.com/leboncoin/spark-web/compare/v10.2.3...v10.2.4) (2025-04-15)
 
 ### Bug Fixes
