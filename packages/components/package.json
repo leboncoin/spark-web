@@ -60,7 +60,9 @@
     "downshift": "9.0.9",
     "emulate-tab": "^1.2.1",
     "radix-ui": "1.4.2",
-    "react-snap-carousel": "^0.5.1"
+    "react-snap-carousel": "^0.5.1",
+    "uuid": "^11.1.0",
+    "valtio": "^2.1.4"
   },
   "peerDependencies": {
     "@spark-ui/theme-utils": "latest",

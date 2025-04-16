@@ -1,0 +1,136 @@
+import { Meta, Canvas } from '@storybook/blocks'
+import { ArgTypes as ExtendedArgTypes } from '@docs/helpers/ArgTypes'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { Callout } from '@docs/helpers/Callout'
+
+import { AutoComplete } from '.'
+
+import * as stories from './AutoComplete.stories'
+
+<Meta of={stories} />
+
+# AutoComplete
+
+An autocomplete is a type of combobox that combines a text input with a list of values.
+
+The input value is restricted to an item value, which makes this component closer to a dropdown than a text input.
+
+
+- ✅ Spark FormField compatibility (statuses, label, helper text, etc.)
+
+
+<Canvas of={stories.Default} />
+
+This implementation is an ASSISTED INPUT, with a list of SUGGESTED values.
+The input value is not restricted to an item value.
+
+The suggested values may or may not updates depending on the input value.
+
+Examples:
+- Search Input: the suggestions changes as the user types.
+- Country list: the suggestions are filtered as the user types.
+- Recent Searches: the suggestions remains the same no matter what the user types.
+
+### Features:
+- [OPT-IN] open on focus
+- [OPT-IN] open only if minimum amount of chars types (ex: 3) and has suggestions.
+- [OPT-IN] disabled automatic filtering (for example to implement your own logic, or simply no filtering)
+
+
+
+
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { AutoComplete } from '@spark-ui/components/autocomplete'
+
+export default () => (
+  <AutoComplete>
+    <AutoComplete.Trigger>
+      <AutoComplete.LeadingIcon />
+      <AutoComplete.Input />
+      <AutoComplete.TrailingIcon />
+      <AutoComplete.ClearButton />
+      <AutoComplete.Disclosure />
+    </AutoComplete.Trigger>
+    <ComboBox.Popover>
+      <AutoComplete.Items>
+        <AutoComplete.Empty />
+        <AutoComplete.Group>
+          <AutoComplete.Label />
+          <AutoComplete.Item>
+            <ComboBox.ItemIndicator />
+            <ComboBox.ItemText />
+          </AutoComplete.Item>
+        </AutoComplete.Group>
+      </AutoComplete.Items>
+    </ComboBox.Popover>
+  </AutoComplete>
+);
+```
+
+## Examples (NEW)
+
+Both ItemIndicator and LeadingIcon won't have dedicated stories, they are part of the Trigger.
+
+### Controlled
+
+<Canvas of={stories.Controlled} />
+
+### Disabled
+
+Use `disabled` prop to disable the input and the popup.
+
+Use `readOnly` prop to disable the input and popup, but allow text selection (for copy/paste).
+
+<Canvas of={stories.Disabled} />
+
+
+### Filtering
+
+Filtering logic is NOT implemented in the component, it's up to the consumer to implement it.
+
+In this example, the filter value is reset after the combobox is closed, and it starts filtering only when you start typing.
+
+<Canvas of={stories.Filtering} />
+
+
+### Loading
+
+
+### Groups
+
+You can divide the items into groups, and they will be displayed in the popover.
+
+Each `AutoComplete.Group` must have an `AutoComplete.Label`. If you no items rendered in a group, the group will not be displayed.
+
+<Canvas of={stories.Groups} />
+
+## ADVANCED Examples (NEW)
+
+### Custom item
+
+You are free to use custom JSX inside the item, as long as you wrap the text with the `AutoComplete.ItemText` component.
+This is important in order to manage the focus/selection logic, as well as the automatic highlighting of items as you type.
+
+Everything that is outside of the `AutoComplete.ItemText` is ignored by the automatic highlight logic.
+
+
+<Canvas of={stories.CustomItem} />
+
+### Dialog
+
+<Canvas of={stories.CustomDialog} />
+
+
+
+## ADVANCED FormField compatibility (NEW)
+
+### Status
