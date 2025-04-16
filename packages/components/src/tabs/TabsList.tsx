@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { ArrowVerticalLeft } from '@spark-ui/icons/ArrowVerticalLeft'
 import { ArrowVerticalRight } from '@spark-ui/icons/ArrowVerticalRight'
 import { Tabs as RadixTabs } from 'radix-ui'
