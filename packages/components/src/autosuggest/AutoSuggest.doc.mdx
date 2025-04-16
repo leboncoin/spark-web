@@ -1,0 +1,125 @@
+import { Meta, Canvas } from '@storybook/blocks'
+import { ArgTypes as ExtendedArgTypes } from '@docs/helpers/ArgTypes'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { Callout } from '@docs/helpers/Callout'
+
+import { AutoSuggest } from '.'
+
+import * as stories from './AutoSuggest.stories'
+
+<Meta of={stories} />
+
+# AutoSuggest
+
+A autosuggest is a type of combobox that combines a text input with a list of suggested values.
+
+This implementation is an ASSISTED INPUT, with a list of SUGGESTED values.
+The input value is not restricted to an item value.
+
+The suggested values may or may not updates depending on the input value.
+
+Examples:
+- Search Input: the suggestions changes as the user types.
+- Country list: the suggestions are filtered as the user types.
+- Recent Searches: the suggestions remains the same no matter what the user types.
+
+### Features:
+- [OPT-IN] open on focus
+- [OPT-IN] open only if minimum amount of chars types (ex: 3) and has suggestions.
+- [OPT-IN] disabled automatic filtering (for example to implement your own logic, or simply no filtering)
+
+
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { AutoSuggest } from '@spark-ui/components/autosuggest'
+
+export default () => (
+  <AutoSuggest>
+    <AutoSuggest.Trigger>
+      <AutoSuggest.LeadingIcon />
+      <AutoSuggest.Input />
+      <AutoSuggest.TrailingIcon />
+      <AutoSuggest.ClearButton />
+      <AutoSuggest.Disclosure />
+    </AutoSuggest.Trigger>
+    <ComboBox.Popover>
+      <AutoSuggest.Items>
+        <AutoSuggest.Empty />
+        <AutoSuggest.Group>
+          <AutoSuggest.Label />
+          <AutoSuggest.Item>
+            <ComboBox.ItemIndicator />
+            <ComboBox.ItemText />
+          </AutoSuggest.Item>
+        </AutoSuggest.Group>
+      </AutoSuggest.Items>
+    </ComboBox.Popover>
+  </AutoSuggest>
+);
+```
+
+## Examples (NEW)
+
+Both ItemIndicator and LeadingIcon won't have dedicated stories, they are part of the Trigger.
+
+### Default value
+### Controlled value
+
+### Controlled open state
+
+### No filtering (default ?)
+### Filtering (not case sensitive)
+### Custom filtering (on call site)
+
+### Disabled
+### Disabled Item
+### Read only
+### Loading
+### Status
+
+### Automatic highlighting
+
+Use `autoHighlight` to highlight the first suggestion matching the input value.
+
+It compares the input value with the suggestion label (not case sensitive).
+
+Possible values:
+- `autoHighlight="none"`: no automatic selection.
+- `autoHighlight="full"`: automatic selection when the full string matches.
+- `autoHighlight="startsWith"`: automatic selection when the input value is a prefix of the suggestion label.
+- `autoHighlight="endsWith"`: automatic selection when the input value is a suffix of the suggestion label.
+- `Function`: custom function that will be called with the input value and the suggestion data (label and value).
+
+### Automatic selection
+
+Use `autoSelect` to automatically select the first suggestion matching the input value when focus leaves the input.
+
+Possible values:
+- `autoSelect="none"`: no automatic selection.
+- `autoSelect="full"`: automatic selection when the full string matches.
+- `autoSelect="startsWith"`: automatic selection when the input value is a prefix of the suggestion label.
+- `autoSelect="endsWith"`: automatic selection when the input value is a suffix of the suggestion label.
+- `Function`: custom function that will be called with the input value and the suggestion data (label and value).
+
+It compares the input value with the suggestion label (not case sensitive). A selection will be made only if the full string matches.
+
+
+
+### Groups
+
+## ADVANCED Examples (NEW)
+
+### Custom item
+### Search Modal
+
+## ADVANCED FormField compatibility (NEW)
