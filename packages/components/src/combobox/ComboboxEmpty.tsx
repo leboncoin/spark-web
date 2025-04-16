@@ -6,7 +6,7 @@ import { useComboboxContext } from './ComboboxContext'
 interface EmptyProps {
   className?: string
   children: ReactNode
-  ref?: Ref<HTMLDivElement>
+  ref?: Ref<HTMLLIElement>
 }
 
 export const Empty = ({ className, children, ref: forwardedRef }: EmptyProps) => {
@@ -14,12 +14,14 @@ export const Empty = ({ className, children, ref: forwardedRef }: EmptyProps) =>
   const hasNoItemVisible = ctx.filteredItemsMap.size === 0
 
   return hasNoItemVisible ? (
-    <div
+    <li
       ref={forwardedRef}
+      role="option"
+      aria-selected={false}
       className={cx('px-lg py-md text-body-1 text-on-surface/dim-1', className)}
     >
       {children}
-    </div>
+    </li>
   ) : null
 }
 

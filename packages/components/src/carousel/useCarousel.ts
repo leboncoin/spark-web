@@ -1,12 +1,12 @@
 /* eslint-disable max-lines-per-function */
 import {
+  KeyboardEvent,
   useCallback,
   useEffect,
   useId,
   useLayoutEffect,
   useRef,
   useState,
-  KeyboardEvent,
 } from 'react'
 
 import {
@@ -227,6 +227,13 @@ export const useCarousel = ({
 
     getSlidesContainerProps: (): ComputedSlideGroupProps => ({
       id: `carousel::${carouselId}::item-group`,
+      /**
+       * The carousel pattern was originally designed for a single slide.
+       * When there is more than one slide, the aria-live region is set to off to avoid announcing the whole list of slides.
+       * This is not ideal but we keep it for backwards compatibility.
+       *
+       * @see https://www.w3.org/WAI/ARIA/apg/patterns/carousel/#wai-aria-attributes
+       */
       'aria-live': slidesPerPage > 1 ? 'off' : 'polite',
       'data-scope': DATA_SCOPE,
       'data-part': 'item-group',

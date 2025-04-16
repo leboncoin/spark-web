@@ -3,9 +3,10 @@ import userEvent from '@testing-library/user-event'
 import { mockResizeObserver } from 'jsdom-testing-mocks'
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { createTabs, type TabItem } from './Tabs.stories'
+import { Tabs, TabsListProps, TabsProps } from '.'
+import { type TabItem } from './Tabs.stories'
 
-const tabs: TabItem[] = [
+const defaultTabs: TabItem[] = [
   {
     children: 'Yesterday',
     value: 'tab1',
@@ -28,6 +29,34 @@ const tabsWithOverflow = [
   { children: 'Seven', value: 'tab7', content: 'Lorem ipsum dolor sit amet' },
 ]
 
+const createTabs = ({
+  rootProps = {},
+  listProps = {},
+  tabs = defaultTabs,
+}: {
+  rootProps?: TabsProps
+  listProps?: Omit<TabsListProps, 'children'>
+  tabs?: TabItem[]
+} = {}) => {
+  return (
+    <Tabs defaultValue="tab1" {...rootProps}>
+      <Tabs.List {...listProps}>
+        {tabs.map(({ value, children, disabled, a11yLabel }) => (
+          <Tabs.Trigger key={value} value={value} disabled={disabled} aria-label={a11yLabel}>
+            {children}
+          </Tabs.Trigger>
+        ))}
+      </Tabs.List>
+
+      {tabs.map(({ content, value }) => (
+        <Tabs.Content key={value} value={value}>
+          <p>{content}</p>
+        </Tabs.Content>
+      ))}
+    </Tabs>
+  )
+}
+
 describe('Tabs', () => {
   const scrollIntoViewSpy = vi.fn()
 
@@ -44,7 +73,7 @@ describe('Tabs', () => {
     const user = userEvent.setup()
     const rootProps = { defaultValue: 'tab1', onValueChange: vi.fn() }
 
-    render(createTabs({ tabs, rootProps }))
+    render(createTabs({ rootProps }))
 
     expect(screen.getByText('Yesterday')).toBeInTheDocument()
 
@@ -57,7 +86,7 @@ describe('Tabs', () => {
   it('should scroll into focused tab item', async () => {
     const user = userEvent.setup()
 
-    render(createTabs({ tabs }))
+    render(createTabs())
 
     await user.click(screen.getByText('Today'))
 
@@ -68,7 +97,7 @@ describe('Tabs', () => {
     const user = userEvent.setup()
     const rootProps = { defaultValue: 'tab1', onValueChange: vi.fn() }
     const tabsWithDisabled = [
-      ...tabs,
+      ...defaultTabs,
       { children: 'Tomorrow', value: 'tab3', content: 'Things will happen', disabled: true },
     ]
 
@@ -213,7 +242,6 @@ describe('Tabs', () => {
       it('should keep inactive tabs in the DOM (but hidden) when forceMount prop is true', async () => {
         render(
           createTabs({
-            tabs,
             rootProps: { defaultValue: 'tab1', forceMount: true },
           })
         )

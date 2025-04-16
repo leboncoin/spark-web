@@ -59,9 +59,14 @@ export const Input = ({
     }
   }, [])
 
-  const [PopoverTrigger, popoverTriggerProps] = ctx.hasPopover
-    ? [Popover.Trigger, { asChild: true, type: undefined }]
-    : [Fragment, {}]
+  const PopoverTrigger = ctx.hasPopover ? Popover.Trigger : Fragment
+  const popoverTriggerProps = ctx.hasPopover
+    ? {
+        asChild: true,
+        type: undefined,
+        'aria-haspopup': undefined,
+      }
+    : {}
 
   const multiselectInputProps = ctx.getDropdownProps()
   const inputRef = useMergeRefs(forwardedRef, ctx.innerInputRef, multiselectInputProps.ref)

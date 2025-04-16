@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { StoryLabel } from '@docs/helpers/StoryLabel'
 import { ConversationFill } from '@spark-ui/icons/ConversationFill'
 import { FireFill } from '@spark-ui/icons/FireFill'
@@ -6,8 +7,7 @@ import type { Meta, StoryFn } from '@storybook/react'
 import type { ReactNode } from 'react'
 
 import { Icon } from '../icon'
-import { Tabs, type TabsProps } from '.'
-import type { TabsListProps } from './TabsList'
+import { Tabs } from '.'
 
 const meta: Meta<typeof Tabs> = {
   title: 'Components/Tabs',
@@ -32,183 +32,282 @@ export interface TabItem {
   content: string
 }
 
-const defaultTabs = [
-  {
-    children: <span>Inbox</span>,
-    value: 'tab1',
-    disabled: false,
-    content: 'Your inbox is empty',
-  },
-  {
-    children: <span>Today</span>,
-    value: 'tab2',
-    disabled: false,
-    content: 'Make some coffee',
-  },
-  {
-    children: <span>Upcoming</span>,
-    value: 'tab3',
-    disabled: false,
-    content: 'Order more coffee',
-  },
-]
+export const Default: StoryFn = _args => {
+  const tabs = [
+    {
+      children: <span>Inbox</span>,
+      value: 'tab1',
+      content: 'Your inbox is empty',
+    },
+    {
+      children: <span>Today</span>,
+      value: 'tab2',
+      content: 'Make some coffee',
+    },
+    {
+      children: <span>Upcoming</span>,
+      value: 'tab3',
+      content: 'Order more coffee',
+    },
+  ]
 
-const withIconTabs = [
-  {
-    value: 'tab1',
-    children: (
-      <>
-        <Icon size="sm">
-          <MailFill />
-        </Icon>
-        <span>Inbox</span>
-      </>
-    ),
-    content: 'Your inbox is empty',
-    disabled: false,
-  },
-  {
-    children: (
-      <>
-        <Icon size="sm">
-          <ConversationFill />
-        </Icon>
-        <span>Today</span>
-      </>
-    ),
-    value: 'tab2',
-    content: 'Make some coffee',
-    disabled: false,
-  },
-  {
-    children: (
-      <>
-        <Icon size="sm">
-          <FireFill />
-        </Icon>
-        <span>Upcoming</span>
-      </>
-    ),
-    value: 'tab3',
-    content: 'Order more coffee',
-    disabled: false,
-  },
-]
-
-const withIconOnlyTabs = [
-  {
-    value: 'tab1',
-    children: (
-      <Icon size="sm">
-        <MailFill />
-      </Icon>
-    ),
-    a11yLabel: 'Inbox',
-    content: 'Your inbox is empty',
-    disabled: false,
-  },
-  {
-    children: (
-      <Icon size="sm">
-        <ConversationFill />
-      </Icon>
-    ),
-    a11yLabel: 'Today',
-    value: 'tab2',
-    content: 'Make some coffee',
-    disabled: false,
-  },
-  {
-    children: (
-      <Icon size="sm">
-        <FireFill />
-      </Icon>
-    ),
-    a11yLabel: 'Upcoming',
-    value: 'tab3',
-    content: 'Order more coffee',
-    disabled: false,
-  },
-]
-
-export const createTabs = ({
-  rootProps = {},
-  listProps = {},
-  tabs = defaultTabs,
-}: {
-  rootProps?: TabsProps
-  listProps?: Omit<TabsListProps, 'children'>
-  tabs?: TabItem[]
-} = {}) => {
   return (
-    <Tabs defaultValue="tab1" {...rootProps}>
-      <Tabs.List {...listProps}>
-        {tabs.map(({ value, children, disabled, a11yLabel }) => (
-          <Tabs.Trigger key={value} value={value} disabled={disabled} aria-label={a11yLabel}>
-            {children}
-          </Tabs.Trigger>
-        ))}
-      </Tabs.List>
+    <div>
+      <h4 id="tasks-label" className="text-display-2">
+        Tasks
+      </h4>
+      <Tabs defaultValue="tab1">
+        <Tabs.List aria-labelledby="tasks-label">
+          {tabs.map(({ value, children }) => (
+            <Tabs.Trigger key={value} value={value}>
+              {children}
+            </Tabs.Trigger>
+          ))}
+        </Tabs.List>
 
-      {tabs.map(({ content, value }) => (
-        <Tabs.Content key={value} value={value}>
-          <p>{content}</p>
-        </Tabs.Content>
-      ))}
-    </Tabs>
+        {tabs.map(({ content, value }) => (
+          <Tabs.Content key={value} value={value}>
+            <p>{content}</p>
+          </Tabs.Content>
+        ))}
+      </Tabs>
+    </div>
   )
 }
 
-export const Default: StoryFn = _args => <div>{createTabs()}</div>
+export const Icons: StoryFn = _args => {
+  const tabs = [
+    {
+      value: 'tab1',
+      children: (
+        <>
+          <Icon size="sm">
+            <MailFill />
+          </Icon>
+          <span>Inbox</span>
+        </>
+      ),
+      content: 'Your inbox is empty',
+      disabled: false,
+    },
+    {
+      children: (
+        <>
+          <Icon size="sm">
+            <ConversationFill />
+          </Icon>
+          <span>Today</span>
+        </>
+      ),
+      value: 'tab2',
+      content: 'Make some coffee',
+      disabled: false,
+    },
+    {
+      children: (
+        <>
+          <Icon size="sm">
+            <FireFill />
+          </Icon>
+          <span>Upcoming</span>
+        </>
+      ),
+      value: 'tab3',
+      content: 'Order more coffee',
+      disabled: false,
+    },
+  ]
 
-export const Icons: StoryFn = _args => (
-  <div className="gap-lg flex flex-col">
-    <div>
-      <StoryLabel>with icons</StoryLabel>
-      {createTabs({ tabs: withIconTabs, rootProps: { defaultValue: 'tab2' } })}
-    </div>
+  return (
+    <div className="gap-lg flex flex-col">
+      <div>
+        <Tabs defaultValue="tab2">
+          <Tabs.List>
+            {tabs.map(({ value, children, disabled }) => (
+              <Tabs.Trigger key={value} value={value} disabled={disabled}>
+                {children}
+              </Tabs.Trigger>
+            ))}
+          </Tabs.List>
 
-    <div>
-      <StoryLabel>with icons only</StoryLabel>
-      {createTabs({ tabs: withIconOnlyTabs, rootProps: { defaultValue: 'tab3' } })}
+          {tabs.map(({ content, value }) => (
+            <Tabs.Content key={value} value={value}>
+              <p>{content}</p>
+            </Tabs.Content>
+          ))}
+        </Tabs>
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
-export const Intent: StoryFn = _args => (
-  <div className="gap-lg flex flex-col">
-    <div>
-      <StoryLabel>basic (default)</StoryLabel>
-      {createTabs()}
-    </div>
-    <div>
-      <StoryLabel>main</StoryLabel>
-      {createTabs({ rootProps: { intent: 'main' } })}
-    </div>
-    <div>
-      <StoryLabel>support</StoryLabel>
-      {createTabs({ rootProps: { intent: 'support' } })}
-    </div>
-  </div>
-)
+export const Intent: StoryFn = _args => {
+  const tabs = [
+    {
+      children: <span>Inbox</span>,
+      value: 'tab1',
+      disabled: false,
+      content: 'Your inbox is empty',
+    },
+    {
+      children: <span>Today</span>,
+      value: 'tab2',
+      disabled: false,
+      content: 'Make some coffee',
+    },
+    {
+      children: <span>Upcoming</span>,
+      value: 'tab3',
+      disabled: false,
+      content: 'Order more coffee',
+    },
+  ]
 
-export const Orientation: StoryFn = _args => (
-  <div className="gap-lg flex flex-col">
-    <div>
-      <StoryLabel>horizontal (default)</StoryLabel>
-      {createTabs({ rootProps: { orientation: 'horizontal' } })}
-    </div>
+  return (
+    <div className="gap-lg flex flex-col">
+      <div>
+        <StoryLabel>basic (default)</StoryLabel>
+        <Tabs defaultValue="tab1">
+          <Tabs.List>
+            {tabs.map(({ value, children, disabled }) => (
+              <Tabs.Trigger key={value} value={value} disabled={disabled}>
+                {children}
+              </Tabs.Trigger>
+            ))}
+          </Tabs.List>
 
-    <div>
-      <StoryLabel>vertical</StoryLabel>
-      {createTabs({ rootProps: { orientation: 'vertical' } })}
+          {tabs.map(({ content, value }) => (
+            <Tabs.Content key={value} value={value}>
+              <p>{content}</p>
+            </Tabs.Content>
+          ))}
+        </Tabs>
+      </div>
+      <div>
+        <StoryLabel>main</StoryLabel>
+        <Tabs defaultValue="tab1" intent="main">
+          <Tabs.List>
+            {tabs.map(({ value, children, disabled }) => (
+              <Tabs.Trigger key={value} value={value} disabled={disabled}>
+                {children}
+              </Tabs.Trigger>
+            ))}
+          </Tabs.List>
+
+          {tabs.map(({ content, value }) => (
+            <Tabs.Content key={value} value={value}>
+              <p>{content}</p>
+            </Tabs.Content>
+          ))}
+        </Tabs>
+      </div>
+      <div>
+        <StoryLabel>support</StoryLabel>
+        <Tabs defaultValue="tab1" intent="support">
+          <Tabs.List>
+            {tabs.map(({ value, children, disabled }) => (
+              <Tabs.Trigger key={value} value={value} disabled={disabled}>
+                {children}
+              </Tabs.Trigger>
+            ))}
+          </Tabs.List>
+
+          {tabs.map(({ content, value }) => (
+            <Tabs.Content key={value} value={value}>
+              <p>{content}</p>
+            </Tabs.Content>
+          ))}
+        </Tabs>
+      </div>
     </div>
-  </div>
-)
+  )
+}
+
+export const Orientation: StoryFn = _args => {
+  const tabs = [
+    {
+      children: <span>Inbox</span>,
+      value: 'tab1',
+      disabled: false,
+      content: 'Your inbox is empty',
+    },
+    {
+      children: <span>Today</span>,
+      value: 'tab2',
+      disabled: false,
+      content: 'Make some coffee',
+    },
+    {
+      children: <span>Upcoming</span>,
+      value: 'tab3',
+      disabled: false,
+      content: 'Order more coffee',
+    },
+  ]
+
+  return (
+    <div className="gap-lg flex flex-col">
+      <div>
+        <StoryLabel>horizontal (default)</StoryLabel>
+        <Tabs defaultValue="tab1" orientation="horizontal">
+          <Tabs.List>
+            {tabs.map(({ value, children, disabled }) => (
+              <Tabs.Trigger key={value} value={value} disabled={disabled}>
+                {children}
+              </Tabs.Trigger>
+            ))}
+          </Tabs.List>
+
+          {tabs.map(({ content, value }) => (
+            <Tabs.Content key={value} value={value}>
+              <p>{content}</p>
+            </Tabs.Content>
+          ))}
+        </Tabs>
+      </div>
+
+      <div>
+        <StoryLabel>vertical</StoryLabel>
+        <Tabs defaultValue="tab1" orientation="vertical">
+          <Tabs.List>
+            {tabs.map(({ value, children, disabled }) => (
+              <Tabs.Trigger key={value} value={value} disabled={disabled}>
+                {children}
+              </Tabs.Trigger>
+            ))}
+          </Tabs.List>
+
+          {tabs.map(({ content, value }) => (
+            <Tabs.Content key={value} value={value}>
+              <p>{content}</p>
+            </Tabs.Content>
+          ))}
+        </Tabs>
+      </div>
+    </div>
+  )
+}
 
 export const Overflow: StoryFn = _args => {
   const overflowTabs = [
-    ...defaultTabs,
+    {
+      children: <span>Inbox</span>,
+      value: 'tab1',
+      disabled: false,
+      content: 'Your inbox is empty',
+    },
+    {
+      children: <span>Today</span>,
+      value: 'tab2',
+      disabled: false,
+      content: 'Make some coffee',
+    },
+    {
+      children: <span>Upcoming</span>,
+      value: 'tab3',
+      disabled: false,
+      content: 'Order more coffee',
+    },
     {
       children: <span>Pending</span>,
       value: 'tab4',
@@ -233,75 +332,184 @@ export const Overflow: StoryFn = _args => {
     <div className="gap-lg flex flex-col">
       <div className="max-w-sz-464 shrink basis-auto overflow-auto">
         <StoryLabel>with loop</StoryLabel>
-        {createTabs({
-          listProps: { loop: true },
-          tabs: overflowTabs,
-        })}
+        <Tabs defaultValue="tab1">
+          <Tabs.List loop>
+            {overflowTabs.map(({ value, children, disabled }) => (
+              <Tabs.Trigger key={value} value={value} disabled={disabled}>
+                {children}
+              </Tabs.Trigger>
+            ))}
+          </Tabs.List>
+
+          {overflowTabs.map(({ content, value }) => (
+            <Tabs.Content key={value} value={value}>
+              <p>{content}</p>
+            </Tabs.Content>
+          ))}
+        </Tabs>
       </div>
 
       <div className="max-w-sz-464 shrink basis-auto overflow-auto">
         <StoryLabel>without loop (default)</StoryLabel>
-        {createTabs({ tabs: overflowTabs })}
+
+        <Tabs defaultValue="tab1">
+          <Tabs.List>
+            {overflowTabs.map(({ value, children, disabled }) => (
+              <Tabs.Trigger key={value} value={value} disabled={disabled}>
+                {children}
+              </Tabs.Trigger>
+            ))}
+          </Tabs.List>
+
+          {overflowTabs.map(({ content, value }) => (
+            <Tabs.Content key={value} value={value}>
+              <p>{content}</p>
+            </Tabs.Content>
+          ))}
+        </Tabs>
       </div>
     </div>
   )
 }
 
-export const Size: StoryFn = _args => (
-  <div className="gap-lg flex flex-col">
+export const Size: StoryFn = _args => {
+  const sizes = ['xs', 'sm', 'md'] as const
+  const tabs = [
+    {
+      children: <span>Inbox</span>,
+      value: 'tab1',
+      disabled: false,
+      content: 'Your inbox is empty',
+    },
+    {
+      children: <span>Today</span>,
+      value: 'tab2',
+      disabled: false,
+      content: 'Make some coffee',
+    },
+    {
+      children: <span>Upcoming</span>,
+      value: 'tab3',
+      disabled: false,
+      content: 'Order more coffee',
+    },
+  ]
+
+  return (
+    <div className="gap-lg flex flex-col">
+      {sizes.map(size => (
+        <div key={size}>
+          <StoryLabel>
+            {size}
+            {size === 'md' && ' (default)'}
+          </StoryLabel>
+          <Tabs defaultValue="tab1" size={size}>
+            <Tabs.List>
+              {tabs.map(({ value, children, disabled }) => (
+                <Tabs.Trigger key={value} value={value} disabled={disabled}>
+                  {children}
+                </Tabs.Trigger>
+              ))}
+            </Tabs.List>
+
+            {tabs.map(({ content, value }) => (
+              <Tabs.Content key={value} value={value}>
+                <p>{content}</p>
+              </Tabs.Content>
+            ))}
+          </Tabs>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export const ForceMount: StoryFn = _args => {
+  const tabs = [
+    {
+      children: <span>Inbox</span>,
+      value: 'tab1',
+      disabled: false,
+      content: 'Your inbox is empty',
+    },
+    {
+      children: <span>Today</span>,
+      value: 'tab2',
+      disabled: false,
+      content: 'Make some coffee',
+    },
+    {
+      children: <span>Upcoming</span>,
+      value: 'tab3',
+      disabled: false,
+      content: 'Order more coffee',
+    },
+  ]
+
+  return (
     <div>
-      <StoryLabel>xs</StoryLabel>
-      {createTabs({ rootProps: { size: 'xs' } })}
-    </div>
+      <StoryLabel>forceMount</StoryLabel>
 
-    <div>
-      <StoryLabel>sm</StoryLabel>
-      {createTabs({ rootProps: { size: 'sm' } })}
-    </div>
+      <Tabs defaultValue="tab1" forceMount>
+        <Tabs.List>
+          {tabs.map(({ value, children, disabled }) => (
+            <Tabs.Trigger key={value} value={value} disabled={disabled}>
+              {children}
+            </Tabs.Trigger>
+          ))}
+        </Tabs.List>
 
-    <div>
-      <StoryLabel>md (default)</StoryLabel>
-      {createTabs({ rootProps: { size: 'md' } })}
+        {tabs.map(({ content, value }) => (
+          <Tabs.Content key={value} value={value}>
+            <p>{content}</p>
+          </Tabs.Content>
+        ))}
+      </Tabs>
     </div>
-  </div>
-)
+  )
+}
 
-export const ForceMount: StoryFn = _args => (
-  <div>
-    <StoryLabel>forceMount</StoryLabel>
-    {createTabs({
-      rootProps: { defaultValue: 'tab1', forceMount: true },
-      tabs: defaultTabs,
-    })}
-  </div>
-)
+export const Disabled: StoryFn = _args => {
+  const tabs = [
+    {
+      children: <span>Inbox</span>,
+      value: 'tab1',
+      content: 'Your inbox is empty',
+      disabled: true,
+    },
+    {
+      children: <span>Today</span>,
+      value: 'tab2',
+      content: 'Make some coffee',
+      disabled: false,
+    },
+    {
+      children: <span>Upcoming</span>,
+      value: 'tab3',
+      content: 'Order more coffee',
+      disabled: false,
+    },
+  ]
 
-export const State: StoryFn = _args => (
-  <div className="gap-lg flex flex-row">
-    <div className="shrink basis-auto overflow-auto">
-      {createTabs({
-        rootProps: { defaultValue: 'tab2' },
-        tabs: [
-          {
-            children: <span>Inbox</span>,
-            value: 'tab1',
-            content: 'Your inbox is empty',
-            disabled: true,
-          },
-          {
-            children: <span>Today</span>,
-            value: 'tab2',
-            content: 'Make some coffee',
-            disabled: false,
-          },
-          {
-            children: <span>Upcoming</span>,
-            value: 'tab3',
-            content: 'Order more coffee',
-            disabled: false,
-          },
-        ],
-      })}
+  return (
+    <div className="gap-lg flex flex-row">
+      <div className="shrink basis-auto overflow-auto">
+        <Tabs defaultValue="tab2">
+          <Tabs.List>
+            {tabs.map(({ value, children, disabled }) => (
+              <Tabs.Trigger key={value} value={value} disabled={disabled}>
+                {children}
+              </Tabs.Trigger>
+            ))}
+          </Tabs.List>
+
+          {tabs.map(({ content, value }) => (
+            <Tabs.Content key={value} value={value}>
+              <p>{content}</p>
+            </Tabs.Content>
+          ))}
+        </Tabs>
+      </div>
     </div>
-  </div>
-)
+  )
+}

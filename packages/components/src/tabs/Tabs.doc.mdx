@@ -1,6 +1,7 @@
 import { Meta, Canvas } from '@storybook/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
 import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { AriaRoles } from '@docs/helpers/AriaRoles'
 import { Tabs } from '.'
 import { Kbd } from '@spark-ui/components/kbd'
 
@@ -41,7 +42,7 @@ export default () => (
 
 Use `disabled` prop on item to set related state to it. Other states (`:hover|:focus|...`) are automatically managed.
 
-<Canvas of={stories.State} />
+<Canvas of={stories.Disabled} />
 
 ### Icons
 
@@ -112,6 +113,9 @@ Adheres to the [Tabs WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/pa
 
 ### Tips
 
+- If the whole tabs area has a title, link it to the `Tabs.List` element using `aria-labelledby` prop.
+- It is advised to use `asChild` on each `Tabs.Trigger` and use the appropriate heading tag according to your page structure.
+
 ### Keyboard Interactions
 
 - <Kbd>Tab</Kbd>: When focus moves onto the tabs, focuses the active trigger. When a trigger is
@@ -126,3 +130,24 @@ Adheres to the [Tabs WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/pa
   its associated content.
 - <Kbd>Home</Kbd>: Moves focus to the first trigger and activates its associated content.
 - <Kbd>End</Kbd>: Moves focus to the last trigger and activates its associated content.
+
+### Roles
+
+<AriaRoles
+  of={Tabs}
+  role="none"
+  subcomponents={{
+    'Tabs.List': {
+      of: Tabs.List,
+      role: 'tablist',
+    },
+    'Tabs.Trigger': {
+      of: Tabs.Trigger,
+      role: 'tab',
+    },
+    'Tabs.Content': {
+      of: Tabs.Content,
+      role: 'tabpanel',
+    },
+  }}
+/>
