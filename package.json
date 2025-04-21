@@ -123,7 +123,7 @@
     "tsup": "^8.4.0",
     "type-fest": "4.39.1",
     "typescript": "5.8.2",
-    "vite": "^5.4.17",
+    "vite": "^6.3.2",
     "vite-plugin-dts": "4.5.3",
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "^3.1.1"
