@@ -11,7 +11,7 @@ export const DrawerOverlay = ({ className, ref, ...rest }: DrawerOverlayProps): 
     ref={ref}
     className={cx(
       ['fixed', 'top-0', 'left-0', 'w-screen', 'h-screen', 'z-overlay'],
-      ['bg-overlay/dim-3'],
+      ['bg-overlay/dim-1'],
       ['data-[state=open]:animate-fade-in'],
       ['data-[state=closed]:animate-fade-out'],
       className
