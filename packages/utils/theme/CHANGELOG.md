@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.2.6](https://github.com/leboncoin/spark-web/compare/v10.2.5...v10.2.6) (2025-04-23)
+
+### Bug Fixes
+
+- **components:** update overlay color for dialogs ([aed9cff](https://github.com/leboncoin/spark-web/commit/aed9cff196e124cbbfe525b2b0d5c9334968653e))
+
 ## [10.2.5](https://github.com/leboncoin/spark-web/compare/v10.2.4...v10.2.5) (2025-04-16)
 
 **Note:** Version bump only for package @spark-ui/theme-utils
