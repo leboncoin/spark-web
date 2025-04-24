@@ -33,3 +33,8 @@ updates:
       dependencies:
         patterns:
           - '*'
+        update-types: ['minor', 'patch']
+      major:
+        patterns:
+          - '*'
+        update-types: ['major']
