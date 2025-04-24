@@ -64,7 +64,6 @@ export const Input = ({
     ? {
         asChild: true,
         type: undefined,
-        'aria-haspopup': undefined,
       }
     : {}
 
