@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.2.7](https://github.com/leboncoin/spark-web/compare/v10.2.6...v10.2.7) (2025-04-24)
+
+### Bug Fixes
+
+- **components:** reverting combobox a11y to investigate why it impacts ARIA role in cypress env ([ac0e96d](https://github.com/leboncoin/spark-web/commit/ac0e96debb337c5f7e7a1ad19e48d04c035b3477))
+
 ## [10.2.6](https://github.com/leboncoin/spark-web/compare/v10.2.5...v10.2.6) (2025-04-23)
 
 ### Bug Fixes
