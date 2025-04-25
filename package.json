@@ -111,7 +111,7 @@
     "react-dom": "19.1.0",
     "react-element-to-jsx-string": "^17.0.0",
     "react-live": "4.1.8",
-    "react-router-dom": "7.4.1",
+    "react-router-dom": "7.5.2",
     "react-xarrows": "^2.0.2",
     "resize-observer-polyfill": "^1.5.1",
     "rollup": "^4.39.0",
