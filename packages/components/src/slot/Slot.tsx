@@ -8,7 +8,7 @@ import {
   Ref,
 } from 'react'
 
-export const Slottable = RadixSlot.Slottable
+export const Slottable: typeof RadixSlot.Slottable = RadixSlot.Slottable
 
 export type SlotProps = PropsWithChildren<HTMLAttributes<HTMLElement>> & {
   ref?: Ref<HTMLElement>
