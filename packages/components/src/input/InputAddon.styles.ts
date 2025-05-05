@@ -7,6 +7,7 @@ export const inputAddonStyles = cva(
     'shrink-0',
     'h-full',
     'focus-visible:relative focus-visible:z-raised',
+    'mx-0',
   ],
   {
     variants: {

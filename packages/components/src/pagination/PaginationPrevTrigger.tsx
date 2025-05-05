@@ -32,7 +32,7 @@ export const PrevTrigger = ({ children, className, href, ref, ...props }: PrevTr
   const localProps = {
     'data-spark-component': 'pagination-prev-trigger',
     intent: 'support',
-    design: 'underlined',
+    design: 'contrast',
     ...props,
     className,
     ...(shouldDisableLink && {

@@ -21,11 +21,11 @@ export const CloseButton = ({
     <RadixPopover.Close
       data-spark-component="popover-close-button"
       ref={ref}
-      className={cx('right-md top-md absolute', className)}
+      className={cx('right-lg top-md absolute', className)}
       asChild
       {...rest}
     >
-      <IconButton size="sm" intent="neutral" design="underlined" aria-label={ariaLabel}>
+      <IconButton size="sm" intent="neutral" design="ghost" aria-label={ariaLabel}>
         <Icon>
           <CloseSVG />
         </Icon>
