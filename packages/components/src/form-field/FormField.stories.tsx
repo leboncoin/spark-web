@@ -40,25 +40,28 @@ export const Default: StoryFn = () => (
 )
 
 export const Required: StoryFn = () => (
-  <FormField name="password" isRequired>
-    <FormField.Label>Password</FormField.Label>
+  <div>
+    <p className="mb-xl">* Required fields</p>
+    <FormField name="password" isRequired>
+      <FormField.Label>Password</FormField.Label>
 
-    <FormField.Control>
-      {({ id, name, description, isRequired }) => (
-        <input
-          type="password"
-          id={id}
-          name={name}
-          aria-describedby={description}
-          aria-required={isRequired}
-          required={isRequired}
-          className="border-md border-neutral p-md rounded-sm outline-hidden"
-        />
-      )}
-    </FormField.Control>
+      <FormField.Control>
+        {({ id, name, description, isRequired }) => (
+          <input
+            type="password"
+            id={id}
+            name={name}
+            aria-describedby={description}
+            aria-required={isRequired}
+            required={isRequired}
+            className="border-md border-neutral p-md rounded-sm outline-hidden"
+          />
+        )}
+      </FormField.Control>
 
-    <FormField.ErrorMessage>Password is required</FormField.ErrorMessage>
-  </FormField>
+      <FormField.ErrorMessage>Password is required</FormField.ErrorMessage>
+    </FormField>
+  </div>
 )
 
 export const CustomRequired: StoryFn = () => (

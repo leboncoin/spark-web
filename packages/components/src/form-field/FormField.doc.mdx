@@ -1,6 +1,7 @@
 import { Meta, Canvas } from '@storybook/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
 import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Callout } from '@docs/helpers/Callout'
 
 import { FormField } from '.'
 
@@ -53,6 +54,10 @@ Use `FormField.CharactersCount` to show users how many characters they have left
 ### Required
 
 Set `isRequired` prop to `true` to mark the input as required and display a required indicator. The default indicator is an asterisk `*`.
+
+<Callout kind="warning">
+  If your form has mandatory fields, you must include an explicit note at the top of the form, outside of the input fields, to inform users that certain fields are required.
+</Callout>
 
 <Canvas of={stories.Required} />
 

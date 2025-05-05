@@ -1,6 +1,7 @@
 import { Meta, Canvas } from '@storybook/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
 import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Callout } from '@docs/helpers/Callout'
 
 import { Input, InputGroup } from '.'
 
@@ -133,6 +134,10 @@ Use `FormField.Label` to add a label to the input.
 ### Required
 
 Use the `isRequired` prop of the `FormField` to indicate that the input is required.
+
+<Callout kind="warning">
+  If your form has mandatory fields, you must include an explicit note at the top of the form, outside of the input fields, to inform users that certain fields are required.
+</Callout>
 
 <Canvas of={stories.FieldRequired} />
 

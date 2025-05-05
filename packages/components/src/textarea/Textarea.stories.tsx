@@ -160,11 +160,14 @@ export const FieldHiddenLabel: StoryFn = _args => {
 
 export const FieldRequired: StoryFn = _args => {
   return (
-    <FormField name="title" isRequired>
-      <FormField.Label>Title</FormField.Label>
+    <div>
+      <p className="mb-xl">* Required fields</p>
+      <FormField name="title" isRequired>
+        <FormField.Label>Title</FormField.Label>
 
-      <Textarea rows={2} />
-    </FormField>
+        <Textarea rows={2} />
+      </FormField>
+    </div>
   )
 }
 
