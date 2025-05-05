@@ -12,14 +12,32 @@
     font-family: var(--font-sans) !important;
   }
 
-  html[data-theme="light"] {
+  :root[data-color-scheme='light'] {
+    color-scheme: light;
     --color-code-block: #f5f5f6;
     --canvas-stripe: #f7f7f7;
   }
 
-  html[data-theme="dark"] {
+  @media (prefers-color-scheme: light) {
+    :root:not([data-color-scheme]) {
+      color-scheme: light;
+      --color-code-block: #f5f5f6;
+      --canvas-stripe: #f7f7f7;
+    }
+  }
+
+  :root[data-color-scheme='dark'] {
+    color-scheme: dark;
     --color-code-block: #f6f8f9;
     --canvas-stripe: #1e1e1e;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-color-scheme]) {
+      color-scheme: dark;
+      --color-code-block: #f6f8f9;
+      --canvas-stripe: #1e1e1e;
+    }
   }
 
   .sbdocs-wrapper {
