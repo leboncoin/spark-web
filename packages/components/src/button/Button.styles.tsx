@@ -28,16 +28,16 @@ export const buttonStyles = cva(
        *
        * - `tinted`: Button will be filled but using a lighter color scheme.
        *
-       * - `underlined`: Button will look like a link. No borders, plain text.
+       * - `ghost`: Button will look like a link. No borders, plain text.
        *
        * - `contrast`: Button will be surface filled. No borders, plain text.
        *
        */
-      design: makeVariants<'design', ['filled', 'outlined', 'tinted', 'underlined', 'contrast']>({
+      design: makeVariants<'design', ['filled', 'outlined', 'tinted', 'ghost', 'contrast']>({
         filled: [],
         outlined: ['bg-transparent', 'border-sm', 'border-current'],
         tinted: [],
-        underlined: ['-mx-md px-md underline hover:bg-main/dim-5'],
+        ghost: ['-mx-md px-md underline hover:bg-main/dim-5'],
         contrast: ['bg-surface'],
       }),
       /**

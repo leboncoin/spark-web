@@ -38,7 +38,7 @@ const intents: ButtonProps['intent'][] = [
   'neutral',
   'surface',
 ]
-const designs: ButtonProps['design'][] = ['filled', 'outlined', 'tinted', 'contrast', 'underlined']
+const designs: ButtonProps['design'][] = ['filled', 'outlined', 'tinted', 'contrast', 'ghost']
 const shapes: ButtonProps['shape'][] = ['rounded', 'square', 'pill']
 
 export const Default: StoryObj = {
@@ -92,7 +92,7 @@ export const DesignAndIntentTable: StoryFn = _args => (
           >
             <td className="border-outline p-md bg-surface text-on-surface border">{intent}</td>
             {designs.map(design => (
-              <td key={`${intent}-${design}`} className={'border-outline p-md border'}>
+              <td key={`${intent}-${design}`} className={'border-outline p-lg border'}>
                 <Button intent={intent} design={design}>
                   Click me
                 </Button>

@@ -42,7 +42,7 @@ export const Usage: StoryFn = _args => {
 
           <AlertDialog.Footer className="gap-md flex justify-end">
             <AlertDialog.Cancel asChild>
-              <Button intent="neutral" design="underlined">
+              <Button intent="neutral" design="ghost">
                 Cancel
               </Button>
             </AlertDialog.Cancel>
@@ -81,7 +81,7 @@ export const Controlled: StoryFn = () => {
 
             <AlertDialog.Footer className="gap-md flex justify-end">
               <AlertDialog.Cancel asChild>
-                <Button intent="neutral" design="underlined">
+                <Button intent="neutral" design="ghost">
                   Cancel
                 </Button>
               </AlertDialog.Cancel>

@@ -38,7 +38,7 @@ export const FirstPageTrigger = ({
   const localProps = {
     'data-spark-component': 'pagination-first-page-trigger',
     intent: 'support',
-    design: 'underlined',
+    design: 'contrast',
     ...props,
     className,
     ...(shouldDisableLink && {

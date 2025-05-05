@@ -13,7 +13,7 @@ const Root = ({
   className,
   size = 'md',
   intent = 'neutral',
-  design = 'underlined',
+  design = 'ghost',
   children = <CloseSVG />,
   ref,
   ...rest
