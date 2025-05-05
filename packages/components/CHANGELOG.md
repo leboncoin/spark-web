@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.3.0](https://github.com/leboncoin/spark-web/compare/v10.2.9...v10.3.0) (2025-05-05)
+
+### Features
+
+- **components:** clear button on textarea ([6ee2313](https://github.com/leboncoin/spark-web/commit/6ee2313c2d08a8d1e6c28793e5887fb973b65e0b))
+
 ## [10.2.9](https://github.com/leboncoin/spark-web/compare/v10.2.8...v10.2.9) (2025-04-25)
 
 **Note:** Version bump only for package @spark-ui/components
