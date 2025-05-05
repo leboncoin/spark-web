@@ -27,7 +27,7 @@ export const Item = ({ children, value, className, href, ref, ...props }: ItemPr
   const localProps = {
     'data-spark-component': 'pagination-item',
     intent: 'support',
-    design: apiProps['aria-current'] === 'page' ? 'filled' : 'underlined',
+    design: apiProps['aria-current'] === 'page' ? 'filled' : 'contrast',
     className,
     ...props,
   }

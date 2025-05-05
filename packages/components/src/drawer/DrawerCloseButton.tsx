@@ -13,7 +13,7 @@ export const DrawerCloseButton = ({
   className,
   size = 'md',
   intent = 'neutral',
-  design = 'underlined',
+  design = 'ghost',
   children = <CloseSVG />,
   ref,
   ...rest

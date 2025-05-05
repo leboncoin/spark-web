@@ -37,13 +37,7 @@ const intents: IconButtonProps['intent'][] = [
   'neutral',
   'surface',
 ]
-const designs: IconButtonProps['design'][] = [
-  'filled',
-  'outlined',
-  'tinted',
-  'contrast',
-  'underlined',
-]
+const designs: IconButtonProps['design'][] = ['filled', 'outlined', 'tinted', 'contrast', 'ghost']
 const shapes: IconButtonProps['shape'][] = ['rounded', 'square', 'pill']
 
 const icon = (

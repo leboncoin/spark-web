@@ -87,7 +87,7 @@ export const snackbarItemVariantContent = cva(
   [
     'inline-grid items-center',
     'col-start-1 row-start-1',
-    'px-md', // applying padding on the parent prevents VoiceOver on Safari from reading snackbar content 🤷
+    'pl-md pr-lg', // applying padding on the parent prevents VoiceOver on Safari from reading snackbar content 🤷
   ],
   {
     variants: {
