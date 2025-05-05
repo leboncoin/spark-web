@@ -33,6 +33,7 @@ export default () => (
     <TextareaGroup.LeadingIcon />
     <Textarea />
     <TextareaGroup.TrailingIcon />
+    <TextareaGroup.ClearButton />
   </TextareaGroup>
 );
 ```
@@ -140,6 +141,10 @@ set the `state` prop of the `FormField` to `error` to indicate that the input is
       of: TextareaGroup.TrailingIcon,
       description:
         'Append a decorative icon inside the textarea (to the right). This element will be replaced by a status indicator whenever the textarea is in error/alert/success state.',
+    },
+    'TextareaGroup.ClearButton': {
+      of: TextareaGroup.ClearButton,
+      description: 'Add a clear button to the textarea group.',
     },
   }}
 />
