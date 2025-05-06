@@ -1,6 +1,6 @@
 {
   "name": "@spark-ui/cli-utils",
-  "version": "10.3.1",
+  "version": "10.3.2",
   "description": "Spark CLI utils",
   "publishConfig": {
     "access": "public"
