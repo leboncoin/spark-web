@@ -1,5 +1,8 @@
 export default () => `{
   "extends": "../../../tsconfig.json",
-  "include": ["src/**/*", "../../global.d.ts"]
+  "include": ["src/**/*", "../../global.d.ts"],
+  "compilerOptions": {
+    "incremental": false
+  }
 }
 `
