@@ -42,39 +42,6 @@ const ExampleContainer = ({ children, ...props }: Props) => {
   )
 }
 
-export const parameters = {
-  docs: {
-    container: ExampleContainer,
-  },
-  options: {
-    storySort: {
-      order: [
-        'Getting Started',
-        'Using Spark',
-        [
-          'Setup',
-          'Styling overview',
-          'Handling multiple themes',
-          'Migrating from Styled Components',
-          'Tailwind config viewer',
-          'FAQ',
-        ],
-        'Components',
-        'Utils',
-        'Hooks',
-        'Contributing',
-        '*',
-      ],
-    },
-  },
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/,
-    },
-  },
-}
-
 const preview = {
   globalTypes: {
     theme: {
@@ -94,43 +61,80 @@ const preview = {
   initialGlobals: {
     theme: 'light',
   },
+  parameters: {
+    docs: {
+      container: ExampleContainer,
+    },
+    options: {
+      storySort: {
+        order: [
+          'Getting Started',
+          'Using Spark',
+          [
+            'Setup',
+            'Styling overview',
+            'Handling multiple themes',
+            'Migrating from Styled Components',
+            'Tailwind config viewer',
+            'FAQ',
+          ],
+          'Components',
+          'Utils',
+          'Hooks',
+          'Contributing',
+          '*',
+        ],
+      },
+    },
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/,
+      },
+    },
+  },
+  decorators: [
+    // custom theme decorator, see https://yannbraga.dev/blog/multi-theme-decorator
+    (storyFn: () => ReactNode, { globals }: { globals: { theme: string } }) => {
+      const themeKey = globals.theme
+
+      const htmlElement = document.querySelector('html')
+      if (!htmlElement) return
+      htmlElement.setAttribute('data-theme', themeKey)
+
+      return storyFn()
+    },
+    (storyFn: () => ReactNode, { id, viewMode }: { id: string; viewMode: string }) => {
+      const params = new URLSearchParams(window.top?.location.search)
+      params.set('id', id)
+      params.delete('path')
+
+      return (
+        <div className="relative w-full">
+          {viewMode === 'docs' && (
+            <div className="-right-lg -top-xl absolute">
+              <a
+                href={`/iframe.html?${params.toString()}`}
+                target="_blank"
+                className="text-basic hover:text-basic-hovered focus:text-basic-hovered enabled:active:text-basic-hovered"
+              >
+                <Icon size="sm" label="expand">
+                  <ShareExpand />
+                </Icon>
+              </a>
+            </div>
+          )}
+          {storyFn()}
+        </div>
+      )
+    },
+  ],
+  globals: {
+    a11y: {
+      // Optional flag to prevent the automatic check
+      manual: true,
+    },
+  },
 }
 
 export default preview
-
-export const decorators = [
-  // custom theme decorator, see https://yannbraga.dev/blog/multi-theme-decorator
-  (storyFn: () => ReactNode, { globals }: { globals: { theme: string } }) => {
-    const themeKey = globals.theme
-
-    const htmlElement = document.querySelector('html')
-    if (!htmlElement) return
-    htmlElement.setAttribute('data-theme', themeKey)
-
-    return storyFn()
-  },
-  (storyFn: () => ReactNode, { id, viewMode }: { id: string; viewMode: string }) => {
-    const params = new URLSearchParams(window.top?.location.search)
-    params.set('id', id)
-    params.delete('path')
-
-    return (
-      <div className="relative w-full">
-        {viewMode === 'docs' && (
-          <div className="-right-lg -top-xl absolute">
-            <a
-              href={`/iframe.html?${params.toString()}`}
-              target="_blank"
-              className="text-basic hover:text-basic-hovered focus:text-basic-hovered enabled:active:text-basic-hovered"
-            >
-              <Icon size="sm" label="expand">
-                <ShareExpand />
-              </Icon>
-            </a>
-          </div>
-        )}
-        {storyFn()}
-      </div>
-    )
-  },
-]
