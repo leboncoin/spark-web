@@ -12,6 +12,10 @@ updates:
       zag-js:
         patterns:
           - '@zag-js/*'
+      react-aria:
+        patterns:
+          - '@react-aria/*'
+          - '@react-stately/*'
       testing:
         patterns:
           - '@testing-library/*'
@@ -35,6 +39,8 @@ updates:
           - '*'
         exclude-patterns:
           - '@zag-js/*'
+          - '@react-aria/*'
+          - '@react-stately/*'
           - '@testing-library/*'
           - '@testing-library'
           - 'vitest'
