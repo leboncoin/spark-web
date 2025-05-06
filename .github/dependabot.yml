@@ -33,6 +33,20 @@ updates:
       dependencies:
         patterns:
           - '*'
+        exclude-patterns:
+          - '@zag-js/*'
+          - '@testing-library/*'
+          - '@testing-library'
+          - 'vitest'
+          - '@vitest/*'
+          - '@vitest'
+          - '@playwright/*'
+          - '@playwright'
+          - '@storybook/*'
+          - '*storybook*'
+          - 'vite'
+          - '@vitejs/*'
+          - '*vite*'
         update-types: ['minor', 'patch']
       major:
         patterns:
