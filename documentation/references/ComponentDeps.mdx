@@ -1,0 +1,492 @@
+import { Meta } from '@storybook/blocks'
+import { Callout } from '@docs/helpers/Callout'
+
+<Meta title="References/Components Dependencies" />
+
+# Components Dependencies
+
+**Spark UI components are either:**
+- Fully custom (no dependencies)
+- Using one of the following UI libraries:
+    - Base UI
+    - Radix UI
+    - React-aria
+    - Zag JS
+
+export const componentDependencies = [
+  { 
+    name: 'accordion', 
+    uses: ['zagJS'],
+    libraries: {
+      baseUI: true,
+      radixUI: true,
+      reactAria: 'DisclosureGroup',
+      zagJS: true
+    }
+  },
+  { 
+    name: 'alert-dialog', 
+    uses: ['radixUI'],
+    libraries: {
+      baseUI: true,
+      radixUI: true,
+      reactAria: false,
+      zagJS: false
+    }
+  },
+  { 
+    name: 'avatar', 
+    uses: [],
+    libraries: {
+      baseUI: true,
+      radixUI: true,
+      reactAria: false,
+      zagJS: true
+    }
+  },
+  { 
+    name: 'badge', 
+    uses: [],
+    libraries: {
+      baseUI: false,
+      radixUI: false,
+      reactAria: false,
+      zagJS: false
+    }
+  },
+  { 
+    name: 'breadcrumb', 
+    uses: [],
+    libraries: {
+      baseUI: false,
+      radixUI: false,
+      reactAria: true,
+      zagJS: false
+    }
+  },
+  { 
+    name: 'button', 
+    uses: [],
+    libraries: {
+      baseUI: false,
+      radixUI: false,
+      reactAria: true,
+      zagJS: false
+    }
+  },
+  { 
+    name: 'carousel', 
+    uses: [],
+    libraries: {
+      baseUI: false,
+      radixUI: false,
+      reactAria: false,
+      zagJS: true
+    }
+  },
+  { 
+    name: 'checkbox', 
+    uses: ['radixUI'],
+    libraries: {
+      baseUI: true,
+      radixUI: true,
+      reactAria: true,
+      zagJS: true
+    }
+  },
+  { 
+    name: 'chip', 
+    uses: [],
+    libraries: {
+      baseUI: false,
+      radixUI: false,
+      reactAria: false,
+      zagJS: false
+    }
+  },
+  { 
+    name: 'collapsible', 
+    uses: ['zagJS'],
+    libraries: {
+      baseUI: true,
+      radixUI: true,
+      reactAria: 'Disclosure',
+      zagJS: true
+    }
+  },
+  { 
+    name: 'combobox', 
+    uses: [],
+    libraries: {
+      baseUI: false,
+      radixUI: false,
+      reactAria: 'lack many features',
+      zagJS: true
+    }
+  },
+  { 
+    name: 'dialog', 
+    uses: ['radixUI'],
+    libraries: {
+      baseUI: true,
+      radixUI: true,
+      reactAria: true,
+      zagJS: true
+    }
+  },
+  { 
+    name: 'divider', 
+    uses: ['radixUI'],
+    libraries: {
+      baseUI: 'Separator',
+      radixUI: 'Separator',
+      reactAria: 'useSeparator',
+      zagJS: false
+    }
+  },
+  { 
+    name: 'drawer', 
+    uses: ['radixUI'],
+    libraries: {
+      baseUI: 'Dialog',
+      radixUI: 'Dialog',
+      reactAria: 'Dialog',
+      zagJS: 'Dialog'
+    }
+  },
+  { 
+    name: 'dropdown', 
+    uses: [],
+    libraries: {
+      baseUI: 'Select',
+      radixUI: 'Select',
+      reactAria: false,
+      zagJS: 'Select'
+    }
+  },
+  { 
+    name: 'form-field', 
+    uses: [],
+    libraries: {
+      baseUI: 'Field',
+      radixUI: false,
+      reactAria: false,
+      zagJS: false
+    }
+  },
+  { 
+    name: 'icon', 
+    uses: [],
+    libraries: {
+      baseUI: false,
+      radixUI: false,
+      reactAria: false,
+      zagJS: false
+    }
+  },
+  { 
+    name: 'icon-button', 
+    uses: [],
+    libraries: {
+      baseUI: false,
+      radixUI: false,
+      reactAria: false,
+      zagJS: false
+    }
+  },
+  { 
+    name: 'input', 
+    uses: [],
+    libraries: {
+      baseUI: 'No Input Group',
+      radixUI: false,
+      reactAria: 'TextField',
+      zagJS: false
+    }
+  },
+  { 
+    name: 'kbd', 
+    uses: [],
+    libraries: {
+      baseUI: false,
+      radixUI: false,
+      reactAria: false,
+      zagJS: false
+    }
+  },
+  { 
+    name: 'label', 
+    uses: ['radixUI'],
+    libraries: {
+      baseUI: false,
+      radixUI: true,
+      reactAria: false,
+      zagJS: false
+    }
+  },
+  { 
+    name: 'link-box', 
+    uses: [],
+    libraries: {
+      baseUI: false,
+      radixUI: false,
+      reactAria: false,
+      zagJS: false
+    }
+  },
+  { 
+    name: 'pagination', 
+    uses: ['zagJS'],
+    libraries: {
+      baseUI: false,
+      radixUI: false,
+      reactAria: false,
+      zagJS: true
+    }
+  },
+  { 
+    name: 'popover', 
+    uses: ['radixUI'],
+    libraries: {
+      baseUI: true,
+      radixUI: true,
+      reactAria: true,
+      zagJS: true
+    }
+  },
+  { 
+    name: 'portal', 
+    uses: ['radixUI'],
+    libraries: {
+      baseUI: false,
+      radixUI: true,
+      reactAria: 'PortalProvider',
+      zagJS: true
+    }
+  },
+  { 
+    name: 'progress', 
+    uses: ['radixUI'],
+    libraries: {
+      baseUI: true,
+      radixUI: true,
+      reactAria: 'ProgressBar',
+      zagJS: true
+    }
+  },
+  { 
+    name: 'progress-tracker', 
+    uses: [],
+    libraries: {
+      baseUI: false,
+      radixUI: false,
+      reactAria: false,
+      zagJS: 'Steps'
+    }
+  },
+  { 
+    name: 'radio-group', 
+    uses: ['radixUI'],
+    libraries: {
+      baseUI: true,
+      radixUI: true,
+      reactAria: true,
+      zagJS: true
+    }
+  },
+  { 
+    name: 'rating', 
+    uses: [],
+    libraries: {
+      baseUI: false,
+      radixUI: false,
+      reactAria: false,
+      zagJS: true
+    }
+  },
+  { 
+    name: 'scrolling-list', 
+    uses: [],
+    libraries: {
+      baseUI: false,
+      radixUI: false,
+      reactAria: false,
+      zagJS: false
+    }
+  },
+  { 
+    name: 'select (native)', 
+    uses: [],
+    libraries: {
+      baseUI: false,
+      radixUI: false,
+      reactAria: false,
+      zagJS: false
+    }
+  },
+  { 
+    name: 'skeleton', 
+    uses: [],
+    libraries: {
+      baseUI: false,
+      radixUI: false,
+      reactAria: false,
+      zagJS: false
+    }
+  },
+  { 
+    name: 'slider', 
+    uses: ['radixUI'],
+    libraries: {
+      baseUI: true,
+      radixUI: true,
+      reactAria: true,
+      zagJS: 'Slider + RangeSlider'
+    }
+  },
+  { 
+    name: 'slot', 
+    uses: ['radixUI'],
+    libraries: {
+      baseUI: 'replaced with render props',
+      radixUI: true,
+      reactAria: false,
+      zagJS: false
+    }
+  },
+  { 
+    name: 'snackbar', 
+    uses: ['reactAria'],
+    libraries: {
+      baseUI: 'Toast',
+      radixUI: 'Toast',
+      reactAria: 'Toast',
+      zagJS: 'Toast'
+    }
+  },
+  { 
+    name: 'spinner', 
+    uses: [],
+    libraries: {
+      baseUI: false,
+      radixUI: false,
+      reactAria: false,
+      zagJS: false
+    }
+  },
+  { 
+    name: 'stepper', 
+    uses: ['reactAria'],
+    libraries: {
+      baseUI: 'NumberField',
+      radixUI: false,
+      reactAria: 'NumberField',
+      zagJS: 'Number Input'
+    }
+  },
+  { 
+    name: 'switch', 
+    uses: ['radixUI'],
+    libraries: {
+      baseUI: true,
+      radixUI: true,
+      reactAria: true,
+      zagJS: true
+    }
+  },
+  { 
+    name: 'tabs', 
+    uses: ['radixUI'],
+    libraries: {
+      baseUI: true,
+      radixUI: true,
+      reactAria: true,
+      zagJS: true
+    }
+  },
+  { 
+    name: 'tag', 
+    uses: [],
+    libraries: {
+      baseUI: false,
+      radixUI: false,
+      reactAria: false,
+      zagJS: false
+    }
+  },
+  { 
+    name: 'text-link', 
+    uses: [],
+    libraries: {
+      baseUI: false,
+      radixUI: false,
+      reactAria: 'Link',
+      zagJS: false
+    }
+  },
+  { 
+    name: 'textarea', 
+    uses: [],
+    libraries: {
+      baseUI: false,
+      radixUI: false,
+      reactAria: false,
+      zagJS: false
+    }
+  },
+  { 
+    name: 'visually-hidden', 
+    uses: [],
+    libraries: {
+      baseUI: false,
+      radixUI: true,
+      reactAria: true,
+      zagJS: null
+    }
+  }
+];
+
+<div class="overflow-x-auto sb-unstyled">
+  <table class="w-full border-collapse">
+    <thead>
+      <tr class="bg-neutral-container">
+        <th class="border border-outline p-md text-left">Components</th>
+        <th class="border border-outline p-md text-left">Base UI</th>
+        <th class="border border-outline p-md text-left">Radix UI</th>
+        <th class="border border-outline p-md text-left">React-aria</th>
+        <th class="border border-outline p-md text-left">Zag JS</th>
+      </tr>
+    </thead>
+    <tbody>
+      {componentDependencies.map((component) => (
+        <tr key={component.name}>
+          <td class="border border-outline p-md ">{component.name}</td>
+          <td class={"border border-outline p-md " + (component.uses.includes('baseUI') ? 'bg-success-container text-on-success-container' : '')}>
+            <span>
+                {component.uses.includes('baseUI') ? '✅ Used by Spark': component.libraries.baseUI ? '🙋‍♂️ Available' : '🔴'}
+                {typeof component.libraries.baseUI === 'string' && ` (${component.libraries.baseUI})`}
+            </span>
+          </td>
+          <td class={"border border-outline p-md " + (component.uses.includes('radixUI') ? 'bg-success-container text-on-success-container' : '')}>
+            <span>
+                {component.uses.includes('radixUI') ? '✅ Used by Spark':component.libraries.radixUI ? '🙋‍♂️ Available' : '🔴'}
+                {typeof component.libraries.radixUI === 'string' && ` (${component.libraries.radixUI})`}
+            </span>
+          </td>
+          <td class={"border border-outline p-md " + (component.uses.includes('reactAria') ? 'bg-success-container text-on-success-container' : '')}>
+            <span>
+                {component.uses.includes('reactAria') ? '✅ Used by Spark':component.libraries.reactAria ? '🙋‍♂️ Available' : '🔴'}
+                {typeof component.libraries.reactAria === 'string' && ` (${component.libraries.reactAria})`}
+            </span>
+          </td>
+          <td class={"border border-outline p-md " + (component.uses.includes('zagJS') ? 'bg-success-container text-on-success-container' : '')}>
+            <span>
+                {component.uses.includes('zagJS') ? '✅ Used by Spark':component.libraries.zagJS ? '🙋‍♂️ Available' : '🔴'}
+                {typeof component.libraries.zagJS === 'string' && ` (${component.libraries.zagJS})`}
+            </span>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
