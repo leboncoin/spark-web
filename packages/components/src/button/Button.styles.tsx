@@ -13,7 +13,7 @@ export const buttonStyles = cva(
   [
     'u-shadow-border-transition',
     'box-border inline-flex items-center justify-center gap-md whitespace-nowrap',
-    'px-lg',
+    'default:px-lg',
     'text-body-1 font-bold',
     'focus-visible:u-outline',
   ],
@@ -37,7 +37,7 @@ export const buttonStyles = cva(
         filled: [],
         outlined: ['bg-transparent', 'border-sm', 'border-current'],
         tinted: [],
-        ghost: [],
+        ghost: ['-mx-md px-md underline hover:bg-main/dim-5'],
         contrast: ['bg-surface'],
       }),
       /**
