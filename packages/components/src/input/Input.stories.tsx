@@ -427,11 +427,14 @@ export const FieldCharactersCount: StoryFn = _args => {
       <Input value={value} onChange={handleChange} maxLength={MAX_LENGTH} />
 
       <div className="gap-md flex justify-between">
-        <FormField.HelperMessage>
-          Type the text but take into account the max length
-        </FormField.HelperMessage>
-
-        <FormField.CharactersCount value={value} maxLength={MAX_LENGTH} />
+        <FormField.CharactersCount
+          value={value}
+          maxLength={MAX_LENGTH}
+          description={`You can enter up to ${MAX_LENGTH} characters`}
+          liveAnnouncement={({ remainingChars }) =>
+            `You have ${remainingChars} characters remaining`
+          }
+        />
       </div>
     </FormField>
   )

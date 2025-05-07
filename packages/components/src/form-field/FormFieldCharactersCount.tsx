@@ -1,7 +1,17 @@
 import { cx } from 'class-variance-authority'
-import { ComponentPropsWithoutRef, Ref } from 'react'
+import { ComponentPropsWithoutRef, Ref, useEffect, useState } from 'react'
+
+import { FormFieldMessage } from './FormFieldMessage'
 
 export type FormFieldCharactersCountProps = ComponentPropsWithoutRef<'span'> & {
+  /**
+   * This description is for the screen reader, read when the input is focused.
+   */
+  description?: string
+  /**
+   * The live announcement is for the screen read after a delay once the input value changes.
+   */
+  liveAnnouncement?: ({ remainingChars }: { remainingChars: number }) => string
   /**
    * Current value for the input this component belongs to.
    */
@@ -17,19 +27,44 @@ export const FormFieldCharactersCount = ({
   className,
   value = '',
   maxLength,
+  description,
+  liveAnnouncement,
   ref,
   ...others
 }: FormFieldCharactersCountProps) => {
-  const displayValue = `${value.length}/${maxLength}`
+  const [throttledValue, setThrottledValue] = useState(value)
+
+  /**
+   * The value is throttled to avoid spamming the aria-live region (and consequently the screen reader).
+   */
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setThrottledValue(value)
+    }, 1000)
+
+    return () => clearTimeout(timeoutId)
+  }, [value])
 
   return (
-    <span
-      ref={ref}
-      data-spark-component="form-field-characters-count"
-      className={cx(className, 'text-caption', 'text-neutral')}
-      {...others}
-    >
-      {displayValue}
+    <span className="ml-auto self-end">
+      {description && (
+        <FormFieldMessage className="default:sr-only">{description}</FormFieldMessage>
+      )}
+      <span
+        ref={ref}
+        aria-hidden
+        data-spark-component="form-field-characters-count"
+        className={cx(className, 'text-caption', 'text-neutral')}
+        {...others}
+      >
+        {`${value.length}/${maxLength}`}
+      </span>
+
+      {liveAnnouncement && (
+        <span className="sr-only" aria-live="polite">
+          {liveAnnouncement({ remainingChars: maxLength - throttledValue.length })}
+        </span>
+      )}
     </span>
   )
 }

@@ -161,7 +161,7 @@ export const State: StoryFn = () => (
   </div>
 )
 
-export const CharactersCount: StoryFn = _args => {
+export const CharactersCount: StoryFn = () => {
   const MAX_LENGTH = 90
   const [value, setValue] = useState('')
 
@@ -171,7 +171,7 @@ export const CharactersCount: StoryFn = _args => {
 
   return (
     <FormField name="input-with-a-characters-count">
-      <FormField.Label>Input with a characters count</FormField.Label>
+      <FormField.Label>Email</FormField.Label>
 
       <FormField.Control>
         {({ id, name, description }) => (
@@ -189,11 +189,14 @@ export const CharactersCount: StoryFn = _args => {
       </FormField.Control>
 
       <div className="gap-md flex justify-between">
-        <FormField.HelperMessage>
-          Type the text but take into account the max length
-        </FormField.HelperMessage>
-
-        <FormField.CharactersCount value={value} maxLength={MAX_LENGTH} />
+        <FormField.CharactersCount
+          value={value}
+          maxLength={MAX_LENGTH}
+          description={`You can enter up to ${MAX_LENGTH} characters`}
+          liveAnnouncement={({ remainingChars }) =>
+            `You have ${remainingChars} characters remaining`
+          }
+        />
       </div>
     </FormField>
   )

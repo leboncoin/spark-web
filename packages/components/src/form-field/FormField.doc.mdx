@@ -49,6 +49,14 @@ export default () => (
 
 Use `FormField.CharactersCount` to show users how many characters they have left. Can be used in combination with all types of text inputs.
 
+<Callout kind="warning" className="sb-unstyled">
+  Don't forget to pass both `description` and `liveAnnouncement` props to the `FormField.CharactersCount` component to make it compatible with screen readers:
+  <ul className="pl-3xl">
+    <li className='list-disc'>`description` is read when the focus is on the input.</li>
+    <li className='list-disc'>`liveAnnouncement` is read when the user types (after a delay).</li>
+  </ul>
+</Callout>
+
 <Canvas of={stories.CharactersCount} />
 
 ### Required

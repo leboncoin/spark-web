@@ -208,7 +208,14 @@ export const FieldCharactersCount: StoryFn = () => {
           <FormField.ErrorMessage>The description is invalid</FormField.ErrorMessage>
         </div>
 
-        <FormField.CharactersCount value={value} maxLength={maxLength} />
+        <FormField.CharactersCount
+          value={value}
+          maxLength={maxLength}
+          description={`You can enter up to ${maxLength} characters`}
+          liveAnnouncement={({ remainingChars }) =>
+            `You have ${remainingChars} characters remaining`
+          }
+        />
       </div>
     </FormField>
   )
