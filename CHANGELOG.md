@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.4.0](https://github.com/leboncoin/spark-web/compare/v10.3.6...v10.4.0) (2025-05-07)
+
+### Features
+
+- **components:** formfield chars count now support screen readers ([39efd0c](https://github.com/leboncoin/spark-web/commit/39efd0cbcc336fcaa78db8a7731669ce274a174a))
+
 ## [10.3.6](https://github.com/leboncoin/spark-web/compare/v10.3.5...v10.3.6) (2025-05-07)
 
 **Note:** Version bump only for package spark
