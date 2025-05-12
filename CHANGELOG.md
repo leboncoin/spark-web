@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.4.3](https://github.com/leboncoin/spark-web/compare/v10.4.2...v10.4.3) (2025-05-12)
+
+### Bug Fixes
+
+- **theme-utils:** css output was no longer named style.css ([3c62d60](https://github.com/leboncoin/spark-web/commit/3c62d6090ae4955b6b2987b48875ba3778dfa7a3))
+
 ## [10.4.2](https://github.com/leboncoin/spark-web/compare/v10.4.1...v10.4.2) (2025-05-12)
 
 **Note:** Version bump only for package spark
