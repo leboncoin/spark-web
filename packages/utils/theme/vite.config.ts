@@ -1,5 +1,5 @@
-import path from 'path'
 import terser from '@rollup/plugin-terser'
+import path from 'path'
 import dts from 'vite-plugin-dts'
 
 const pkg = require(path.resolve(__dirname, './package.json'))
@@ -17,6 +17,7 @@ export default async () => {
         entry: 'src/index.ts',
         formats: ['es', 'cjs'],
         fileName: 'index',
+        cssFileName: 'style', // https://vite.dev/guide/migration#customize-css-output-file-name-in-library-mode
       },
       rollupOptions: {
         external: [...deps, ...devDeps],
