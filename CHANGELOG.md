@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.5.0](https://github.com/leboncoin/spark-web/compare/v10.4.3...v10.5.0) (2025-05-12)
+
+### Features
+
+- **theme-utils:** prefers-color-scheme in theme ([723a1b1](https://github.com/leboncoin/spark-web/commit/723a1b1c9c07df0e89aee0bb730859381b5a7270))
+
 ## [10.4.3](https://github.com/leboncoin/spark-web/compare/v10.4.2...v10.4.3) (2025-05-12)
 
 ### Bug Fixes
