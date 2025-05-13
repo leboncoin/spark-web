@@ -1,6 +1,6 @@
-import { Collapsible as Root } from './Collapsible'
-import { Content } from './CollapsibleContent'
-import { Trigger } from './CollapsibleTrigger'
+import { Content } from './Content'
+import { Root } from './Root'
+import { Trigger } from './Trigger'
 
 export const Collapsible: typeof Root & {
   Trigger: typeof Trigger
@@ -13,7 +13,3 @@ export const Collapsible: typeof Root & {
 Collapsible.displayName = 'Collapsible'
 Trigger.displayName = 'Collapsible.Trigger'
 Content.displayName = 'Collapsible.Content'
-
-export { type CollapsibleProps } from './Collapsible'
-export { type CollapsibleContentProps } from './CollapsibleContent'
-export { type CollapsibleTriggerProps } from './CollapsibleTrigger'
