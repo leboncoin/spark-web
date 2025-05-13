@@ -44,15 +44,14 @@ const ExampleContainer = ({ children, ...props }: Props) => {
 
 const preview = {
   globalTypes: {
-    colorScheme: {
-      description: 'Set the color scheme',
-      defaultValue: 'system',
+    theme: {
+      name: 'Theme',
+      description: 'Set the color theme',
+      defaultValue: 'light',
       toolbar: {
-        title: 'Color Scheme',
         // show the theme name once selected in the toolbar
-        dynamicTitle: false,
+        dynamicTitle: true,
         items: [
-          { value: 'system', title: 'System' },
           { value: 'light', right: '⚪️', title: 'Light' },
           { value: 'dark', right: '⚫️', title: 'Dark' },
         ],
@@ -96,18 +95,12 @@ const preview = {
   },
   decorators: [
     // custom theme decorator, see https://yannbraga.dev/blog/multi-theme-decorator
-    (storyFn: () => ReactNode, { globals }: { globals: { colorScheme: string } }) => {
-      const colorSchemeKey = globals.colorScheme
+    (storyFn: () => ReactNode, { globals }: { globals: { theme: string } }) => {
+      const themeKey = globals.theme
 
       const htmlElement = document.querySelector('html')
-
       if (!htmlElement) return
-
-      if (colorSchemeKey === 'system') {
-        htmlElement.removeAttribute('data-color-scheme')
-      } else {
-        htmlElement.setAttribute('data-color-scheme', colorSchemeKey)
-      }
+      htmlElement.setAttribute('data-theme', themeKey)
 
       return storyFn()
     },
