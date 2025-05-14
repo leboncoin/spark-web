@@ -32,6 +32,7 @@ const IncrementButton = ({
         className={className}
         aria-label={buttonProps['aria-label'] as string}
         {...buttonProps}
+        disabled={rest.disabled || buttonProps.disabled}
       >
         {children || (
           <Icon>
