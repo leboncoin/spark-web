@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.5.4](https://github.com/leboncoin/spark-web/compare/v10.5.3...v10.5.4) (2025-05-15)
+
+### Bug Fixes
+
+- **components:** forward props to ComboboxItem ([11c879b](https://github.com/leboncoin/spark-web/commit/11c879b827c515381b70b7a2746106a501a83972))
+
 ## [10.5.3](https://github.com/leboncoin/spark-web/compare/v10.5.2...v10.5.3) (2025-05-15)
 
 **Note:** Version bump only for package spark
