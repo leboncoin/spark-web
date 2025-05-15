@@ -62,6 +62,7 @@ const ItemContent = ({
   value,
   children,
   ref: forwardedRef,
+  ...rest
 }: ItemProps) => {
   const ctx = useComboboxContext()
   const itemCtx = useComboboxItemContext()
@@ -91,6 +92,7 @@ const ItemContent = ({
       )}
       key={value}
       {...downshiftItemProps}
+      {...rest}
       aria-selected={itemCtx.isSelected}
       aria-labelledby={itemCtx.textId}
     >
