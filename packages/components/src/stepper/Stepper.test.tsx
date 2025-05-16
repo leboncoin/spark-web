@@ -317,9 +317,7 @@ describe('Stepper', () => {
       expect(input).toHaveValue('10')
     })
 
-    it('should set value to max if value is undefined and user clicks decrement', async () => {
-      const user = userEvent.setup()
-
+    it('should disable decrement button if value is empty and minValue is >= 0', () => {
       render(
         <Stepper {...defaultProps} defaultValue={undefined} minValue={0} maxValue={10}>
           <Stepper.DecrementButton aria-label="Decrement" />
@@ -328,10 +326,19 @@ describe('Stepper', () => {
         </Stepper>
       )
 
-      const input = screen.getByRole('textbox')
-      await user.click(screen.getByLabelText('Decrement'))
+      expect(screen.getByLabelText('Decrement')).toBeDisabled()
+    })
 
-      expect(input).toHaveValue('10')
+    it('should disable increment button if value is empty and maxValue is <= 0', () => {
+      render(
+        <Stepper {...defaultProps} defaultValue={undefined} maxValue={0}>
+          <Stepper.DecrementButton aria-label="Decrement" />
+          <Stepper.Input />
+          <Stepper.IncrementButton aria-label="Increment" />
+        </Stepper>
+      )
+
+      expect(screen.getByLabelText('Increment')).toBeDisabled()
     })
 
     it('should set value to min if value is undefined and user clicks increment', async () => {
