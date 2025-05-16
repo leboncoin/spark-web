@@ -2,20 +2,29 @@ import type { AriaButtonOptions } from '@react-aria/button'
 import type { NumberFieldAria } from '@react-aria/numberfield'
 import type { NumberFieldStateOptions } from '@react-stately/numberfield'
 import type { AriaNumberFieldProps } from '@react-types/numberfield'
+import type { Ref, RefObject } from 'react'
+
 import type { IconButtonProps } from '../icon-button'
 import type { InputGroupProps, InputProps } from '../input'
-import type { Ref, RefObject } from 'react'
 
 /**
  * As we're using React Spectrum library to build this component, we also want
  * to build our typing uppon theirs.
  * Still, we have to adapt it to avoid exposing useless props.
  */
-
-export type StepperButtonProps = Omit<IconButtonProps, 'disabled'> &
+export type StepperButtonProps = Omit<
+  IconButtonProps,
+  'shape' | 'size' | 'disabled' | 'asChild' | 'isLoading' | 'loadingLabel'
+> &
   Omit<
     AriaButtonOptions<'button'>,
-    'elementType' | 'href' | 'target' | 'isDisabled' | 'excludeFromTabOrder' | 'aria-label'
+    | 'elementType'
+    | 'href'
+    | 'target'
+    | 'isDisabled'
+    | 'excludeFromTabOrder'
+    | 'aria-label'
+    | 'preventFocusOnPress'
   > & {
     disabled?: boolean
     ref?: Ref<HTMLButtonElement>
@@ -46,7 +55,8 @@ type SpectrumNumberFieldPropsFilter =
 
 export interface UseStepperArgs
   extends Omit<
-    Omit<NumberFieldStateOptions, 'locale'> & AriaNumberFieldProps,
+    Omit<NumberFieldStateOptions, 'locale'> &
+      Omit<AriaNumberFieldProps, 'incrementAriaLabel' | 'decrementAriaLabel'>,
     SpectrumNumberFieldPropsFilter
   > {
   inputRef: RefObject<HTMLInputElement | null>
@@ -75,13 +85,13 @@ export type UseStepperReturn = Pick<
 >
 
 export type StepperProps = Omit<
-  Omit<UseStepperArgs, 'inputRef' | 'aria-label'> & InputGroupProps,
+  Omit<UseStepperArgs, 'inputRef' | 'aria-label'> & Omit<InputGroupProps, 'onClear'>,
   'onChange'
 > & {
   onValueChange?: (e: number) => void
   ref?: Ref<HTMLDivElement>
 }
 
-export type StepperInputProps = InputProps & {
+export type StepperInputProps = Omit<InputProps, 'asChild'> & {
   ref?: Ref<HTMLInputElement>
 }
