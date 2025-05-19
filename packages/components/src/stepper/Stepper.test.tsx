@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { ArrowHorizontalUp } from '@spark-ui/icons/ArrowHorizontalUp'
 import { act, fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
@@ -10,8 +11,6 @@ import { Stepper } from '.'
 const defaultProps = {
   defaultValue: 0,
   'aria-label': 'Stepper',
-  incrementAriaLabel: 'Increment',
-  decrementAriaLabel: 'Decrement',
   onValueChange: vi.fn(),
 }
 
@@ -243,7 +242,7 @@ describe('Stepper', () => {
 
     render(
       <Stepper {...defaultProps} defaultValue={8}>
-        <Stepper.IncrementButton aria-label="Custom increment" asChild>
+        <Stepper.IncrementButton aria-label="Custom increment">
           <Icon>
             <ArrowHorizontalUp />
           </Icon>

@@ -14,8 +14,6 @@ export const Stepper = ({
   formatOptions,
   minValue,
   maxValue,
-  incrementAriaLabel,
-  decrementAriaLabel,
   ref: forwardedRef,
   ...stepperProps
 }: PropsWithChildren<StepperProps>) => {
@@ -29,13 +27,17 @@ export const Stepper = ({
   } = useStepper({
     ...{
       ...stepperProps,
+      /**
+       * To enable the possibility to init the stepper with empty (undefined) value,
+       * we need to force the empty value to NaN.
+       * Cf. https://github.com/adobe/react-spectrum/issues/5524
+       */
+      ...('value' in stepperProps && { value: stepperProps.value ?? NaN }),
       onChange: stepperProps.onValueChange,
     },
     formatOptions,
     minValue,
     maxValue,
-    incrementAriaLabel,
-    decrementAriaLabel,
     inputRef,
   })
 
