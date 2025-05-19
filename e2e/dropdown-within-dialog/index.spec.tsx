@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test'
 import { BASE_URL } from '../constant'
 
 test('dropdown within a dialog', async ({ page }) => {
-  await page.goto(`${BASE_URL}/dropdown-within-dialog`)
+  await page.goto(`${BASE_URL}/dropdown-within-dialog?variant=default`)
 
   const dialogTrigger = page.getByRole('button', { name: 'Create account' })
   const dropdown = page.getByRole('combobox', { name: 'books' })

@@ -18,7 +18,7 @@
     "test:run": "vitest run",
     "test:coverage": "rm -rf ./dist/coverage && vitest run --coverage --coverage.provider=v8",
     "test:coverage:open": "npx open-cli ./dist/coverage/index.html",
-    "test:e2e": "npx playwright install && npx playwright install-deps && npx playwright test -gv 'should not have any accessibility issues'",
+    "test:e2e": "npx playwright install && npx playwright test -gv 'should not have any accessibility issues'",
     "test:e2e:visual": "npx playwright install && npx playwright test --ui",
     "test:a11y": "npx playwright install && npx playwright test -g 'should not have any accessibility issues'",
     "typecheck": "tsc --noEmit",

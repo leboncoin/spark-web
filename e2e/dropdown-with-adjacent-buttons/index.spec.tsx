@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test'
 import { BASE_URL } from '../constant'
 
 test('dropdown with adjacent buttons', async ({ page }) => {
-  await page.goto(`${BASE_URL}/dropdown-with-adjacent-buttons`)
+  await page.goto(`${BASE_URL}/dropdown-with-adjacent-buttons?variant=default`)
 
   const dropdown = page.getByRole('combobox', { name: 'Book' })
 

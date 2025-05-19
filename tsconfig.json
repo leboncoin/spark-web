@@ -17,6 +17,7 @@
   },
   "include": [
     "vitest.setup.ts",
+    "playwright.config.ts",
     "global.d.ts",
     "packages/**/*.ts",
     "packages/**/*.tsx",
