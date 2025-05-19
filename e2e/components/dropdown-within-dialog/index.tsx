@@ -1,10 +1,10 @@
 import { Button } from '@spark-ui/components/button'
-import { Dropdown } from '@spark-ui/components/dropdown'
 import { Dialog } from '@spark-ui/components/dialog'
+import { Dropdown } from '@spark-ui/components/dropdown'
 import { FormField } from '@spark-ui/components/form-field'
 import React from 'react'
 
-export function DropdownWithinDialog() {
+export const DropdownWithinDialog = () => {
   const [open, setOpen] = React.useState(false)
   const [buttonText, setButtonText] = React.useState('hello')
 

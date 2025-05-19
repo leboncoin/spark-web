@@ -14,10 +14,17 @@ import { buildComponentReport, buildGlobalReport } from './utils'
 const components = Object.keys(a11yComponents) as A11yComponentsKey[]
 
 test.describe('Spark UI accessibility', () => {
+  test.describe.configure({ mode: 'default' })
+
   components.forEach(component => {
     test(`${component} should not have any accessibility issues`, async ({ page }, testInfo) => {
+      // Navigate to the component page
       await page.goto(`${BASE_URL}/a11y/${component}`)
 
+      // Wait for the page to be fully loaded
+      await page.waitForLoadState('networkidle')
+
+      // Run accessibility tests
       const results = await new AxeBuilder({ page }).options({ ...AxeOptions }).analyze()
 
       await buildComponentReport({

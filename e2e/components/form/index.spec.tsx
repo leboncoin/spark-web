@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-import { BASE_URL } from '../constant'
+import { BASE_URL } from '../../constant'
 
 const implementations = [
   {

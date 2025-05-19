@@ -1,6 +1,6 @@
 {
-  "@spark-ui/collapsible": {
-    "timestamp": "2024-11-06T15:04:52.592Z",
+  "@spark-ui/components/collapsible": {
+    "timestamp": "2025-05-19T12:44:26.996Z",
     "url": "http://localhost:3002/a11y/collapsible",
     "incomplete": [],
     "violations": []

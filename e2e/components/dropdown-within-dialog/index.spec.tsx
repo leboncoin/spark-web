@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-import { BASE_URL } from '../constant'
+import { BASE_URL } from '../../constant'
 
 test('dropdown within a dialog', async ({ page }) => {
   await page.goto(`${BASE_URL}/dropdown-within-dialog`)

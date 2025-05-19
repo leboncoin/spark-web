@@ -1,75 +1,8 @@
 {
   "@spark-ui/components/avatar": {
-    "timestamp": "2025-04-08T12:28:00.188Z",
+    "timestamp": "2025-05-19T12:44:31.602Z",
     "url": "http://localhost:3002/a11y/avatar",
-    "incomplete": [
-      {
-        "id": "aria-prohibited-attr",
-        "impact": "serious",
-        "tags": [
-          "cat.aria",
-          "wcag2a",
-          "wcag412",
-          "EN-301-549",
-          "EN-9.4.1.2"
-        ],
-        "description": "Ensure ARIA attributes are not prohibited for an element's role",
-        "help": "Elements must only use permitted ARIA attributes",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-prohibited-attr?application=playwright",
-        "nodes": [
-          {
-            "any": [],
-            "all": [],
-            "none": [
-              {
-                "id": "aria-prohibited-attr",
-                "data": {
-                  "role": null,
-                  "nodeName": "div",
-                  "messageKey": "noRoleSingular",
-                  "prohibited": [
-                    "aria-label"
-                  ]
-                },
-                "relatedNodes": [],
-                "impact": "serious",
-                "message": "aria-label attribute is not well supported on a div with no valid role attribute."
-              }
-            ],
-            "impact": "serious",
-            "html": "<div aria-label=\"John Doe\" title=\"John Doe\" class=\"group default:border-outline relative size-full overflow-hidden focus-visible:u-outline default:rounded-full\">",
-            "target": [
-              "div[aria-label=\"John Doe\"]"
-            ]
-          },
-          {
-            "any": [],
-            "all": [],
-            "none": [
-              {
-                "id": "aria-prohibited-attr",
-                "data": {
-                  "role": null,
-                  "nodeName": "div",
-                  "messageKey": "noRoleSingular",
-                  "prohibited": [
-                    "aria-label"
-                  ]
-                },
-                "relatedNodes": [],
-                "impact": "serious",
-                "message": "aria-label attribute is not well supported on a div with no valid role attribute."
-              }
-            ],
-            "impact": "serious",
-            "html": "<div aria-label=\"John Doe (Online)\" title=\"John Doe (Online)\" class=\"group default:border-outline relative size-full overflow-hidden focus-visible:u-outline default:rounded-full\">",
-            "target": [
-              "div[aria-label=\"John Doe (Online)\"]"
-            ]
-          }
-        ]
-      }
-    ],
+    "incomplete": [],
     "violations": []
   }
 }

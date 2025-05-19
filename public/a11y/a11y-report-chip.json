@@ -1,6 +1,6 @@
 {
-  "@spark-ui/chip": {
-    "timestamp": "2024-11-06T15:04:51.194Z",
+  "@spark-ui/components/chip": {
+    "timestamp": "2025-05-19T12:44:45.469Z",
     "url": "http://localhost:3002/a11y/chip",
     "incomplete": [],
     "violations": []

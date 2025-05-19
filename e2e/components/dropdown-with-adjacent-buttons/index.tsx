@@ -3,7 +3,7 @@ import { Dropdown } from '@spark-ui/components/dropdown'
 import { FormField } from '@spark-ui/components/form-field'
 import React from 'react'
 
-export function DropdownWithAdjacentButtons() {
+export const DropdownWithAdjacentButtons = () => {
   const [firstBtnText, setFirstBtnText] = React.useState('hello')
   const [secondBtnText, setSecondBtnText] = React.useState('there')
 
