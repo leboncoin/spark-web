@@ -271,6 +271,7 @@ export const CarouselImplementation = () => {
   } as const
 
   const [searchParams] = useSearchParams()
+
   const variant = (searchParams.get('variant') ?? 'default') as keyof typeof variants
   const Component = variants[variant]
 

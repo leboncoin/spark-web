@@ -1,7 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import { expect, test } from '@playwright/test'
 
-import { BASE_URL } from '../constant'
+import { BASE_URL } from '../../constant'
 
 /**
  * UATs (Access restricted to Spark team): https://docs.google.com/spreadsheets/d/1Lpp_3QO6WQn4TNLHgEahYG6dsQ9ozBx1xptFvxfws8Y/edit?usp=sharing

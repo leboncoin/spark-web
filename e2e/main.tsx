@@ -5,42 +5,42 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import { a11yRoutes } from './a11y/routes'
-import { CarouselImplementation } from './carousel'
-import { ComboboxWithinDialog } from './combobox-within-dialog'
-import { DropdownWithAdjacentButtons } from './dropdown-with-adjacent-buttons'
-import { DropdownWithinDialog } from './dropdown-within-dialog'
-import { DialogForm, DrawerForm } from './form'
-import { ScrollingListImplementation } from './scrolling-list'
+import { CarouselImplementation } from './components/carousel'
+import { ComboboxWithinDialog } from './components/combobox-within-dialog'
+import { DropdownWithAdjacentButtons } from './components/dropdown-with-adjacent-buttons'
+import { DropdownWithinDialog } from './components/dropdown-within-dialog'
+import { DialogForm, DrawerForm } from './components/form'
+import { ScrollingListImplementation } from './components/scrolling-list'
 
 const router = createBrowserRouter([
   ...a11yRoutes,
   {
     path: 'combobox-within-dialog',
-    element: <ComboboxWithinDialog />,
+    Component: ComboboxWithinDialog,
   },
   {
     path: 'dropdown-within-dialog',
-    element: <DropdownWithinDialog />,
+    Component: DropdownWithinDialog,
   },
   {
     path: 'dropdown-with-adjacent-buttons',
-    element: <DropdownWithAdjacentButtons />,
+    Component: DropdownWithAdjacentButtons,
   },
   {
     path: 'spark-form-within-dialog',
-    element: <DialogForm />,
+    Component: DialogForm,
   },
   {
     path: 'spark-form-within-drawer',
-    element: <DrawerForm />,
+    Component: DrawerForm,
   },
   {
     path: 'carousel',
-    element: <CarouselImplementation />,
+    Component: CarouselImplementation,
   },
   {
     path: 'scrolling-list',
-    element: <ScrollingListImplementation />,
+    Component: ScrollingListImplementation,
   },
 ])
 

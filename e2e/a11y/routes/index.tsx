@@ -6,6 +6,6 @@ import { a11yElements } from './elements'
 export const a11yRoutes: RouteObject[] = (Object.keys(a11yComponents) as A11yComponentsKey[]).map(
   componentName => ({
     path: `a11y/${componentName}`,
-    element: a11yElements[componentName],
+    Component: a11yElements[componentName],
   })
 )

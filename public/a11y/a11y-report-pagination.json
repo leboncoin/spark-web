@@ -1,6 +1,6 @@
 {
-  "@spark-ui/pagination": {
-    "timestamp": "2024-11-06T15:04:43.897Z",
+  "@spark-ui/components/pagination": {
+    "timestamp": "2025-05-19T12:44:42.793Z",
     "url": "http://localhost:3002/a11y/pagination",
     "incomplete": [],
     "violations": []

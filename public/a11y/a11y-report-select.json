@@ -1,6 +1,6 @@
 {
-  "@spark-ui/select": {
-    "timestamp": "2024-11-06T15:04:53.278Z",
+  "@spark-ui/components/select": {
+    "timestamp": "2025-05-19T12:44:33.827Z",
     "url": "http://localhost:3002/a11y/select",
     "incomplete": [],
     "violations": []

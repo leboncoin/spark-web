@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-import { BASE_URL } from '../constant'
+import { BASE_URL } from '../../constant'
 
 test('combobox within a dialog', async ({ page }) => {
   await page.goto(`${BASE_URL}/combobox-within-dialog`)

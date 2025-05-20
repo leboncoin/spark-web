@@ -1,7 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import { expect, type Locator, test } from '@playwright/test'
 
-import { BASE_URL } from '../constant'
+import { BASE_URL } from '../../constant'
 
 async function isFullyVisibleInContainer(
   item: Locator | undefined,
@@ -31,6 +31,10 @@ async function isFullyVisibleInContainer(
 test.describe('Spark scrolling list', () => {
   test('should traverse the scrolling list', async ({ page }) => {
     await page.goto(`${BASE_URL}/scrolling-list?variant=default`)
+
+    // Wait for network to be idle and ensure the page is stable
+    await page.waitForLoadState('networkidle')
+    await page.waitForLoadState('domcontentloaded')
 
     const scrollingList = page.getByRole('list', { name: 'Popular products' })
     const items = await scrollingList.locator('[role="listitem"]').all()
@@ -90,6 +94,10 @@ test.describe('Spark scrolling list', () => {
   test('should loop using controls', async ({ page }) => {
     await page.goto(`${BASE_URL}/scrolling-list?variant=loop`)
 
+    // Wait for network to be idle and ensure the page is stable
+    await page.waitForLoadState('networkidle')
+    await page.waitForLoadState('domcontentloaded')
+
     const scrollingList = page.getByRole('list', { name: 'Popular products' })
     const items = await scrollingList.locator('[role="listitem"]').all()
     const prevButton = page.getByRole('button', { name: 'Previous items' })
@@ -126,6 +134,10 @@ test.describe('Spark scrolling list', () => {
 
   test('should hide controls when carousel has only one page', async ({ page }) => {
     await page.goto(`${BASE_URL}/scrolling-list?variant=singlePage`)
+
+    // Wait for network to be idle and ensure the page is stable
+    await page.waitForLoadState('networkidle')
+    await page.waitForLoadState('domcontentloaded')
 
     const scrollingList = page.getByRole('list', { name: 'Popular products' })
     const items = await scrollingList.locator('[role="listitem"]').all()

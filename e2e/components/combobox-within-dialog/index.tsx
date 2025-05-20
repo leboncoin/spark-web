@@ -4,7 +4,7 @@ import { Dialog } from '@spark-ui/components/dialog'
 import { FormField } from '@spark-ui/components/form-field'
 import React from 'react'
 
-export function ComboboxWithinDialog() {
+export const ComboboxWithinDialog = () => {
   const [open, setOpen] = React.useState(false)
   const [buttonText, setButtonText] = React.useState('hello')
 

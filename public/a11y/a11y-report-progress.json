@@ -1,6 +1,6 @@
 {
-  "@spark-ui/progress": {
-    "timestamp": "2024-11-06T15:04:47.237Z",
+  "@spark-ui/components/progress": {
+    "timestamp": "2025-05-19T12:44:49.540Z",
     "url": "http://localhost:3002/a11y/progress",
     "incomplete": [],
     "violations": []

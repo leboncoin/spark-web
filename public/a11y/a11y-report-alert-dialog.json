@@ -1,6 +1,6 @@
 {
-  "@spark-ui/alert-dialog": {
-    "timestamp": "2024-11-06T15:04:43.399Z",
+  "@spark-ui/components/alert-dialog": {
+    "timestamp": "2025-05-19T12:44:29.372Z",
     "url": "http://localhost:3002/a11y/alert-dialog",
     "incomplete": [
       {
@@ -27,7 +27,7 @@
                 "data": null,
                 "relatedNodes": [
                   {
-                    "html": "<span data-radix-focus-guard=\"\" tabindex=\"0\" style=\"outline: currentcolor; opacity: 0; position: fixed; pointer-events: none;\" data-aria-hidden=\"true\" aria-hidden=\"true\"></span>",
+                    "html": "<span data-radix-focus-guard=\"\" tabindex=\"0\" data-aria-hidden=\"true\" aria-hidden=\"true\" style=\"outline: none; opacity: 0; position: fixed; pointer-events: none;\"></span>",
                     "target": [
                       "span:nth-child(1)"
                     ]
@@ -39,7 +39,7 @@
             ],
             "none": [],
             "impact": "serious",
-            "html": "<span data-radix-focus-guard=\"\" tabindex=\"0\" style=\"outline: currentcolor; opacity: 0; position: fixed; pointer-events: none;\" data-aria-hidden=\"true\" aria-hidden=\"true\"></span>",
+            "html": "<span data-radix-focus-guard=\"\" tabindex=\"0\" data-aria-hidden=\"true\" aria-hidden=\"true\" style=\"outline: none; opacity: 0; position: fixed; pointer-events: none;\"></span>",
             "target": [
               "span:nth-child(1)"
             ]
@@ -52,7 +52,7 @@
                 "data": null,
                 "relatedNodes": [
                   {
-                    "html": "<span data-radix-focus-guard=\"\" tabindex=\"0\" style=\"outline: currentcolor; opacity: 0; position: fixed; pointer-events: none;\" data-aria-hidden=\"true\" aria-hidden=\"true\"></span>",
+                    "html": "<span data-radix-focus-guard=\"\" tabindex=\"0\" data-aria-hidden=\"true\" aria-hidden=\"true\" style=\"outline: none; opacity: 0; position: fixed; pointer-events: none;\"></span>",
                     "target": [
                       "span:nth-child(6)"
                     ]
@@ -64,7 +64,7 @@
             ],
             "none": [],
             "impact": "serious",
-            "html": "<span data-radix-focus-guard=\"\" tabindex=\"0\" style=\"outline: currentcolor; opacity: 0; position: fixed; pointer-events: none;\" data-aria-hidden=\"true\" aria-hidden=\"true\"></span>",
+            "html": "<span data-radix-focus-guard=\"\" tabindex=\"0\" data-aria-hidden=\"true\" aria-hidden=\"true\" style=\"outline: none; opacity: 0; position: fixed; pointer-events: none;\"></span>",
             "target": [
               "span:nth-child(6)"
             ]
@@ -92,16 +92,16 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "controlsWithinPopup",
-                  "needsReview": "aria-controls=\"radix-:r3:\""
+                  "needsReview": "aria-controls=\"radix-«r0»\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-:r3:\""
+                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-«r0»\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"alert-dialog-title\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap px-lg text-body-1 font-bold focus-visible:outline-none focus-visible:u-ring [&amp;:not(:focus-visible)]:ring-inset min-w-sz-44 h-sz-44 rounded-lg text-on-error bg-error hover:bg-error-hovered enabled:active:bg-error-hovered focus-visible:bg-error-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-:r3:\" data-state=\"open\">",
+            "html": "<button data-spark-component=\"alert-dialog-title\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer text-on-error bg-error hover:bg-error-hovered enabled:active:bg-error-hovered focus-visible:bg-error-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-«r0»\" data-state=\"open\">",
             "target": [
               "button[aria-haspopup=\"dialog\"]"
             ]

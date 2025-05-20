@@ -1,6 +1,6 @@
 {
-  "@spark-ui/breadcrumb": {
-    "timestamp": "2024-11-06T15:04:46.588Z",
+  "@spark-ui/components/breadcrumb": {
+    "timestamp": "2025-05-19T12:44:36.292Z",
     "url": "http://localhost:3002/a11y/breadcrumb",
     "incomplete": [
       {
