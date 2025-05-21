@@ -2,12 +2,14 @@ import { DocsContainer, DocsContainerProps } from '@storybook/blocks'
 import { Icon } from '@spark-ui/components/icon'
 import { ShareExpand } from '@spark-ui/icons/ShareExpand'
 import { WarningOutline } from '@spark-ui/icons/WarningOutline'
+import React, { ReactNode, useEffect, useState } from 'react'
 
 import '../src/tailwind.css'
 import './sb-theming.css'
 
 import { ToC } from '@docs/helpers/ToC'
-import { ReactNode, useEffect, useState } from 'react'
+
+import { ThemeProvider } from './ThemeProvider'
 
 interface Props extends DocsContainerProps {
   children: ReactNode
@@ -44,22 +46,36 @@ const ExampleContainer = ({ children, ...props }: Props) => {
 
 const preview = {
   globalTypes: {
-    theme: {
-      name: 'Theme',
-      description: 'Set the color theme',
-      defaultValue: 'light',
+    colorScheme: {
+      name: 'Color scheme',
+      description: 'Set the color scheme',
+      defaultValue: 'system',
       toolbar: {
-        // show the theme name once selected in the toolbar
         dynamicTitle: true,
         items: [
-          { value: 'light', right: '⚪️', title: 'Light' },
-          { value: 'dark', right: '⚫️', title: 'Dark' },
+          { value: 'system', right: '⚙️', title: 'System color scheme' },
+          { value: 'light', right: '⚪️', title: 'Light (forced)' },
+          { value: 'dark', right: '⚫️', title: 'Dark (forced)' },
+        ],
+      },
+    },
+    highContrast: {
+      name: 'a11y - High contrast',
+      description: 'Toggle high contrast',
+      defaultValue: 'system',
+      toolbar: {
+        dynamicTitle: true,
+        items: [
+          { value: 'system', right: '⚙️', title: 'System contrast' },
+          { value: 'false', title: 'Regular contrast (forced)' },
+          { value: 'true', title: 'High contrast (forced)' },
         ],
       },
     },
   },
   initialGlobals: {
-    theme: 'light',
+    colorScheme: 'system',
+    highContrast: 'system',
   },
   parameters: {
     docs: {
@@ -94,15 +110,16 @@ const preview = {
     },
   },
   decorators: [
-    // custom theme decorator, see https://yannbraga.dev/blog/multi-theme-decorator
-    (storyFn: () => ReactNode, { globals }: { globals: { theme: string } }) => {
-      const themeKey = globals.theme
-
-      const htmlElement = document.querySelector('html')
-      if (!htmlElement) return
-      htmlElement.setAttribute('data-theme', themeKey)
-
-      return storyFn()
+    (
+      storyFn: () => ReactNode,
+      { globals }: { globals: { colorScheme: string; highContrast: string } }
+    ) => {
+      const { colorScheme, highContrast } = globals
+      return (
+        <ThemeProvider colorScheme={colorScheme} highContrast={highContrast}>
+          {storyFn()}
+        </ThemeProvider>
+      )
     },
     (storyFn: () => ReactNode, { id, viewMode }: { id: string; viewMode: string }) => {
       const params = new URLSearchParams(window.top?.location.search)
