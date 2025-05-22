@@ -12,12 +12,14 @@
     font-family: var(--font-sans) !important;
   }
 
-  html[data-theme="light"] {
+  html[data-theme="light"],
+  html[data-theme="light-more-contrast"] {
     --color-code-block: #f5f5f6;
     --canvas-stripe: #f7f7f7;
   }
 
-  html[data-theme="dark"] {
+  html[data-theme="dark"],
+  html[data-theme="dark-more-contrast"] {
     --color-code-block: #f6f8f9;
     --canvas-stripe: #1e1e1e;
   }
@@ -36,10 +38,10 @@
     color: var(--color-on-background) !important;
   }
 
-  .sbdocs-wrapper #spark-doc-container > h2,
-  .sbdocs-wrapper #spark-doc-container > h3,
-  .sbdocs-wrapper #spark-doc-container > h4,
-  .sbdocs-wrapper #spark-doc-container > h5 {
+  .sbdocs-wrapper #spark-doc-container>h2,
+  .sbdocs-wrapper #spark-doc-container>h3,
+  .sbdocs-wrapper #spark-doc-container>h4,
+  .sbdocs-wrapper #spark-doc-container>h5 {
     color: var(--color-support) !important;
   }
 
@@ -52,13 +54,11 @@
   }
 
   .docs-story {
-    background: repeating-linear-gradient(
-      45deg,
-      var(--color-surface),
-      var(--color-surface) 5px,
-      var(--canvas-stripe) 5px,
-      var(--canvas-stripe) 10px
-    ) !important;
+    background: repeating-linear-gradient(45deg,
+        var(--color-surface),
+        var(--color-surface) 5px,
+        var(--canvas-stripe) 5px,
+        var(--canvas-stripe) 10px) !important;
   }
 
 
@@ -82,15 +82,15 @@
     width: 100%;
   }
 
-  #spark-doc-container > h1 {
+  #spark-doc-container>h1 {
     color: #ec5a13 !important;
     font-weight: 700 !important;
   }
 
-  #spark-doc-container > h2,
-  #spark-doc-container > h3,
-  #spark-doc-container > h4,
-  #spark-doc-container > h5 {
+  #spark-doc-container>h2,
+  #spark-doc-container>h3,
+  #spark-doc-container>h4,
+  #spark-doc-container>h5 {
     color: #094171 !important;
     font-weight: 700 !important;
   }

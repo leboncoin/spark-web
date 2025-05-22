@@ -1,7 +1,10 @@
 @import './keyframes.css';
 @import './custom-variants.css';
 @import './utilities.css';
+
 @import './dark-theme.css';
+@import './light-theme-more-contrast.css';
+@import './dark-theme-more-contrast.css';
 
 @theme {
   --breakpoint-*: initial;
