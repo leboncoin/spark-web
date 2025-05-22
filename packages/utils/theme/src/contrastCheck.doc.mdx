@@ -1,0 +1,73 @@
+import { Canvas, Meta } from '@storybook/addon-docs'
+import * as ContrastCheck from './contrastCheck.stories'
+
+<Meta of={ContrastCheck} />
+
+# Contrast check
+
+## Usage
+
+```typescript
+import { getThemeContrastReport, checkColorContrast } from '@spark-ui/theme-utils'
+```
+
+### getThemeContrastReport
+
+Use `getThemeContrastReport(theme)` to get a detailed report of the contrast ratio for each pair of colors in the theme.
+
+For exemple `main` colored background is supposed to have `onMain` colored text. The pair `main/onMain` must provide sufficient contrast ratio to pass [SC 1.4.3 - Contrast (Minimum) (Level AA)](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html).
+Same goes for every other color pair in a Spark theme.
+
+Each pair is tested for normal text size and larger text size, as they both have different contrast requirements.
+
+Score can be: `Failed`, `AA` or `AAA`.
+
+```typescript
+import { checkColorContrast } from '@spark-ui/theme-utils'
+
+const report = getThemeContrastReport(theme)
+```
+
+Report looks like this:
+
+```json
+// Exemple for the main color
+{
+  "main": {
+    "previewStyles": "bg-main text-on-main",
+    "small": {
+      "contrastRatio": "3.48",
+      "score": "Failed",
+      "textSize": "Small",
+      "colors": ["#EC5A13", "#FFFFFF"]
+    },
+    "large": {
+      "contrastRatio": "3.48",
+      "score": "Failed",
+      "textSize": "Small",
+      "colors": ["#EC5A13", "#FFFFFF"]
+    }
+  }
+  // other colors...
+}
+```
+
+### checkColorContrast
+
+Use `checkColorContrast` to compare two colors given a font-size.
+
+```typescript
+import { checkColorContrast } from '@spark-ui/theme-utils'
+
+const LARGE_FONT_SIZE = 24
+
+checkColorContrast('#EC5A13', '#FFFFFF', LARGE_FONT_SIZE) // { "contrastRatio": "3.48", "score": "Failed", "textSize": "Large", "colors": ["#EC5A13", "#FFFFFF"] }
+```
+
+## Spark theme contrasts
+
+This section displays card with all color schemes offered by Spark themes (default and dark).
+
+It can be used by Axe dev tools or Playwright for an a11y color check.
+
+<Canvas of={ContrastCheck.Default} />
