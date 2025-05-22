@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.6.0](https://github.com/leboncoin/spark-web/compare/v10.5.10...v10.6.0) (2025-05-22)
+
+### Features
+
+- **theme-utils:** high-contrast-mode ([cc937d5](https://github.com/leboncoin/spark-web/commit/cc937d5798bce86832bd6b1947d0d0787dd2f99d))
+
 ## [10.5.10](https://github.com/leboncoin/spark-web/compare/v10.5.9...v10.5.10) (2025-05-20)
 
 **Note:** Version bump only for package spark
