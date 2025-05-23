@@ -21,7 +21,7 @@ export const CloseButton = ({
     <RadixPopover.Close
       data-spark-component="popover-close-button"
       ref={ref}
-      className={cx('right-md top-md absolute', className)}
+      className={cx('right-lg top-md absolute', className)}
       asChild
       {...rest}
     >
