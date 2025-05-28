@@ -1,6 +1,6 @@
 {
   "name": "@spark-ui/components",
-  "version": "10.6.2",
+  "version": "10.6.3",
   "license": "MIT",
   "description": "Spark (Leboncoin design system) components.",
   "exports": {
@@ -49,9 +49,9 @@
     "@react-aria/toast": "^3.0.0-beta.18",
     "@react-stately/numberfield": "3.9.11",
     "@react-stately/toast": "^3.0.0-beta.7",
-    "@spark-ui/hooks": "^10.6.2",
-    "@spark-ui/icons": "^10.6.2",
-    "@spark-ui/internal-utils": "^10.6.2",
+    "@spark-ui/hooks": "^10.6.3",
+    "@spark-ui/icons": "^10.6.3",
+    "@spark-ui/internal-utils": "^10.6.3",
     "@zag-js/accordion": "1.13.1",
     "@zag-js/collapsible": "1.13.1",
     "@zag-js/pagination": "1.13.1",
