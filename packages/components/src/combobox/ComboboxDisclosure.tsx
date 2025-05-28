@@ -38,7 +38,7 @@ export const Disclosure = ({
   return (
     <IconButton
       ref={ref}
-      className={cx(className, 'mt-[calc((44px-32px)/2)]')}
+      className={cx(className, 'ml-sm mt-[calc((44px-32px)/2)]')}
       intent={intent}
       design={design}
       size={size}

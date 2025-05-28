@@ -59,6 +59,7 @@ export const Button = ({
   size = 'md',
   asChild,
   className,
+  underline = false,
   ref,
   ...others
 }: ButtonProps) => {
@@ -94,6 +95,7 @@ export const Button = ({
         intent,
         shape,
         size,
+        underline,
       })}
       disabled={!!disabled}
       aria-busy={isLoading}

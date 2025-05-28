@@ -32,7 +32,7 @@ export const NextTrigger = ({ children, className, href, ref, ...props }: NextTr
   const localProps = {
     'data-spark-component': 'pagination-next-trigger',
     intent: 'support',
-    design: 'ghost',
+    design: 'contrast',
     ...props,
     className,
     ...(shouldDisableLink && {
