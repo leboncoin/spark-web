@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.7.0](https://github.com/leboncoin/spark-web/compare/v10.6.8...v10.7.0) (2025-06-02)
+
+### Features
+
+- **components:** replaced button ghost design with underlined design ([0d1f03d](https://github.com/leboncoin/spark-web/commit/0d1f03d4dab59b21961cdcf8109e09e35f0730fe))
+- **components:** updated ghost button design ([325a4a6](https://github.com/leboncoin/spark-web/commit/325a4a6531bb2167796f8c3fca8763a071701a1e))
+
 ## [10.6.8](https://github.com/leboncoin/spark-web/compare/v10.6.7...v10.6.8) (2025-06-02)
 
 **Note:** Version bump only for package spark
