@@ -40,7 +40,7 @@ export const Usage: StoryFn = _args => {
             </AlertDialog.Description>
           </AlertDialog.Body>
 
-          <AlertDialog.Footer className="gap-md flex justify-end">
+          <AlertDialog.Footer className="gap-lg flex justify-end">
             <AlertDialog.Cancel asChild>
               <Button intent="neutral" design="ghost">
                 Cancel
@@ -79,7 +79,7 @@ export const Controlled: StoryFn = () => {
               Are you sure? You can not undo this action afterwards.
             </AlertDialog.Body>
 
-            <AlertDialog.Footer className="gap-md flex justify-end">
+            <AlertDialog.Footer className="gap-lg flex justify-end">
               <AlertDialog.Cancel asChild>
                 <Button intent="neutral" design="ghost">
                   Cancel

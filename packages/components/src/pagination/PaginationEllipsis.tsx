@@ -20,12 +20,7 @@ export const Ellipsis = ({ children, index, className, ref, ...rest }: EllipsisP
 
   return (
     <li>
-      <span
-        data-spark-component="pagination-ellipsis"
-        ref={ref}
-        className={cx('size-sz-44 flex items-center justify-center')}
-        {...mergedProps}
-      >
+      <span data-spark-component="pagination-ellipsis" ref={ref} {...mergedProps}>
         {children || '\u2026'}
       </span>
     </li>

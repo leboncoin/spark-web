@@ -2,6 +2,7 @@ import { StoryLabel } from '@docs/helpers/StoryLabel'
 import { LikeFill } from '@spark-ui/icons/LikeFill'
 import { LikeOutline } from '@spark-ui/icons/LikeOutline'
 import { Meta, StoryFn } from '@storybook/react'
+import { cx } from 'class-variance-authority'
 import { useState } from 'react'
 
 import { Checkbox } from '../checkbox'
@@ -36,7 +37,7 @@ const intents: IconButtonProps['intent'][] = [
   'neutral',
   'surface',
 ]
-const designs: IconButtonProps['design'][] = ['filled', 'outlined', 'tinted', 'ghost', 'contrast']
+const designs: IconButtonProps['design'][] = ['filled', 'outlined', 'tinted', 'contrast', 'ghost']
 const shapes: IconButtonProps['shape'][] = ['rounded', 'square', 'pill']
 
 const icon = (
@@ -85,29 +86,43 @@ export const Disabled: StoryFn = _args => (
   </IconButton>
 )
 
-export const Intent: StoryFn = _args => (
-  <div className="gap-lg flex">
-    {intents.map(intent => (
-      <div key={intent} className="text-center">
-        <StoryLabel className="mx-auto">{intent}</StoryLabel>
-        <IconButton intent={intent} aria-label={`${intent} button`}>
-          {icon}
-        </IconButton>
-      </div>
-    ))}
-  </div>
-)
-
-export const Design: StoryFn = _args => (
-  <div className="gap-lg flex">
-    {designs.map(design => (
-      <div key={design} className="text-center">
-        <StoryLabel className="mx-auto">{design}</StoryLabel>
-        <IconButton design={design} aria-label={`${design} button`}>
-          {icon}
-        </IconButton>
-      </div>
-    ))}
+export const DesignAndIntentTable: StoryFn = _args => (
+  <div className="overflow-x-auto">
+    <table className="border-collapse">
+      <thead>
+        <tr>
+          <th className="border-outline p-md bg-surface text-on-surface border">Intent \ Design</th>
+          {designs.map(design => (
+            <th key={design} className="border-outline p-md bg-surface text-on-surface border">
+              {design}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {intents.map(intent => (
+          <tr
+            key={intent}
+            className={cx({
+              'bg-overlay/dim-3': intent === 'surface',
+            })}
+          >
+            <td className="border-outline p-md bg-surface text-on-surface border">{intent}</td>
+            {designs.map(design => (
+              <td key={`${intent}-${design}`} className="border-outline p-md border">
+                <IconButton
+                  intent={intent}
+                  design={design}
+                  aria-label={`${intent} ${design} button`}
+                >
+                  {icon}
+                </IconButton>
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
   </div>
 )
 
