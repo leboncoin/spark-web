@@ -2,6 +2,7 @@ import { StoryLabel } from '@docs/helpers/StoryLabel'
 import { Meta, StoryFn } from '@storybook/react'
 import { useState } from 'react'
 
+import { Tag } from '../tag'
 import { Slider, type SliderProps } from '.'
 
 const meta: Meta<typeof Slider> = {
@@ -25,11 +26,27 @@ export const Default: StoryFn = _args => (
       <Slider.Track />
       <Slider.Thumb aria-label="Power" />
     </Slider>
+
+    <Slider
+      min={1}
+      max={10}
+      step={1}
+      defaultValue={[1, 10]}
+      onValueCommit={value => {
+        console.log('ON COMMIT', value)
+        // console.log(value)
+      }}
+    >
+      <Slider.Track />
+      <Slider.Thumb />
+      <Slider.Thumb />
+    </Slider>
   </form>
 )
 
 export const Controlled: StoryFn = _args => {
   const [value, setValue] = useState([0, 100])
+  const [commitedValue, setCommitedValue] = useState(value)
 
   return (
     <form>
@@ -41,9 +58,13 @@ export const Controlled: StoryFn = _args => {
         min={0}
         max={100}
         value={value}
-        onValueChange={setValue}
-        onValueCommit={() => {
-          console.log(value)
+        onValueChange={value => {
+          console.log('onValueChange', value)
+          setValue(value)
+        }}
+        onValueCommit={value => {
+          console.log('onValueCommit', value)
+          setCommitedValue(value)
         }}
         id="controlled-slider"
         name="controlled-slider"
@@ -52,6 +73,11 @@ export const Controlled: StoryFn = _args => {
         <Slider.Thumb aria-label="Power" />
         <Slider.Thumb aria-label="Power" />
       </Slider>
+
+      <div className="my-md gap-md flex">
+        <Tag intent="info">Editing value = [{value.join(', ')}]</Tag>
+        <Tag intent="info">Commited value = [{commitedValue.join(', ')}]</Tag>
+      </div>
     </form>
   )
 }
