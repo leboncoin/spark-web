@@ -35,7 +35,7 @@
     "camel-case": "4.1.2",
     "chalk": "5.4.1",
     "commander": "13.1.0",
-    "esbuild": "0.25.4",
+    "esbuild": "0.25.5",
     "fs-extra": "11.3.0",
     "pascal-case": "3.1.2",
     "ts-morph": "25.0.1"
