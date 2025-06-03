@@ -161,13 +161,14 @@ export const CustomImplementation: StoryFn = () => {
         id={id}
         htmlFor={value}
         className={cx(
-          'max-w-sz-320 gap-md p-lg flex flex-wrap rounded-md shadow-sm',
-          value === selectedValue ? 'bg-success/dim-4' : '',
+          'max-w-sz-320 bg-surface text-on-surface p-lg rounded-lg',
+          'gap-lg flex flex-wrap items-center',
+          value === selectedValue ? 'ring-outline-high ring-2' : 'ring-outline ring-1',
           'cursor-pointer'
         )}
       >
         <RadioGroup.Radio aria-labelledby={id} id={value} {...others} />
-        {children}
+        <div className="grow">{children}</div>
       </Label>
     )
   }
@@ -180,64 +181,6 @@ export const CustomImplementation: StoryFn = () => {
     }
 
     const radios = ['A', 'B', 'C']
-
-    return (
-      <RadioGroup value={value} name="sport" onValueChange={onValueChange}>
-        {radios.map(radio => {
-          return (
-            <CustomRadio selectedValue={value} key={radio} value={radio}>
-              <div className="flex grow justify-between">
-                <span className="font-bold">{radio}</span>
-                <span>this is a custom</span>
-              </div>
-              <div className="w-full text-right italic">implementation of a radio</div>
-            </CustomRadio>
-          )
-        })}
-      </RadioGroup>
-    )
-  }
-
-  return <Example />
-}
-
-export const InvisibleRadioGroup: StoryFn = () => {
-  const CustomRadio = ({
-    children,
-    selectedValue,
-    ...others
-  }: RadioProps & { selectedValue: string }) => {
-    const id = useId()
-    const { value } = others
-
-    return (
-      <Label
-        id={id}
-        htmlFor={value}
-        className={cx(
-          'max-w-sz-320 gap-md p-lg flex flex-wrap rounded-md shadow-sm',
-          value === selectedValue ? 'bg-success/dim-4' : '',
-          'cursor-pointer',
-          'focus-within:ring-outline-high',
-          '[&:has(:focus-visible)]:focus-within:ring-2'
-        )}
-      >
-        <VisuallyHidden>
-          <RadioGroup.Radio aria-labelledby={id} id={value} {...others} />
-        </VisuallyHidden>
-        {children}
-      </Label>
-    )
-  }
-
-  const Example = () => {
-    const [value, setValue] = useState<string>('')
-
-    function onValueChange(current: string) {
-      setValue(current)
-    }
-
-    const radios = ['D', 'E', 'F']
 
     return (
       <RadioGroup value={value} name="sport" onValueChange={onValueChange}>
