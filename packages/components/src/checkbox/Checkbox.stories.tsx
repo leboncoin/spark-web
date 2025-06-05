@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import { StoryLabel } from '@docs/helpers/StoryLabel'
 import { Close } from '@spark-ui/icons/Close'
 import { Plus } from '@spark-ui/icons/Plus'
@@ -31,7 +30,7 @@ export default meta
 export const Default: StoryFn = _args => (
   <Checkbox className="max-w-sz-432">
     Refuse terms and conditions, because you are so unhappy with it. There is no reason to accept
-    that, it’s unfair!
+    that, it's unfair!
   </Checkbox>
 )
 
@@ -112,7 +111,7 @@ export const Disabled: StoryFn = _args => <Checkbox disabled>Accept terms and co
 export const Reverse: StoryFn = _args => (
   <Checkbox reverse className="max-w-sz-432">
     Refuse terms and conditions, because you are so unhappy with it. There is no reason to accept
-    that, it’s unfair!
+    that, it's unfair!
   </Checkbox>
 )
 
@@ -221,13 +220,14 @@ export const CustomImplementation: StoryFn = () => {
         id={id}
         htmlFor={value}
         className={cx(
-          'max-w-sz-320 gap-md p-lg flex flex-wrap rounded-md shadow-sm',
-          checked ? 'bg-success/dim-4' : '',
+          'max-w-sz-320 bg-surface text-on-surface p-lg rounded-lg',
+          'gap-lg flex flex-wrap items-center',
+          checked ? 'ring-outline-high ring-2' : 'ring-outline ring-1',
           'cursor-pointer'
         )}
       >
         <Checkbox aria-labelledby={id} id={value} checked={checked} {...others} />
-        {children}
+        <div className="grow">{children}</div>
       </Label>
     )
   }
@@ -236,56 +236,6 @@ export const CustomImplementation: StoryFn = () => {
     const [checked, setChecked] = useState(['A'])
 
     const values = ['A', 'B', 'C']
-
-    return (
-      <CheckboxGroup value={checked} name="sport" onCheckedChange={setChecked}>
-        {values.map(value => {
-          return (
-            <CustomCheckbox key={value} value={value} checked={checked.includes(value)}>
-              <div className="flex grow justify-between">
-                <span className="font-bold">{value}</span>
-                <span>this is a custom</span>
-              </div>
-              <div className="w-full text-right italic">implementation of a checkbox</div>
-            </CustomCheckbox>
-          )
-        })}
-      </CheckboxGroup>
-    )
-  }
-
-  return <Example />
-}
-
-export const InvisibleCheckbox: StoryFn = () => {
-  const CustomCheckbox = ({ children, checked, ...others }: CheckboxProps) => {
-    const id = useId()
-    const { value } = others
-
-    return (
-      <Label
-        id={id}
-        htmlFor={value}
-        className={cx(
-          'max-w-sz-320 gap-md p-lg flex flex-wrap rounded-md shadow-sm',
-          checked ? 'bg-success/dim-3' : '',
-          'focus-within:ring-outline-high',
-          '[&:has(:focus-visible)]:focus-within:ring-2',
-          'cursor-pointer'
-        )}
-      >
-        <VisuallyHidden>
-          <Checkbox aria-labelledby={id} id={value} checked={checked} {...others} />
-        </VisuallyHidden>
-        {children}
-      </Label>
-    )
-  }
-
-  const Example = () => {
-    const [checked, setChecked] = useState(['D'])
-
-    const values = ['D', 'E', 'F']
 
     return (
       <CheckboxGroup value={checked} name="sport" onCheckedChange={setChecked}>
