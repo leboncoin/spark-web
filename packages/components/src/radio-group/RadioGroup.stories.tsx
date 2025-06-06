@@ -73,25 +73,7 @@ export const Controlled: StoryFn = () => {
   )
 }
 
-export const Reverse: StoryFn = _args => (
-  <RadioGroup className="max-w-sz-112" reverse defaultValue="1">
-    <RadioGroup.Radio value="1">First</RadioGroup.Radio>
-    <RadioGroup.Radio value="2">Second</RadioGroup.Radio>
-    <RadioGroup.Radio value="3">Third</RadioGroup.Radio>
-  </RadioGroup>
-)
-
-const intents: RadioGroupProps['intent'][] = [
-  'main',
-  'support',
-  'accent',
-  'basic',
-  'info',
-  'neutral',
-  'success',
-  'alert',
-  'error',
-]
+const intents: RadioGroupProps['intent'][] = ['basic', 'error']
 
 export const Intent: StoryFn = _args => {
   return (

@@ -108,32 +108,7 @@ export const ControlledGroup: StoryFn = () => {
 
 export const Disabled: StoryFn = _args => <Checkbox disabled>Accept terms and conditions</Checkbox>
 
-export const Reverse: StoryFn = _args => (
-  <Checkbox reverse className="max-w-sz-432">
-    Refuse terms and conditions, because you are so unhappy with it. There is no reason to accept
-    that, it's unfair!
-  </Checkbox>
-)
-
-export const ReverseGroup: StoryFn = _args => (
-  <CheckboxGroup className="max-w-sz-144" reverse name="sport">
-    <Checkbox value="soccer">Soccer</Checkbox>
-    <Checkbox value="tennis">Tennis</Checkbox>
-    <Checkbox value="baseball">Baseball</Checkbox>
-  </CheckboxGroup>
-)
-
-const intents = [
-  'main',
-  'support',
-  'accent',
-  'basic',
-  'success',
-  'alert',
-  'error',
-  'info',
-  'neutral',
-] as const
+const intents = ['basic', 'error'] as const
 
 export const Intent: StoryFn = _args => (
   <div className="gap-xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5">

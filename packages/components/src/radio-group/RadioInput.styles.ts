@@ -43,22 +43,14 @@ export const radioInputVariants = cva(
           'data-[state=checked]:border-neutral',
           'hover:ring-neutral-container',
         ],
-        info: ['border-outline', 'data-[state=checked]:border-info', 'hover:ring-info-container'],
+        info: ['border-info', 'data-[state=checked]:border-info', 'hover:ring-info-container'],
         success: [
-          'border-outline',
+          'border-success',
           'data-[state=checked]:border-success',
           'hover:ring-success-container',
         ],
-        alert: [
-          'border-outline',
-          'data-[state=checked]:border-alert',
-          'hover:ring-alert-container',
-        ],
-        error: [
-          'border-outline',
-          'data-[state=checked]:border-error',
-          'hover:ring-error-container',
-        ],
+        alert: ['border-alert', 'data-[state=checked]:border-alert', 'hover:ring-alert-container'],
+        error: ['border-error', 'data-[state=checked]:border-error', 'hover:ring-error-container'],
       }),
     },
     defaultVariants: {
