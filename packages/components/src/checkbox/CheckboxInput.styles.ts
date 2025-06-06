@@ -21,7 +21,6 @@ export const checkboxInputStyles = cva(
         main: [
           'text-on-main',
           'hover:ring-main-container',
-          // data-[ok=cool]:bg-main
           'data-[state=unchecked]:border-outline',
           'data-[state=indeterminate]:border-main data-[state=indeterminate]:bg-main',
           'data-[state=checked]:border-main data-[state=checked]:bg-main',
@@ -50,28 +49,28 @@ export const checkboxInputStyles = cva(
         success: [
           'text-on-success',
           'hover:ring-success-container',
-          'data-[state=unchecked]:border-outline',
+          'data-[state=unchecked]:border-success',
           'data-[state=indeterminate]:border-success data-[state=indeterminate]:bg-success',
           'data-[state=checked]:border-success data-[state=checked]:bg-success',
         ],
         alert: [
           'text-on-alert',
           'hover:ring-alert-container',
-          'data-[state=unchecked]:border-outline',
+          'data-[state=unchecked]:border-alert',
           'data-[state=indeterminate]:border-alert data-[state=indeterminate]:bg-alert',
           'data-[state=checked]:border-alert data-[state=checked]:bg-alert',
         ],
         error: [
           'text-on-error',
           'hover:ring-error-container',
-          'data-[state=unchecked]:border-outline',
+          'data-[state=unchecked]:border-error',
           'data-[state=indeterminate]:border-error data-[state=indeterminate]:bg-error',
           'data-[state=checked]:border-error data-[state=checked]:bg-error',
         ],
         info: [
           'text-on-info',
           'hover:ring-info-container',
-          'data-[state=unchecked]:border-outline',
+          'data-[state=unchecked]:border-info',
           'data-[state=indeterminate]:border-info data-[state=indeterminate]:bg-info',
           'data-[state=checked]:border-info data-[state=checked]:bg-info',
         ],
