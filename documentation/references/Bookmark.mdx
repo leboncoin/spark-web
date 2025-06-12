@@ -1,0 +1,165 @@
+import { Meta } from '@storybook/blocks'
+import { Callout } from '@docs/helpers/Callout'
+import { Button } from '@spark-ui/components/button'
+import { BookmarkOutline } from '@spark-ui/icons'
+import { Icon } from '@spark-ui/components/icon'
+import { useEffect, useRef } from 'react'
+
+<Meta title="References/Higlight spark components" />
+
+# Highlight spark components
+
+This bookmark will highlight all spark components on the current page. 
+
+<Callout kind="warning" marginY="large">
+  <p>
+    iframes: the script is unable to detect components in iframes for now.
+  </p>
+</Callout>
+
+**Simply drag and drop this button into your browser's bookmarks bar**, then go to any website using Spark and click on the bookmark:
+
+<div className="sb-unstyled bg-basic-container text-on-basic-container p-xl w-full">
+<Button intent="info" asChild>
+  <a 
+    ref={(el) => {
+      if (el) {
+        el.href = 'javascript:' + encodeURIComponent(`
+          !function(){
+            const e=document.createElement("style"),
+            t="data-spark-component";
+            function n(e){
+              const n=e.getAttribute(t),
+              r=document.createElement("div"),
+              i=document.createElement("div");
+              r.className="spark-overlay",
+              r.textContent=n,
+              i.className="spark-highlight";
+              const l=function(e){
+                let t=e,n=0;
+                for(;t&&t!==document.body;){
+                  const e=window.getComputedStyle(t).zIndex;
+                  if("auto"!==e){
+                    const t=parseInt(e);
+                    isNaN(t)||(n=Math.max(n,t))
+                  }
+                  t=t.parentElement
+                }
+                return n
+              }(e),
+              s=l+1;
+              return r.style.zIndex=s,
+              i.style.zIndex=s,
+              o(e,r,i),
+              document.body.appendChild(r),
+              document.body.appendChild(i),
+              {element:e,overlay:r,highlight:i}
+            }
+            function o(e,t,n){
+              const o=e.getBoundingClientRect();
+              t.style.top=o.top+window.scrollY+"px",
+              t.style.left=o.left+window.scrollX+"px",
+              n.style.top=o.top+window.scrollY+"px",
+              n.style.left=o.left+window.scrollX+"px",
+              n.style.width=o.width+"px",
+              n.style.height=o.height+"px"
+            }
+            function r(){
+              l.forEach((({element:e,overlay:t,highlight:n})=>{
+                if(document.body.contains(e))
+                  o(e,t,n);
+                else{
+                  t.remove(),
+                  n.remove();
+                  const o=l.findIndex((t=>t.element===e));
+                  -1!==o&&l.splice(o,1)
+                }
+              }))
+            }
+            function i(){
+              l.forEach((({overlay:e,highlight:t})=>{
+                e.remove(),
+                t.remove()
+              })),
+              l.length=0,
+              requestAnimationFrame((()=>{
+                document.querySelectorAll(\`[\${t}]\`).forEach((e=>{
+                  l.push(n(e))
+                }))
+              }))
+            }
+            e.textContent=\`
+              .spark-overlay {
+                position: absolute;
+                background: var(--color-basic, #094171);
+                color: var(--color-on-basic, #ffffff);
+                padding: 4px 8px;
+                font-size: 12px;
+                font-weight: 700;
+                font-family: monospace;
+                z-index: 1;
+                pointer-events: none;
+                border-radius: 8px;
+                transform: translateY(-100%);
+                margin-top: -4px;
+              }
+              .spark-highlight {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 123, 255, 0.2);
+                border: 2px dashed rgba(0, 123, 255, 0.5);
+                pointer-events: none;
+                z-index: 1;
+              }
+            \`,
+            document.head.appendChild(e);
+            const l=[];
+            let s;
+            i();
+            new MutationObserver((e=>{
+              let n=!1;
+              var o,l;
+              e.forEach((e=>{
+                [...e.addedNodes,...e.removedNodes].some((e=>
+                  1===e.nodeType&&(e.hasAttribute(t)||e.querySelector(\`[\${t}]\`))
+                ))&&(n=!0),
+                "attributes"===e.type&&e.attributeName===t&&(n=!0)
+              })),
+              n?(o=i,l=50,clearTimeout(s),s=setTimeout(o,l)):r()
+            })).observe(document.body,{
+              childList:!0,
+              subtree:!0,
+              attributes:!0,
+              attributeFilter:[t]
+            });
+            const a=new ResizeObserver((()=>{r()}));
+            function d(){
+              document.querySelectorAll(\`[\${t}]\`).forEach((e=>{
+                a.observe(e)
+              }))
+            }
+            d();
+            const c=i;
+            i=function(){
+              c(),
+              requestAnimationFrame(d)
+            },
+            window.addEventListener("scroll",(()=>{r()})),
+            setInterval(r,100)
+          }();
+        `);
+      }
+    }}
+    onClick={(e) => e.preventDefault()}
+    draggable="true"
+  >
+    Highlight Spark components
+    <Icon>
+        <BookmarkOutline />
+    </Icon> 
+  </a>
+</Button>
+</div>
