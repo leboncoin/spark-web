@@ -4,8 +4,6 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
-    reviewers:
-      - 'Powerplex'
     commit-message:
       prefix: 'build(npm)'
     groups:
