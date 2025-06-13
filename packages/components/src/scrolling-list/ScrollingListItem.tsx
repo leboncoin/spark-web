@@ -36,6 +36,7 @@ export const ScrollingListItem = ({
 
   return (
     <Component
+      data-spark-component="scrolling-list-item"
       role="listitem"
       ref={itemRef}
       className={cx(

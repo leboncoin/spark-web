@@ -26,6 +26,7 @@ export const SnackbarItemAction = ({
 
   return (
     <Button
+      data-spark-component="snackbar-item-action"
       ref={ref}
       size="md"
       shape="rounded"

@@ -6,7 +6,7 @@ export type DrawerDescriptionProps = RadixDrawer.DialogDescriptionProps & {
 }
 
 export const DrawerDescription = (props: DrawerDescriptionProps) => (
-  <RadixDrawer.Description {...props} />
+  <RadixDrawer.Description data-spark-component="drawer-description" {...props} />
 )
 
 DrawerDescription.displayName = 'Drawer.Description'

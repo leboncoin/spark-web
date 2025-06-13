@@ -17,6 +17,7 @@ export const ProgressIndicator = ({
 
   return (
     <RadixProgress.ProgressIndicator
+      data-spark-component="progress-indicator"
       className={progressIndicatorStyles({ className, intent, shape, isIndeterminate })}
       style={{ ...style, ...(!isIndeterminate && { transform: `translateX(-${x}%)` }) }}
       ref={ref}

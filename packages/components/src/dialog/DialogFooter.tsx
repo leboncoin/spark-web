@@ -8,7 +8,12 @@ export interface FooterProps {
 }
 
 export const Footer = ({ children, className, ref, ...rest }: FooterProps): ReactElement => (
-  <footer ref={ref} className={cx(className, ['px-xl', 'py-lg'])} {...rest}>
+  <footer
+    data-spark-component="dialog-footer"
+    ref={ref}
+    className={cx(className, ['px-xl', 'py-lg'])}
+    {...rest}
+  >
     {children}
   </footer>
 )

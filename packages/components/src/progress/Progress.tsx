@@ -34,6 +34,7 @@ export const Progress = ({
   return (
     <ProgressContext.Provider data-spark-component="progress" value={value}>
       <RadixProgress.Progress
+        data-spark-component="progress"
         ref={ref}
         className={cx('gap-sm focus-visible:u-outline flex flex-col', className)}
         value={valueProp}

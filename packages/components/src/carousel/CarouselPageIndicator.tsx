@@ -43,6 +43,7 @@ export const CarouselPageIndicator = ({
 
   return (
     <button
+      data-spark-component="carousel-page-indicator"
       ref={ref}
       key={index}
       {...ctx.getIndicatorProps({ index })}

@@ -147,6 +147,7 @@ export const TabsList = ({
       )}
 
       <RadixTabs.List
+        data-spark-component="tabs-list"
         ref={listRef}
         className={listStyles()}
         asChild={asChild}

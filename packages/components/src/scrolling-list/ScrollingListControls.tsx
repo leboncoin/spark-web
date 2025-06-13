@@ -22,6 +22,7 @@ export const ScrollingListControls = ({
 }: ScrollingListControls) => {
   return (
     <div
+      data-spark-component="scrolling-list-controls"
       className={cx(
         'default:px-md pointer-events-none absolute inset-0 flex flex-row items-center justify-between overflow-hidden',
         className

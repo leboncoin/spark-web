@@ -10,7 +10,7 @@ export interface DrawerTriggerProps extends RadixDrawer.DialogTriggerProps {
 }
 
 export const DrawerTrigger = (props: DrawerTriggerProps): ReactElement => (
-  <RadixDrawer.Trigger {...props} />
+  <RadixDrawer.Trigger data-spark-component="drawer-trigger" {...props} />
 )
 
 DrawerTrigger.displayName = 'Drawer.Trigger'

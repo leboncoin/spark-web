@@ -46,6 +46,7 @@ export const TabsTrigger = ({
 
   return (
     <RadixTabs.Trigger
+      data-spark-component="tabs-trigger"
       ref={ref}
       className={triggerVariants({ intent, size, className })}
       asChild={asChild}

@@ -24,7 +24,13 @@ export const ProgressLabel = ({
   const ref = useMergeRefs(forwardedRef, rootRef)
 
   return (
-    <span id={id} className="text-body-2 text-on-surface" ref={ref} {...others}>
+    <span
+      data-spark-component="progress-label"
+      id={id}
+      className="text-body-2 text-on-surface"
+      ref={ref}
+      {...others}
+    >
       {children}
     </span>
   )

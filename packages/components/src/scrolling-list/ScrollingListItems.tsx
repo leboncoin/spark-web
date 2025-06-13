@@ -87,6 +87,7 @@ export const ScrollingListItems = ({ children, className = '', ...rest }: Props)
 
   return (
     <div
+      data-spark-component="scrolling-list-items"
       id="scrolling-list-items"
       role="list"
       className={cx(

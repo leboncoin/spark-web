@@ -13,6 +13,8 @@ export interface TriggerProps {
   ref?: Ref<HTMLButtonElement>
 }
 
-export const Trigger = (props: TriggerProps): ReactElement => <RadixDialog.Trigger {...props} />
+export const Trigger = (props: TriggerProps): ReactElement => (
+  <RadixDialog.Trigger data-spark-component="dialog-trigger" {...props} />
+)
 
 Trigger.displayName = 'Dialog.Trigger'

@@ -6,7 +6,12 @@ export type DrawerFooterProps = ComponentPropsWithoutRef<'footer'> & {
 }
 
 export const DrawerFooter = ({ className, ref, ...rest }: DrawerFooterProps): ReactElement => (
-  <footer ref={ref} className={cx(['px-xl', 'py-lg'], className)} {...rest} />
+  <footer
+    data-spark-component="drawer-footer"
+    ref={ref}
+    className={cx(['px-xl', 'py-lg'], className)}
+    {...rest}
+  />
 )
 
 DrawerFooter.displayName = 'Drawer.Footer'

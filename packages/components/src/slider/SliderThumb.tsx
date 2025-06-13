@@ -39,6 +39,7 @@ export const SliderThumb = ({
 
   return (
     <RadixSlider.Thumb
+      data-spark-component="slider-thumb"
       ref={ref}
       asChild={asChild}
       onPointerDown={(e: PointerEvent<HTMLSpanElement>) => {

@@ -22,6 +22,7 @@ export const ScrollingListNextButton = ({ 'aria-label': ariaLabel, ...rest }: Ic
 
   return (
     <IconButton
+      data-spark-component="scrolling-list-next-button"
       size="sm"
       intent="surface"
       design="filled"

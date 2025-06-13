@@ -16,6 +16,7 @@ export const CarouselSlides = ({ children, className = '' }: Props) => {
 
   return (
     <div
+      data-spark-component="carousel-slides"
       {...ctx.getSlidesContainerProps()}
       className={cx(
         'focus-visible:u-outline relative w-full',

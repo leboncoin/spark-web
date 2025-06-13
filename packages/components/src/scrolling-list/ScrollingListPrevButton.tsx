@@ -31,6 +31,7 @@ export const ScrollingListPrevButton = ({
 
   return (
     <IconButton
+      data-spark-component="scrolling-list-prev-button"
       size="sm"
       intent="surface"
       design="filled"

@@ -37,6 +37,7 @@ export const TabsContent = ({
 
   return (
     <RadixTabs.Content
+      data-spark-component="tabs-content"
       ref={ref}
       forceMount={forceMount || rest.forceMount}
       className={contentStyles({ className, forceMount })}

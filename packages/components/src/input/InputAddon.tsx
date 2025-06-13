@@ -35,6 +35,7 @@ export const InputAddon = ({
   return (
     <Component
       ref={ref}
+      data-spark-component="input-addon"
       className={inputAddonStyles({
         className,
         intent: state,

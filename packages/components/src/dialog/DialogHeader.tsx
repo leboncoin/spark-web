@@ -8,7 +8,12 @@ export interface HeaderProps {
 }
 
 export const Header = ({ children, className, ref, ...rest }: HeaderProps): ReactElement => (
-  <header ref={ref} className={cx(className, ['px-xl', 'py-lg'])} {...rest}>
+  <header
+    data-spark-component="dialog-header"
+    ref={ref}
+    className={cx(className, ['px-xl', 'py-lg'])}
+    {...rest}
+  >
     {children}
   </header>
 )

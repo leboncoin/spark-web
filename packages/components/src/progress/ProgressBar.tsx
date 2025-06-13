@@ -15,7 +15,12 @@ export const ProgressBar = ({
   const { shape } = useProgress()
 
   return (
-    <div className={progressBarStyles({ className, shape })} ref={ref} {...others}>
+    <div
+      data-spark-component="progress-bar"
+      className={progressBarStyles({ className, shape })}
+      ref={ref}
+      {...others}
+    >
       {children}
     </div>
   )

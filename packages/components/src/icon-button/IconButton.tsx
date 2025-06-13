@@ -20,6 +20,7 @@ export const IconButton = ({
 }: IconButtonProps) => {
   return (
     <Button
+      data-spark-component="icon-button"
       ref={ref}
       className={iconButtonStyles({ size, className })}
       design={design}

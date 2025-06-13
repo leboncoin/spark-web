@@ -13,6 +13,7 @@ export const Overlay = ({ className, ref, ...rest }: OverlayProps): ReactElement
 
   return (
     <RadixDialog.Overlay
+      data-spark-component="dialog-overlay"
       ref={ref}
       className={cx(
         isFullScreen ? 'hidden' : 'fixed',

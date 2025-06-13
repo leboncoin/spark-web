@@ -8,6 +8,7 @@ export type DrawerOverlayProps = RadixDrawer.DialogOverlayProps & {
 
 export const DrawerOverlay = ({ className, ref, ...rest }: DrawerOverlayProps): ReactElement => (
   <RadixDrawer.Overlay
+    data-spark-component="drawer-overlay"
     ref={ref}
     className={cx(
       ['fixed', 'top-0', 'left-0', 'w-screen', 'h-screen', 'z-overlay'],

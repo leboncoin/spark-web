@@ -34,6 +34,7 @@ export const RadioInput = ({ intent: intentProp, className, ref, ...others }: Ra
 
   return (
     <RadixRadioGroup.RadioGroupItem
+      data-spark-component="radio-input"
       ref={ref}
       className={radioInputVariants({ intent, className })}
       {...others}

@@ -63,6 +63,7 @@ const Root = ({
 
   return (
     <Component
+      data-spark-component="input"
       ref={ref}
       id={id}
       name={name}

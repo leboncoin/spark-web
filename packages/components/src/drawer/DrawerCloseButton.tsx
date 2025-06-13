@@ -19,6 +19,7 @@ export const DrawerCloseButton = ({
   ...rest
 }: DrawerCloseButtonProps) => (
   <DrawerClose
+    data-spark-component="drawer-close-button"
     ref={ref}
     className={cx(['absolute', 'top-sm', 'right-xl'], className)}
     asChild
