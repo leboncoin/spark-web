@@ -17,5 +17,9 @@ export interface SwitchLabelProps extends LabelStylesProps, LabelProps {
 }
 
 export const SwitchLabel = ({ className, disabled, ...others }: SwitchLabelProps) => (
-  <Label className={labelStyles({ disabled, className })} {...others} />
+  <Label
+    data-spark-component="switch-label"
+    className={labelStyles({ disabled, className })}
+    {...others}
+  />
 )

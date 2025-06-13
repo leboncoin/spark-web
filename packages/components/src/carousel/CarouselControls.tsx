@@ -12,6 +12,7 @@ export const CarouselControls = ({ children, className, ...props }: ControlsProp
 
   return (
     <div
+      data-spark-component="carousel-controls"
       className={cx(
         'default:px-lg pointer-events-none absolute inset-0 flex flex-row items-center justify-between',
         className

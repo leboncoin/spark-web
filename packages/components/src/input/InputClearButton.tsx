@@ -34,6 +34,7 @@ const Root = ({
   return (
     <button
       ref={ref}
+      data-spark-component="input-clear-button"
       className={cx(
         className,
         'pointer-events-auto absolute',

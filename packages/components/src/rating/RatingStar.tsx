@@ -30,6 +30,7 @@ export const RatingStar = ({
 }: RatingStarProps) => {
   return (
     <div
+      data-spark-component="rating-star"
       ref={forwardedRef}
       onMouseEnter={onMouseEnter}
       className={ratingStarStyles({

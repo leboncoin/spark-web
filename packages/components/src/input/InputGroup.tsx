@@ -1,4 +1,4 @@
-/* eslint-disable complexity */
+/* eslint-disable max-lines-per-function */
 
 import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { useCombinedState } from '@spark-ui/hooks/use-combined-state'
@@ -138,6 +138,7 @@ export const InputGroup = ({
   return (
     <InputGroupContext.Provider value={current}>
       <div
+        data-spark-component="input-group"
         ref={forwardedRef}
         className={inputGroupStyles({ disabled, readOnly, className })}
         {...others}

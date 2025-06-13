@@ -20,6 +20,7 @@ const Root = ({
 }: CloseButtonProps) => {
   return (
     <Close
+      data-spark-component="dialog-close-button"
       data-part="close"
       ref={ref}
       className={cx(['absolute', 'top-md', 'right-xl'], className)}

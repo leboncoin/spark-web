@@ -13,6 +13,7 @@ export interface DividerContentProps extends HTMLAttributes<HTMLSpanElement> {
 export const DividerContent = ({ children, ref, className, ...props }: DividerContentProps) => {
   return children ? (
     <span
+      data-spark-component="divider-content"
       ref={ref}
       {...props}
       className={cx('group-data-[writing-mode=vertical-lr]:[writing-mode:vertical-lr]', className)}

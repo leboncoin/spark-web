@@ -61,6 +61,7 @@ export const TextLink = ({
 
   return (
     <Component
+      data-spark-component="text-link"
       ref={ref}
       className={textLinkStyles({ className, bold, intent, underline })}
       {...props}

@@ -87,6 +87,7 @@ export const SwitchInput = ({
 
   return (
     <RadixSwitch.Root
+      data-spark-component="switch-input"
       ref={ref}
       className={styles({ intent, size, className })}
       value={value}

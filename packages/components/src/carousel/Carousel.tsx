@@ -46,6 +46,7 @@ export const Carousel = ({
       }}
     >
       <div
+        data-spark-component="carousel"
         className={cx('gap-lg relative box-border flex flex-col', className)}
         {...carouselApi.getRootProps()}
       >

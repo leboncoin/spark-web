@@ -28,6 +28,7 @@ export const SnackbarItemClose = ({
 
   return (
     <IconButton
+      data-spark-component="snackbar-item-close"
       ref={ref}
       size="md"
       shape="rounded"

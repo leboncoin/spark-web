@@ -26,6 +26,7 @@ export const AvatarOnlineBadge = ({ angle = 135, ...props }: AvatarOnlineBadgePr
 
   return (
     <div
+      data-spark-component="avatar-online-badge"
       role="status"
       aria-label={onlineText}
       style={{

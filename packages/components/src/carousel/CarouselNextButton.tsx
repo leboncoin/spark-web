@@ -12,6 +12,7 @@ export const CarouselNextButton = ({
 
   return (
     <IconButton
+      data-spark-component="carousel-next-button"
       {...ctx.getNextTriggerProps()}
       intent="surface"
       design="filled"

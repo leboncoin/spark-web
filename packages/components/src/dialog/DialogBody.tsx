@@ -15,7 +15,12 @@ export const Body = ({
   ref,
   ...rest
 }: BodyProps): ReactElement => (
-  <div ref={ref} className={dialogBodyStyles({ inset, className })} {...rest}>
+  <div
+    data-spark-component="dialog-body"
+    ref={ref}
+    className={dialogBodyStyles({ inset, className })}
+    {...rest}
+  >
     {children}
   </div>
 )

@@ -8,6 +8,7 @@ export type DrawerTitleProps = RadixDrawer.DialogTitleProps & {
 
 export const DrawerTitle = ({ className, ref, ...others }: DrawerTitleProps) => (
   <RadixDrawer.Title
+    data-spark-component="drawer-title"
     ref={ref}
     className={cx('text-headline-2 text-on-surface', className)}
     {...others}

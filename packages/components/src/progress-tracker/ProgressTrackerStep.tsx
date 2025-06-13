@@ -75,6 +75,7 @@ export const ProgressTrackerStep = ({
 
   return (
     <li
+      data-spark-component="progress-tracker-step"
       id={stepId}
       ref={ref}
       data-state={progressState}

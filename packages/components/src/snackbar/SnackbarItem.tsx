@@ -1,4 +1,5 @@
-/* eslint-disable complexity */
+/* eslint-disable max-lines-per-function */
+
 import { useToast } from '@react-aria/toast'
 import {
   Children,
@@ -142,6 +143,7 @@ export const SnackbarItem = ({
 
   return (
     <div
+      data-spark-component="snackbar-item"
       className={snackbarItemVariant({ design, intent, className })}
       data-animation={toast.animation}
       {...(!(swipeState === 'cancel' && toast.animation === 'exiting') && {

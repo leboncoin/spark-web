@@ -11,6 +11,7 @@ export const InputIcon = ({ className, intent, children, ...others }: InputIconP
 
   return (
     <Icon
+      data-spark-component="input-icon"
       intent={intent}
       className={cx(
         className,

@@ -26,6 +26,7 @@ export const CarouselSlide = ({
 
   return (
     <div
+      data-spark-component="carousel-slide"
       ref={itemRef}
       {...ctx.getSlideProps({ index, totalSlides: totalSlides as number })}
       className={cx('default:bg-surface relative overflow-hidden', className)}

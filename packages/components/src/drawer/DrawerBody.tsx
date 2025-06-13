@@ -15,7 +15,12 @@ export const DrawerBody = ({
   ref,
   ...rest
 }: DrawerBodyProps) => (
-  <div ref={ref} className={drawerBodyStyles({ inset, className })} {...rest}>
+  <div
+    data-spark-component="drawer-body"
+    ref={ref}
+    className={drawerBodyStyles({ inset, className })}
+    {...rest}
+  >
     {children}
   </div>
 )

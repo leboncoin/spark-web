@@ -39,6 +39,7 @@ export const AvatarAction = ({
 
   return (
     <Comp
+      data-spark-component="avatar-action"
       style={{
         position: 'absolute',
         ...(design === 'circle' ? { left: `${position.x}px`, top: `${position.y}px` } : {}),

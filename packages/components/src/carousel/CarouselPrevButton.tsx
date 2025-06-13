@@ -12,6 +12,7 @@ export const CarouselPrevButton = ({
 
   return (
     <IconButton
+      data-spark-component="carousel-prev-button"
       {...ctx.getPrevTriggerProps()}
       intent="surface"
       design="filled"

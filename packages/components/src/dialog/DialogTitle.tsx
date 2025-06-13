@@ -9,6 +9,7 @@ export type TitleProps = RadixDialog.DialogTitleProps & {
 export const Title = ({ className, ref, ...others }: TitleProps) => {
   return (
     <RadixDialog.Title
+      data-spark-component="dialog-title"
       ref={ref}
       className={cx(
         'text-headline-1 text-on-surface',

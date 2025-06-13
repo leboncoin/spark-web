@@ -24,7 +24,7 @@ const IncrementButton = ({
   const { buttonProps } = useButton({ ...incrementButtonProps, ...rest }, ref)
 
   return (
-    <InputGroup.TrailingAddon asChild>
+    <InputGroup.TrailingAddon asChild data-spark-component="stepper-increment-button">
       <IconButton
         ref={ref}
         design={design}
@@ -59,7 +59,7 @@ const DecrementButton = ({
   const { buttonProps } = useButton({ ...decrementButtonProps, ...rest }, ref)
 
   return (
-    <InputGroup.LeadingAddon asChild>
+    <InputGroup.LeadingAddon asChild data-spark-component="stepper-decrement-button">
       <IconButton
         ref={ref}
         design={design}

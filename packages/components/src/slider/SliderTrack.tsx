@@ -19,7 +19,13 @@ export const SliderTrack = ({ asChild = false, className, ref, ...rest }: Slider
   const { intent, shape } = useSliderContext()
 
   return (
-    <RadixSlider.Track ref={ref} asChild={asChild} className={trackVariants({ shape })} {...rest}>
+    <RadixSlider.Track
+      data-spark-component="slider-track"
+      ref={ref}
+      asChild={asChild}
+      className={trackVariants({ shape })}
+      {...rest}
+    >
       <RadixSlider.Range className={rangeVariants({ intent, shape, className })} />
     </RadixSlider.Track>
   )

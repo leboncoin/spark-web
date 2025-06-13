@@ -21,7 +21,13 @@ export interface RadioLabelProps
 }
 
 export const RadioLabel = ({ disabled, ...others }: RadioLabelProps) => {
-  return <Label.Root className={radioLabelStyles({ disabled })} {...others} />
+  return (
+    <Label.Root
+      data-spark-component="radio-label"
+      className={radioLabelStyles({ disabled })}
+      {...others}
+    />
+  )
 }
 
 RadioLabel.displayName = 'RadioGroup.RadioLabel'

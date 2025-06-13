@@ -13,7 +13,12 @@ export const DrawerHeader = ({
   ref,
   ...rest
 }: DrawerHeaderProps): ReactElement => (
-  <header ref={ref} className={cx(['px-xl', 'py-lg'], className)} {...rest}>
+  <header
+    data-spark-component="drawer-header"
+    ref={ref}
+    className={cx(['px-xl', 'py-lg'], className)}
+    {...rest}
+  >
     {children}
   </header>
 )

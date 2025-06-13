@@ -103,7 +103,12 @@ export const ScrollingList = ({
 
   return (
     <ScrollingListContext.Provider value={ctxValue}>
-      <div className="gap-lg group/scrolling-list relative flex w-full flex-col">{children}</div>
+      <div
+        data-spark-component="scrolling-list"
+        className="gap-lg group/scrolling-list relative flex w-full flex-col"
+      >
+        {children}
+      </div>
       <span ref={skipAnchorRef} className="size-0 overflow-hidden" tabIndex={-1} />
     </ScrollingListContext.Provider>
   )

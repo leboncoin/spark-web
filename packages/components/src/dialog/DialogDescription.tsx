@@ -5,6 +5,8 @@ export type DescriptionProps = RadixDialog.DialogDescriptionProps & {
   ref?: Ref<HTMLParagraphElement>
 }
 
-export const Description = (props: DescriptionProps) => <RadixDialog.Description {...props} />
+export const Description = (props: DescriptionProps) => (
+  <RadixDialog.Description data-spark-component="dialog-description" {...props} />
+)
 
 Description.displayName = 'Dialog.Description'
