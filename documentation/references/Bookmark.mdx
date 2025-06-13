@@ -48,16 +48,16 @@ This bookmark will highlight all spark components on the current page.
                 return n
               }(e),
               s=l+1;
-              return r.style.zIndex=s,
+              r.style.zIndex=s,
               i.style.zIndex=s,
               o(e,r,i),
               document.body.appendChild(r),
-              document.body.appendChild(i),
-              {element:e,overlay:r,highlight:i}
+              document.body.appendChild(i);
+              return {element:e,overlay:r,highlight:i};
             }
             function o(e,t,n){
               const o=e.getBoundingClientRect();
-              t.style.top=o.top+window.scrollY+"px",
+              t.style.top=o.top+window.scrollY+o.height+"px",
               t.style.left=o.left+window.scrollX+"px",
               n.style.top=o.top+window.scrollY+"px",
               n.style.left=o.left+window.scrollX+"px",
@@ -65,7 +65,9 @@ This bookmark will highlight all spark components on the current page.
               n.style.height=o.height+"px"
             }
             function r(){
-              l.forEach((({element:e,overlay:t,highlight:n})=>{
+              l.forEach((item)=>{
+                if (!item) return;
+                const {element:e,overlay:t,highlight:n} = item;
                 if(document.body.contains(e))
                   o(e,t,n);
                 else{
@@ -74,18 +76,44 @@ This bookmark will highlight all spark components on the current page.
                   const o=l.findIndex((t=>t.element===e));
                   -1!==o&&l.splice(o,1)
                 }
-              }))
+              })
             }
             function i(){
-              l.forEach((({overlay:e,highlight:t})=>{
+              l.forEach((item)=>{
+                if (!item) return;
+                const {overlay:e,highlight:t} = item;
                 e.remove(),
                 t.remove()
-              })),
+              }),
               l.length=0,
               requestAnimationFrame((()=>{
+                // First pass: create all elements
+                const highlights = [];
                 document.querySelectorAll(\`[\${t}]\`).forEach((e=>{
-                  l.push(n(e))
-                }))
+                  const elements = n(e);
+                  highlights.push(elements);
+                  const showOverlay = () => {
+                    elements.overlay.style.opacity = '1';
+                    elements.overlay.style.display = 'block';
+                  };
+                  const hideOverlay = () => {
+                    elements.overlay.style.opacity = '0';
+                    elements.overlay.style.display = 'none';
+                  };
+                  e.addEventListener('mouseenter', showOverlay);
+                  e.addEventListener('mouseleave', hideOverlay);
+                }));
+
+                // Second pass: add all highlights first
+                highlights.forEach(elements => {
+                  document.body.appendChild(elements.highlight);
+                });
+
+                // Third pass: add all overlays
+                highlights.forEach(elements => {
+                  document.body.appendChild(elements.overlay);
+                  l.push(elements);
+                });
               }))
             }
             e.textContent=\`
@@ -97,11 +125,14 @@ This bookmark will highlight all spark components on the current page.
                 font-size: 12px;
                 font-weight: 700;
                 font-family: monospace;
-                z-index: 1;
+                z-index: 2;
                 pointer-events: none;
                 border-radius: 8px;
-                transform: translateY(-100%);
-                margin-top: -4px;
+                box-shadow: var(--shadow-sm, 0px 1px 2px 0px rgba(0, 0, 0, 0.05));
+                transform: translateY(0%);
+                margin-top: 4px;
+                opacity: 0;
+                transition: opacity 0.2s ease;
               }
               .spark-highlight {
                 position: absolute;
