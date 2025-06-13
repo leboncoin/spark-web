@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.7.5](https://github.com/leboncoin/spark-web/compare/v10.7.4...v10.7.5) (2025-06-13)
+
+### Bug Fixes
+
+- **components:** added missing data-spark attrs ([9c31e6f](https://github.com/leboncoin/spark-web/commit/9c31e6fc8d341fff2da7207020e785f1c4553761))
+- improved bookmark to highlight spark components ([b52faeb](https://github.com/leboncoin/spark-web/commit/b52faeb791885de3ccd12dfc1cd298ef4fe4b26f))
+
 ## [10.7.4](https://github.com/leboncoin/spark-web/compare/v10.7.3...v10.7.4) (2025-06-12)
 
 **Note:** Version bump only for package spark
