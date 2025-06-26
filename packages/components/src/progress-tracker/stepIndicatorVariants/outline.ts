@@ -13,7 +13,7 @@ export const outlineVariants = [
     design: 'outline',
     intent: 'basic',
     state: 'active',
-    class: 'text-on-basic-container bg-basic-container',
+    class: 'text-on-basic bg-basic',
   },
   {
     design: 'outline',
@@ -29,7 +29,7 @@ export const outlineVariants = [
     design: 'outline',
     intent: 'support',
     state: 'active',
-    class: 'text-on-support-container bg-support-container',
+    class: 'text-on-support bg-support',
   },
   {
     design: 'outline',
@@ -45,7 +45,7 @@ export const outlineVariants = [
     design: 'outline',
     intent: 'main',
     state: 'active',
-    class: 'text-on-main-container bg-main-container',
+    class: 'text-on-main bg-main',
   },
   {
     design: 'outline',
@@ -61,7 +61,7 @@ export const outlineVariants = [
     design: 'outline',
     intent: 'neutral',
     state: 'active',
-    class: 'text-on-neutral-container bg-neutral-container',
+    class: 'text-on-neutral bg-neutral',
   },
   {
     design: 'outline',
@@ -77,7 +77,7 @@ export const outlineVariants = [
     design: 'outline',
     intent: 'info',
     state: 'active',
-    class: 'text-on-info-container bg-info-container',
+    class: 'text-on-info bg-info',
   },
   {
     design: 'outline',
@@ -93,7 +93,7 @@ export const outlineVariants = [
     design: 'outline',
     intent: 'accent',
     state: 'active',
-    class: 'text-on-accent-container bg-accent-container',
+    class: 'text-on-accent bg-accent',
   },
   {
     design: 'outline',
@@ -109,7 +109,7 @@ export const outlineVariants = [
     design: 'outline',
     intent: 'danger',
     state: 'active',
-    class: 'text-on-error-container bg-error-container',
+    class: 'text-on-error bg-error',
   },
   {
     design: 'outline',
@@ -125,7 +125,7 @@ export const outlineVariants = [
     design: 'outline',
     intent: 'alert',
     state: 'active',
-    class: 'text-on-alert-container bg-alert-container',
+    class: 'text-on-alert bg-alert',
   },
   {
     design: 'outline',
@@ -141,6 +141,6 @@ export const outlineVariants = [
     design: 'outline',
     intent: 'success',
     state: 'active',
-    class: 'text-on-success-container bg-success-container',
+    class: 'text-on-success bg-success',
   },
 ] as const

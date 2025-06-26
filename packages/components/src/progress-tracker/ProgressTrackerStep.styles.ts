@@ -6,6 +6,8 @@ export const stepItemVariant = cva(
     // Progress Track
     'after:absolute after:z-base',
     'last:after:content-none',
+    'after:bg-outline',
+    'group-data-[orientation=horizontal]/list:before:bg-outline',
     // Horizontal orientation
     'group-data-[orientation=horizontal]/list:px-[1px]',
     'group-data-[orientation=horizontal]/list:before:absolute group-data-[orientation=horizontal]/list:before:z-base',
@@ -55,15 +57,15 @@ export const stepItemVariant = cva(
         ],
       },
       intent: {
-        basic: ['after:bg-basic', 'group-data-[orientation=horizontal]/list:before:bg-basic'],
-        support: ['after:bg-support', 'group-data-[orientation=horizontal]/list:before:bg-support'],
-        main: ['after:bg-main', 'group-data-[orientation=horizontal]/list:before:bg-main'],
-        neutral: ['after:bg-neutral', 'group-data-[orientation=horizontal]/list:before:bg-neutral'],
-        info: ['after:bg-info', 'group-data-[orientation=horizontal]/list:before:bg-info'],
-        accent: ['after:bg-accent', 'group-data-[orientation=horizontal]/list:before:bg-accent'],
-        danger: ['after:bg-error', 'group-data-[orientation=horizontal]/list:before:bg-error'],
-        alert: ['after:bg-alert', 'group-data-[orientation=horizontal]/list:before:bg-alert'],
-        success: ['after:bg-success', 'group-data-[orientation=horizontal]/list:before:bg-success'],
+        basic: '',
+        support: '',
+        main: '',
+        neutral: '',
+        info: '',
+        accent: '',
+        danger: '',
+        alert: '',
+        success: '',
       },
       disabled: {
         true: 'before:opacity-dim-3',
