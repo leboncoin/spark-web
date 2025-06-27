@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.7.7](https://github.com/leboncoin/spark-web/compare/v10.7.6...v10.7.7) (2025-06-27)
+
+### Bug Fixes
+
+- **components:** active tab trigger text is now bold ([f682e9a](https://github.com/leboncoin/spark-web/commit/f682e9a8852e50c012759d54e46d769985e985cd))
+- **components:** switch - improved contrast when toggled off ([0fb07d3](https://github.com/leboncoin/spark-web/commit/0fb07d3d3e7d4163858c33f18e0ac34d8a9f5bf2))
+- **components:** updated design of progresstracker ([c46abd4](https://github.com/leboncoin/spark-web/commit/c46abd4b3bfb8a4be90309f9da96259c2d1bcf03))
+
 ## [10.7.6](https://github.com/leboncoin/spark-web/compare/v10.7.5...v10.7.6) (2025-06-13)
 
 **Note:** Version bump only for package @spark-ui/components
