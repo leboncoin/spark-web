@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.8.0](https://github.com/leboncoin/spark-web/compare/v10.7.7...v10.8.0) (2025-06-27)
+
+### Features
+
+- **components:** carousel pagePicker can now be inside the carousel ([249b34b](https://github.com/leboncoin/spark-web/commit/249b34b152ed570811ee32aeb57d8cd662748c7c))
+
 ## [10.7.7](https://github.com/leboncoin/spark-web/compare/v10.7.6...v10.7.7) (2025-06-27)
 
 ### Bug Fixes
