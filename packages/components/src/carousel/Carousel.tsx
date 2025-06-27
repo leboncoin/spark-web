@@ -17,6 +17,7 @@ export const Carousel = ({
   snapStop = 'always',
   scrollBehavior = 'smooth',
   slidesPerMove = 'auto',
+  pagePickerInset = false,
   slidesPerPage = 1,
   loop = false,
   children,
@@ -35,6 +36,7 @@ export const Carousel = ({
     snapStop,
     snapType,
     page,
+    pagePickerInset,
     onPageChange,
   })
 

@@ -1,4 +1,4 @@
-import { CSSProperties, Ref, RefObject, KeyboardEvent } from 'react'
+import { CSSProperties, KeyboardEvent, Ref, RefObject } from 'react'
 
 export const DATA_SCOPE = 'carousel' as const
 export const DIRECTION = 'ltr' as const
@@ -46,6 +46,7 @@ export interface UseCarouselProps {
   loop?: boolean
   scrollBehavior?: 'instant' | 'smooth'
   onPageChange?: (pageIndex: number) => void
+  pagePickerInset?: boolean
 }
 
 export interface ComputedRootProps {
@@ -145,6 +146,7 @@ export interface CarouselAPI extends AnatomyPropsSetters {
   gap: number
   page: number
   pageSnapPoints: number[]
+  pagePickerInset: boolean
   canScrollNext: boolean
   canScrollPrev: boolean
   scrollTo: (pageIndex: number, behavior: 'instant' | 'smooth') => void

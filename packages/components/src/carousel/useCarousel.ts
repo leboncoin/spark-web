@@ -39,6 +39,7 @@ export const useCarousel = ({
   slidesPerMove = 'auto',
   scrollBehavior = 'smooth',
   loop = false,
+  pagePickerInset = false,
   // state control
   page: controlledPage,
   onPageChange: onPageChangeProp,
@@ -170,6 +171,7 @@ export const useCarousel = ({
     slidesPerMove,
     scrollBehavior,
     loop,
+    pagePickerInset,
     // computed state
     page: pageState,
     pageSnapPoints,
