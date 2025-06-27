@@ -1,6 +1,7 @@
 import { Meta, Canvas } from '@storybook/addon-docs'
 import { Kbd } from '@spark-ui/components/kbd'
 import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Callout } from '@docs/helpers/Callout'
 
 import { Carousel } from '.'
 
@@ -70,6 +71,21 @@ The page corresponds to the scroll snap position index based on the layout. It d
 To customize spacing between slides, set the `gap` property. Value in pixels (integer).
 
 <Canvas of={stories.Gap} />
+
+### Inset page picker
+
+To inset the page picker from the edges of the carousel, pass the `pagePickerInset` prop to `Carousel`.
+
+Each `Carousel.PageIndicator` can have an `intent` prop to customize its appearance, either `basic` or `surface`.
+
+<Callout kind="warning" marginY="large">
+  <p>
+    <span className="font-bold">a11y</span>: When using images in carousel slides, ensure proper contrast between page indicators and background. Add a gradient overlay or shadow to maintain accessibility standards.
+    Check the code example to see how to do it.
+  </p>
+</Callout>
+
+<Canvas of={stories.InsetPagePicker} />
 
 ### Loop
 

@@ -23,6 +23,7 @@ export const CarouselPagePicker = ({ children, className }: Props) => {
         {...ctx.getIndicatorGroupProps()}
         className={cx(
           'default:min-h-sz-16 flex w-full flex-wrap items-center justify-center',
+          ctx.pagePickerInset && 'bottom-sz-12 absolute inset-x-0',
           className
         )}
       >

@@ -267,6 +267,41 @@ export const Gap: StoryFn = _args => {
   )
 }
 
+export const InsetPagePicker: StoryFn = _args => {
+  return (
+    <Carousel pagePickerInset>
+      <Carousel.Viewport>
+        <Carousel.Slides>
+          {Array.from({ length: 11 }).map((_, i) => (
+            <Carousel.Slide key={i} aria-label={`Slide ${i}`} className="flex items-center">
+              {/* Custom gradient element to ensure the contrast ratio is met */}
+              <div className="h-sz-36 to-surface-inverse/dim-2 pointer-events-none absolute inset-x-0 bottom-0 bg-linear-to-b/oklch from-transparent" />
+              <RandomImage imgHeight={600} imgWidth={600} className="h-sz-256 object-cover" />
+            </Carousel.Slide>
+          ))}
+        </Carousel.Slides>
+        <Carousel.Controls>
+          <Carousel.PrevButton aria-label="Previous group of items" />
+          <Carousel.NextButton aria-label="Next group of items" />
+        </Carousel.Controls>
+      </Carousel.Viewport>
+
+      <Carousel.PagePicker>
+        {({ pages }) =>
+          pages.map(page => (
+            <Carousel.PageIndicator
+              key={page}
+              index={page}
+              intent="surface"
+              aria-label={`Go to page ${page + 1}`}
+            />
+          ))
+        }
+      </Carousel.PagePicker>
+    </Carousel>
+  )
+}
+
 export const DefaultPage: StoryFn = _args => {
   return (
     <Carousel defaultPage={2}>
