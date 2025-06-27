@@ -69,29 +69,6 @@ export const Sizes: StoryFn = _args => (
   </div>
 )
 
-const intents: ComponentProps<typeof Switch>['intent'][] = [
-  'main',
-  'support',
-  'accent',
-  'basic',
-  'success',
-  'alert',
-  'error',
-  'info',
-  'neutral',
-]
-
-export const Intent: StoryFn = _args => (
-  <div className="gap-lg flex">
-    {intents.map(intent => (
-      <div key={intent}>
-        <StoryLabel>{intent}</StoryLabel>
-        <Switch intent={intent} defaultChecked aria-label={`My ${intent} switch`} />
-      </div>
-    ))}
-  </div>
-)
-
 export const FieldHelperMessage: StoryFn = _args => (
   <FormField name="agreement">
     <Switch>Gifts only</Switch>

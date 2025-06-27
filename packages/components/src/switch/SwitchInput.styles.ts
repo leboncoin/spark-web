@@ -10,7 +10,7 @@ export const styles = cva(
     'transition-colors duration-200 ease-in-out',
     'disabled:hover:ring-transparent disabled:cursor-not-allowed disabled:opacity-dim-3',
     'focus-visible:u-outline',
-    'data-[state=unchecked]:bg-on-surface/dim-4',
+    'data-[state=unchecked]:bg-on-surface/dim-3',
     'u-shadow-border-transition',
     'overflow-x-hidden',
   ]),
@@ -93,7 +93,7 @@ export const thumbStyles = cva(
       }),
       checked: {
         true: '-translate-x-full',
-        false: 'translate-x-0 text-on-surface/dim-4',
+        false: 'translate-x-0 text-on-surface/dim-2',
       },
     },
     defaultVariants: {
