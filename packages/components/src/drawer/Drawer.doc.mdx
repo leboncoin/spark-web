@@ -58,6 +58,18 @@ export default () => (
 
 ## Examples
 
+### Fade effect
+
+Use `withFade` to add a fade effect to indicate content overflow. It uses an alpha css mask to be compatible no matter wich background is behind your content.
+
+<Canvas of={stories.Fade} />
+
+### Inset
+
+When set to `true`, this option will remove the internal padding of the `Drawer.Body` component. This allows you to have an image or any content that occupies the full width, for example.
+
+<Canvas of={stories.Inset} />
+
 ### Side
 
 Pick a side among `right`, `left`, `top` and `bottom`.
@@ -70,11 +82,7 @@ Pick a size among `sm`, `md`, `lg`, `fluid` and `fullscreen`.
 
 <Canvas of={stories.Sizes} />
 
-### Inset
 
-When set to `true`, this option will remove the internal padding of the `Drawer.Body` component. This allows you to have an image or any content that occupies the full width, for example.
-
-<Canvas of={stories.Inset} />
 
 ## API Reference
 
