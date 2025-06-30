@@ -64,17 +64,23 @@ Use `open` and `onOpenChange` props to control the state of the dialog. This is 
 
 <Canvas of={stories.Controlled} />
 
-### Sizes
+### Fade effect
 
-Pick a size among `sm`, `md`, `lg` and `fullscreen`.
+Use `withFade` to add a fade effect to indicate content overflow. It uses an alpha css mask to be compatible no matter wich background is behind your content.
 
-<Canvas of={stories.Sizes} />
+<Canvas of={stories.Fade} />
 
 ### Inset
 
 When set to `true`, this option will remove the internal padding of the `Dialog.Body` component. This allows you to have an image or any content that occupies the full width, for example.
 
 <Canvas of={stories.Inset} />
+
+### Sizes
+
+Pick a size among `sm`, `md`, `lg` and `fullscreen`.
+
+<Canvas of={stories.Sizes} />
 
 ## Advanced Examples
 

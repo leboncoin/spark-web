@@ -1,12 +1,16 @@
-import { useEffect, useState, RefObject } from 'react'
+import { RefObject, useEffect, useState } from 'react'
 
 export interface ScrollOverflow {
+  top: number
+  bottom: number
   left: number
   right: number
 }
 
 export function useScrollOverflow(scrollRef: RefObject<HTMLElement | null>): ScrollOverflow {
   const [overflow, setOverflow] = useState<ScrollOverflow>({
+    top: 0,
+    bottom: 0,
     left: 0,
     right: 0,
   })
@@ -16,9 +20,12 @@ export function useScrollOverflow(scrollRef: RefObject<HTMLElement | null>): Scr
       const scrollElement = scrollRef.current
 
       if (scrollElement) {
-        const { scrollLeft, scrollWidth, clientWidth } = scrollElement
+        const { scrollTop, scrollHeight, clientHeight, scrollLeft, scrollWidth, clientWidth } =
+          scrollElement
 
         setOverflow({
+          top: scrollTop,
+          bottom: scrollHeight - (scrollTop + clientHeight),
           left: scrollLeft,
           right: scrollWidth - (scrollLeft + clientWidth),
         })
