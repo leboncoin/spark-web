@@ -77,7 +77,7 @@ export const ScrollingListItems = ({ children, className = '', ...rest }: Props)
     scrollPaddingInline: 'var(--scrolling-list-px)',
     '--scrolling-list-px': `${ctx.scrollPadding}px`,
     '--scrolling-list-gap': `${ctx.gap}px`,
-    ...(ctx.widthFade && {
+    ...(ctx.withFade && {
       maskImage:
         'linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 44px, rgba(0, 0, 0, 1) calc(100% - 44px), rgba(0, 0, 0, 0))',
       maskSize: `calc(100% + ${ctx.overflow.left ? '0px' : '44px'} + ${ctx.overflow.right ? '0px' : '44px'}) 100%`,

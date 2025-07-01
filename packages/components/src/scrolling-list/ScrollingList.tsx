@@ -1,7 +1,6 @@
+import { ScrollOverflow, useScrollOverflow } from '@spark-ui/hooks/use-scroll-overflow'
 import { createContext, ReactNode, RefObject, useRef } from 'react'
 import { SnapCarouselResult, useSnapCarousel } from 'react-snap-carousel'
-
-import { ScrollOverflow, useScrollOverflow } from './useScrollOverflow'
 
 type SnapType = 'mandatory' | 'proximity' | 'none'
 type ScrollBehavior = 'smooth' | 'instant'
@@ -23,7 +22,7 @@ interface Props {
   /**
    * Add a fade effect to indicate content overflow.
    */
-  widthFade?: boolean
+  withFade?: boolean
   children?: ReactNode
   /**
    * When `true`, allow previous and next buttons to be used when reaching the edges of the list.
@@ -46,7 +45,7 @@ interface ScrollingListContextState extends SnapCarouselResult {
   visibleItemsRange: readonly [number, number]
   loop: boolean
   gap: number
-  widthFade: boolean
+  withFade: boolean
   scrollPadding: number
   scrollAreaRef: RefObject<HTMLDivElement | null>
   overflow: ScrollOverflow
@@ -63,7 +62,7 @@ export const ScrollingList = ({
   scrollBehavior = 'smooth',
   loop = false,
   gap = 16,
-  widthFade = false, // TODO: ask for default value + why it has been removed from specs
+  withFade = false,
   scrollPadding = 0,
   children,
 }: Props) => {
@@ -95,7 +94,7 @@ export const ScrollingList = ({
     visibleItemsRange,
     loop,
     gap,
-    widthFade,
+    withFade,
     scrollPadding,
     scrollAreaRef,
     overflow,

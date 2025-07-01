@@ -3,11 +3,18 @@ import { createContext, type ReactNode, useContext, useState } from 'react'
 export interface DialogContextState {
   isFullScreen: boolean
   setIsFullScreen: (value: boolean) => void
+  withFade: boolean
 }
 
 const DialogContext = createContext<DialogContextState | null>(null)
 
-export const DialogProvider = ({ children: childrenProp }: { children: ReactNode }) => {
+export const DialogProvider = ({
+  children: childrenProp,
+  withFade = false,
+}: {
+  children: ReactNode
+  withFade?: boolean
+}) => {
   const [isFullScreen, setIsFullScreen] = useState(false)
 
   return (
@@ -15,6 +22,7 @@ export const DialogProvider = ({ children: childrenProp }: { children: ReactNode
       value={{
         isFullScreen,
         setIsFullScreen,
+        withFade,
       }}
     >
       {childrenProp}

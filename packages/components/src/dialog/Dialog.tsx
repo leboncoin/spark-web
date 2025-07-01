@@ -24,9 +24,13 @@ export interface DialogProps {
    * Specifies if the dialog is a modal.
    */
   modal?: RadixDialog.DialogProps['modal']
+  /**
+   * Specifies if the dialog should have a fade animation on its body (in case it is scrollable).
+   */
+  withFade?: boolean
 }
 
-export const Dialog = ({ children, ...rest }: DialogProps): ReactElement => {
+export const Dialog = ({ children, withFade = false, ...rest }: DialogProps): ReactElement => {
   const open = rest.open
   const activeElementRef = useRef<Element>(null)
 
@@ -50,7 +54,7 @@ export const Dialog = ({ children, ...rest }: DialogProps): ReactElement => {
   useEffect(handleActiveElementFocus, [open])
 
   return (
-    <DialogProvider>
+    <DialogProvider withFade={withFade}>
       <RadixDialog.Root {...rest}>{children}</RadixDialog.Root>
     </DialogProvider>
   )

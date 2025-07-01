@@ -214,7 +214,7 @@ export const Gap: StoryFn = _args => {
 
 export const Fade: StoryFn = _args => {
   return (
-    <ScrollingList widthFade>
+    <ScrollingList withFade>
       <ScrollingList.SkipButton>Ignore the list</ScrollingList.SkipButton>
 
       <ScrollingList.Items>

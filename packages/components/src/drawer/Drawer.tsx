@@ -1,6 +1,8 @@
 import { Dialog as RadixDrawer } from 'radix-ui'
 import { type ReactElement, ReactNode } from 'react'
 
+import { DrawerProvider } from './DrawerContext'
+
 export interface DrawerProps {
   /**
    * Children of the component.
@@ -22,6 +24,10 @@ export interface DrawerProps {
    * Specifies if the dialog is a modal.
    */
   modal?: RadixDrawer.DialogProps['modal']
+  /**
+   * Specifies if the drawer should have a fade animation on its body (in case it is scrollable).
+   */
+  withFade?: boolean
 }
 
 export interface DialogProps {
@@ -32,8 +38,10 @@ export interface DialogProps {
   modal?: boolean
 }
 
-export const Drawer = ({ children, ...rest }: DrawerProps): ReactElement => (
-  <RadixDrawer.Root {...rest}>{children}</RadixDrawer.Root>
+export const Drawer = ({ children, withFade = false, ...rest }: DrawerProps): ReactElement => (
+  <DrawerProvider withFade={withFade}>
+    <RadixDrawer.Root {...rest}>{children}</RadixDrawer.Root>
+  </DrawerProvider>
 )
 
 Drawer.displayName = 'Drawer.Root'

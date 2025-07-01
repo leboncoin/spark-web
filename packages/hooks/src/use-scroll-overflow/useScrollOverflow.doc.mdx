@@ -1,0 +1,34 @@
+import { Meta, Story } from '@storybook/blocks'
+
+<Meta title="Hooks/useScrollOverflow" />
+
+# useScrollOverflow
+
+Detects overflow from any side of a scrollable element.
+
+## Install
+
+```
+npm install @spark-ui/hooks
+```
+
+## Import
+
+```
+import { useScrollOverflow } from "@spark-ui/hooks/use-scroll-overflow"
+```
+
+## Usage
+
+```jsx
+import * as React from 'react'
+import { useScrollOverflow } from "@spark-ui/hooks/use-scroll-overflow"
+
+const Demo = () => {
+  const overflow = useScrollOverflow()
+
+  return <div className={overflow.bottom > 0 ? 'border-b-sm border-outline' : ''}>
+    <p>Some scrollable text</p>
+  </div>
+}
+```
