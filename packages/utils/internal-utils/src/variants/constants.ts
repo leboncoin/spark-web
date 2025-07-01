@@ -11,6 +11,7 @@ const intents = [
   'danger',
   'neutral',
   'surface',
+  'surfaceInverse',
   'accent',
   'basic',
 ] as const

@@ -38,7 +38,7 @@ export const buttonStyles = cva(
         outlined: ['bg-transparent', 'border-sm', 'border-current'],
         tinted: [],
         ghost: ['default:-mx-md px-md hover:bg-main/dim-5'],
-        contrast: ['bg-surface'],
+        contrast: [],
       }),
       underline: {
         true: ['underline'],
@@ -59,6 +59,7 @@ export const buttonStyles = cva(
           'info',
           'neutral',
           'surface',
+          'surfaceInverse',
         ]
       >({
         main: [],
@@ -71,6 +72,7 @@ export const buttonStyles = cva(
         info: [],
         neutral: [],
         surface: [],
+        surfaceInverse: [],
       }),
       /**
        * Size of the button.
