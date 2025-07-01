@@ -101,4 +101,14 @@ export const outlinedVariants = [
       'text-surface',
     ]),
   },
+  {
+    intent: 'surfaceInverse',
+    design: 'outlined',
+    class: tw([
+      'hover:bg-surface-inverse/dim-5',
+      'enabled:active:bg-surface-inverse/dim-5',
+      'focus-visible:bg-surface-inverse/dim-5',
+      'text-surface-inverse',
+    ]),
+  },
 ] as const
