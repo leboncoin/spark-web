@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.9.0](https://github.com/leboncoin/spark-web/compare/v10.8.2...v10.9.0) (2025-07-01)
+
+### Features
+
+- **components:** added fade scroll indicator on Drawer ([4bc8f20](https://github.com/leboncoin/spark-web/commit/4bc8f2008a4daa12c13060b91929b5dc73eaaf2c))
+- **components:** fade scroll effect on Dialog ([4b5d171](https://github.com/leboncoin/spark-web/commit/4b5d171a20e6433a61bbd6ccf7b680aa1e74c0ed))
+
 ## [10.8.2](https://github.com/leboncoin/spark-web/compare/v10.8.1...v10.8.2) (2025-07-01)
 
 **Note:** Version bump only for package @spark-ui/components
