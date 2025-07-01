@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.8.1](https://github.com/leboncoin/spark-web/compare/v10.8.0...v10.8.1) (2025-07-01)
+
+### Bug Fixes
+
+- **components:** avatar, improving error detection on image ([f8624d5](https://github.com/leboncoin/spark-web/commit/f8624d5759637e83a0b7a3f371a5681a074d616a))
+
 # [10.8.0](https://github.com/leboncoin/spark-web/compare/v10.7.7...v10.8.0) (2025-06-27)
 
 ### Features
