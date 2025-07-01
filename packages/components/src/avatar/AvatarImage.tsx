@@ -12,9 +12,17 @@ export const AvatarImage = ({ className, asChild, src, ...props }: AvatarImagePr
   const { username, isOnline, onlineText } = useAvatarContext()
   const Comp = asChild ? Slot : 'img'
 
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
 
   const accessibleName = isOnline && onlineText ? `${username} (${onlineText})` : username
+
+  const handleError = (event: any) => {
+    setIsVisible(false)
+    // Call the original onError if provided
+    if (props.onError) {
+      props.onError(event)
+    }
+  }
 
   return (
     <Comp
@@ -29,9 +37,7 @@ export const AvatarImage = ({ className, asChild, src, ...props }: AvatarImagePr
       )}
       alt={accessibleName}
       src={src}
-      onLoad={() => {
-        setIsVisible(true)
-      }}
+      onError={handleError}
       {...props}
     />
   )
