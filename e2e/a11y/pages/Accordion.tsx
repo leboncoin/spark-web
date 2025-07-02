@@ -3,7 +3,7 @@ import React from 'react'
 
 export const A11yAccordion = () => (
   <section>
-    <Accordion defaultValue={['watercraft']}>
+    <Accordion defaultValue={['watercraft']} aria-label="Playwright Accordion">
       <Accordion.Item value="watercraft">
         <Accordion.ItemHeader asChild>
           <h4>

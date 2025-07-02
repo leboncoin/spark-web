@@ -44,7 +44,7 @@
     "build": "NODE_OPTIONS='--max-old-space-size=8192' tsup"
   },
   "dependencies": {
-    "@base-ui-components/react": "^1.0.0-alpha.8",
+    "@base-ui-components/react": "^1.0.0-beta.1",
     "@react-aria/button": "3.13.0",
     "@react-aria/numberfield": "3.11.13",
     "@react-aria/toast": "^3.0.0-beta.18",
@@ -53,8 +53,6 @@
     "@spark-ui/hooks": "^10.9.0",
     "@spark-ui/icons": "^10.9.0",
     "@spark-ui/internal-utils": "^10.9.0",
-    "@zag-js/accordion": "1.14.0",
-    "@zag-js/collapsible": "1.14.0",
     "@zag-js/pagination": "1.14.0",
     "@zag-js/react": "1.14.0",
     "class-variance-authority": "0.7.1",

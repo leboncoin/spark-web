@@ -11,7 +11,13 @@ export interface ContentProps extends ComponentProps<typeof Collapsible.Panel> {
   asChild?: boolean
 }
 
-export const Content = ({ asChild = false, className, children, ...props }: ContentProps) => {
+export const Content = ({
+  asChild = false,
+  className,
+  children,
+  hiddenUntilFound = true,
+  ...props
+}: ContentProps) => {
   const renderSlot = useRenderSlot(asChild, 'div')
 
   return (
@@ -27,6 +33,7 @@ export const Content = ({ asChild = false, className, children, ...props }: Cont
         className
       )}
       render={renderSlot}
+      hiddenUntilFound={hiddenUntilFound}
       {...props}
     >
       {children}

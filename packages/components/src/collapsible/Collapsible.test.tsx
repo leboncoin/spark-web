@@ -13,7 +13,7 @@ describe('Collapsible', () => {
       <Collapsible>
         <Collapsible.Trigger>Expand</Collapsible.Trigger>
 
-        <Collapsible.Content hiddenUntilFound>
+        <Collapsible.Content>
           <p>Collapsible content</p>
         </Collapsible.Content>
       </Collapsible>
@@ -38,7 +38,7 @@ describe('Collapsible', () => {
           <button>Expand</button>
         </Collapsible.Trigger>
 
-        <Collapsible.Content hiddenUntilFound>
+        <Collapsible.Content>
           <p>Collapsible content</p>
         </Collapsible.Content>
       </Collapsible>
@@ -74,7 +74,7 @@ describe('Collapsible', () => {
               <button>Expand</button>
             </Collapsible.Trigger>
 
-            <Collapsible.Content hiddenUntilFound>
+            <Collapsible.Content>
               <p>Collapsible content</p>
             </Collapsible.Content>
           </Collapsible>
@@ -104,7 +104,7 @@ describe('Collapsible', () => {
             <button>Expand</button>
           </Collapsible.Trigger>
 
-          <Collapsible.Content hiddenUntilFound>
+          <Collapsible.Content>
             <p>Collapsible content</p>
           </Collapsible.Content>
         </Collapsible>
@@ -128,7 +128,7 @@ describe('Collapsible', () => {
             <button>Expand</button>
           </Collapsible.Trigger>
 
-          <Collapsible.Content hiddenUntilFound>
+          <Collapsible.Content>
             <p>Collapsible content</p>
           </Collapsible.Content>
         </Collapsible>

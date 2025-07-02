@@ -1,21 +1,15 @@
-import { createSplitProps } from '@spark-ui/internal-utils'
-import { mergeProps } from '@zag-js/react'
+import { Accordion as BaseAccordion } from '@base-ui-components/react/accordion'
 import { cx } from 'class-variance-authority'
-import { type ComponentPropsWithoutRef, Ref } from 'react'
+import { type ComponentProps, Ref } from 'react'
 
-import { Collapsible } from '../collapsible'
-import { useAccordionContext } from './Accordion'
-import { useAccordionItemContext } from './AccordionItemContext'
+import { useRenderSlot } from './useRenderSlot'
 
-export interface AccordionItemContentProps extends ComponentPropsWithoutRef<'div'> {
+type ExtentedZagInterface = Omit<ComponentProps<typeof BaseAccordion.Panel>, 'render'>
+
+export interface AccordionItemContentProps extends ExtentedZagInterface {
   asChild?: boolean
   ref?: Ref<HTMLDivElement>
 }
-
-const splitVisibilityProps = createSplitProps<{
-  hidden?: boolean
-  'data-state'?: string
-}>()
 
 export const ItemContent = ({
   asChild = false,
@@ -24,27 +18,23 @@ export const ItemContent = ({
   ref,
   ...props
 }: AccordionItemContentProps) => {
-  const accordion = useAccordionContext()
-  const accordionItem = useAccordionItemContext()
-
-  const localProps = {
-    className: cx('[&>:first-child]:p-lg', 'text-body-1 text-on-surface', className),
-    asChild,
-    ...props,
-  }
-  const contentProps = accordion.getItemContentProps({
-    value: accordionItem.value,
-    ...(accordionItem.disabled && { disabled: accordionItem.disabled }),
-  })
-
-  const [, itemContentProps] = splitVisibilityProps(contentProps, ['hidden', 'data-state'])
-
-  const mergedProps = mergeProps(itemContentProps, localProps)
+  const renderSlot = useRenderSlot(asChild, 'div')
 
   return (
-    <Collapsible.Content ref={ref} data-spark-component="accordion-item-content" {...mergedProps}>
+    <BaseAccordion.Panel
+      ref={ref}
+      data-spark-component="accordion-item-content"
+      className={cx(
+        '[&>:first-child]:p-lg overflow-hidden',
+        'h-[var(--accordion-panel-height)] transition-all duration-200 data-[ending-style]:h-0 data-[starting-style]:h-0',
+        'text-body-1 text-on-surface',
+        className
+      )}
+      render={renderSlot}
+      {...props}
+    >
       {children}
-    </Collapsible.Content>
+    </BaseAccordion.Panel>
   )
 }
 

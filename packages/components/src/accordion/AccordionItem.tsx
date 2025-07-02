@@ -1,15 +1,14 @@
-import { mergeProps } from '@zag-js/react'
+import { Accordion as BaseAccordion } from '@base-ui-components/react/accordion'
 import { cx } from 'class-variance-authority'
-import { type ComponentPropsWithoutRef, Ref } from 'react'
+import { type ComponentProps, Ref } from 'react'
 
-import { Collapsible } from '../collapsible'
 import { useAccordionContext } from './Accordion'
-import { AccordionItemProvider } from './AccordionItemContext'
+import { useRenderSlot } from './useRenderSlot'
 
-export interface AccordionItemProps extends ComponentPropsWithoutRef<'div'> {
-  value: string
+type ExtentedZagInterface = Omit<ComponentProps<typeof BaseAccordion.Item>, 'render'>
+
+export interface AccordionItemProps extends ExtentedZagInterface {
   asChild?: boolean
-  disabled?: boolean
   ref?: Ref<HTMLDivElement>
 }
 
@@ -17,42 +16,28 @@ export const Item = ({
   asChild = false,
   className,
   children,
-  disabled = false,
-  value,
   ref,
   ...props
 }: AccordionItemProps) => {
   const accordion = useAccordionContext()
 
-  const localProps = {
-    className: cx(
-      'relative first:rounded-t-lg last:rounded-b-lg',
-      'not-last:border-b-0',
-      { 'border-sm border-outline': accordion.design === 'outlined' },
-      className
-    ),
-    asChild,
-    ...props,
-  }
-
-  const itemProps = accordion.getItemProps({ value, ...(disabled && { disabled }) })
-  const mergedProps = mergeProps(itemProps, localProps)
-
-  const item = accordion.getItemState({ value })
-  const itemContentProps = accordion.getItemContentProps({ value })
+  const renderSlot = useRenderSlot(asChild, 'div')
 
   return (
-    <AccordionItemProvider value={value} disabled={disabled}>
-      <Collapsible
-        ref={ref}
-        open={item.expanded}
-        data-spark-component="accordion-item"
-        ids={{ content: itemContentProps.id }}
-        {...mergedProps}
-      >
-        {children}
-      </Collapsible>
-    </AccordionItemProvider>
+    <BaseAccordion.Item
+      ref={ref}
+      data-spark-component="accordion-item"
+      render={renderSlot}
+      className={cx(
+        'relative first:rounded-t-lg last:rounded-b-lg',
+        'not-last:border-b-0',
+        { 'border-sm border-outline': accordion.design === 'outlined' },
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </BaseAccordion.Item>
   )
 }
 
