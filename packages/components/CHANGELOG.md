@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.10.0](https://github.com/leboncoin/spark-web/compare/v10.9.0...v10.10.0) (2025-07-03)
+
+### Features
+
+- **components:** migrated accordion from ZagJS to BaseUI ([1607bf5](https://github.com/leboncoin/spark-web/commit/1607bf512a22e9bf482ede8c6bfb56e0cee8926e))
+
 # [10.9.0](https://github.com/leboncoin/spark-web/compare/v10.8.2...v10.9.0) (2025-07-01)
 
 ### Features
