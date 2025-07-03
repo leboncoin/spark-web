@@ -113,9 +113,16 @@ export const Design: StoryFn = _args => {
         return (
           <div key={design}>
             <Tag className="mb-sm">{design}</Tag>
-            <Accordion design={design} defaultValue={['watercraft']}>
+            <Accordion
+              multiple
+              design={design}
+              defaultValue={['watercraft']}
+              aria-label={`Accordion with ${design} design`}
+            >
               <Accordion.Item value="watercraft">
-                <Accordion.ItemTrigger>Watercraft</Accordion.ItemTrigger>
+                <Accordion.ItemTrigger>
+                  Watercraft <span className="sr-only">{design}</span>
+                </Accordion.ItemTrigger>
                 <Accordion.ItemContent>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
@@ -125,7 +132,9 @@ export const Design: StoryFn = _args => {
               </Accordion.Item>
 
               <Accordion.Item value="automobiles">
-                <Accordion.ItemTrigger>Automobiles</Accordion.ItemTrigger>
+                <Accordion.ItemTrigger>
+                  Automobiles <span className="sr-only">{design}</span>
+                </Accordion.ItemTrigger>
                 <Accordion.ItemContent>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
@@ -135,7 +144,9 @@ export const Design: StoryFn = _args => {
               </Accordion.Item>
 
               <Accordion.Item value="aircrafts">
-                <Accordion.ItemTrigger>Aircrafts</Accordion.ItemTrigger>
+                <Accordion.ItemTrigger>
+                  Aircrafts <span className="sr-only">{design}</span>
+                </Accordion.ItemTrigger>
                 <Accordion.ItemContent>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor

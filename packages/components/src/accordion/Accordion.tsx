@@ -1,15 +1,13 @@
-import * as accordion from '@zag-js/accordion'
-import { mergeProps, normalizeProps, type PropTypes, useMachine } from '@zag-js/react'
+import { Accordion as BaseAccordion } from '@base-ui-components/react/accordion'
 import { cx } from 'class-variance-authority'
-import { type ComponentPropsWithoutRef, createContext, Ref, useContext, useId } from 'react'
+import { ComponentProps, createContext, Ref, useContext } from 'react'
 
-import { Slot } from '../slot'
+import { useRenderSlot } from './useRenderSlot'
 
 type ExtentedZagInterface = Omit<
-  accordion.Props,
-  'id' | 'ids' | 'orientation' | 'getRootNode' | 'onValueChange'
-> &
-  Omit<ComponentPropsWithoutRef<'div'>, 'defaultChecked'>
+  ComponentProps<typeof BaseAccordion.Root>,
+  'openMultiple' | 'render'
+>
 
 export interface AccordionProps extends ExtentedZagInterface {
   /**
@@ -17,81 +15,46 @@ export interface AccordionProps extends ExtentedZagInterface {
    */
   asChild?: boolean
   /**
-   * Whether an accordion item can be closed after it has been expanded.
-   */
-  collapsible?: boolean
-  defaultValue?: accordion.Props['value']
-  /**
    * Whether the accordion items are disabled
    */
   disabled?: boolean
   /**
-   * Whether multiple accordion items can be expanded at the same time.
+   * Whether multiple items can be open at the same time.
    */
   multiple?: boolean
-  /**
-   * The `value` of the accordion items that are currently being expanded.
-   */
-  value?: string[]
-  /**
-   * The callback fired when the state of expanded/collapsed accordion items changes.
-   */
-  onValueChange?: (value: string[]) => void
   design?: 'filled' | 'outlined'
   ref?: Ref<HTMLDivElement>
 }
 
-const AccordionContext = createContext<
-  | (accordion.Api<PropTypes> & {
-      design: 'filled' | 'outlined'
-    })
-  | null
->(null)
+const AccordionContext = createContext<{
+  design: 'filled' | 'outlined'
+} | null>(null)
 
 export const Accordion = ({
   asChild = false,
   children,
-  collapsible = true,
-  className,
-  defaultValue,
   design = 'outlined',
-  disabled = false,
+  hiddenUntilFound = true,
   multiple = false,
-  value,
-  onValueChange,
+  className,
   ref,
   ...props
 }: AccordionProps) => {
-  const [machineProps, localProps] = accordion.splitProps({
-    children,
-    multiple,
-    collapsible,
-    value,
-    disabled,
-    className: cx('bg-surface rounded-lg h-fit', className),
-    ...props,
-  })
-
-  const service = useMachine(accordion.machine, {
-    ...machineProps,
-    defaultValue,
-    value,
-    id: useId(),
-    onValueChange(details) {
-      onValueChange?.(details.value)
-    },
-  })
-
-  const Component = asChild ? Slot : 'div'
-  const api = accordion.connect(service, normalizeProps)
-
-  const mergedProps = mergeProps(api.getRootProps(), localProps)
+  const renderSlot = useRenderSlot(asChild, 'div')
 
   return (
-    <AccordionContext.Provider value={{ ...api, design }}>
-      <Component data-spark-component="accordion" ref={ref} {...mergedProps}>
+    <AccordionContext.Provider value={{ design }}>
+      <BaseAccordion.Root
+        data-spark-component="accordion"
+        ref={ref}
+        openMultiple={multiple}
+        hiddenUntilFound={hiddenUntilFound}
+        className={cx('bg-surface h-fit rounded-lg', className)}
+        render={renderSlot}
+        {...props}
+      >
         {children}
-      </Component>
+      </BaseAccordion.Root>
     </AccordionContext.Provider>
   )
 }
