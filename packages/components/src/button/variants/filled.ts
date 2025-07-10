@@ -117,4 +117,15 @@ export const filledVariants = [
       'focus-visible:bg-surface-hovered',
     ]),
   },
+  {
+    intent: 'surfaceInverse',
+    design: 'filled',
+    class: tw([
+      'bg-surface-inverse',
+      'text-on-surface-inverse',
+      'hover:bg-surface-inverse-hovered',
+      'enabled:active:bg-surface-inverse-hovered',
+      'focus-visible:bg-surface-inverse-hovered',
+    ]),
+  },
 ] as const

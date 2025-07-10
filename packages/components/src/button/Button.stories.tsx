@@ -38,6 +38,7 @@ const intents: ButtonProps['intent'][] = [
   'info',
   'neutral',
   'surface',
+  'surfaceInverse',
 ]
 const designs: ButtonProps['design'][] = ['filled', 'outlined', 'tinted', 'contrast', 'ghost']
 const shapes: ButtonProps['shape'][] = ['rounded', 'square', 'pill']
@@ -99,6 +100,7 @@ export const DesignAndIntentTable: StoryFn = _args => {
               key={intent}
               className={cx({
                 'bg-overlay/dim-3': intent === 'surface',
+                'bg-overlay/dim-1': intent === 'surfaceInverse',
               })}
             >
               <td className="border-outline p-md bg-surface text-on-surface border">{intent}</td>

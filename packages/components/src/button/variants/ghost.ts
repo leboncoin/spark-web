@@ -101,4 +101,14 @@ export const ghostVariants = [
       'focus-visible:bg-surface/dim-5',
     ]),
   },
+  {
+    intent: 'surfaceInverse',
+    design: 'ghost',
+    class: tw([
+      'text-surface-inverse',
+      'hover:bg-surface-inverse/dim-5',
+      'enabled:active:bg-surface-inverse/dim-5',
+      'focus-visible:bg-surface-inverse/dim-5',
+    ]),
+  },
 ] as const
