@@ -172,15 +172,14 @@ export const Gap: StoryFn = _args => {
           <FormField.Label>Gap</FormField.Label>
 
           <Stepper
-            aria-label="Stepper with min/max values"
             step={8}
             maxValue={64}
             minValue={0}
             value={gap}
-            onValueChange={setGap}
+            onValueChange={value => setGap(value ?? 0)}
           >
             <Stepper.DecrementButton aria-label="Decrement" />
-            <Stepper.Input />
+            <Stepper.Input aria-label="Gap between items" />
             <Stepper.IncrementButton aria-label="Increment" />
           </Stepper>
         </FormField>
@@ -375,15 +374,14 @@ export const ScrollPadding: StoryFn = _args => {
           <FormField.Label>ScrollPadding</FormField.Label>
 
           <Stepper
-            aria-label="Stepper with min/max values"
             step={4}
             maxValue={44}
             minValue={0}
             value={scrollPadding}
-            onValueChange={setScrollPadding}
+            onValueChange={value => setScrollPadding(value ?? 0)}
           >
             <Stepper.DecrementButton aria-label="Decrement" />
-            <Stepper.Input />
+            <Stepper.Input aria-label="Scroll padding" />
             <Stepper.IncrementButton aria-label="Increment" />
           </Stepper>
         </FormField>

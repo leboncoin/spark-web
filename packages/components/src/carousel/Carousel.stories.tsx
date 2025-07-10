@@ -217,7 +217,7 @@ export const Controlled: StoryFn = _args => {
 }
 
 export const Gap: StoryFn = _args => {
-  const [gap, setGap] = useState<number>(16)
+  const [gap, setGap] = useState(16)
 
   return (
     <div className="gap-xl flex flex-col">
@@ -226,15 +226,14 @@ export const Gap: StoryFn = _args => {
           <FormField.Label>Gap</FormField.Label>
 
           <Stepper
-            aria-label="Stepper with min/max values"
             step={8}
             maxValue={64}
             minValue={0}
             value={gap}
-            onValueChange={setGap}
+            onValueChange={value => setGap(value ?? 0)}
           >
             <Stepper.DecrementButton aria-label="Decrement" />
-            <Stepper.Input />
+            <Stepper.Input aria-label="Gap between slides" />
             <Stepper.IncrementButton aria-label="Increment" />
           </Stepper>
         </FormField>
