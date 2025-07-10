@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.11.0](https://github.com/leboncoin/spark-web/compare/v10.10.0...v10.11.0) (2025-07-10)
+
+### Features
+
+- **components:** added surfaceInverse intent to button ([331b724](https://github.com/leboncoin/spark-web/commit/331b724dfafc33bcfdaee178b3bff07de48462b4))
+
 # [10.10.0](https://github.com/leboncoin/spark-web/compare/v10.9.0...v10.10.0) (2025-07-03)
 
 **Note:** Version bump only for package @spark-ui/internal-utils
