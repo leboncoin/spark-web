@@ -1,10 +1,10 @@
 import { cx } from 'class-variance-authority'
-import { createContext, ReactNode, useContext } from 'react'
+import { ComponentProps, createContext, ReactNode, useContext } from 'react'
 
 import { CarouselAPI, UseCarouselProps } from './types'
 import { useCarousel } from './useCarousel'
 
-interface Props extends UseCarouselProps {
+interface Props extends UseCarouselProps, ComponentProps<'div'> {
   children?: ReactNode
   className?: string
 }
@@ -25,6 +25,7 @@ export const Carousel = ({
   defaultPage,
   page,
   onPageChange,
+  ...props
 }: Props) => {
   const carouselApi = useCarousel({
     defaultPage,
@@ -51,6 +52,7 @@ export const Carousel = ({
         data-spark-component="carousel"
         className={cx('gap-lg relative box-border flex flex-col', className)}
         {...carouselApi.getRootProps()}
+        {...props}
       >
         {children}
       </div>

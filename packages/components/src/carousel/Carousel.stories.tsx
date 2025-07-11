@@ -51,7 +51,7 @@ const RandomImage = memo(
 
 export const Default: StoryFn = _args => {
   return (
-    <Carousel>
+    <Carousel aria-label="Best products">
       <Carousel.Viewport>
         <Carousel.Slides>
           {Array.from({ length: 11 }).map((_, i) => {
@@ -158,7 +158,12 @@ export const Controlled: StoryFn = _args => {
         })}
       </ul>
 
-      <Carousel page={activePage} onPageChange={handlePageChange} className="w-sz-448">
+      <Carousel
+        aria-label="Best products"
+        page={activePage}
+        onPageChange={handlePageChange}
+        className="w-sz-448"
+      >
         <Carousel.Viewport>
           <Carousel.Slides>
             {productsData.map(product => {
@@ -234,7 +239,7 @@ export const Gap: StoryFn = _args => {
         </FormField>
       </div>
 
-      <Carousel gap={gap} slidesPerPage={3}>
+      <Carousel aria-label="Best products" gap={gap} slidesPerPage={3}>
         <Carousel.Viewport>
           <Carousel.Slides>
             {Array.from({ length: 11 }).map((_, i) => (
@@ -269,7 +274,7 @@ export const Gap: StoryFn = _args => {
 
 export const InsetPagePicker: StoryFn = _args => {
   return (
-    <Carousel pagePickerInset>
+    <Carousel aria-label="Best products" pagePickerInset>
       <Carousel.Viewport>
         <Carousel.Slides>
           {Array.from({ length: 11 }).map((_, i) => (
@@ -304,7 +309,7 @@ export const InsetPagePicker: StoryFn = _args => {
 
 export const DefaultPage: StoryFn = _args => {
   return (
-    <Carousel defaultPage={2}>
+    <Carousel aria-label="Best products" defaultPage={2}>
       <Carousel.Viewport>
         <Carousel.Slides>
           {Array.from({ length: 5 }).map((_, i) => {
@@ -336,7 +341,7 @@ export const DefaultPage: StoryFn = _args => {
 
 export const Loop: StoryFn = _args => {
   return (
-    <Carousel loop>
+    <Carousel aria-label="Best products" loop>
       <Carousel.Viewport>
         <Carousel.Slides>
           {Array.from({ length: 3 }).map((_, i) => {
@@ -492,7 +497,7 @@ export const SlidesPerPage: StoryFn = _args => {
         </fieldset>
       </div>
 
-      <Carousel slidesPerPage={slidesPerPage}>
+      <Carousel aria-label="Best products" slidesPerPage={slidesPerPage}>
         <Carousel.Viewport>
           <Carousel.Slides>
             {Array.from({ length: 11 }).map((_, i) => (
@@ -528,7 +533,7 @@ export const SlidesPerPage: StoryFn = _args => {
 export const SlidesPerMove: StoryFn = _args => {
   return (
     <div className="gap-xl flex flex-col">
-      <Carousel slidesPerPage={3} slidesPerMove={1}>
+      <Carousel aria-label="Best products" slidesPerPage={3} slidesPerMove={1}>
         <Carousel.Viewport>
           <Carousel.Slides>
             {Array.from({ length: 11 }).map((_, i) => (
@@ -603,7 +608,7 @@ export const CustomPageIndicators: StoryFn = () => {
 
   return (
     <div className="gap-md flex">
-      <Carousel className="w-sz-448" loop>
+      <Carousel aria-label="Best products" className="w-sz-448" loop>
         <Carousel.Viewport>
           <Carousel.Slides>
             {productsData.map(product => {
