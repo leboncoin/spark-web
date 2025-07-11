@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.11.1](https://github.com/leboncoin/spark-web/compare/v10.11.0...v10.11.1) (2025-07-11)
+
+### Bug Fixes
+
+- **components:** carousel - open aria-label attribute ([5967eb2](https://github.com/leboncoin/spark-web/commit/5967eb23e1f80cf0428191295943cd73766858aa))
+
 # [10.11.0](https://github.com/leboncoin/spark-web/compare/v10.10.0...v10.11.0) (2025-07-10)
 
 ### Features
