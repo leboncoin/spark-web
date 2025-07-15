@@ -69,7 +69,7 @@
     "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
-    "@types/use-sync-external-store": "^0.0.3",
+    "@types/use-sync-external-store": "^1.5.0",
     "jsdom-testing-mocks": "1.13.1"
   },
   "repository": {
