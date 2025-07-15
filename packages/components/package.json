@@ -49,7 +49,8 @@
     "@react-aria/numberfield": "3.11.13",
     "@react-aria/toast": "^3.0.0-beta.18",
     "@react-stately/numberfield": "3.9.11",
-    "@react-stately/toast": "^3.0.0-beta.7",
+    "@swc/helpers": "^0.5.0",
+    "use-sync-external-store": "^1.2.0",
     "@spark-ui/hooks": "^10.11.1",
     "@spark-ui/icons": "^10.11.1",
     "@spark-ui/internal-utils": "^10.11.1",
@@ -68,6 +69,7 @@
     "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
+    "@types/use-sync-external-store": "^0.0.3",
     "jsdom-testing-mocks": "1.13.1"
   },
   "repository": {
