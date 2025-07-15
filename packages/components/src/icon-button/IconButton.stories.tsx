@@ -1,7 +1,7 @@
 import { StoryLabel } from '@docs/helpers/StoryLabel'
 import { LikeFill } from '@spark-ui/icons/LikeFill'
 import { LikeOutline } from '@spark-ui/icons/LikeOutline'
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react-vite'
 import { cx } from 'class-variance-authority'
 import { useState } from 'react'
 

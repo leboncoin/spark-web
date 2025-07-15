@@ -30,16 +30,9 @@ const config: StorybookConfig = {
   ],
   addons: [
     'storybook-addon-tag-badges',
-    {
-      name: '@storybook/addon-essentials',
-      options: {
-        backgrounds: false,
-        actions: false,
-        controls: false,
-      },
-    },
     '@storybook/addon-a11y',
     '@storybook/addon-designs',
+    '@storybook/addon-docs'
   ],
   staticDirs: ['../public'],
   framework: {

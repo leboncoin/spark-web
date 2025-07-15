@@ -5,7 +5,7 @@ import { memo, useEffect, useSyncExternalStore, useRef } from 'react'
      https://github.com/leboncoin/spark-web/pull/2497
 */
 
-import { useGlobals } from '@storybook/manager-api'
+import { useGlobals } from 'storybook/manager-api'
 
 function useUrlChange() {
   /* 1 */

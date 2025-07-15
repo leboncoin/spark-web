@@ -1,5 +1,5 @@
 import { Button } from '@spark-ui/components/button'
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react-vite'
 import { useEffect, useRef, useState } from 'react'
 
 import { Progress, ProgressProps } from '.'

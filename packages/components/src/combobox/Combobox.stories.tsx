@@ -2,7 +2,7 @@
 // import { Button } from '../button'
 import { PenOutline } from '@spark-ui/icons/PenOutline'
 import { Search } from '@spark-ui/icons/Search'
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react-vite'
 import { ComponentProps, useState } from 'react'
 
 import { Button } from '../button'

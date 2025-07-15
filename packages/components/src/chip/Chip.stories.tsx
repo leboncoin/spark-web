@@ -4,7 +4,7 @@ import { CalendarOutline } from '@spark-ui/icons/CalendarOutline'
 import { Check } from '@spark-ui/icons/Check'
 import { EyeOutline } from '@spark-ui/icons/EyeOutline'
 import { MailOutline } from '@spark-ui/icons/MailOutline'
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react-vite'
 import { ComponentProps, useRef, useState } from 'react'
 
 import { Icon } from '../icon'

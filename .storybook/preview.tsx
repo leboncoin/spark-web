@@ -1,4 +1,4 @@
-import { DocsContainer, DocsContainerProps } from '@storybook/blocks'
+import { DocsContainer, DocsContainerProps } from '@storybook/addon-docs/blocks'
 import { Icon } from '@spark-ui/components/icon'
 import { ShareExpand } from '@spark-ui/icons/ShareExpand'
 import { WarningOutline } from '@spark-ui/icons/WarningOutline'
@@ -73,10 +73,14 @@ const preview = {
       },
     },
   },
+
   initialGlobals: {
-    colorScheme: 'system',
-    highContrast: 'system',
+    a11y: {
+      // Optional flag to prevent the automatic check
+      manual: true,
+    },
   },
+
   parameters: {
     docs: {
       container: ExampleContainer,
@@ -109,6 +113,7 @@ const preview = {
       },
     },
   },
+
   decorators: [
     (
       storyFn: () => ReactNode,
@@ -145,13 +150,7 @@ const preview = {
         </div>
       )
     },
-  ],
-  globals: {
-    a11y: {
-      // Optional flag to prevent the automatic check
-      manual: true,
-    },
-  },
+  ]
 }
 
 export default preview

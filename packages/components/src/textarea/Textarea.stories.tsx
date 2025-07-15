@@ -1,6 +1,6 @@
 import { Check } from '@spark-ui/icons/Check'
 import { PenOutline } from '@spark-ui/icons/PenOutline'
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react-vite'
 import { ChangeEvent, useState } from 'react'
 
 import { FormField } from '../form-field'

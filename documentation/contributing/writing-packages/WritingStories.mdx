@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/blocks'
+import { Meta } from '@storybook/addon-docs/blocks'
 import { Callout } from '@docs/helpers/Callout'
 
 <Meta title="Contributing/Writing packages/Documentation" />
@@ -41,7 +41,7 @@ The meta is the semantic information about the documented component. Storybook n
 The meta itself must be declared in the `*stories.tsx` file, but must be referenced in this one to link both files.
 
 ```
-import { Meta } from '@storybook/blocks'
+import { Meta } from '@storybook/addon-docs/blocks'
 
 import * as stories from './Input.stories'
 
@@ -124,7 +124,7 @@ Example `input` "Usage" section:
 
 ```
 
-import { Canvas, Story } from '@storybook/blocks'
+import { Canvas, Story } from '@storybook/addon-docs/blocks'
 
 ## Usage
 
@@ -224,7 +224,7 @@ Please refer to [official Storybook documentation](https://storybook.js.org/docs
 ```tsx
 // Radio.stories.tsx
 
-import { Meta, StoryFn, StoryObj } from '@storybook/react'
+import { Meta, StoryFn, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 
 import { Radio, RadioGroup } from '.'

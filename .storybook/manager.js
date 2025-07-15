@@ -1,4 +1,4 @@
-import { addons, types } from '@storybook/manager-api'
+import { addons, types } from 'storybook/manager-api'
 import { getTheme } from './theme/getTheme.js'
 import { SkinlessThemeSwitcherHandler } from './addons/SkinlessThemeSwitcherHandler.jsx'
 

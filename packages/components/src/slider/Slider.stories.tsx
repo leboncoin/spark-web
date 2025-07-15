@@ -1,5 +1,5 @@
 import { StoryLabel } from '@docs/helpers/StoryLabel'
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react-vite'
 import { useState } from 'react'
 
 import { Slider, type SliderProps } from '.'

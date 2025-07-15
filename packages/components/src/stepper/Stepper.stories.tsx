@@ -1,7 +1,7 @@
 import { StoryLabel } from '@docs/helpers/StoryLabel'
 import { ArrowHorizontalDown } from '@spark-ui/icons/ArrowHorizontalDown'
 import { ArrowHorizontalUp } from '@spark-ui/icons/ArrowHorizontalUp'
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react-vite'
 import { useState } from 'react'
 
 import { FormField } from '../form-field'
