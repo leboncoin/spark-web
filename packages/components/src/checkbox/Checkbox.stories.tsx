@@ -1,7 +1,7 @@
 import { StoryLabel } from '@docs/helpers/StoryLabel'
 import { Close } from '@spark-ui/icons/Close'
 import { Plus } from '@spark-ui/icons/Plus'
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react-vite'
 import { cx } from 'class-variance-authority'
 import { useId, useState } from 'react'
 

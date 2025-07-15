@@ -1,6 +1,6 @@
 import { Close } from '@spark-ui/icons/Close'
 import { MapExpand } from '@spark-ui/icons/MapExpand'
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react-vite'
 import { useState } from 'react'
 
 import { Icon } from '../icon'

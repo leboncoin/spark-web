@@ -1,5 +1,5 @@
 import { FavoriteOutline } from '@spark-ui/icons/FavoriteOutline'
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react-vite'
 
 import { Icon } from '../icon'
 import { IconButton } from '../icon-button'

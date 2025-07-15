@@ -2,7 +2,7 @@ import { StoryLabel } from '@docs/helpers/StoryLabel'
 import { Spinner } from '@spark-ui/components/spinner'
 import { AccountOutline } from '@spark-ui/icons/AccountOutline'
 import { ShareOutline } from '@spark-ui/icons/ShareOutline'
-import type { Meta, StoryFn, StoryObj } from '@storybook/react'
+import type { Meta, StoryFn, StoryObj } from '@storybook/react-vite'
 
 import { Button } from '../button'
 import { Icon } from '../icon'

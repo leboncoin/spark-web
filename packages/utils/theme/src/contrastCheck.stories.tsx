@@ -2,7 +2,7 @@ import { Icon } from '@spark-ui/components/icon'
 import { Tag } from '@spark-ui/components/tag'
 import { Block } from '@spark-ui/icons/Block'
 import { Check } from '@spark-ui/icons/Check'
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react-vite'
 import { cx } from 'class-variance-authority'
 import { ReactNode, useEffect, useRef, useState } from 'react'
 

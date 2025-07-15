@@ -1,6 +1,6 @@
 import { StoryLabel } from '@docs/helpers/StoryLabel'
 import { BookmarkFill } from '@spark-ui/icons/BookmarkFill'
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react-vite'
 import { useState } from 'react'
 
 import { Icon } from '../icon'

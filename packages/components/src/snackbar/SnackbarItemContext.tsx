@@ -1,6 +1,6 @@
-import { QueuedToast, ToastState } from '@react-stately/toast'
 import { createContext, useContext } from 'react'
 
+import { QueuedToast, ToastState } from './local-toast'
 import type { SnackbarItemValue } from './SnackbarItem'
 
 export interface SnackbarItemState<T = SnackbarItemValue> {

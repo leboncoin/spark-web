@@ -1,5 +1,5 @@
 import { StoryLabel } from '@docs/helpers/StoryLabel'
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react-vite'
 import { ComponentProps, Fragment } from 'react'
 
 import { Divider } from './index'
