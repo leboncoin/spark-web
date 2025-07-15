@@ -1,11 +1,7 @@
-import {
-  type ToastOptions as SnackBarItemOptions,
-  ToastQueue,
-  useToastQueue,
-} from '@react-stately/toast'
 import { type ReactElement, Ref, type RefObject, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 
+import { type ToastOptions as SnackBarItemOptions, ToastQueue, useToastQueue } from './local-toast'
 import { type SnackbarItemValue } from './SnackbarItem'
 import { SnackbarRegion, type SnackbarRegionProps } from './SnackbarRegion'
 import { useSnackbarGlobalStore } from './useSnackbarGlobalStore'

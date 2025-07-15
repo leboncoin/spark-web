@@ -3,7 +3,7 @@ import { StoryLabel } from '@docs/helpers/StoryLabel'
 import { ConversationFill } from '@spark-ui/icons/ConversationFill'
 import { FireFill } from '@spark-ui/icons/FireFill'
 import { MailFill } from '@spark-ui/icons/MailFill'
-import type { Meta, StoryFn } from '@storybook/react'
+import type { Meta, StoryFn } from '@storybook/react-vite'
 import type { ReactNode } from 'react'
 
 import { Icon } from '../icon'

@@ -1,7 +1,7 @@
 import { Switch } from '@spark-ui/components/switch'
 import { Check } from '@spark-ui/icons/Check'
 import { FavoriteOutline } from '@spark-ui/icons/FavoriteOutline'
-import { Meta, StoryFn, StoryObj } from '@storybook/react'
+import { Meta, StoryFn, StoryObj } from '@storybook/react-vite'
 import { cx } from 'class-variance-authority'
 import { type ComponentProps, useState } from 'react'
 

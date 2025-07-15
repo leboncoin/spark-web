@@ -1,4 +1,4 @@
-import { create } from '@storybook/theming'
+import { create } from 'storybook/theming'
 import logoUrl from '../spark-logo.svg'
 
 // https://github.com/storybookjs/storybook/blob/next/code/lib/theming/src/types.ts

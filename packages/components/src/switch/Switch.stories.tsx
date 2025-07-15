@@ -1,7 +1,7 @@
 import { StoryLabel } from '@docs/helpers/StoryLabel'
 import { StarFill } from '@spark-ui/icons/StarFill'
 import { StarOutline } from '@spark-ui/icons/StarOutline'
-import type { Meta, StoryFn } from '@storybook/react'
+import type { Meta, StoryFn } from '@storybook/react-vite'
 import { type ComponentProps, useState } from 'react'
 
 import { FormField } from '../form-field'

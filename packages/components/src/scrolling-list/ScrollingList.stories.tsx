@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react-vite'
 import { useState } from 'react'
 
 import { Button } from '../button'

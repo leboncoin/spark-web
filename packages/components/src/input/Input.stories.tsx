@@ -5,7 +5,7 @@ import { EyeOffOutline } from '@spark-ui/icons/EyeOffOutline'
 import { EyeOutline } from '@spark-ui/icons/EyeOutline'
 import { PenOutline } from '@spark-ui/icons/PenOutline'
 import { Search } from '@spark-ui/icons/Search'
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react-vite'
 import { ChangeEvent, useState } from 'react'
 
 import { Button } from '../button'

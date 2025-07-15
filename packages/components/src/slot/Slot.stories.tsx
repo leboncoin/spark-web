@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react-vite'
 import { useEffect, useRef, useState } from 'react'
 
 import { Slot, Slottable } from '.'

@@ -1,5 +1,5 @@
 import { Check } from '@spark-ui/icons/Check'
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react-vite'
 import { type ComponentProps } from 'react'
 
 import { Icon } from '../icon'

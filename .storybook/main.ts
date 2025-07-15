@@ -28,19 +28,7 @@ const config: StorybookConfig = {
     '!..packages/icons/**/*.doc.mdx',
     '!..packages/icons/**/*.stories.tsx',
   ],
-  addons: [
-    'storybook-addon-tag-badges',
-    {
-      name: '@storybook/addon-essentials',
-      options: {
-        backgrounds: false,
-        actions: false,
-        controls: false,
-      },
-    },
-    '@storybook/addon-a11y',
-    '@storybook/addon-designs',
-  ],
+  addons: ['@storybook/addon-a11y', '@storybook/addon-designs', '@storybook/addon-docs'],
   staticDirs: ['../public'],
   framework: {
     name: '@storybook/react-vite',

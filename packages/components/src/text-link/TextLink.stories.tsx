@@ -1,5 +1,5 @@
 import { Link as LinkSVG } from '@spark-ui/icons/Link'
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react-vite'
 
 import { Icon } from '../icon'
 import { TextLink, type TextLinkProps } from '.'
