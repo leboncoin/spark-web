@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.11.4](https://github.com/leboncoin/spark-web/compare/v10.11.3...v10.11.4) (2025-07-16)
+
+### Bug Fixes
+
+- **components:** fixed version for react-aria toast ([d7cf39b](https://github.com/leboncoin/spark-web/commit/d7cf39b28e6a869c618ac58f46c2caf48a413e1e))
+
 ## [10.11.3](https://github.com/leboncoin/spark-web/compare/v10.11.2...v10.11.3) (2025-07-16)
 
 ### Bug Fixes
