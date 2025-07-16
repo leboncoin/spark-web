@@ -6,7 +6,7 @@ export const styles = cva(
     'min-h-sz-44 rounded-lg px-lg',
     'text-body-1',
     // outline styles
-    'ring-1 outline-hidden ring-inset',
+    'ring-1 outline-hidden ring-inset focus-within:ring-blue',
   ],
   {
     variants: {
@@ -40,7 +40,7 @@ export const styles = cva(
       {
         disabled: false,
         state: undefined,
-        class: 'hover:ring-outline-high focus-within:ring-outline-high',
+        class: 'default:hover:ring-outline-high',
       },
     ],
   }
