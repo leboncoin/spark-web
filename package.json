@@ -141,8 +141,5 @@
     "commitizen": {
       "path": "@commitlint/cz-commitlint"
     }
-  },
-  "overrides": {
-    "@react-stately/toast": "3.0.0-beta.7"
   }
 }
