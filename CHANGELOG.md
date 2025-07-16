@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.11.3](https://github.com/leboncoin/spark-web/compare/v10.11.2...v10.11.3) (2025-07-16)
+
+### Bug Fixes
+
+- **components:** forced beta version of react-stately toast ([452b321](https://github.com/leboncoin/spark-web/commit/452b32183e34719436020811088e0cadd8f958d4))
+
 ## [10.11.2](https://github.com/leboncoin/spark-web/compare/v10.11.1...v10.11.2) (2025-07-15)
 
 ### Bug Fixes
