@@ -9,7 +9,7 @@ export interface LinkBoxRaisedProps {
 }
 
 export const LinkBoxRaised = ({ className, ...props }: LinkBoxRaisedProps) => {
-  return <Slot className={cx('z-raised relative', className)} {...props} />
+  return <Slot className={cx('default:z-raised default:relative', className)} {...props} />
 }
 
 LinkBoxRaised.displayName = 'LinkBox.Raised'

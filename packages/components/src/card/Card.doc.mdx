@@ -1,0 +1,122 @@
+import { Kbd } from '@spark-ui/components/kbd'
+import { Canvas, Meta } from '@storybook/addon-docs/blocks'
+import { Source } from '@storybook/addon-docs/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Callout } from '@docs/helpers/Callout'
+import { AriaRoles } from '@docs/helpers/AriaRoles'
+import { Card } from '.'
+import * as CardStories from './Card.stories'
+
+<Meta of={CardStories} />
+
+
+# Card
+
+A card is a generic container with multiple design and intent options. It is non-interactive by default but can be turned into either a link or a button.
+
+<Canvas of={CardStories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```js
+import { Card } from '@spark-ui/components/card'
+
+export default () => (
+  <Card>
+    <Card.Backdrop />
+    <Card.Content>
+      {/* Your content here */}
+    </Card.Content>
+  </Card>
+);
+```
+
+The Card component consists of three main parts:
+
+- **Card**: The root container that provides the card's styling and context
+- **Card.Backdrop**: An optional gradient effect on the top of the card
+- **Card.Content**: The content container with proper padding and spacing
+
+## Examples
+
+### Backdrop
+
+The `Card.Backdrop` component is used to create a gradient effect on the top of the card.
+
+Set the `animation` prop to `slideRight` to animate the backdrop gradient (more animation options could be added in the future).
+
+<Canvas of={CardStories.Backdrop} />
+
+
+### Design and Intent
+
+See all possible combinations of designs and intents in the table below.
+
+- Use `design` prop to set the different look and feels of a card.
+- Use `intent` prop to set the color intent of a card.
+
+<Canvas of={CardStories.DesignAndIntentTable} />
+
+### Inset Content
+
+Pass the `inset` prop on `Card.Content` to remove the default padding.
+
+It gives you more control over the content inside the card and its layout.
+
+<Canvas of={CardStories.InsetContent} />
+
+## Advanced Examples
+
+### Link
+
+Use `asChild` so that the card takes the html tag and props of its direct child element.
+In this example, if you need your card to be a link.
+
+This polymorphic behaviour can be used with any type of HTML element, but the following might be more common: `div, article, section, aside, button, a, form, li, nav`
+
+<Callout kind="warning">
+  If you do decide to change the underlying element type, it is your responsibility to ensure it
+  remains accessible and functional. In the case of Tooltip.Trigger for example, it must be a
+  focusable element that can respond to pointer and keyboard events. If you were to switch it to a
+  div, it would no longer be accessible.
+</Callout>
+
+<Canvas of={CardStories.Link} />
+
+### LinkBox
+
+In case you wish to have interactive elements inside the card WHILE the card itself is a link, you can use the `LinkBox` component.
+
+It will keep the HTML valid and accessible (as it is forbidden to have nested links, but `LinkBox` is a wrapper that allows it).
+
+<Canvas of={CardStories.WithLinkBox} />
+
+## API Reference
+
+
+<ArgTypes
+  of={Card}
+  description="Contains all the parts of a card."
+  subcomponents={{
+    'Card.Backdrop': {
+      of: Card.Backdrop,
+      description: 'A gradient effect on the top of the card, to highlight it.',
+    },
+    'Card.Content': {
+      of: Card.Content,
+      description: 'Contains the content of the card.',
+    },
+  
+  }}
+/>
+
+## Accessibility
+
+<A11yReport of="card" />

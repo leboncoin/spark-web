@@ -169,4 +169,14 @@
       transform: translateX(100vw);
     }
   }
+
+  --animate-slide-bg-right: slide-bg-right 2s linear infinite;
+  @keyframes slide-bg-right {
+    0% {
+      background-position: 200% 0%;
+    }
+    100% {
+      background-position: 0% 0%;
+    }
+  }
 }
