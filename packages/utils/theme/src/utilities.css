@@ -132,14 +132,14 @@
 }
 
 @utility u-outline {
-  outline-color: var(--color-blue);
+  outline-color: var(--color-focus);
   outline-style: solid;
   outline-width: 2px;
   outline-offset: 2px;
 }
 
 @utility u-outline-inset {
-  outline-color: var(--color-blue);
+  outline-color: var(--color-focus);
   outline-style: solid;
   outline-width: 2px;
   outline-offset: calc(2px * -1);

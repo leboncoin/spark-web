@@ -1,4 +1,5 @@
 [data-theme='dark'] {
+  --color-focus: #d1d1ff;
   --color-basic: #c2e0fa;
   --color-on-basic: #152233;
   --color-basic-hovered: #9fcef7;

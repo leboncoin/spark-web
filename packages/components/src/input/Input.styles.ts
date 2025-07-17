@@ -14,7 +14,7 @@ export const inputStyles = cva(
     'autofill:shadow-surface autofill:shadow-[inset_0_0_0px_1000px]',
     'disabled:cursor-not-allowed disabled:border-outline disabled:bg-on-surface/dim-5 disabled:text-on-surface/dim-3',
     'read-only:cursor-default read-only:pointer-events-none read-only:bg-on-surface/dim-5',
-    'focus:ring-1 focus:ring-inset focus:ring-blue focus:border-blue',
+    'focus:ring-1 focus:ring-inset focus:ring-focus focus:border-focus',
   ],
   {
     variants: {

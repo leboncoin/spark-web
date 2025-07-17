@@ -6,7 +6,7 @@ export const styles = cva(
     'min-h-sz-44 rounded-lg bg-surface text-on-surface px-lg',
     'text-body-1',
     // outline styles
-    'ring-1 outline-hidden ring-inset focus:ring-2 focus:ring-blue',
+    'ring-1 outline-hidden ring-inset focus:ring-2 focus:ring-focus',
   ],
   {
     variants: {

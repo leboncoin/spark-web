@@ -4,7 +4,7 @@ export const thumbVariants = cva(
   [
     'block h-sz-24 w-sz-24 rounded-full cursor-pointer',
     'outline-hidden',
-    'focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue',
+    'focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-focus',
     'data-[interaction=pointerdown]:focus-visible:ring-0!',
     'data-disabled:hover:ring-0 data-disabled:hover:after:w-0 data-disabled:hover:after:h-0 data-disabled:cursor-not-allowed',
     'after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:z-hide',
