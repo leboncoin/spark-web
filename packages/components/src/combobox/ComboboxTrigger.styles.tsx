@@ -5,7 +5,7 @@ export const styles = cva(
     'flex items-start gap-md min-h-sz-44 text-body-1',
     'h-fit rounded-lg px-lg',
     // outline styles
-    'ring-1 outline-hidden ring-inset focus-within:ring-2',
+    'ring-1 outline-hidden ring-inset focus-within:ring-2 focus-within:ring-focus',
   ],
   {
     variants: {
@@ -14,7 +14,7 @@ export const styles = cva(
         false: 'h-sz-44',
       },
       state: {
-        undefined: 'ring-outline focus-within:ring-outline-high',
+        undefined: 'ring-outline',
         error: 'ring-error',
         alert: 'ring-alert',
         success: 'ring-success',
@@ -30,7 +30,7 @@ export const styles = cva(
       {
         disabled: false,
         state: undefined,
-        class: 'hover:ring-outline-high',
+        class: 'default:hover:ring-outline-high',
       },
       {
         disabled: false,

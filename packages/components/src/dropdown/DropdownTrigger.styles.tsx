@@ -6,12 +6,12 @@ export const styles = cva(
     'min-h-sz-44 rounded-lg bg-surface text-on-surface px-lg',
     'text-body-1',
     // outline styles
-    'ring-1 outline-hidden ring-inset focus:ring-2',
+    'ring-1 outline-hidden ring-inset focus:ring-2 focus:ring-focus',
   ],
   {
     variants: {
       state: {
-        undefined: 'ring-outline focus:ring-outline-high',
+        undefined: 'ring-outline',
         error: 'ring-error',
         alert: 'ring-alert',
         success: 'ring-success',
@@ -27,7 +27,7 @@ export const styles = cva(
       {
         disabled: false,
         state: undefined,
-        class: 'hover:ring-outline-high',
+        class: 'default:hover:ring-outline-high',
       },
     ],
   }

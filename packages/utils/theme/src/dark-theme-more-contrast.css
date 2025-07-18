@@ -1,4 +1,6 @@
 [data-theme='dark-more-contrast'] {
+  --color-focus: #d1d1ff;
+
   --color-basic: #bcbcbc;
   --color-on-basic: #1a1a1a;
   --color-basic-hovered: #8d8d8d;

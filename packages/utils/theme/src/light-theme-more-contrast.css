@@ -1,4 +1,5 @@
 [data-theme='light-more-contrast'] {
+  --color-focus: #00f;
   --color-basic: #484848;
   --color-on-basic: #f9f9f9;
   --color-basic-hovered: #5e5e5e;
