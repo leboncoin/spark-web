@@ -1,17 +1,17 @@
 import { Meta } from '@storybook/addon-docs/blocks'
 import { Callout } from '@docs/helpers/Callout'
 
-<Meta title="References/Components Dependencies" />
+<Meta title="Components Principles/Third-party libraries" />
 
-# Components Dependencies
+# Third-party libraries
 
-**Spark UI components are either:**
-- Fully custom (no dependencies)
-- Using one of the following UI libraries:
-    - Base UI
-    - Radix UI
-    - React-aria
-    - Zag JS
+Most Spark components are fully custom, but some of them are using third-party libraries.
+
+This section lists the components that are using third-party libraries, and the libraries they are using.
+
+The mid-term goal is to migrate all component to `Base UI` if possible, as its core set of components is a good base for Spark components, more exhaustive than Radix while keeping a similar approach.
+
+
 
 export const componentDependencies = [
   { 

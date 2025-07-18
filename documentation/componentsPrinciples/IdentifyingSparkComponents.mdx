@@ -5,11 +5,23 @@ import { BookmarkOutline } from '@spark-ui/icons'
 import { Icon } from '@spark-ui/components/icon'
 import { useEffect, useRef } from 'react'
 
-<Meta title="References/Higlight spark components" />
+<Meta title="Components Principles/Identifying Spark components" />
 
-# Highlight spark components
+# Identifying Spark components
 
-This bookmark will highlight all spark components on the current page. 
+Each Spark component has a `data-spark-component` attribute, including the sub-components of a compound component.
+
+```html
+<button data-spark-component="button">
+  Click me
+</button>
+```
+
+
+
+
+
+This bookmark will highlight all spark components on the current page, using this attribute. 
 
 <Callout kind="warning" marginY="large">
   <p>

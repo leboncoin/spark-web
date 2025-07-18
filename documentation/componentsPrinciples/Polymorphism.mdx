@@ -1,0 +1,113 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Components Principles/Polymorphism" />
+
+
+# Polymorphism in React Components
+
+## General Concept
+
+Polymorphism, derived from the Greek words "poly" (many) and "morph" (form), is a fundamental programming concept that allows objects to take on multiple forms or behaviors while maintaining a consistent interface. In the context of React components, polymorphism enables components to adapt their rendering behavior based on props, context, or other conditions while preserving a unified API.
+
+### Component Polymorphism
+
+**Component Polymorphism** is a pattern where a component can render different elements or structures based on props while maintaining a consistent interface. This allows the same component to adapt its rendering behavior to different contexts and use cases.
+
+### Benefits of Polymorphism in React
+
+- **Reusability**: Components can be used in various contexts without modification
+- **Flexibility**: Single components can adapt to different use cases
+- **Consistency**: Maintains a unified API across different implementations
+- **Composability**: Components can be combined in different ways
+
+## The `asChild` Pattern in Spark
+
+The Spark component library implements a powerful polymorphic pattern using the `asChild` prop, which allows components to render as different HTML elements or custom components while maintaining their functionality and styling.
+
+### How `asChild` Works
+
+The `asChild` pattern leverages React's `cloneElement` API to transfer props, event handlers, and styling from the parent component to its child. When `asChild` is true, the component doesn't render its own element but instead clones its child and merges the necessary props.
+
+### Implementation Example
+
+```tsx
+import * as React from 'react'
+import { Slot } from '../slot'
+
+interface AvatarProps {
+  asChild?: boolean;
+  children?: React.ReactNode;
+  // ... other props
+}
+
+export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
+  ({ asChild, children, ...props }, ref) => {
+    const Comp = asChild ? Slot : 'div'
+    
+    return (
+      <Comp ref={ref} {...props}>
+        {children}
+      </Comp>
+    )
+  }
+)
+```
+
+### Usage Examples
+
+#### Basic Element Rendering
+```tsx
+// Renders as a button by default
+<Button>Click me</Button>
+
+// Renders as a link when asChild is used
+<Button asChild>
+  <a href="/dashboard">Go to Dashboard</a>
+</Button>
+
+// Renders as a custom component
+<Button asChild>
+  <CustomLinkComponent to="/profile">Profile</CustomLinkComponent>
+</Button>
+```
+
+#### Semantic HTML Adaptation
+```tsx
+// Navigation item that can be a link or button
+<NavigationItem asChild>
+  {href ? (
+    <a href={href} target="_blank" rel="noopener">
+      {children}
+    </a>
+  ) : (
+    <button type="button" onClick={onClick}>
+      {children}
+    </button>
+  )}
+</NavigationItem>
+```
+
+### Key Benefits of the `asChild` Pattern
+
+1. **Semantic Correctness**: Components can render as semantically appropriate HTML elements
+2. **Accessibility**: Maintains proper ARIA attributes and keyboard navigation
+3. **Styling Consistency**: Preserves component styling while changing the underlying element
+4. **Framework Agnostic**: Works with any routing library or custom components
+5. **Type Safety**: Provides proper TypeScript support for different element types
+
+### Best Practices
+
+1. **Always provide a default element**: Components should render a sensible default when `asChild` is false
+2. **Preserve event handlers**: Ensure all event handlers are properly transferred to the child
+3. **Maintain accessibility**: Transfer ARIA attributes and keyboard event handlers
+4. **Handle refs correctly**: Use `forwardRef` and properly merge refs
+5. **Type safety**: Provide proper TypeScript types for different element variants
+
+### Common Use Cases
+
+- **Navigation components**: Buttons that can render as links
+- **Form elements**: Input wrappers that can render as different input types
+- **Layout components**: Containers that can render as different HTML elements
+- **Interactive elements**: Components that can be buttons, links, or custom interactive elements
+
+The `asChild` pattern is a powerful tool that enables Spark components to be highly flexible while maintaining consistency and accessibility. It allows developers to use the same component API across different contexts without sacrificing semantic correctness or user experience.

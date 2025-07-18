@@ -1,0 +1,249 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+import { Callout } from '@docs/helpers/Callout'
+import { Divider } from '@spark-ui/components/divider'
+
+<Meta title="Components Principles/Composition" />
+
+# Component Composition
+
+Component composition is one of the most powerful features of Spark's design system. It allows you to combine multiple compound components together to create sophisticated, hybrid user experiences that would be impossible to achieve with monolithic components.
+
+## What is Component Composition?
+
+Component composition is the practice of combining multiple compound components to create complex, interactive patterns. Unlike traditional component libraries that provide pre-built, rigid solutions, Spark's compound components can be freely interleaved and customized to fit any use case.
+
+## Flexibility Beyond Pre-built Solutions
+
+Traditional UI libraries often provide specific components like "SearchModal" or "DropdownWithSearch" that are limited to predefined use cases. With Spark's composition approach, you can create any combination imaginable:
+
+- **Dialog + Combobox** = Modal search interface
+- **Popover + Form** = Inline editing
+- **Drawer + Tabs** = Multi-panel sidebar
+
+The true power of composition lies in the ability to inject custom markup at any level of the component hierarchy. This isn't limited to compound components - you can add custom elements, styling, and behavior wherever needed:
+
+## Example
+
+To effectively compose components, it's essential to understand their internal structure. Here are simplified examples of how Dialog and Combobox are structured:
+
+Here we will combine a Dialog and a Combobox to create a modal search interface.
+
+<div className="flex gap-md flex-wrap sb-unstyled">
+  <div>
+    <p className="text-headline-1">Dialog Anatomy</p>
+```tsx
+// Simplified Dialog structure
+<Dialog>
+  <Dialog.Trigger>     {/* Opens the dialog */}
+  <Dialog.Portal>      {/* Renders outside normal DOM */}
+    <Dialog.Overlay /> {/* Backdrop */}
+    <Dialog.Content>   {/* The modal container */}
+      <Dialog.Header>  {/* Optional header */}
+      <Dialog.Body>    {/* Main content area */}
+      <Dialog.Footer>  {/* Optional footer */}
+    </Dialog.Content>
+  </Dialog.Portal>
+</Dialog>
+```
+  </div>
+  <div>
+    <p className="text-headline-1">Combobox Anatomy</p>
+
+```tsx
+// Simplified Combobox structure
+<Combobox>
+  <Combobox.Trigger>   {/* Input container */}
+    <Combobox.Input /> {/* The search input */}
+    <Combobox.ClearButton /> {/* Clear input */}
+  </Combobox.Trigger>
+  <Combobox.Items>     {/* Dropdown container */}
+    <Combobox.Item />  {/* Individual options */}
+    <Combobox.Empty /> {/* No results state */}
+  </Combobox.Items>
+</Combobox>
+```
+  </div>
+</div>
+
+
+<p className="text-headline-1 sb-unstyled">Combining them into a search dialog</p>
+
+Here's how these two components can be composed to create a powerful modal search interface:
+
+```tsx
+<Dialog>
+  {/* Custom trigger with chip display */}
+    <Dialog.Trigger asChild>
+      {selectedBook ? (
+        <Chip onClear={() => setSelectedBook(null)}>
+          <Chip.Content>{selectedBook.title}</Chip.Content>
+          <Chip.ClearButton />
+        </Chip>
+      ) : (
+        <Button variant="outline">
+          <Icon><Search /></Icon>
+          <span>Search a book...</span>
+        </Button>
+      )}
+    </Dialog.Trigger>
+  
+  <Dialog.Portal>
+    <Dialog.Content size="sm">
+      {/* Custom header */}
+      <Dialog.Header>
+        <h2 className="text-lg font-semibold">Select a Book</h2>
+        <Dialog.CloseButton />
+      </Dialog.Header>
+      
+      {/* Composed Combobox */}
+      <Dialog.Body>
+        <Combobox
+          onValueChange={(value) => {
+            const book = books.find(b => b.id === value)
+            if (book) {
+              setSelectedBook(book)
+              setIsOpen(false) // Close dialog after selection
+            }
+          }}
+        >
+          <Combobox.Trigger>
+            <Combobox.Input 
+              placeholder="Type to search books..."
+              autoFocus
+            />
+          </Combobox.Trigger>
+          
+          {/* Notice how we don't wrap with Combobox.Popover here, as the dialog is already a sufficient container */}
+          <Combobox.Items>
+            <Combobox.Empty>No books found</Combobox.Empty>
+            {books.map(book => (
+              <Combobox.Item key={book.id} value={book.id}>{book.title}</Combobox.Item>
+            ))}
+          </Combobox.Items>
+        </Combobox>
+      </Dialog.Body>
+    </Dialog.Content>
+  </Dialog.Portal>
+</Dialog>
+```
+
+## Benefits of Component Composition
+
+<table className="w-full border-collapse">
+  <thead>
+    <tr className="border-b border-border">
+      <th className="text-left p-md font-semibold">Benefit</th>
+      <th className="text-left p-md font-semibold">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr className="border-b border-border">
+      <td className="p-md font-bold">Unlimited Flexibility</td>
+      <td className="p-md">Create any combination of components without waiting for library updates or creating custom components from scratch.</td>
+    </tr>
+    <tr className="border-b border-border">
+      <td className="p-md font-bold">Consistent Design Language</td>
+      <td className="p-md">All composed components maintain Spark's design tokens, accessibility features, and interaction patterns.</td>
+    </tr>
+    <tr className="border-b border-border">
+      <td className="p-md font-bold">Type Safety</td>
+      <td className="p-md">Each component maintains its own TypeScript interface, providing excellent IntelliSense and error checking.</td>
+    </tr>
+    <tr className="border-b border-border">
+      <td className="p-md font-bold">Accessibility by Default</td>
+      <td className="p-md">Composed components inherit accessibility features from their individual parts, ensuring WCAG compliance.</td>
+    </tr>
+    <tr className="border-b border-border">
+      <td className="p-md font-bold">Performance Optimized</td>
+      <td className="p-md">Each component is optimized independently, and composition doesn't add unnecessary overhead.</td>
+    </tr>
+    <tr className="border-b border-border">
+      <td className="p-md font-bold">Easy Testing</td>
+      <td className="p-md">Test each component part separately, then test the composition as a whole.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Best Practices
+
+<table className="w-full border-collapse">
+  <thead>
+    <tr className="border-b border-border">
+      <th className="text-left p-md font-semibold">Practice</th>
+      <th className="text-left p-md font-semibold">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr className="border-b border-border">
+      <td className="p-md font-bold">Start Simple, Compose Gradually</td>
+      <td className="p-md">Begin with basic components and add complexity through composition rather than building monolithic solutions.</td>
+    </tr>
+    <tr className="border-b border-border">
+      <td className="p-md font-bold">Leverage `asChild` for Custom Triggers</td>
+      <td className="p-md">Use the `asChild` pattern to create custom trigger elements while maintaining component functionality.</td>
+    </tr>
+    <tr className="border-b border-border">
+      <td className="p-md font-bold">Inject Custom Markup Strategically</td>
+      <td className="p-md">Add custom elements at the right level - headers, footers, and content areas are perfect for customization.</td>
+    </tr>
+    <tr className="border-b border-border">
+      <td className="p-md font-bold">Maintain Component Boundaries</td>
+      <td className="p-md">Respect each component's API and don't try to override internal behavior.</td>
+    </tr>
+    <tr className="border-b border-border">
+      <td className="p-md font-bold">Consider State Management</td>
+      <td className="p-md">Think about how state flows between composed components and use appropriate patterns (controlled vs uncontrolled).</td>
+    </tr>
+  </tbody>
+</table>
+
+## Advanced Composition Patterns
+
+### Conditional Composition
+```tsx
+{isMobile ? (
+  <Drawer>
+    <Drawer.Trigger>Menu</Drawer.Trigger>
+    <Drawer.Content>
+      <Navigation />
+    </Drawer.Content>
+  </Drawer>
+) : (
+  <Popover>
+    <Popover.Trigger>Menu</Popover.Trigger>
+    <Popover.Content>
+      <Navigation />
+    </Popover.Content>
+  </Popover>
+)}
+```
+
+### Nested Composition
+```tsx
+<Accordion>
+  <Accordion.Item>
+    <Accordion.Trigger>Settings</Accordion.Trigger>
+    <Accordion.Content>
+      <Tabs>
+        <Tabs.List>
+          <Tabs.Trigger>General</Tabs.Trigger>
+          <Tabs.Trigger>Advanced</Tabs.Trigger>
+        </Tabs.List>
+        <Tabs.Content>
+          <Form>
+            {/* Form fields */}
+          </Form>
+        </Tabs.Content>
+      </Tabs>
+    </Accordion.Content>
+  </Accordion.Item>
+</Accordion>
+```
+
+<Callout kind="info">
+  Component composition is not just a feature - it's a fundamental design philosophy in Spark. 
+  By embracing composition, you unlock the full potential of the design system and can create 
+  sophisticated user experiences that feel natural and consistent.
+</Callout>
+
+The power of component composition lies in its ability to transform simple building blocks into complex, beautiful interfaces while maintaining the flexibility and consistency that modern applications demand. 
