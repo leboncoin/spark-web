@@ -1,0 +1,199 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+import { Callout } from '@docs/helpers/Callout'
+
+<Meta title="Components Principles/Compound pattern" />
+
+
+
+# Compound Component Pattern
+
+Spark is adopting the compound component pattern for all its components.
+
+This pattern is particularly effective for complex UI components that have multiple related parts.
+
+It is a powerful React pattern that allows you to create flexible, composable components with a clear and intuitive API. It's particularly effective for complex UI components that have multiple related parts.
+
+## What is the Compound Component Pattern?
+
+Compound components are a set of components that work together to form a cohesive unit. Instead of passing all configuration through props to a single component, you compose the component by combining multiple sub-components.
+
+## The Problem with Monolithic Components
+
+Traditional monolithic components often suffer from several issues:
+
+- **Prop Drilling**: All configuration must be passed through a single component, leading to long prop lists
+- **Limited Flexibility**: Components are rigid and difficult to customize without extensive prop combinations
+- **Poor Readability**: Complex prop objects make it hard to understand what the component will render
+- **Type Complexity**: Single large TypeScript interfaces become unwieldy and hard to maintain
+- **Over-Engineering**: Components try to handle too many use cases, becoming bloated and fragile
+
+## Benefits
+
+- **Flexible Composition**: Components can be arranged and customized in any order
+- **Clear API**: The component structure is self-documenting and intuitive
+- **Better Separation of Concerns**: Each sub-component has a single responsibility with its own props and TypeScript types
+- **Enhanced Reusability**: Sub-components can be used independently or in different combinations
+- **Improved Developer Experience**: Better IntelliSense and type safety
+- **Type Safety**: Each sub-component has its own TypeScript interface, providing better type checking and autocomplete
+
+## Example: Popover Component
+
+The Popover component in Spark demonstrates the compound component pattern perfectly:
+
+```tsx
+<Popover>
+  <Popover.Trigger asChild>
+    <Button>Trigger popover</Button>
+  </Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Content>
+      <Popover.Header>Title</Popover.Header>
+      <p>Content goes here</p>
+      <Popover.Arrow />
+      <Popover.CloseButton aria-label="Close" />
+    </Popover.Content>
+  </Popover.Portal>
+</Popover>
+```
+
+### Component Anatomy
+
+- **`Popover`**: The root component that provides context and manages state
+- **`Popover.Trigger`**: The element that opens the popover
+- **`Popover.Portal`**: Handles rendering the popover outside the normal DOM hierarchy
+- **`Popover.Content`**: The actual popover content container
+- **`Popover.Header`**: Optional header section
+- **`Popover.Arrow`**: Visual indicator pointing to the trigger
+- **`Popover.CloseButton`**: Optional close button
+
+## Why This Pattern Works
+
+The compound component pattern makes complex interactions feel natural and declarative. Each piece has a clear purpose, and developers can easily understand how to compose them together. The pattern scales well as components become more complex, maintaining clarity and flexibility throughout.
+
+## Warnings
+
+### Don't Split Compound Components Across Files
+
+<Callout kind="warning">
+  While compound components are composed of multiple sub-components, they should **never** be split across separate files.
+</Callout>
+
+ Here's why:
+
+- **Context Dependency**: Sub-components rely on shared context from the root component
+- **Import Complexity**: Developers would need to import multiple files for a single component
+- **Breaking Changes**: Changes to one sub-component could break others without clear indication
+- **Bundle Size**: Multiple files can lead to larger bundle sizes due to separate chunks
+- **Maintenance Overhead**: Related logic becomes scattered, making debugging and updates difficult
+
+**Always keep all sub-components of a compound component in the same file** to maintain cohesion and ensure they work together seamlessly.
+
+### Example: The Dangers of Splitting
+
+Here's what could go wrong if you split a compound component across files:
+
+#### 1. Context Issues and Missing Provider
+
+```tsx
+// ❌ WRONG: Consumer imports parts in different files
+// Header.tsx
+import { Popover, PopoverTrigger } from '@spark/components'
+
+export const Header = () => {
+  return (
+    <header>
+      <Popover>
+        <PopoverTrigger>Menu</PopoverTrigger>
+        {/* Missing PopoverContent - will not work by itself (Single Responsibility Principle is broken) */}
+      </Popover>
+    </header>
+  )
+}
+
+// Sidebar.tsx  
+import { PopoverContent } from '@spark/components'
+
+export const Sidebar = () => {
+  return (
+    <aside>
+      {/* This will crash because PopoverContext is not available */}
+      <PopoverContent>Menu items</PopoverContent>
+    </aside>
+  )
+}
+```
+
+#### 2. Maintenance Overhead
+
+```tsx
+// ❌ WRONG: Consumer spreads compound parts across multiple files
+// UserProfile.tsx
+import { Popover, PopoverTrigger } from '@spark/components'
+
+export const UserProfile = () => {
+  return (
+    <div>
+      <Popover>
+        <PopoverTrigger>Profile</PopoverTrigger>
+        {/* PopoverContent is in another file - hard to maintain */}
+      </Popover>
+    </div>
+  )
+}
+
+// UserProfileContent.tsx
+import { PopoverContent } from '@spark/components'
+
+export const UserProfileContent = () => {
+  return (
+    <PopoverContent>
+      <div>User info</div>
+      <div>Settings</div>
+      {/* If Popover API changes, this file needs updates */}
+    </PopoverContent>
+  )
+}
+
+// If Popover API changes, you need to update:
+// - UserProfile.tsx (imports and usage)
+// - UserProfileContent.tsx (imports and usage)
+// - Any other files using Popover parts...
+
+// Testing becomes complex:
+// UserProfileContent.test.tsx
+import { render } from '@testing-library/react'
+import { UserProfileContent } from './UserProfileContent'
+
+test('UserProfileContent renders correctly', () => {
+  // ❌ This will fail because PopoverContent needs Popover context
+  render(<UserProfileContent />) // Error: PopoverContext is not available
+  
+  // ❌ Need complex mock or wrapper
+  render(
+    <Popover>
+      <UserProfileContent />
+    </Popover>
+  ) // Works but tests the wrong thing - testing Popover, not UserProfileContent
+})
+```
+
+**vs.**
+
+```tsx
+// ✅ CORRECT: Keep compound components together
+// UserProfile.tsx
+import { Popover } from '@spark/components'
+
+export const UserProfile = () => {
+  return (
+    <Popover>
+      <Popover.Trigger>Profile</Popover.Trigger>
+      <Popover.Content>
+        <div>User info</div>
+        <div>Settings</div>
+      </Popover.Content>
+    </Popover>
+  )
+}
+```
+

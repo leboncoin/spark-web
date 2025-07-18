@@ -13,7 +13,15 @@ addons.setConfig({
   theme: getTheme({ base: 'light' }),
   sidebar: {
     showRoots: true,
-    collapsedRoots: ['using-spark', 'hooks', 'contributing', 'experimental', 'utils', 'references'],
+    collapsedRoots: [
+      'styling',
+      'components-principles',
+      'hooks',
+      'contributing',
+      'experimental',
+      'utils',
+      'references',
+    ],
     filters: {
       hidden: item => !item.tags?.includes('hidden'),
     },

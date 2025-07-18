@@ -88,20 +88,42 @@ const preview = {
     options: {
       storySort: {
         order: [
-          'Getting Started',
-          'Using Spark',
+          'Introduction',
+          'Setup',
+          'Components list',
+          'Accessibility',
+          'Styling',
           [
-            'Setup',
-            'Styling overview',
-            'Handling multiple themes',
-            'Migrating from Styled Components',
-            'Tailwind config viewer',
-            'FAQ',
+            'Overview',
+            'Design Tokens',
+            'Themes', // + custom themes
+            'Themes - Contrast check',
+            // 'Theme provider', // TODO
+          ],
+          'Components Principles',
+          [
+            'Compound pattern',
+            'Composition',
+            'Polymorphism',
+            // 'Controlled/Uncontrolled', // TODO
+            'Third-party libraries',
+            'Identifying Spark components',
           ],
           'Components',
-          'Utils',
           'Hooks',
+          'utils',
           'Contributing',
+          // [
+          //   'Project structure',
+          //   'Adding or updating components',
+          //   'Writing documentation',
+          //   'Testing',
+          //   'Github workflow',
+          //   'Github actions',
+          //   'Definition of ready',
+          //   'Definition of done',
+          // ],
+          'F.A.Q',
           '*',
         ],
       },
@@ -150,7 +172,7 @@ const preview = {
         </div>
       )
     },
-  ]
+  ],
 }
 
 export default preview

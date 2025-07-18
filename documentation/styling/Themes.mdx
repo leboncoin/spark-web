@@ -1,0 +1,89 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+import { Card } from '@docs/helpers/Card'
+import { Callout } from '@docs/helpers/Callout'
+
+<Meta title="Styling/Themes" />
+
+# Theme
+
+## Default themes
+
+Spark provides 4 default themes:
+
+- `light`
+- `dark`
+- `light-more-contrast`
+- `dark-more-contrast`
+
+Each theme can be applied on your website by adding the `data-theme` attribute to the `html` element.
+
+```html
+<html data-theme="light">
+  ...
+</html>
+```
+
+It is up to you to pick a theme provider that switch between themes based on the user's preferences or your own business logic. 
+
+We advise your to be careful to the user's preferences and to the user's ability to switch between themes.
+
+```jsx
+const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+const isMoreContrast = window.matchMedia('(prefers-contrast: more)').matches
+
+const colorScheme = isDark ? 'dark' : 'light' 
+const themeName = isMoreContrast ? `${colorScheme}-more-contrast` : colorScheme
+
+document.documentElement.setAttribute('data-theme', themeName)
+```
+
+If you are using server-side rendering, we recommend to use [next-themes](https://github.com/pacocoursey/next-themes) to handle the theme switching (or making your own).
+
+
+## Custom themes
+
+You can create as many custom themes as you want for your application by adding those themes to your **Tailwind CSS configuration file**.
+
+For most cases, you will only need to override the color-related tokens (`--color-*`).
+
+
+```css
+@import "tailwindcss";
+
+@import "./node_modules/@spark-ui/theme-utils/dist/style.css"; /* spark default theme */
+
+[data-theme='pro-user-light'] {
+  --color-main: #yourColor;
+  --color-support: #yourColor;
+  ...
+}
+
+[data-theme='pro-user-dark'] {
+  --color-main: #yourColor;
+  --color-support: #yourColor;
+  ...
+}
+
+```
+
+
+
+## Customizing base font-size
+
+If your project uses a base font size other than **16px** (16px is the value used in our Spark theme, which sets ⁠`--spacing-scale` to **16**), update the `⁠--spacing-scale` CSS variable to ensure that spacing values are computed correctly.
+
+For example, if your base font size is `10px`, set ⁠`--spacing-scale` to **10** inside your **Tailwind CSS configuration file**.
+
+It will look something like this:
+
+```css
+@import 'tailwindcss';
+
+@import './node_modules/@spark-ui/theme-utils/dist/style.css'; /* spark default theme */
+
+@theme {
+  --spacing-scale: 10; /* for a 10px base font size */
+}
+```
+
+

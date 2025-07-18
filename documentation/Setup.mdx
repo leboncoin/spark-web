@@ -2,22 +2,24 @@ import { Meta } from '@storybook/addon-docs/blocks'
 import { Card } from '@docs/helpers/Card'
 import { Callout } from '@docs/helpers/Callout'
 
-<Meta title="Using Spark/Setup" />
+<Meta title="Setup" />
 
 # Setup
 
 ## Prerequisites
 
-**Spark UI** being based on **Tailwind CSS** library, you will need to [have it installed](https://tailwindcss.com/docs/installation) in your project.
+**Spark UI** is built on **Tailwind CSS v4**. [Install Tailwind CSS](https://tailwindcss.com/docs/installation) in your project first.
 
-To take benefit of a full empowered developper experience (autocomplete, syntax highlighting, linting...), you should also take a look at [**Tailwind CSS IntelliSense**](https://tailwindcss.com/docs/editor-setup#intelli-sense-for-vs-code) extension. For now it comes actually only for VS Code but you also may be interested on equivalent solutions such as the ones provided [for JetBrains IDEs](https://www.jetbrains.com/help/webstorm/tailwind-css.html).
+For a better developer experience (autocomplete, syntax highlighting, linting), use the [**Tailwind CSS IntelliSense**](https://tailwindcss.com/docs/editor-setup#intelli-sense-for-vs-code) extension for VS Code, or similar tools for [JetBrains IDEs](https://www.jetbrains.com/help/webstorm/tailwind-css.html).
+
+Finally, make sure your project is using **React 19** or higher.
 
 ## Spark setup
 
 After completing the Tailwind CSS setup, you'll simply have to install the following packages via your command line:
 
 ```bash
-npm i @spark-ui/theme-utils
+npm i @spark-ui/theme-utils @spark-ui/components
 ```
 
 Navigate to your **Tailwind CSS configuration file** and refer to the example below for applying our Spark theme:
@@ -25,7 +27,7 @@ Navigate to your **Tailwind CSS configuration file** and refer to the example be
 ```css
 @import 'tailwindcss';
 
-@import './node_modules/@spark-ui/theme-utils/dist/style.css'; /* spark default theme */
+@import './node_modules/@spark-ui/theme-utils/dist/style.css'; /* spark themes */
 
 @source './node_modules/@spark-ui'; /* ensure that the Spark components are scanned */
 ```
