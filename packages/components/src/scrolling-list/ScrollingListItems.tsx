@@ -92,7 +92,7 @@ export const ScrollingListItems = ({ children, className = '', ...rest }: Props)
       role="list"
       className={cx(
         'relative transition-all duration-300',
-        'u-no-scrollbar overflow-x-auto scroll-smooth default:overscroll-contain',
+        'u-no-scrollbar overflow-x-auto scroll-smooth',
         'w-full gap-(--scrolling-list-gap) default:flex default:flex-row',
         'focus-visible:u-outline',
         className
