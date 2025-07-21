@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.11.8](https://github.com/leboncoin/spark-web/compare/v10.11.7...v10.11.8) (2025-07-21)
+
+### Bug Fixes
+
+- **components:** remove overscroll behaviour on the carousel ([c5e3a1f](https://github.com/leboncoin/spark-web/commit/c5e3a1fdffa98c2e9e213397c7273f13051746ba))
+
 ## [10.11.7](https://github.com/leboncoin/spark-web/compare/v10.11.6...v10.11.7) (2025-07-18)
 
 **Note:** Version bump only for package @spark-ui/components
