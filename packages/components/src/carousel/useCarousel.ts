@@ -248,7 +248,6 @@ export const useCarousel = ({
         scrollSnapType: `x ${snapType}`,
         gridAutoFlow: 'column',
         scrollbarWidth: 'none',
-        overscrollBehavior: 'contain',
         gridAutoColumns: 'var(--slide-item-size)',
         overflowX: 'auto',
       },
