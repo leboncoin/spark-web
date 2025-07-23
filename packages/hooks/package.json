@@ -1,6 +1,6 @@
 {
   "name": "@spark-ui/hooks",
-  "version": "10.11.8",
+  "version": "10.11.9",
   "description": "Common hooks for Spark UI",
   "exports": {
     "./*": {
