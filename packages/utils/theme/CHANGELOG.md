@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.11.10](https://github.com/leboncoin/spark-web/compare/v10.11.9...v10.11.10) (2025-07-24)
+
+**Note:** Version bump only for package @spark-ui/theme-utils
+
 ## [10.11.9](https://github.com/leboncoin/spark-web/compare/v10.11.8...v10.11.9) (2025-07-23)
 
 **Note:** Version bump only for package @spark-ui/theme-utils
