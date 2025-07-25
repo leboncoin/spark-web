@@ -8,7 +8,7 @@ The Spark project uses GitHub Actions for continuous integration, deployment, an
 
 - **Quality Assurance**: Code quality checks, testing, and security scanning
 - **Release Management**: Automated releases and deployments
-- **Maintenance**: Dependency updates and repository mirroring
+- **Maintenance**: Dependency updates
 - **Manual Operations**: On-demand deployments and icon updates
 
 ## Workflow Files
@@ -142,27 +142,6 @@ The Spark project uses GitHub Actions for continuous integration, deployment, an
 - **Output**: Deployment URL
 - **Secrets**: Requires `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`, and `VERCEL_TOKEN`
 
-### 5. Mirror Workflow
-
-**File**: `mirror.yml`
-
-**Purpose**: Mirrors the repository to an internal GitHub Enterprise instance.
-
-**Trigger**:
-- Manual workflow dispatch
-- Scheduled runs (Monday-Friday at 7:00 AM and 7:00 PM UTC)
-
-**Jobs**:
-
-#### Mirror (`mirror`)
-- **Purpose**: Pushes main branch to internal repository
-- **Steps**:
-  1. **SSH Setup**: Configures SSH agent with internal repository key
-  2. **Host Configuration**: Adds internal GitHub host to known hosts
-  3. **Remote Addition**: Adds internal repository as remote
-  4. **Force Push**: Pushes main branch to internal repository with force flag
-- **Secrets**: Requires `GH_ENTERPRISE_INTERNAL_SSH_PRIVATE_KEY` and `GH_ENTERPRISE_INTERNAL_SSH_REPOSITORY_URL`
-
 ## Configuration Files
 
 ### 1. Dependabot Configuration
@@ -290,18 +269,6 @@ The Spark project uses GitHub Actions for continuous integration, deployment, an
       <td>Codecov authentication token for coverage reporting</td>
       <td><code>quality.yml</code></td>
       <td>Codecov API token</td>
-    </tr>
-    <tr>
-      <td><code>GH_ENTERPRISE_INTERNAL_SSH_PRIVATE_KEY</code></td>
-      <td>SSH key for internal repository access</td>
-      <td><code>mirror.yml</code></td>
-      <td>SSH private key for internal GitHub Enterprise access</td>
-    </tr>
-    <tr>
-      <td><code>GH_ENTERPRISE_INTERNAL_SSH_REPOSITORY_URL</code></td>
-      <td>Internal repository URL</td>
-      <td><code>mirror.yml</code></td>
-      <td>SSH URL of the destination repository</td>
     </tr>
   </tbody>
 </table>
