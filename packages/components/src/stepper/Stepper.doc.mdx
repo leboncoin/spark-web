@@ -32,7 +32,7 @@ export default () => (
     <Stepper.Input />
     <Stepper.IncrementButton />
   </Stepper>
-);
+)
 ```
 
 ## Examples
@@ -78,6 +78,8 @@ Use `step` prop to snap the value to certain increments, starting from the minim
 Use `minValue|maxValue` props to limit the entered value to a specific range. Ranges can be open ended by only providing either `minValue` or `maxValue` rather than both.
 
 Increment and decrement buttons will be disabled when the value is within one step value from the bounds.
+
+If the value is empty (unset or cleared) and `minValue|maxValue` set to limit value to strictly positive or negative values then increment and decrement buttons will be disabled accordingly.
 
 If the user types a value that is beyond range bounds and blurs the input, the value will be clamped.
 
