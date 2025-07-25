@@ -245,14 +245,66 @@ The Spark project uses GitHub Actions for continuous integration, deployment, an
 
 ### Required Secrets
 
-- **`NPM_TOKEN`**: NPM authentication token for package publishing
-- **`SPARK_SA_TOKEN`**: GitHub token for repository access during releases
-- **`VERCEL_TOKEN`**: Vercel authentication token for deployments
-- **`VERCEL_ORG_ID`**: Vercel organization ID
-- **`VERCEL_PROJECT_ID`**: Vercel project ID
-- **`CODECOV_TOKEN`**: Codecov authentication token for coverage reporting
-- **`GH_ENTERPRISE_INTERNAL_SSH_PRIVATE_KEY`**: SSH key for internal repository access
-- **`GH_ENTERPRISE_INTERNAL_SSH_REPOSITORY_URL`**: Internal repository URL
+<table>
+  <thead>
+    <tr>
+      <th>Secret</th>
+      <th>Usage</th>
+      <th>Workflows</th>
+      <th>Configuration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>NPM_TOKEN</code></td>
+      <td>NPM authentication token for package publishing</td>
+      <td><code>release.yml</code></td>
+      <td>NPM authentication token with publish permissions</td>
+    </tr>
+    <tr>
+      <td><code>SPARK_SA_TOKEN</code></td>
+      <td>GitHub token for repository access during releases</td>
+      <td><code>release.yml</code></td>
+      <td>GitHub token with push and release creation permissions</td>
+    </tr>
+    <tr>
+      <td><code>VERCEL_TOKEN</code></td>
+      <td>Vercel authentication token for deployments</td>
+      <td><code>release.yml</code>, <code>quality.yml</code>, <code>manual-deploy.yml</code></td>
+      <td>Vercel API token</td>
+    </tr>
+    <tr>
+      <td><code>VERCEL_ORG_ID</code></td>
+      <td>Vercel organization ID</td>
+      <td><code>release.yml</code>, <code>quality.yml</code>, <code>manual-deploy.yml</code></td>
+      <td>Found in Vercel settings</td>
+    </tr>
+    <tr>
+      <td><code>VERCEL_PROJECT_ID</code></td>
+      <td>Vercel project ID</td>
+      <td><code>release.yml</code>, <code>quality.yml</code>, <code>manual-deploy.yml</code></td>
+      <td>Found in Vercel project settings</td>
+    </tr>
+    <tr>
+      <td><code>CODECOV_TOKEN</code></td>
+      <td>Codecov authentication token for coverage reporting</td>
+      <td><code>quality.yml</code></td>
+      <td>Codecov API token</td>
+    </tr>
+    <tr>
+      <td><code>GH_ENTERPRISE_INTERNAL_SSH_PRIVATE_KEY</code></td>
+      <td>SSH key for internal repository access</td>
+      <td><code>mirror.yml</code></td>
+      <td>SSH private key for internal GitHub Enterprise access</td>
+    </tr>
+    <tr>
+      <td><code>GH_ENTERPRISE_INTERNAL_SSH_REPOSITORY_URL</code></td>
+      <td>Internal repository URL</td>
+      <td><code>mirror.yml</code></td>
+      <td>SSH URL of the destination repository</td>
+    </tr>
+  </tbody>
+</table>
 
 ### Environment Variables
 
