@@ -31,6 +31,8 @@ export type TagProps = BaseTagProps & ValidTagDesignIntent
 export const Tag = ({
   design = 'filled',
   intent = 'basic',
+  size = 'md',
+  shape = 'pill',
   asChild,
   className,
   ref,
@@ -46,6 +48,8 @@ export const Tag = ({
         className,
         design,
         intent,
+        size,
+        shape,
       })}
       {...others}
     />
