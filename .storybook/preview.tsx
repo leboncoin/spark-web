@@ -7,8 +7,6 @@ import React, { ReactNode, useEffect, useState } from 'react'
 import '../src/tailwind.css'
 import './sb-theming.css'
 
-import { ToC } from '@docs/helpers/ToC'
-
 import { ThemeProvider } from './ThemeProvider'
 
 interface Props extends DocsContainerProps {
@@ -38,8 +36,6 @@ const ExampleContainer = ({ children, ...props }: Props) => {
 
         {children}
       </div>
-
-      <ToC />
     </DocsContainer>
   )
 }
@@ -84,6 +80,9 @@ const preview = {
   parameters: {
     docs: {
       container: ExampleContainer,
+      toc: {
+        headingSelector: 'h2, h3',
+      },
     },
     options: {
       storySort: {

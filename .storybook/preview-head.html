@@ -27,7 +27,6 @@
   .sbdocs-wrapper {
     background: var(--color-background) !important;
     color: var(--color-on-background) !important;
-    padding: 30px 20px !important;
   }
 
   .sbdocs-wrapper :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) {
@@ -45,15 +44,8 @@
     color: var(--color-support) !important;
   }
 
-  .sbdocs-content {
-    display: grid !important;
-    grid-template-columns: 100% 0;
-    gap: 24px;
-    max-width: 1200px !important;
-    height: 100%;
-  }
-
   .docs-story {
+    /* striped background inside canvas to showcase opacity */
     background: repeating-linear-gradient(45deg,
         var(--color-surface),
         var(--color-surface) 5px,
@@ -62,11 +54,6 @@
   }
 
 
-  @media (min-width: 1024px) {
-    .sbdocs-content {
-      grid-template-columns: minmax(0, auto) 200px;
-    }
-  }
 
   .docblock-source {
     border: 1px solid var(--color-outline) !important;
@@ -78,12 +65,10 @@
     background-color: var(--color-code-block) !important;
   }
 
-  #spark-doc-container {
-    width: 100%;
-  }
+
 
   #spark-doc-container>h1 {
-    color: #ec5a13 !important;
+    color: var(--color-main) !important;
     font-weight: 700 !important;
   }
 
@@ -91,8 +76,25 @@
   #spark-doc-container>h3,
   #spark-doc-container>h4,
   #spark-doc-container>h5 {
-    color: #094171 !important;
+    color: var(--color-support) !important;
     font-weight: 700 !important;
+  }
+
+  /* === Table of contents === */
+  .toc-wrapper .toc-link {
+    color: var(--color-on-background) !important;
+  }
+
+  .toc-wrapper .is-active-link {
+    color: var(--color-main) !important;
+  }
+
+  .toc-wrapper .toc-list {
+    border-color: color-mix(in srgb, var(--color-outline) var(--opacity-dim-3), transparent) !important;
+  }
+
+  .toc-wrapper .is-active-li::before {
+    border-color: var(--color-main) !important;
   }
 
   /* === ArgTypes TABLE === */
