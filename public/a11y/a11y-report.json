@@ -1,12 +1,12 @@
 {
   "@spark-ui/components/accordion": {
-    "timestamp": "2025-05-19T12:44:26.995Z",
+    "timestamp": "2025-07-28T08:02:52.740Z",
     "url": "http://localhost:3002/a11y/accordion",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/alert-dialog": {
-    "timestamp": "2025-05-19T12:44:29.372Z",
+    "timestamp": "2025-07-28T08:02:54.049Z",
     "url": "http://localhost:3002/a11y/alert-dialog",
     "incomplete": [
       {
@@ -107,7 +107,7 @@
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"alert-dialog-title\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer text-on-error bg-error hover:bg-error-hovered enabled:active:bg-error-hovered focus-visible:bg-error-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-«r0»\" data-state=\"open\">",
+            "html": "<button data-spark-component=\"alert-dialog-title\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap default:px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer text-on-error bg-error hover:bg-error-hovered enabled:active:bg-error-hovered focus-visible:bg-error-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-«r0»\" data-state=\"open\">",
             "target": [
               "button[aria-haspopup=\"dialog\"]"
             ]
@@ -118,19 +118,19 @@
     "violations": []
   },
   "@spark-ui/components/avatar": {
-    "timestamp": "2025-05-19T12:44:31.602Z",
+    "timestamp": "2025-07-28T08:02:55.108Z",
     "url": "http://localhost:3002/a11y/avatar",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/badge": {
-    "timestamp": "2025-05-19T12:44:33.811Z",
+    "timestamp": "2025-07-28T08:02:56.233Z",
     "url": "http://localhost:3002/a11y/badge",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/breadcrumb": {
-    "timestamp": "2025-05-19T12:44:36.292Z",
+    "timestamp": "2025-07-28T08:02:57.111Z",
     "url": "http://localhost:3002/a11y/breadcrumb",
     "incomplete": [
       {
@@ -189,31 +189,90 @@
     "violations": []
   },
   "@spark-ui/components/button": {
-    "timestamp": "2025-05-19T12:44:38.105Z",
+    "timestamp": "2025-07-28T08:02:58.302Z",
     "url": "http://localhost:3002/a11y/button",
     "incomplete": [],
     "violations": []
   },
+  "@spark-ui/components/card": {
+    "timestamp": "2025-07-28T08:02:59.531Z",
+    "url": "http://localhost:3002/a11y/card",
+    "incomplete": [
+      {
+        "id": "bypass",
+        "impact": "serious",
+        "tags": [
+          "cat.keyboard",
+          "wcag2a",
+          "wcag241",
+          "section508",
+          "section508.22.o",
+          "TTv5",
+          "TT9.a",
+          "EN-301-549",
+          "EN-9.2.4.1"
+        ],
+        "description": "Ensure each page has at least one mechanism for a user to bypass navigation and jump straight to the content",
+        "help": "Page must have means to bypass repeated blocks",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/bypass?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "internal-link-present",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "No valid skip link found"
+              },
+              {
+                "id": "header-present",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Page does not have a heading"
+              },
+              {
+                "id": "landmark",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Page does not have a landmark region"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<html lang=\"en\">",
+            "target": [
+              "html"
+            ]
+          }
+        ]
+      }
+    ],
+    "violations": []
+  },
   "@spark-ui/components/checkbox": {
-    "timestamp": "2025-05-19T12:44:42.792Z",
+    "timestamp": "2025-07-28T08:03:00.721Z",
     "url": "http://localhost:3002/a11y/checkbox",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/chip": {
-    "timestamp": "2025-05-19T12:44:45.469Z",
+    "timestamp": "2025-07-28T08:03:01.889Z",
     "url": "http://localhost:3002/a11y/chip",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/collapsible": {
-    "timestamp": "2025-05-19T12:44:26.996Z",
+    "timestamp": "2025-07-28T08:03:02.947Z",
     "url": "http://localhost:3002/a11y/collapsible",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/combobox": {
-    "timestamp": "2025-05-19T12:44:29.400Z",
+    "timestamp": "2025-07-28T08:03:04.094Z",
     "url": "http://localhost:3002/a11y/combobox",
     "incomplete": [
       {
@@ -278,7 +337,7 @@
     "violations": []
   },
   "@spark-ui/components/dialog": {
-    "timestamp": "2025-05-19T12:44:31.738Z",
+    "timestamp": "2025-07-28T08:03:05.397Z",
     "url": "http://localhost:3002/a11y/dialog",
     "incomplete": [
       {
@@ -379,9 +438,9 @@
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"button\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-«r0»\" data-state=\"open\">",
+            "html": "<button data-spark-component=\"dialog-trigger\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap default:px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-«r0»\" data-state=\"open\">",
             "target": [
-              "button[aria-haspopup=\"dialog\"]"
+              "button[data-spark-component=\"dialog-trigger\"]"
             ]
           },
           {
@@ -411,13 +470,13 @@
     "violations": []
   },
   "@spark-ui/components/divider": {
-    "timestamp": "2025-05-19T12:44:33.813Z",
+    "timestamp": "2025-07-28T08:03:06.800Z",
     "url": "http://localhost:3002/a11y/divider",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/drawer": {
-    "timestamp": "2025-05-19T12:44:36.260Z",
+    "timestamp": "2025-07-28T08:03:08.213Z",
     "url": "http://localhost:3002/a11y/drawer",
     "incomplete": [
       {
@@ -518,9 +577,9 @@
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"button\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-«r0»\" data-state=\"open\">",
+            "html": "<button data-spark-component=\"drawer-trigger\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap default:px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-«r0»\" data-state=\"open\">",
             "target": [
-              "button[aria-haspopup=\"dialog\"]"
+              "button[data-spark-component=\"drawer-trigger\"]"
             ]
           }
         ]
@@ -529,7 +588,7 @@
     "violations": []
   },
   "@spark-ui/components/dropdown": {
-    "timestamp": "2025-05-19T12:44:38.173Z",
+    "timestamp": "2025-07-28T08:03:09.291Z",
     "url": "http://localhost:3002/a11y/dropdown",
     "incomplete": [
       {
@@ -562,7 +621,7 @@
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button type=\"button\" class=\"flex w-full items-center justify-between min-h-sz-44 rounded-lg bg-surface text-on-surface px-lg text-body-1 ring-1 outline-hidden ring-inset focus:ring-2 ring-outline focus:ring-outline-high hover:ring-outline-high\" aria-activedescendant=\"\" aria-controls=\":dropdown-input-«r1»-menu\" aria-expanded=\"false\" aria-haspopup=\"listbox\" aria-labelledby=\":dropdown-label-«r0»\" id=\":dropdown-input-«r1»-toggle-button\" role=\"combobox\" tabindex=\"0\" data-spark-component=\"dropdown-trigger\" data-state=\"open\">",
+            "html": "<button type=\"button\" class=\"flex w-full items-center justify-between min-h-sz-44 rounded-lg bg-surface text-on-surface px-lg text-body-1 ring-1 outline-hidden ring-inset focus:ring-2 focus:ring-focus ring-outline default:hover:ring-outline-high\" aria-activedescendant=\"\" aria-controls=\":dropdown-input-«r1»-menu\" aria-expanded=\"false\" aria-haspopup=\"listbox\" aria-labelledby=\":dropdown-label-«r0»\" id=\":dropdown-input-«r1»-toggle-button\" role=\"combobox\" tabindex=\"0\" data-spark-component=\"dropdown-trigger\" data-state=\"open\">",
             "target": [
               "#\\:dropdown-input-«r1»-toggle-button"
             ]
@@ -583,7 +642,7 @@
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button type=\"button\" class=\"flex w-full items-center justify-between min-h-sz-44 rounded-lg bg-surface text-on-surface px-lg text-body-1 ring-1 outline-hidden ring-inset focus:ring-2 ring-outline focus:ring-outline-high hover:ring-outline-high\" aria-activedescendant=\"\" aria-controls=\":dropdown-input-«r5»-menu\" aria-expanded=\"false\" aria-haspopup=\"listbox\" aria-labelledby=\":dropdown-label-«r4»\" id=\":dropdown-input-«r5»-toggle-button\" role=\"combobox\" tabindex=\"0\" data-spark-component=\"dropdown-trigger\" data-state=\"open\">",
+            "html": "<button type=\"button\" class=\"flex w-full items-center justify-between min-h-sz-44 rounded-lg bg-surface text-on-surface px-lg text-body-1 ring-1 outline-hidden ring-inset focus:ring-2 focus:ring-focus ring-outline default:hover:ring-outline-high\" aria-activedescendant=\"\" aria-controls=\":dropdown-input-«r5»-menu\" aria-expanded=\"false\" aria-haspopup=\"listbox\" aria-labelledby=\":dropdown-label-«r4»\" id=\":dropdown-input-«r5»-toggle-button\" role=\"combobox\" tabindex=\"0\" data-spark-component=\"dropdown-trigger\" data-state=\"open\">",
             "target": [
               "#\\:dropdown-input-«r5»-toggle-button"
             ]
@@ -594,55 +653,55 @@
     "violations": []
   },
   "@spark-ui/components/form-field": {
-    "timestamp": "2025-05-19T12:44:42.789Z",
+    "timestamp": "2025-07-28T08:03:10.530Z",
     "url": "http://localhost:3002/a11y/form-field",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/icon": {
-    "timestamp": "2025-05-19T12:44:45.464Z",
+    "timestamp": "2025-07-28T08:03:11.677Z",
     "url": "http://localhost:3002/a11y/icon",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/icon-button": {
-    "timestamp": "2025-05-19T12:44:26.992Z",
+    "timestamp": "2025-07-28T08:03:12.863Z",
     "url": "http://localhost:3002/a11y/icon-button",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/input": {
-    "timestamp": "2025-05-19T12:44:29.339Z",
+    "timestamp": "2025-07-28T08:03:14.008Z",
     "url": "http://localhost:3002/a11y/input",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/kbd": {
-    "timestamp": "2025-05-19T12:44:58.138Z",
+    "timestamp": "2025-07-28T08:03:15.043Z",
     "url": "http://localhost:3002/a11y/kbd",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/label": {
-    "timestamp": "2025-05-19T12:44:36.250Z",
+    "timestamp": "2025-07-28T08:03:16.053Z",
     "url": "http://localhost:3002/a11y/label",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/link-box": {
-    "timestamp": "2025-05-19T12:45:03.949Z",
+    "timestamp": "2025-07-28T08:03:18.240Z",
     "url": "http://localhost:3002/a11y/link-box",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/pagination": {
-    "timestamp": "2025-05-19T12:44:42.793Z",
+    "timestamp": "2025-07-28T08:03:19.292Z",
     "url": "http://localhost:3002/a11y/pagination",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/popover": {
-    "timestamp": "2025-05-19T12:44:45.481Z",
+    "timestamp": "2025-07-28T08:03:20.554Z",
     "url": "http://localhost:3002/a11y/popover",
     "incomplete": [
       {
@@ -675,7 +734,7 @@
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"popover-trigger\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"false\" aria-controls=\"radix-«r0»\" data-state=\"closed\">",
+            "html": "<button data-spark-component=\"popover-trigger\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap default:px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"false\" aria-controls=\"radix-«r0»\" data-state=\"closed\">",
             "target": [
               "button[aria-controls=\"radix-«r0»\"]"
             ]
@@ -696,7 +755,7 @@
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"popover-trigger\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"false\" aria-controls=\"radix-«r1»\" data-state=\"closed\">",
+            "html": "<button data-spark-component=\"popover-trigger\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap default:px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"false\" aria-controls=\"radix-«r1»\" data-state=\"closed\">",
             "target": [
               "button[aria-controls=\"radix-«r1»\"]"
             ]
@@ -707,91 +766,91 @@
     "violations": []
   },
   "@spark-ui/components/progress": {
-    "timestamp": "2025-05-19T12:44:49.540Z",
+    "timestamp": "2025-07-28T08:03:21.793Z",
     "url": "http://localhost:3002/a11y/progress",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/progress-tracker": {
-    "timestamp": "2025-05-19T12:44:26.994Z",
+    "timestamp": "2025-07-28T08:03:22.879Z",
     "url": "http://localhost:3002/a11y/progress-tracker",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/radio-group": {
-    "timestamp": "2025-05-19T12:44:29.371Z",
+    "timestamp": "2025-07-28T08:03:23.979Z",
     "url": "http://localhost:3002/a11y/radio-group",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/rating": {
-    "timestamp": "2025-05-19T12:44:31.441Z",
+    "timestamp": "2025-07-28T08:03:24.918Z",
     "url": "http://localhost:3002/a11y/rating",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/select": {
-    "timestamp": "2025-05-19T12:44:33.827Z",
+    "timestamp": "2025-07-28T08:03:26.213Z",
     "url": "http://localhost:3002/a11y/select",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/skeleton": {
-    "timestamp": "2025-05-19T12:44:36.259Z",
+    "timestamp": "2025-07-28T08:03:27.460Z",
     "url": "http://localhost:3002/a11y/skeleton",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/slider": {
-    "timestamp": "2025-05-19T12:44:38.108Z",
+    "timestamp": "2025-07-28T08:03:28.411Z",
     "url": "http://localhost:3002/a11y/slider",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/snackbar": {
-    "timestamp": "2025-05-19T12:44:42.792Z",
+    "timestamp": "2025-07-28T08:03:29.604Z",
     "url": "http://localhost:3002/a11y/snackbar",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/spinner": {
-    "timestamp": "2025-05-19T12:44:45.464Z",
+    "timestamp": "2025-07-28T08:03:30.761Z",
     "url": "http://localhost:3002/a11y/spinner",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/stepper": {
-    "timestamp": "2025-05-19T12:44:27.077Z",
+    "timestamp": "2025-07-28T08:03:31.953Z",
     "url": "http://localhost:3002/a11y/stepper",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/switch": {
-    "timestamp": "2025-05-19T12:44:29.328Z",
+    "timestamp": "2025-07-28T08:03:33.128Z",
     "url": "http://localhost:3002/a11y/switch",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/tabs": {
-    "timestamp": "2025-05-19T12:44:31.287Z",
+    "timestamp": "2025-07-28T08:03:34.319Z",
     "url": "http://localhost:3002/a11y/tabs",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/tag": {
-    "timestamp": "2025-05-19T12:44:33.813Z",
+    "timestamp": "2025-07-28T08:03:35.760Z",
     "url": "http://localhost:3002/a11y/tag",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/textarea": {
-    "timestamp": "2025-05-19T12:44:36.264Z",
+    "timestamp": "2025-07-28T08:03:36.701Z",
     "url": "http://localhost:3002/a11y/textarea",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/text-link": {
-    "timestamp": "2025-05-19T12:45:09.479Z",
+    "timestamp": "2025-07-28T08:03:37.816Z",
     "url": "http://localhost:3002/a11y/text-link",
     "incomplete": [
       {
@@ -850,7 +909,7 @@
     "violations": []
   },
   "@spark-ui/components/visually-hidden": {
-    "timestamp": "2025-05-19T12:44:42.792Z",
+    "timestamp": "2025-07-28T08:03:38.964Z",
     "url": "http://localhost:3002/a11y/visually-hidden",
     "incomplete": [],
     "violations": []

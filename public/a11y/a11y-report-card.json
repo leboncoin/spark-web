@@ -1,7 +1,7 @@
 {
-  "@spark-ui/components/breadcrumb": {
-    "timestamp": "2025-07-28T08:02:57.111Z",
-    "url": "http://localhost:3002/a11y/breadcrumb",
+  "@spark-ui/components/card": {
+    "timestamp": "2025-07-28T08:02:59.531Z",
+    "url": "http://localhost:3002/a11y/card",
     "incomplete": [
       {
         "id": "bypass",

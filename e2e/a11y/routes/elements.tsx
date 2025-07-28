@@ -6,6 +6,7 @@ import { A11yAvatar } from '../pages/Avatar'
 import { A11yBadge } from '../pages/Badge'
 import { A11yBreadcrumb } from '../pages/Breadcrumb'
 import { A11yButton } from '../pages/Button'
+import { A11yCard } from '../pages/Card'
 import { A11yCheckbox } from '../pages/Checkbox'
 import { A11yChip } from '../pages/Chip'
 import { A11yCollapsible } from '../pages/Collapsible'
@@ -54,6 +55,7 @@ export const a11yElements: Record<A11yComponentsKey, ComponentType> = {
   badge: A11yBadge,
   breadcrumb: A11yBreadcrumb,
   button: A11yButton,
+  card: A11yCard,
   checkbox: A11yCheckbox,
   chip: A11yChip,
   collapsible: A11yCollapsible,

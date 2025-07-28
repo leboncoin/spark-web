@@ -219,7 +219,7 @@ export const WithLinkBox: StoryFn = _args => {
   return (
     <div className="gap-md flex flex-wrap">
       <LinkBox>
-        <Card asChild className="min-w-sz-160 shadow-md">
+        <Card className="min-w-sz-160 shadow-md">
           <Card.Content className="gap-md flex flex-col items-start">
             <div className="h-sz-144 relative w-full">
               <img src={pandaImg} alt="Panda" className="size-full rounded-lg object-cover" />

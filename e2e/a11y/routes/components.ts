@@ -11,6 +11,7 @@ export const a11yComponents = {
   badge: 'badge',
   breadcrumb: 'breadcrumb',
   button: 'button',
+  card: 'card',
   checkbox: 'checkbox',
   chip: 'chip',
   collapsible: 'collapsible',
