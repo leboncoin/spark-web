@@ -46,7 +46,7 @@ export const FormFieldCharactersCount = ({
   }, [value])
 
   return (
-    <span className="ml-auto self-end">
+    <span className="ml-auto self-start">
       {description && (
         <FormFieldMessage className="default:sr-only">{description}</FormFieldMessage>
       )}
