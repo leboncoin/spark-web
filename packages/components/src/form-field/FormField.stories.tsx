@@ -188,16 +188,12 @@ export const CharactersCount: StoryFn = () => {
         )}
       </FormField.Control>
 
-      <div className="gap-md flex justify-between">
-        <FormField.CharactersCount
-          value={value}
-          maxLength={MAX_LENGTH}
-          description={`You can enter up to ${MAX_LENGTH} characters`}
-          liveAnnouncement={({ remainingChars }) =>
-            `You have ${remainingChars} characters remaining`
-          }
-        />
-      </div>
+      <FormField.CharactersCount
+        value={value}
+        maxLength={MAX_LENGTH}
+        description={`You can enter up to ${MAX_LENGTH} characters`}
+        liveAnnouncement={({ remainingChars }) => `You have ${remainingChars} characters remaining`}
+      />
     </FormField>
   )
 }
