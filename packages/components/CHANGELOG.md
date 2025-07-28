@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.11.14](https://github.com/leboncoin/spark-web/compare/v10.11.13...v10.11.14) (2025-07-28)
+
+### Bug Fixes
+
+- **components:** align chars count to top ([0d9baac](https://github.com/leboncoin/spark-web/commit/0d9baac83c7b80505ff4410cb22e483b70ea09f5))
+
 ## [10.11.13](https://github.com/leboncoin/spark-web/compare/v10.11.12...v10.11.13) (2025-07-28)
 
 **Note:** Version bump only for package @spark-ui/components
