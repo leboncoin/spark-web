@@ -43,7 +43,7 @@ const intents: CardProps['intent'][] = [
   'info',
   'neutral',
 ]
-const designs: CardProps['design'][] = ['filled', 'outlined', 'tinted']
+const designs: CardProps['design'][] = ['filled', 'tinted', 'outlined']
 
 export const Default: StoryObj = {
   render: _args => {
@@ -100,6 +100,7 @@ export const Backdrop: StoryFn = _args => {
 export const DesignAndIntentTable: StoryFn = _args => {
   const [withShadows, setWithShadows] = useState(true)
   const [withBackdrop, setWithBackdrop] = useState(true)
+  const [disabled, setDisabled] = useState(false)
 
   return (
     <div className="gap-lg flex flex-col">
@@ -110,6 +111,10 @@ export const DesignAndIntentTable: StoryFn = _args => {
         <Divider orientation="vertical" />
         <Switch checked={withBackdrop} onCheckedChange={setWithBackdrop}>
           With backdrop
+        </Switch>
+        <Divider orientation="vertical" />
+        <Switch checked={disabled} onCheckedChange={setDisabled}>
+          Disabled (only for button cards)
         </Switch>
       </div>
 
@@ -141,7 +146,7 @@ export const DesignAndIntentTable: StoryFn = _args => {
                     className={cx('w-sz-208', withShadows && 'shadow-md')}
                     asChild
                   >
-                    <button type="button" className="text-left">
+                    <button type="button" className="text-left" disabled={disabled}>
                       {withBackdrop && <Card.Backdrop intent={intent} />}
                       <Card.Content className="gap-md flex flex-col items-start">
                         <div className="h-sz-80 relative w-full">

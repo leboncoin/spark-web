@@ -7,6 +7,7 @@ export interface CardContextValue {
   intent: CardStylesProps['intent']
   hasBackdrop: boolean
   inset: boolean
+  isInteractive: boolean
 }
 
 const CardContext = createContext<CardContextValue | undefined>(undefined)

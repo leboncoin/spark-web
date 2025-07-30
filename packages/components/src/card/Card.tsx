@@ -2,8 +2,8 @@ import { ComponentProps } from 'react'
 
 import { Slot } from '../slot'
 import { cardStyles, type CardStylesProps } from './Card.styles'
-import { hasBackdrop } from './utils'
 import { CardContext } from './context'
+import { hasBackdrop, isInteractive } from './utils'
 
 export interface CardProps extends ComponentProps<'div'>, CardStylesProps {
   /**
@@ -28,6 +28,7 @@ export const Card = ({
 }: CardProps) => {
   const Component = asChild ? Slot : 'div'
   const backdropDetected = hasBackdrop(children)
+  const interactiveDetected = isInteractive(children, asChild, props)
 
   return (
     <CardContext.Provider
@@ -36,10 +37,12 @@ export const Card = ({
         intent,
         hasBackdrop: backdropDetected,
         inset,
+        isInteractive: interactiveDetected,
       }}
     >
       <Component
         data-spark-component="card"
+        data-interactive={interactiveDetected}
         ref={ref}
         className={cardStyles({
           className,

@@ -2,7 +2,10 @@ import { makeVariants, tw } from '@spark-ui/internal-utils'
 import { cva, VariantProps } from 'class-variance-authority'
 
 export const cardStyles = cva(
-  ['relative bg-clip-padding default:rounded-lg focus-visible:u-outline'],
+  [
+    'group relative bg-clip-padding default:rounded-lg focus-visible:u-outline',
+    'disabled:opacity-dim-3 disabled:cursor-not-allowed',
+  ],
   {
     variants: {
       design: {
