@@ -2,7 +2,10 @@ import { makeVariants, tw } from '@spark-ui/internal-utils'
 import { cva, VariantProps } from 'class-variance-authority'
 
 export const contentStyles = cva(
-  ['relative h-full default:rounded-lg w-full focus-visible:u-outline'],
+  [
+    'relative h-full default:rounded-lg w-full focus-visible:u-outline',
+    'default:transition-colors default:duration-200 ease-linear',
+  ],
   {
     variants: {
       inset: {
@@ -10,7 +13,9 @@ export const contentStyles = cva(
       },
       design: {
         filled: [],
-        outlined: ['default:bg-surface'],
+        outlined: [
+          'default:bg-surface group-focus:bg-surface-hovered group-not-disabled:group-data-[interactive=true]:group-hover:bg-surface-hovered',
+        ],
         tinted: [],
       },
       hasBackdrop: {

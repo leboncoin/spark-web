@@ -12,7 +12,7 @@ import avatarImg from './avatar.png'
 const meta: Meta<typeof Avatar> = {
   title: 'Components/Avatar',
   component: Avatar,
-  tags: ['todo'],
+  tags: ['data-display'],
 }
 
 export default meta

@@ -17,7 +17,7 @@ import pandaImg from './docAssets/panda.jpg'
 const meta: Meta<typeof Card> = {
   title: 'Components/Card',
   component: Card,
-  tags: ['action'],
+  tags: ['action', 'data-display'],
   parameters: {
     design: {
       type: 'figma',
