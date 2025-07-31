@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.14.0](https://github.com/leboncoin/spark-web/compare/v10.13.0...v10.14.0) (2025-07-31)
+
+### Features
+
+- **components:** card component ([b2b5139](https://github.com/leboncoin/spark-web/commit/b2b51398fa7b84cc3110c758f614b423a951d174))
+
 # [10.13.0](https://github.com/leboncoin/spark-web/compare/v10.12.0...v10.13.0) (2025-07-31)
 
 **Note:** Version bump only for package @spark-ui/theme-utils
