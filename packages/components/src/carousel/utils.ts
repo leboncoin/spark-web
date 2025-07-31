@@ -76,3 +76,47 @@ export function getSnapPositions({
     })
     .map(slide => (slide as HTMLElement).offsetLeft)
 }
+
+/**
+ * Calculate the state of a dot indicator of a carousel depending on the current page and the total number of pages.
+ */
+export function computeDotState({
+  dotIndex,
+  pageState,
+  totalPages,
+  maxDots = 5,
+}: {
+  dotIndex: number
+  pageState: number
+  totalPages: number
+  maxDots?: number
+}): 'active' | 'edge' | 'idle' | 'hidden' {
+  if (totalPages <= maxDots) {
+    return dotIndex === pageState ? 'active' : 'idle'
+  }
+
+  if (pageState <= Math.floor(maxDots / 2)) {
+    if (dotIndex > maxDots - 1) return 'hidden'
+    if (dotIndex === pageState) return 'active'
+    if (dotIndex === maxDots - 1) return 'edge'
+
+    return 'idle'
+  }
+
+  if (pageState >= totalPages - Math.ceil(maxDots / 2)) {
+    const startIndex = totalPages - maxDots
+    if (dotIndex < startIndex) return 'hidden'
+    if (dotIndex === pageState) return 'active'
+    if (dotIndex === startIndex) return 'edge'
+
+    return 'idle'
+  }
+
+  const startIndex = pageState - Math.floor(maxDots / 2)
+  const endIndex = pageState + Math.floor(maxDots / 2)
+  if (dotIndex < startIndex || dotIndex > endIndex) return 'hidden'
+  if (dotIndex === pageState) return 'active'
+  if (dotIndex === startIndex || dotIndex === endIndex) return 'edge'
+
+  return 'idle'
+}

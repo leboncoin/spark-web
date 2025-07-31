@@ -5,6 +5,7 @@ import { Button } from '../button'
 import { FormField } from '../form-field'
 import { Input } from '../input'
 import { RadioGroup } from '../radio-group'
+import { Tabs } from '../tabs'
 import { Dialog, type DialogContentProps } from '.'
 
 const meta: Meta<typeof Dialog> = {
@@ -32,17 +33,25 @@ export const Default: StoryFn = () => {
       <Dialog.Portal>
         <Dialog.Overlay />
 
-        <Dialog.Content size="sm">
+        <Dialog.Content size="lg">
           <Dialog.Header>
-            <Dialog.Title>Edit profile</Dialog.Title>
+            <Dialog.Title>Accessibilité</Dialog.Title>
           </Dialog.Header>
 
           <Dialog.Body>
-            <Dialog.Description>
-              Make changes to your profile here. Click save when you are done.
-            </Dialog.Description>
+            <Tabs defaultValue="tab1">
+              <Tabs.List aria-labelledby="tasks-label">
+                <Tabs.Trigger value="settings">Paramètres</Tabs.Trigger>
+                <Tabs.Trigger value="information">Informations</Tabs.Trigger>
+              </Tabs.List>
 
-            <p>Lorem ipsum dolor sit amet</p>
+              <Tabs.Content value="settings">
+                <p>Paramètre d'accessibilité</p>
+              </Tabs.Content>
+              <Tabs.Content value="information">
+                <p>Informations</p>
+              </Tabs.Content>
+            </Tabs>
           </Dialog.Body>
 
           <Dialog.Footer className="gap-md flex justify-end">

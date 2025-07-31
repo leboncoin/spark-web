@@ -25,6 +25,7 @@ export const Carousel = ({
   defaultPage,
   page,
   onPageChange,
+  maxDots = 5,
   ...props
 }: Props) => {
   const carouselApi = useCarousel({
@@ -39,6 +40,7 @@ export const Carousel = ({
     page,
     pagePickerInset,
     onPageChange,
+    maxDots,
   })
 
   return (

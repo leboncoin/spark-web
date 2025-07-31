@@ -22,7 +22,8 @@ export const CarouselPagePicker = ({ children, className }: Props) => {
         data-spark-component="carousel-page-picker"
         {...ctx.getIndicatorGroupProps()}
         className={cx(
-          'default:min-h-sz-16 flex w-full flex-wrap items-center justify-center',
+          'flex-wrap items-center justify-center',
+          'default:min-h-sz-16 flex',
           ctx.pagePickerInset && 'bottom-sz-12 absolute inset-x-0',
           className
         )}
