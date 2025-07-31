@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.12.0](https://github.com/leboncoin/spark-web/compare/v10.11.14...v10.12.0) (2025-07-31)
+
+### Features
+
+- **components:** tag shapes and sizes ([6939dea](https://github.com/leboncoin/spark-web/commit/6939deab352bd1cf48809a4ebd477b2f4709611a))
+
 ## [10.11.14](https://github.com/leboncoin/spark-web/compare/v10.11.13...v10.11.14) (2025-07-28)
 
 ### Bug Fixes
