@@ -47,7 +47,7 @@ export const CarouselPageIndicator = ({
             'w-sz-8 h-sz-8',
             'data-[state=active]:w-sz-32 data-[state=active]:h-sz-8',
             'data-[state=edge]:w-sz-4 data-[state=edge]:h-sz-4',
-            'data-[state=hidden]:size-0',
+            'data-[state=hidden]:m-0 data-[state=hidden]:size-0',
             intent === 'surface'
               ? 'data-[state=active]:bg-surface bg-surface/dim-2'
               : 'data-[state=active]:bg-basic bg-on-surface/dim-2'
