@@ -14,7 +14,7 @@ export const LinkBox = ({ className, asChild, ref, ...props }: LinkBoxProps) => 
     <Component
       ref={ref}
       data-spark-component="link-box"
-      className={cx('relative', className)}
+      className={cx('default:relative', className)}
       {...props}
     />
   )

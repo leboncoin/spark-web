@@ -1,6 +1,6 @@
 {
   "@spark-ui/components/alert-dialog": {
-    "timestamp": "2025-05-19T12:44:29.372Z",
+    "timestamp": "2025-07-28T08:02:54.049Z",
     "url": "http://localhost:3002/a11y/alert-dialog",
     "incomplete": [
       {
@@ -101,7 +101,7 @@
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"alert-dialog-title\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer text-on-error bg-error hover:bg-error-hovered enabled:active:bg-error-hovered focus-visible:bg-error-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-«r0»\" data-state=\"open\">",
+            "html": "<button data-spark-component=\"alert-dialog-title\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap default:px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer text-on-error bg-error hover:bg-error-hovered enabled:active:bg-error-hovered focus-visible:bg-error-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-«r0»\" data-state=\"open\">",
             "target": [
               "button[aria-haspopup=\"dialog\"]"
             ]

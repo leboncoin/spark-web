@@ -1,6 +1,6 @@
 {
   "@spark-ui/components/drawer": {
-    "timestamp": "2025-05-19T12:44:36.260Z",
+    "timestamp": "2025-07-28T08:03:08.213Z",
     "url": "http://localhost:3002/a11y/drawer",
     "incomplete": [
       {
@@ -101,9 +101,9 @@
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"button\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-«r0»\" data-state=\"open\">",
+            "html": "<button data-spark-component=\"drawer-trigger\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap default:px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-«r0»\" data-state=\"open\">",
             "target": [
-              "button[aria-haspopup=\"dialog\"]"
+              "button[data-spark-component=\"drawer-trigger\"]"
             ]
           }
         ]
