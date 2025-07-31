@@ -7,8 +7,7 @@ export const tagStyles = cva(
   [
     'box-border inline-flex items-center justify-center gap-sm whitespace-nowrap',
     'text-caption font-bold',
-    'h-sz-20 px-md',
-    'rounded-full',
+    'px-md',
   ],
   {
     variants: {
@@ -22,6 +21,15 @@ export const tagStyles = cva(
         filled: [],
         outlined: ['border-sm', 'border-current'],
         tinted: [],
+      }),
+      size: makeVariants<'size', ['md', 'lg']>({
+        md: ['h-sz-20'],
+        lg: ['h-sz-24'],
+      }),
+      shape: makeVariants<'shape', ['square', 'rounded', 'pill']>({
+        square: [],
+        rounded: ['rounded-md'],
+        pill: ['rounded-full'],
       }),
       /**
        * Color scheme of the tag.
@@ -57,6 +65,8 @@ export const tagStyles = cva(
     defaultVariants: {
       design: 'filled',
       intent: 'basic',
+      size: 'md',
+      shape: 'pill',
     },
   }
 )

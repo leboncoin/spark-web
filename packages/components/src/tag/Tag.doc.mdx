@@ -31,7 +31,7 @@ export default () => <Tag />;
 
 ### Design
 
-Use `design` prop to set the different look and feels of a tag.
+Use `design` prop to set the different look and feels of a tag. Default: `filled`.
 
 <Canvas of={TagStories.Design} />
 
@@ -43,9 +43,27 @@ Compose the content of the tag using the `Icon` component to add an icon to the 
 
 ### Intent
 
-Use `intent` prop to set the color intent of a tag.
+Use `intent` prop to set the color intent of a tag. Default: `basic`.
 
 <Canvas of={TagStories.Intent} />
+
+### Sizes
+
+Use `size` prop to set the different sizes of a tag. Default: `md`.
+
+<Canvas of={TagStories.Sizes} />
+
+### Shapes
+
+Use `shape` prop to set the different border radius styles of a tag. Default: `pill`.
+
+<Canvas of={TagStories.Shapes} />
+
+### All Combinations
+
+Explore all possible combinations of design, intent, shape, and size props.
+
+<Canvas of={TagStories.AllCombinations} />
 
 ## API Reference
 

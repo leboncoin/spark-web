@@ -1,4 +1,4 @@
-import { tw } from './default'
+import { tw } from '@spark-ui/internal-utils'
 
 export const filledVariants = [
   {
