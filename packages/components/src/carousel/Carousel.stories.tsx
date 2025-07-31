@@ -5,6 +5,7 @@ import { memo, useState } from 'react'
 
 import { Button } from '../button'
 import { FormField } from '../form-field'
+import { RadioGroup } from '../radio-group'
 import { Select } from '../select'
 import { Slider } from '../slider'
 import { Stepper } from '../stepper'
@@ -675,6 +676,59 @@ export const CustomPageIndicators: StoryFn = () => {
                 </Carousel.PageIndicator>
               )
             })
+          }
+        </Carousel.PagePicker>
+      </Carousel>
+    </div>
+  )
+}
+
+export const MaxDots: StoryFn = () => {
+  const [maxDots, setMaxDots] = useState<number>(5)
+
+  const handleMaxDotsChange = (value: string) => {
+    setMaxDots(value === 'Infinity' ? Infinity : Number(value))
+  }
+
+  return (
+    <div className="gap-xl flex flex-col">
+      <RadioGroup
+        value={maxDots === Infinity ? 'Infinity' : maxDots.toString()}
+        onValueChange={handleMaxDotsChange}
+        orientation="horizontal"
+        aria-label="Max dots selection"
+      >
+        <RadioGroup.Radio value="5">5</RadioGroup.Radio>
+        <RadioGroup.Radio value="7">7</RadioGroup.Radio>
+        <RadioGroup.Radio value="Infinity">Infinity</RadioGroup.Radio>
+      </RadioGroup>
+
+      <Carousel aria-label="Best products" maxDots={maxDots}>
+        <Carousel.Viewport>
+          <Carousel.Slides>
+            {Array.from({ length: 11 }).map((_, i) => (
+              <Carousel.Slide key={i} aria-label={`Slide ${i}`} className="flex items-center">
+                <RandomImage imgHeight={600} imgWidth={600} className="h-sz-256 object-cover" />
+
+                <Button className="bottom-lg right-lg absolute">Read article</Button>
+              </Carousel.Slide>
+            ))}
+          </Carousel.Slides>
+          <Carousel.Controls>
+            <Carousel.PrevButton aria-label="Previous group of items" />
+            <Carousel.NextButton aria-label="Next group of items" />
+          </Carousel.Controls>
+        </Carousel.Viewport>
+
+        <Carousel.PagePicker>
+          {({ pages }) =>
+            pages.map(page => (
+              <Carousel.PageIndicator
+                key={page}
+                index={page}
+                aria-label={`Go to page ${page + 1}`}
+              />
+            ))
           }
         </Carousel.PagePicker>
       </Carousel>

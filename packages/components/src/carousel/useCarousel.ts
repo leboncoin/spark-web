@@ -24,7 +24,7 @@ import { useEvent } from './useEvent'
 import { useIsMounted } from './useIsMounted'
 import { useScrollEnd } from './useScrollEnd'
 import { useSnapPoints } from './useSnapPoints'
-import { getSnapPositions, isSnapPoint } from './utils'
+import { computeDotState, getSnapPositions, isSnapPoint } from './utils'
 
 const DATA_SCOPE = 'carousel' as const
 const DIRECTION = 'ltr' as const
@@ -40,6 +40,7 @@ export const useCarousel = ({
   scrollBehavior = 'smooth',
   loop = false,
   pagePickerInset = false,
+  maxDots = 5,
   // state control
   page: controlledPage,
   onPageChange: onPageChangeProp,
@@ -172,6 +173,7 @@ export const useCarousel = ({
     scrollBehavior,
     loop,
     pagePickerInset,
+    maxDots,
     // computed state
     page: pageState,
     pageSnapPoints,
@@ -289,18 +291,23 @@ export const useCarousel = ({
     }),
 
     getIndicatorProps: ({ index }): ComputedIndicatorProps => {
-      const isActivePage = index === pageState
+      const dotState = computeDotState({
+        dotIndex: index,
+        pageState,
+        totalPages: pageSnapPoints.length,
+        maxDots,
+      })
 
       return {
         role: 'radio',
         id: `carousel::${carouselId}::indicator:${index}`,
-        'aria-checked': isActivePage,
+        'aria-checked': index === pageState,
         'data-scope': DATA_SCOPE,
         'data-part': 'indicator',
         'data-orientation': 'horizontal',
         'data-index': index,
-        'data-state': isActivePage ? 'active' : 'inactive',
-        tabIndex: isActivePage ? 0 : -1,
+        'data-state': dotState,
+        tabIndex: index === pageState ? 0 : -1,
         onClick: () => {
           scrollTo(index, scrollBehavior)
         },

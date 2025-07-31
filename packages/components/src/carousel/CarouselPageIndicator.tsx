@@ -30,32 +30,29 @@ export const CarouselPageIndicator = ({
     }
   })
 
-  const styles = cx(
-    'group h-sz-16 relative flex',
-    'hover:cursor-pointer',
-    'w-sz-16 data-[state=active]:w-sz-44'
-  )
-
-  const dotsStyles = cx(
-    'before:rounded-sm before:block before:size-md',
-    'before:absolute before:left-1/2 before:top-1/2 before:-translate-x-1/2 before:-translate-y-1/2',
-    'data-[state=active]:before:w-sz-32',
-    intent === 'surface'
-      ? 'data-[state=active]:before:bg-surface data-[state=inactive]:before:bg-surface/dim-2'
-      : 'data-[state=active]:before:bg-basic data-[state=inactive]:before:bg-on-surface/dim-2'
-  )
+  const indicatorProps = ctx.getIndicatorProps({ index })
 
   return (
     <button
       data-spark-component="carousel-page-indicator"
       ref={ref}
       key={index}
-      {...ctx.getIndicatorProps({ index })}
+      {...indicatorProps}
       aria-label={ariaLabel}
       className={cx(
         {
-          [styles]: !unstyled,
-          [dotsStyles]: !unstyled,
+          [cx(
+            'border-outline group relative flex justify-center border-0 hover:cursor-pointer',
+            'm-sm rounded-sm transition-all duration-[200ms] ease-linear',
+            'w-sz-8 h-sz-8',
+            'data-[state=active]:w-sz-32 data-[state=active]:h-sz-8',
+            'data-[state=edge]:w-sz-4 data-[state=edge]:h-sz-4',
+            'data-[state=hidden]:size-0',
+            intent === 'surface'
+              ? 'data-[state=active]:bg-surface bg-surface/dim-2'
+              : 'data-[state=active]:bg-basic bg-on-surface/dim-2'
+          )]: !unstyled,
+          // [dotsStyles]: !unstyled,
         },
         className
       )}

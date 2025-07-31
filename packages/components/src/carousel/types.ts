@@ -47,6 +47,10 @@ export interface UseCarouselProps {
   scrollBehavior?: 'instant' | 'smooth'
   onPageChange?: (pageIndex: number) => void
   pagePickerInset?: boolean
+  /**
+   * Maximum number of dots to display in the page picker.
+   */
+  maxDots?: number
 }
 
 export interface ComputedRootProps {
@@ -123,7 +127,7 @@ export interface ComputedIndicatorProps {
   'data-part': 'indicator'
   'data-orientation': 'horizontal'
   'data-index': number
-  'data-state': 'active' | 'inactive'
+  'data-state': 'active' | 'edge' | 'hidden' | 'idle'
   tabIndex: 0 | -1
   onClick: () => void
   onKeyDown: (event: KeyboardEvent) => void
@@ -159,4 +163,5 @@ export interface CarouselAPI extends AnatomyPropsSetters {
   snapType: UseCarouselProps['snapType']
   snapStop: UseCarouselProps['snapStop']
   scrollBehavior: UseCarouselProps['scrollBehavior']
+  maxDots: number
 }

@@ -64,4 +64,46 @@ describe('Carousel', () => {
     expect(nextButton).toBeInTheDocument()
     expect(pagePicker).toBeInTheDocument()
   })
+
+  it('should use maxDots from context', () => {
+    render(
+      <Carousel maxDots={7}>
+        <Carousel.Viewport>
+          <Carousel.Slides>
+            <Carousel.Slide className="flex items-center">
+              <button type="button">Read article 1</button>
+            </Carousel.Slide>
+            <Carousel.Slide className="flex items-center">
+              <button type="button">Read article 2</button>
+            </Carousel.Slide>
+            <Carousel.Slide className="flex items-center">
+              <button type="button">Read article 3</button>
+            </Carousel.Slide>
+          </Carousel.Slides>
+          <Carousel.Controls>
+            <Carousel.PrevButton aria-label="Next group of items" />
+            <Carousel.NextButton aria-label="Previous group of items" />
+          </Carousel.Controls>
+        </Carousel.Viewport>
+
+        <Carousel.PagePicker>
+          {({ pages, maxDots }) => {
+            // Verify that maxDots is available in the context
+            expect(maxDots).toBe(7)
+
+            return pages.map(page => (
+              <Carousel.PageIndicator
+                key={page}
+                index={page}
+                aria-label={`Go to page ${page + 1}`}
+              />
+            ))
+          }}
+        </Carousel.PagePicker>
+      </Carousel>
+    )
+
+    const carousel = screen.getByRole('region')
+    expect(carousel).toBeInTheDocument()
+  })
 })
