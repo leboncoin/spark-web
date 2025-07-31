@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.13.0](https://github.com/leboncoin/spark-web/compare/v10.12.0...v10.13.0) (2025-07-31)
+
+### Features
+
+- **components:** maxDots on carousel ([13a3cf8](https://github.com/leboncoin/spark-web/commit/13a3cf8fd5b9d7f09100bb41d127d427dfd47694))
+
 # [10.12.0](https://github.com/leboncoin/spark-web/compare/v10.11.14...v10.12.0) (2025-07-31)
 
 ### Features
