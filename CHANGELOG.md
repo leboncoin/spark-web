@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.14.1](https://github.com/leboncoin/spark-web/compare/v10.14.0...v10.14.1) (2025-07-31)
+
+### Bug Fixes
+
+- **components:** removed margin from hidden carousel dots ([cdf8b40](https://github.com/leboncoin/spark-web/commit/cdf8b4080435da711793014f7ca0d1ef28a3ef80))
+
 # [10.14.0](https://github.com/leboncoin/spark-web/compare/v10.13.0...v10.14.0) (2025-07-31)
 
 ### Features
