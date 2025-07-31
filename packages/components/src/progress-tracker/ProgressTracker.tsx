@@ -10,7 +10,7 @@ import type { StepIndicatorVariantProps } from './ProgressTrackerStepIndicator.s
 
 export interface ProgressTrackerProps
   extends ComponentPropsWithRef<'div'>,
-    Pick<StepIndicatorVariantProps, 'size' | 'intent' | 'design'> {
+    Pick<StepIndicatorVariantProps, 'size' | 'intent'> {
   /**
    * The orientation of the progress tracker
    * @default 'horizontal"
@@ -38,7 +38,6 @@ export const ProgressTracker = ({
   readOnly = false,
   intent = 'basic',
   size = 'lg',
-  design = 'outline',
   orientation = 'horizontal',
   children,
   className,
@@ -51,7 +50,7 @@ export const ProgressTracker = ({
 
   return (
     <ProgressTrackerContext.Provider
-      value={{ stepIndex, onStepClick, steps, setSteps, size, intent, design, readOnly }}
+      value={{ stepIndex, onStepClick, steps, setSteps, size, intent, readOnly }}
     >
       <Component
         ref={ref}

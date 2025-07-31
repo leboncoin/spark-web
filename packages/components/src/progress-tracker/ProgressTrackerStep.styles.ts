@@ -58,13 +58,7 @@ export const stepItemVariant = cva(
       },
       intent: {
         basic: '',
-        support: '',
-        main: '',
         neutral: '',
-        info: '',
-        accent: '',
-        danger: '',
-        alert: '',
         success: '',
       },
       disabled: {
