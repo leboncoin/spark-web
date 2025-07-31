@@ -4,7 +4,7 @@ import type { ProgressTrackerProps } from './ProgressTracker'
 
 // Interfaces
 export type ProgressTrackerContextInterface = Required<
-  Pick<ProgressTrackerProps, 'stepIndex' | 'size' | 'intent' | 'design' | 'readOnly'>
+  Pick<ProgressTrackerProps, 'stepIndex' | 'size' | 'intent' | 'readOnly'>
 > &
   Pick<ProgressTrackerProps, 'onStepClick'> & {
     steps: Map<string, string[]>
