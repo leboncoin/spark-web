@@ -27,14 +27,11 @@ export const ProgressTrackerStepIndicator = ({
   incomplete,
   className,
 }: ProgressTrackerStepIndicatorProps) => {
-  const { size, intent, design } = useProgressTrackerContext()
+  const { size, intent } = useProgressTrackerContext()
   const { index, state } = useProgressTrackerStepContext()
 
   return (
-    <span
-      className={stepIndicatorVariant({ size, intent, design, state, className })}
-      aria-hidden="true"
-    >
+    <span className={stepIndicatorVariant({ size, intent, state, className })} aria-hidden="true">
       {size !== 'sm' && (
         <>
           {state === 'complete' && (complete === undefined ? <CompleteIndicator /> : complete)}
