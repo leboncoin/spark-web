@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.14.2](https://github.com/leboncoin/spark-web/compare/v10.14.1...v10.14.2) (2025-08-01)
+
+### Bug Fixes
+
+- **theme-utils:** improved surface hover color token ([b16d936](https://github.com/leboncoin/spark-web/commit/b16d9369bfd658b9ab2963472ac4fc74833ff989))
+
 ## [10.14.1](https://github.com/leboncoin/spark-web/compare/v10.14.0...v10.14.1) (2025-07-31)
 
 **Note:** Version bump only for package @spark-ui/theme-utils
