@@ -5,7 +5,7 @@ export const ghostVariants = [
     intent: 'main',
     design: 'ghost',
     class: tw([
-      'text-main',
+      'text-on-main-container',
       'hover:bg-main/dim-5',
       'enabled:active:bg-main/dim-5',
       'focus-visible:bg-main/dim-5',
@@ -15,7 +15,7 @@ export const ghostVariants = [
     intent: 'support',
     design: 'ghost',
     class: tw([
-      'text-support',
+      'text-on-support-container',
       'hover:bg-support/dim-5',
       'enabled:active:bg-support/dim-5',
       'focus-visible:bg-support/dim-5',
@@ -25,7 +25,7 @@ export const ghostVariants = [
     intent: 'accent',
     design: 'ghost',
     class: tw([
-      'text-accent',
+      'text-on-accent-container',
       'hover:bg-accent/dim-5',
       'enabled:active:bg-accent/dim-5',
       'focus-visible:bg-accent/dim-5',
@@ -35,7 +35,7 @@ export const ghostVariants = [
     intent: 'basic',
     design: 'ghost',
     class: tw([
-      'text-basic',
+      'text-on-basic-container',
       'hover:bg-basic/dim-5',
       'enabled:active:bg-basic/dim-5',
       'focus-visible:bg-basic/dim-5',
@@ -45,7 +45,7 @@ export const ghostVariants = [
     intent: 'success',
     design: 'ghost',
     class: tw([
-      'text-success',
+      'text-on-success-container',
       'hover:bg-success/dim-5',
       'enabled:active:bg-success/dim-5',
       'focus-visible:bg-success/dim-5',
@@ -55,7 +55,7 @@ export const ghostVariants = [
     intent: 'alert',
     design: 'ghost',
     class: tw([
-      'text-alert',
+      'text-on-alert-container',
       'hover:bg-alert/dim-5',
       'enabled:active:bg-alert/dim-5',
       'focus-visible:bg-alert/dim-5',
@@ -65,7 +65,7 @@ export const ghostVariants = [
     intent: 'danger',
     design: 'ghost',
     class: tw([
-      'text-error',
+      'text-on-error-container',
       'hover:bg-error/dim-5',
       'enabled:active:bg-error/dim-5',
       'focus-visible:bg-error/dim-5',
@@ -75,7 +75,7 @@ export const ghostVariants = [
     intent: 'info',
     design: 'ghost',
     class: tw([
-      'text-info',
+      'text-on-info-container',
       'hover:bg-info/dim-5',
       'enabled:active:bg-info/dim-5',
       'focus-visible:bg-info/dim-5',
@@ -85,7 +85,7 @@ export const ghostVariants = [
     intent: 'neutral',
     design: 'ghost',
     class: tw([
-      'text-neutral',
+      'text-on-neutral-container',
       'hover:bg-neutral/dim-5',
       'enabled:active:bg-neutral/dim-5',
       'focus-visible:bg-neutral/dim-5',
