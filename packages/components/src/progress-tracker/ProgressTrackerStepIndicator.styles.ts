@@ -1,7 +1,5 @@
 import { cva, VariantProps } from 'class-variance-authority'
 
-import { outlineVariants, tintedVariants } from './stepIndicatorVariants'
-
 export const stepIndicatorVariant = cva(
   [
     'relative flex shrink-0 justify-center items-center',
@@ -30,18 +28,8 @@ export const stepIndicatorVariant = cva(
       },
       intent: {
         basic: '',
-        support: '',
-        main: '',
         neutral: '',
-        info: '',
-        accent: '',
-        danger: '',
-        alert: '',
         success: '',
-      },
-      design: {
-        outline: 'border-sm',
-        tinted: '',
       },
       state: {
         complete: '',
@@ -53,14 +41,58 @@ export const stepIndicatorVariant = cva(
      * Known type issue with CVA compoundVariants and VS Code/Intellisense:
      * https://github.com/joe-bell/cva/discussions/195#discussioncomment-6750163
      * */
-    /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
     /* @ts-ignore */
-    compoundVariants: [...outlineVariants, ...tintedVariants],
+    compoundVariants: [
+      // Basic
+      {
+        intent: 'basic',
+        state: ['complete', 'incomplete'],
+        class: [
+          'text-on-basic-container bg-basic-container',
+          'group-hover/btn:group-data-[interactive=true]/btn:bg-basic-container-hovered',
+          'group-hover/btn:group-data-[interactive=false]/btn:bg-basic-container',
+        ],
+      },
+      {
+        intent: 'basic',
+        state: 'active',
+        class: 'text-on-basic bg-basic',
+      },
+      // Neutral
+      {
+        intent: 'neutral',
+        state: ['complete', 'incomplete'],
+        class: [
+          'text-on-neutral-container bg-neutral-container',
+          'group-hover/btn:group-data-[interactive=true]/btn:bg-neutral-container-hovered',
+          'group-hover/btn:group-data-[interactive=false]/btn:bg-neutral-container',
+        ],
+      },
+      {
+        intent: 'neutral',
+        state: 'active',
+        class: 'text-on-neutral bg-neutral',
+      },
+      // Success
+      {
+        intent: 'success',
+        state: ['complete', 'incomplete'],
+        class: [
+          'text-on-success-container bg-success-container',
+          'group-hover/btn:group-data-[interactive=true]/btn:bg-success-container-hovered',
+          'group-hover/btn:group-data-[interactive=false]/btn:bg-success-container',
+        ],
+      },
+      {
+        intent: 'success',
+        state: 'active',
+        class: 'text-on-success bg-success',
+      },
+    ],
     defaultVariants: {
       size: 'lg',
       state: 'incomplete',
       intent: 'basic',
-      design: 'outline',
     },
   }
 )
