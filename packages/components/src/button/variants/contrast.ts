@@ -5,7 +5,7 @@ export const contrastVariants = [
     intent: 'main',
     design: 'contrast',
     class: tw([
-      'text-main bg-surface',
+      'text-on-main-contaier bg-surface',
       'hover:bg-main-container-hovered',
       'enabled:active:bg-main-container-hovered',
       'focus-visible:bg-main-container-hovered',
@@ -15,7 +15,7 @@ export const contrastVariants = [
     intent: 'support',
     design: 'contrast',
     class: tw([
-      'text-support bg-surface',
+      'text-on-support-container bg-surface',
       'hover:bg-support-container-hovered',
       'enabled:active:bg-support-container-hovered',
       'focus-visible:bg-support-container-hovered',
@@ -25,7 +25,7 @@ export const contrastVariants = [
     intent: 'accent',
     design: 'contrast',
     class: tw([
-      'text-accent bg-surface',
+      'text-on-accent-container bg-surface',
       'hover:bg-accent-container-hovered',
       'enabled:active:bg-accent-container-hovered',
       'focus-visible:bg-accent-container-hovered',
@@ -35,7 +35,7 @@ export const contrastVariants = [
     intent: 'basic',
     design: 'contrast',
     class: tw([
-      'text-basic bg-surface',
+      'text-on-basic-container bg-surface',
       'hover:bg-basic-container-hovered',
       'enabled:active:bg-basic-container-hovered',
       'focus-visible:bg-basic-container-hovered',
@@ -45,7 +45,7 @@ export const contrastVariants = [
     intent: 'success',
     design: 'contrast',
     class: tw([
-      'text-success bg-surface',
+      'text-on-success-container bg-surface',
       'hover:bg-success-container-hovered',
       'enabled:active:bg-success-container-hovered',
       'focus-visible:bg-success-container-hovered',
@@ -55,7 +55,7 @@ export const contrastVariants = [
     intent: 'alert',
     design: 'contrast',
     class: tw([
-      'text-alert bg-surface',
+      'text-on-alert-container bg-surface',
       'hover:bg-alert-container-hovered',
       'enabled:active:bg-alert-container-hovered',
       'focus-visible:bg-alert-container-hovered',
@@ -65,7 +65,7 @@ export const contrastVariants = [
     intent: 'danger',
     design: 'contrast',
     class: tw([
-      'text-error bg-surface',
+      'text-on-error-container bg-surface',
       'hover:bg-error-container-hovered',
       'enabled:active:bg-error-container-hovered',
       'focus-visible:bg-error-container-hovered',
@@ -75,7 +75,7 @@ export const contrastVariants = [
     intent: 'info',
     design: 'contrast',
     class: tw([
-      'text-info bg-surface',
+      'text-on-info-container bg-surface',
       'hover:bg-info-container-hovered',
       'enabled:active:bg-info-container-hovered',
       'focus-visible:bg-info-container-hovered',
@@ -85,7 +85,7 @@ export const contrastVariants = [
     intent: 'neutral',
     design: 'contrast',
     class: tw([
-      'text-neutral bg-surface',
+      'text-on-neutral-container bg-surface',
       'hover:bg-neutral-container-hovered',
       'enabled:active:bg-neutral-container-hovered',
       'focus-visible:bg-neutral-container-hovered',
