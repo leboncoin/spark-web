@@ -137,6 +137,9 @@
   "namespaces": [
     "spark-ui"
   ],
+  "engines": {
+    "node": "22.x"
+  },
   "config": {
     "commitizen": {
       "path": "@commitlint/cz-commitlint"
