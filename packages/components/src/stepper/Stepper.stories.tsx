@@ -112,13 +112,23 @@ export const Step: StoryFn = _args => (
   </Stepper>
 )
 
-export const MinMaxValues: StoryFn = _args => (
-  <Stepper aria-label="Stepper with min/max values" minValue={0} maxValue={100} defaultValue={0}>
-    <Stepper.DecrementButton aria-label="Decrement" />
-    <Stepper.Input />
-    <Stepper.IncrementButton aria-label="Increment" />
-  </Stepper>
-)
+export const MinMaxValues: StoryFn = _args => {
+  const [value, setValue] = useState<number>()
+
+  return (
+    <Stepper
+      aria-label="Stepper with min/max values"
+      minValue={0}
+      maxValue={10}
+      value={value}
+      onValueChange={setValue}
+    >
+      <Stepper.DecrementButton aria-label="Decrement" />
+      <Stepper.Input />
+      <Stepper.IncrementButton aria-label="Increment" />
+    </Stepper>
+  )
+}
 
 export const FormatOptions: StoryFn = _args => (
   <div className="gap-xl grid grid-cols-2 md:grid-cols-3">
