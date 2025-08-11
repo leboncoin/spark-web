@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.15.0](https://github.com/leboncoin/spark-web/compare/v10.14.4...v10.15.0) (2025-08-11)
+
+### Features
+
+- **components:** simpler design for ProgressTracker ([7757780](https://github.com/leboncoin/spark-web/commit/77577801d8956da7817a9905d69e1e2aeea1a495))
+
 ## [10.14.4](https://github.com/leboncoin/spark-web/compare/v10.14.3...v10.14.4) (2025-08-08)
 
 **Note:** Version bump only for package spark
