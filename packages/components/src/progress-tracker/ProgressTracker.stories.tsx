@@ -22,18 +22,7 @@ const meta: Meta<typeof ProgressTracker> = {
 export default meta
 
 const sizes: ProgressTrackerProps['size'][] = ['sm', 'md', 'lg']
-const designs: ProgressTrackerProps['design'][] = ['outline', 'tinted']
-const intents: ProgressTrackerProps['intent'][] = [
-  'basic',
-  'support',
-  'main',
-  'neutral',
-  'info',
-  'accent',
-  'danger',
-  'alert',
-  'success',
-]
+const intents: ProgressTrackerProps['intent'][] = ['basic', 'neutral', 'success']
 const orientations: ProgressTrackerProps['orientation'][] = ['horizontal', 'vertical']
 
 export const Default: StoryFn = _args => (
@@ -47,48 +36,8 @@ export const Default: StoryFn = _args => (
         <ProgressTracker.StepIndicator />
         <ProgressTracker.StepLabel>Deploy</ProgressTracker.StepLabel>
       </ProgressTracker.Step>
-      <ProgressTracker.Step>
+      <ProgressTracker.Step disabled>
         <ProgressTracker.StepIndicator />
-        <ProgressTracker.StepLabel>Iterate</ProgressTracker.StepLabel>
-      </ProgressTracker.Step>
-    </ProgressTracker>
-
-    <ProgressTracker stepIndex={1} aria-label="Default progress tracker with custom indicators">
-      <ProgressTracker.Step>
-        <ProgressTracker.StepIndicator
-          complete={
-            <Icon>
-              <BookmarkFill />
-            </Icon>
-          }
-          incomplete="A"
-        />
-        <ProgressTracker.StepLabel>Build</ProgressTracker.StepLabel>
-      </ProgressTracker.Step>
-      <ProgressTracker.Step>
-        <ProgressTracker.StepIndicator incomplete="B" />
-        <ProgressTracker.StepLabel>Deploy</ProgressTracker.StepLabel>
-      </ProgressTracker.Step>
-      <ProgressTracker.Step>
-        <ProgressTracker.StepIndicator incomplete="C" />
-        <ProgressTracker.StepLabel>Iterate</ProgressTracker.StepLabel>
-      </ProgressTracker.Step>
-    </ProgressTracker>
-
-    <ProgressTracker
-      stepIndex={1}
-      aria-label="Default progress tracker with empty incomplete indicator"
-    >
-      <ProgressTracker.Step>
-        <ProgressTracker.StepIndicator incomplete={null} />
-        <ProgressTracker.StepLabel>Build</ProgressTracker.StepLabel>
-      </ProgressTracker.Step>
-      <ProgressTracker.Step>
-        <ProgressTracker.StepIndicator incomplete={null} />
-        <ProgressTracker.StepLabel>Deploy</ProgressTracker.StepLabel>
-      </ProgressTracker.Step>
-      <ProgressTracker.Step>
-        <ProgressTracker.StepIndicator incomplete={null} />
         <ProgressTracker.StepLabel>Iterate</ProgressTracker.StepLabel>
       </ProgressTracker.Step>
     </ProgressTracker>
@@ -130,34 +79,6 @@ export const Size: StoryFn = _args => (
           aria-label={`Progress tracker "${size}"`}
           stepIndex={1}
           size={size as ProgressTrackerProps['size']}
-        >
-          <ProgressTracker.Step>
-            <ProgressTracker.StepIndicator />
-            <ProgressTracker.StepLabel>Build</ProgressTracker.StepLabel>
-          </ProgressTracker.Step>
-          <ProgressTracker.Step>
-            <ProgressTracker.StepIndicator />
-            <ProgressTracker.StepLabel>Deploy</ProgressTracker.StepLabel>
-          </ProgressTracker.Step>
-          <ProgressTracker.Step>
-            <ProgressTracker.StepIndicator />
-            <ProgressTracker.StepLabel>Iterate</ProgressTracker.StepLabel>
-          </ProgressTracker.Step>
-        </ProgressTracker>
-      </div>
-    ))}
-  </div>
-)
-
-export const Design: StoryFn = _args => (
-  <div className="gap-2xl flex flex-wrap items-center">
-    {designs.map(design => (
-      <div key={design}>
-        <StoryLabel>{`${design}${design === 'outline' ? ' (default)' : ''}`}</StoryLabel>
-        <ProgressTracker
-          aria-label={`Progress tracker "${design}"`}
-          stepIndex={1}
-          design={design as ProgressTrackerProps['design']}
         >
           <ProgressTracker.Step>
             <ProgressTracker.StepIndicator />
@@ -273,3 +194,47 @@ export const Controlled: StoryFn = () => {
     </ProgressTracker>
   )
 }
+
+export const CustomCompleteIndicator: StoryFn = _args => (
+  <div className="gap-2xl flex flex-wrap items-center">
+    <ProgressTracker stepIndex={1} aria-label="Default progress tracker with custom indicators">
+      <ProgressTracker.Step>
+        <ProgressTracker.StepIndicator
+          complete={
+            <Icon>
+              <BookmarkFill />
+            </Icon>
+          }
+          incomplete="A"
+        />
+        <ProgressTracker.StepLabel>Build</ProgressTracker.StepLabel>
+      </ProgressTracker.Step>
+      <ProgressTracker.Step>
+        <ProgressTracker.StepIndicator incomplete="B" />
+        <ProgressTracker.StepLabel>Deploy</ProgressTracker.StepLabel>
+      </ProgressTracker.Step>
+      <ProgressTracker.Step>
+        <ProgressTracker.StepIndicator incomplete="C" />
+        <ProgressTracker.StepLabel>Iterate</ProgressTracker.StepLabel>
+      </ProgressTracker.Step>
+    </ProgressTracker>
+
+    <ProgressTracker
+      stepIndex={1}
+      aria-label="Default progress tracker with empty incomplete indicator"
+    >
+      <ProgressTracker.Step>
+        <ProgressTracker.StepIndicator incomplete={null} />
+        <ProgressTracker.StepLabel>Build</ProgressTracker.StepLabel>
+      </ProgressTracker.Step>
+      <ProgressTracker.Step>
+        <ProgressTracker.StepIndicator incomplete={null} />
+        <ProgressTracker.StepLabel>Deploy</ProgressTracker.StepLabel>
+      </ProgressTracker.Step>
+      <ProgressTracker.Step>
+        <ProgressTracker.StepIndicator incomplete={null} />
+        <ProgressTracker.StepLabel>Iterate</ProgressTracker.StepLabel>
+      </ProgressTracker.Step>
+    </ProgressTracker>
+  </div>
+)
