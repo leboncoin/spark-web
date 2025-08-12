@@ -1,13 +1,13 @@
 import { cx } from 'class-variance-authority'
-import { ComponentPropsWithRef, PropsWithChildren } from 'react'
+import { ComponentPropsWithoutRef, PropsWithChildren, Ref } from 'react'
 
-import { Input } from '../input'
+import { Input, InputProps } from '../input'
 
-export interface TextareaProps extends ComponentPropsWithRef<'textarea'> {
-  /**
-   * If `false`, the textarea won't be resizable.
-   */
+type TextareaPrimitiveProps = ComponentPropsWithoutRef<'textarea'>
+
+export interface TextareaProps extends TextareaPrimitiveProps, Pick<InputProps, 'onValueChange'> {
   isResizable?: boolean
+  ref?: Ref<HTMLTextAreaElement>
 }
 
 const Root = ({
