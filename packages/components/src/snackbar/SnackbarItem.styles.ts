@@ -20,10 +20,11 @@ export const snackbarItemVariant = cva(
     /**
      * Animation and opacity
      */
+    'animation-duration-400',
     '[animation-fill-mode: forwards]!',
     'data-[animation=queued]:animate-fade-in',
-    'data-[animation=entering]:easing-decelerate-back',
-    'data-[animation=exiting]:easing-standard',
+    'data-[animation=entering]:animation-ease-decelerate-back',
+    'data-[animation=exiting]:animation-ease-accelerate',
     // Parent position bottom|bottom-left|bottom-right
     'data-[animation=entering]:group-data-[position=bottom]:[&:not([data-swipe])]:animate-slide-in-bottom',
     'data-[animation=exiting]:opacity-0 data-[animation=exiting]:transition-opacity',
