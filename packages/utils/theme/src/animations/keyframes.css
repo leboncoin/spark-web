@@ -1,0 +1,29 @@
+@import './slide.css';
+@import './fade.css';
+@import './standalone.css';
+
+@theme inline {
+  --ease-linear: cubic-bezier(0, 0, 1, 1);
+
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-standard-back: cubic-bezier(0.54, -0.52, 0.29, 1.54);
+
+  --ease-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --ease-accelerate-back: cubic-bezier(0.35, -0.47, 0.8, 0.15);
+
+  --ease-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-decelerate-back: cubic-bezier(0.45, 1.45, 0.8, 1);
+
+  --spark-animation-duration: 250ms;
+  --spark-animation-ease: var(--ease-standard);
+}
+
+@utility animation-duration-* {
+  --spark-animation-duration: calc(--value(integer, [integer]) * 1ms);
+}
+
+@utility animation-ease-* {
+  /* PRETTIER IGNORE: otherwise it adds a space between the value and the unit */
+  /* prettier-ignore */
+  --spark-animation-ease: --value(--ease-*);
+}

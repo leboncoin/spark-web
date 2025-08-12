@@ -6,13 +6,13 @@ export const backdropStyles = cva(
     'default:bg-surface default:bg-gradient-to-r absolute inset-x-0 top-0',
     'h-sz-16',
     'default:rounded-t-lg',
-    'bg-[length:200%_100%]',
+    'bg-[length:200%_100%] bg-position-[0%_0%]',
   ],
   {
     variants: {
       animation: {
         none: '',
-        slideRight: 'animate-slide-bg-right',
+        pulse: 'animate-standalone-backdrop-pulse',
       },
       intent: makeVariants<
         'intent',
