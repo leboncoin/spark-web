@@ -54,12 +54,14 @@
     "@spark-ui/cli-utils": "*",
     "@storybook/addon-a11y": "^9.0.16",
     "@storybook/addon-designs": "^10.0.1",
+    "@storybook/addon-docs": "^9.0.16",
     "@storybook/react-vite": "^9.0.16",
     "@tailwindcss/postcss": "^4.1.1",
     "@testing-library/dom": "10.4.0",
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
+    "@types/d3": "^7.4.3",
     "@types/node": "^22.14.0",
     "@types/react": "19.1.6",
     "@types/react-dom": "19.1.5",
@@ -76,6 +78,7 @@
     "commitizen": "4.3.1",
     "concurrently": "^9.1.2",
     "copy-to-clipboard": "3.3.3",
+    "d3": "^7.8.5",
     "deepmerge": "4.3.1",
     "eslint": "^9.23.0",
     "eslint-config-prettier": "^10.1.1",
@@ -117,13 +120,12 @@
     "vite": "^6.3.3",
     "vite-plugin-dts": "4.5.4",
     "vite-tsconfig-paths": "5.1.4",
-    "vitest": "^3.1.1",
-    "@storybook/addon-docs": "^9.0.16"
+    "vitest": "^3.1.1"
   },
   "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.9.6",
     "@tailwindcss/oxide-linux-x64-gnu": "^4.1.1",
-    "lightningcss-linux-x64-gnu": "^1.29.3",
-    "@rollup/rollup-linux-x64-gnu": "^4.9.6"
+    "lightningcss-linux-x64-gnu": "^1.29.3"
   },
   "workspaces": [
     "packages/hooks",

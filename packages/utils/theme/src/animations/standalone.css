@@ -1,0 +1,74 @@
+/* Standalone animations are animations that are not part of the Spark UI library and are meant for internal use only. */
+@theme inline {
+  --animate-standalone-indeterminate-bar: indeterminate-bar 1s ease-out infinite normal none running;
+  @keyframes indeterminate-bar {
+    0% {
+      left: 0;
+      width: 0;
+    }
+    50% {
+      left: 50%;
+      width: 50%;
+    }
+    75% {
+      left: 100%;
+      width: 0;
+    }
+    100% {
+      left: 0;
+      width: 0;
+    }
+  }
+
+  --animate-standalone-shimmer: shimmer 2s ease-in infinite;
+  @keyframes shimmer {
+    100% {
+      mask-position: -200% 0%;
+    }
+  }
+
+  --animate-standalone-swipe-out-left: swipe-out-left 0.1s ease-out;
+  @keyframes swipe-out-left {
+    0% {
+      transform: translateX(var(--swipe-position-x));
+    }
+    100% {
+      transform: translateX(-100vw);
+    }
+  }
+
+  --animate-standalone-swipe-out-right: swipe-out-right 0.1s ease-out;
+  @keyframes swipe-out-right {
+    0% {
+      transform: translateX(var(--swipe-position-x));
+    }
+    100% {
+      transform: translateX(100vw);
+    }
+  }
+
+  --animate-standalone-backdrop-pulse: backdrop-pulse 1s linear infinite;
+  @keyframes backdrop-pulse {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 0%;
+    }
+    100% {
+      background-position: 0% 0%;
+    }
+  }
+
+  --animate-standalone-demo-slide-right: demo-slide-right var(--spark-animation-duration, 1000ms)
+    var(--ease-linear) infinite;
+  @keyframes demo-slide-right {
+    0% {
+      left: 0;
+    }
+
+    100% {
+      left: calc(100% - 24px);
+    }
+  }
+}
