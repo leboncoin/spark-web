@@ -1,0 +1,22 @@
+@theme inline {
+  --animate-fade-in: fade-in var(--spark-animation-duration) var(--spark-animation-ease);
+  --animate-fade-out: fade-out var(--spark-animation-duration) var(--spark-animation-ease);
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}

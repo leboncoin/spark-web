@@ -83,9 +83,9 @@ export const Backdrop: StoryFn = _args => {
         </Card>
       </div>
       <div>
-        <Tag className="mb-md">Animation: slideRight</Tag>
+        <Tag className="mb-md">Animation: pulse</Tag>
         <Card className="min-w-sz-160">
-          <Card.Backdrop animation="slideRight" />
+          <Card.Backdrop animation="pulse" />
           <Card.Content className="gap-md flex flex-col items-start">
             <Skeleton label="Loading..." className="gap-xl flex w-full flex-col">
               <Skeleton.Line lines={3} />

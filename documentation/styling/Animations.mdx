@@ -1,0 +1,333 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+import { Callout } from '@docs/helpers/Callout'
+import { IconButton } from '@spark-ui/components/icon-button'
+import { Button } from '@spark-ui/components/button'
+import { Icon } from '@spark-ui/components/icon'
+import { Card } from '@spark-ui/components/card'
+import { ArrowHorizontalUp } from '@spark-ui/icons/ArrowHorizontalUp'
+import { PlayFill } from '@spark-ui/icons/PlayFill'
+import { PauseOutline } from '@spark-ui/icons/PauseOutline'
+import { useState, useEffect } from 'react'
+import { EaseCurvePreview } from './EaseCurvePreview'
+
+<Meta title="Styling/Animations" />
+
+# Animations
+
+## Introduction
+
+Animations can be applied to any element using the `animate-` prefix.
+
+By default, tailwind does not provide classes for animations, only for transitions.
+
+Spark UI provides a set of predefined animations that can be used to create smooth and natural animations, as well as the possibility to customize the duration and easing function of the animations.
+
+<Callout kind="warning" marginY="large">
+    <p>Rely on css transitions for simple animations. CSS keyframes are meant for complex animations.</p>
+    <p>CSS transitions durations and easing functions are customizable by default.</p>
+</Callout>
+
+
+## Utilities
+
+### Animation duration
+
+Every Spark UI animation shared the same default duration of `250ms`. 
+
+You can override this duration by using the `animation-duration-*` utility class.
+
+
+{(() => {
+  const [isDurationPlaying, setIsDurationPlaying] = useState(false);
+  
+  const toggleDurationPlayPause = () => {
+    setIsDurationPlaying(!isDurationPlaying);
+  };
+
+  const durationExamples = [
+    {
+      utility: '',
+      duration: 'Default duration (250ms)',
+      description: '(no class given)'
+    },
+    {
+      utility: 'animation-duration-2000',
+      duration: '2000ms',
+      description: 'animation-duration-2000'
+    },
+    {
+      utility: 'animation-duration-4000',
+      duration: '4000ms',
+      description: 'animation-duration-4000'
+    }
+  ];
+
+  return (
+    <table className="w-full [table-layout:auto]">
+      <colgroup>
+        <col style={{ width: 'auto' }} />
+        <col style={{ width: 'auto' }} />
+        <col style={{ width: '300px' }} />
+      </colgroup>
+      <thead>
+        <tr>
+          <th>Utility class</th>
+          <th>Applied duration</th>
+          <th style={{ minWidth: 300 }}>
+            <div className="flex items-center gap-lg">
+              <span>Example</span>
+              <Button 
+                size="sm" 
+                design="filled"
+                intent="basic"
+                onClick={toggleDurationPlayPause}
+                className="sb-unstyled"
+              >
+                <Icon className="size-4">
+                  {isDurationPlaying ? <PauseOutline /> : <PlayFill />}
+                </Icon>
+                {isDurationPlaying ? 'Pause' : 'Play'}
+              </Button>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {durationExamples.map((example, index) => (
+          <tr key={index}>
+            <td>
+              {example.description.startsWith('(') ? (
+                <em>{example.description}</em>
+              ) : (
+                <code>{example.description}</code>
+              )}
+            </td>
+            <td>{example.duration}</td>
+            <td>
+              <div className="bg-neutral-container rounded-full flex flex-col items-start bg-linear-to-r from-main-container to-support-container">
+                <div 
+                  className={`relative scale-200 translate-x-[6px] rounded-full bg-main size-sz-12 ${
+                    example.utility ? example.utility : ''
+                  } ${
+                    isDurationPlaying ? 'animate-standalone-demo-slide-right' : ''
+                  }`}
+                />
+              </div>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+})()}
+
+### Easing Functions
+
+Every Spark UI animation shared the same default easing curve named `ease-standard` (`cubic-bezier(0.2, 0, 0, 1)`).
+
+Spark UI provides a set of predefined easing functions that can be used to create smooth and natural animations. These easing functions are available as CSS custom properties and can be used with the `cubic-bezier()` function.
+
+{(() => {
+  const [isEasingPlaying, setIsEasingPlaying] = useState(false);
+  
+  const toggleEasingPlayPause = () => {
+    setIsEasingPlaying(!isEasingPlaying);
+  };
+
+  const easingFunctions = [
+    {
+      utility: 'animation-ease-standard',
+      name: 'standard',
+      bezier: 'cubic-bezier(0.2, 0, 0, 1)',
+    },
+    {
+      utility: 'animation-ease-decelerate',
+      name: 'decelerate',
+      bezier: 'cubic-bezier(0.05, 0.7, 0.1, 1)',
+    },
+    {
+      utility: 'animation-ease-accelerate',
+      name: 'accelerate',
+      bezier: 'cubic-bezier(0.3, 0, 0.8, 0.15)',
+    },
+    {
+      utility: 'animation-ease-linear',
+      name: 'linear',
+      bezier: 'cubic-bezier(0, 0, 1, 1)',
+    },
+  ];
+
+  const backEasingFunctions = [
+    {
+      utility: 'animation-ease-standard-back',
+      name: 'standard-back',
+      bezier: 'cubic-bezier(0.54, -0.52, 0.29, 1.54)',
+    },
+    {
+        utility: 'animation-ease-decelerate-back',
+        name: 'decelerate-back',
+        bezier: 'cubic-bezier(0.45, 1.45, 0.8, 1)',
+    },
+    {
+      utility: 'animation-ease-accelerate-back',
+      name: 'accelerate-back',
+      bezier: 'cubic-bezier(0.35, -0.47, 0.8, 0.15)',
+    },
+  ];
+
+  return (
+    <div className="grid grid-cols-1 gap-lg sm:grid-cols-2 md:grid-cols-3">
+        {easingFunctions.map((easing, index) => {
+          // Find corresponding back easing function
+          const backEasing = backEasingFunctions.find(back => 
+            back.name === `${easing.name}-back`
+          );
+          
+          return (
+            <>
+                    <Card design="tinted" intent="neutral">            
+                        <Card.Content>
+                            <div className="flex flex-col gap-sm sb-unstyled">
+                                <p>{easing.utility}</p>
+                                <p className='text-small'>{easing.bezier}</p>
+                            </div>  
+                            <EaseCurvePreview
+                                name={easing.name}
+                                bezier={easing.bezier}
+                                description=""
+                                color={easing.color}
+                                width={200}
+                                height={200}
+                            />
+                                
+                        </Card.Content>
+                    </Card>
+                
+                    {backEasing ? (
+                    <Card design="tinted" intent="neutral">
+                        <Card.Content>
+                            <div className="flex flex-col gap-sm sb-unstyled">
+                                <p>{backEasing.utility}</p>
+                                <p className='text-small'>{backEasing.bezier}</p>
+                            </div>  
+                            <EaseCurvePreview
+                                name={backEasing.name}
+                                bezier={backEasing.bezier}
+                                description=""
+                                color={backEasing.color}
+                                width={200}
+                                height={200}
+                            />
+                        </Card.Content>
+                    </Card>
+                    ) : null}
+                
+                
+            </>
+          );
+        })}
+      
+    </div>
+  );
+})()}
+
+### Combined utilities
+
+You can combine the animation duration and easing function utilities to create more complex animations.
+
+For example if you have a disclosure animation where the entering and exiting animations have different durations and easing functions, you can use the combined utilities to create the animation.
+
+```tsx
+<div className={cx(
+    // Entering animation
+    'data-[state=open]:animate-slide-in-right',
+    'data-[state=open]:animation-duration-400',
+    'data-[state=open]:animation-ease-decelerate-back',
+    // Exiting animation
+    'data-[state=closed]:animate-slide-out-right',
+    'data-[state=closed]:animation-duration-250',
+    'data-[state=closed]:animation-ease-accelerate',
+)} />
+```
+
+
+## Spark UI animations
+
+[Work in progress]
+
+
+## Default tailwind animations
+
+These are not part of the Spark UI library but are still made available to the user.
+
+<table>
+  <thead>
+    <tr>
+      <th>Animation</th>
+      <th>Description</th>
+      <th>Exemple</th>
+      <th>Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Spin</strong></td>
+      <td>Continuously rotates the element 360 degrees in a linear motion.</td>
+      <td>
+        <IconButton className="animate-spin duration-[3000ms]">
+          <Icon>
+            <ArrowHorizontalUp />
+          </Icon>
+        </IconButton>
+      </td>
+      <td>
+        <pre>{`className="animate-spin"`}</pre>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Ping</strong></td>
+      <td>Creates a single, rapidly expanding and fading ring for attention or feedback.</td>
+      <td>
+        <IconButton className="relative before:bg-main before:size-full before:rounded-lg before:absolute before:animate-ping">
+          <Icon>
+            <ArrowHorizontalUp />
+          </Icon>
+        </IconButton>
+      </td>
+      <td>
+        <pre>
+            {`className="relative before:bg-main before:size-full before:rounded-lg before:absolute before:animate-ping"`}
+        </pre>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Pulse</strong></td>
+      <td>Fades the element in and out to create a pulsing effect, often used for loading states.</td>
+      <td>
+        <IconButton className="animate-pulse">
+          <Icon>
+            <ArrowHorizontalUp />
+          </Icon>
+        </IconButton>
+      </td>
+      <td>
+        <pre>{`className="animate-pulse"`}</pre>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Bounce</strong></td>
+      <td>Makes the element move up and down in a bouncing motion, drawing attention.</td>
+      <td>
+        <IconButton className="animate-bounce">
+          <Icon>
+            <ArrowHorizontalUp />
+          </Icon>
+        </IconButton>
+      </td>
+      <td>
+        <pre>{`className="animate-bounce"`}</pre>
+      </td>
+    </tr>
+  </tbody>
+</table>
+

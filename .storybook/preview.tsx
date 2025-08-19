@@ -97,6 +97,7 @@ const preview = {
             'Design Tokens',
             'Themes', // + custom themes
             'Themes - Contrast check',
+            'Animations',
             // 'Theme provider', // TODO
           ],
           'Components Principles',

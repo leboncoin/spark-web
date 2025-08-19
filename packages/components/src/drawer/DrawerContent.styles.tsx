@@ -2,8 +2,8 @@ import { cva, VariantProps } from 'class-variance-authority'
 
 export const drawerContentStyles = cva(
   [
-    ['fixed', 'z-modal', 'flex', 'flex-col'],
-    ['bg-surface', 'shadow-md'],
+    'fixed z-modal flex flex-col bg-surface shadow-md',
+    'data-[state=open]:animation-duration-400 data-[state=closed]:animation-duration-200',
   ],
   {
     variants: {
@@ -17,7 +17,7 @@ export const drawerContentStyles = cva(
       side: {
         right: [
           'inset-y-0 right-0',
-          'data-[state=open]:animate-slide-in-right',
+          'data-[state=open]:animate-slide-in-right ',
           'data-[state=closed]:animate-slide-out-right',
         ],
         left: [
