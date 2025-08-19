@@ -4,15 +4,21 @@ import { IconButton } from '@spark-ui/components/icon-button'
 import { Button } from '@spark-ui/components/button'
 import { Icon } from '@spark-ui/components/icon'
 import { Card } from '@spark-ui/components/card'
+import { Tag } from '@spark-ui/components/tag'
+import { Dropdown } from '@spark-ui/components/dropdown'
+import { FormField } from '@spark-ui/components/form-field'
 import { ArrowHorizontalUp } from '@spark-ui/icons/ArrowHorizontalUp'
 import { PlayFill } from '@spark-ui/icons/PlayFill'
 import { PauseOutline } from '@spark-ui/icons/PauseOutline'
 import { useState, useEffect } from 'react'
 import { EaseCurvePreview } from './EaseCurvePreview'
+import { cx } from 'class-variance-authority'
 
 <Meta title="Styling/Animations" />
 
 # Animations
+
+
 
 ## Introduction
 
@@ -231,6 +237,51 @@ Spark UI provides a set of predefined easing functions that can be used to creat
   );
 })()}
 
+### Other utilities
+
+For every other css animation properties, you can use the `animation-*` utility class to set the value.
+
+<table>
+  <thead>
+    <tr>
+      <th>CSS Property</th>
+      <th>Example Class</th>
+      <th>Default Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>animation-delay</code></td>
+      <td><code>animation-delay-1000</code></td>
+      <td><code>0ms</code></td>
+    </tr>
+    <tr>
+      <td><code>animation-iteration-count</code></td>
+      <td><code>animation-iteration-infinite</code>, <code>animation-iteration-3</code></td>
+      <td><code>1</code></td>
+    </tr>
+    <tr>
+      <td><code>animation-direction</code></td>
+      <td><code>animation-direction-reverse</code></td>
+      <td><code>normal</code></td>
+    </tr>
+    <tr>
+      <td><code>animation-fill-mode</code></td>
+      <td><code>animation-fill-mode-forwards</code></td>
+      <td><code>none</code></td>
+    </tr>
+    <tr>
+      <td><code>animation-play-state</code></td>
+      <td><code>animation-play-state-paused</code></td>
+      <td><code>running</code></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
 ### Combined utilities
 
 You can combine the animation duration and easing function utilities to create more complex animations.
@@ -251,83 +302,270 @@ For example if you have a disclosure animation where the entering and exiting an
 ```
 
 
-## Spark UI animations
+## Catalog of animations
 
-[Work in progress]
+export const AnimationPreview = ({ animationName }) => {
+    return (
+        <div className='sb-unstyled relative overflow-hidden w-full h-sz-96 flex flex-col gap-sm'>
+            <div className='relative w-full h-full bg-neutral-container'>
+                <div className={cx(
+                    'bg-basic rounded-sm size-sz-24 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
+                    'animation-duration-2000 animation-ease-standard animation-iteration-infinite',
+                    animationName
+                )} />
+            </div>
+            <p className='text-caption w-full text-center'>{animationName}</p>
+        </div>
+    )
+}
 
+### SlideIn/Out
 
-## Default tailwind animations
+<div className='grid grid-cols-2 sm:grid-cols-4 gap-lg'>
+    <AnimationPreview animationName='animate-slide-in-left' />
+    <AnimationPreview animationName='animate-slide-in-top' />
+    <AnimationPreview animationName='animate-slide-in-right' />
+    <AnimationPreview animationName='animate-slide-in-bottom' />
+    <AnimationPreview animationName='animate-slide-out-left' />
+    <AnimationPreview animationName='animate-slide-out-top' />
+    <AnimationPreview animationName='animate-slide-out-right' />
+    <AnimationPreview animationName='animate-slide-out-bottom' />
+</div>
 
-These are not part of the Spark UI library but are still made available to the user.
+### FadeIn/Out
 
-<table>
-  <thead>
-    <tr>
-      <th>Animation</th>
-      <th>Description</th>
-      <th>Exemple</th>
-      <th>Code</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Spin</strong></td>
-      <td>Continuously rotates the element 360 degrees in a linear motion.</td>
-      <td>
-        <IconButton className="animate-spin duration-[3000ms]">
-          <Icon>
-            <ArrowHorizontalUp />
-          </Icon>
-        </IconButton>
-      </td>
-      <td>
-        <pre>{`className="animate-spin"`}</pre>
-      </td>
-    </tr>
-    <tr>
-      <td><strong>Ping</strong></td>
-      <td>Creates a single, rapidly expanding and fading ring for attention or feedback.</td>
-      <td>
-        <IconButton className="relative before:bg-main before:size-full before:rounded-lg before:absolute before:animate-ping">
-          <Icon>
-            <ArrowHorizontalUp />
-          </Icon>
-        </IconButton>
-      </td>
-      <td>
-        <pre>
-            {`className="relative before:bg-main before:size-full before:rounded-lg before:absolute before:animate-ping"`}
-        </pre>
-      </td>
-    </tr>
-    <tr>
-      <td><strong>Pulse</strong></td>
-      <td>Fades the element in and out to create a pulsing effect, often used for loading states.</td>
-      <td>
-        <IconButton className="animate-pulse">
-          <Icon>
-            <ArrowHorizontalUp />
-          </Icon>
-        </IconButton>
-      </td>
-      <td>
-        <pre>{`className="animate-pulse"`}</pre>
-      </td>
-    </tr>
-    <tr>
-      <td><strong>Bounce</strong></td>
-      <td>Makes the element move up and down in a bouncing motion, drawing attention.</td>
-      <td>
-        <IconButton className="animate-bounce">
-          <Icon>
-            <ArrowHorizontalUp />
-          </Icon>
-        </IconButton>
-      </td>
-      <td>
-        <pre>{`className="animate-bounce"`}</pre>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div className='grid grid-cols-2 sm:grid-cols-4 gap-lg'>
+    <AnimationPreview animationName='animate-fade-in' />
+    <AnimationPreview animationName='animate-fade-out' />
+</div>
 
+### ScaleIn/Out
+
+<div className='grid grid-cols-2 sm:grid-cols-4 gap-lg'>
+    <AnimationPreview animationName='animate-scale-in' />
+    <AnimationPreview animationName='animate-scale-out' />
+    <AnimationPreview animationName='animate-scale-in-x' />
+    <AnimationPreview animationName='animate-scale-out-x' />
+    <AnimationPreview animationName='animate-scale-in-y' />
+    <AnimationPreview animationName='animate-scale-out-y' />
+</div>
+
+## Playground
+
+export const Playground = () => {
+    const [animationName, setAnimationName] = useState('animate-slide-in-top');
+    const [animationDuration, setAnimationDuration] = useState('animation-duration-1000');
+    const [animationEasing, setAnimationEasing] = useState('animation-ease-standard');
+    const [animationDelay, setAnimationDelay] = useState('animation-delay-0');
+    const [animationIteration, setAnimationIteration] = useState('animation-iteration-infinite');
+    const [animationDirection, setAnimationDirection] = useState('animation-direction-normal');
+    const [animationFillMode, setAnimationFillMode] = useState('animation-fill-mode-none');
+    const [animationPlayState, setAnimationPlayState] = useState('animation-play-state-running');
+
+    const animations = [
+        'animate-slide-in-left',
+        'animate-slide-in-top',
+        'animate-slide-in-right',
+        'animate-slide-in-bottom',
+        'animate-slide-out-left',
+        'animate-slide-out-top',
+        'animate-slide-out-right',
+        'animate-slide-out-bottom',
+        'animate-fade-in',
+        'animate-fade-out',
+        'animate-scale-in',
+        'animate-scale-out',
+        'animate-scale-in-x',
+        'animate-scale-out-x',
+        'animate-scale-in-y',
+        'animate-scale-out-y',
+    ]
+
+  return (
+    <Card design="outlined">
+        <Card.Content inset className="grid grid-cols-2 gap-lg overflow-hidden sb-unstyled">
+            <div className='grid grid-cols-2 gap-md p-lg'>
+                <FormField>
+                    <FormField.Label>Name</FormField.Label>
+                    <Dropdown value={animationName} onValueChange={(value) => setAnimationName(value)} className="w-full">
+                        <Dropdown.Trigger>
+                            <Dropdown.Value placeholder="Pick a keyframe" />
+                        </Dropdown.Trigger>
+                        <Dropdown.Popover>
+                            <Dropdown.Items>
+                                {animations.map((animation) => (
+                                    <Dropdown.Item key={animation} value={`${animation}`}>{animation}</Dropdown.Item>
+                                ))}
+                            </Dropdown.Items>
+                        </Dropdown.Popover>
+                    </Dropdown>
+                </FormField>
+
+                <FormField>
+                    <FormField.Label>Duration</FormField.Label>
+                    <Dropdown value={animationDuration} onValueChange={(value) => setAnimationDuration(value)} className="w-full">
+                        <Dropdown.Trigger>
+                            <Dropdown.Value placeholder="Pick a duration" />
+                        </Dropdown.Trigger>
+                        <Dropdown.Popover>
+                            <Dropdown.Items>
+                                <Dropdown.Item value="animation-duration-250">250ms</Dropdown.Item>
+                                <Dropdown.Item value="animation-duration-500">500ms</Dropdown.Item>
+                                <Dropdown.Item value="animation-duration-750">750ms</Dropdown.Item>
+                                <Dropdown.Item value="animation-duration-1000">1000ms</Dropdown.Item>
+                                <Dropdown.Item value="animation-duration-1250">1250ms</Dropdown.Item>
+                                <Dropdown.Item value="animation-duration-1500">1500ms</Dropdown.Item>
+                                <Dropdown.Item value="animation-duration-1750">1750ms</Dropdown.Item>
+                                <Dropdown.Item value="animation-duration-2000">2000ms</Dropdown.Item>
+                            </Dropdown.Items>
+                        </Dropdown.Popover>
+                    </Dropdown>
+                </FormField>
+
+                <FormField>
+                    <FormField.Label>Ease</FormField.Label>
+                    <Dropdown value={animationEasing} onValueChange={(value) => setAnimationEasing(value)} className="w-full">
+                        <Dropdown.Trigger>
+                            <Dropdown.Value placeholder="Pick an easing" />
+                        </Dropdown.Trigger>
+                        <Dropdown.Popover>
+                            <Dropdown.Items>
+                                <Dropdown.Item value="animation-ease-standard">standard</Dropdown.Item>
+                                <Dropdown.Item value="animation-ease-decelerate">decelerate</Dropdown.Item>
+                                <Dropdown.Item value="animation-ease-accelerate">accelerate</Dropdown.Item>
+                                <Dropdown.Item value="animation-ease-linear">linear</Dropdown.Item>
+                                <Dropdown.Item value="animation-ease-standard-back">standard-back</Dropdown.Item>
+                                <Dropdown.Item value="animation-ease-decelerate-back">decelerate-back</Dropdown.Item>
+                                <Dropdown.Item value="animation-ease-accelerate-back">accelerate-back</Dropdown.Item>
+                            </Dropdown.Items>
+                        </Dropdown.Popover>
+                    </Dropdown>
+                </FormField>
+
+                <FormField>
+                    <FormField.Label>Delay</FormField.Label>
+                    <Dropdown value={animationDelay} onValueChange={(value) => setAnimationDelay(value)} className="w-full">
+                        <Dropdown.Trigger>
+                            <Dropdown.Value placeholder="Pick a delay" />
+                        </Dropdown.Trigger>
+                        <Dropdown.Popover>
+                            <Dropdown.Items>
+                                <Dropdown.Item value="animation-delay-0">0ms</Dropdown.Item>
+                                <Dropdown.Item value="animation-delay-250">250ms</Dropdown.Item>
+                                <Dropdown.Item value="animation-delay-500">500ms</Dropdown.Item>
+                                <Dropdown.Item value="animation-delay-750">750ms</Dropdown.Item>
+                                <Dropdown.Item value="animation-delay-1000">1000ms</Dropdown.Item>
+                                <Dropdown.Item value="animation-delay-1250">1250ms</Dropdown.Item>
+                            </Dropdown.Items>
+                        </Dropdown.Popover>
+                    </Dropdown>
+                </FormField>
+
+                <FormField>
+                    <FormField.Label>Iteration</FormField.Label>
+                    <Dropdown value={animationIteration} onValueChange={(value) => {
+                        setAnimationIteration(value)
+                    }} className="w-full">
+                        <Dropdown.Trigger>
+                            <Dropdown.Value placeholder="Pick an iteration" />
+                        </Dropdown.Trigger>
+                        <Dropdown.Popover>
+                            <Dropdown.Items>
+                                <Dropdown.Item value="animation-iteration-infinite">infinite</Dropdown.Item>
+                                <Dropdown.Item value="animation-iteration-1">1</Dropdown.Item>
+                                <Dropdown.Item value="animation-iteration-2">2</Dropdown.Item>
+                                <Dropdown.Item value="animation-iteration-3">3</Dropdown.Item>
+                            </Dropdown.Items>
+                        </Dropdown.Popover>
+                    </Dropdown>
+                </FormField>
+
+                <FormField>
+                    <FormField.Label>Direction</FormField.Label>
+                    <Dropdown value={animationDirection} onValueChange={(value) => setAnimationDirection(value)} className="w-full">
+                        <Dropdown.Trigger>
+                            <Dropdown.Value placeholder="Pick a direction" />
+                        </Dropdown.Trigger>
+                        <Dropdown.Popover>
+                            <Dropdown.Items>
+                                <Dropdown.Item value="animation-direction-normal">normal</Dropdown.Item>
+                                <Dropdown.Item value="animation-direction-reverse">reverse</Dropdown.Item>
+                                <Dropdown.Item value="animation-direction-alternate">alternate</Dropdown.Item>
+                                <Dropdown.Item value="animation-direction-alternate-reverse">alternate-reverse</Dropdown.Item>
+                            </Dropdown.Items>
+                        </Dropdown.Popover>
+                    </Dropdown>
+                </FormField>
+
+                <FormField>
+                    <FormField.Label>Fill mode</FormField.Label>
+                    <Dropdown value={animationFillMode} onValueChange={(value) => setAnimationFillMode(value)} className="w-full">
+                        <Dropdown.Trigger>
+                            <Dropdown.Value placeholder="Pick a fill mode" />
+                        </Dropdown.Trigger>
+                        <Dropdown.Popover>
+                            <Dropdown.Items>
+                                <Dropdown.Item value="animation-fill-mode-none">none</Dropdown.Item>
+                                <Dropdown.Item value="animation-fill-mode-forwards">forwards</Dropdown.Item>
+                                <Dropdown.Item value="animation-fill-mode-backwards">backwards</Dropdown.Item>
+                                <Dropdown.Item value="animation-fill-mode-both">both</Dropdown.Item>
+                            </Dropdown.Items>
+                        </Dropdown.Popover>
+                    </Dropdown>
+                </FormField>
+
+                <FormField>
+                    <FormField.Label>Play state</FormField.Label>
+                    <Dropdown value={animationPlayState} onValueChange={(value) => setAnimationPlayState(value)} className="w-full">
+                        <Dropdown.Trigger>
+                            <Dropdown.Value placeholder="Pick a play state" />
+                        </Dropdown.Trigger>
+                        <Dropdown.Popover>
+                            <Dropdown.Items>
+                                <Dropdown.Item value="animation-play-state-running">running</Dropdown.Item>
+                                <Dropdown.Item value="animation-play-state-paused">paused</Dropdown.Item>
+                            </Dropdown.Items>
+                        </Dropdown.Popover>
+                    </Dropdown>
+                </FormField>
+            </div>
+            
+            <div className='relative overflow-hidden w-full bg-neutral-container h-full flex flex-col gap-sm'>
+                <div className={cx(
+                    'bg-basic rounded-lg shadow-sm size-sz-80 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
+                    animationName,
+                    animationDuration,
+                    animationEasing,
+                    animationDelay,
+                    animationIteration,
+                    animationDirection,
+                    animationFillMode,
+                    animationPlayState
+                )} />
+                {animationIteration !== 'animation-iteration-infinite' && <Button design="filled" intent="info" size="sm" className='absolute bottom-md left-md' onClick={() => {
+                    const prevAnimationName = animationName
+                    setAnimationName('')
+                    setTimeout(() => {
+                        setAnimationName(prevAnimationName)
+                    }, 0)
+                }}>
+                    Replay
+                    <Icon>
+                        <PlayFill />
+                    </Icon>
+                </Button>}
+            </div>
+        </Card.Content>
+    </Card>  
+    )   
+}
+
+<Playground />
+
+## Accessibility
+
+Use tailwind's `motion-safe` class to ensure that animations are not disabled for users who have motion preferences enabled.
+
+```tsx
+<div className="motion-safe:animate-slide-in-top" />
+```
