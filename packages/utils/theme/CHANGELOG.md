@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.16.0](https://github.com/leboncoin/spark-web/compare/v10.15.1...v10.16.0) (2025-08-19)
+
+### Features
+
+- **theme-utils:** spark animations layer ([767ed22](https://github.com/leboncoin/spark-web/commit/767ed2201ab5840fe07f42a8a93e93d9880452d6))
+
 ## [10.15.1](https://github.com/leboncoin/spark-web/compare/v10.15.0...v10.15.1) (2025-08-12)
 
 **Note:** Version bump only for package @spark-ui/theme-utils
