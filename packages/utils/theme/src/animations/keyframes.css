@@ -1,5 +1,6 @@
 @import './slide.css';
 @import './fade.css';
+@import './scale.css';
 @import './standalone.css';
 
 @theme inline {
@@ -16,14 +17,46 @@
 
   --spark-animation-duration: 250ms;
   --spark-animation-ease: var(--ease-standard);
+  --spark-animation-delay: 0ms;
+  --spark-animation-fill-mode: none;
+  --spark-animation-iteration-count: 1;
+  --spark-animation-direction: normal;
+  --spark-animation-play-state: running;
 }
 
 @utility animation-duration-* {
   --spark-animation-duration: calc(--value(integer, [integer]) * 1ms);
+  animation-duration: var(--spark-animation-duration);
 }
 
 @utility animation-ease-* {
   /* PRETTIER IGNORE: otherwise it adds a space between the value and the unit */
   /* prettier-ignore */
   --spark-animation-ease: --value(--ease-*);
+  animation-timing-function: var(--spark-animation-ease);
+}
+
+@utility animation-delay-* {
+  --spark-animation-delay: calc(--value(integer, [integer]) * 1ms);
+  animation-delay: var(--spark-animation-delay);
+}
+
+@utility animation-iteration-* {
+  --spark-animation-iteration-count: --value(integer, 'infinite');
+  animation-iteration-count: var(--spark-animation-iteration-count);
+}
+
+@utility animation-direction-* {
+  --spark-animation-direction: --value('normal', 'reverse', 'alternate', 'alternate-reverse');
+  animation-direction: var(--spark-animation-direction);
+}
+
+@utility animation-fill-mode-* {
+  --spark-animation-fill-mode: --value('none', 'forwards', 'backwards', 'both');
+  animation-fill-mode: var(--spark-animation-fill-mode);
+}
+
+@utility animation-play-state-* {
+  --spark-animation-play-state: --value('paused', 'running');
+  animation-play-state: var(--spark-animation-play-state);
 }
