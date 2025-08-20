@@ -23,11 +23,22 @@ export function useScrollOverflow(scrollRef: RefObject<HTMLElement | null>): Scr
         const { scrollTop, scrollHeight, clientHeight, scrollLeft, scrollWidth, clientWidth } =
           scrollElement
 
+        // Helper function to handle floating point precision issues
+        // This fixes the bug where overflow.right = 1 instead of 0 in iframes
+        const roundToNearestPixel = (value: number): number => {
+          // Round to 2 decimal places to handle sub-pixel precision
+          // This prevents issues like 0.9999999999999999 becoming 1
+          return Math.round(value * 100) / 100
+        }
+
+        const rightOverflow = scrollWidth - (scrollLeft + clientWidth)
+        const bottomOverflow = scrollHeight - (scrollTop + clientHeight)
+
         setOverflow({
-          top: scrollTop,
-          bottom: scrollHeight - (scrollTop + clientHeight),
-          left: scrollLeft,
-          right: scrollWidth - (scrollLeft + clientWidth),
+          top: roundToNearestPixel(scrollTop),
+          bottom: roundToNearestPixel(bottomOverflow),
+          left: roundToNearestPixel(scrollLeft),
+          right: roundToNearestPixel(rightOverflow),
         })
       }
     }
@@ -43,7 +54,7 @@ export function useScrollOverflow(scrollRef: RefObject<HTMLElement | null>): Scr
     return () => {
       if (scrollElement) {
         scrollElement.removeEventListener('scroll', checkScrollContent)
-        window.addEventListener('resize', checkScrollContent)
+        window.removeEventListener('resize', checkScrollContent)
       }
     }
   }, [scrollRef])
