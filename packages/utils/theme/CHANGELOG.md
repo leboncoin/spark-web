@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.16.1](https://github.com/leboncoin/spark-web/compare/v10.16.0...v10.16.1) (2025-08-20)
+
+### Bug Fixes
+
+- **theme-utils:** added extra animation utilities and docs ([30671f7](https://github.com/leboncoin/spark-web/commit/30671f77805c490dc9ba1024e80fb85ed59462d8))
+
 # [10.16.0](https://github.com/leboncoin/spark-web/compare/v10.15.1...v10.16.0) (2025-08-19)
 
 ### Features
