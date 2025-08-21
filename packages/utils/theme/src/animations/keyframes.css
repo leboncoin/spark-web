@@ -1,6 +1,9 @@
 @import './slide.css';
 @import './fade.css';
 @import './scale.css';
+@import './rotate.css';
+@import './shake.css';
+@import './ping.css';
 @import './standalone.css';
 
 @theme inline {

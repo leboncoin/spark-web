@@ -10,7 +10,7 @@ import { FormField } from '@spark-ui/components/form-field'
 import { ArrowHorizontalUp } from '@spark-ui/icons/ArrowHorizontalUp'
 import { PlayFill } from '@spark-ui/icons/PlayFill'
 import { PauseOutline } from '@spark-ui/icons/PauseOutline'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { EaseCurvePreview } from './EaseCurvePreview'
 import { cx } from 'class-variance-authority'
 
@@ -304,63 +304,172 @@ For example if you have a disclosure animation where the entering and exiting an
 
 ## Catalog of animations
 
-export const AnimationPreview = ({ animationName }) => {
+export const AnimationPreview = ({ animation, className, style }) => {
+  const [animationName, setAnimationName] = useState(animation);
+  const [isIdle, setIsIdle] = useState(true);
+  const previousAnimationNameRef = useRef(animation);
+
+  useEffect(() => {
+    if (animationName) {
+      previousAnimationNameRef.current = animationName;
+    }
+  }, [animationName]);
+
+  const displayAnimationName = animationName || previousAnimationNameRef.current;
+
+  const handleReplay = useCallback(() => {
+    const currentAnimation = animationName;
+    setIsIdle(false);
+    setAnimationName('')
+    setTimeout(() => {
+      setAnimationName(currentAnimation)
+    }, 0)
+  }, [animationName]);
+
     return (
-        <div className='sb-unstyled relative overflow-hidden w-full h-sz-96 flex flex-col gap-sm'>
-            <div className='relative w-full h-full bg-neutral-container'>
+        <div className='sb-unstyled relative overflow-hidden w-full flex flex-col gap-sm'>
+            <div className='relative w-full bg-neutral-container h-sz-96 border-sm border-basic'>
                 <div className={cx(
-                    'bg-basic rounded-sm size-sz-24 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
-                    'animation-duration-2000 animation-ease-standard animation-iteration-infinite',
-                    animationName
-                )} />
+                    'flex items-center justify-center p-md text-caption',
+                    'bg-basic text-on-basic rounded-sm size-sz-24 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
+                    'default:animation-duration-2000',
+                    'default:animation-ease-standard',
+                    'default:animation-iteration-1',
+                    !isIdle && animationName,
+                    className,
+                )} style={style}>
+                🙂
+                </div>
+                <IconButton design="filled" intent="info" size="sm" className='absolute top-0-md left-0 rounded-none rounded-br-md' onClick={handleReplay}>
+                    <Icon>
+                        <PlayFill />
+                    </Icon>
+                </IconButton>
             </div>
-            <p className='text-caption w-full text-center'>{animationName}</p>
+            <p className='text-caption w-full text-center'>{displayAnimationName} {className}</p>
+            
+            <p className='text-caption w-full text-center'>{JSON.stringify(style)}</p>
         </div>
     )
 }
 
 ### SlideIn/Out
 
+- Recommended duration: 
+  - `400ms` for slide in animations.
+  - `250ms` for slide out animations.
+- Recommended easing: 
+  - `ease-decelerate-back` for slide in animations.
+  - `ease-standard` for slide out animations.
+
 <div className='grid grid-cols-2 sm:grid-cols-4 gap-lg'>
-    <AnimationPreview animationName='animate-slide-in-left' />
-    <AnimationPreview animationName='animate-slide-in-top' />
-    <AnimationPreview animationName='animate-slide-in-right' />
-    <AnimationPreview animationName='animate-slide-in-bottom' />
-    <AnimationPreview animationName='animate-slide-out-left' />
-    <AnimationPreview animationName='animate-slide-out-top' />
-    <AnimationPreview animationName='animate-slide-out-right' />
-    <AnimationPreview animationName='animate-slide-out-bottom' />
+    <AnimationPreview animation="animate-slide-in-left" />
+    <AnimationPreview animation="animate-slide-in-top" />
+    <AnimationPreview animation="animate-slide-in-right" />
+    <AnimationPreview animation="animate-slide-in-bottom" />
+    <AnimationPreview animation="animate-slide-out-left" />
+    <AnimationPreview animation="animate-slide-out-top" />
+    <AnimationPreview animation="animate-slide-out-right" />
+    <AnimationPreview animation="animate-slide-out-bottom" />
 </div>
 
 ### FadeIn/Out
 
+- Recommended duration: 
+  - `250ms` for both in and out animations.
+- Recommended easing: 
+  - `ease-standard` for both in and out animations.
+
 <div className='grid grid-cols-2 sm:grid-cols-4 gap-lg'>
-    <AnimationPreview animationName='animate-fade-in' />
-    <AnimationPreview animationName='animate-fade-out' />
+    <AnimationPreview animation='animate-fade-in' />
+    <AnimationPreview animation='animate-fade-out' />
 </div>
 
 ### ScaleIn/Out
 
+- Recommended duration: 
+  - `150ms` for both in and out animations.
+- Recommended easing: 
+  - `ease-standard` for both in and out animations.
+
+
 <div className='grid grid-cols-2 sm:grid-cols-4 gap-lg'>
-    <AnimationPreview animationName='animate-scale-in' />
-    <AnimationPreview animationName='animate-scale-out' />
-    <AnimationPreview animationName='animate-scale-in-x' />
-    <AnimationPreview animationName='animate-scale-out-x' />
-    <AnimationPreview animationName='animate-scale-in-y' />
-    <AnimationPreview animationName='animate-scale-out-y' />
+    <AnimationPreview animation='animate-scale-in' />
+    <AnimationPreview animation='animate-scale-out' />
+    <AnimationPreview animation='animate-scale-in-x' />
+    <AnimationPreview animation='animate-scale-out-x' />
+    <AnimationPreview animation='animate-scale-in-y' />
+    <AnimationPreview animation='animate-scale-out-y' />
 </div>
+
+### Ping
+
+- Recommended duration: `650ms`.
+- Recommended easing: `ease-standard`.
+- Recommended iteration count: `3` or `infinite`.
+
+**Note** this animation is better applied on a pseudo element overlapping the element you wish to pulse.
+
+<div className='grid grid-cols-2 sm:grid-cols-4 gap-lg'>
+    <AnimationPreview animation='before:animate-ping' className='before:absolute before:size-full before:animation-duration-650 before:bg-[inherit] before:rounded-[inherit] before:z-hide' />
+</div>
+
+### Rotate
+
+- Recommended duration: `150ms`.
+- Recommended easing: `ease-standard`.
+- To set the rotation angle, add the `animation-rotate-end-360` (set the angle you want to rotate to).
+
+<div className='grid grid-cols-2 sm:grid-cols-4 gap-lg'>
+    <AnimationPreview animation='animate-rotate' />
+    <AnimationPreview animation='animate-rotate' className='animation-rotate-end-360'/>
+</div>
+
+### Shake
+
+- Recommended duration: `500ms`.
+- Recommended easing: `ease-standard`.
+- To set the intensity of the shake, add the `animation-shake-intensity-50` utility class (unit is percentage).
+
+<div className='grid grid-cols-2 sm:grid-cols-4 gap-lg'>
+    <AnimationPreview animation='animate-shake-x' className='animation-duration-500' />
+    <AnimationPreview animation='animate-shake-x' className='animation-duration-500 animation-shake-intensity-50' />
+    <AnimationPreview animation='animate-shake-y' className='animation-duration-500' />
+    <AnimationPreview animation='animate-shake-y' className='animation-duration-500 animation-shake-intensity-50' />
+</div>
+
+
+
+
 
 ## Playground
 
 export const Playground = () => {
     const [animationName, setAnimationName] = useState('animate-slide-in-top');
-    const [animationDuration, setAnimationDuration] = useState('animation-duration-1000');
+    const previousAnimationNameRef = useRef('animate-slide-in-top');
+    const [animationDuration, setAnimationDuration] = useState('animation-duration-500');
     const [animationEasing, setAnimationEasing] = useState('animation-ease-standard');
     const [animationDelay, setAnimationDelay] = useState('animation-delay-0');
-    const [animationIteration, setAnimationIteration] = useState('animation-iteration-infinite');
+    const [animationIteration, setAnimationIteration] = useState('animation-iteration-1');
     const [animationDirection, setAnimationDirection] = useState('animation-direction-normal');
     const [animationFillMode, setAnimationFillMode] = useState('animation-fill-mode-none');
     const [animationPlayState, setAnimationPlayState] = useState('animation-play-state-running');
+
+    useEffect(() => {
+        if (animationName) {
+            previousAnimationNameRef.current = animationName;
+        }
+    }, [animationName]);
+
+    const displayAnimationName = animationName || previousAnimationNameRef.current;
+
+    const handleReplay = useCallback(() => {
+        const currentAnimation = animationName;
+        setAnimationName('')
+        setTimeout(() => {
+            setAnimationName(currentAnimation)
+        }, 0)
+    }, [animationName]);
 
     const animations = [
         'animate-slide-in-left',
@@ -379,6 +488,10 @@ export const Playground = () => {
         'animate-scale-out-x',
         'animate-scale-in-y',
         'animate-scale-out-y',
+        'animate-shake-x',
+        'animate-shake-y',
+        'animate-rotate',
+        'animate-ping',
     ]
 
   return (
@@ -387,14 +500,16 @@ export const Playground = () => {
             <div className='grid grid-cols-2 gap-md p-lg'>
                 <FormField>
                     <FormField.Label>Name</FormField.Label>
-                    <Dropdown value={animationName} onValueChange={(value) => setAnimationName(value)} className="w-full">
+                    <Dropdown value={displayAnimationName} onValueChange={(value) => setAnimationName(value)} className="w-full">
                         <Dropdown.Trigger>
-                            <Dropdown.Value placeholder="Pick a keyframe" />
+                            <Dropdown.Value placeholder="Pick a keyframe">
+                                {displayAnimationName.replace('animate-', '')}
+                            </Dropdown.Value>
                         </Dropdown.Trigger>
-                        <Dropdown.Popover>
+                        <Dropdown.Popover matchTriggerWidth={false}>
                             <Dropdown.Items>
                                 {animations.map((animation) => (
-                                    <Dropdown.Item key={animation} value={`${animation}`}>{animation}</Dropdown.Item>
+                                    <Dropdown.Item key={animation} value={`${animation}`}>{animation.replace('animate-', '')}</Dropdown.Item>
                                 ))}
                             </Dropdown.Items>
                         </Dropdown.Popover>
@@ -542,13 +657,7 @@ export const Playground = () => {
                     animationFillMode,
                     animationPlayState
                 )} />
-                {animationIteration !== 'animation-iteration-infinite' && <Button design="filled" intent="info" size="sm" className='absolute bottom-md left-md' onClick={() => {
-                    const prevAnimationName = animationName
-                    setAnimationName('')
-                    setTimeout(() => {
-                        setAnimationName(prevAnimationName)
-                    }, 0)
-                }}>
+                {animationIteration !== 'animation-iteration-infinite' && <Button design="filled" intent="info" size="sm" className='absolute bottom-md left-md' onClick={handleReplay}>
                     Replay
                     <Icon>
                         <PlayFill />

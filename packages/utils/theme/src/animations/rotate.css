@@ -1,0 +1,24 @@
+@utility animation-rotate-start-* {
+  /* PRETTIER IGNORE: otherwise it adds a space between the value and the unit */
+  /* prettier-ignore */
+  --rotateStart: --value(integer, [integer])deg;
+}
+
+@utility animation-rotate-end-* {
+  /* PRETTIER IGNORE: otherwise it adds a space between the value and the unit */
+  /* prettier-ignore */
+  --rotateEnd: --value(integer, [integer])deg;
+}
+
+@theme inline {
+  --animate-rotate: rotate var(--spark-animation-duration) var(--spark-animation-ease);
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(var(--rotateStart, 0deg));
+    }
+    100% {
+      transform: rotate(var(--rotateEnd, 180deg));
+    }
+  }
+}
