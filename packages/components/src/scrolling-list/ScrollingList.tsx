@@ -1,5 +1,7 @@
 import { ScrollOverflow, useScrollOverflow } from '@spark-ui/hooks/use-scroll-overflow'
+import { cx } from 'class-variance-authority'
 import {
+  ComponentPropsWithRef,
   createContext,
   ReactNode,
   RefObject,
@@ -8,14 +10,13 @@ import {
   useLayoutEffect,
   useRef,
 } from 'react'
-import { cx } from 'class-variance-authority'
 import { SnapCarouselResult, useSnapCarousel } from 'react-snap-carousel'
 
 type SnapType = 'mandatory' | 'proximity' | 'none'
 type ScrollBehavior = 'smooth' | 'instant'
 type SnapStop = 'normal' | 'always'
 
-interface Props {
+interface Props extends ComponentPropsWithRef<'div'> {
   /**
    * CSS scroll snap behavior.
    * - `mandatory` to force snapping on each "page".
@@ -76,13 +77,14 @@ export const ScrollingList = ({
   scrollPadding = 0,
   children,
   className,
+  ...rest
 }: Props) => {
   const scrollAreaRef = useRef<HTMLDivElement>(null)
   const skipAnchorRef = useRef<HTMLButtonElement>(null)
 
   const snapCarouselAPI = useSnapCarousel()
 
-  const overflow = useScrollOverflow(scrollAreaRef)
+  const overflow = useScrollOverflow(scrollAreaRef, { precisionTreshold: 1 })
 
   const { activePageIndex, pages, refresh } = snapCarouselAPI
 
@@ -143,6 +145,7 @@ export const ScrollingList = ({
           'gap-lg group/scrolling-list relative flex flex-col default:w-full',
           className
         )}
+        {...rest}
       >
         {children}
       </div>

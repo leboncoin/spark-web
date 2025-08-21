@@ -7,7 +7,7 @@ import { Select } from '@spark-ui/components/select'
 import { Stepper } from '@spark-ui/components/stepper'
 import { Close } from '@spark-ui/icons/Close'
 import { Meta, StoryFn } from '@storybook/react-vite'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { ScrollingList } from '.'
 
@@ -419,6 +419,8 @@ export const ScrollPadding: StoryFn = _args => {
 }
 
 export const FixedSizeItems: StoryFn = _args => {
+  const scrollAreaRef = useRef<HTMLDivElement>(null)
+
   const getRandomWidth = () => {
     return Math.floor(Math.random() * (400 - 100 + 1)) + 100
   }
@@ -436,6 +438,14 @@ export const FixedSizeItems: StoryFn = _args => {
   const [simpleProducts, setSimpleProducts] = useState(() => {
     return Array.from({ length: 5 }).map(makeProduct)
   })
+
+  // Scroll to the right when the list is updated
+  useEffect(() => {
+    if (scrollAreaRef.current) {
+      scrollAreaRef.current.scrollLeft =
+        scrollAreaRef.current.scrollWidth - scrollAreaRef.current.clientWidth
+    }
+  }, [scrollAreaRef, simpleProducts.length])
 
   const addProduct = () => {
     setSimpleProducts([...simpleProducts, makeProduct()])
@@ -455,7 +465,11 @@ export const FixedSizeItems: StoryFn = _args => {
           Ignore the list
         </ScrollingList.SkipButton>
 
-        <ScrollingList.Items aria-labelledby="fixed-size-products-list" className="w-[500px]">
+        <ScrollingList.Items
+          ref={scrollAreaRef}
+          aria-labelledby="fixed-size-products-list"
+          className="w-[500px]"
+        >
           {simpleProducts.map(product => {
             return (
               <ScrollingList.Item

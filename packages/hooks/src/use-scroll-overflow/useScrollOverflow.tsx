@@ -7,7 +7,14 @@ export interface ScrollOverflow {
   right: number
 }
 
-export function useScrollOverflow(scrollRef: RefObject<HTMLElement | null>): ScrollOverflow {
+export function useScrollOverflow(
+  scrollRef: RefObject<HTMLElement | null>,
+  /**
+   * Tolerance threshold for floating-point precision issues.
+   * Values below this threshold are considered as "no overflow" to handle sub-pixel rendering artifacts.
+   */
+  { precisionTreshold = 0 }: { precisionTreshold?: number } = {}
+): ScrollOverflow {
   const [overflow, setOverflow] = useState<ScrollOverflow>({
     top: 0,
     bottom: 0,
@@ -23,22 +30,18 @@ export function useScrollOverflow(scrollRef: RefObject<HTMLElement | null>): Scr
         const { scrollTop, scrollHeight, clientHeight, scrollLeft, scrollWidth, clientWidth } =
           scrollElement
 
-        // Helper function to handle floating point precision issues
-        // This fixes the bug where overflow.right = 1 instead of 0 in iframes
-        const roundToNearestPixel = (value: number): number => {
-          // Round to 2 decimal places to handle sub-pixel precision
-          // This prevents issues like 0.9999999999999999 becoming 1
-          return Math.round(value * 100) / 100
+        const applyPrecision = (value: number): number => {
+          return value <= precisionTreshold ? 0 : value
         }
 
         const rightOverflow = scrollWidth - (scrollLeft + clientWidth)
         const bottomOverflow = scrollHeight - (scrollTop + clientHeight)
 
         setOverflow({
-          top: roundToNearestPixel(scrollTop),
-          bottom: roundToNearestPixel(bottomOverflow),
-          left: roundToNearestPixel(scrollLeft),
-          right: roundToNearestPixel(rightOverflow),
+          top: applyPrecision(scrollTop),
+          bottom: applyPrecision(bottomOverflow),
+          left: applyPrecision(scrollLeft),
+          right: applyPrecision(rightOverflow),
         })
       }
     }
