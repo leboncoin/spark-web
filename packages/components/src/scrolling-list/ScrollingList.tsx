@@ -1,12 +1,22 @@
 import { ScrollOverflow, useScrollOverflow } from '@spark-ui/hooks/use-scroll-overflow'
-import { createContext, ReactNode, RefObject, useRef } from 'react'
+import { cx } from 'class-variance-authority'
+import {
+  ComponentPropsWithRef,
+  createContext,
+  ReactNode,
+  RefObject,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+} from 'react'
 import { SnapCarouselResult, useSnapCarousel } from 'react-snap-carousel'
 
 type SnapType = 'mandatory' | 'proximity' | 'none'
 type ScrollBehavior = 'smooth' | 'instant'
 type SnapStop = 'normal' | 'always'
 
-interface Props {
+interface Props extends ComponentPropsWithRef<'div'> {
   /**
    * CSS scroll snap behavior.
    * - `mandatory` to force snapping on each "page".
@@ -36,6 +46,7 @@ interface Props {
    * Offset (in pixels) of the left of the optimal viewing region of the list.
    */
   scrollPadding?: number
+  className?: string
 }
 
 interface ScrollingListContextState extends SnapCarouselResult {
@@ -65,21 +76,47 @@ export const ScrollingList = ({
   withFade = false,
   scrollPadding = 0,
   children,
+  className,
+  ...rest
 }: Props) => {
   const scrollAreaRef = useRef<HTMLDivElement>(null)
   const skipAnchorRef = useRef<HTMLButtonElement>(null)
 
   const snapCarouselAPI = useSnapCarousel()
 
-  const overflow = useScrollOverflow(scrollAreaRef)
+  const overflow = useScrollOverflow(scrollAreaRef, { precisionTreshold: 1 })
 
-  const { activePageIndex, pages } = snapCarouselAPI
+  const { activePageIndex, pages, refresh } = snapCarouselAPI
 
   const visibleItems = pages[activePageIndex] as number[]
 
   const visibleItemsRange = visibleItems
     ? ([visibleItems[0]! + 1, visibleItems[visibleItems.length - 1]! + 1] as const)
     : ([0, 0] as const)
+
+  // Force refresh of the carousel API when children change
+  const forceRefresh = useCallback(() => {
+    if (refresh && scrollAreaRef.current) {
+      // Small delay to ensure DOM is updated
+      setTimeout(() => {
+        refresh()
+      }, 0)
+    }
+  }, [refresh])
+
+  useEffect(() => {
+    forceRefresh()
+  }, [children, forceRefresh])
+
+  useLayoutEffect(() => {
+    if (scrollAreaRef.current) {
+      // Use requestAnimationFrame to ensure proper timing with the render cycle
+      // This prevents race conditions that occur when the console is closed
+      requestAnimationFrame(() => {
+        window.dispatchEvent(new Event('resize'))
+      })
+    }
+  }, [children])
 
   const skipKeyboardNavigation = () => {
     skipAnchorRef.current?.focus()
@@ -104,7 +141,11 @@ export const ScrollingList = ({
     <ScrollingListContext.Provider value={ctxValue}>
       <div
         data-spark-component="scrolling-list"
-        className="gap-lg group/scrolling-list relative flex w-full flex-col"
+        className={cx(
+          'gap-lg group/scrolling-list relative flex flex-col default:w-full',
+          className
+        )}
+        {...rest}
       >
         {children}
       </div>

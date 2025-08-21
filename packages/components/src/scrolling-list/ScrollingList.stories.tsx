@@ -1,11 +1,14 @@
 /* eslint-disable max-lines */
+import { Button } from '@spark-ui/components/button'
+import { FormField } from '@spark-ui/components/form-field'
+import { Icon } from '@spark-ui/components/icon'
+import { IconButton } from '@spark-ui/components/icon-button'
+import { Select } from '@spark-ui/components/select'
+import { Stepper } from '@spark-ui/components/stepper'
+import { Close } from '@spark-ui/icons/Close'
 import { Meta, StoryFn } from '@storybook/react-vite'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-import { Button } from '../button'
-import { FormField } from '../form-field'
-import { Select } from '../select'
-import { Stepper } from '../stepper'
 import { ScrollingList } from '.'
 
 const meta: Meta<typeof ScrollingList> = {
@@ -409,6 +412,102 @@ export const ScrollPadding: StoryFn = _args => {
         <ScrollingList.Controls>
           <ScrollingList.PrevButton aria-label="Previous items" />
           <ScrollingList.NextButton aria-label="Next items" />
+        </ScrollingList.Controls>
+      </ScrollingList>
+    </div>
+  )
+}
+
+export const FixedSizeItems: StoryFn = _args => {
+  const scrollAreaRef = useRef<HTMLDivElement>(null)
+
+  const getRandomWidth = () => {
+    return Math.floor(Math.random() * (400 - 100 + 1)) + 100
+  }
+
+  function generateRandomId() {
+    return Math.random().toString(36).substr(2, 9)
+  }
+
+  function makeProduct() {
+    const id = generateRandomId()
+
+    return { id, name: `Product ${id}`, width: getRandomWidth() }
+  }
+
+  const [simpleProducts, setSimpleProducts] = useState(() => {
+    return Array.from({ length: 5 }).map(makeProduct)
+  })
+
+  // Scroll to the right when the list is updated
+  useEffect(() => {
+    if (scrollAreaRef.current) {
+      scrollAreaRef.current.scrollLeft =
+        scrollAreaRef.current.scrollWidth - scrollAreaRef.current.clientWidth
+    }
+  }, [scrollAreaRef, simpleProducts.length])
+
+  const addProduct = () => {
+    setSimpleProducts([...simpleProducts, makeProduct()])
+  }
+
+  const removeProduct = (id: string) => {
+    setSimpleProducts(simpleProducts.filter(product => product.id !== id))
+  }
+
+  return (
+    <div>
+      <h3 id="fixed-size-products-list" className="text-headline-1 mb-md">
+        Fixed Size Products
+      </h3>
+      <ScrollingList>
+        <ScrollingList.SkipButton aria-describedby="fixed-size-products-list">
+          Ignore the list
+        </ScrollingList.SkipButton>
+
+        <ScrollingList.Items
+          ref={scrollAreaRef}
+          aria-labelledby="fixed-size-products-list"
+          className="w-[500px]"
+        >
+          {simpleProducts.map(product => {
+            return (
+              <ScrollingList.Item
+                key={product.id}
+                style={{ width: product.width }}
+                className="bg-main-container text-on-main-container p-lg border-outline relative flex h-[200px] items-center justify-center rounded-xl border"
+              >
+                <p className="text-headline-2 text-center">{product.name}</p>
+                <IconButton
+                  aria-label="Delete"
+                  size="sm"
+                  className="top-md right-md absolute"
+                  onClick={() => removeProduct(product.id)}
+                >
+                  <Icon>
+                    <Close />
+                  </Icon>
+                </IconButton>
+              </ScrollingList.Item>
+            )
+          })}
+          <ScrollingList.Item
+            key="add-product"
+            className="flex cursor-pointer items-center justify-center"
+            onClick={addProduct}
+          >
+            <Button>Add a product</Button>
+          </ScrollingList.Item>
+        </ScrollingList.Items>
+        <ScrollingList.Controls>
+          <ScrollingList.PrevButton
+            aria-label="Previous items"
+            aria-describedby="fixed-size-products-list"
+          />
+          <ScrollingList.NextButton
+            aria-label="Next items"
+            aria-describedby="fixed-size-products-list"
+          />
         </ScrollingList.Controls>
       </ScrollingList>
     </div>

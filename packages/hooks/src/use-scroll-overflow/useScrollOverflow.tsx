@@ -7,7 +7,14 @@ export interface ScrollOverflow {
   right: number
 }
 
-export function useScrollOverflow(scrollRef: RefObject<HTMLElement | null>): ScrollOverflow {
+export function useScrollOverflow(
+  scrollRef: RefObject<HTMLElement | null>,
+  /**
+   * Tolerance threshold for floating-point precision issues.
+   * Values below this threshold are considered as "no overflow" to handle sub-pixel rendering artifacts.
+   */
+  { precisionTreshold = 0 }: { precisionTreshold?: number } = {}
+): ScrollOverflow {
   const [overflow, setOverflow] = useState<ScrollOverflow>({
     top: 0,
     bottom: 0,
@@ -23,11 +30,18 @@ export function useScrollOverflow(scrollRef: RefObject<HTMLElement | null>): Scr
         const { scrollTop, scrollHeight, clientHeight, scrollLeft, scrollWidth, clientWidth } =
           scrollElement
 
+        const applyPrecision = (value: number): number => {
+          return value <= precisionTreshold ? 0 : value
+        }
+
+        const rightOverflow = scrollWidth - (scrollLeft + clientWidth)
+        const bottomOverflow = scrollHeight - (scrollTop + clientHeight)
+
         setOverflow({
-          top: scrollTop,
-          bottom: scrollHeight - (scrollTop + clientHeight),
-          left: scrollLeft,
-          right: scrollWidth - (scrollLeft + clientWidth),
+          top: applyPrecision(scrollTop),
+          bottom: applyPrecision(bottomOverflow),
+          left: applyPrecision(scrollLeft),
+          right: applyPrecision(rightOverflow),
         })
       }
     }
@@ -43,7 +57,7 @@ export function useScrollOverflow(scrollRef: RefObject<HTMLElement | null>): Scr
     return () => {
       if (scrollElement) {
         scrollElement.removeEventListener('scroll', checkScrollContent)
-        window.addEventListener('resize', checkScrollContent)
+        window.removeEventListener('resize', checkScrollContent)
       }
     }
   }, [scrollRef])

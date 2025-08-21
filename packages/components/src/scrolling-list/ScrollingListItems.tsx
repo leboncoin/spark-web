@@ -2,7 +2,7 @@ import { cx } from 'class-variance-authority'
 import {
   Children,
   cloneElement,
-  ComponentPropsWithoutRef,
+  ComponentPropsWithRef,
   CSSProperties,
   isValidElement,
   KeyboardEvent,
@@ -15,7 +15,7 @@ import {
 import { ScrollingListContext } from './ScrollingList'
 import { ScrollingListItemProps } from './ScrollingListItem'
 
-interface Props extends ComponentPropsWithoutRef<'div'> {
+interface Props extends ComponentPropsWithRef<'div'> {
   children?: ReactNode
   className?: string
 }
@@ -32,7 +32,7 @@ export function mergeRefs<T>(...refs: (Ref<T> | undefined | null)[]): Ref<T> {
   }
 }
 
-export const ScrollingListItems = ({ children, className = '', ...rest }: Props) => {
+export const ScrollingListItems = ({ children, ref, className = '', ...rest }: Props) => {
   const ctx = useContext(ScrollingListContext)
 
   const snapConfig = {
@@ -97,7 +97,7 @@ export const ScrollingListItems = ({ children, className = '', ...rest }: Props)
         'focus-visible:u-outline',
         className
       )}
-      ref={mergeRefs<HTMLDivElement>(ctx.scrollAreaRef, ctx.scrollRef)}
+      ref={mergeRefs<HTMLDivElement>(ctx.scrollAreaRef, ctx.scrollRef, ref)}
       style={inlineStyles}
       onKeyDown={handleKeyDown}
       {...rest}
