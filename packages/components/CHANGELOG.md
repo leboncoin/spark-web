@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.16.2](https://github.com/leboncoin/spark-web/compare/v10.16.1...v10.16.2) (2025-08-21)
+
+### Bug Fixes
+
+- **components:** dynamic overflow detection for ScrollingList ([eb7f67e](https://github.com/leboncoin/spark-web/commit/eb7f67ef728efca4977232680e0cb53f0facb6fc))
+- **components:** showcase how to manipulate scroll through ref ([b3642e5](https://github.com/leboncoin/spark-web/commit/b3642e57469268469cf2e1f01b3a62c3bf7ffddf))
+
 ## [10.16.1](https://github.com/leboncoin/spark-web/compare/v10.16.0...v10.16.1) (2025-08-20)
 
 **Note:** Version bump only for package @spark-ui/components
