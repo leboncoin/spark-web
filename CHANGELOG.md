@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.17.0](https://github.com/leboncoin/spark-web/compare/v10.16.2...v10.17.0) (2025-08-22)
+
+### Features
+
+- **theme-utils:** added rotate, ping, shake to animations ([10d6604](https://github.com/leboncoin/spark-web/commit/10d6604c5dc7ea78c09a3fc0b12648a19d4754cc))
+
 ## [10.16.2](https://github.com/leboncoin/spark-web/compare/v10.16.1...v10.16.2) (2025-08-21)
 
 ### Bug Fixes
