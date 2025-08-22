@@ -1,0 +1,15 @@
+@theme inline {
+  --animate-ping: ping var(--spark-animation-duration) var(--spark-animation-ease);
+
+  @keyframes ping {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    75%,
+    100% {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+}

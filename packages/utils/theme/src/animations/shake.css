@@ -1,0 +1,52 @@
+@utility animation-shake-intensity-* {
+  /* PRETTIER IGNORE: otherwise it adds a space between the value and the unit */
+  /* prettier-ignore */
+  --shakeIntensity: calc(--value(integer) * 1%);
+}
+
+@theme inline {
+  --animate-shake-x: shake-x var(--spark-animation-duration) var(--spark-animation-ease);
+  --animate-shake-y: shake-y var(--spark-animation-duration) var(--spark-animation-ease);
+
+  @keyframes shake-x {
+    0% {
+      transform: translateX(0%);
+    }
+    20% {
+      transform: translateX(calc(var(--shakeIntensity, 4%) * -1));
+    }
+    40% {
+      transform: translateX(var(--shakeIntensity, 4%));
+    }
+    60% {
+      transform: translateX(calc(var(--shakeIntensity, 4%) * -1));
+    }
+    80% {
+      transform: translateX(var(--shakeIntensity, 4%));
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+
+  @keyframes shake-y {
+    0% {
+      transform: translateY(0%);
+    }
+    20% {
+      transform: translateY(calc(var(--shakeIntensity, 4%) * -1));
+    }
+    40% {
+      transform: translateY(var(--shakeIntensity, 4%));
+    }
+    60% {
+      transform: translateY(calc(var(--shakeIntensity, 4%) * -1));
+    }
+    80% {
+      transform: translateY(var(--shakeIntensity, 4%));
+    }
+    100% {
+      transform: translateY(0%);
+    }
+  }
+}
