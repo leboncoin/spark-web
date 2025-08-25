@@ -3,7 +3,7 @@ import { cva, VariantProps } from 'class-variance-authority'
 
 export const backdropStyles = cva(
   [
-    'default:bg-surface default:bg-gradient-to-r absolute inset-x-0 top-0',
+    'default:bg-surface default:bg-gradient-to-r absolute inset-x-0 top-0 z-hide',
     'h-sz-16',
     'default:rounded-t-lg',
     'bg-[length:200%_100%] bg-position-[0%_0%]',

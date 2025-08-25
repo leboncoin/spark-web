@@ -14,6 +14,10 @@ export interface CardProps extends ComponentProps<'div'>, CardStylesProps {
    * Whether the card should have an inset padding.
    */
   inset?: boolean
+  /**
+   * Whether the card content should have a gradient background.
+   */
+  withGradient?: boolean
 }
 
 export const Card = ({
@@ -22,6 +26,7 @@ export const Card = ({
   intent = 'surface',
   inset = false,
   asChild,
+  withGradient,
   className,
   ref,
   ...props
@@ -38,6 +43,7 @@ export const Card = ({
         hasBackdrop: backdropDetected,
         inset,
         isInteractive: interactiveDetected,
+        withGradient,
       }}
     >
       <Component
