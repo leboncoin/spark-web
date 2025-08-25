@@ -72,6 +72,24 @@ It gives you more control over the content inside the card and its layout.
 
 <Canvas of={CardStories.InsetContent} />
 
+### With Gradient
+
+The `withGradient` prop adds gradient backgrounds to cards while preserving good contrast.
+
+**Filled design**: Uses color stops and gradient logic optimized for solid color backgrounds.
+The gradient maintains the original color intensity while adding visual depth.
+
+**Tinted design**: Uses different color stops and gradient logic specifically designed for 
+container backgrounds. This ensures the gradient preserves the subtle, tinted appearance 
+while maintaining excellent readability and contrast.
+
+Use tailwind classes to:
+- customize the orientation of the gradient (ex: `bg-linear-to-tl`)
+- customize the start/end color stops (ex: `from-main to-accent`)
+
+
+<Canvas of={CardStories.WithGradient} />
+
 ## Advanced Examples
 
 ### Link

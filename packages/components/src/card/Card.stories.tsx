@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { Divider } from '@spark-ui/components/divider'
 import { Icon } from '@spark-ui/components/icon'
 import { IconButton } from '@spark-ui/components/icon-button'
@@ -48,22 +49,24 @@ const designs: CardProps['design'][] = ['filled', 'tinted', 'outlined']
 export const Default: StoryObj = {
   render: _args => {
     return (
-      <Card className="max-w-sz-320">
-        <Card.Backdrop />
-        <Card.Content className="gap-md flex flex-col items-start">
-          <div className="h-sz-144 relative w-full">
-            <img
-              src={pandaImg}
-              alt="Panda"
-              className="relative size-full rounded-lg object-cover"
-            />
-          </div>
-          <div>
-            <p className="text-headline-2">All about pandas</p>
-            <p>Read about Panda and Red Panda</p>
-          </div>
-        </Card.Content>
-      </Card>
+      <div>
+        <Card className="max-w-sz-320">
+          <Card.Backdrop />
+          <Card.Content className="gap-md flex flex-col items-start">
+            <div className="h-sz-144 relative w-full">
+              <img
+                src={pandaImg}
+                alt="Panda"
+                className="relative size-full rounded-lg object-cover"
+              />
+            </div>
+            <div>
+              <p className="text-headline-2">All about pandas</p>
+              <p>Read about Panda and Red Panda</p>
+            </div>
+          </Card.Content>
+        </Card>
+      </div>
     )
   },
 }
@@ -100,6 +103,7 @@ export const Backdrop: StoryFn = _args => {
 export const DesignAndIntentTable: StoryFn = _args => {
   const [withShadows, setWithShadows] = useState(true)
   const [withBackdrop, setWithBackdrop] = useState(true)
+  const [withGradient, setWithGradient] = useState(false)
   const [disabled, setDisabled] = useState(false)
 
   return (
@@ -111,6 +115,10 @@ export const DesignAndIntentTable: StoryFn = _args => {
         <Divider orientation="vertical" />
         <Switch checked={withBackdrop} onCheckedChange={setWithBackdrop}>
           With backdrop
+        </Switch>
+        <Divider orientation="vertical" />
+        <Switch checked={withGradient} onCheckedChange={setWithGradient}>
+          With gradient
         </Switch>
         <Divider orientation="vertical" />
         <Switch checked={disabled} onCheckedChange={setDisabled}>
@@ -143,6 +151,7 @@ export const DesignAndIntentTable: StoryFn = _args => {
                   <Card
                     intent={intent}
                     design={design}
+                    withGradient={withGradient}
                     className={cx('w-sz-208', withShadows && 'shadow-md')}
                     asChild
                   >
@@ -257,6 +266,109 @@ export const WithLinkBox: StoryFn = _args => {
           </Card.Content>
         </Card>
       </LinkBox>
+    </div>
+  )
+}
+
+/**
+ * The `withGradient` prop adds gradient backgrounds to cards while preserving good contrast.
+ *
+ * **Filled design**: Uses color stops and gradient logic optimized for solid color backgrounds.
+ * The gradient maintains the original color intensity while adding visual depth.
+ *
+ * **Tinted design**: Uses different color stops and gradient logic specifically designed for
+ * container backgrounds. This ensures the gradient preserves the subtle, tinted appearance
+ * while maintaining excellent readability and contrast.
+ */
+export const WithGradient: StoryFn = _args => {
+  const [withGradient, setWithGradient] = useState(true)
+
+  return (
+    <div className="gap-lg flex flex-col">
+      <div className="gap-md flex items-center">
+        <Switch
+          checked={withGradient}
+          onCheckedChange={setWithGradient}
+          id="with-gradient-toggle"
+        />
+        <label htmlFor="with-gradient-toggle" className="text-body-2">
+          Enable gradient background
+        </label>
+      </div>
+
+      <div className="gap-lg grid grid-cols-2">
+        <div>
+          <Tag className="mb-md">
+            Filled + Main + {withGradient ? 'withGradient' : 'no gradient'}
+          </Tag>
+          <Card intent="main" design="filled" withGradient={withGradient} className="min-w-sz-160">
+            <Card.Content className="gap-md flex flex-col items-start">
+              <div>
+                <p className="text-headline-2">Lorem Ipsum</p>
+                <p className="text-body-2">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+              </div>
+            </Card.Content>
+          </Card>
+        </div>
+
+        <div>
+          <Tag className="mb-md">
+            Tinted + Main + {withGradient ? 'withGradient' : 'no gradient'}
+          </Tag>
+          <Card intent="main" design="tinted" withGradient={withGradient} className="min-w-sz-160">
+            <Card.Content className="gap-md flex flex-col items-start">
+              <div>
+                <p className="text-headline-2">Lorem Ipsum</p>
+                <p className="text-body-2">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+              </div>
+            </Card.Content>
+          </Card>
+        </div>
+
+        <div>
+          <Tag className="mb-md">
+            Filled + Main + {withGradient ? 'withGradient' : 'no gradient'} + custom direction
+          </Tag>
+          <Card intent="main" design="filled" withGradient={withGradient} className="min-w-sz-160">
+            <Card.Content className="gap-md flex flex-col items-start bg-linear-to-l">
+              <div>
+                <p className="text-headline-2">Lorem Ipsum</p>
+                <p className="text-body-2">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+              </div>
+            </Card.Content>
+          </Card>
+        </div>
+
+        <div>
+          <Tag className="mb-md">
+            Filled + Main + {withGradient ? 'withGradient' : 'no gradient'} + custom end color
+          </Tag>
+          <Card intent="main" design="filled" withGradient={withGradient} className="min-w-sz-160">
+            <Card.Content className="gap-md to-accent! flex flex-col items-start">
+              <div>
+                <p className="text-headline-2">Lorem Ipsum</p>
+                <p className="text-body-2">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+              </div>
+            </Card.Content>
+          </Card>
+        </div>
+      </div>
     </div>
   )
 }
