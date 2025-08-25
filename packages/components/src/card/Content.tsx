@@ -17,23 +17,26 @@ export interface ContentProps extends ComponentProps<'div'> {
 
 export const Content = ({ children, inset, asChild, className, ref, ...props }: ContentProps) => {
   const Component = asChild ? Slot : 'div'
-  const { design, intent, hasBackdrop } = useCardContext()
+  const { design, intent, hasBackdrop, withGradient } = useCardContext()
 
   return (
-    <Component
-      data-spark-component="card-content"
-      ref={ref}
-      className={contentStyles({
-        className,
-        design,
-        intent,
-        inset,
-        hasBackdrop,
-      })}
-      {...props}
-    >
-      {children}
-    </Component>
+    <>
+      <Component
+        data-spark-component="card-content"
+        data-with-gradient={withGradient || undefined}
+        ref={ref}
+        className={contentStyles({
+          className,
+          design,
+          intent,
+          inset,
+          hasBackdrop,
+        })}
+        {...props}
+      >
+        {children}
+      </Component>
+    </>
   )
 }
 

@@ -144,3 +144,50 @@
   outline-width: 2px;
   outline-offset: calc(2px * -1);
 }
+
+/*
+  u-gradient-*: A utility to apply a gradient to a background.
+  For elements whose background is using a base color (strong color, not like the *-container colors)
+*/
+@utility u-filled-gradient-* {
+  /* prettier-ignore */
+  --tw-gradient-from: --value(--color-*);
+
+  /* prettier-ignore */
+  --tw-gradient-to: --value(--color-*);
+
+  background-image: linear-gradient(
+    var(--tw-gradient-position, to top right in oklab),
+    var(--tw-gradient-from) 25%,
+    --alpha(var(--tw-gradient-to) / var(--opacity-dim-1)) 100%
+  );
+  background-color: --alpha(var(--color-surface) / 0);
+  background-blend-mode: overlay;
+}
+
+@utility u-filled-gradient-hovered {
+  background-color: --alpha(var(--color-surface) / var(--opacity-dim-4));
+}
+
+/*
+  u-tinted-gradient-*: A utility to apply a gradient to a background.
+  For elements whose background is using a *-container color.
+*/
+@utility u-tinted-gradient-* {
+  /* prettier-ignore */
+  --tw-gradient-from: --value(--color-*);
+  --tw-gradient-to: var(--color-surface);
+
+  background: linear-gradient(
+    var(--tw-gradient-position, to top right in oklab),
+    --alpha(var(--tw-gradient-from) / var(--opacity-dim-1)) 0%,
+    var(--tw-gradient-from) 25%,
+    --alpha(var(--tw-gradient-to) / var(--opacity-dim-4)) 100%
+  );
+  background-color: --alpha(var(--color-surface) / 0);
+  background-blend-mode: overlay;
+}
+
+@utility u-tinted-gradient-hovered {
+  background-color: --alpha(var(--color-surface) / var(--opacity-dim-2));
+}

@@ -8,6 +8,7 @@ export interface CardContextValue {
   hasBackdrop: boolean
   inset: boolean
   isInteractive: boolean
+  withGradient?: boolean
 }
 
 const CardContext = createContext<CardContextValue | undefined>(undefined)
