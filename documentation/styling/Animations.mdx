@@ -13,6 +13,11 @@ import { PauseOutline } from '@spark-ui/icons/PauseOutline'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { EaseCurvePreview } from './EaseCurvePreview'
 import { cx } from 'class-variance-authority'
+import { 
+  BasicSparkAnimateExample, 
+  HookSparkAnimateExample, 
+} from './SparkAnimateExamples'
+import { Tabs } from '@spark-ui/components/tabs'
 
 <Meta title="Styling/Animations" />
 
@@ -670,6 +675,70 @@ export const Playground = () => {
 }
 
 <Playground />
+
+## Usage with Javascript
+
+Use either `animate` or it's hook equivalent `useAnimate` to trigger animations.
+
+They both provide a way to trigger animations and clean up classes once the animation is complete.
+
+<Tabs defaultValue="animate">
+  <Tabs.List>
+    <Tabs.Trigger value="animate">animate()</Tabs.Trigger>
+    <Tabs.Trigger value="useAnimate">useAnimate()</Tabs.Trigger>
+  </Tabs.List>
+
+  <Tabs.Content value="animate">
+    <BasicSparkAnimateExample />
+    
+    ```tsx
+    import { useRef } from 'react'
+    import { animate } from '@spark-ui/theme-utils'
+    import { Button } from '@spark-ui/components/button'
+
+    export function MyComponent() {
+      const buttonRef = useRef<HTMLButtonElement>(null)
+
+
+      const handleClick = () => {
+        animate(buttonRef.current, 'animate-shake-x animation-duration-500')
+      }
+
+      return (
+          <Button ref={buttonRef} onClick={handleClick}>
+            Click me!
+          </Button>
+      )
+    }
+    ```
+  </Tabs.Content>
+
+  <Tabs.Content value="useAnimate">
+    <HookSparkAnimateExample />
+    
+    ```tsx
+    import { useRef } from 'react'
+    import { useAnimate } from '@spark-ui/theme-utils'
+    import { Button } from '@spark-ui/components/button'
+
+    export function MyComponent() {
+      const buttonRef = useRef<HTMLDivElement>(null)
+      const animateButton = useAnimate(buttonRef)
+
+      const handleClick = () => {
+        animateButton('animate-scale-in animation-duration-150')
+      }
+
+      return (
+        <Button ref={buttonRef} onClick={handleClick}>
+          Click me!
+        </Button>
+      )
+    }
+    ```
+  </Tabs.Content>
+</Tabs>
+
 
 ## Accessibility
 
