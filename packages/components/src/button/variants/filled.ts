@@ -6,6 +6,7 @@ export const filledVariants = [
     intent: 'main',
     design: 'filled',
     class: tw([
+      'data-[with-gradient=true]:u-filled-gradient-main',
       'bg-main',
       'text-on-main',
       'hover:bg-main-hovered',
@@ -18,6 +19,7 @@ export const filledVariants = [
     intent: 'support',
     design: 'filled',
     class: tw([
+      'data-[with-gradient=true]:u-filled-gradient-support',
       'bg-support',
       'text-on-support',
       'hover:bg-support-hovered',
@@ -30,6 +32,7 @@ export const filledVariants = [
     intent: 'accent',
     design: 'filled',
     class: tw([
+      'data-[with-gradient=true]:u-filled-gradient-accent',
       'bg-accent',
       'text-on-accent',
       'hover:bg-accent-hovered',
@@ -42,6 +45,7 @@ export const filledVariants = [
     intent: 'basic',
     design: 'filled',
     class: tw([
+      'data-[with-gradient=true]:u-filled-gradient-basic',
       'bg-basic',
       'text-on-basic',
       'hover:bg-basic-hovered',
@@ -54,6 +58,7 @@ export const filledVariants = [
     intent: 'success',
     design: 'filled',
     class: tw([
+      'data-[with-gradient=true]:u-filled-gradient-success',
       'bg-success',
       'text-on-success',
       'hover:bg-success-hovered',
@@ -66,6 +71,7 @@ export const filledVariants = [
     intent: 'alert',
     design: 'filled',
     class: tw([
+      'data-[with-gradient=true]:u-filled-gradient-alert',
       'bg-alert',
       'text-on-alert',
       'hover:bg-alert-hovered',
@@ -78,6 +84,7 @@ export const filledVariants = [
     intent: 'danger',
     design: 'filled',
     class: tw([
+      'data-[with-gradient=true]:u-filled-gradient-error',
       'text-on-error bg-error',
       'hover:bg-error-hovered enabled:active:bg-error-hovered',
       'focus-visible:bg-error-hovered',
@@ -88,6 +95,7 @@ export const filledVariants = [
     intent: 'info',
     design: 'filled',
     class: tw([
+      'data-[with-gradient=true]:u-filled-gradient-info',
       'text-on-error bg-info',
       'hover:bg-info-hovered enabled:active:bg-info-hovered',
       'focus-visible:bg-info-hovered',
@@ -98,6 +106,7 @@ export const filledVariants = [
     intent: 'neutral',
     design: 'filled',
     class: tw([
+      'data-[with-gradient=true]:u-filled-gradient-neutral',
       'bg-neutral',
       'text-on-neutral',
       'hover:bg-neutral-hovered',
@@ -110,6 +119,7 @@ export const filledVariants = [
     intent: 'surface',
     design: 'filled',
     class: tw([
+      'data-[with-gradient=true]:u-filled-gradient-surface',
       'bg-surface',
       'text-on-surface',
       'hover:bg-surface-hovered',
@@ -121,6 +131,7 @@ export const filledVariants = [
     intent: 'surfaceInverse',
     design: 'filled',
     class: tw([
+      'data-[with-gradient=true]:u-filled-gradient-surface-inverse',
       'bg-surface-inverse',
       'text-on-surface-inverse',
       'hover:bg-surface-inverse-hovered',

@@ -34,9 +34,9 @@ export const buttonStyles = cva(
        *
        */
       design: makeVariants<'design', ['filled', 'outlined', 'tinted', 'ghost', 'contrast']>({
-        filled: [],
+        filled: ['data-[with-gradient=true]:hover:u-filled-gradient-hovered'],
         outlined: ['bg-transparent', 'border-sm', 'border-current'],
-        tinted: [],
+        tinted: ['data-[with-gradient=true]:hover:u-tinted-gradient-hovered'],
         ghost: ['default:-mx-md px-md hover:bg-main/dim-5'],
         contrast: [],
       }),
@@ -97,6 +97,13 @@ export const buttonStyles = cva(
         true: ['cursor-not-allowed', 'opacity-dim-3'],
         false: ['cursor-pointer'],
       },
+      /**
+       * Whether the button should have a gradient background.
+       */
+      withGradient: {
+        true: [],
+        false: [],
+      },
     },
     compoundVariants: [
       ...filledVariants,
@@ -110,6 +117,7 @@ export const buttonStyles = cva(
       intent: 'main',
       size: 'md',
       shape: 'rounded',
+      withGradient: false,
     },
   }
 )

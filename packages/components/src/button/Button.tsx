@@ -25,6 +25,10 @@ export interface ButtonProps
    * **Please note that using this can result in layout shifting when the Button goes from loading state to normal state.**
    */
   loadingText?: string
+  /**
+   * Whether the button should have a gradient background.
+   */
+  withGradient?: boolean
   ref?: Ref<HTMLButtonElement>
 }
 
@@ -60,6 +64,7 @@ export const Button = ({
   asChild,
   className,
   underline = false,
+  withGradient,
   ref,
   ...others
 }: ButtonProps) => {
@@ -86,6 +91,7 @@ export const Button = ({
   return (
     <Component
       data-spark-component="button"
+      data-with-gradient={withGradient || undefined}
       {...(Component === 'button' && { type: 'button' })}
       ref={ref}
       className={buttonStyles({
@@ -96,6 +102,7 @@ export const Button = ({
         shape,
         size,
         underline,
+        withGradient,
       })}
       disabled={!!disabled}
       aria-busy={isLoading}
