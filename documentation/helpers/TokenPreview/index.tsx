@@ -24,6 +24,14 @@ export const ColorPreview = ({ bg }: { bg: string }) => {
   )
 }
 
+export const ShadowsPreview = () => {
+  return (
+    <div>
+      <div className="size-sz-144 shadow-xs" />
+    </div>
+  )
+}
+
 export const BackgroundColorPreview = () => {
   const bgColors = {
     'bg-main': {
