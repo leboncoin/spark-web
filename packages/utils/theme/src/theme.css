@@ -140,6 +140,12 @@
   --shadow-md: 0 6px 12px 0 var(--color-shadow);
   --shadow-lg: 0 8px 16px 0 var(--color-shadow);
   --shadow-xl: 0 12px 24px 0 var(--color-shadow);
+
+  --inset-shadow-xs: inset 0 1px 2px 0 var(--color-shadow);
+  --inset-shadow-sm: inset 0 4px 8px 0 var(--color-shadow);
+  --inset-shadow-md: inset 0 6px 12px 0 var(--color-shadow);
+  --inset-shadow-lg: inset 0 8px 16px 0 var(--color-shadow);
+  --inset-shadow-xl: inset 0 12px 24px 0 var(--color-shadow);
   --shadow-none: none;
 
   --spacing-scale: 16; /* for a 16px base font size */
