@@ -10,6 +10,7 @@ import { ComponentProps, useRef, useState } from 'react'
 import { Icon } from '../icon'
 import { Input as SparkInput, InputGroup } from '../input'
 import { Label } from '../label'
+import { Switch } from '../switch'
 import { VisuallyHidden } from '../visually-hidden'
 import { Chip } from '.'
 import { ChipLeadingIcon } from './ChipLeadingIcon'
@@ -320,67 +321,103 @@ export const Input: StoryFn = () => {
   )
 }
 
-export const DefaultIntent: StoryFn = _args => (
-  <div className="gap-md flex flex-col flex-wrap">
-    {designs.map(design => (
-      <div key={design} className="gap-md flex flex-wrap">
-        {intents.map(intent => (
-          <Chip
-            onClear={() => console.log('clear')}
-            design={design}
-            key={`${design}-${intent}`}
-            intent={intent}
-          >
-            <Chip.Content>{intent}</Chip.Content>
-            <Chip.ClearButton label="clear" />
-          </Chip>
-        ))}
-      </div>
-    ))}
-  </div>
-)
+export const DefaultIntent: StoryFn = _args => {
+  const [withGradient, setWithGradient] = useState(false)
 
-export const ActionIntent: StoryFn = _args => (
-  <div className="gap-md flex flex-col flex-wrap">
-    {designs.map(design => (
-      <div key={design} className="gap-md flex flex-wrap">
-        {intents.map(intent => (
-          <Chip
-            design={design}
-            key={`${design}-${intent}`}
-            intent={intent}
-            onClick={() => console.log(`click ${design} ${intent}`)}
-            onClear={() => console.log('clear')}
-          >
-            <Chip.Content>{intent}</Chip.Content>
-            <Chip.ClearButton label="clear" />
-          </Chip>
+  return (
+    <div className="gap-md flex flex-col">
+      <div className="gap-md flex items-center">
+        <Switch checked={withGradient} onClick={() => setWithGradient(!withGradient)}>
+          With gradient
+        </Switch>
+      </div>
+      <div className="gap-md flex flex-col flex-wrap">
+        {designs.map(design => (
+          <div key={design} className="gap-md flex flex-wrap">
+            {intents.map(intent => (
+              <Chip
+                onClear={() => console.log('clear')}
+                design={design}
+                key={`${design}-${intent}`}
+                intent={intent}
+                withGradient={withGradient}
+              >
+                <Chip.Content>{intent}</Chip.Content>
+                <Chip.ClearButton label="clear" />
+              </Chip>
+            ))}
+          </div>
         ))}
       </div>
-    ))}
-  </div>
-)
+    </div>
+  )
+}
 
-export const SelectionIntent: StoryFn = _args => (
-  <div className="gap-md flex flex-col flex-wrap">
-    {designs.map(design => (
-      <div key={design} className="gap-md flex flex-wrap">
-        {intents.map(intent => (
-          <Chip
-            defaultPressed={true}
-            design={design}
-            key={`${design}-${intent}`}
-            intent={intent}
-            onClear={() => console.log('clear')}
-          >
-            <Chip.Content>{intent}</Chip.Content>
-            <Chip.ClearButton label="clear" />
-          </Chip>
+export const ActionIntent: StoryFn = _args => {
+  const [withGradient, setWithGradient] = useState(false)
+
+  return (
+    <div className="gap-md flex flex-col">
+      <div className="gap-md flex items-center">
+        <Switch checked={withGradient} onClick={() => setWithGradient(!withGradient)}>
+          With gradient
+        </Switch>
+      </div>
+      <div className="gap-md flex flex-col flex-wrap">
+        {designs.map(design => (
+          <div key={design} className="gap-md flex flex-wrap">
+            {intents.map(intent => (
+              <Chip
+                design={design}
+                key={`${design}-${intent}`}
+                intent={intent}
+                onClick={() => console.log(`click ${design} ${intent}`)}
+                onClear={() => console.log('clear')}
+                withGradient={withGradient}
+              >
+                <Chip.Content>{intent}</Chip.Content>
+                <Chip.ClearButton label="clear" />
+              </Chip>
+            ))}
+          </div>
         ))}
       </div>
-    ))}
-  </div>
-)
+    </div>
+  )
+}
+
+export const SelectionIntent: StoryFn = _args => {
+  const [withGradient, setWithGradient] = useState(false)
+
+  return (
+    <div className="gap-md flex flex-col">
+      <div className="gap-md flex items-center">
+        <Switch checked={withGradient} onClick={() => setWithGradient(!withGradient)}>
+          With gradient
+        </Switch>
+      </div>
+      <div className="gap-md flex flex-col flex-wrap">
+        {designs.map(design => (
+          <div key={design} className="gap-md flex flex-wrap">
+            {intents.map(intent => (
+              <Chip
+                defaultPressed={true}
+                design={design}
+                key={`${design}-${intent}`}
+                intent={intent}
+                onClear={() => console.log('clear')}
+                withGradient={withGradient}
+              >
+                <Chip.Content>{intent}</Chip.Content>
+                <Chip.ClearButton label="clear" />
+              </Chip>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
 
 export const Disabled: StoryFn = _args => (
   <div>

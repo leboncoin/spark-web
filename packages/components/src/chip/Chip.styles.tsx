@@ -68,12 +68,85 @@ export const chipStyles = cva(
         true: [],
         false: [],
       },
+      /**
+       * Whether the chip should have a gradient background.
+       */
+      withGradient: {
+        true: [],
+        false: [],
+      },
       // 'pl-[calc(var(--spacing-md)-(var(--border-width-sm)))]'
     },
-    compoundVariants: [...outlinedVariants, ...tintedVariants, ...dashedVariants],
+    compoundVariants: [
+      ...outlinedVariants,
+      ...tintedVariants,
+      ...dashedVariants,
+      // FILLED with gradient (for outlined design)
+      {
+        intent: 'main',
+        design: 'outlined',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-main'],
+      },
+      {
+        intent: 'support',
+        design: 'outlined',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-support'],
+      },
+      {
+        intent: 'basic',
+        design: 'outlined',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-basic'],
+      },
+      {
+        intent: 'accent',
+        design: 'outlined',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-accent'],
+      },
+      {
+        intent: 'success',
+        design: 'outlined',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-success'],
+      },
+      {
+        intent: 'alert',
+        design: 'outlined',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-alert'],
+      },
+      {
+        intent: 'danger',
+        design: 'outlined',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-error'],
+      },
+      {
+        intent: 'info',
+        design: 'outlined',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-info'],
+      },
+      {
+        intent: 'neutral',
+        design: 'outlined',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-neutral'],
+      },
+      {
+        intent: 'surface',
+        design: 'outlined',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-surface'],
+      },
+    ],
     defaultVariants: {
       design: 'outlined',
       intent: 'basic',
+      withGradient: false,
     },
   }
 )
