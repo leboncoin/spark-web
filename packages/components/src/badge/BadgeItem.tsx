@@ -26,6 +26,10 @@ export interface BadgeItemProps
    * @default 'relative'
    */
   type?: 'relative' | 'standalone'
+  /**
+   * Whether the badge should have a gradient background.
+   */
+  withGradient?: boolean
   ref?: Ref<HTMLSpanElement>
 }
 
@@ -36,6 +40,7 @@ export const BadgeItem = ({
   count,
   overflowCount = 99,
   'aria-label': label,
+  withGradient,
   className,
   ...others
 }: BadgeItemProps) => {
@@ -46,11 +51,13 @@ export const BadgeItem = ({
   return (
     <span
       data-spark-component="badge"
+      data-with-gradient={withGradient || undefined}
       role="status"
       className={styles({
         intent,
         size,
         type,
+        withGradient,
         className,
       })}
       {...props}

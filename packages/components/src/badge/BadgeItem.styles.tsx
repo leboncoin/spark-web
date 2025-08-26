@@ -51,11 +51,72 @@ export const styles = cva(
         relative: ['absolute right-0 border-md', 'translate-x-1/2 -translate-y-1/2'],
         standalone: [],
       },
+      /**
+       * Whether the badge should have a gradient background.
+       */
+      withGradient: {
+        true: [],
+        false: [],
+      },
     },
+    compoundVariants: [
+      // FILLED with gradient
+      {
+        intent: 'main',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-main'],
+      },
+      {
+        intent: 'support',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-support'],
+      },
+      {
+        intent: 'accent',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-accent'],
+      },
+      {
+        intent: 'success',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-success'],
+      },
+      {
+        intent: 'alert',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-alert'],
+      },
+      {
+        intent: 'danger',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-error'],
+      },
+      {
+        intent: 'info',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-info'],
+      },
+      {
+        intent: 'neutral',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-neutral'],
+      },
+      {
+        intent: 'surface',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-surface'],
+      },
+      {
+        intent: 'basic',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-basic'],
+      },
+    ],
     defaultVariants: {
       intent: 'danger',
       size: 'md',
       type: 'relative',
+      withGradient: false,
     },
   }
 )
