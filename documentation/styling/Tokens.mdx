@@ -234,17 +234,129 @@ Colors to use for overlays (ex: modals, tooltips, dropdowns). Combine it with `d
 <div className="bg-overlay/dim-3" />
 ```
 
-### Preview - Backgrounds
+### Backgrounds
 
 <BackgroundColorPreview />
 
-### Preview - Text
+
+### Text
 
 <TextColorPreview />
 
-### Preview - Outlines
+### Outlines
 
 <OutlineColorPreview />
+
+## Shadows
+
+### Regular shadows
+
+Use utilities like `shadow-xs` and `shadow-sm` to apply a box shadow to an element. You can prefix it with `inset-` to apply it to the inside of the element.
+
+You can also have both an inset and a regular shadow at once.
+
+<div className='sb-unstyled'>
+    <div className='flex gap-lg flex-wrap'>
+        <div className='flex flex-col gap-md items-center'>
+            <Tag intent="info" design='tinted' className='self-center'>shadow-xs</Tag>
+            <div className="size-sz-64 shadow-xs" />
+        </div>
+        <div className='flex flex-col gap-md items-center'>
+            <Tag intent="info" design='tinted' className='self-center'>shadow-sm</Tag>
+            <div className="size-sz-64 shadow-sm" />
+        </div>
+        <div className='flex flex-col gap-md items-center'>
+            <Tag intent="info" design='tinted' className='self-center'>shadow-md</Tag>
+            <div className="size-sz-64 shadow-md" />
+        </div>
+        <div className='flex flex-col gap-md items-center'>
+            <Tag intent="info" design='tinted' className='self-center'>shadow-lg</Tag>
+            <div className="size-sz-64 shadow-lg" />
+        </div>
+        <div className='flex flex-col gap-md items-center'>
+            <Tag intent="info" design='tinted' className='self-center'>shadow-xl</Tag>
+            <div className="size-sz-64 shadow-xl" />
+        </div>
+        <div className='flex flex-col gap-md items-center'>
+            <Tag intent="info" design='tinted' className='self-center'>inset-shadow-xs</Tag>
+            <div className="size-sz-64 inset-shadow-xs" />
+        </div>
+        <div className='flex flex-col gap-md items-center'>
+            <Tag intent="info" design='tinted' className='self-center'>inset-shadow-sm</Tag>
+            <div className="size-sz-64 inset-shadow-sm" />
+        </div>
+        <div className='flex flex-col gap-md items-center'>
+            <Tag intent="info" design='tinted' className='self-center'>inset-shadow-md</Tag>
+            <div className="size-sz-64 inset-shadow-md" />
+        </div>
+        <div className='flex flex-col gap-md items-center'>
+            <Tag intent="info" design='tinted' className='self-center'>inset-shadow-lg</Tag>
+            <div className="size-sz-64 inset-shadow-lg" />
+        </div>
+        <div className='flex flex-col gap-md items-center'>
+            <Tag intent="info" design='tinted' className='self-center'>inset-shadow-xl</Tag>
+            <div className="size-sz-64 inset-shadow-xl" />
+        </div>
+    </div>
+</div>
+
+### Ring shadows
+
+Use utilities like `ring-2` and `ring-4` to apply a solid box-shadow to an element. You can prefix it with `inset-` to apply it to the inside of the element.
+
+You can combine a ring with a shadow to create a more complex effect. You can also have both an inset and a regular ring at once.
+
+<div className='sb-unstyled'>
+    <div className='flex gap-lg flex-wrap'>
+    <div className='flex flex-col gap-md items-center'>
+            <Tag intent="info" design='tinted' className='self-center'>ring-1</Tag>
+            <div className="size-sz-64 ring-1" />
+        </div>
+        <div className='flex flex-col gap-md items-center'>
+            <Tag intent="info" design='tinted' className='self-center'>ring-2</Tag>
+            <div className="size-sz-64 ring-2" />
+        </div>
+        <div className='flex flex-col gap-md items-center'>
+            <Tag intent="info" design='tinted' className='self-center'>ring-4</Tag>
+            <div className="size-sz-64 ring-4" />
+        </div>
+        <div className='flex flex-col gap-md items-center'>
+            <Tag intent="info" design='tinted' className='self-center'>ring-8</Tag>
+            <div className="size-sz-64 ring-8" />
+        </div>
+        
+    </div>
+</div>
+
+### Colored shadows
+
+Use utilities like `shadow-main` (or any other Spark color) to change the color of a box shadow. 
+
+Use utilities like `ring-main` (or any other Spark color) to change the color of a ring.
+
+<div className='sb-unstyled'>
+    <div className='flex gap-lg flex-wrap'>
+        <div className='flex flex-col gap-md items-center'>
+            <Tag intent="info" design='tinted' className='self-center'>shadow-md +shadow-main</Tag>
+            <div className="size-sz-64 shadow-md shadow-main" />
+        </div>
+        <div className='flex flex-col gap-md items-center'>
+            <Tag intent="info" design='tinted' className='self-center'>inset-shadow-md + inset-shadow-main</Tag>
+            <div className="size-sz-64 inset-shadow-md inset-shadow-main" />
+        </div>
+        <div className='flex flex-col gap-md items-center'>
+            <Tag intent="info" design='tinted' className='self-center'>ring-2 + ring-main</Tag>
+            <div className="size-sz-64 ring-2 ring-main" />
+        </div>
+        <div className='flex flex-col gap-md items-center'>
+            <Tag intent="info" design='tinted' className='self-center'>inset-ring-2 + inset-ring-main</Tag>
+            <div className="size-sz-64 inset-ring-2 inset-ring-main" />
+        </div>
+    </div>
+</div>
+
+
+
 
 ## Spacing 
 
