@@ -10,6 +10,10 @@ interface BaseTagProps
    * Change the component to the HTML tag or custom component of the only child.
    */
   asChild?: boolean
+  /**
+   * Whether the tag should have a gradient background.
+   */
+  withGradient?: boolean
 }
 
 interface FilteredDesignIntent<
@@ -35,6 +39,7 @@ export const Tag = ({
   shape = 'pill',
   asChild,
   className,
+  withGradient,
   ref,
   ...others
 }: TagProps) => {
@@ -43,6 +48,7 @@ export const Tag = ({
   return (
     <Component
       data-spark-component="tag"
+      data-with-gradient={withGradient || undefined}
       ref={ref}
       className={tagStyles({
         className,
@@ -50,6 +56,7 @@ export const Tag = ({
         intent,
         size,
         shape,
+        withGradient,
       })}
       {...others}
     />

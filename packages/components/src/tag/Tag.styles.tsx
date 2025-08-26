@@ -60,13 +60,141 @@ export const tagStyles = cva(
         neutral: [],
         surface: [],
       }),
+      /**
+       * Whether the tag should have a gradient background.
+       */
+      withGradient: {
+        true: [],
+        false: [],
+      },
     },
-    compoundVariants: [...filledVariants, ...outlinedVariants, ...tintedVariants],
+    compoundVariants: [
+      ...filledVariants,
+      ...outlinedVariants,
+      ...tintedVariants,
+      // FILLED with gradient
+      {
+        intent: 'main',
+        design: 'filled',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-main'],
+      },
+      {
+        intent: 'support',
+        design: 'filled',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-support'],
+      },
+      {
+        intent: 'accent',
+        design: 'filled',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-accent'],
+      },
+      {
+        intent: 'basic',
+        design: 'filled',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-basic'],
+      },
+      {
+        intent: 'success',
+        design: 'filled',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-success'],
+      },
+      {
+        intent: 'alert',
+        design: 'filled',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-alert'],
+      },
+      {
+        intent: 'danger',
+        design: 'filled',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-error'],
+      },
+      {
+        intent: 'info',
+        design: 'filled',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-info'],
+      },
+      {
+        intent: 'neutral',
+        design: 'filled',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-neutral'],
+      },
+      {
+        intent: 'surface',
+        design: 'filled',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-filled-gradient-surface'],
+      },
+      // TINTED with gradient
+      {
+        intent: 'main',
+        design: 'tinted',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-tinted-gradient-main-container'],
+      },
+      {
+        intent: 'support',
+        design: 'tinted',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-tinted-gradient-support-container'],
+      },
+      {
+        intent: 'accent',
+        design: 'tinted',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-tinted-gradient-accent-container'],
+      },
+      {
+        intent: 'basic',
+        design: 'tinted',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-tinted-gradient-basic-container'],
+      },
+      {
+        intent: 'success',
+        design: 'tinted',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-tinted-gradient-success-container'],
+      },
+      {
+        intent: 'alert',
+        design: 'tinted',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-tinted-gradient-alert-container'],
+      },
+      {
+        intent: 'danger',
+        design: 'tinted',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-tinted-gradient-error-container'],
+      },
+      {
+        intent: 'info',
+        design: 'tinted',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-tinted-gradient-info-container'],
+      },
+      {
+        intent: 'neutral',
+        design: 'tinted',
+        withGradient: true,
+        class: ['data-[with-gradient=true]:u-tinted-gradient-neutral-container'],
+      },
+    ],
     defaultVariants: {
       design: 'filled',
       intent: 'basic',
       size: 'md',
       shape: 'pill',
+      withGradient: false,
     },
   }
 )

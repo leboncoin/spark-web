@@ -1,8 +1,9 @@
 import { Check } from '@spark-ui/icons/Check'
 import { Meta, StoryFn } from '@storybook/react-vite'
-import { type ComponentProps } from 'react'
+import { type ComponentProps, useState } from 'react'
 
 import { Icon } from '../icon'
+import { Switch } from '../switch'
 import { Tag } from '.'
 
 const meta: Meta<typeof Tag> = {
@@ -48,29 +49,38 @@ export const Design: StoryFn = _args => (
   </div>
 )
 
-export const Intent: StoryFn = _args => (
-  <div className="gap-md flex flex-col">
-    {designs.map(design => (
-      <div key={design} className="gap-md flex flex-row">
-        {intents.map(intent => {
-          if (design !== 'filled' && intent === 'surface') {
-            return (
-              <span key={intent} className="text-small self-center">
-                N/A
-              </span>
-            )
-          }
+export const Intent: StoryFn = _args => {
+  const [withGradient, setWithGradient] = useState(false)
 
-          return (
-            <Tag key={intent} design={design} intent={intent as any}>
-              {intent} tag
-            </Tag>
-          )
-        })}
+  return (
+    <div className="gap-md flex flex-col">
+      <div className="gap-md flex items-center">
+        <Switch checked={withGradient} onClick={() => setWithGradient(!withGradient)}>
+          With gradient
+        </Switch>
       </div>
-    ))}
-  </div>
-)
+      {designs.map(design => (
+        <div key={design} className="gap-md flex flex-row">
+          {intents.map(intent => {
+            if (design !== 'filled' && intent === 'surface') {
+              return (
+                <span key={intent} className="text-small self-center">
+                  N/A
+                </span>
+              )
+            }
+
+            return (
+              <Tag key={intent} design={design} intent={intent as any} withGradient={withGradient}>
+                {intent} tag
+              </Tag>
+            )
+          })}
+        </div>
+      ))}
+    </div>
+  )
+}
 
 export const Icons: StoryFn = _args => (
   <div className="gap-md flex flex-wrap">
