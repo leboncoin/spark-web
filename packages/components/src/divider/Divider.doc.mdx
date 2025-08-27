@@ -1,6 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes as ExtendedArgTypes } from '@docs/helpers/ArgTypes'
 
 import { Divider } from '.'
 
@@ -37,6 +36,21 @@ export default () => (
   </Divider>
 );
 ```
+
+## API Reference
+
+### Divider
+
+Visually or semantically separates content.
+
+<ArgTypes of={Divider} />
+
+### _.Content
+
+A label appearing on top of the divider if necessary.
+
+<ArgTypes of={Divider.Content} />
+
 
 ## Examples
 
@@ -89,20 +103,6 @@ Users can also rotate the text to achieve the proper design.
 ### Card Content
 
 <Canvas of={stories.Card} />
-
-## API Reference
-
-<ExtendedArgTypes
-  of={Divider}
-  description="Visually or semantically separates content."
-  subcomponents={{
-    'Divider.Content': {
-      of: Divider.Content,
-      description: 'A label appearing on top of the divider if necessary.',
-    },
-  }}
-/>
-
 
 ## Accessibility
 

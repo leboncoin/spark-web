@@ -1,6 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 
 import { Skeleton } from '.'
 
@@ -34,6 +33,34 @@ export default () => (
 );
 ```
 
+## API Reference
+
+### Skeleton
+
+A container for all Skeleton parts.
+
+<ArgTypes of={Skeleton} />
+
+
+### _.Circle
+
+A specific Skeleton component, for circular content.
+
+<ArgTypes of={Skeleton.Circle} />
+
+### _.Rectangle
+
+A specific Skeleton component, for rectangular content.
+
+<ArgTypes of={Skeleton.Rectangle} />
+
+### _.Line
+
+A specific Skeleton component, for "line-shaped" content (such as text).
+
+<ArgTypes of={Skeleton.Line} />
+
+
 ## Examples
 
 ### Sizing
@@ -64,27 +91,6 @@ Use `isAnimated` prop to display an animation on your `<Skeleton />` content.
 For specific needs you may want to build an entire layout using skeleton items (eg. cards, ...). You may then simply add your own solution (such as a specific markup using flexbox or grid CSS modules) in your implementation.
 
 <Canvas of={stories.Layout} />
-
-## API Reference
-
-<ArgTypes
-  of={Skeleton}
-  description="A container for all Skeleton parts."
-  subcomponents={{
-    'Skeleton.Circle': {
-      of: Skeleton.Circle,
-      description: 'A specific Skeleton component, for circular content.',
-    },
-    'Skeleton.Rectangle': {
-      of: Skeleton.Rectangle,
-      description: 'A specific Skeleton component, for rectangular content.',
-    },
-    'Skeleton.Line': {
-      of: Skeleton.Line,
-      description: 'A specific Skeleton component, for "line-shaped" content (such as text).',
-    },
-  }}
-/>
 
 ## Accessibility
 

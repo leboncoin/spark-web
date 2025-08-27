@@ -1,4 +1,4 @@
-import { StoryLabel } from '@docs/helpers/StoryLabel'
+import { Tag } from '@spark-ui/components/tag'
 import { Meta, StoryFn } from '@storybook/react-vite'
 
 import { Button } from '../button'
@@ -40,11 +40,11 @@ export const Default: StoryFn = _args => <Badge count={1}>{fakeAvatar}</Badge>
 export const Intents: StoryFn = _args => (
   <div className="gap-xl grid grid-cols-2 sm:grid-cols-5">
     {intents.map(intent => (
-      <div key={intent} className="flex flex-col items-center">
-        <StoryLabel className="mb-xl">{`
+      <div key={intent} className="gap-xl flex flex-col items-center">
+        <Tag className="flex">{`
             ${intent}
             ${intent === 'danger' ? ' (default)' : ''}
-          `}</StoryLabel>
+          `}</Tag>
 
         <Badge intent={intent} count={1}>
           {fakeAvatar}
@@ -65,7 +65,7 @@ export const NoCount: StoryFn = _args => <Badge>{fakeAvatar}</Badge>
 export const CountThreshold: StoryFn = _args => (
   <div className="gap-xl flex">
     <div className="text-center">
-      <StoryLabel className="mb-xl">Default threshold</StoryLabel>
+      <Tag className="mb-xl flex">Default threshold</Tag>
       <Badge
         count={1000}
         aria-label={({ overflowCount }) => `More than ${overflowCount} notifications`}
@@ -74,7 +74,7 @@ export const CountThreshold: StoryFn = _args => (
       </Badge>
     </div>
     <div className="text-center">
-      <StoryLabel className="mb-xl">Custom threshold</StoryLabel>
+      <Tag className="mb-xl flex">Custom threshold</Tag>
       <Badge
         count={1000}
         overflowCount={999}
@@ -91,10 +91,10 @@ export const Sizes: StoryFn = _args => (
     {sizes.map(size => (
       <div className="gap-xl flex flex-col" key={size}>
         <div className="text-center">
-          <StoryLabel className="mb-md">{`
+          <Tag className="mb-md flex">{`
             ${size}
             ${size === 'md' ? ' (default)' : ''}
-          `}</StoryLabel>
+          `}</Tag>
 
           <Badge key={size} size={size} count={25}>
             {fakeAvatar}
@@ -102,11 +102,11 @@ export const Sizes: StoryFn = _args => (
         </div>
 
         <div className="text-center">
-          <StoryLabel className="mb-md">{`
+          <Tag className="mb-md flex">{`
             ${size}
             ${size === 'md' ? ' (default)' : ''}
             empty
-          `}</StoryLabel>
+          `}</Tag>
 
           <Badge key={size} size={size}>
             {fakeAvatar}
@@ -114,11 +114,11 @@ export const Sizes: StoryFn = _args => (
         </div>
 
         <div className="text-center">
-          <StoryLabel className="mb-md">{`
+          <Tag className="mb-md flex">{`
             ${size}
             ${size === 'md' ? ' (default)' : ''}
             standalone with count
-          `}</StoryLabel>
+          `}</Tag>
 
           <div className="bg-overlay/dim-3 p-md flex items-center justify-center">
             <Badge key={size} size={size} count={25} />
@@ -126,11 +126,11 @@ export const Sizes: StoryFn = _args => (
         </div>
 
         <div className="text-center">
-          <StoryLabel className="mb-md">{`
+          <Tag className="mb-md flex">{`
             ${size}
             ${size === 'md' ? ' (default)' : ''}
             standalone
-          `}</StoryLabel>
+          `}</Tag>
 
           <div className="bg-overlay/dim-3 p-md flex items-center justify-center">
             <Badge key={size} size={size} />

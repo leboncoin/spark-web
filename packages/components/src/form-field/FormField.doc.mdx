@@ -1,6 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { Callout } from '@docs/helpers/Callout'
 
 import { FormField } from '.'
@@ -42,6 +41,67 @@ export default () => (
 )
 ```
 
+## API Reference
+
+### FormField
+
+Wrap any type of input (Input, Checkbox, RadioGroup, etc.) to add contextual information to it and build accessible forms.
+
+<ArgTypes of={FormField} />
+
+
+
+### _.Label
+
+Label to attach to the associated input to describe it and give it an accessible name.
+
+<ArgTypes of={FormField.Label} />
+
+
+### _.HelperMessage
+
+Help users by showing an helper message below an input.
+
+<ArgTypes of={FormField.HelperMessage} />
+
+
+### _.SuccessMessage
+
+Help users by showing an success message below an input. Indicates the input has been successfully filled in by the user.
+
+<ArgTypes of={FormField.SuccessMessage} />
+
+### _.AlertMessage
+
+Help users by showing an alert message (warning) below an input. For example: a password input with an insecure password.
+
+<ArgTypes of={FormField.AlertMessage} />
+
+### _.ErrorMessage
+
+Help users by showing an error message below an input. Indicated the input has not been successfully filled in by the user.
+
+<ArgTypes of={FormField.ErrorMessage} />
+
+### _.Control
+
+This higher order component gives you access to the internal state of the field. Wrap an input with it to get access to the state. It can be used to build complex custom inputs.
+
+<ArgTypes of={FormField.Control} />
+
+### _.RequiredIndicator
+
+Render it inside the FormField.Label to mark the field as mandatory (required)
+
+<ArgTypes of={FormField.RequiredIndicator} />
+
+### _.CharactersCount
+
+Displays characters count for text inputs and textareas, and the max length allowed in these components.
+
+<ArgTypes of={FormField.CharactersCount} />
+
+
 
 ## Examples
 
@@ -80,54 +140,6 @@ Configure the required indicator using the `requiredIndicator` prop and the `For
 Use the `state` prop to set the visual validation state. Choose between `error`, `success` and `alert`.
 
 <Canvas of={stories.State} />
-
-## API Reference
-
-<ArgTypes
-  of={FormField}
-  description="Wrap any type of input (Input, Checkbox, RadioGroup, etc.) to add contextual information to it and build accessible forms."
-  subcomponents={{
-    'FormField.Label': {
-      of: FormField.Label,
-      description:
-        'Label to attach to the associated input to describe it and give it an accessible name.',
-    },
-    'FormField.HelperMessage': {
-      of: FormField.HelperMessage,
-      description: 'Help users by showing an helper message below an input.',
-    },
-    'FormField.SuccessMessage': {
-      of: FormField.SuccessMessage,
-      description:
-        'Help users by showing an success message below an input. Indicates the input has been successfully filled in by the user.',
-    },
-    'FormField.AlertMessage': {
-      of: FormField.AlertMessage,
-      description:
-        'Help users by showing an alert message (warning) below an input. For example: a password input with an insecure password.',
-    },
-    'FormField.ErrorMessage': {
-      of: FormField.ErrorMessage,
-      description:
-        'Help users by showing an error message below an input. Indicated the input has not been successfully filled in by the user.',
-    },
-    'FormField.Control': {
-      of: FormField.Control,
-      description:
-        'This higher order component gives you access to the internal state of the field. Wrap an input with it to get access to the state. It can be used to build complex custom inputs.',
-    },
-    'FormField.RequiredIndicator': {
-      of: FormField.RequiredIndicator,
-      description: 'Render it inside the FormField.Label to mark the field as mandatory (required)',
-    },
-    'FormField.CharactersCount': {
-      of: FormField.CharactersCount,
-      description:
-        'Displays characters count for text inputs and textareas, and the max length allowed in these components.',
-    },
-  }}
-/>
-
 
 ## Accessibility
 

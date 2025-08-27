@@ -7,15 +7,15 @@ export const A11yReport = ({ of }: { of: string }) => {
 
   useEffect(() => {
     const fetchReport = async (name: string) => {
-      const { violations }: Report = await fetch(`/a11y/a11y-report-${name}.json`)
+      const report: Report = await fetch(`/a11y/a11y-report-${name}.json`)
         .then(response => response.json())
-        .then(data => data[`@spark-ui/${name}`])
+        .then(data => data[`@spark-ui/components/${name}`])
         .catch(() => {
           console.error('Unable to find accessibility report')
           setErrors(404)
         })
 
-      if (violations.length) setErrors(violations)
+      if (report.violations.length) setErrors(report.violations)
     }
 
     fetchReport(of)

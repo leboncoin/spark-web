@@ -1,5 +1,4 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
 import { Callout } from '@docs/helpers/Callout'
 import { Avatar } from '.'
@@ -35,6 +34,46 @@ export default () => (
   </Avatar>
 );
 ```
+
+## API Reference
+
+### Avatar
+
+Main container for the avatar.
+
+<ArgTypes of={Avatar} />
+
+
+### _.User
+
+Preview section of the user (either a profile pic or a placeholder)
+
+<ArgTypes of={Avatar.User} />
+
+
+### _.Image
+
+Component to display the avatar image.
+
+<ArgTypes of={Avatar.Image} />
+
+### _.Placeholder
+
+Placeholder to display in case there is no image or the image is not available.
+
+<ArgTypes of={Avatar.Placeholder} />
+
+### _.OnlineBadge
+
+Badge to display the online status of the user.
+
+<ArgTypes of={Avatar.OnlineBadge} />
+
+### _.Action
+
+Edit button positioned on the avatar border.
+
+<ArgTypes of={Avatar.Action} />
 
 ## Examples
 
@@ -93,36 +132,6 @@ Use the `design` prop to display a square avatar.
 The Avatar component comes in 5 different sizes.
 
 <Canvas of={stories.Sizes} />
-
-## API Reference
-
-<ArgTypes
-  of={Avatar}
-  description="Main container for the avatar."
-  subcomponents={{
-    'Avatar.User': {
-      of: Avatar.User,
-      description: 'Preview section of the user (either a profile pic or a placeholder)',
-    },
-    'Avatar.Image': {
-      of: Avatar.Image,
-      description: 'Component to display the avatar image.',
-    },
-    'Avatar.Placeholder': {
-      of: Avatar.Placeholder,
-      description: 'Placeholder to display in case there is no image or the image is not available.',
-    },
-    'Avatar.OnlineBadge': {
-      of: Avatar.OnlineBadge,
-      description: 'Badge to display the online status of the user.',
-    },
-    'Avatar.Action': {
-      of: Avatar.Action,
-      description: 'Edit button positioned on the avatar border.',
-    },
-  }}
-/>
-
 
 ## Accessibility
 

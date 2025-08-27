@@ -1,4 +1,4 @@
-import { StoryLabel } from '@docs/helpers/StoryLabel'
+import { Tag } from '@spark-ui/components/tag'
 import { LikeFill } from '@spark-ui/icons/LikeFill'
 import { LikeOutline } from '@spark-ui/icons/LikeOutline'
 import { Meta, StoryFn } from '@storybook/react-vite'
@@ -55,7 +55,7 @@ export const Sizes: StoryFn = _args => (
     {sizes.map(size => {
       return (
         <div key={size} className="text-center">
-          <StoryLabel className="mx-auto">{size}</StoryLabel>
+          <Tag className="mb-md mx-auto flex">{size}</Tag>
           <IconButton size={size} aria-label={`${size} button`}>
             {icon}
           </IconButton>
@@ -70,7 +70,7 @@ export const Shapes: StoryFn = _args => (
     {shapes.map(shape => {
       return (
         <div key={shape} className="text-center">
-          <StoryLabel className="mx-auto">{shape}</StoryLabel>
+          <Tag className="mb-md mx-auto flex">{shape}</Tag>
           <IconButton shape={shape} aria-label={`${shape} button`}>
             {icon}
           </IconButton>

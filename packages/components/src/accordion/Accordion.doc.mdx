@@ -1,5 +1,4 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
 import { AriaRoles } from '@docs/helpers/AriaRoles'
 import { Kbd } from '../kbd'
@@ -49,6 +48,41 @@ export default () => (
 
 
 
+## API Reference
+
+### Accordion
+
+Contains all the parts of an accordion.
+
+<ArgTypes of={Accordion} />
+
+### _.Item
+
+Contains all the parts of a collapsible section.
+
+<ArgTypes of={Accordion.Item} />
+
+### _.ItemHeader
+
+Set the heading level for your accordion trigger elements. By default, renders an `h3`.
+
+<ArgTypes of={Accordion.ItemHeader} />
+
+### _.ItemTrigger
+
+Toggles the collapsed state of its associated item.
+
+<ArgTypes of={Accordion.ItemTrigger} />
+
+
+### _.ItemContent
+
+Contains the collapsible content for an item.
+
+<ArgTypes of={Accordion.ItemContent} />
+
+
+
 ## Examples
 
 
@@ -83,32 +117,6 @@ Use `multiple` to allow multiple panels to be opened at the same time.
 Use `defaultValue` to pass an array of panels values to open by default.
 
 <Canvas of={stories.Multiple} />
-
-## API Reference
-
-<ArgTypes
-  of={Accordion}
-  description="Contains all the parts of an accordion."
-  subcomponents={{
-    'Accordion.Item': {
-      of: Accordion.Item,
-      description: 'Contains all the parts of a collapsible section..',
-    },
-    'Accordion.ItemHeader': {
-      of: Accordion.ItemHeader,
-      description:
-        'Set the heading level for your accordion trigger elements. By default, renders an `h3`.',
-    },
-    'Accordion.ItemTrigger': {
-      of: Accordion.ItemTrigger,
-      description: 'Toggles the collapsed state of its associated item.',
-    },
-    'Accordion.ItemContent': {
-      of: Accordion.ItemContent,
-      description: 'Contains the collapsible content for an item.',
-    },
-  }}
-/>
 
 ## Accessibility
 

@@ -1,5 +1,4 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
 import { Kbd } from '@spark-ui/components/kbd'
 
@@ -36,24 +35,29 @@ export default () => (
 );
 ```
 
-## Examples
-
 ## API Reference
 
-<ArgTypes
-  of={Collapsible}
-  description="An interactive component which expands/collapses a panel."
-  subcomponents={{
-    'Collapsible.Trigger': {
-      of: Collapsible.Trigger,
-      description: 'The button that toggles the collapsible.',
-    },
-    'Collapsible.Content': {
-      of: Collapsible.Content,
-      description: 'The component that contains the collapsible content.',
-    },
-  }}
-/>
+### Collapsible
+
+An interactive component which expands/collapses a panel.
+
+<ArgTypes of={Collapsible} />
+
+### _.Trigger
+
+The button that toggles the collapsible.
+
+<ArgTypes of={Collapsible.Trigger} />
+
+### _.Content
+
+The component that contains the collapsible content.
+
+<ArgTypes of={Collapsible.Content} />
+
+
+
+## Examples
 
 ## Accessibility
 

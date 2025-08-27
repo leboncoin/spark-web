@@ -1,6 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 
 import { LinkBox } from '.'
 
@@ -35,6 +34,29 @@ export default () => (
 );
 ```
 
+## API Reference
+
+### LinkBox
+
+Contains all the parts of a LinkBox.
+
+<ArgTypes of={LinkBox} />
+
+
+### _.Link
+
+Main link of the link box. A single LinkBox must contain only one LinkBox.Link.
+
+<ArgTypes of={LinkBox.Link} />
+
+
+### _.Raised
+
+If your LinkBox contains others links or interactive elements, wrap them with LinkBox.Raised to keep them on top of the LinkBox overlay.
+
+<ArgTypes of={LinkBox.Raised} />
+
+
 ## Examples
 
 ### Nesting
@@ -44,25 +66,6 @@ If your linkbox contains interactive elements inside of it, wrap them with `Link
 It will raise their `z-index` to stay above the main link of your `LinkBox`.
 
 <Canvas of={stories.Nesting} />
-
-## API Reference
-
-<ArgTypes
-  of={LinkBox}
-  description="Contains all the parts of a LinkBox."
-  subcomponents={{
-    'LinkBox.Link': {
-      of: LinkBox.Link,
-      description:
-        'Main link of the link box. A single LinkBox must contain only one LinkBox.Link.',
-    },
-    'LinkBox.Raised': {
-      of: LinkBox.Raised,
-      description:
-        'If your LinkBox contains others links or interactive elements, wrap them with LinkBox.Raised to keep them on top of the LinkBox overlay.',
-    },
-  }}
-/>
 
 ## Accessibility
 

@@ -1,6 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { Label } from '.'
 import * as stories from './Label.stories'
 
@@ -30,6 +29,21 @@ export default () => (
 );
 ```
 
+## API Reference
+
+### Label 
+
+Renders an accessible label associated with controls.
+
+<ArgTypes of={Label} />
+
+### _.RequiredIndicator
+
+An optional indicator to display a field as required. Must be rendered inside Label.
+
+<ArgTypes of={Label.RequiredIndicator} />
+
+
 ## Examples
 
 ### Required
@@ -43,20 +57,6 @@ Use `Label.RequiredIndicator` component to display a required indicator inside t
 Optionally use the `children` prop to change the indicator.
 
 <Canvas of={stories.RequiredIndicator} />
-
-## API Reference
-
-<ArgTypes
-  of={Label}
-  description="A label that can be used to describe a field"
-  subcomponents={{
-    'Label.RequiredIndicator': {
-      of: Label.RequiredIndicator,
-      description:
-        'An optional indicator to display a field as required. Must be rendered inside Label.',
-    },
-  }}
-/>
 
 ## Accessibility
 

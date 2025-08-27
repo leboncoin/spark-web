@@ -1,5 +1,4 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
-import { ArgTypes as ExtendedArgTypes } from '@docs/helpers/ArgTypes'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import * as SlotStories from './Slot.stories'
 import { Slot, Slottable } from '.'
 
@@ -25,11 +24,26 @@ npm install @spark-ui/components
 import { Slot, Slottable } from "@spark-ui/components/slot"
 
 export default () => (
-  <Slot>
+  <Slot>  
     <Slottable />
   </Slot>
 );
 ```
+
+## API Reference
+
+### Slot
+
+Merges its props onto its immediate child.
+
+<ArgTypes of={Slot} />
+
+### Slottable
+
+Wraps the elements on a fragment appending all other slot descendant elements not wrapped into it.
+
+<ArgTypes of={Slottable} />
+
 
 ## Prop Merge Techniques
 
@@ -88,16 +102,3 @@ All non Slottable direct Slot children descendant elements will be appended to t
 
 <Canvas of={SlotStories.Append} />
 
-## API Reference
-
-<ExtendedArgTypes
-  of={Slot}
-  description="Merges its props onto its immediate child."
-  subcomponents={{
-    Slottable: {
-      of: Slottable,
-      description:
-        'Wraps the elements on a fragment appending all other slot descendant elements not wrapped into it.',
-    },
-  }}
-/>

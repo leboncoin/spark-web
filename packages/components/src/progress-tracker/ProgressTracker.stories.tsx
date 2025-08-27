@@ -1,4 +1,4 @@
-import { StoryLabel } from '@docs/helpers/StoryLabel'
+import { Tag } from '@spark-ui/components/tag'
 import { BookmarkFill } from '@spark-ui/icons/BookmarkFill'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useState } from 'react'
@@ -73,7 +73,7 @@ export const Size: StoryFn = _args => (
   <div className="gap-2xl flex flex-wrap items-center">
     {sizes.map(size => (
       <div key={size}>
-        <StoryLabel>{`${size}${size === 'lg' ? ' (default)' : ''}`}</StoryLabel>
+        <Tag className="mb-md flex">{`${size}${size === 'lg' ? ' (default)' : ''}`}</Tag>
 
         <ProgressTracker
           aria-label={`Progress tracker "${size}"`}
@@ -102,7 +102,7 @@ export const Intent: StoryFn = _args => (
   <div className="gap-2xl flex flex-wrap items-center">
     {intents.map(intent => (
       <div key={intent}>
-        <StoryLabel>{`${intent}${intent === 'basic' ? ' (default)' : ''}`}</StoryLabel>
+        <Tag className="mb-md flex">{`${intent}${intent === 'basic' ? ' (default)' : ''}`}</Tag>
         <ProgressTracker
           aria-label={`Progress tracker "${intent}"`}
           stepIndex={1}
@@ -134,9 +134,7 @@ export const Orientation: StoryFn = _args => (
   <div className="gap-2xl flex flex-wrap">
     {orientations.map(orientation => (
       <div key={orientation}>
-        <StoryLabel>{`${orientation}${
-          orientation === 'horizontal' ? ' (default)' : ''
-        }`}</StoryLabel>
+        <Tag className="mb-md flex">{`${orientation}${orientation === 'horizontal' ? ' (default)' : ''}`}</Tag>
 
         <ProgressTracker
           stepIndex={1}

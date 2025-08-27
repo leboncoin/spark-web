@@ -1,6 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { Kbd } from '@spark-ui/components/kbd'
 
 import { Pagination } from '.'
@@ -39,6 +38,59 @@ export default () => (
   </Pagination.Pages>
 );
 ```
+
+## API Reference
+
+### Pagination
+
+Contains all the parts of a pagination.
+
+<ArgTypes of={Pagination} />  
+
+### _.FirstPageTrigger
+
+A button to go to the first page, no matter which page is currently selected.
+
+<ArgTypes of={Pagination.FirstPageTrigger} />
+
+
+### _.PrevTrigger
+
+A button to go to the previous page, no matter which page is currently selected.
+
+<ArgTypes of={Pagination.PrevTrigger} />
+
+
+### _.NextTrigger
+
+A button to go to the next page, no matter which page is currently selected.
+
+<ArgTypes of={Pagination.NextTrigger} />
+
+### _.LastPageTrigger
+
+A button to go to the last page, no matter which page is currently selected.
+
+<ArgTypes of={Pagination.LastPageTrigger} />
+
+### _.Pages
+
+This component exposes the internal api of the pagination to render individual page elements by yourself.
+
+<ArgTypes of={Pagination.Pages} />
+
+### _.Item
+
+A numbered page item. Can be a link or a button.
+
+<ArgTypes of={Pagination.Item} />
+
+### _.Ellipsis
+
+Indicates a jump between visible page elements.
+
+<ArgTypes of={Pagination.Ellipsis} />
+
 
 ## Examples
 
@@ -146,45 +198,6 @@ The `type` of the trigger element can be either a **button** (`<Pagination type=
   <Pagination.NextTrigger aria-label="Next page" href="#next" />
 </Pagination>
 ```
-
-## API Reference
-
-<ArgTypes
-  of={Pagination}
-  description="Contains all the parts of a pagination."
-  subcomponents={{
-    'Pagination.FirstPageTrigger': {
-      of: Pagination.FirstPageTrigger,
-      description: 'A button to go to the first page, no matter which page is currently selected.',
-    },
-    'Pagination.PrevTrigger': {
-      of: Pagination.PrevTrigger,
-      description:
-        'A button to go to the previous page, no matter which page is currently selected.',
-    },
-    'Pagination.NextTrigger': {
-      of: Pagination.NextTrigger,
-      description: 'A button to go to the next page, no matter which page is currently selected.',
-    },
-    'Pagination.LastPageTrigger': {
-      of: Pagination.LastPageTrigger,
-      description: 'A button to go to the last page, no matter which page is currently selected.',
-    },
-    'Pagination.Pages': {
-      of: Pagination.Pages,
-      description:
-        'This component exposes the internal api of the pagination to render individual page elements by yourself.',
-    },
-    'Pagination.Item': {
-      of: Pagination.Item,
-      description: 'A numbered page item. Can be a link or a button.',
-    },
-    'Pagination.Ellipsis': {
-      of: Pagination.Ellipsis,
-      description: 'Indicates a jump between visible page elements.',
-    },
-  }}
-/>
 
 ## Accessibility
 

@@ -1,4 +1,4 @@
-import { StoryLabel } from '@docs/helpers/StoryLabel'
+import { Tag } from '@spark-ui/components/tag'
 import { Close } from '@spark-ui/icons/Close'
 import { Plus } from '@spark-ui/icons/Plus'
 import { Meta, StoryFn } from '@storybook/react-vite'
@@ -115,7 +115,7 @@ export const Intent: StoryFn = _args => (
     {intents.map(intent => {
       return (
         <div key={intent}>
-          <StoryLabel>{`${intent}${intent === 'basic' ? ' (default)' : ''}`}</StoryLabel>
+          <Tag className="flex">{`${intent}${intent === 'basic' ? ' (default)' : ''}`}</Tag>
 
           <CheckboxGroup defaultValue={['soccer']} intent={intent} orientation="vertical">
             <Checkbox value="soccer">Soccer</Checkbox>
@@ -143,7 +143,7 @@ export const GroupOrientation: StoryFn = _args => {
   return (
     <div className="gap-xl flex flex-col">
       <div>
-        <StoryLabel>Vertical (default)</StoryLabel>
+        <Tag className="flex">Vertical (default)</Tag>
 
         <CheckboxGroup orientation="vertical">
           <Checkbox value="soccer">Soccer</Checkbox>
@@ -152,7 +152,7 @@ export const GroupOrientation: StoryFn = _args => {
         </CheckboxGroup>
       </div>
       <div>
-        <StoryLabel>Horizontal</StoryLabel>
+        <Tag className="flex">Horizontal</Tag>
 
         <CheckboxGroup orientation="horizontal">
           <Checkbox value="soccer">Soccer</Checkbox>

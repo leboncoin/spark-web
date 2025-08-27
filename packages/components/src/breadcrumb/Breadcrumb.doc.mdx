@@ -1,5 +1,4 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
 import { Kbd } from '@spark-ui/components/kbd'
 
@@ -36,6 +35,40 @@ export default () => (
 );
 ```
 
+## API Reference
+
+### Breadcrumb
+
+Contains all the parts of a breakpoint. Navigation area.
+
+<ArgTypes of={Breadcrumb} />
+
+
+### _.Item
+
+List item to use inside of `Breadcrumb` directly.
+
+<ArgTypes of={Breadcrumb.Item} />
+
+
+### _.Link
+
+Use inside `Breadcrumb.Item` if your item must be a link.
+
+<ArgTypes of={Breadcrumb.Link} />
+
+### _.CurrentPage
+
+Use inside `Breadcrumb.Item` if your item is the current page (non-interactive link).
+
+<ArgTypes of={Breadcrumb.CurrentPage} />
+
+### _.Separator
+
+Separator to use between each `Breadcrumb.Item`. Content can be customized.
+
+<ArgTypes of={Breadcrumb.Separator} />
+
 ## Examples
 
 ### Custom Separator
@@ -49,32 +82,6 @@ Use the `children` property of `Breadcrumb.Separator` to use a different icon fo
 Apply a maximum width on an element to truncate it automatically.
 
 <Canvas of={stories.Truncate} />
-
-## API Reference
-
-<ArgTypes
-  of={Breadcrumb}
-  description="Contains all the parts of a breakpoint. Navigation area."
-  subcomponents={{
-    'Breadcrumb.Item': {
-      of: Breadcrumb.Item,
-      description: 'List item to use inside of `Breadcrumb` directly.',
-    },
-    'Breadcrumb.Link': {
-      of: Breadcrumb.Link,
-      description: 'Use inside `Breadcrumb.Item` if your item must be a link.',
-    },
-    'Breadcrumb.CurrentPage': {
-      of: Breadcrumb.CurrentPage,
-      description:
-        'Use inside `Breadcrumb.Item` if your item is the current page (non-interactive link).',
-    },
-    'Breadcrumb.Separator': {
-      of: Breadcrumb.Separator,
-      description: 'Separator to use between each `Breadcrumb.Item`. Content can be customized.',
-    },
-  }}
-/>
 
 ## Accessibility
 

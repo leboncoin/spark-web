@@ -1,5 +1,4 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { Kbd } from '@spark-ui/components/kbd'
 import { A11yReport } from '@docs/helpers/A11yReport'
 
@@ -53,6 +52,85 @@ export default () => (
 );
 ```
 
+## API Reference
+
+### AlertDialog
+
+Contains all the parts of an alert dialog.
+
+<ArgTypes of={AlertDialog} />
+
+
+### _.Trigger
+
+A button that opens the dialog.
+
+<ArgTypes of={AlertDialog.Trigger} />
+
+
+### _.Portal
+
+When used, portals your overlay and content parts into the body.
+
+<ArgTypes of={AlertDialog.Portal} />
+
+### _.Overlay
+
+A layer that covers the inert portion of the view when the dialog is open.
+
+<ArgTypes of={AlertDialog.Overlay} />
+
+### _.Content
+
+Contains content to be rendered when the dialog is open.
+
+<ArgTypes of={AlertDialog.Content} />
+
+### _.Header
+
+To use inside of AlertDialog.Content. Sticky header inside the dialog.
+
+<ArgTypes of={AlertDialog.Header} />
+
+### _.Body
+
+To use inside of AlertDialog.Content. Main content of the dialog. Becomes scrollable when content is overflowing the screen.
+
+<ArgTypes of={AlertDialog.Body} />
+
+### _.Footer
+
+To use inside of AlertDialog.Content. Sticky footer to be rendered in the open dialog. Use it to render CTAs and make them accessible in every condition.
+
+<ArgTypes of={AlertDialog.Footer} />
+
+
+### _.Title
+
+An accessible name to be announced when the dialog is opened.
+
+<ArgTypes of={AlertDialog.Title} />
+
+
+### _.Description
+
+An accessible description to be announced when the dialog is opened.
+
+<ArgTypes of={AlertDialog.Description} />
+
+### _.Cancel
+
+A button that closes the dialog. This button should be distinguished visually from AlertDialog.Action buttons.
+
+<ArgTypes of={AlertDialog.Cancel} />
+
+### _.Action
+
+A button that closes the dialog. These buttons should be distinguished visually from the AlertDialog.Cancel button.
+
+<ArgTypes of={AlertDialog.Action} />
+
+
 ## Examples
 
 ### Controlled
@@ -60,63 +138,6 @@ export default () => (
 Use `open` and `onOpenChange` props to control the state of the dialog. This is specially useful to close the dialog after an async operation has completed.
 
 <Canvas of={stories.Controlled} />
-
-## API Reference
-
-<ArgTypes
-  of={AlertDialog}
-  description="Contains all the parts of an alert dialog."
-  subcomponents={{
-    'AlertDialog.Trigger': {
-      of: AlertDialog.Trigger,
-      description: 'A button that opens the dialog.',
-    },
-    'AlertDialog.Portal': {
-      of: AlertDialog.Portal,
-      description: 'When used, portals your overlay and content parts into the body.',
-    },
-    'AlertDialog.Overlay': {
-      of: AlertDialog.Overlay,
-      description: 'A layer that covers the inert portion of the view when the dialog is open.',
-    },
-    'AlertDialog.Content': {
-      of: AlertDialog.Content,
-      description: 'Contains content to be rendered when the dialog is open.',
-    },
-    'AlertDialog.Header': {
-      of: AlertDialog.Header,
-      description: 'To use inside of AlertDialog.Content. Sticky header inside the dialog.',
-    },
-    'AlertDialog.Body': {
-      of: AlertDialog.Body,
-      description:
-        'To use inside of AlertDialog.Content. Main content of the dialog. Becomes scrollable when content is overflowing the screen.',
-    },
-    'AlertDialog.Footer': {
-      of: AlertDialog.Footer,
-      description:
-        'To use inside of AlertDialog.Content. Sticky footer to be rendered in the open dialog. Use it to render CTAs and make them accessible in every condition.',
-    },
-    'AlertDialog.Title': {
-      of: AlertDialog.Title,
-      description: 'An accessible name to be announced when the dialog is opened.',
-    },
-    'AlertDialog.Description': {
-      of: AlertDialog.Description,
-      description: 'An accessible description to be announced when the dialog is opened.',
-    },
-    'AlertDialog.Cancel': {
-      of: AlertDialog.Cancel,
-      description:
-        'A button that closes the dialog. This button should be distinguished visually from AlertDialog.Action buttons.',
-    },
-    'AlertDialog.Action': {
-      of: AlertDialog.Action,
-      description:
-        'A button that closes the dialog. These buttons should be distinguished visually from the AlertDialog.Cancel button.',
-    },
-  }}
-/>
 
 ## Accessibility
 

@@ -1,5 +1,5 @@
-import { StoryLabel } from '@docs/helpers/StoryLabel'
 import { Spinner } from '@spark-ui/components/spinner'
+import { Tag } from '@spark-ui/components/tag'
 import { AccountOutline } from '@spark-ui/icons/AccountOutline'
 import { ShareOutline } from '@spark-ui/icons/ShareOutline'
 import type { Meta, StoryFn, StoryObj } from '@storybook/react-vite'
@@ -96,7 +96,7 @@ export const AsLink: StoryFn = () => {
   return (
     <div className="gap-xl flex">
       <div className="gap-md flex flex-col">
-        <StoryLabel>Link</StoryLabel>
+        <Tag className="flex">Link</Tag>
         <Avatar size="xl" username="John Doe">
           <Avatar.User asChild>
             <a
@@ -112,7 +112,7 @@ export const AsLink: StoryFn = () => {
       </div>
 
       <div className="gap-md flex flex-col">
-        <StoryLabel>Button</StoryLabel>
+        <Tag className="flex">Button</Tag>
         <Avatar size="xl" username="John Doe">
           <Avatar.User asChild>
             <button type="button" onClick={() => alert('clicked')}>
@@ -152,7 +152,7 @@ export const Placeholder: StoryFn = () => {
     <div>
       <div className="gap-xl flex flex-wrap items-start">
         <div className="gap-md flex flex-col">
-          <StoryLabel>Default</StoryLabel>
+          <Tag className="flex">Default</Tag>
           <Avatar username="John Doe">
             <Avatar.User>
               <Avatar.Placeholder />
@@ -160,7 +160,7 @@ export const Placeholder: StoryFn = () => {
           </Avatar>
         </div>
         <div className="gap-md flex flex-col">
-          <StoryLabel>Custom - icon</StoryLabel>
+          <Tag className="flex">Custom - icon</Tag>
           <Avatar username="John Doe">
             <Avatar.User>
               <Avatar.Placeholder className="bg-neutral-container text-on-neutral-container">
@@ -172,7 +172,7 @@ export const Placeholder: StoryFn = () => {
           </Avatar>
         </div>
         <div className="gap-md flex flex-col">
-          <StoryLabel>Custom - spinner</StoryLabel>
+          <Tag className="flex">Custom - spinner</Tag>
           <Avatar username="John Doe">
             <Avatar.User>
               <Avatar.Placeholder>
@@ -219,7 +219,7 @@ export const Sizes: StoryFn = () => {
       <div className="gap-xl flex flex-wrap items-start">
         {sizes.map(size => (
           <div key={size} className="gap-lg flex flex-col">
-            <StoryLabel>{size}</StoryLabel>
+            <Tag className="flex">{size}</Tag>
             <Avatar size={size} username="John Doe" isOnline onlineText="Online">
               <Avatar.User>
                 <Avatar.Placeholder />

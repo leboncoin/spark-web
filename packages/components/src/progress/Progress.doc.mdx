@@ -1,6 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { Callout } from '@docs/helpers/Callout'
 import { TextLink } from '@spark-ui/components/text-link'
 
@@ -45,6 +44,35 @@ export default () => (
   </Progress>
 );
 ```
+
+## API Reference
+
+### Progress
+
+Contains all of the progress parts. It also makes progress accessible to assistive technologies.
+
+<ArgTypes of={Progress} />
+
+
+
+### _.Bar
+
+Used to show the progress bar.
+
+<ArgTypes of={Progress.Bar} />
+
+### _.Label
+
+Used to display a label for the progress.
+
+<ArgTypes of={Progress.Label} />
+
+### _.Indicator
+
+Used to show the progress. Automatically added by the progress bar.
+
+<ArgTypes of={Progress.Indicator} />
+
 
 ## Examples
 
@@ -97,27 +125,6 @@ Use `isIndeterminate` prop to represent an interdeterminate operation.
 Displaying the progress value as text is possible by composing the different components.
 
 <Canvas of={stories.VisibleValue} />
-
-## API Reference
-
-<ArgTypes
-  of={Progress}
-  description="Contains all of the progress parts. It also makes progress accessible to assistive technologies."
-  subcomponents={{
-    'Progress.Bar': {
-      of: Progress.Bar,
-      description: 'Used to show the progress bar.',
-    },
-    'Progress.Label': {
-      of: Progress.Label,
-      description: 'Used to display a label for the progress.',
-    },
-    'Progress.Indicator': {
-      of: Progress.Indicator,
-      description: 'Used to show the progress. Automatically added by the progress bar.',
-    },
-  }}
-/>
 
 ## Accessibility
 

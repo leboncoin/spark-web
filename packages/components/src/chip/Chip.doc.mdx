@@ -1,5 +1,4 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
-import { ArgTypes as ExtendedArgTypes } from '@docs/helpers/ArgTypes'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
 import { Chip } from '.'
 import { Callout } from '@docs/helpers/Callout'
@@ -76,6 +75,44 @@ export default () => (
   </Chip>
 );
 ```
+
+## API Reference
+
+### Chip
+
+Component for offering information
+
+<ArgTypes of={Chip} />
+
+
+
+### _.Content
+
+The main chip container
+
+<ArgTypes of={Chip.Content} />
+
+
+### _.LeadingIcon
+
+Prepend a decorative icon inside the chip (to the left).
+
+<ArgTypes of={Chip.LeadingIcon} />
+
+
+### _.TrailingIcon
+
+Append a decorative icon inside the chip (to the right).
+
+<ArgTypes of={Chip.TrailingIcon} />
+
+
+### _.ClearButton
+
+For removing the chip.
+
+<ArgTypes of={Chip.ClearButton} />
+
 
 ## Examples
 
@@ -169,31 +206,6 @@ Suggestion chips help narrow a user’s intent by presenting dynamically generat
 <Canvas of={stories.Suggestion} />
 
 Suggestion chips can offer quick-reply options in a chat or email app, or It can help the user start a search.
-
-## API Reference
-
-<ExtendedArgTypes
-  of={Chip}
-  description="Component for offering information"
-  subcomponents={{
-    'Chip.Content': {
-      of: Chip.Content,
-      description: 'The main chip container',
-    },
-    'Chip.LeadingIcon': {
-      of: Chip.LeadingIcon,
-      description: 'Prepend a decorative icon inside the chip (to the left).',
-    },
-    'Chip.TrailingIcon': {
-      of: Chip.TrailingIcon,
-      description: 'Append a decorative icon inside the chip (to the right).',
-    },
-    'Chip.ClearButton': {
-      of: Chip.ClearButton,
-      description: 'For removing the chip.',
-    },
-  }}
-/>
 
 ## Accessibility
 

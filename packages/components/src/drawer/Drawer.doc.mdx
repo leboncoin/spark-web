@@ -1,6 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { Kbd } from '@spark-ui/components/kbd'
 
 import { Drawer } from '.'
@@ -56,6 +55,71 @@ export default () => (
 );
 ```
 
+## API Reference
+
+### Drawer
+
+Contains all the parts of a drawer.
+
+<ArgTypes of={Drawer} />  
+
+### _.Trigger
+
+The button that opens the drawer.
+
+<ArgTypes of={Drawer.Trigger} />
+
+
+### _.Portal
+
+When used, portals your overlay and content parts into the body.
+
+<ArgTypes of={Drawer.Portal} />
+
+
+### _.Overlay
+
+A layer that covers the inert portion of the view when the drawer is open.
+
+<ArgTypes of={Drawer.Overlay} />
+
+### _.Content
+
+Contains Header/Body/Footer to be rendered in the open drawer.
+
+<ArgTypes of={Drawer.Content} />
+
+### _.Header
+
+To use inside of Popover.Content. Sticky header inside the drawer.
+
+<ArgTypes of={Drawer.Header} />
+
+### _.Body
+
+To use inside of Popover.Content. Main content of the drawer. Becomes scrollable when content is overflowing the screen.
+
+<ArgTypes of={Drawer.Body} />
+
+### _.Footer
+
+To use inside of Popover.Content. Sticky footer to be rendered in the open drawer. Use it to render CTAs and make them accessible in every condition.
+
+<ArgTypes of={Drawer.Footer} /> 
+
+### _.Close
+
+An abstract button that closes the drawer, meant for usage inside the content to attach closing behavior to.
+
+<ArgTypes of={Drawer.Close} />
+
+### _.CloseButton
+
+An icon button with a cross icon that closes the drawer and is located in the top right corner of the drawer.
+
+<ArgTypes of={Drawer.CloseButton} />
+
+
 ## Examples
 
 ### Fade effect
@@ -83,57 +147,6 @@ Pick a size among `sm`, `md`, `lg`, `fluid` and `fullscreen`.
 <Canvas of={stories.Sizes} />
 
 
-
-## API Reference
-
-<ArgTypes
-  of={Drawer}
-  description="Contains all the parts of a drawer."
-  subcomponents={{
-    'Drawer.Trigger': {
-      of: Drawer.Trigger,
-      description: 'The button that opens the drawer.',
-    },
-    'Drawer.Portal': {
-      of: Drawer.Portal,
-      description: 'When used, portals your overlay and content parts into the body.',
-    },
-    'Drawer.Overlay': {
-      of: Drawer.Overlay,
-      description: 'A layer that covers the inert portion of the view when the drawer is open.',
-    },
-    'Drawer.Content': {
-      of: Drawer.Content,
-      description: 'Contains Header/Body/Footer to be rendered in the open drawer.',
-    },
-    'Drawer.Header': {
-      of: Drawer.Header,
-      description: 'To use inside of Popover.Content. Sticky header inside the drawer.',
-    },
-    'Drawer.Body': {
-      of: Drawer.Body,
-      description:
-        'To use inside of Popover.Content. Main content of the drawer. Becomes scrollable when content is overflowing the screen.',
-    },
-    'Drawer.Footer': {
-      of: Drawer.Footer,
-      description:
-        'To use inside of Popover.Content. Sticky footer to be rendered in the open drawer. Use it to render CTAs and make them accessible in every condition.',
-    },
-    'Drawer.CloseButton': {
-      of: Drawer.CloseButton,
-      description: 'The button that closes the drawer.',
-    },
-    'Drawer.Title': {
-      of: Drawer.Title,
-      description: 'An accessible title to be announced when the drawer is opened.',
-    },
-    'Drawer.Description': {
-      of: Drawer.Description,
-      description: 'An optional accessible description to be announced when the drawer is opened.',
-    },
-  }}
-/>
 
 ## Accessibility
 
