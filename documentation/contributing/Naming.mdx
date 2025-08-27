@@ -1,0 +1,209 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Contributing/Naming things" />
+
+# Naming
+
+**Naming** increases speed to comprehend code and reduces bugs through confusion.
+
+- Use english as universal naming standard language
+
+
+
+
+## Reserved prefixes
+
+- **use**Something: react hook
+- **with**Something: react HighOrderComponent
+- **on**Something: react component handler (props)
+- **handle**Something: react component handler (internal methods)
+
+## DataType directives
+
+<table>
+  <thead>
+    <tr>
+      <th>DataType</th>
+      <th>Guideline</th>
+      <th>Do</th>
+      <th>Don't</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Boolean</strong></td>
+      <td>Add <strong>is</strong> or <strong>has</strong> as variable name prefixes + participle verb or adjective. Use semantic affirmative naming.</td>
+      <td>
+        <code>const isVisible = true</code><br/>
+        <code>const hasPermissions = true</code>
+      </td>
+      <td>
+        <code>const name = true</code><br/>
+        <code>const isInvisible = false</code>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Number</strong></td>
+      <td>Use singular. Use <strong>-number</strong> postfix or <strong>n</strong>- prefix.</td>
+      <td>
+        <code>const count = 0</code><br/>
+        <code>const pageNumber = 3</code><br/>
+        <code>const nPage = 3</code>
+      </td>
+      <td>
+        <em>No specific examples</em>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>String</strong></td>
+      <td>Use singular.</td>
+      <td>
+        <code>const fruit = '🍎'</code><br/>
+        <code>const car = '🚗'</code>
+      </td>
+      <td>
+        <code>const fruits = '🍎'</code><br/>
+        <code>const cars = '🚗'</code>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Array, Set or Map</strong></td>
+      <td>Use plural.</td>
+      <td>
+        <code>const fruits = ['🍎', '🍌', '🍐']</code><br/>
+        <code>const cars = ['🚗', '🚙', '🚘']</code>
+      </td>
+      <td>
+        <code>const fruits = '🍎'</code><br/>
+        <code>const cars = '🚗'</code>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Functions</strong></td>
+      <td>Use infinitive <strong>verb</strong>. For async functions, use gerund (-ing). For React component prop handlers, use <strong>on</strong>-Whatever prefix.</td>
+      <td>
+        <code>const handleThat = () => {}</code><br/>
+        <code>const handlingThat = async () => {}</code><br/>
+        <code>const onClick = () => {}</code>
+      </td>
+      <td>
+        <code>const click = () => {}</code>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Class or React Component entity</strong></td>
+      <td>Use initial Capital Letter for declarations. Use lower-case for instances.</td>
+      <td>
+        <code>class Car {}</code><br/>
+        <code>const Car = props => &lt;div&gt;🏎️&lt;/div&gt;</code><br/>
+        <code>const ferrari = new Car('Ferrari')</code><br/>
+        <code>const ferrari = &lt;Car /&gt;</code>
+      </td>
+      <td>
+        <code>class car {}</code><br/>
+        <code>const Ferrari = new Car('Ferrari')</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Semantic naming
+
+#### Leverage names to reveal intent
+
+```js
+const fruit = '🍌' // ❌
+const banana = '🍌' // ✅
+```
+
+#### Be consistent with naming conventions
+
+```js
+const [appleMeasurement, grapeDimensions, ...fruitSizes] = ['xs', 'l', 'm'] // ❌
+const [appleSize, grapeSize, ...fruitSizes] = ['xs', 'l', 'm'] // ✅
+```
+
+#### Be specific & avoid general terms unless they have contextual meaning
+
+```js
+const [fruit1, fruit2, fruit3, ...otherFruits] = ['🍋', '🍌', '🍉', '🍇'] // ❌
+const [lemon, banana, watermelon, ...otherFruits] = ['🍋', '🍌', '🍉', '🍇'] // ✅
+```
+
+#### Avoid abbreviations
+
+```js
+const a11y // ❌
+const accessibility // ✅
+```
+
+
+#### Encode hints in the name rather than in comments
+
+```js
+const pet = '🐶' // domesticated wolf's descendant animal. ❌
+const dog = '🐶' // ✅
+```
+
+#### Do not reuse names in different scopes
+
+```js
+const Component = ({ children, ...props }) => {
+  const Children = ({ ...props }) => <div {...props} /> // ❌
+  return (
+    <div {...props}>
+      <Children foo="bar" />
+    </div>
+  )
+}
+```
+
+```js
+const Component = ({ children, ...props }) => {
+  const Children = ({ ...childrenProps }) => <div {...childrenProps} /> // ✅
+  return (
+    <div {...props}>
+      <Children foo="bar" />
+    </div>
+  )
+}
+```
+
+#### Don't pick names making only sense to you
+
+Try to avoid acronyms. It normally belongs to a jargon, and it's not universally spread.
+
+```js
+const WIP // ❌
+const workInProgress // ✅
+
+const WYSIWYG // ❌
+const whatYouSeeIsWhatYouGet // ✅
+
+const palta = "🥑" // ❌
+const avocado = "🥑" // ✅
+
+const lol = '🤣' // ❌
+const hilarious = '🤣' // ✅
+
+const AFAIK, ASAP, AKA, FYI, DRY, H8, DM, MD // ❌
+
+```
+
+#### Don't be funny
+
+```js
+// Magic. Do not touch. ❌
+const sum = (a, b) => {
+  return a + b;
+  const youShouldNeverReadThis // ❌
+  // nobody read comments! ❌
+}
+```
+
+```js
+// ✅
+const sum = (a, b) => {
+  return a + b
+}
+```

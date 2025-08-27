@@ -1,0 +1,253 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Contributing/Project architecture" />
+
+# Project architecture
+
+Spark is a monorepo project managed by [Lerna](https://lerna.js.org/) and organized according to a modular architecture. The project follows modern Design System design principles with clear separation of responsibilities.
+
+## General architecture
+
+The project is organized as follows:
+
+- **`packages/`** : Main directory containing all publishable packages, managed by Lerna
+- **`documentation/`** : MDX files documented by Storybook for the Design System
+- **`e2e/`** : End-to-end and accessibility tests with Playwright
+- **`src/`** : Source code not managed by Lerna (configuration, global styles)
+- **`storybook/`** : Storybook configuration and build
+
+## Packages
+
+### @spark-ui/components
+
+The main package containing all React components of the Design System.
+
+#### Structure
+```
+packages/components/
+├── src/
+│   ├── accordion/          # Accordion component
+│   ├── alert-dialog/       # AlertDialog component
+│   ├── avatar/             # Avatar component
+│   ├── badge/              # Badge component
+│   ├── button/             # Button component
+│   ├── card/               # Card component
+│   └── ...                 # +45 other components
+├── package.json
+├── tsup.config.ts          # Build configuration
+└── global.d.ts             # Global types
+```
+
+#### Features
+- **Build** : Uses Tsup for TypeScript compilation and type generation
+- **Exports** : Support for CommonJS and ESM formats with TypeScript types
+- **Dependencies** : Integration with Radix UI, React Aria, and Zag.js
+- **Accessibility** : WCAG compliance and ARIA attributes support
+- **Styling** : Uses Tailwind CSS with custom variants
+
+#### Component structure
+Each component follows a standardized structure:
+
+```
+dialog/
+├── Dialog.tsx              # Main Dialog component
+├── Dialog.test.tsx         # Main component tests
+├── Dialog.stories.tsx      # Main component stories
+├── Dialog.doc.mdx          # Main component documentation
+├── DialogTrigger.tsx       # Dialog.Trigger sub-component
+├── DialogTrigger.test.tsx  # Trigger tests
+├── DialogTrigger.stories.tsx # Trigger stories
+├── DialogContent.tsx       # Dialog.Content sub-component
+├── DialogContent.test.tsx  # Content tests
+├── DialogContent.stories.tsx # Content stories
+└── index.ts                # Public exports
+```
+
+### @spark-ui/hooks
+
+Package containing reusable React hooks for common business logic.
+
+#### Structure
+```
+packages/hooks/
+├── src/
+│   ├── use-combined-state/    # Hook for managing combined state
+│   ├── use-merge-refs/        # Hook for merging React refs
+│   ├── use-mounted-state/     # Hook for post-mount state
+│   └── use-scroll-overflow/   # Hook for scroll management
+├── package.json
+└── tsconfig.json
+```
+
+#### Features
+- **Utility hooks** : Common functionality for managing refs, states and events
+- **TypeScript** : Complete type support with typed exports
+- **Build** : Compilation with Tsup for multi-format compatibility
+- **Dependencies** : Uses Lodash for certain functionalities
+
+#### Usage examples
+```tsx
+import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
+import { useMountedState } from '@spark-ui/hooks/use-mounted-state'
+
+// Merging multiple refs
+const mergedRef = useMergeRefs(ref1, ref2, ref3)
+
+// State after component mount
+const isMounted = useMountedState()
+```
+
+### @spark-ui/utils
+
+Package containing utilities and development tools.
+
+#### Structure
+```
+packages/utils/
+├── cli/                    # Command line tools
+├── internal-utils/         # Shared internal utilities
+└── theme/                  # Theme utilities
+```
+
+##### @spark-ui/cli-utils
+CLI tools to improve the development experience.
+
+**Features** :
+- **Component generation** : `spark generate` to create new components
+- **Templates** : Template system for package creation
+- **Workflow** : Integration with the development process
+
+**Usage** :
+```bash
+# Generate a new component
+npx spark generate
+
+# Or install globally
+npm install -g @spark-ui/cli-utils
+spark generate
+```
+
+##### @spark-ui/internal-utils
+Internal utilities shared between packages.
+
+**Features** :
+- **Variant management** : `makeVariants` to create component variants
+- **React utilities** : `deepFind`, `createSplitProps` for props manipulation
+- **Object utilities** : `omit`, `useEvent` for object and event management
+- **Tailwind integration** : `tw` for programmatic Tailwind usage
+
+**Examples** :
+```tsx
+import { makeVariants, tw } from '@spark-ui/internal-utils'
+
+// Creating variants
+const buttonVariants = makeVariants({
+  intent: ['main', 'support', 'accent'],
+  size: ['sm', 'md', 'lg']
+})
+
+// Programmatic Tailwind usage
+const className = tw('px-4', 'py-2', 'bg-blue-500')
+```
+
+##### @spark-ui/theme-utils
+Theme configuration and CSS variables management.
+
+**Features** :
+- **CSS variables** : Definition of colors, spacings, typographies
+- **Themes** : Light/dark theme support with contrast variants
+- **Animations** : Custom keyframes and transitions
+- **Responsive** : Breakpoints and responsive utilities
+
+**Theme structure** :
+```css
+@theme {
+  --color-main: #ec5a13;
+  --color-on-main: #ffffff;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --font-sans: 'Nunito Sans', ui-sans-serif, system-ui;
+}
+```
+
+## Development workflow
+
+### Build and compilation
+```bash
+# Build all packages
+npm run build
+
+# Build in watch mode
+npm run build:watch
+
+# Build a specific package
+lerna run build --scope=@spark-ui/components
+```
+
+### Testing and quality
+```bash
+# Unit tests
+npm run test
+
+# Accessibility tests
+npm run test:a11y
+
+# End-to-end tests
+npm run test:e2e
+
+# Type checking
+npm run typecheck
+```
+
+### Documentation
+```bash
+# Start Storybook
+npm run storybook:start
+
+# Build documentation
+npm run storybook:build
+```
+
+## Standard package structure
+
+Every published package follows a consistent structure regardless of its type:
+
+### Required files
+- **`package.json`** : Package manifest with dependencies and scripts
+- **`README.md`** : Basic package documentation and usage
+- **`LICENSE`** : Usage, modification, and distribution terms
+- **`CHANGELOG.md`** : Complete change history over time
+- **`.gitignore`** : Git untracked file rules
+- **`.npmignore`** : NPM package exclusion rules
+- **`tsconfig.json`** : TypeScript configuration
+- **`vite.config.ts`** : Vite build configuration
+- **`src/`** : Source code directory
+- **`index.tsx`** : Main export file (imports and exports all exposed resources)
+
+### Build artifacts
+- **`dist/`** : Generated bundle directory (ignored by `.gitignore`)
+
+
+## Dependencies and technologies
+
+- **React 19** : Main framework
+- **TypeScript** : Static typing
+- **Tailwind CSS 4** : Design system
+- **Storybook** : Component documentation and development
+- **Vitest** : Unit testing
+- **Playwright** : End-to-end and accessibility testing
+- **Lerna** : Monorepo management
+- **Tsup** : Build and bundling
+
+## Best practices
+
+1. **Component structure** : Follow the standardized structure with stories, tests and documentation
+2. **Accessibility** : All components must be WCAG compliant
+3. **Types** : Use strict TypeScript with well-defined interfaces
+4. **Testing** : Complete test coverage with accessibility tests
+5. **Documentation** : Keep documentation up to date with usage examples
+6. **Versioning** : Use semantic versioning with Lerna
+
+This modular architecture enables efficient maintenance, maximum reusability and Design System scalability while maintaining technical and visual consistency.
+
+

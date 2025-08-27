@@ -1,0 +1,83 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Contributing/Testing" />
+
+# Testing Strategy
+
+## Quick Start
+
+**Commands:**
+- `npm run test` - Watch mode (terminal)
+- `npm run test:ui` - Watch mode (browser)
+- `npm run test:run` - Single run
+- `npm run test:coverage` - With coverage report
+
+## Testing Stack
+
+- **Vitest** - Test runner with IDE plugins for VSCode/IntelliJ
+- **Testing Library** - User-centric testing philosophy
+- **user-event** - Browser-like event simulation (use this, NOT `fireEvent`)
+
+## Testing Philosophy
+
+> "The more your tests resemble the way your software is used, the more confidence they can give you."
+
+Test user interfaces, not implementation details. Focus on how users interact with your components.
+
+## Component Testing Guidelines
+
+### 1. Test Structure
+```tsx
+import { describe, it, expect } from 'vitest'
+import userEvent from '@testing-library/user-event'
+
+describe('ComponentName behavior', () => {
+  it('should perform expected action', async () => {
+    const user = userEvent.setup()
+    // Test implementation
+  })
+})
+```
+
+### 2. Naming Convention
+- **Test descriptions**: Start with `should`
+- **Test groups**: Use `describe()` for logical grouping
+
+### 3. Given/When/Then Pattern
+```tsx
+it('should trigger click event', async () => {
+  const user = userEvent.setup()
+  const clickEvent = vi.fn()
+
+  // Given: component setup
+  render(<Button onClick={clickEvent}>Click me</Button>)
+
+  // When: user interaction
+  await user.click(screen.getByText('Click me'))
+
+  // Then: verify result
+  expect(clickEvent).toHaveBeenCalledTimes(1)
+})
+```
+
+### 4. User Events
+- **Setup**: `const user = userEvent.setup()` in each test
+- **Async**: Always use `async/await` with user events
+- **Import**: `import userEvent from '@testing-library/user-event'`
+
+## Testing Utilities & Hooks
+
+For non-UI utilities, use standard unit testing. For React hooks, use `renderHook` from `@testing-library/react-hooks`.
+
+## Key Rules
+
+✅ **DO:**
+- Use `user-event` for interactions
+- Follow Given/When/Then pattern
+- Test from user perspective
+- Use `should` in test names
+
+❌ **DON'T:**
+- Use `fireEvent` (deprecated)
+- Test implementation details
+- Skip async/await with user events
