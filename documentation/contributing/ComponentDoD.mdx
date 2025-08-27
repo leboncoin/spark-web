@@ -1,0 +1,216 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+import { Callout } from '@docs/helpers/Callout'
+
+<Meta title="Contributing/Component checklist" />
+
+# Component - Definition of Done
+
+<Callout kind="warning">
+  Work in progress. This page must be submitted to the Spark team to get the approval.
+</Callout>
+
+**This document provides a list of criterias that each Spark component must fulfill.**
+
+## Key Requirements
+
+Each Spark component must fulfill the following criteria:
+
+- ✅ **Dual state management** - Must support both controlled (external state) and uncontrolled (internal state) modes
+- ✅ **Ref support** - Must accept ref prop directly (React 19 compatible)
+- ✅ **Composability** - Must use compound component pattern when applicable
+- ✅ **Chrome extension compatibility** - Must include `data-spark-component` attribute
+- ✅ **Customization support** - Must accept className for styling customization
+- ✅ **Testing** - Must include comprehensive testing following our strategy
+- ✅ **Documentation** - Must follow Storybook guidelines
+
+### Dual state management
+
+Every Spark component must support **both** controlled (external state) and uncontrolled (internal state) modes. This provides flexibility for different use cases:
+
+**Uncontrolled mode** (internal state):
+```jsx
+<Checkbox /> // Component manages its own state internally
+```
+
+**Controlled mode** (external state):
+```jsx
+const [isChecked, setIsChecked] = useState(false)
+
+<Checkbox
+    isChecked={isChecked}
+    onCheckedChange={setIsChecked}
+/>
+```
+
+**Why both modes?**
+- **Uncontrolled**: Easier integration for basic use cases, no need to manage state externally
+- **Controlled**: Better control over component behavior, enables conditional logic, form integration, etc.
+
+<Callout kind="info">
+  **Every Spark component must support both modes to provide maximum flexibility for developers.**
+</Callout>
+
+### Ref support
+
+In React 19, components can now accept a `ref` prop directly without needing to use `forwardRef`. This allows you to pass a `ref` from a parent component to access the underlying DOM element or React component instance.
+
+Here are some common scenarios where you might want to use refs:
+
+1. **Accessing child component DOM elements**: If you need to manipulate or retrieve information from a DOM element in a child component, you can pass a `ref` to access the underlying DOM element.
+2. **Controlling child component behavior**: If you need to control the behavior of a child component from a parent component, you can use a `ref` to call methods on the child component instance.
+3. **Integrating with third-party libraries**: If you're using a third-party library that expects a `ref` to be passed to a component, you can pass the `ref` directly.
+
+Here's an example of how you can now pass a `ref` directly to a child component:
+
+```jsx
+import React from 'react'
+
+const ChildComponent = ({ ref, ...props }) => {
+  return <div ref={ref} {...props}>Child component</div>
+}
+
+const ParentComponent = () => {
+  const childRef = React.useRef()
+
+  const handleClick = () => {
+    console.log(childRef.current) // logs the child component DOM element
+  }
+
+  return (
+    <div>
+      <ChildComponent ref={childRef} />
+      <button onClick={handleClick}>Log child ref</button>
+    </div>
+  )
+}
+```
+
+In this example, `ChildComponent` now accepts a `ref` prop directly and applies it to the underlying DOM element. ParentComponent creates a ref using `React.useRef()` and passes it to ChildComponent. When the button is clicked, the `handleClick` function logs the `childRef.current` value, which is the underlying DOM element of `ChildComponent`.
+
+**Important**: Make sure your component accepts and applies the `ref` prop to the appropriate DOM element or component instance. This ensures that consumers can access the underlying element when needed.
+
+### Composability
+
+Spark components are of two kinds:
+
+- **Single components**: Consist of only one element and are generally simpler and easier to use. They are typically used when a particular functionality is required in a single instance and does not need to interact with other components. Single part components are often more lightweight and can be easier to maintain and test.
+- **Compound components**: Consist of multiple elements and are designed to work together to provide more complex functionality. They are often used when a more sophisticated solution is required, or when multiple components need to be combined to achieve a particular outcome. Compound components are often more modular and can be reused across different parts of an application.
+
+<Callout kind="info">
+  **If your component's visual part could be used separately to achieve different layouts, you must
+  use the compound component pattern**
+</Callout>
+
+Composability refers to the ability to combine smaller building blocks to create larger and more complex structures. In React, composability is important because it enables developers to create reusable, modular components that can be easily combined to create complex user interfaces.
+
+There are several benefits to composing React components:
+
+- **Reusability**: Composable components can be reused in multiple parts of an application or in multiple applications altogether, reducing development time and increasing code maintainability.
+- **Scalability**: As an application grows, composability allows developers to add new components without having to refactor existing code.
+- **Flexibility**: Composable components can be easily rearranged and combined to create new UIs, giving developers more flexibility in designing the application.
+- **Readability**: Composable components are typically smaller and easier to understand than large, monolithic components. This makes it easier for developers to read, understand, and modify the codebase.
+- **Testability**: Composable components can be tested in isolation, which makes it easier to write and maintain automated tests.
+
+Overall, composability is an important aspect of building scalable, maintainable, and flexible React applications. By breaking down complex user interfaces into smaller, composable components, developers can create code that is easier to understand, modify, and test.
+
+**Other benefits involves:**
+
+- Markup (JSX) is interopable with custom html elements.
+- Drastically reduce the number of props. No more monolithic components.
+
+<p className="sb-unstyled font-bold text-error">
+  You must absolutely avoid the monolithic approach when writing a compound component.
+</p>
+
+❌ Monolithic:
+
+```jsx
+import { Dialog } from '@spark-ui/components/dialog'
+
+function MyDialog() {
+  return (
+    <>
+      <button type="button">Open dialog</button>
+      <Dialog
+        title="My dialog"
+        size="medium"
+        isOpen={isModalOpened}
+        withOverlay={false}
+        withCloseButton={false}
+      >
+        My modal content.
+      </Dialog>
+    </>
+  )
+}
+```
+
+✅ Composable:
+
+```jsx
+import { Dialog } from '@spark-ui/components/dialog'
+
+function MyDialog() {
+  return (
+    <Dialog size="medium">
+      <Dialog.Trigger>
+        <button type="button">Open dialog</button>
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        {/* <Dialog.Overlay /> */}
+        <Dialog.Content>
+          <Dialog.Title>My dialog</Dialog.Title>
+          {/* <Dialog.CloseButton /> */}
+          <p>My modal content.</p>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog>
+  )
+}
+```
+
+### Chrome extension compatibility
+
+Spark provides a Chrome extension that can highlight any Spark component on any website using Spark.
+This feature requires every Spark component to have a `data-spark-component` HTML attribute.
+
+This attribute's value must be the component name (kebab-case). **For compound components, each subComponent must have the attribute.**
+
+```
+<div data-spark-component="radio-group" ...
+```
+
+### Customization support
+
+Every Spark component must accept a `className` prop to allow consumers to customize styling (margins, positioning, responsive behavior, etc.).
+
+**Important**: When spreading props, extract `className` separately to avoid overriding default styles.
+
+#### ❌ Don't:
+```jsx
+<div className="default-styles" {...rest} /> // className gets overridden
+```
+
+#### ✅ Do:
+```jsx
+const { className, ...rest } = props
+<div className={`default-styles ${className}`} {...rest} />
+```
+
+Or with CVA: `className={styles({ className })}`
+
+### Testing
+
+Every Spark component must include comprehensive testing following our testing strategy. This ensures quality, reliability, and maintainability.
+
+**Requirements:**
+- Unit tests for all component functionality
+- User interaction testing with Testing Library
+- Accessibility testing for WCAG compliance
+- Storybook stories for visual testing and documentation
+
+[Go to testing guidelines](?path=/docs/contributing-testing--docs)
+
+### Documentation
+
+[Go to stories guidelines](?path=/docs/contributing-documentation--docs)
