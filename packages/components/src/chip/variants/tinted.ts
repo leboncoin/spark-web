@@ -6,6 +6,7 @@ export const tintedVariants = [
     intent: 'main',
     design: 'tinted',
     class: tw([
+      'data-[with-gradient=true]:u-tinted-gradient-main-container',
       'bg-main-container',
       'enabled:hover:bg-main-container-hovered',
       'enabled:active:bg-main-container-hovered',
@@ -18,6 +19,7 @@ export const tintedVariants = [
     intent: 'support',
     design: 'tinted',
     class: tw([
+      'data-[with-gradient=true]:u-tinted-gradient-support-container',
       'bg-support-container',
       'enabled:hover:bg-support-container-hovered',
       'enabled:active:bg-support-container-hovered',
@@ -30,6 +32,7 @@ export const tintedVariants = [
     intent: 'basic',
     design: 'tinted',
     class: tw([
+      'data-[with-gradient=true]:u-tinted-gradient-basic-container',
       'bg-basic-container',
       'enabled:hover:bg-basic-container-hovered',
       'enabled:active:bg-basic-container-hovered',
@@ -42,6 +45,7 @@ export const tintedVariants = [
     intent: 'accent',
     design: 'tinted',
     class: tw([
+      'data-[with-gradient=true]:u-tinted-gradient-accent-container',
       'bg-accent-container',
       'enabled:hover:bg-accent-container-hovered',
       'enabled:active:bg-accent-container-hovered',
@@ -54,6 +58,7 @@ export const tintedVariants = [
     intent: 'success',
     design: 'tinted',
     class: tw([
+      'data-[with-gradient=true]:u-tinted-gradient-success-container',
       'bg-success-container',
       'enabled:hover:bg-success-container-hovered',
       'enabled:active:bg-success-container-hovered',
@@ -66,6 +71,7 @@ export const tintedVariants = [
     intent: 'alert',
     design: 'tinted',
     class: tw([
+      'data-[with-gradient=true]:u-tinted-gradient-alert-container',
       'bg-alert-container',
       'enabled:hover:bg-alert-container-hovered',
       'enabled:active:bg-alert-container-hovered',
@@ -78,6 +84,7 @@ export const tintedVariants = [
     intent: 'danger',
     design: 'tinted',
     class: tw([
+      'data-[with-gradient=true]:u-tinted-gradient-error-container',
       'bg-error-container',
       'enabled:hover:bg-error-container-hovered',
       'enabled:active:bg-error-container-hovered',
@@ -90,6 +97,7 @@ export const tintedVariants = [
     intent: 'info',
     design: 'tinted',
     class: tw([
+      'data-[with-gradient=true]:u-tinted-gradient-info-container',
       'bg-info-container',
       'enabled:hover:bg-info-container-hovered',
       'enabled:active:bg-info-container-hovered',
@@ -102,6 +110,7 @@ export const tintedVariants = [
     intent: 'neutral',
     design: 'tinted',
     class: tw([
+      'data-[with-gradient=true]:u-tinted-gradient-neutral-container',
       'bg-neutral-container',
       'enabled:hover:bg-neutral-container-hovered',
       'enabled:active:bg-neutral-container-hovered',
@@ -114,6 +123,7 @@ export const tintedVariants = [
     intent: 'surface',
     design: 'tinted',
     class: tw([
+      'data-[with-gradient=true]:u-tinted-gradient-surface',
       'bg-surface/dim-1',
       'enabled:hover:bg-surface-hovered/dim-1',
       'enabled:active:bg-surface-hovered/dim-1',

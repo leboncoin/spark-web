@@ -75,12 +75,18 @@ export const Shapes: StoryFn = _args => (
 
 export const DesignAndIntentTable: StoryFn = _args => {
   const [underline, setUnderline] = useState(false)
+  const [withGradient, setWithGradient] = useState(false)
 
   return (
     <div className="gap-lg flex flex-col">
-      <Switch checked={underline} onClick={() => setUnderline(!underline)}>
-        Show underline
-      </Switch>
+      <div className="gap-lg flex items-center">
+        <Switch checked={underline} onClick={() => setUnderline(!underline)}>
+          Show underline
+        </Switch>
+        <Switch checked={withGradient} onClick={() => setWithGradient(!withGradient)}>
+          With gradient
+        </Switch>
+      </div>
       <table className="border-collapse">
         <thead>
           <tr>
@@ -106,7 +112,12 @@ export const DesignAndIntentTable: StoryFn = _args => {
               <td className="border-outline p-md bg-surface text-on-surface border">{intent}</td>
               {designs.map(design => (
                 <td key={`${intent}-${design}`} className={'border-outline p-lg border'}>
-                  <Button intent={intent} design={design} underline={underline}>
+                  <Button
+                    intent={intent}
+                    design={design}
+                    underline={underline}
+                    withGradient={withGradient}
+                  >
                     Click me
                   </Button>
                 </td>

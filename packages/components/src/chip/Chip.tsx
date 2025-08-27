@@ -30,6 +30,10 @@ export interface ChipProps extends ChipPrimitiveProps, Omit<ChipStylesProps, 'ha
    * Clear chip handler
    */
   onClear?: (event?: MouseEvent<HTMLButtonElement>) => void
+  /**
+   * Whether the chip should have a gradient background.
+   */
+  withGradient?: boolean
   ref?: Ref<HTMLButtonElement | HTMLDivElement>
 }
 
@@ -44,6 +48,7 @@ export const Chip = ({
   className,
   onClick,
   onClear,
+  withGradient,
   ref: forwardedRef,
   ...otherProps
 }: ChipProps) => {
@@ -69,12 +74,14 @@ export const Chip = ({
     <ChipContext.Provider value={{ disabled, design, intent, onClear }}>
       <ChipElement
         ref={forwardedRef}
+        data-with-gradient={withGradient || undefined}
         className={chipStyles({
           className,
           design,
           disabled,
           intent,
           hasClearButton: !!clearButton,
+          withGradient,
         })}
         {...{
           ...chipProps,

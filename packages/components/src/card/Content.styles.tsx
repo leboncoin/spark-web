@@ -5,6 +5,7 @@ export const contentStyles = cva(
   [
     'relative h-full default:rounded-lg w-full focus-visible:u-outline',
     'default:transition-colors default:duration-200 ease-linear',
+    'before:content-[""] before:absolute before:inset-0 before:rounded-lg before:bg-surface before:z-hide',
   ],
   {
     variants: {
@@ -12,14 +13,18 @@ export const contentStyles = cva(
         false: ['default:p-lg'],
       },
       design: {
-        filled: [],
+        filled: [
+          'group-not-disabled:group-data-[interactive=true]:group-hover:data-[with-gradient=true]:u-filled-gradient-hovered',
+        ],
         outlined: [
           'default:bg-surface group-focus:bg-surface-hovered group-not-disabled:group-data-[interactive=true]:group-hover:bg-surface-hovered',
         ],
-        tinted: [],
+        tinted: [
+          'group-not-disabled:group-data-[interactive=true]:group-hover:data-[with-gradient=true]:u-tinted-gradient-hovered',
+        ],
       },
       hasBackdrop: {
-        true: ['rounded-t-[16px_8px] '],
+        true: ['rounded-t-[16px_8px] before:rounded-t-[16px_8px]'],
       },
       intent: makeVariants<
         'intent',
@@ -56,6 +61,7 @@ export const contentStyles = cva(
         intent: 'main',
         design: 'filled',
         class: tw([
+          'data-[with-gradient=true]:u-filled-gradient-main',
           'bg-main text-on-main group-focus:bg-main-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-main-hovered',
         ]),
@@ -64,7 +70,9 @@ export const contentStyles = cva(
         intent: 'support',
         design: 'filled',
         class: tw([
-          'bg-support text-on-support group-focus:bg-support-hovered',
+          'data-[with-gradient=true]:u-filled-gradient-support',
+          'bg-support',
+          'text-on-support group-focus:bg-support-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-support-hovered',
         ]),
       },
@@ -72,7 +80,9 @@ export const contentStyles = cva(
         intent: 'accent',
         design: 'filled',
         class: tw([
-          'bg-accent text-on-accent group-focus:bg-accent-hovered',
+          'data-[with-gradient=true]:u-filled-gradient-accent',
+          'bg-accent',
+          'text-on-accent group-focus:bg-accent-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-accent-hovered',
         ]),
       },
@@ -80,7 +90,9 @@ export const contentStyles = cva(
         intent: 'basic',
         design: 'filled',
         class: tw([
-          'bg-basic text-on-basic group-focus:bg-basic-hovered',
+          'data-[with-gradient=true]:u-filled-gradient-basic',
+          'bg-basic',
+          'text-on-basic group-focus:bg-basic-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-basic-hovered',
         ]),
       },
@@ -88,7 +100,9 @@ export const contentStyles = cva(
         intent: 'success',
         design: 'filled',
         class: tw([
-          'bg-success text-on-success group-focus:bg-success-hovered',
+          'data-[with-gradient=true]:u-filled-gradient-success',
+          'bg-success',
+          'text-on-success group-focus:bg-success-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-success-hovered',
         ]),
       },
@@ -96,7 +110,9 @@ export const contentStyles = cva(
         intent: 'alert',
         design: 'filled',
         class: tw([
-          'bg-alert text-on-alert group-focus:bg-alert-hovered',
+          'data-[with-gradient=true]:u-filled-gradient-alert',
+          'bg-alert',
+          'text-on-alert group-focus:bg-alert-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-alert-hovered',
         ]),
       },
@@ -104,7 +120,9 @@ export const contentStyles = cva(
         intent: 'danger',
         design: 'filled',
         class: tw([
-          'text-on-error bg-error group-focus:bg-error-hovered',
+          'data-[with-gradient=true]:u-filled-gradient-error',
+          'bg-error',
+          'text-on-error group-focus:bg-error-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-error-hovered',
         ]),
       },
@@ -112,7 +130,9 @@ export const contentStyles = cva(
         intent: 'info',
         design: 'filled',
         class: tw([
-          'text-on-error bg-info group-focus:bg-info-hovered',
+          'data-[with-gradient=true]:u-filled-gradient-info',
+          'bg-info',
+          'text-on-error group-focus:bg-info-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-info-hovered',
         ]),
       },
@@ -120,7 +140,9 @@ export const contentStyles = cva(
         intent: 'neutral',
         design: 'filled',
         class: tw([
-          'bg-neutral text-on-neutral group-focus:bg-neutral-hovered',
+          'data-[with-gradient=true]:u-filled-gradient-neutral',
+          'bg-neutral',
+          'text-on-neutral group-focus:bg-neutral-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-neutral-hovered',
         ]),
       },
@@ -128,7 +150,9 @@ export const contentStyles = cva(
         intent: 'surface',
         design: 'filled',
         class: tw([
-          'bg-surface text-on-surface group-focus:bg-surface-hovered',
+          'data-[with-gradient=true]:u-filled-gradient-surface',
+          'bg-surface',
+          'text-on-surface group-focus:bg-surface-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-surface-hovered',
         ]),
       },
@@ -141,15 +165,20 @@ export const contentStyles = cva(
         intent: 'main',
         design: 'tinted',
         class: tw([
-          'bg-main-container text-on-main-container group-focus:bg-main-container-hovered',
+          'data-[with-gradient=true]:u-tinted-gradient-main-container',
+          'bg-main-container',
+          'text-on-main-container group-focus:bg-main-container-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-main-container-hovered',
+          'group-not-disabled:group-data-[interactive=true]:group-hover:data-[with-gradient=true]:bg-surface-inverse',
         ]),
       },
       {
         intent: 'support',
         design: 'tinted',
         class: tw([
-          'bg-support-container text-on-support-container group-focus:bg-support-container-hovered',
+          'data-[with-gradient=true]:u-tinted-gradient-support-container',
+          'bg-support-container',
+          'text-on-support-container group-focus:bg-support-container-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-support-container-hovered',
         ]),
       },
@@ -157,7 +186,9 @@ export const contentStyles = cva(
         intent: 'accent',
         design: 'tinted',
         class: tw([
-          'bg-accent-container text-on-accent-container group-focus:bg-accent-container-hovered',
+          'data-[with-gradient=true]:u-tinted-gradient-accent-container',
+          'bg-accent-container',
+          'text-on-accent-container group-focus:bg-accent-container-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-accent-container-hovered',
         ]),
       },
@@ -165,14 +196,19 @@ export const contentStyles = cva(
         intent: 'basic',
         design: 'tinted',
         class: tw([
-          'bg-basic-container text-on-basic-container group-focus:bg-basic-container-hovered',
+          'data-[with-gradient=true]:u-tinted-gradient-basic-container',
+          'bg-basic-container',
+          'text-on-basic-container group-focus:bg-basic-container-hovered',
+          'group-not-disabled:group-data-[interactive=true]:group-hover:bg-basic-container-hovered',
         ]),
       },
       {
         intent: 'success',
         design: 'tinted',
         class: tw([
-          'bg-success-container text-on-success-container group-focus:bg-success-container-hovered',
+          'data-[with-gradient=true]:u-tinted-gradient-success-container',
+          'bg-success-container',
+          'text-on-success-container group-focus:bg-success-container-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-success-container-hovered',
         ]),
       },
@@ -180,7 +216,9 @@ export const contentStyles = cva(
         intent: 'alert',
         design: 'tinted',
         class: tw([
-          'bg-alert-container text-on-alert-container group-focus:bg-alert-container-hovered',
+          'data-[with-gradient=true]:u-tinted-gradient-alert-container',
+          'bg-alert-container',
+          'text-on-alert-container group-focus:bg-alert-container-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-alert-container-hovered',
         ]),
       },
@@ -188,7 +226,9 @@ export const contentStyles = cva(
         intent: 'danger',
         design: 'tinted',
         class: tw([
-          'bg-error-container text-on-error-container group-focus:bg-error-container-hovered',
+          'data-[with-gradient=true]:u-tinted-gradient-error-container',
+          'bg-error-container',
+          'text-on-error-container group-focus:bg-error-container-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-error-container-hovered',
         ]),
       },
@@ -196,7 +236,9 @@ export const contentStyles = cva(
         intent: 'info',
         design: 'tinted',
         class: tw([
-          'bg-info-container text-on-info-container group-focus:bg-info-container-hovered',
+          'data-[with-gradient=true]:u-tinted-gradient-info-container',
+          'bg-info-container',
+          'text-on-info-container group-focus:bg-info-container-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-info-container-hovered',
         ]),
       },
@@ -204,7 +246,9 @@ export const contentStyles = cva(
         intent: 'neutral',
         design: 'tinted',
         class: tw([
-          'bg-neutral-container text-on-neutral-container group-focus:bg-neutral-container-hovered',
+          'data-[with-gradient=true]:u-tinted-gradient-neutral-container',
+          'bg-neutral-container',
+          'text-on-neutral-container group-focus:bg-neutral-container-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-neutral-container-hovered',
         ]),
       },
@@ -212,7 +256,9 @@ export const contentStyles = cva(
         intent: 'surface',
         design: 'tinted',
         class: tw([
-          'bg-surface text-on-surface group-focus:bg-surface-hovered',
+          'data-[with-gradient=true]:u-tinted-gradient-surface',
+          'bg-surface',
+          'text-on-surface group-focus:bg-surface-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-surface-hovered',
         ]),
       },
