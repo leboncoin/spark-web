@@ -1,4 +1,4 @@
-import { StoryLabel } from '@docs/helpers/StoryLabel'
+import { Tag } from '@spark-ui/components/tag'
 import { ArrowHorizontalDown } from '@spark-ui/icons/ArrowHorizontalDown'
 import { ArrowHorizontalUp } from '@spark-ui/icons/ArrowHorizontalUp'
 import { Meta, StoryFn } from '@storybook/react-vite'
@@ -93,7 +93,7 @@ export const State: StoryFn = _args => (
   <div className="gap-xl grid grid-cols-2 md:grid-cols-3">
     {states.map(state => (
       <div key={state}>
-        <StoryLabel>{state}</StoryLabel>
+        <Tag className="mb-md flex">{state}</Tag>
         <Stepper aria-label={`Stepper ${state}`} state={state}>
           <Stepper.DecrementButton aria-label="Decrement" />
           <Stepper.Input />
@@ -123,7 +123,7 @@ export const MinMaxValues: StoryFn = _args => (
 export const FormatOptions: StoryFn = _args => (
   <div className="gap-xl grid grid-cols-2 md:grid-cols-3">
     <div>
-      <StoryLabel>Percentages</StoryLabel>
+      <Tag className="mb-md flex">Percentages</Tag>
       <Stepper
         aria-label="Stepper with percentages"
         minValue={0}
@@ -137,7 +137,7 @@ export const FormatOptions: StoryFn = _args => (
     </div>
 
     <div>
-      <StoryLabel>Currency values</StoryLabel>
+      <Tag className="mb-md flex">Currency values</Tag>
       <Stepper
         aria-label="Stepper with currency value"
         defaultValue={1}
@@ -151,7 +151,7 @@ export const FormatOptions: StoryFn = _args => (
     </div>
 
     <div>
-      <StoryLabel>Units</StoryLabel>
+      <Tag className="mb-md flex">Units</Tag>
       <Stepper
         aria-label="Stepper with units"
         defaultValue={20}

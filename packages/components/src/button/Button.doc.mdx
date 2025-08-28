@@ -1,8 +1,7 @@
 import { Kbd } from '@spark-ui/components/kbd'
-import { Canvas, Meta } from '@storybook/addon-docs/blocks'
+import { Canvas, Meta, ArgTypes } from '@storybook/addon-docs/blocks'
 import { Source } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { Callout } from '@docs/helpers/Callout'
 import { AriaRoles } from '@docs/helpers/AriaRoles'
 import { Button } from '.'
@@ -32,6 +31,12 @@ export default () => (
   <Button />
 );
 ```
+
+## API Reference
+
+### Button
+
+<ArgTypes of={Button} />
 
 ## Examples
 
@@ -109,10 +114,6 @@ This polymorphic behaviour can be used with any type of HTML element.
 Use `aria-pressed` to transform the button into a toggle button.
 
 <Canvas of={ButtonStories.Toggle} />
-
-## API Reference
-
-<ArgTypes of={Button} />
 
 ## Accessibility
 

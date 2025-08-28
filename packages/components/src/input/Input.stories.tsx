@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { StoryLabel } from '@docs/helpers/StoryLabel'
+import { Tag } from '@spark-ui/components/tag'
 import { Check } from '@spark-ui/icons/Check'
 import { EyeOffOutline } from '@spark-ui/icons/EyeOffOutline'
 import { EyeOutline } from '@spark-ui/icons/EyeOutline'
@@ -61,7 +61,7 @@ export const Disabled: StoryFn = _args => {
       </Checkbox>
 
       <div>
-        <StoryLabel>Standalone input</StoryLabel>
+        <Tag className="mb-md flex">Standalone input</Tag>
         <Input
           className="max-w-sz-320"
           aria-label="Website"
@@ -71,7 +71,7 @@ export const Disabled: StoryFn = _args => {
       </div>
 
       <div>
-        <StoryLabel>Addons - solid</StoryLabel>
+        <Tag className="mb-md flex">Addons - solid</Tag>
         <InputGroup className="max-w-sz-320" disabled={isDisabled}>
           <InputGroup.LeadingAddon asChild>
             <IconButton intent="main" design="filled" aria-label="Search">
@@ -96,7 +96,7 @@ export const Disabled: StoryFn = _args => {
       </div>
 
       <div>
-        <StoryLabel>Addons - text</StoryLabel>
+        <Tag className="mb-md flex">Addons - text</Tag>
         <InputGroup className="max-w-sz-320" disabled={isDisabled}>
           <InputGroup.LeadingAddon>https://</InputGroup.LeadingAddon>
           <InputGroup.LeadingIcon>
@@ -108,7 +108,7 @@ export const Disabled: StoryFn = _args => {
       </div>
 
       <div>
-        <StoryLabel>Addons - inline</StoryLabel>
+        <Tag className="mb-md flex">Addons - inline</Tag>
         <InputGroup className="max-w-sz-320" disabled={isDisabled}>
           <InputGroup.LeadingIcon>
             <PenOutline />
@@ -121,7 +121,7 @@ export const Disabled: StoryFn = _args => {
       </div>
 
       <div>
-        <StoryLabel>With FormField label</StoryLabel>
+        <Tag className="mb-md flex">With FormField label</Tag>
         <FormField disabled={isDisabled}>
           <FormField.Label>My label</FormField.Label>
           <Input
@@ -146,7 +146,7 @@ export const ReadOnly: StoryFn = _args => {
       </Checkbox>
 
       <div>
-        <StoryLabel>Standalone input</StoryLabel>
+        <Tag className="mb-md flex">Standalone input</Tag>
 
         <Input
           className="max-w-sz-320"
@@ -157,7 +157,7 @@ export const ReadOnly: StoryFn = _args => {
       </div>
 
       <div>
-        <StoryLabel>Addons - solid</StoryLabel>
+        <Tag className="mb-md flex">Addons - solid</Tag>
 
         <InputGroup className="max-w-sz-320" readOnly={isReadOnly}>
           <InputGroup.LeadingAddon asChild>
@@ -187,7 +187,7 @@ export const ReadOnly: StoryFn = _args => {
       </div>
 
       <div>
-        <StoryLabel>Addons - text</StoryLabel>
+        <Tag className="mb-md flex">Addons - text</Tag>
         <InputGroup className="max-w-sz-320" readOnly={isReadOnly}>
           <InputGroup.LeadingAddon>https://</InputGroup.LeadingAddon>
 
@@ -202,7 +202,7 @@ export const ReadOnly: StoryFn = _args => {
       </div>
 
       <div>
-        <StoryLabel>Addons - inline</StoryLabel>
+        <Tag className="mb-md flex">Addons - inline</Tag>
         <InputGroup className="max-w-sz-320" readOnly={isReadOnly}>
           <InputGroup.LeadingIcon>
             <PenOutline />
@@ -217,7 +217,7 @@ export const ReadOnly: StoryFn = _args => {
       </div>
 
       <div>
-        <StoryLabel>With FormField label</StoryLabel>
+        <Tag className="mb-md flex">With FormField label</Tag>
 
         <FormField readOnly={isReadOnly}>
           <FormField.Label>My label</FormField.Label>
@@ -238,7 +238,7 @@ export const Addons: StoryFn = _args => {
   return (
     <div className="gap-xl flex flex-col">
       <div className="gap-sm flex flex-col">
-        <StoryLabel>Solid</StoryLabel>
+        <Tag className="flex">Solid</Tag>
         <InputGroup className="max-w-sz-320">
           <InputGroup.LeadingAddon asChild>
             <Button design="ghost" intent="neutral">
@@ -257,7 +257,7 @@ export const Addons: StoryFn = _args => {
       </div>
 
       <div className="gap-sm flex flex-col">
-        <StoryLabel>Inline</StoryLabel>
+        <Tag className="flex">Inline</Tag>
         <InputGroup className="max-w-sz-320">
           <InputGroup.LeadingAddon className="px-lg">
             <Button size="sm">Click</Button>
@@ -274,7 +274,7 @@ export const Addons: StoryFn = _args => {
       </div>
 
       <div className="gap-sm flex flex-col">
-        <StoryLabel>Raw text</StoryLabel>
+        <Tag className="flex">Raw text</Tag>
         <InputGroup className="max-w-sz-320">
           <InputGroup.LeadingAddon className="px-lg">https://</InputGroup.LeadingAddon>
           <Input aria-label="Website" />
@@ -351,7 +351,7 @@ export const State: StoryFn = _args => {
     <div className="gap-xl grid grid-cols-2 md:grid-cols-3">
       {states.map(state => (
         <div key={state}>
-          <StoryLabel>{state}</StoryLabel>
+          <Tag className="mb-md flex">{state}</Tag>
           <InputGroup className="max-w-sz-320" state={state}>
             <InputGroup.LeadingAddon>https://</InputGroup.LeadingAddon>
             <Input aria-label={`${state} state`} />

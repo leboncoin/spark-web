@@ -1,6 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { Kbd } from '@spark-ui/components/kbd'
 
 import { Rating } from '.'
@@ -28,6 +27,12 @@ import { Rating } from '@spark-ui/components/rating'
 
 export default () => <Rating />;
 ```
+
+## API Reference
+
+### Rating
+
+<ArgTypes of={Rating} />
 
 ## Examples
 
@@ -61,10 +66,6 @@ The **Rating** component includes a simple rounding mechanism to guarantee a nic
 <Canvas of={stories.Rounded} />
 
 If for any reason you need some specific rounding mechanisms, feel free to define yours and provide your rounded value.
-
-## API Reference
-
-<ArgTypes of={Rating} />
 
 ## Accessibility
 

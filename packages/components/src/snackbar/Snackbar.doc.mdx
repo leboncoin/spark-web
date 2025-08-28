@@ -1,6 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { Kbd } from '@spark-ui/components/kbd'
 import { Source } from '@storybook/addon-docs/blocks'
 
@@ -36,6 +35,49 @@ import { Snackbar, addSnackbar } from '@spark-ui/components/snackbar'
 
 export default () => <Snackbar/>;
 ```
+
+## API Reference
+
+### Snackbar
+
+A container for queued snackbars. It should be placed at the root of the app.
+
+<ArgTypes of={Snackbar} />  
+
+
+### _.Item
+
+The component that display each snackbar's content.
+
+<ArgTypes of={Snackbar.Item} />
+
+
+### _.ItemIcon
+
+The component that prepend an icon in the snackbar.
+
+<ArgTypes of={Snackbar.ItemIcon} />
+
+
+### _.ItemAction
+
+The component that renders a button which action is safe to ignore.
+
+<ArgTypes of={Snackbar.ItemAction} />
+
+### _.ItemClose
+
+The component that closes the snackbar.
+
+<ArgTypes of={Snackbar.ItemClose} />
+
+### addSnackbar
+
+The function that triggers snackbars by adding them to a global queue.
+
+<ArgTypes of={addSnackbar} />
+
+
 
 ## Examples
 
@@ -86,36 +128,6 @@ For accessibility reasons **snackbars won't dismiss automatically when an action
 To always render snackbars with their associated action and/or close buttons, you simply need to declare them within a custom `<Snackbar.Item>` implementation.
 
 <Canvas of={stories.AdvancedActionClose} />
-
-## API Reference
-
-<ArgTypes
-  of={Snackbar}
-  description="A container for queued snackbars. It should be placed at the root of the app."
-  exclude={['position', 'priority']}
-  subcomponents={{
-    'Snackbar.Item': {
-      of: Snackbar.Item,
-      description: "The component that display each snackbar's content.",
-    },
-    'Snackbar.ItemIcon': {
-      of: Snackbar.ItemIcon,
-      description: 'The component that prepend an icon in the snackbar.',
-    },
-    'Snackbar.ItemAction': {
-      of: Snackbar.ItemAction,
-      description: 'The component that renders a button which action is safe to ignore.',
-    },
-    'Snackbar.ItemClose': {
-      of: Snackbar.ItemClose,
-      description: 'The component that closes the snackbar.',
-    },
-    addSnackbar: {
-      of: addSnackbar,
-      description: 'The function that triggers snackbars by adding them to a global queue.',
-    },
-  }}
-/>
 
 ## Accessibility
 

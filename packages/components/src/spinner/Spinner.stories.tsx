@@ -1,4 +1,4 @@
-import { StoryLabel } from '@docs/helpers/StoryLabel'
+import { Tag } from '@spark-ui/components/tag'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { ComponentProps } from 'react'
 
@@ -37,7 +37,7 @@ export const Intents: StoryFn = _args => (
   <div className="gap-lg flex">
     {intents.map(intent => (
       <div key={intent} className="text-center">
-        <StoryLabel>{intent}</StoryLabel>
+        <Tag className="mb-md flex">{intent}</Tag>
         <Spinner intent={intent} />
       </div>
     ))}
@@ -50,7 +50,7 @@ export const Sizes: StoryFn = _args => (
   <div className="gap-lg flex">
     {sizes.map(size => (
       <div key={size} className="text-center">
-        <StoryLabel>{size}</StoryLabel>
+        <Tag className="mb-md flex">{size}</Tag>
 
         {size === 'full' ? (
           <div className="h-[90px] w-[90px]">

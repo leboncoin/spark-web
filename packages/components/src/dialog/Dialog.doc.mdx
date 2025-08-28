@@ -1,5 +1,4 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
 import { Kbd } from '@spark-ui/components/kbd'
 
@@ -56,6 +55,81 @@ export default () => (
 );
 ```
 
+## API Reference
+
+### Dialog
+
+Contains all the parts of a dialog.
+
+<ArgTypes of={Dialog} />
+
+### _.Trigger
+
+The button that opens the dialog.
+
+<ArgTypes of={Dialog.Trigger} />
+
+### _.Portal
+
+When used, portals your overlay and content parts into the body.
+
+<ArgTypes of={Dialog.Portal} />
+
+### _.Overlay
+
+A layer that covers the inert portion of the view when the dialog is open.
+
+<ArgTypes of={Dialog.Overlay} />
+
+### _.Content
+
+Contains Header/Body/Footer to be rendered in the open dialog.
+
+<ArgTypes of={Dialog.Content} />
+
+### _.Header
+
+To use inside of Popover.Content. Sticky header inside the dialog.
+
+<ArgTypes of={Dialog.Header} />
+
+### _.Body
+
+To use inside of Popover.Content. Main content of the dialog. Becomes scrollable when content is overflowing the screen.
+
+<ArgTypes of={Dialog.Body} />
+
+### _.Footer
+
+To use inside of Popover.Content. Sticky footer inside the dialog.
+
+<ArgTypes of={Dialog.Footer} />
+
+### _.Title
+
+An accessible title that will be announced when the dialog opens.
+
+<ArgTypes of={Dialog.Title} />
+
+### _.Description
+
+An accessible description that will be announced when the dialog opens.
+
+<ArgTypes of={Dialog.Description} />
+
+### _.Close
+
+An abstract button that closes the dialog, meant for usage inside the content to attach closing behavior to, or can also be used as a button element.
+
+<ArgTypes of={Dialog.Close} />
+
+### _.CloseButton
+
+An icon button with a cross icon that closes the dialog and is located in the top right corner of the dialog.
+
+<ArgTypes of={Dialog.CloseButton} />
+
+
 ## Examples
 
 ### Controlled
@@ -95,57 +169,6 @@ The `Dialog` component can be effortlessly combined with a form element.
 Use `onOpenAutoFocus` and a `ref` to direct focus to a specific element when the dialog opens.
 
 <Canvas of={stories.ForwardFocus} />
-
-## API Reference
-
-<ArgTypes
-  of={Dialog}
-  description="Contains all the parts of a dialog."
-  subcomponents={{
-    'Dialog.Trigger': {
-      of: Dialog.Trigger,
-      description: 'The button that opens the dialog.',
-    },
-    'Dialog.Portal': {
-      of: Dialog.Portal,
-      description: 'When used, portals your overlay and content parts into the body.',
-    },
-    'Dialog.Overlay': {
-      of: Dialog.Overlay,
-      description: 'A layer that covers the inert portion of the view when the dialog is open.',
-    },
-    'Dialog.Content': {
-      of: Dialog.Content,
-      description: 'Contains Header/Body/Footer to be rendered in the open dialog.',
-    },
-    'Dialog.Header': {
-      of: Dialog.Header,
-      description: 'To use inside of Popover.Content. Sticky header inside the dialog.',
-    },
-    'Dialog.Body': {
-      of: Dialog.Body,
-      description:
-        'To use inside of Popover.Content. Main content of the dialog. Becomes scrollable when content is overflowing the screen.',
-    },
-    'Dialog.Footer': {
-      of: Dialog.Footer,
-      description:
-        'To use inside of Popover.Content. Sticky footer to be rendered in the open dialog. Use it to render CTAs and make them accessible in every condition.',
-    },
-    'Dialog.CloseButton': {
-      of: Dialog.CloseButton,
-      description: 'The button that closes the dialog.',
-    },
-    'Dialog.Title': {
-      of: Dialog.Title,
-      description: 'An accessible title to be announced when the dialog is opened.',
-    },
-    'Dialog.Description': {
-      of: Dialog.Description,
-      description: 'An optional accessible description to be announced when the dialog is opened.',
-    },
-  }}
-/>
 
 ## Accessibility
 

@@ -1,8 +1,7 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { Kbd } from '@spark-ui/components/kbd'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { StoryLabel } from '@docs/helpers/StoryLabel'
+import { Tag } from '@spark-ui/components/tag'
 import { Checkbox, CheckboxGroup } from '.'
 import * as stories from './Checkbox.stories'
 
@@ -15,10 +14,10 @@ It is used in forms when a user needs to select multiple values from several opt
 
 Checkbox label can be multiline. Still you should care of not using elements (for the label) with greater line height than the checkbox input height, to preserve vertical alignment.
 
-<StoryLabel>Standalone</StoryLabel>
+<Tag className='sb-unstyled'>Standalone</Tag>
 <Canvas of={stories.Default} />
 
-<StoryLabel>Group</StoryLabel>
+<Tag className='sb-unstyled'>Group</Tag>
 <Canvas of={stories.DefaultGroup} />
 
 ## Install
@@ -43,17 +42,34 @@ export default () => (
 );
 ```
 
+## API Reference
+
+### Checkbox
+
+A control that allows the user to toggle between checked and not checked.
+
+<ArgTypes of={Checkbox} />
+
+
+### CheckboxGroup
+
+A checkbox group allows users to select one or more items from a list of choices.
+
+<ArgTypes of={CheckboxGroup} />
+
+
+
 ## Examples
 
 ### Uncontrolled
 
-<StoryLabel>Standalone</StoryLabel>
+<Tag className='sb-unstyled'>Standalone</Tag>
 
 Use `defaultChecked` prop to set the default state of the checkbox. Optionally `onCheckedChange` prop can be used to know when the state of the checkbox changes.
 
 <Canvas of={stories.Uncontrolled} />
 
-<StoryLabel>Group</StoryLabel>
+<Tag className='sb-unstyled'>Group</Tag>
 
 The `defaultValue` prop can be used to set the default state of the group. Optionally `onCheckedChange`
 prop can be used to get the current state of the checkbox group.
@@ -62,13 +78,13 @@ prop can be used to get the current state of the checkbox group.
 
 ### Controlled
 
-<StoryLabel>Standalone</StoryLabel>
+<Tag className='sb-unstyled'>Standalone</Tag>
 
 Use `checked` and `onCheckedChange` props to control the state of the checkbox. The `checked` prop can also be set to indeterminate.
 
 <Canvas of={stories.Controlled} />
 
-<StoryLabel>Group</StoryLabel>
+<Tag className='sb-unstyled'>Group</Tag>
 
 Use `value` and `onCheckedChange` props to control the state of the checkbox.
 
@@ -152,20 +168,6 @@ Use the `isRequired` prop of the `FormField` to indicate that the input is requi
 set the `state` prop of the `FormField` to `error` to indicate that the input is invalid. Optionally use the `FormField.ErrorMessage` to describe why the input is invalid.
 
 <Canvas of={stories.FieldInvalid} />
-
-## API Reference
-
-<ArgTypes
-  of={Checkbox}
-  description="A control that allows the user to toggle between checked and not checked."
-  subcomponents={{
-    CheckboxGroup: {
-      of: CheckboxGroup,
-      description:
-        'A checkbox group allows users to select one or more items from a list of choices.',
-    },
-  }}
-/>
 
 ## Accessibility
 

@@ -1,4 +1,4 @@
-import { StoryLabel } from '@docs/helpers/StoryLabel'
+import { Tag } from '@spark-ui/components/tag'
 import { StarFill } from '@spark-ui/icons/StarFill'
 import { StarOutline } from '@spark-ui/icons/StarOutline'
 import type { Meta, StoryFn } from '@storybook/react-vite'
@@ -60,7 +60,7 @@ export const Sizes: StoryFn = _args => (
   <div className="gap-lg flex">
     {sizes.map(size => (
       <div key={size}>
-        <StoryLabel>{size}</StoryLabel>
+        <Tag className="mb-md flex">{size}</Tag>
         <Switch name="small" size={size}>
           Agreed
         </Switch>

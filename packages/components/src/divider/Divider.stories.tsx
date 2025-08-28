@@ -1,4 +1,4 @@
-import { StoryLabel } from '@docs/helpers/StoryLabel'
+import { Tag } from '@spark-ui/components/tag'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { ComponentProps, Fragment } from 'react'
 
@@ -59,7 +59,7 @@ export const Intent: StoryFn = _args => (
   <div className="flex flex-col">
     {intents.map(intent => (
       <Fragment key={intent}>
-        <StoryLabel>{intent}</StoryLabel>
+        <Tag className="flex">{intent}</Tag>
         <Divider intent={intent}>
           <Divider.Content>{intent}</Divider.Content>
         </Divider>

@@ -1,6 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { Kbd } from '@spark-ui/components/kbd'
 import { Callout } from '@docs/helpers/Callout'
 import { IconButton } from '.'
@@ -27,6 +26,14 @@ import { IconButton } from '@spark-ui/components/icon-button'
 
 export default () => <IconButton />;
 ```
+
+## API Reference
+
+### IconButton
+
+A button that renders an icon.
+
+<ArgTypes of={IconButton} />
 
 ## Examples
 
@@ -87,10 +94,6 @@ This polymorphic behaviour can be used with any type of HTML element.
 Use `aria-pressed` to transform the button into a toggle button.
 
 <Canvas of={stories.Toggle} />
-
-## API Reference
-
-<ArgTypes of={IconButton} />
 
 ## Accessibility
 

@@ -1,6 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { Kbd } from '@spark-ui/components/kbd'
 import { Callout } from '@docs/helpers/Callout'
 
@@ -29,6 +28,14 @@ import { TextLink } from '@spark-ui/components/text-link'
 
 export default () => <TextLink />;
 ```
+
+## API Reference
+
+### TextLink
+
+This component support [all HTML attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attributes) supported by the `a` tag.
+
+<ArgTypes of={TextLink} />
 
 ## Examples
 
@@ -88,12 +95,6 @@ By default `TextLink` shows an underline. It can be disabled to only be shown wh
 </Callout>
 
 <Canvas of={stories.Underline} />
-
-## API Reference
-
-This component support [all HTML attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attributes) supported by the `a` tag.
-
-<ArgTypes of={TextLink} />
 
 ## Accessibility
 

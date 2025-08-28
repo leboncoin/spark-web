@@ -1,5 +1,4 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { Kbd } from '@spark-ui/components/kbd'
 
 import { ScrollingList } from '.'
@@ -49,6 +48,58 @@ return () => (
 )
 ```
 
+## API Reference
+
+### ScrollingList
+
+Presents a set of slides, by sequentially displaying a subset of one or more items.
+
+<ArgTypes of={ScrollingList} /> 
+
+### _.Items
+
+The scroll area of the scrolling list, contains all items to display in slides.
+
+<ArgTypes of={ScrollingList.Items} />
+
+
+### _.Item
+
+A single content container within a set of content containers that hold the content to be presented by the scrolling list.
+
+<ArgTypes of={ScrollingList.Item} />
+
+
+
+### _.Controls
+
+Two interactive elements, styled as arrow buttons, that displays the next or previous slide in the rotation sequence.
+
+<ArgTypes of={ScrollingList.Controls} />
+
+
+
+### _.PrevButton
+
+Button that scroll to previous set of items.
+
+<ArgTypes of={ScrollingList.PrevButton} />
+
+
+### _.NextButton
+
+Button that scroll to next set of items.
+
+<ArgTypes of={ScrollingList.NextButton} />
+
+
+### _.SkipButton
+
+A button only visible for keyboard users. Allow them to skip the content of the scrolling list entirely.
+
+<ArgTypes of={ScrollingList.SkipButton} />
+
+   
 ## Examples
 
 ### Controls visibility
@@ -114,45 +165,6 @@ This example demonstrates a scrolling list with an indeterminate number of items
 This is to show you that the snapping points are calculated from the natural width of the items, and not from the width of the container.
 
 <Canvas of={stories.FixedSizeItems} />
-
-## API Reference
-
-<ArgTypes
-  of={ScrollingList}
-  description="Presents a set of slides, by sequentially displaying a subset of one or more items."
-  subcomponents={{
-    'ScrollingList.Items': {
-      of: ScrollingList.Items,
-      description:
-        'The scroll area of the scrolling list, contains all items to display in slides.',
-    },
-    'ScrollingList.Item': {
-      of: ScrollingList.Item,
-      description:
-        'A single content container within a set of content containers that hold the content to be presented by the scrolling list.',
-    },
-    'ScrollingList.Controls': {
-      of: ScrollingList.Controls,
-      description:
-        'Two interactive elements, styled as arrow buttons, that displays the next or previous slide in the rotation sequence.',
-    },
-    'ScrollingList.PrevButton': {
-      of: ScrollingList.PrevButton,
-      description:
-        'Button that scroll to previous set of items.',
-    },
-    'ScrollingList.NextButton': {
-      of: ScrollingList.NextButton,
-      description:
-        'Button that scroll to next set of items.',
-    },
-    'ScrollingList.SkipButton': {
-      of: ScrollingList.SkipButton,
-      description:
-        'A button only visible for keyboard users. Allow them to skip the content of the scrolling list entirely.',
-    },
-  }}
-/>
 
 ## Accessibility
 

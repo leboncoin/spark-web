@@ -1,4 +1,4 @@
-import { StoryLabel } from '@docs/helpers/StoryLabel'
+import { Tag } from '@spark-ui/components/tag'
 import { Meta, StoryFn } from '@storybook/react-vite'
 
 import { Rating, type RatingProps } from '.'
@@ -34,7 +34,7 @@ export const Size: StoryFn = _args => (
   <div className="gap-xl flex flex-row flex-wrap">
     {sizes.map(size => (
       <div key={size} className="">
-        <StoryLabel>{`${size}${size === 'md' ? ' (default)' : ''}`}</StoryLabel>
+        <Tag className="mb-md flex">{`${size}${size === 'md' ? ' (default)' : ''}`}</Tag>
         <Rating defaultValue={3} size={size} aria-label={`Rating control ${size}`} />
       </div>
     ))}
@@ -45,7 +45,7 @@ export const Rounded: StoryFn = _args => (
   <div className="gap-xl flex flex-row flex-wrap">
     {[1.1, 2.24, 3.75, 4.74].map(val => (
       <div key={val} className="">
-        <StoryLabel>{val}</StoryLabel>
+        <Tag className="mb-md flex">{val}</Tag>
         <Rating defaultValue={val} aria-label={`Rating control ${val}`} readOnly />
       </div>
     ))}

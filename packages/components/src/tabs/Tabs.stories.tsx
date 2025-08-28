@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { StoryLabel } from '@docs/helpers/StoryLabel'
+import { Tag } from '@spark-ui/components/tag'
 import { ConversationFill } from '@spark-ui/icons/ConversationFill'
 import { FireFill } from '@spark-ui/icons/FireFill'
 import { MailFill } from '@spark-ui/icons/MailFill'
@@ -166,7 +166,7 @@ export const Intent: StoryFn = _args => {
   return (
     <div className="gap-lg flex flex-col">
       <div>
-        <StoryLabel>basic (default)</StoryLabel>
+        <Tag className="mb-md flex">basic (default)</Tag>
         <Tabs defaultValue="tab1">
           <Tabs.List>
             {tabs.map(({ value, children, disabled }) => (
@@ -184,7 +184,7 @@ export const Intent: StoryFn = _args => {
         </Tabs>
       </div>
       <div>
-        <StoryLabel>main</StoryLabel>
+        <Tag className="mb-md flex">main</Tag>
         <Tabs defaultValue="tab1" intent="main">
           <Tabs.List>
             {tabs.map(({ value, children, disabled }) => (
@@ -202,7 +202,7 @@ export const Intent: StoryFn = _args => {
         </Tabs>
       </div>
       <div>
-        <StoryLabel>support</StoryLabel>
+        <Tag className="mb-md flex">support</Tag>
         <Tabs defaultValue="tab1" intent="support">
           <Tabs.List>
             {tabs.map(({ value, children, disabled }) => (
@@ -248,7 +248,7 @@ export const Orientation: StoryFn = _args => {
   return (
     <div className="gap-lg flex flex-col">
       <div>
-        <StoryLabel>horizontal (default)</StoryLabel>
+        <Tag className="mb-md flex">horizontal (default)</Tag>
         <Tabs defaultValue="tab1" orientation="horizontal">
           <Tabs.List>
             {tabs.map(({ value, children, disabled }) => (
@@ -267,7 +267,7 @@ export const Orientation: StoryFn = _args => {
       </div>
 
       <div>
-        <StoryLabel>vertical</StoryLabel>
+        <Tag className="mb-md flex">vertical</Tag>
         <Tabs defaultValue="tab1" orientation="vertical">
           <Tabs.List>
             {tabs.map(({ value, children, disabled }) => (
@@ -331,7 +331,7 @@ export const Overflow: StoryFn = _args => {
   return (
     <div className="gap-lg flex flex-col">
       <div className="max-w-sz-464 shrink basis-auto overflow-auto">
-        <StoryLabel>with loop</StoryLabel>
+        <Tag className="mb-md flex">with loop</Tag>
         <Tabs defaultValue="tab1">
           <Tabs.List loop>
             {overflowTabs.map(({ value, children, disabled }) => (
@@ -350,7 +350,7 @@ export const Overflow: StoryFn = _args => {
       </div>
 
       <div className="max-w-sz-464 shrink basis-auto overflow-auto">
-        <StoryLabel>without loop (default)</StoryLabel>
+        <Tag className="mb-md flex">without loop (default)</Tag>
 
         <Tabs defaultValue="tab1">
           <Tabs.List>
@@ -399,10 +399,10 @@ export const Size: StoryFn = _args => {
     <div className="gap-lg flex flex-col">
       {sizes.map(size => (
         <div key={size}>
-          <StoryLabel>
+          <Tag className="mb-md flex">
             {size}
             {size === 'md' && ' (default)'}
-          </StoryLabel>
+          </Tag>
           <Tabs defaultValue="tab1" size={size}>
             <Tabs.List>
               {tabs.map(({ value, children, disabled }) => (
@@ -448,7 +448,7 @@ export const ForceMount: StoryFn = _args => {
 
   return (
     <div>
-      <StoryLabel>forceMount</StoryLabel>
+      <Tag className="mb-md flex">forceMount</Tag>
 
       <Tabs defaultValue="tab1" forceMount>
         <Tabs.List>

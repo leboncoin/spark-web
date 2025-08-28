@@ -1,5 +1,4 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
 import { Badge } from '.'
 import * as stories from './Badge.stories'
@@ -30,6 +29,15 @@ export default () => (
 );
 ```
 
+## API Reference
+
+### Badge
+
+Main container for the badge.
+
+<ArgTypes of={Badge} />
+
+
 ## Examples
 
 ### Intents
@@ -59,10 +67,6 @@ Use `count` prop to display a number inside the `Badge`. There is a default thre
 Use `size` prop to set the size of the badge.
 
 <Canvas of={stories.Sizes} />
-
-## API Reference
-
-<ArgTypes of={Badge} />
 
 ## Accessibility
 

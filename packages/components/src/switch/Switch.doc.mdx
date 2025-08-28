@@ -1,5 +1,4 @@
-import { Canvas, Meta } from '@storybook/addon-docs/blocks'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
+import { Canvas, Meta, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
 import { Kbd } from '@spark-ui/components/kbd'
 import { Switch } from '.'
@@ -26,6 +25,12 @@ import { Switch } from '@spark-ui/components/switch'
 
 export default () => <Switch />;
 ```
+
+## API Reference
+
+### Switch
+
+<ArgTypes of={Switch} />
 
 ## Examples
 
@@ -78,10 +83,6 @@ Use the `FormField.HelperMessage` component to provide a description to the swit
 set the `state` prop of the `FormField` to `error` to indicate that the input is invalid. Optionally use the `FormField.ErrorMessage` to describe why the input is invalid.
 
 <Canvas of={stories.FieldInvalid} />
-
-## API Reference
-
-<ArgTypes of={Switch} />
 
 ## Accessibility
 

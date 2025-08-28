@@ -1,4 +1,4 @@
-import { StoryLabel } from '@docs/helpers/StoryLabel'
+import { Tag } from '@spark-ui/components/tag'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { cx } from 'class-variance-authority'
 import { useId, useState } from 'react'
@@ -80,7 +80,7 @@ export const Intent: StoryFn = _args => {
     <div className="gap-xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
       {intents.map(intent => (
         <div key={intent}>
-          <StoryLabel>{`${intent}${intent === 'basic' ? ' (default)' : ''}`}</StoryLabel>
+          <Tag className="mb-md flex">{`${intent}${intent === 'basic' ? ' (default)' : ''}`}</Tag>
           <RadioGroup defaultValue="1" intent={intent}>
             <RadioGroup.Radio value="1">First</RadioGroup.Radio>
             <RadioGroup.Radio value="2">Second</RadioGroup.Radio>
@@ -99,7 +99,7 @@ export const Orientation: StoryFn = _args => {
     <div className="gap-xl flex flex-col">
       {orientations.map(orientation => (
         <div key={orientation}>
-          <StoryLabel>{orientation}</StoryLabel>
+          <Tag className="mb-md flex">{orientation}</Tag>
           <RadioGroup defaultValue="1" orientation={orientation}>
             <RadioGroup.Radio value="1">First</RadioGroup.Radio>
             <RadioGroup.Radio value="2">Second</RadioGroup.Radio>

@@ -1,4 +1,4 @@
-import { StoryLabel } from '@docs/helpers/StoryLabel'
+import { Tag } from '@spark-ui/components/tag'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useState } from 'react'
 
@@ -85,7 +85,7 @@ export const Intent: StoryFn = _args => (
   <div className="gap-xl grid grid-cols-2 sm:grid-cols-5">
     {intents.map(intent => (
       <div key={intent} className="grow">
-        <StoryLabel>{`${intent}${intent === 'basic' ? ' (default)' : ''}`}</StoryLabel>
+        <Tag className="mb-md flex">{`${intent}${intent === 'basic' ? ' (default)' : ''}`}</Tag>
 
         <Slider defaultValue={[75]} intent={intent}>
           <Slider.Track />
@@ -100,7 +100,7 @@ export const Shape: StoryFn = _args => (
   <div className="gap-xl grid grid-cols-2">
     {shapes.map(shape => (
       <div key={shape} className="grow">
-        <StoryLabel>{`${shape}${shape === 'square' ? ' (default)' : ''}`}</StoryLabel>
+        <Tag className="mb-md flex">{`${shape}${shape === 'square' ? ' (default)' : ''}`}</Tag>
 
         <Slider defaultValue={[75]} shape={shape}>
           <Slider.Track />

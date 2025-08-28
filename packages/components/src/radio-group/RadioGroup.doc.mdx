@@ -1,6 +1,5 @@
-import { Canvas, Meta } from '@storybook/addon-docs/blocks'
+import { Canvas, Meta, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { RadioGroup } from '.'
 import * as stories from './RadioGroup.stories'
 import { Kbd } from '@spark-ui/components/kbd'
@@ -32,6 +31,22 @@ export default () => (
   </RadioGroup>
 );
 ```
+
+## API Reference
+
+### RadioGroup
+
+Contains all the parts of a radio group.
+
+<ArgTypes of={RadioGroup} />
+
+
+### _.Radio
+
+An item in the group that can be checked.
+
+<ArgTypes of={RadioGroup.Radio} />  
+
 
 ## Examples
 
@@ -111,20 +126,6 @@ Use the `FormField.HelperMessage` component to provide a description to the inpu
 set the `state` prop of the `FormField` to `error` to indicate that the input is invalid. Optionally use the `FormField.ErrorMessage` to describe why the input is invalid.
 
 <Canvas of={stories.FieldInvalid} />
-
-## API Reference
-
-<ArgTypes
-  of={RadioGroup}
-  description="Contains all the parts of a radio group."
-  subcomponents={{
-    'RadioGroup.Radio': {
-      of: RadioGroup.Radio,
-      description: 'An item in the group that can be checked.',
-    },
-  }}
-/>
-
 
 ## Accessibility
 

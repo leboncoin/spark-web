@@ -1,6 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes as ExtendedArgTypes } from '@docs/helpers/ArgTypes'
 import { Callout } from '@docs/helpers/Callout'
 
 import { Select } from '.'
@@ -46,6 +45,65 @@ export default () => (
   </Select>
 );
 ```
+
+## API Reference
+
+### Select
+
+A form input used for selecting a value: when collapsed it shows the currently selected option and when expanded, it shows a scrollable list of predefined options for the user to choose from.
+
+<ArgTypes of={Select} />
+
+
+### _.Trigger
+
+The button that toggles the select. The Select.Items will position itself by aligning over the trigger.
+
+<ArgTypes of={Select.Trigger} />
+
+
+### _.Value
+
+The part that reflects the selected value. By default the selected item's text will be rendered. if you require more control, you can instead control the select and pass your own children. It should not be styled to ensure correct positioning. An optional placeholder prop is also available for when the select has no value.
+
+<ArgTypes of={Select.Value} />
+
+
+### _.LeadingIcon
+
+Prepend a decorative icon inside the input (to the left).
+
+<ArgTypes of={Select.LeadingIcon} />
+
+
+
+### _.Items
+
+The wrapper which contains all the options.
+
+<ArgTypes of={Select.Items} />
+
+
+
+### _.Item
+
+Each option of the element field.
+
+<ArgTypes of={Select.Item} />
+
+
+### _.Group
+
+A wrapper for grouping a subset of options (Select.Item) when needed. Use in conjunction with Select.Label to ensure good accessibility via automatic labelling.
+
+<ArgTypes of={Select.Group} />
+
+
+### _.Label
+
+Used to render the label of a group. It won't be focusable using arrow keys.
+
+<ArgTypes of={Select.Label} />
 
 ## Examples
 
@@ -132,43 +190,6 @@ Apply `readOnly` to the wrapping `FormField` to indicate the Select is only read
 Set the `state` prop of the `FormField` to `error` to indicate that the Select is invalid. Optionally use the `FormField.ErrorMessage` to describe why the Select is invalid.
 
 <Canvas of={stories.FormFieldValidation} />
-
-## API Reference
-
-<ExtendedArgTypes
-  of={Select}
-  description="A form input used for selecting a value: when collapsed it shows the currently selected option and when expanded, it shows a scrollable list of predefined options for the user to choose from."
-  subcomponents={{
-    'Select.Trigger': {
-      of: Select.Trigger,
-      description:
-        'The button that toggles the select. The Select.Items will position itself by aligning over the trigger.',
-    },
-    'Select.Value': {
-      of: Select.Value,
-      description:
-        "The part that reflects the selected value. By default the selected item's text will be rendered. if you require more control, you can instead control the select and pass your own children. It should not be styled to ensure correct positioning. An optional placeholder prop is also available for when the select has no value.",
-    },
-    'Select.LeadingIcon': {
-      of: Select.LeadingIcon,
-      description: 'Prepend a decorative icon inside the input (to the left).',
-    },
-    'Select.Items': {
-      of: Select.Items,
-      description: 'The wrapper which contains all the options.',
-    },
-    'Select.Item': { of: Select.Item, description: 'Each option of the element field' },
-    'Select.Group': {
-      of: Select.Group,
-      description:
-        'A wrapper for grouping a subset of options (Select.Item) when needed. Use in conjunction with Select.Label to ensure good accessibility via automatic labelling.',
-    },
-    'Select.Label': {
-      of: Select.Label,
-      description: "Used to render the label of a group. It won't be focusable using arrow keys.",
-    },
-  }}
-/>
 
 ## Accessibility
 

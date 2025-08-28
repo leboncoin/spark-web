@@ -11,6 +11,7 @@ import {
   roleElements,
   roles,
 } from 'aria-query'
+import { Fragment } from 'react'
 
 import { rolesDescriptions } from './rolesDescriptions'
 
@@ -24,8 +25,8 @@ const AriaPath = ({ name, roleData }: { name: string; roleData: ARIARoleDefiniti
       <Breadcrumb aria-label="Breadcrumb">
         {superClasses.map((superClass, index) => {
           return (
-            <>
-              <Breadcrumb.Item key={index}>
+            <Fragment key={index}>
+              <Breadcrumb.Item>
                 <Breadcrumb.Link
                   target="_blank"
                   rel="noopener noreferrer"
@@ -35,7 +36,7 @@ const AriaPath = ({ name, roleData }: { name: string; roleData: ARIARoleDefiniti
                 </Breadcrumb.Link>
               </Breadcrumb.Item>
               <Breadcrumb.Separator />
-            </>
+            </Fragment>
           )
         })}
         <Breadcrumb.Item>
@@ -122,12 +123,12 @@ export const AriaRole = ({ role }: { role: ARIARoleDefinitionKey }) => {
                   {attributes &&
                     attributes.map(({ name, value }) => {
                       return (
-                        <>
-                          <span key={name}>
+                        <Fragment key={name}>
+                          <span>
                             {name}="{value}"
                           </span>
                           <span> </span>
-                        </>
+                        </Fragment>
                       )
                     })}
                   {' />'}

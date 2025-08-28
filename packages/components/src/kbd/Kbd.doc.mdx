@@ -1,6 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 
 import { Kbd } from '.'
 
@@ -38,6 +37,12 @@ import { Kbd } from '@spark-ui/components/kbd'
 export default () => <Kbd />;
 ```
 
+## API Reference
+
+### Kbd
+
+<ArgTypes of={Kbd} />
+
 ## Examples
 
 ### Combinations
@@ -57,10 +62,6 @@ If two different keys can execute the same action or the shortcut itself may loo
 When combining a keyboard key and a mouse action combine it using the previous rules and the action name bold and uppercase preceded by the 🖱symbol glyph.
 
 <Canvas of={stories.OptionPlusScroll} />
-
-## API Reference
-
-<ArgTypes of={Kbd} />
 
 ## Accessibility
 

@@ -1,6 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { Kbd } from '@spark-ui/components/kbd'
 
 import { Slider } from '.'
@@ -33,6 +32,29 @@ export default () => (
   </Slider>
 );
 ```
+
+## API Reference
+
+### Slider
+
+Contains all the slider component parts. It will render an input for each thumb when used within a form to ensure events propagate correctly.
+
+<ArgTypes of={Slider} />
+
+
+
+### _.Thumb
+
+A draggable thumb. You can render multiple thumbs.
+
+<ArgTypes of={Slider.Thumb} />
+
+### _.Track
+
+The track shows the range available for user selection.
+
+<ArgTypes of={Slider.Track} />
+
 
 ## Examples
 
@@ -88,24 +110,6 @@ To ensure **proper accessibility**, make sure to set the `aria-valuetext` attrib
 Here's an example to illustrate this:
 
 <Canvas of={stories.RestrictedValues} />
-
-## API Reference
-
-<ArgTypes
-  of={Slider}
-  description="Contains all the slider component parts. It will render an input for each thumb when used within a form to ensure events propagate correctly."
-  subcomponents={{
-    'Slider.Thumb': {
-      of: Slider.Thumb,
-      description: 'A draggable thumb. You can render multiple thumbs.',
-    },
-    'Slider.Track': {
-      of: Slider.Track,
-      description: 'The track shows the range available for user selection.',
-    },
-  }}
-/>
-
 
 ## Accessibility
 

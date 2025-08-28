@@ -1,6 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { Callout } from '@docs/helpers/Callout'
 
 import { Input, InputGroup } from '.'
@@ -42,6 +41,50 @@ export default () => (
   </InputGroup.LeadingIcon>
 )
 ```
+
+## API Reference
+
+### InputGroup
+
+Use this wrapper whenever you need a more complex text input. For example if you need to have leading/trailing icons or addons.
+
+<ArgTypes of={InputGroup} />
+
+### _.LeadingAddon
+
+Add any type of component that will be displayed before the input field. This provides flexibility to include additional elements, such as buttons or dropdowns, to enhance the user interface and provide clear context or guidance to the user.
+
+<ArgTypes of={InputGroup.LeadingAddon} />
+
+### _.LeadingIcon
+
+Prepend a decorative icon inside the input (to the left).
+
+<ArgTypes of={InputGroup.LeadingIcon} />
+
+### _.TrailingAddon
+
+Add any type of component that will be displayed after the input field. This provides flexibility to include additional elements, such as buttons or dropdowns, to enhance the user interface and provide clear context or guidance to the user.
+
+<ArgTypes of={InputGroup.TrailingAddon} />
+
+### _.TrailingIcon
+
+Append a decorative icon inside the input (to the right). This element will be replaced by a status indicator whenever the input is in error/alert/success state.
+
+<ArgTypes of={InputGroup.TrailingIcon} />
+
+### _.ClearButton
+
+Clears the input value. Only for search inputs. This button will be shown when the user has typed something in the input.
+
+<ArgTypes of={InputGroup.ClearButton} />
+
+### Input
+
+Input component is a component that is used to get user input in a text field.
+
+<ArgTypes of={Input} />
 
 ## Examples
 
@@ -146,44 +189,6 @@ Use the `isRequired` prop of the `FormField` to indicate that the input is requi
 set the `state` prop of the `FormField` to `error` to indicate that the input is invalid. Optionally use the `FormField.ErrorMessage` to describe why the input is invalid.
 
 <Canvas of={stories.FieldInvalid} />
-
-## API Reference
-
-<ArgTypes
-  of={Input}
-  description="Input component is a component that is used to get user input in a text field."
-  subcomponents={{
-    InputGroup: {
-      of: InputGroup,
-      description:
-        'Use this wrapper whenever you need a more complex text input. For example if you need to have leading/trailing icons or addons.',
-    },
-    'InputGroup.LeadingAddon': {
-      of: InputGroup.LeadingAddon,
-      description:
-        'Add any type of component that will be displayed before the input field.\n This provides flexibility to include additional elements, such as buttons or dropdowns, to enhance the user interface and provide clear context or guidance to the user.',
-    },
-    'InputGroup.LeadingIcon': {
-      of: InputGroup.LeadingIcon,
-      description: 'Prepend a decorative icon inside the input (to the left).',
-    },
-    'InputGroup.TrailingAddon': {
-      of: InputGroup.TrailingAddon,
-      description:
-        'Add any type of component that will be displayed after the input field. This provides flexibility to include additional elements, such as buttons or dropdowns, to enhance the user interface and provide clear context or guidance to the user.',
-    },
-    'InputGroup.TrailingIcon': {
-      of: InputGroup.TrailingIcon,
-      description:
-        'Append a decorative icon inside the input (to the right). This element will be replaced by a status indicator whenever the input is in error/alert/success state.',
-    },
-    'InputGroup.ClearButton': {
-      of: InputGroup.ClearButton,
-      description:
-        'Clears the input value. Only for search inputs. This button will be shown when the user has typed something in the input.',
-    },
-  }}
-/>
 
 ## Accessibility
 

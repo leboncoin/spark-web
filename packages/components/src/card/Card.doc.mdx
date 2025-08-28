@@ -1,8 +1,7 @@
 import { Kbd } from '@spark-ui/components/kbd'
-import { Canvas, Meta } from '@storybook/addon-docs/blocks'
+import { Canvas, Meta, ArgTypes } from '@storybook/addon-docs/blocks'
 import { Source } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { Callout } from '@docs/helpers/Callout'
 import { AriaRoles } from '@docs/helpers/AriaRoles'
 import { Card } from '.'
@@ -43,6 +42,27 @@ The Card component consists of three main parts:
 - **Card**: The root container that provides the card's styling and context
 - **Card.Backdrop**: An optional gradient effect on the top of the card
 - **Card.Content**: The content container with proper padding and spacing
+
+## API Reference
+
+### Card
+
+Contains all the parts of a card.
+
+<ArgTypes of={Card} />
+
+### _.Backdrop
+
+A gradient effect on the top of the card, to highlight it.
+
+<ArgTypes of={Card.Backdrop} />
+
+### _.Content
+
+Contains the content of the card.
+
+<ArgTypes of={Card.Content} />
+
 
 ## Examples
 
@@ -97,25 +117,6 @@ In case you wish to have interactive elements inside the card WHILE the card its
 It will keep the HTML valid and accessible (as it is forbidden to have nested links, but `LinkBox` is a wrapper that allows it).
 
 <Canvas of={CardStories.WithLinkBox} />
-
-## API Reference
-
-
-<ArgTypes
-  of={Card}
-  description="Contains all the parts of a card."
-  subcomponents={{
-    'Card.Backdrop': {
-      of: Card.Backdrop,
-      description: 'A gradient effect on the top of the card, to highlight it.',
-    },
-    'Card.Content': {
-      of: Card.Content,
-      description: 'Contains the content of the card.',
-    },
-  
-  }}
-/>
 
 ## Accessibility
 

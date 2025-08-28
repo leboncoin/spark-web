@@ -1,6 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { Kbd } from '@spark-ui/components/kbd'
 
 import { Popover } from '.'
@@ -46,6 +45,66 @@ export default () => (
   </Popover.Portal>
 );
 ```
+
+## API Reference
+
+### Popover
+
+Contains all the parts of a popover.
+
+<ArgTypes of={Popover} />
+
+
+### _.Trigger
+
+The button that toggles the popover. By default, the Popover.Content will position itself against the trigger.
+
+<ArgTypes of={Popover.Trigger} />
+
+
+
+### _.Anchor
+
+An optional element to position the Popover.Content against. If this part is not used, the content will position alongside the Popover.Trigger.
+
+<ArgTypes of={Popover.Anchor} />
+
+
+### _.Portal
+
+When used, portals the content part into the body.
+
+<ArgTypes of={Popover.Portal} />
+
+
+### _.Content
+
+The component that pops out when the popover is open.
+
+<ArgTypes of={Popover.Content} />
+
+
+### _.Header
+
+Header for the popover content. Also serve as an accessible name for the Popover. Must be rendered inside Popover.Content.
+
+<ArgTypes of={Popover.Header} />
+
+
+### _.CloseButton
+
+The button that closes an open popover.
+
+<ArgTypes of={Popover.CloseButton} />
+
+
+### _.Arrow
+
+An optional arrow element to render alongside the popover. This can be used to help visually link the anchor with the Popover.Content. Must be rendered inside Popover.Content.
+
+<ArgTypes of={Popover.Arrow} />
+
+
 
 ## Examples
 
@@ -108,47 +167,6 @@ By combining `side` and `align` you can achieve many positions for the popover.
 - `align`: The preferred alignment against the anchor. May change when collisions occur.
 
 <Canvas of={stories.Positionning} />
-
-## API Reference
-
-<ArgTypes
-  of={Popover}
-  description="Contains all the parts of a popover."
-  subcomponents={{
-    'Popover.Trigger': {
-      of: Popover.Trigger,
-      description:
-        'The button that toggles the popover. By default, the Popover.Content will position itself against the trigger.',
-    },
-    'Popover.Anchor': {
-      of: Popover.Anchor,
-      description:
-        'An optional element to position the Popover.Content against. If this part is not used, the content will position alongside the Popover.Trigger.',
-    },
-    'Popover.Portal': {
-      of: Popover.Portal,
-      description: 'When used, portals the content part into the body.',
-    },
-    'Popover.Content': {
-      of: Popover.Content,
-      description: 'The component that pops out when the popover is open.',
-    },
-    'Popover.Header': {
-      of: Popover.Header,
-      description:
-        'Header for the popover content. Also serve as an accessible name for the Popover. Must be rendered inside Popover.Content.',
-    },
-    'Popover.CloseButton': {
-      of: Popover.CloseButton,
-      description: 'The button that closes an open popover.',
-    },
-    'Popover.Arrow': {
-      of: Popover.Arrow,
-      description:
-        'An optional arrow element to render alongside the popover. This can be used to help visually link the anchor with the Popover.Content. Must be rendered inside Popover.Content.',
-    },
-  }}
-/>
 
 ## Accessibility
 

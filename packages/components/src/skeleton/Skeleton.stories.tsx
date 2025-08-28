@@ -1,4 +1,4 @@
-import { StoryLabel } from '@docs/helpers/StoryLabel'
+import { Tag } from '@spark-ui/components/tag'
 import { Meta, StoryFn } from '@storybook/react-vite'
 
 import { Skeleton } from '.'
@@ -45,7 +45,7 @@ export const LineSize: StoryFn = _args => (
 export const Animation: StoryFn = _args => (
   <div className="gap-xl grid grid-cols-2">
     <div>
-      <StoryLabel>with animation (default)</StoryLabel>
+      <Tag className="mb-md flex">with animation (default)</Tag>
 
       <Skeleton label="Loading..." className="gap-lg">
         <Skeleton.Rectangle height={128} />
@@ -53,7 +53,7 @@ export const Animation: StoryFn = _args => (
     </div>
 
     <div>
-      <StoryLabel>without animation</StoryLabel>
+      <Tag className="mb-md flex">without animation</Tag>
       <Skeleton label="Loading..." isAnimated={false} className="gap-lg">
         <Skeleton.Rectangle height={128} />
       </Skeleton>

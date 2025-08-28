@@ -1,6 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes as ExtendedArgTypes } from '@docs/helpers/ArgTypes'
 import { Callout } from '@docs/helpers/Callout'
 
 import { Textarea, TextareaGroup } from '.'
@@ -38,6 +37,42 @@ export default () => (
   </TextareaGroup>
 );
 ```
+
+## API Reference
+
+### Textarea
+
+The textarea component allows you to easily create multi-line text inputs.
+
+<ArgTypes of={Textarea} />
+
+
+### TextareaGroup
+
+Use this wrapper whenever you need a more complex textarea. For example if you need to have leading/trailing icons.
+
+<ArgTypes of={TextareaGroup} />
+
+
+### _.LeadingIcon
+
+Prepend a decorative icon inside the textarea (to the left).
+
+<ArgTypes of={TextareaGroup.LeadingIcon} />
+
+
+### _.TrailingIcon
+
+Append a decorative icon inside the textarea (to the right). This element will be replaced by a status indicator whenever the textarea is in error/alert/success state.
+
+<ArgTypes of={TextareaGroup.TrailingIcon} />
+
+
+### _.ClearButton
+
+Add a clear button to the textarea group.
+
+<ArgTypes of={TextareaGroup.ClearButton} />
 
 ## Examples
 
@@ -126,34 +161,6 @@ Use the `isRequired` prop of the `FormField` to indicate that the textarea is re
 set the `state` prop of the `FormField` to `error` to indicate that the input is invalid. Optionally use the `FormField.ErrorMessage` to describe why the input is invalid.
 
 <Canvas of={stories.FieldInvalid} />
-
-## API Reference
-
-<ExtendedArgTypes
-  of={Textarea}
-  description="The textarea component allows you to easily create multi-line text inputs."
-  subcomponents={{
-    TextareaGroup: {
-      of: TextareaGroup,
-      description:
-        'Use this wrapper whenever you need a more complex textarea. For example if you need to have leading/trailing icons.',
-    },
-    'TextareaGroup.LeadingIcon': {
-      of: TextareaGroup.LeadingIcon,
-      description: 'Prepend a decorative icon inside the textarea (to the left).',
-    },
-    'TextareaGroup.TrailingIcon': {
-      of: TextareaGroup.TrailingIcon,
-      description:
-        'Append a decorative icon inside the textarea (to the right). This element will be replaced by a status indicator whenever the textarea is in error/alert/success state.',
-    },
-    'TextareaGroup.ClearButton': {
-      of: TextareaGroup.ClearButton,
-      description: 'Add a clear button to the textarea group.',
-    },
-  }}
-/>
-
 
 ## Accessibility
 

@@ -1,5 +1,4 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
-import { ArgTypes as ExtendedArgTypes } from '@docs/helpers/ArgTypes'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
 import { Callout } from '@docs/helpers/Callout'
 
@@ -85,6 +84,98 @@ export default () => (
 );
 ```
 
+## API Reference
+
+### Dropdown
+
+A form input used for selecting a value: when collapsed it shows the currently selected option and when expanded, it shows a scrollable list of predefined options for the user to choose from.
+
+<ArgTypes of={Dropdown} />
+
+
+### _.Trigger
+
+The button that toggles the select. The Select.Popover will position itself by aligning over the trigger.
+
+<ArgTypes of={Dropdown.Trigger} />
+
+
+### _.Value
+
+The part that reflects the selected value. By default the selected item's text will be rendered. if you require more control, you can instead control the select and pass your own children. It should not be styled to ensure correct positioning. An optional placeholder prop is also available for when the select has no value.
+
+<ArgTypes of={Dropdown.Value} />  
+
+### _.LeadingIcon
+
+Prepend a decorative icon inside the input (to the left).
+
+<ArgTypes of={Dropdown.LeadingIcon} />
+
+
+### _.Portal
+
+When used, portals the content part into the body.
+
+<ArgTypes of={Dropdown.Portal} /> 
+
+
+### _.Popover
+
+The part that is toggled and portaled when the trigger element is clicked.
+
+<ArgTypes of={Dropdown.Popover} />  
+
+
+### _.Items
+
+The wrapper which contains all the options.
+
+<ArgTypes of={Dropdown.Items} />
+
+
+### _.Item
+
+Each option of the element field
+
+<ArgTypes of={Dropdown.Item} />
+
+
+### _.ItemText
+
+The textual part of the item. It should only contain the text you want to see in the trigger when that item is selected. It should not be styled to ensure correct positioning.
+
+<ArgTypes of={Dropdown.ItemText} />
+
+
+### _.ItemIndicator
+
+Renders when the item is selected. You can style this element directly, or you can use it as a wrapper to put an icon into, or both.
+
+<ArgTypes of={Dropdown.ItemIndicator} />
+
+
+### _.Group
+
+A wrapper for grouping a subset of options (Dropdown.Item) when needed. Use in conjunction with Dropdown.Label to ensure good accessibility via automatic labelling.
+
+<ArgTypes of={Dropdown.Group} />
+
+
+### _.Label
+
+Used to render the label of a group. It won't be focusable using arrow keys.
+
+<ArgTypes of={Dropdown.Label} />
+
+
+### _.Divider
+
+Used to visually separate items in the select.
+
+<ArgTypes of={Dropdown.Divider} />
+
+   
 ## Examples
 
 ### Controlled
@@ -212,66 +303,6 @@ Apply `readOnly` to the wrapping `FormField` to indicate the dropdown is only re
 Set the `state` prop of the `FormField` to `error` to indicate that the dropdown is invalid. Optionally use the `FormField.ErrorMessage` to describe why the dropdown is invalid.
 
 <Canvas of={stories.FormFieldValidation} />
-
-
-## API Reference
-
-<ExtendedArgTypes
-  of={Dropdown}
-  description="A form input used for selecting a value: when collapsed it shows the currently selected option and when expanded, it shows a scrollable list of predefined options for the user to choose from."
-  subcomponents={{
-    'Dropdown.Trigger': {
-      of: Dropdown.Trigger,
-      description:
-        'The button that toggles the select. The Select.Popover will position itself by aligning over the trigger.',
-    },
-    'Dropdown.Value': {
-      of: Dropdown.Value,
-      description:
-        "The part that reflects the selected value. By default the selected item's text will be rendered. if you require more control, you can instead control the select and pass your own children. It should not be styled to ensure correct positioning. An optional placeholder prop is also available for when the select has no value.",
-    },
-    'Dropdown.LeadingIcon': {
-      of: Dropdown.LeadingIcon,
-      description: 'Prepend a decorative icon inside the input (to the left).',
-    },
-    'Dropdown.Portal': {
-      of: Dropdown.Portal,
-      description: 'When used, portals the content part into the body.',
-    },
-    'Dropdown.Popover': {
-      of: Dropdown.Popover,
-      description: 'The part that is toggled and portaled when the trigger element is clicked.',
-    },
-    'Dropdown.Items': {
-      of: Dropdown.Items,
-      description: 'The wrapper which contains all the options.',
-    },
-    'Dropdown.Item': { of: Dropdown.Item, description: 'Each option of the element field' },
-    'Dropdown.ItemText': {
-      of: Dropdown.ItemText,
-      description:
-        'The textual part of the item. It should only contain the text you want to see in the trigger when that item is selected. It should not be styled to ensure correct positioning.',
-    },
-    'Dropdown.ItemIndicator': {
-      of: Dropdown.ItemIndicator,
-      description:
-        'Renders when the item is selected. You can style this element directly, or you can use it as a wrapper to put an icon into, or both.',
-    },
-    'Dropdown.Group': {
-      of: Dropdown.Group,
-      description:
-        'A wrapper for grouping a subset of options (Dropdown.Item) when needed. Use in conjunction with Dropdown.Label to ensure good accessibility via automatic labelling.',
-    },
-    'Dropdown.Label': {
-      of: Dropdown.Label,
-      description: "Used to render the label of a group. It won't be focusable using arrow keys.",
-    },
-    'Dropdown.Divider': {
-      of: Dropdown.Divider,
-      description: 'Used to visually separate items in the select.',
-    },
-  }}
-/>
 
 
 ## Accessibility

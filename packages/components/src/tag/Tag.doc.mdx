@@ -1,6 +1,5 @@
-import { Canvas, Meta } from '@storybook/addon-docs/blocks'
+import { Canvas, Meta, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { Tag } from '.'
 import * as TagStories from './Tag.stories'
 
@@ -26,6 +25,12 @@ import { Tag } from '@spark-ui/components/tag'
 
 export default () => <Tag />;
 ```
+
+## API Reference
+
+### Tag
+
+<ArgTypes of={Tag} />
 
 ## Examples
 
@@ -64,10 +69,6 @@ Use `shape` prop to set the different border radius styles of a tag. Default: `p
 Explore all possible combinations of design, intent, shape, and size props.
 
 <Canvas of={TagStories.AllCombinations} />
-
-## API Reference
-
-<ArgTypes of={Tag} />
 
 ## Accessibility
 

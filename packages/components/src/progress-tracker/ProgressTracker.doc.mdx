@@ -1,6 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { ArgTypes } from '@docs/helpers/ArgTypes'
 import { Kbd } from '@spark-ui/components/kbd'
 
 import { ProgressTracker } from '.'
@@ -37,6 +36,35 @@ export default () => (
   </ProgressTracker.Step>
 );
 ```
+
+## API Reference
+
+### ProgressTracker
+
+Contains all the progress tracker component parts.
+
+<ArgTypes of={ProgressTracker} />
+
+
+
+### _.Step
+
+Contains the button associated to a step.
+
+<ArgTypes of={ProgressTracker.Step} />
+
+### _.StepLabel
+
+The label describing the step.
+
+<ArgTypes of={ProgressTracker.StepLabel} />
+
+### _.StepIndicator
+
+Contains the custom content of a step, for complete and incomplete states.
+
+<ArgTypes of={ProgressTracker.StepIndicator} />
+
 
 ## Examples
 
@@ -83,27 +111,6 @@ Use `orientation` prop to set `horizontal|vertical` orientation.
 Use `complete` prop on `ProgressTracker.StepIndicator` to customize the content of a step that is complete.
 
 <Canvas of={stories.CustomCompleteIndicator} />
-
-## API Reference
-
-<ArgTypes
-  of={ProgressTracker}
-  description="Contains all the progress tracker component parts."
-  subcomponents={{
-    'ProgressTracker.Step': {
-      of: ProgressTracker.Step,
-      description: 'Contains the button associated to a step.',
-    },
-    'ProgressTracker.StepLabel': {
-      of: ProgressTracker.StepLabel,
-      description: 'The label describing the step.',
-    },
-    'ProgressTracker.StepIndicator': {
-      of: ProgressTracker.StepIndicator,
-      description: 'Contains the custom content of a step, for complete and incomplete states.',
-    },
-  }}
-/>
 
 ## Accessibility
 
