@@ -1,6 +1,8 @@
 import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
+import { Callout } from '@docs/helpers/Callout'
 import { Kbd } from '@spark-ui/components/kbd'
+import { TextLink } from '@spark-ui/components/text-link'
 import { Source } from '@storybook/addon-docs/blocks'
 
 import { Snackbar, addSnackbar } from '.'
@@ -9,7 +11,17 @@ import * as stories from './Snackbar.stories'
 
 <Meta of={stories} />
 
+<Callout kind="error" marginY="large">
+  <p>This component is deprecated. Use the <TextLink intent="info" href="/?path=/docs/components-toast--docs">Toast component</TextLink> instead.</p>
+  <ul>
+    <li>Snackbar could only display one toast at a time, Toast can display multiple toasts at the same time.</li>
+    <li>Toast has a more flexible API, allowing for more customization of the toast's content and behavior.</li>
+  </ul>
+</Callout>
+
 # Snackbar
+
+
 
 Display brief, temporary notifications of actions, errors, or other events in an application.
 
