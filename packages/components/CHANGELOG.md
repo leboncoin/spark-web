@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.17.4](https://github.com/leboncoin/spark-web/compare/v10.17.3...v10.17.4) (2025-09-04)
+
+### Bug Fixes
+
+- **components:** base UI beta v3 ([abe663f](https://github.com/leboncoin/spark-web/commit/abe663fd37142a1ef364d616582b10f1cb3f0dd3))
+
 ## [10.17.3](https://github.com/leboncoin/spark-web/compare/v10.17.2...v10.17.3) (2025-08-28)
 
 **Note:** Version bump only for package @spark-ui/components
