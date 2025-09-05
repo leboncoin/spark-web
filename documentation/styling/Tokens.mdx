@@ -466,31 +466,41 @@ export const fontSizes = [
 ## Opacity
 
 <div className='sb-unstyled'>
-  <div className='w-full rounded-lg p-xl bg-linear-to-br from-main to-support'>
-    <div className='gap-lg grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] flex-wrap'>
-        <div className='flex flex-col gap-sm text-on-main'>
-            <div className='bg-surface rounded-lg p-xl' />
-            <Tag intent="info" design='tinted' className='self-center'>opacity-0</Tag>
+  <div className='w-full rounded-lg p-xl bg-surface-inverse' style={{
+    background: 'repeating-linear-gradient(45deg, var(--color-surface-inverse), var(--color-surface-inverse) 5px, #1e1e1e 5px, #1e1e1e 10px) !important'
+  }}>
+    <div className='grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] flex-wrap gap-y-xl'>
+        <div className='flex flex-col gap-md text-on-main'>
+            <div className='bg-surface p-xl border-sm border-outline' />
+            <Tag intent="info" design='tinted' className='self-center'>none</Tag>
         </div>
-        <div className='flex flex-col gap-sm text-on-main'>
-            <div className='bg-surface/dim-1 rounded-lg p-xl' />
-            <Tag intent="info" design='tinted' className='self-center'>opacity-dim-1</Tag>
+        <div className='flex flex-col gap-md text-on-main'>
+            <div className='bg-surface/dim-1 p-xl border-sm border-outline -ml-px' />
+            <Tag intent="info" design='tinted' className='self-center'>dim-1</Tag>
         </div>
-        <div className='flex flex-col gap-sm text-on-main'>
-            <div className='bg-surface/dim-2 rounded-lg p-xl' />
-            <Tag intent="info" design='tinted' className='self-center'>opacity-dim-2</Tag>
+        <div className='flex flex-col gap-md text-on-main'>
+            <div className='bg-surface/dim-2 p-xl border-sm border-outline -ml-px' />
+            <Tag intent="info" design='tinted' className='self-center'>dim-2</Tag>
         </div>
-        <div className='flex flex-col gap-sm text-on-main'>
-            <div className='bg-surface/dim-3 rounded-lg p-xl' />
-            <Tag intent="info" design='tinted' className='self-center'>opacity-dim-3</Tag>
+        <div className='flex flex-col gap-md text-on-main'>
+            <div className='bg-surface/dim-3 p-xl border-sm border-outline -ml-px' />
+            <Tag intent="info" design='tinted' className='self-center'>dim-3</Tag>
         </div>
-            <div className='flex flex-col gap-sm text-on-main'>
-            <div className='bg-surface/dim-4 rounded-lg p-xl' />
-            <Tag intent="info" design='tinted' className='self-center'>opacity-dim-4</Tag>
+            <div className='flex flex-col gap-md text-on-main'>
+            <div className='bg-surface/dim-4 p-xl border-sm border-outline -ml-px' />
+            <Tag intent="info" design='tinted' className='self-center'>dim-4</Tag>
         </div>
-        <div className='flex flex-col gap-sm text-on-main'>
-            <div className='bg-surface/dim-5 rounded-lg p-xl' />
-            <Tag intent="info" design='tinted' className='self-center'>opacity-dim-5</Tag>
+        <div className='flex flex-col gap-md text-on-main'>
+            <div className='bg-surface/dim-5 p-xl border-sm border-outline -ml-px' />
+            <Tag intent="info" design='tinted' className='self-center'>dim-5</Tag>
+        </div>
+        <div className='flex flex-col gap-md text-on-main'>
+            <div className='bg-surface/0 p-xl border-sm border-outline -ml-px' />
+            <div className='flex gap-md justify-center'>
+                <Tag intent="info" design='tinted' className='self-center'>dim-full</Tag>
+                <p>or</p>
+                <Tag intent="info" design='tinted' className='self-center'>0</Tag>
+            </div>
         </div>
     </div>
   </div>
