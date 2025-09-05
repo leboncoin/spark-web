@@ -120,13 +120,13 @@
   --color-on-overlay: #ffffff;
   --color-shadow: rgba(108 129 157 / 0.5);
 
-  --opacity-0: 0;
   --opacity-none: 100%;
   --opacity-dim-1: 72%;
   --opacity-dim-2: 56%;
   --opacity-dim-3: 40%;
   --opacity-dim-4: 16%;
   --opacity-dim-5: 8%;
+  --opacity-dim-full: 0%;
 
   --radius-0: 0px;
   --radius-sm: calc(0.25rem * var(--spacing-factor));
