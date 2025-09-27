@@ -35,11 +35,11 @@
   ],
   "devDependencies": {
     "change-case": "5.4.4",
-    "minimatch": "10.0.1",
+    "minimatch": "10.0.3",
     "path-that-svg": "1.2.4",
     "svgo": "3.3.2",
     "svgson": "5.3.1",
-    "tsup": "^8.4.0"
+    "tsup": "^8.5.0"
   },
   "peerDependencies": {
     "react": "^19.0",
