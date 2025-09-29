@@ -59,9 +59,9 @@
     "@zag-js/pagination": "1.25.0",
     "@zag-js/react": "1.25.0",
     "class-variance-authority": "0.7.1",
-    "downshift": "9.0.9",
+    "downshift": "9.0.10",
     "emulate-tab": "^1.2.1",
-    "radix-ui": "1.4.2",
+    "radix-ui": "1.4.3",
     "react-snap-carousel": "^0.5.1"
   },
   "peerDependencies": {
