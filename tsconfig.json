@@ -8,11 +8,11 @@
     "noEmit": true,
     "module": "ESNext",
     "paths": {
+      "@/*": ["src/*"],
       "@docs/*": ["./documentation/*"],
-      "@spark-ui/components/*": ["packages/components/src/*"],
-      "@spark-ui/hooks/*": ["packages/hooks/src/*"],
       "@spark-ui/*": ["packages/*/src"],
-      "@/*": ["src/*"]
+      "@spark-ui/components/*": ["packages/components/src/*"],
+      "@spark-ui/hooks/*": ["packages/hooks/src/*"]
     }
   },
   "include": [
