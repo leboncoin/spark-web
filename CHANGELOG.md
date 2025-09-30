@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.18.0](https://github.com/leboncoin/spark-web/compare/v10.17.13...v10.18.0) (2025-09-30)
+
+### Features
+
+- **components:** migrated Stepper from react-aria to Base UI ([50dd120](https://github.com/leboncoin/spark-web/commit/50dd1205ab816df18330bf975475679f8f02d8fd))
+
 ## [10.17.13](https://github.com/leboncoin/spark-web/compare/v10.17.12...v10.17.13) (2025-09-29)
 
 ### Bug Fixes
