@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.18.1](https://github.com/leboncoin/spark-web/compare/v10.18.0...v10.18.1) (2025-10-01)
+
+### Bug Fixes
+
+- **components:** adapt the stepper border styles when used without buttons ([423931e](https://github.com/leboncoin/spark-web/commit/423931e27c1dacf96f1d0145833e504104efd62b))
+
 # [10.18.0](https://github.com/leboncoin/spark-web/compare/v10.17.13...v10.18.0) (2025-09-30)
 
 ### Features
