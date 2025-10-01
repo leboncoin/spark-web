@@ -89,6 +89,32 @@ export const Custom: StoryFn = _args => (
   </Stepper>
 )
 
+export const Standalone: StoryFn = _args => (
+  <div className="gap-lg flex flex-col items-start">
+    <div>
+      <Tag className="mb-md flex">No buttons</Tag>
+      <Stepper>
+        <Stepper.Input aria-label="Stepper without buttons" />
+      </Stepper>
+    </div>
+
+    <div>
+      <Tag className="mb-md flex">Increment button only</Tag>
+      <Stepper>
+        <Stepper.Input aria-label="Stepper with only increment button" />
+        <Stepper.IncrementButton aria-label="Increment" />
+      </Stepper>
+    </div>
+    <div>
+      <Tag className="mb-md flex">Decrement button only</Tag>
+      <Stepper>
+        <Stepper.DecrementButton aria-label="Decrement" />
+        <Stepper.Input aria-label="Stepper with only decrement button" />
+      </Stepper>
+    </div>
+  </div>
+)
+
 export const State: StoryFn = _args => (
   <div className="gap-xl grid grid-cols-2 md:grid-cols-3">
     {states.map(state => (
