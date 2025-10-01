@@ -16,6 +16,8 @@ export const Input = ({ className, ...props }: Props) => {
       className={cx(
         // Base styles
         'bg-surface text-on-surface h-sz-44 border-y-sm border-outline text-center',
+        'first:border-l-sm first:rounded-l-lg',
+        'last:border-r-sm last:rounded-r-lg',
         // State styles
         'group-data-[field-state=error]:border-error',
         'group-data-[field-state=alert]:border-alert',
