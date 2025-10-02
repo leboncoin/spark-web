@@ -15,11 +15,13 @@ interface Props extends DocsContainerProps {
 
 const ExampleContainer = ({ children, ...props }: Props) => {
   const [shouldDisplayExperimentalBanner, setShouldDisplayExperimentalBanner] = useState(false)
+  const [shouldDisplaydeprecatedBanner, setShouldDisplayDeprecatedBanner] = useState(false)
 
   useEffect(() => {
     const primaryStoryTitle = props.context.componentStories()[0]?.title
 
     setShouldDisplayExperimentalBanner(primaryStoryTitle?.startsWith('Experimental') || false)
+    setShouldDisplayDeprecatedBanner(primaryStoryTitle?.startsWith('Deprecated') || false)
   }, [props.context?.channel])
 
   return (
@@ -31,6 +33,15 @@ const ExampleContainer = ({ children, ...props }: Props) => {
               <WarningOutline />
             </Icon>
             This component is still experimental. Avoid usage in production features
+          </p>
+        )}
+
+        {shouldDisplaydeprecatedBanner && (
+          <p className="gap-md py-sm px-lg z-sticky bg-alert-container text-on-alert-container border-l-alert sticky top-0 flex items-center border-l-[4px] font-bold">
+            <Icon size="lg" label="warning" intent="alert">
+              <WarningOutline />
+            </Icon>
+            This component is deprecated. Avoid usage in production features
           </p>
         )}
 

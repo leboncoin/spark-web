@@ -1,0 +1,212 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { AriaRoles } from '@docs/helpers/AriaRoles'
+import { Kbd } from '../kbd'
+import { ToastProvider, useToastManager } from '.'
+
+import * as stories from './Toast.stories'
+
+<Meta of={stories} />
+
+# Toast
+
+Generates toast notifications.
+
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+This component is highly programmatic, you can use the `useToastManager` hook to manage the toast list programmatically.
+
+Be careful that the `ToastProvider` component must be used only once in your app, as it manages the toast list state.
+
+```tsx
+import { ToastProvider, ToastTrigger, useToastManager } from "@spark-ui/components/toast"
+
+export default () => (
+  <ToastProvider>
+    <ToastTrigger />
+  </ToastProvider>
+);
+```
+
+
+
+## API Reference
+
+### ToastProvider
+
+Provides a context for creating and managing toasts.
+
+<ArgTypes of={ToastProvider} />
+
+## useToastManager
+
+Manages toasts, called inside of a `ToastProvider`.
+
+### Return value
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>toasts</code></td>
+      <td><code>ToastObject[]</code></td>
+      <td>The array of toast objects.</td>
+    </tr>
+    <tr>
+      <td><code>add</code></td>
+      <td><code>(options: AddOptions) => string</code></td>
+      <td>Adds a new toast and returns its ID</td>
+    </tr>
+    <tr>
+      <td><code>update</code></td>
+      <td><code>(toastId: string, options: Partial&lt;AddOptions&gt;) => void</code></td>
+      <td>Updates an existing toast by ID</td>
+    </tr>
+    <tr>
+      <td><code>promise</code></td>
+      <td><code>&lt;Value&gt;(promise: Promise&lt;Value&gt;, options: PromiseOptions&lt;Value&gt;) => Promise&lt;Value&gt;</code></td>
+      <td>Handles promise-based toast notifications with loading, success, and error states</td>
+    </tr>
+    <tr>
+      <td><code>closeAll</code></td>
+      <td><code>() => void</code></td>
+      <td>Closes all active toasts</td>
+    </tr>
+  </tbody>
+</table>
+
+### Method options
+
+These are the options for the `add`, `update`, and `promise` methods.
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>title</code></td>
+      <td><code>string</code></td>
+      <td>The title of the toast.</td>
+    </tr>
+    <tr>
+      <td><code>description</code></td>
+      <td><code>string</code></td>
+      <td>The description of the toast.</td>
+    </tr>
+    <tr>
+      <td><code>timeout</code></td>
+      <td><code>number</code></td>
+      <td>The amount of time (in ms) before the toast is auto dismissed.</td>
+    </tr>
+    <tr>
+      <td><code>priority</code></td>
+      <td><code>'low' | 'high'</code></td>
+      <td>
+        <p><code>low</code> - The toast will be announced politely.</p>
+        <p><code>high</code> - The toast will be announced urgently.</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code>onClose</code></td>
+      <td><code>() => void</code></td>
+      <td>A callback invoked when the toast is closed.</td>
+    </tr>
+    <tr>
+      <td><code>onRemove</code></td>
+      <td><code>() => void</code></td>
+      <td>A callback invoked when the toast is removed from the list after animations complete when closed.</td>
+    </tr>
+    <tr>
+      <td><code>data.design</code></td>
+      <td><code>'filled' | 'tinted'</code></td>
+      <td>The design of the toast.</td>
+    </tr>
+    <tr>
+      <td><code>data.intent</code></td>
+      <td><code>'main' | 'support' | 'accent' | 'basic' | 'success' | 'alert' | 'error' | 'info' | 'neutral' | 'surface' | 'surfaceInverse'</code></td>
+      <td>The intent of the toast.</td>
+    </tr>
+    <tr>
+      <td><code>data.isClosable</code></td>
+      <td><code>boolean</code></td>
+      <td>Whether to display an extra close button.</td>
+    </tr>
+    <tr>
+      <td><code>data.action</code></td>
+      <td><code>`{ label: string; onClick: () => void }`</code></td>
+      <td>The action button configuration.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## Examples
+
+### add/update/close methods
+
+Manages toasts, called inside of a Toast.Provider.
+
+The `useToastManager` hook is used to manage the toast list programmatically.
+
+The following example showcases a toast that programatically:
+- opens itself.
+- updates it's description a few times to display a countdown  
+- closes itself when the countdown reaches 0.
+
+<Canvas of={stories.ToastManager} />
+
+### promise method
+
+An asynchronous toast can be created with three possible states: `loading`, `success`, and `error`. 
+The type string matches these states to change the styling. Each of the states also accepts the method options object for more granular control.
+
+<Canvas of={stories.WithPromise} />
+
+
+
+### Design and Intents
+
+This example showcases all available design variants (filled and tinted) combined with all intent colors.
+
+<Canvas of={stories.DesignAndIntents} />
+
+
+
+
+
+
+## Accessibility
+
+<A11yReport of="toast" />
+
+Adheres to the [Alert WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/alert).
+
+### Keyboard Interactions
+
+- <Kbd>F6</Kbd>: Focuses snackbar region viewport.
+- <Kbd>Tab</Kbd>: Moves focus to the next focusable element.
+- <Kbd>Shift+Tab</Kbd>: Moves focus to the previous focusable element.
+- <Kbd>Enter</Kbd>: When focus is on a `Snackbar.ItemAction` or `Snackbar.ItemClose`, closes the
+  toast.
+- <Kbd>Space</Kbd>: When focus is on a `Snackbar.ItemAction` or `Snackbar.ItemClose`, closes the
+  toast.

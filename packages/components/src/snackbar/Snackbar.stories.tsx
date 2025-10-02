@@ -5,7 +5,7 @@ import { Button } from '../button'
 import { addSnackbar, type AddSnackbarArgs, Snackbar } from '.'
 
 const meta: Meta<typeof Snackbar> = {
-  title: 'Components/Snackbar',
+  title: 'Deprecated/Snackbar',
   component: Snackbar,
   tags: ['overlays'],
   parameters: {
