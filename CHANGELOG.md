@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.19.0](https://github.com/leboncoin/spark-web/compare/v10.18.1...v10.19.0) (2025-10-02)
+
+### Features
+
+- **components:** toast component ([8c8d6be](https://github.com/leboncoin/spark-web/commit/8c8d6be045718482a1e86a856ede3b10c9474834))
+
 ## [10.18.1](https://github.com/leboncoin/spark-web/compare/v10.18.0...v10.18.1) (2025-10-01)
 
 ### Bug Fixes
