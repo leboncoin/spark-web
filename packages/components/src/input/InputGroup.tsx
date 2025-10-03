@@ -135,6 +135,11 @@ export const InputGroup = ({
     onClearRef.current = onClear
   }, [onClear])
 
+  // Preserve the input value when cloning. Some libraries like React Hook Form
+  // only expose a ref (via `register`) without direct value access, so we need
+  // to manually retrieve the value from the ref to avoid losing it.
+  const inputRefValue = inputRef.current?.value
+
   return (
     <InputGroupContext.Provider value={current}>
       <div
@@ -148,9 +153,9 @@ export const InputGroup = ({
         <div className="relative inline-flex w-full">
           {input &&
             cloneElement(input, {
+              value: value ?? inputRefValue ?? '',
               ref,
               defaultValue: undefined,
-              value: value ?? '',
               onChange: handleChange,
             })}
 
