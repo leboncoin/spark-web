@@ -15,7 +15,7 @@ export const Input = ({ className, ...props }: Props) => {
       data-spark-component="stepper-input"
       className={cx(
         // Base styles
-        'bg-surface text-on-surface h-sz-44 border-y-sm border-outline text-center',
+        'bg-surface text-on-surface px-lg h-sz-44 border-y-sm border-outline relative inline-flex w-full text-center',
         'first:border-l-sm first:rounded-l-lg',
         'last:border-r-sm last:rounded-r-lg',
         // State styles
