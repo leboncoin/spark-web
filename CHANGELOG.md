@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.19.3](https://github.com/leboncoin/spark-web/compare/v10.19.2...v10.19.3) (2025-10-03)
+
+### Bug Fixes
+
+- **components:** preserve input value from ref when cloning ([4b0740e](https://github.com/leboncoin/spark-web/commit/4b0740e9f58485fb5180f4dc4196fb28d9e71820))
+
 ## [10.19.2](https://github.com/leboncoin/spark-web/compare/v10.19.1...v10.19.2) (2025-10-03)
 
 **Note:** Version bump only for package spark
