@@ -1,3 +1,4 @@
+import { Input } from '@spark-ui/components/input'
 import { Tag } from '@spark-ui/components/tag'
 import { ArrowHorizontalDown } from '@spark-ui/icons/ArrowHorizontalDown'
 import { ArrowHorizontalUp } from '@spark-ui/icons/ArrowHorizontalUp'
@@ -96,6 +97,7 @@ export const Standalone: StoryFn = _args => (
       <Stepper>
         <Stepper.Input aria-label="Stepper without buttons" />
       </Stepper>
+      <Input aria-label="Stepper without buttons" />
     </div>
 
     <div>
@@ -105,7 +107,7 @@ export const Standalone: StoryFn = _args => (
         <Stepper.IncrementButton aria-label="Increment" />
       </Stepper>
     </div>
-    <div>
+    <div className="gap-md flex flex-col">
       <Tag className="mb-md flex">Decrement button only</Tag>
       <Stepper>
         <Stepper.DecrementButton aria-label="Decrement" />

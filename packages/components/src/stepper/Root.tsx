@@ -38,7 +38,10 @@ export const Root = ({
       {...(field.id && { id: field.id })}
       {...props}
     >
-      <NumberField.Group className={cx('group flex', className)} data-field-state={state}>
+      <NumberField.Group
+        className={cx('group relative inline-flex w-full', className)}
+        data-field-state={state}
+      >
         {children}
       </NumberField.Group>
     </NumberField.Root>
