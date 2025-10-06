@@ -8,17 +8,22 @@ import { FormField } from '../form-field'
 import { Icon } from '../icon'
 import { Stepper } from '.'
 
+const defaultProps = {
+  defaultValue: 0,
+  'aria-label': 'Stepper',
+  onValueChange: vi.fn(),
+}
+
 describe('Stepper', () => {
   beforeEach(() => vi.clearAllMocks())
 
   it('should handle callback on changing value', async () => {
     const user = userEvent.setup()
-    const onValueChange = vi.fn()
 
     render(
-      <Stepper defaultValue={0} onValueChange={onValueChange}>
+      <Stepper {...defaultProps}>
         <Stepper.DecrementButton aria-label="Decrement" />
-        <Stepper.Input aria-label="Stepper" />
+        <Stepper.Input />
         <Stepper.IncrementButton aria-label="Increment" />
       </Stepper>
     )
@@ -32,7 +37,7 @@ describe('Stepper', () => {
     await user.click(screen.getByLabelText('Decrement'))
     expect(screen.getByRole('textbox')).toHaveValue('0')
 
-    expect(onValueChange).toHaveBeenCalledTimes(2)
+    expect(defaultProps.onValueChange).toHaveBeenCalledTimes(2)
 
     // ... or via direct input
     await user.type(input, '1')
@@ -45,9 +50,9 @@ describe('Stepper', () => {
     const user = userEvent.setup()
 
     render(
-      <Stepper defaultValue={0}>
+      <Stepper {...defaultProps}>
         <Stepper.DecrementButton aria-label="Decrement" />
-        <Stepper.Input aria-label="Stepper" />
+        <Stepper.Input />
         <Stepper.IncrementButton aria-label="Increment" />
       </Stepper>
     )
@@ -64,13 +69,35 @@ describe('Stepper', () => {
     expect(input).toHaveValue('1')
   })
 
+  it('should change value on scrolling up or down', () => {
+    render(
+      <Stepper {...defaultProps}>
+        <Stepper.DecrementButton aria-label="Decrement" />
+        <Stepper.Input />
+        <Stepper.IncrementButton aria-label="Increment" />
+      </Stepper>
+    )
+
+    const input = screen.getByRole('textbox')
+
+    act(() => input.focus())
+
+    fireEvent.wheel(input, { deltaY: 10 })
+    expect(input).toHaveValue('1')
+
+    fireEvent.wheel(input, { deltaY: -10 })
+    expect(input).toHaveValue('0')
+
+    expect(defaultProps.onValueChange).toHaveBeenCalledTimes(2)
+  })
+
   it('should set value to 0 if value is undefined and user clicks increment', async () => {
     const user = userEvent.setup()
 
     render(
-      <Stepper defaultValue={undefined}>
+      <Stepper {...defaultProps} defaultValue={undefined}>
         <Stepper.DecrementButton aria-label="Decrement" />
-        <Stepper.Input aria-label="Stepper" />
+        <Stepper.Input />
         <Stepper.IncrementButton aria-label="Increment" />
       </Stepper>
     )
@@ -85,9 +112,9 @@ describe('Stepper', () => {
     const user = userEvent.setup()
 
     render(
-      <Stepper defaultValue={0}>
+      <Stepper {...defaultProps}>
         <Stepper.DecrementButton aria-label="Decrement" />
-        <Stepper.Input aria-label="Stepper" />
+        <Stepper.Input />
         <Stepper.IncrementButton aria-label="Increment" />
       </Stepper>
     )
@@ -105,10 +132,9 @@ describe('Stepper', () => {
   describe('disabled', () => {
     it('should not change value nor accept interaction', async () => {
       const user = userEvent.setup()
-      const onValueChange = vi.fn()
 
       render(
-        <Stepper defaultValue={0} onValueChange={onValueChange} disabled>
+        <Stepper {...defaultProps} disabled>
           <Stepper.DecrementButton aria-label="Decrement" />
           <Stepper.Input />
           <Stepper.IncrementButton aria-label="Increment" />
@@ -120,18 +146,17 @@ describe('Stepper', () => {
       await user.type(screen.getByRole('textbox'), '11')
       expect(screen.getByRole('textbox')).not.toHaveFocus()
 
-      expect(onValueChange).not.toHaveBeenCalled()
+      expect(defaultProps.onValueChange).not.toHaveBeenCalled()
 
       expect(screen.getByLabelText('Increment')).toBeDisabled()
       expect(screen.getByLabelText('Decrement')).toBeDisabled()
     })
 
     it('should not change value on scrolling up or down', () => {
-      const onValueChange = vi.fn()
       render(
-        <Stepper defaultValue={0} onValueChange={onValueChange} disabled>
+        <Stepper {...defaultProps} disabled>
           <Stepper.DecrementButton aria-label="Decrement" />
-          <Stepper.Input aria-label="Stepper" />
+          <Stepper.Input />
           <Stepper.IncrementButton aria-label="Increment" />
         </Stepper>
       )
@@ -143,19 +168,18 @@ describe('Stepper', () => {
       fireEvent.wheel(input, { deltaY: 10 })
       fireEvent.wheel(input, { deltaY: -10 })
 
-      expect(onValueChange).not.toHaveBeenCalled()
+      expect(defaultProps.onValueChange).not.toHaveBeenCalled()
     })
   })
 
   describe('readOnly', () => {
     it('should not change value nor accept interaction when readonly', async () => {
       const user = userEvent.setup()
-      const onValueChange = vi.fn()
 
       render(
-        <Stepper defaultValue={0} onValueChange={onValueChange} readOnly>
+        <Stepper {...defaultProps} readOnly>
           <Stepper.DecrementButton aria-label="Decrement" />
-          <Stepper.Input aria-label="Stepper" />
+          <Stepper.Input />
           <Stepper.IncrementButton aria-label="Increment" />
         </Stepper>
       )
@@ -168,16 +192,15 @@ describe('Stepper', () => {
       await user.type(input, '11')
       act(() => input.blur())
 
-      expect(onValueChange).not.toHaveBeenCalled()
+      expect(defaultProps.onValueChange).not.toHaveBeenCalled()
       expect(input).toHaveValue('0')
     })
 
     it('should not change value on scrolling up or down', () => {
-      const onValueChange = vi.fn()
       render(
-        <Stepper defaultValue={0} onValueChange={onValueChange} readOnly>
+        <Stepper {...defaultProps} readOnly>
           <Stepper.DecrementButton aria-label="Decrement" />
-          <Stepper.Input aria-label="Stepper" />
+          <Stepper.Input />
           <Stepper.IncrementButton aria-label="Increment" />
         </Stepper>
       )
@@ -189,14 +212,14 @@ describe('Stepper', () => {
       fireEvent.wheel(input, { deltaY: 10 })
       fireEvent.wheel(input, { deltaY: -10 })
 
-      expect(onValueChange).not.toHaveBeenCalled()
+      expect(defaultProps.onValueChange).not.toHaveBeenCalled()
     })
 
     it('should not increment or decrement value using the keyboard arrow up/down keys', async () => {
       const user = userEvent.setup()
 
       render(
-        <Stepper defaultValue={0} readOnly>
+        <Stepper {...defaultProps} readOnly>
           <Stepper.DecrementButton aria-label="Decrement" />
           <Stepper.Input />
           <Stepper.IncrementButton aria-label="Increment" />
@@ -216,34 +239,32 @@ describe('Stepper', () => {
 
   it('should allow custom implementation', async () => {
     const user = userEvent.setup()
-    const onValueChange = vi.fn()
 
     render(
-      <Stepper onValueChange={onValueChange} defaultValue={8}>
+      <Stepper {...defaultProps} defaultValue={8}>
         <Stepper.IncrementButton aria-label="Custom increment">
           <Icon>
             <ArrowHorizontalUp />
           </Icon>
         </Stepper.IncrementButton>
-        <Stepper.Input aria-label="Stepper" />
+        <Stepper.Input />
       </Stepper>
     )
 
     await user.click(screen.getByLabelText('Custom increment'))
 
     expect(screen.getByRole('textbox')).toHaveValue('9')
-    expect(onValueChange).toHaveBeenCalledTimes(1)
+    expect(defaultProps.onValueChange).toHaveBeenCalledTimes(1)
   })
 
   describe('min and max values', () => {
     it('should not change the value if max limit has been reached', async () => {
       const user = userEvent.setup()
-      const onValueChange = vi.fn()
 
       render(
-        <Stepper defaultValue={0} onValueChange={onValueChange} maxValue={5} step={5}>
+        <Stepper {...defaultProps} maxValue={5} step={5}>
           <Stepper.DecrementButton aria-label="Decrement" />
-          <Stepper.Input aria-label="Stepper" />
+          <Stepper.Input />
           <Stepper.IncrementButton aria-label="Increment" />
         </Stepper>
       )
@@ -253,17 +274,16 @@ describe('Stepper', () => {
       expect(screen.getByLabelText('Increment')).toBeDisabled()
 
       await user.click(screen.getByLabelText('Increment'))
-      expect(onValueChange).toHaveBeenCalledTimes(1)
+      expect(defaultProps.onValueChange).toHaveBeenCalledTimes(1)
     })
 
     it('should not change the value if min limit has been reached', async () => {
       const user = userEvent.setup()
-      const onValueChange = vi.fn()
 
       render(
-        <Stepper defaultValue={0} onValueChange={onValueChange} minValue={-10} step={5}>
+        <Stepper {...defaultProps} minValue={-10} step={5}>
           <Stepper.DecrementButton aria-label="Decrement" />
-          <Stepper.Input aria-label="Stepper" />
+          <Stepper.Input />
           <Stepper.IncrementButton aria-label="Increment" />
         </Stepper>
       )
@@ -275,16 +295,16 @@ describe('Stepper', () => {
       expect(screen.getByLabelText('Decrement')).toBeDisabled()
 
       await user.click(screen.getByLabelText('Decrement'))
-      expect(onValueChange).toHaveBeenCalledTimes(2)
+      expect(defaultProps.onValueChange).toHaveBeenCalledTimes(2)
     })
 
     it('should clamp the value on blur if input is beyond range bounds', async () => {
       const user = userEvent.setup()
 
       render(
-        <Stepper defaultValue={0} minValue={0} maxValue={10}>
+        <Stepper {...defaultProps} minValue={0} maxValue={10}>
           <Stepper.DecrementButton aria-label="Decrement" />
-          <Stepper.Input aria-label="Stepper" />
+          <Stepper.Input />
           <Stepper.IncrementButton aria-label="Increment" />
         </Stepper>
       )
@@ -297,13 +317,13 @@ describe('Stepper', () => {
       expect(input).toHaveValue('10')
     })
 
-    it('should set value to min if value is undefined and user clicks decrement', async () => {
+    it('should set value to max if value is undefined and user clicks decrement', async () => {
       const user = userEvent.setup()
 
       render(
-        <Stepper defaultValue={undefined} minValue={0} maxValue={10}>
+        <Stepper {...defaultProps} defaultValue={undefined} minValue={0} maxValue={10}>
           <Stepper.DecrementButton aria-label="Decrement" />
-          <Stepper.Input aria-label="Stepper" />
+          <Stepper.Input />
           <Stepper.IncrementButton aria-label="Increment" />
         </Stepper>
       )
@@ -311,16 +331,16 @@ describe('Stepper', () => {
       const input = screen.getByRole('textbox')
       await user.click(screen.getByLabelText('Decrement'))
 
-      expect(input).toHaveValue('0')
+      expect(input).toHaveValue('10')
     })
 
     it('should set value to min if value is undefined and user clicks increment', async () => {
       const user = userEvent.setup()
 
       render(
-        <Stepper defaultValue={undefined} minValue={4} maxValue={10}>
+        <Stepper {...defaultProps} defaultValue={undefined} minValue={4} maxValue={10}>
           <Stepper.DecrementButton aria-label="Decrement" />
-          <Stepper.Input aria-label="Stepper" />
+          <Stepper.Input />
           <Stepper.IncrementButton aria-label="Increment" />
         </Stepper>
       )
@@ -330,20 +350,56 @@ describe('Stepper', () => {
 
       expect(input).toHaveValue('4')
     })
+
+    it('should only trigger the onValueChange prop when input value is updated and blurred, or when incrementing/decrementing', async () => {
+      // see: https://react-spectrum.adobe.com/react-aria/useNumberField.html#controlled
+      const user = userEvent.setup()
+      const onValueChangeSpy = vi.fn()
+
+      render(
+        <Stepper
+          {...defaultProps}
+          onValueChange={onValueChangeSpy}
+          defaultValue={undefined}
+          minValue={4}
+          maxValue={10}
+        >
+          <Stepper.DecrementButton aria-label="Decrement" />
+          <Stepper.Input />
+          <Stepper.IncrementButton aria-label="Increment" />
+        </Stepper>
+      )
+
+      const input = screen.getByRole('textbox')
+      const incrementBtn = screen.getByRole('button', {
+        name: /Increment/i,
+      })
+
+      await user.type(input, '8')
+
+      expect(onValueChangeSpy).not.toHaveBeenCalled()
+      act(() => input.blur())
+
+      expect(onValueChangeSpy).toHaveBeenCalledTimes(1)
+      expect(onValueChangeSpy).toHaveBeenCalledWith(8)
+      expect(input).toHaveValue('8')
+
+      await user.click(incrementBtn)
+      expect(onValueChangeSpy).toHaveBeenLastCalledWith(9)
+    })
   })
 })
 
 describe('Stepper with FormField', () => {
   it('should properly inherit some attributes when Stepper is wrapped by FormField', async () => {
     const user = userEvent.setup()
-    const onValueChange = vi.fn()
 
     render(
       <FormField name="title" isRequired state="error">
         <FormField.Label>Title</FormField.Label>
-        <Stepper defaultValue={0} onValueChange={onValueChange}>
+        <Stepper {...defaultProps}>
           <Stepper.DecrementButton aria-label="Decrement" />
-          <Stepper.Input aria-label="Stepper" />
+          <Stepper.Input />
           <Stepper.IncrementButton aria-label="Increment" />
         </Stepper>
         <FormField.ErrorMessage>oops</FormField.ErrorMessage>
