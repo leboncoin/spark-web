@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.20.1](https://github.com/leboncoin/spark-web/compare/v10.20.0...v10.20.1) (2025-10-06)
+
+**Note:** Version bump only for package spark
+
+# [10.20.0](https://github.com/leboncoin/spark-web/compare/v10.19.3...v10.20.0) (2025-10-06)
+
+### Features
+
+- **components:** revert BASE UI Stepper to investigate breaking changes ([5d7adb9](https://github.com/leboncoin/spark-web/commit/5d7adb97f0cc223090d51db4471d8a5443a24b5e))
+
 ## [10.19.3](https://github.com/leboncoin/spark-web/compare/v10.19.2...v10.19.3) (2025-10-03)
 
 ### Bug Fixes
