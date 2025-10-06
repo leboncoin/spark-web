@@ -49,9 +49,7 @@
   "dependencies": {
     "@base-ui-components/react": "^1.0.0-beta.3",
     "@react-aria/button": "3.13.0",
-    "@react-aria/numberfield": "3.11.13",
     "@react-aria/toast": "^3.0.0-beta.18",
-    "@react-stately/numberfield": "3.9.11",
     "@react-stately/toast": "^3.0.0-beta.7",
     "@spark-ui/hooks": "^10.20.0",
     "@spark-ui/icons": "^10.20.0",
