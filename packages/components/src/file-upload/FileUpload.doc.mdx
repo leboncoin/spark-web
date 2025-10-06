@@ -1,0 +1,115 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { AriaRoles } from '@docs/helpers/AriaRoles'
+import { Kbd } from '../kbd'
+import { FileUpload } from '.'
+
+import * as stories from './FileUpload.stories'
+
+<Meta of={stories} />
+
+# FileUpload
+
+TODO: description
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { FileUpload } from "@spark-ui/components/file-upload"
+
+export default () => (
+  <FileUpload>
+    TODO
+  </FileUpload>
+);
+```
+
+
+
+## API Reference
+
+### FileUpload
+
+Contains all the parts of a file upload.
+
+<ArgTypes of={FileUpload} />
+
+### _.Trigger
+
+Contains all the parts of a collapsible section.
+
+<ArgTypes of={FileUpload.Trigger} />
+
+
+## Examples
+
+
+### Dropzone
+
+TODO
+
+{/* <Canvas of={stories.Controlled} /> */}
+
+### Accepted files
+
+TODO
+
+{/* <Canvas of={stories.Design} /> */}
+
+### Acepted files - custom
+
+TODO
+
+{/* <Canvas of={stories.Disabled} /> */}
+
+### Multiple files
+
+TODO
+
+{/* <Canvas of={stories.DisabledItem} /> */}
+
+### Conditional Dropzone
+
+TODO 
+
+{/* <Canvas of={stories.Multiple} /> */}
+
+### Custom Trigger
+
+TODO 
+
+{/* <Canvas of={stories.Multiple} /> */}
+
+### Clearable Trigger
+
+TODO 
+
+{/* <Canvas of={stories.Multiple} /> */}
+
+### Custom Dropzone
+
+TODO 
+
+{/* <Canvas of={stories.Multiple} /> */}
+
+## Accessibility
+
+<A11yReport of="file-upload" />
+
+Adheres to the [TODO](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/).
+
+### Keyboard Interactions
+
+TODO
+
+### Pattern
+
+TODO
+
