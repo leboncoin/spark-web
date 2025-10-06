@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@base-ui-components/react": "^1.0.0-beta.3",
-    "@react-aria/button": "3.13.0",
+    "@react-aria/button": "3.14.2",
     "@react-aria/toast": "^3.0.0-beta.18",
     "@react-stately/toast": "^3.0.0-beta.7",
     "@spark-ui/hooks": "^10.19.3",
