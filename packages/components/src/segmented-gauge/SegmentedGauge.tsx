@@ -1,5 +1,5 @@
 import { cx } from 'class-variance-authority'
-import { Ref, useMemo } from 'react'
+import { Ref, useId, useMemo } from 'react'
 
 import { SegmentedGaugeContext } from './SegmentedGaugeContext'
 import { SegmentedGaugeLabel } from './SegmentedGaugeLabel'
@@ -84,6 +84,9 @@ export const SegmentedGauge = ({
     return segmentLabels[currentIndex] || `Value ${currentIndex + 1}`
   }, [segmentLabels, currentIndex])
 
+  // Generate unique ID for the label using React's useId
+  const labelId = useId()
+
   const segmentsData = useMemo(() => {
     return Array.from({ length: segments }, (_, index) => ({
       index,
@@ -104,8 +107,9 @@ export const SegmentedGauge = ({
       activeLabel,
       size,
       intent,
+      labelId,
     }),
-    [value, min, max, segments, segmentLabels, currentIndex, activeLabel, size, intent]
+    [value, min, max, segments, segmentLabels, currentIndex, activeLabel, size, intent, labelId]
   )
 
   // If children is provided, use render prop pattern
@@ -138,6 +142,7 @@ export const SegmentedGauge = ({
         aria-valuemin={min}
         aria-valuemax={max}
         aria-label={ariaLabel}
+        aria-describedby={labelId}
         {...props}
       >
         <SegmentedGaugeTrack>
@@ -152,7 +157,7 @@ export const SegmentedGauge = ({
           ))}
         </SegmentedGaugeTrack>
 
-        <SegmentedGaugeLabel>{activeLabel}</SegmentedGaugeLabel>
+        <SegmentedGaugeLabel id={labelId}>{activeLabel}</SegmentedGaugeLabel>
       </div>
     </SegmentedGaugeContext.Provider>
   )
