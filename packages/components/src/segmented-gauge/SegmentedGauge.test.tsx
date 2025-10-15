@@ -149,12 +149,18 @@ describe('SegmentedGauge', () => {
 
     // When: Checking accessibility attributes
     const meter = screen.getByRole('meter')
+    const label = screen.getByText('Very Good')
 
     // Then: It should have proper ARIA attributes for screen readers
     expect(meter).toHaveAttribute('aria-valuenow', '3')
     expect(meter).toHaveAttribute('aria-valuemin', '0')
     expect(meter).toHaveAttribute('aria-valuemax', '4')
     expect(meter).toHaveAttribute('aria-label', 'Quality rating')
+    expect(meter).toHaveAttribute('aria-describedby')
+
+    // And: The label should have the correct ID and be connected to the meter
+    expect(label).toHaveAttribute('id')
+    expect(meter.getAttribute('aria-describedby')).toBe(label.getAttribute('id'))
   })
 
   it('should render with small size by default', () => {
@@ -227,6 +233,30 @@ describe('SegmentedGauge', () => {
 
     expect(segments[2]).toHaveAttribute('data-active', 'false')
     expect(segments[2]).toHaveAttribute('data-current', 'false')
+  })
+
+  it('should have unique IDs for multiple gauges', () => {
+    // Given: Two SegmentedGauges on the same page
+    render(
+      <div>
+        <SegmentedGauge value={1} segmentLabels={['A', 'B', 'C']} aria-label="First gauge" />
+        <SegmentedGauge value={2} segmentLabels={['X', 'Y', 'Z']} aria-label="Second gauge" />
+      </div>
+    )
+
+    // When: Getting both meters and their labels
+    const meters = screen.getAllByRole('meter')
+    const labels = screen.getAllByTestId('segmented-gauge-label')
+
+    // Then: Each gauge should have unique IDs
+    expect(meters[0]?.getAttribute('aria-describedby')).not.toBe(
+      meters[1]?.getAttribute('aria-describedby')
+    )
+    expect(labels[0]?.getAttribute('id')).not.toBe(labels[1]?.getAttribute('id'))
+
+    // And: Each meter should be connected to its own label
+    expect(meters[0]?.getAttribute('aria-describedby')).toBe(labels[0]?.getAttribute('id'))
+    expect(meters[1]?.getAttribute('aria-describedby')).toBe(labels[1]?.getAttribute('id'))
   })
 
   it('should render with different intents and custom colors', () => {

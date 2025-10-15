@@ -10,6 +10,7 @@ export interface SegmentedGaugeContextValue {
   activeLabel: string
   size: 'sm' | 'md'
   intent: 'basic' | 'success' | 'alert' | 'danger' | 'info' | string
+  labelId: string
 }
 
 export const SegmentedGaugeContext = createContext<SegmentedGaugeContextValue | null>(null)
