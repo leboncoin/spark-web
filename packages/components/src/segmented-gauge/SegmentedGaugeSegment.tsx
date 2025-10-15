@@ -65,6 +65,8 @@ export const SegmentedGaugeSegment = ({
     <div
       data-spark-component="segmented-gauge-segment"
       data-testid="segmented-gauge-segment"
+      data-active={isActive}
+      data-current={isCurrent}
       ref={ref}
       style={
         {
