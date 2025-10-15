@@ -1,0 +1,65 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
+
+import * as stories from './SegmentedGauge.stories'
+
+<Meta of={stories} />
+
+# SegmentedGauge
+
+A segmented gauge component that displays a horizontal gauge divided into N sections with a circular indicator on the section corresponding to the current value. Follows the ARIA meter pattern for accessibility.
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```bash
+npm install @spark-ui/components
+```
+
+## Import
+
+```tsx
+import { SegmentedGauge } from '@spark-ui/components'
+```
+
+## Props
+
+<ArgTypes of={stories.Default} />
+
+## Usage
+
+
+### With render prop
+
+Use the render prop pattern for complete control over the layout and styling.
+
+<Canvas of={stories.WithRenderProp} />
+
+
+### Sizes
+
+<Canvas of={stories.SizeVariants} />
+
+### Intent and custom colors
+
+Examples with different intents to convey different meanings.
+It is also possible to pass a custom color to the intent prop.
+
+<Canvas of={stories.IntentVariants} />
+
+## Accessibility
+
+Adheres to the [meter WAI-ARIA role](https://www.w3.org/TR/wai-aria-1.1/#meter).
+
+### Guidelines
+
+- Usage of `aria-label` is **mandatory**. It serves as the accessible name for the meter.
+- The component automatically manages `aria-valuenow`, `aria-valuemin`, and `aria-valuemax` attributes.
+- Each segment can have its own `aria-label` for additional context.
+- The circular indicator is marked with `aria-hidden="true"` as it's purely decorative.
+
+### Screen reader
+
+- The meter value and range are announced to screen readers.
+- Individual segment labels are available for additional context.
+- The current active segment is clearly indicated.
