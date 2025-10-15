@@ -7,13 +7,34 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
+  permissions:
+    contents: write
+  contributors:
+    runs-on: ubuntu-latest
+    name: Contributors
+    steps:
+      - name: Doc contributors
+        uses: akhilmhdh/contributors-readme-action@v2.3.6
+        if: github.event_name == 'push'
+        with:
+          image_size: 50
+          readme_path: 'documentation/contributing/Contributors.md'
+          columns_per_row: 8
+          use_username: true
+          commit_message: 'docs(chore): update contributors'
+          committer_username: 'github-actions[bot]'
+          committer_email: 'github-actions[bot]@users.noreply.github.com'
+          auto_detect_branch_protection: false
+          collaborators: 'outside'
+        env:
+          GITHUB_TOKEN: ${{ secrets.SA_TOKEN }}
   release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.SPARK_SA_TOKEN }}
+          token: ${{ secrets.SA_TOKEN }}
           fetch-depth: 0
       - name: Identity
         run: |
@@ -29,7 +50,7 @@ jobs:
       - name: Publish
         run: npm run release
   deploy:
-    needs: [release]
+    needs: [contributors, release]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -45,7 +66,7 @@ jobs:
       - name: Build Storybook
         run: npm run storybook:build
       - name: Deploy Storybook to Vercel
-        run: vercel deploy --token $VERCEL_TOKEN --prod --yes --archive=tgz
+        run: vercel deploy --token $VERCEL_TOKEN --prod --yes
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
