@@ -1,5 +1,10 @@
 import { cx } from 'class-variance-authority'
-import { ComponentProps, createContext, Ref, useContext, useMemo } from 'react'
+import { Ref, useMemo } from 'react'
+
+import { SegmentedGaugeContext } from './SegmentedGaugeContext'
+import { SegmentedGaugeLabel } from './SegmentedGaugeLabel'
+import { SegmentedGaugeSegment } from './SegmentedGaugeSegment'
+import { SegmentedGaugeTrack } from './SegmentedGaugeTrack'
 
 export interface SegmentedGaugeProps {
   /**
@@ -48,30 +53,6 @@ export interface SegmentedGaugeProps {
       Label: typeof SegmentedGaugeLabel
     }
   }) => React.ReactNode
-}
-
-interface SegmentedGaugeContextValue {
-  value: number
-  min: number
-  max: number
-  segments: number
-  segmentLabels: string[]
-  currentIndex: number
-  activeLabel: string
-  size: 'sm' | 'md'
-  intent: 'basic' | 'success' | 'alert' | 'danger' | 'info' | string
-}
-
-const SegmentedGaugeContext = createContext<SegmentedGaugeContextValue | null>(null)
-
-export const useSegmentedGaugeContext = () => {
-  const context = useContext(SegmentedGaugeContext)
-
-  if (!context) {
-    throw new Error('useSegmentedGaugeContext must be used within a SegmentedGauge provider')
-  }
-
-  return context
 }
 
 export const SegmentedGauge = ({
@@ -178,135 +159,3 @@ export const SegmentedGauge = ({
 }
 
 SegmentedGauge.displayName = 'SegmentedGauge'
-
-// Track component
-export interface SegmentedGaugeTrackProps extends ComponentProps<'div'> {
-  ref?: Ref<HTMLDivElement>
-}
-
-export const SegmentedGaugeTrack = ({
-  className,
-  children,
-  ref,
-  ...props
-}: SegmentedGaugeTrackProps) => {
-  return (
-    <div
-      data-spark-component="segmented-gauge-track"
-      ref={ref}
-      className={cx('gap-sm relative flex rounded-full', className)}
-      {...props}
-    >
-      {children}
-    </div>
-  )
-}
-
-SegmentedGaugeTrack.displayName = 'SegmentedGauge.Track'
-
-// Segment component
-export interface SegmentedGaugeSegmentProps extends ComponentProps<'div'> {
-  index: number
-  isActive: boolean
-  isCurrent: boolean
-  ref?: Ref<HTMLDivElement>
-}
-
-export const SegmentedGaugeSegment = ({
-  isActive,
-  isCurrent,
-  className,
-  children,
-  ref,
-  ...props
-}: SegmentedGaugeSegmentProps) => {
-  const { size, intent } = useSegmentedGaugeContext()
-
-  const gaugeColor = useMemo(() => {
-    // Handle predefined intents
-    switch (intent) {
-      case 'success':
-        return 'var(--color-success)'
-      case 'alert':
-        return 'var(--color-alert)'
-      case 'danger':
-        return 'var(--color-error)'
-      case 'info':
-        return 'var(--color-info)'
-      case 'basic':
-        return 'var(--color-basic)'
-      default:
-        // Handle custom colors (hex, CSS variables, etc.)
-        return intent || 'var(--color-basic)'
-    }
-  }, [intent])
-
-  const segmentClasses = cx(
-    'border-outline relative rounded-full',
-    {
-      'h-sz-8 w-sz-24': size === 'sm',
-      'h-sz-12 w-sz-36': size === 'md',
-      'default:bg-[color-mix(in_srgb,var(--gauge-color)_var(--opacity-dim-1),transparent)]':
-        isActive,
-      'border-sm': !isActive,
-    },
-    className
-  )
-
-  const indicatorClasses = cx(
-    'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
-    'default:bg-surface/dim-1 default:rounded-full',
-    'border-[var(--gauge-color)]',
-    {
-      'size-sz-12 border-md': size === 'sm',
-      'size-sz-20 border-lg': size === 'md',
-    }
-  )
-
-  return (
-    <div
-      data-spark-component="segmented-gauge-segment"
-      data-testid="segmented-gauge-segment"
-      ref={ref}
-      style={
-        {
-          '--gauge-color': gaugeColor,
-        } as React.CSSProperties
-      }
-      className={segmentClasses}
-      {...props}
-    >
-      {children}
-      {isCurrent && <div className={indicatorClasses} aria-hidden="true" />}
-    </div>
-  )
-}
-
-SegmentedGaugeSegment.displayName = 'SegmentedGauge.Segment'
-
-// Label component
-export interface SegmentedGaugeLabelProps extends ComponentProps<'span'> {
-  ref?: Ref<HTMLSpanElement>
-}
-
-export const SegmentedGaugeLabel = ({
-  className,
-  children,
-  ref,
-  ...props
-}: SegmentedGaugeLabelProps) => {
-  const { activeLabel } = useSegmentedGaugeContext()
-
-  return (
-    <span
-      data-spark-component="segmented-gauge-label"
-      ref={ref}
-      className={cx('default:text-on-surface default:text-body-2', className)}
-      {...props}
-    >
-      {children || activeLabel}
-    </span>
-  )
-}
-
-SegmentedGaugeLabel.displayName = 'SegmentedGauge.Label'
