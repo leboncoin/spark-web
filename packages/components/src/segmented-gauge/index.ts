@@ -1,7 +1,7 @@
 import { SegmentedGauge as Root } from './SegmentedGauge'
-import { SegmentedGaugeTrack } from './SegmentedGauge'
-import { SegmentedGaugeSegment } from './SegmentedGauge'
-import { SegmentedGaugeLabel } from './SegmentedGauge'
+import { SegmentedGaugeLabel } from './SegmentedGaugeLabel'
+import { SegmentedGaugeSegment } from './SegmentedGaugeSegment'
+import { SegmentedGaugeTrack } from './SegmentedGaugeTrack'
 
 export const SegmentedGauge: typeof Root & {
   Track: typeof SegmentedGaugeTrack
@@ -19,6 +19,6 @@ SegmentedGaugeSegment.displayName = 'SegmentedGauge.Segment'
 SegmentedGaugeLabel.displayName = 'SegmentedGauge.Label'
 
 export { type SegmentedGaugeProps } from './SegmentedGauge'
-export { type SegmentedGaugeTrackProps } from './SegmentedGauge'
-export { type SegmentedGaugeSegmentProps } from './SegmentedGauge'
-export { type SegmentedGaugeLabelProps } from './SegmentedGauge'
+export { type SegmentedGaugeTrackProps } from './SegmentedGaugeTrack'
+export { type SegmentedGaugeSegmentProps } from './SegmentedGaugeSegment'
+export { type SegmentedGaugeLabelProps } from './SegmentedGaugeLabel'
