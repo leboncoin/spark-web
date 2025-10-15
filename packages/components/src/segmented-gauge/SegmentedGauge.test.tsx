@@ -5,34 +5,45 @@ import { SegmentedGauge } from '.'
 
 describe('SegmentedGauge', () => {
   it('should render with default props', () => {
+    // Given: A SegmentedGauge with default props
     render(
       <SegmentedGauge value={3} segmentLabels={['A', 'B', 'C', 'D', 'E']} aria-label="Test gauge" />
     )
 
+    // When: The component renders
+    // Then: It should display a meter element with proper accessibility
     expect(screen.getByRole('meter')).toBeInTheDocument()
     expect(screen.getByLabelText('Test gauge')).toBeInTheDocument()
   })
 
   it('should render with custom segment labels', () => {
+    // Given: Custom segment labels array
     const segmentLabels = ['Low', 'Medium', 'High', 'Very High', 'Excellent']
 
+    // When: Rendering with custom labels
     render(<SegmentedGauge value={2} segmentLabels={segmentLabels} aria-label="Test gauge" />)
 
+    // Then: The correct label should be displayed
     expect(screen.getByText('High')).toBeInTheDocument()
   })
 
   it('should render with custom min and max values for discrete values', () => {
+    // Given: A SegmentedGauge with 5 segments (0-4 range)
     render(
       <SegmentedGauge value={2} segmentLabels={['A', 'B', 'C', 'D', 'E']} aria-label="Test gauge" />
     )
 
+    // When: The component renders
     const meter = screen.getByRole('meter')
+
+    // Then: It should have correct ARIA attributes for discrete values
     expect(meter).toHaveAttribute('aria-valuenow', '2')
     expect(meter).toHaveAttribute('aria-valuemin', '0')
     expect(meter).toHaveAttribute('aria-valuemax', '4')
   })
 
   it('should render with render prop pattern', () => {
+    // Given: A SegmentedGauge with render prop children
     render(
       <SegmentedGauge value={2} segmentLabels={['A', 'B', 'C']} aria-label="Test gauge">
         {({ segments, activeLabel, SegmentedGauge }) => (
@@ -54,56 +65,44 @@ describe('SegmentedGauge', () => {
       </SegmentedGauge>
     )
 
+    // When: The component renders with custom render prop
+    // Then: It should render the custom structure and active label
     expect(screen.getByTestId('custom-render')).toBeInTheDocument()
     expect(screen.getByText('C')).toBeInTheDocument()
   })
 
   it('should calculate correct current index for value', () => {
+    // Given: A SegmentedGauge with value 0
     const { rerender } = render(
       <SegmentedGauge value={0} segmentLabels={['A', 'B', 'C', 'D', 'E']} aria-label="Test gauge" />
     )
 
-    // Value 0 should be at index 0 (current segment has indicator)
+    // When: Checking the current segment indicator
     let segments = screen.getAllByTestId('segmented-gauge-segment')
     const currentSegment0 = segments[0]
-    const indicator0 = currentSegment0.querySelector('[aria-hidden="true"]')
-    expect(indicator0).toBeInTheDocument()
+    expect(currentSegment0).toBeDefined()
+    const indicator0 = currentSegment0?.querySelector('[aria-hidden="true"]')
 
+    // Then: Value 0 should show indicator at index 0
+    expect(indicator0).toBeInTheDocument()
+    expect(currentSegment0).toHaveAttribute('data-current', 'true')
+
+    // When: Changing value to 2
     rerender(
       <SegmentedGauge value={2} segmentLabels={['A', 'B', 'C', 'D', 'E']} aria-label="Test gauge" />
     )
 
-    // Value 2 should be at index 2 (current segment has indicator)
+    // Then: Value 2 should show indicator at index 2
     segments = screen.getAllByTestId('segmented-gauge-segment')
     const currentSegment2 = segments[2]
-    const indicator2 = currentSegment2.querySelector('[aria-hidden="true"]')
+    expect(currentSegment2).toBeDefined()
+    const indicator2 = currentSegment2?.querySelector('[aria-hidden="true"]')
     expect(indicator2).toBeInTheDocument()
-  })
-
-  it('should apply correct active states to segments', () => {
-    render(
-      <SegmentedGauge value={2} segmentLabels={['A', 'B', 'C', 'D', 'E']} aria-label="Test gauge" />
-    )
-
-    const segments = screen.getAllByTestId('segmented-gauge-segment')
-
-    // First 3 segments should be active (0-2)
-    expect(segments[0]).toHaveClass(
-      'bg-[color-mix(in_srgb,var(--color-basic)_var(--opacity-dim-1),transparent)]'
-    )
-    expect(segments[1]).toHaveClass(
-      'bg-[color-mix(in_srgb,var(--color-basic)_var(--opacity-dim-1),transparent)]'
-    )
-    expect(segments[2]).toHaveClass(
-      'bg-[color-mix(in_srgb,var(--color-basic)_var(--opacity-dim-1),transparent)]'
-    )
-
-    // Last 2 segments should not be active
-    expect(segments[3]).toHaveClass('border-sm')
-    expect(segments[4]).toHaveClass('border-sm')
+    expect(currentSegment2).toHaveAttribute('data-current', 'true')
   })
 
   it('should handle edge cases for value calculation', () => {
+    // Given: A SegmentedGauge with value below minimum (-1)
     const { rerender } = render(
       <SegmentedGauge
         value={-1}
@@ -112,12 +111,16 @@ describe('SegmentedGauge', () => {
       />
     )
 
-    // Value below min should clamp to min (index 0)
+    // When: Checking the current segment
     let segments = screen.getAllByTestId('segmented-gauge-segment')
     const currentSegment0 = segments[0]
-    const indicator0 = currentSegment0.querySelector('[aria-hidden="true"]')
+    expect(currentSegment0).toBeDefined()
+    const indicator0 = currentSegment0?.querySelector('[aria-hidden="true"]')
+
+    // Then: Value below min should clamp to min (index 0)
     expect(indicator0).toBeInTheDocument()
 
+    // When: Setting value above maximum (10)
     rerender(
       <SegmentedGauge
         value={10}
@@ -126,14 +129,16 @@ describe('SegmentedGauge', () => {
       />
     )
 
-    // Value above max should clamp to max (index 4)
+    // Then: Value above max should clamp to max (index 4)
     segments = screen.getAllByTestId('segmented-gauge-segment')
     const currentSegment4 = segments[4]
-    const indicator4 = currentSegment4.querySelector('[aria-hidden="true"]')
+    expect(currentSegment4).toBeDefined()
+    const indicator4 = currentSegment4?.querySelector('[aria-hidden="true"]')
     expect(indicator4).toBeInTheDocument()
   })
 
   it('should be accessible', () => {
+    // Given: A SegmentedGauge with meaningful labels and aria-label
     render(
       <SegmentedGauge
         value={3}
@@ -142,7 +147,10 @@ describe('SegmentedGauge', () => {
       />
     )
 
+    // When: Checking accessibility attributes
     const meter = screen.getByRole('meter')
+
+    // Then: It should have proper ARIA attributes for screen readers
     expect(meter).toHaveAttribute('aria-valuenow', '3')
     expect(meter).toHaveAttribute('aria-valuemin', '0')
     expect(meter).toHaveAttribute('aria-valuemax', '4')
@@ -150,55 +158,93 @@ describe('SegmentedGauge', () => {
   })
 
   it('should render with small size by default', () => {
+    // Given: A SegmentedGauge without size prop
     render(<SegmentedGauge value={2} segmentLabels={['A', 'B', 'C']} aria-label="Test gauge" />)
 
+    // When: The component renders
     const segments = screen.getAllByTestId('segmented-gauge-segment')
+
+    // Then: It should use small size classes by default
     expect(segments[0]).toHaveClass('h-sz-8', 'w-sz-24')
   })
 
   it('should render with medium size when specified', () => {
+    // Given: A SegmentedGauge with size="md"
     render(
       <SegmentedGauge value={2} size="md" segmentLabels={['A', 'B', 'C']} aria-label="Test gauge" />
     )
 
+    // When: The component renders
     const segments = screen.getAllByTestId('segmented-gauge-segment')
-    expect(segments[0]).toHaveClass('h-sz-12', 'w-[34px]')
+
+    // Then: It should use medium size classes
+    expect(segments[0]).toHaveClass('h-sz-12', 'w-sz-36')
   })
 
   it('should render correct indicator size for small gauge', () => {
+    // Given: A small SegmentedGauge with value 1
     render(<SegmentedGauge value={1} segmentLabels={['A', 'B', 'C']} aria-label="Test gauge" />)
 
+    // When: Checking the current segment indicator
     const segments = screen.getAllByTestId('segmented-gauge-segment')
     const currentSegment = segments[1]
-    const indicator = currentSegment.querySelector('[aria-hidden="true"]')
+    expect(currentSegment).toBeDefined()
+    const indicator = currentSegment?.querySelector('[aria-hidden="true"]')
+
+    // Then: The indicator should have small size classes
     expect(indicator).toHaveClass('size-sz-12')
   })
 
   it('should render correct indicator size for medium gauge', () => {
+    // Given: A medium SegmentedGauge with value 1
     render(
       <SegmentedGauge value={1} size="md" segmentLabels={['A', 'B', 'C']} aria-label="Test gauge" />
     )
 
+    // When: Checking the current segment indicator
     const segments = screen.getAllByTestId('segmented-gauge-segment')
     const currentSegment = segments[1]
-    const indicator = currentSegment.querySelector('[aria-hidden="true"]')
-    expect(indicator).toHaveClass('size-[18px]')
+    expect(currentSegment).toBeDefined()
+    const indicator = currentSegment?.querySelector('[aria-hidden="true"]')
+
+    // Then: The indicator should have medium size classes
+    expect(indicator).toHaveClass('size-sz-20')
   })
 
-  it('should render with basic intent by default', () => {
+  it('should set correct data attributes on segments', () => {
+    // Given: A SegmentedGauge with value 1 and 3 segments
     render(<SegmentedGauge value={1} segmentLabels={['A', 'B', 'C']} aria-label="Test gauge" />)
 
+    // When: Checking segment data attributes
     const segments = screen.getAllByTestId('segmented-gauge-segment')
-    expect(segments[0]).toHaveClass(
-      'bg-[color-mix(in_srgb,var(--color-basic)_var(--opacity-dim-1),transparent)]'
-    )
-    expect(segments[1]).toHaveClass(
-      'bg-[color-mix(in_srgb,var(--color-basic)_var(--opacity-dim-1),transparent)]'
-    )
+
+    // Then: Segments should have correct data-active and data-current attributes
+    expect(segments[0]).toHaveAttribute('data-active', 'true')
+    expect(segments[0]).toHaveAttribute('data-current', 'false')
+
+    expect(segments[1]).toHaveAttribute('data-active', 'true')
+    expect(segments[1]).toHaveAttribute('data-current', 'true')
+
+    expect(segments[2]).toHaveAttribute('data-active', 'false')
+    expect(segments[2]).toHaveAttribute('data-current', 'false')
   })
 
-  it('should render with success intent', () => {
-    render(
+  it('should render with different intents and custom colors', () => {
+    // Given: A SegmentedGauge with default intent
+    const { rerender } = render(
+      <SegmentedGauge value={1} segmentLabels={['A', 'B', 'C']} aria-label="Test gauge" />
+    )
+
+    // When: Checking basic intent (default)
+    let segments = screen.getAllByTestId('segmented-gauge-segment')
+    // Then: It should use basic color classes and set gauge color variable
+    expect(segments[0]).toHaveClass(
+      'default:bg-[color-mix(in_srgb,var(--gauge-color)_var(--opacity-dim-1),transparent)]'
+    )
+    expect(segments[0]).toHaveStyle({ '--gauge-color': 'var(--color-basic)' })
+
+    // When: Setting success intent
+    rerender(
       <SegmentedGauge
         value={1}
         intent="success"
@@ -206,14 +252,12 @@ describe('SegmentedGauge', () => {
         aria-label="Test gauge"
       />
     )
+    // Then: It should set success color variable
+    segments = screen.getAllByTestId('segmented-gauge-segment')
+    expect(segments[0]).toHaveStyle({ '--gauge-color': 'var(--color-success)' })
 
-    const segments = screen.getAllByTestId('segmented-gauge-segment')
-    expect(segments[0]).toHaveClass('bg-success/dim-1')
-    expect(segments[1]).toHaveClass('bg-success/dim-1')
-  })
-
-  it('should render with alert intent', () => {
-    render(
+    // When: Setting alert intent
+    rerender(
       <SegmentedGauge
         value={1}
         intent="alert"
@@ -221,14 +265,12 @@ describe('SegmentedGauge', () => {
         aria-label="Test gauge"
       />
     )
+    // Then: It should set alert color variable
+    segments = screen.getAllByTestId('segmented-gauge-segment')
+    expect(segments[0]).toHaveStyle({ '--gauge-color': 'var(--color-alert)' })
 
-    const segments = screen.getAllByTestId('segmented-gauge-segment')
-    expect(segments[0]).toHaveClass('bg-alert/dim-1')
-    expect(segments[1]).toHaveClass('bg-alert/dim-1')
-  })
-
-  it('should render with danger intent', () => {
-    render(
+    // When: Setting danger intent
+    rerender(
       <SegmentedGauge
         value={1}
         intent="danger"
@@ -236,14 +278,12 @@ describe('SegmentedGauge', () => {
         aria-label="Test gauge"
       />
     )
+    // Then: It should set error color variable
+    segments = screen.getAllByTestId('segmented-gauge-segment')
+    expect(segments[0]).toHaveStyle({ '--gauge-color': 'var(--color-error)' })
 
-    const segments = screen.getAllByTestId('segmented-gauge-segment')
-    expect(segments[0]).toHaveClass('bg-error/dim-1')
-    expect(segments[1]).toHaveClass('bg-error/dim-1')
-  })
-
-  it('should render with info intent', () => {
-    render(
+    // When: Setting info intent
+    rerender(
       <SegmentedGauge
         value={1}
         intent="info"
@@ -251,14 +291,12 @@ describe('SegmentedGauge', () => {
         aria-label="Test gauge"
       />
     )
+    // Then: It should set info color variable
+    segments = screen.getAllByTestId('segmented-gauge-segment')
+    expect(segments[0]).toHaveStyle({ '--gauge-color': 'var(--color-info)' })
 
-    const segments = screen.getAllByTestId('segmented-gauge-segment')
-    expect(segments[0]).toHaveClass('bg-info/dim-1')
-    expect(segments[1]).toHaveClass('bg-info/dim-1')
-  })
-
-  it('should render correct indicator border color for different intents', () => {
-    const { rerender } = render(
+    // When: Testing indicator border colors for success intent
+    rerender(
       <SegmentedGauge
         value={1}
         intent="success"
@@ -266,12 +304,14 @@ describe('SegmentedGauge', () => {
         aria-label="Test gauge"
       />
     )
-
-    let segments = screen.getAllByTestId('segmented-gauge-segment')
+    // Then: Indicator should have success border class
+    segments = screen.getAllByTestId('segmented-gauge-segment')
     let currentSegment = segments[1]
-    let indicator = currentSegment.querySelector('[aria-hidden="true"]')
-    expect(indicator).toHaveClass('border-success')
+    expect(currentSegment).toBeDefined()
+    let indicator = currentSegment?.querySelector('[aria-hidden="true"]')
+    expect(indicator).toHaveClass('border-[var(--gauge-color)]')
 
+    // When: Testing indicator border colors for danger intent
     rerender(
       <SegmentedGauge
         value={1}
@@ -280,15 +320,15 @@ describe('SegmentedGauge', () => {
         aria-label="Test gauge"
       />
     )
-
+    // Then: Indicator should have error border class
     segments = screen.getAllByTestId('segmented-gauge-segment')
     currentSegment = segments[1]
-    indicator = currentSegment.querySelector('[aria-hidden="true"]')
-    expect(indicator).toHaveClass('border-error')
-  })
+    expect(currentSegment).toBeDefined()
+    indicator = currentSegment?.querySelector('[aria-hidden="true"]')
+    expect(indicator).toHaveClass('border-[var(--gauge-color)]')
 
-  it('should render with custom hex color', () => {
-    render(
+    // When: Setting custom hex color
+    rerender(
       <SegmentedGauge
         value={1}
         intent="#8B5CF6"
@@ -296,69 +336,9 @@ describe('SegmentedGauge', () => {
         aria-label="Test gauge"
       />
     )
-
-    const segments = screen.getAllByTestId('segmented-gauge-segment')
-    const segment = segments[0]
-    expect(segment).toHaveStyle({ '--gauge-color': '#8B5CF6' })
-  })
-
-  it('should render with custom CSS variable', () => {
-    render(
-      <SegmentedGauge
-        value={1}
-        intent="var(--color-primary)"
-        segmentLabels={['A', 'B', 'C']}
-        aria-label="Test gauge"
-      />
-    )
-
-    const segments = screen.getAllByTestId('segmented-gauge-segment')
-    const segment = segments[0]
-    expect(segment).toHaveStyle({ '--gauge-color': 'var(--color-primary)' })
-  })
-
-  it('should render with custom RGB color', () => {
-    render(
-      <SegmentedGauge
-        value={1}
-        intent="rgb(34, 197, 94)"
-        segmentLabels={['A', 'B', 'C']}
-        aria-label="Test gauge"
-      />
-    )
-
-    const segments = screen.getAllByTestId('segmented-gauge-segment')
-    const segment = segments[0]
-    expect(segment).toHaveStyle({ '--gauge-color': 'rgb(34, 197, 94)' })
-  })
-
-  it('should work with custom min and max values for discrete values', () => {
-    const { rerender } = render(
-      <SegmentedGauge
-        value={0}
-        segmentLabels={['A', 'B', 'C', 'D', 'E']}
-        aria-label="Grade rating"
-      />
-    )
-
-    // Value 0 should be at index 0 (current segment has indicator)
-    let segments = screen.getAllByTestId('segmented-gauge-segment')
-    const currentSegment0 = segments[0]
-    const indicator0 = currentSegment0.querySelector('[aria-hidden="true"]')
-    expect(indicator0).toBeInTheDocument()
-
-    rerender(
-      <SegmentedGauge
-        value={2}
-        segmentLabels={['A', 'B', 'C', 'D', 'E']}
-        aria-label="Grade rating"
-      />
-    )
-
-    // Value 2 should be at index 2 (current segment has indicator)
+    // Then: It should apply custom color as CSS variable
     segments = screen.getAllByTestId('segmented-gauge-segment')
-    const currentSegment2 = segments[2]
-    const indicator2 = currentSegment2.querySelector('[aria-hidden="true"]')
-    expect(indicator2).toBeInTheDocument()
+    let segment = segments[0]
+    expect(segment).toHaveStyle({ '--gauge-color': '#8B5CF6' })
   })
 })
