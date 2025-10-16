@@ -1,4 +1,5 @@
 import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
+import { Callout } from '@docs/helpers/Callout'
 
 import * as stories from './SegmentedGauge.stories'
 
@@ -6,7 +7,7 @@ import * as stories from './SegmentedGauge.stories'
 
 # SegmentedGauge
 
-A segmented gauge component that displays a horizontal gauge divided into N sections with a circular indicator on the section corresponding to the current value. Follows the ARIA meter pattern for accessibility.
+A segmented gauge component that displays a horizontal gauge divided into sections based on min/max values with a circular indicator on the section corresponding to the current value. Follows the ARIA meter pattern for accessibility.
 
 <Canvas of={stories.Default} />
 
@@ -28,6 +29,40 @@ import { SegmentedGauge } from '@spark-ui/components'
 
 ## Usage
 
+### Indeterminate
+
+A `SegmentedGauge` can be used without a value to indicate that the value is not available.
+
+<Callout kind="warning">
+  <p>
+    a11y: A `meter` pattern MUST have a value. If the value is not available, the component uses a `status` role instead.
+  </p>
+</Callout>
+
+<Canvas of={stories.WithoutValue} />
+
+### Intent
+
+Examples with different intents to convey different meanings.
+
+<Canvas of={stories.IntentVariants} />
+
+### Custom colors
+
+It is also possible to pass a custom color to the intent prop. For example, to manage your own color scale.
+
+<Callout kind="warning">
+  <p>
+    If your website supports dark mode or high contrast mode, favor using Spark UI color tokens to provide a good contrast.
+  </p>
+</Callout>
+
+<Canvas of={stories.CustomColors} />
+
+
+### Sizes
+
+<Canvas of={stories.SizeVariants} />
 
 ### With render prop
 
@@ -35,21 +70,15 @@ Use the render prop pattern for complete control over the layout and styling.
 
 <Canvas of={stories.WithRenderProp} />
 
-
-### Sizes
-
-<Canvas of={stories.SizeVariants} />
-
-### Intent and custom colors
-
-Examples with different intents to convey different meanings.
-It is also possible to pass a custom color to the intent prop.
-
-<Canvas of={stories.IntentVariants} />
-
 ### With Label
 
 Use the Label component to provide clear context and improve accessibility.
+
+<Callout kind="warning">
+  <p>
+    a11y: If you don't combine the Label component with the SegmentedGauge component, you must provide an aria-label prop.
+  </p>
+</Callout>
 
 <Canvas of={stories.WithLabel} />
 
@@ -59,13 +88,13 @@ Adheres to the [meter WAI-ARIA role](https://www.w3.org/TR/wai-aria-1.1/#meter).
 
 ### Guidelines
 
-- Usage of `aria-label` is **mandatory**. It serves as the accessible name for the meter.
-- The component automatically manages `aria-valuenow`, `aria-valuemin`, and `aria-valuemax` attributes.
-- Each segment can have its own `aria-label` for additional context.
+- If you don't attach a visible label to the gauge, you **must** use `aria-label`. It serves as the accessible name for the meter.
+- The `description` prop provides additional context via `aria-describedby`.
 - The circular indicator is marked with `aria-hidden="true"` as it's purely decorative.
+- The component falls back to a `status` role if the value is not available.
 
 ### Screen reader
 
 - The meter value and range are announced to screen readers.
-- Individual segment labels are available for additional context.
+- The description text provides additional context about the current value.
 - The current active segment is clearly indicated.
