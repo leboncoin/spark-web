@@ -24,9 +24,13 @@ export interface SegmentedGaugeProps {
    */
   intent?: 'basic' | 'success' | 'alert' | 'danger' | 'info' | string
   /**
-   * Accessible label for the gauge
+   * ID of the gauge element
    */
-  'aria-label': string
+  id?: string
+  /**
+   * Accessible label for the gauge (required if no id is provided)
+   */
+  'aria-label'?: string
   /**
    * Additional CSS classes
    */
@@ -55,6 +59,7 @@ export const SegmentedGauge = ({
   segmentLabels,
   size = 'sm',
   intent = 'basic',
+  id,
   'aria-label': ariaLabel,
   className,
   ref,
@@ -79,8 +84,11 @@ export const SegmentedGauge = ({
     return segmentLabels[currentIndex] || `Value ${currentIndex + 1}`
   }, [segmentLabels, currentIndex])
 
-  // Generate unique ID for the label using React's useId
-  const labelId = useId()
+  // Generate unique IDs
+  const internalLabelId = useId()
+  const generatedId = useId()
+  // Use provided id or generated one for the gauge element
+  const gaugeId = id || generatedId
 
   const segmentsData = useMemo(() => {
     return Array.from({ length: segments }, (_, index) => ({
@@ -102,9 +110,22 @@ export const SegmentedGauge = ({
       activeLabel,
       size,
       intent,
-      labelId,
+      labelId: internalLabelId,
+      gaugeId,
     }),
-    [value, min, max, segments, segmentLabels, currentIndex, activeLabel, size, intent, labelId]
+    [
+      value,
+      min,
+      max,
+      segments,
+      segmentLabels,
+      currentIndex,
+      activeLabel,
+      size,
+      intent,
+      internalLabelId,
+      gaugeId,
+    ]
   )
 
   // If children is provided, use render prop pattern
@@ -124,6 +145,7 @@ export const SegmentedGauge = ({
   return (
     <SegmentedGaugeContext.Provider value={contextValue}>
       <div
+        id={gaugeId}
         data-spark-component="segmented-gauge"
         ref={ref}
         className={cx('gap-md flex items-center', className)}
@@ -131,8 +153,9 @@ export const SegmentedGauge = ({
         aria-valuenow={value}
         aria-valuemin={min}
         aria-valuemax={max}
-        aria-label={ariaLabel}
-        aria-describedby={labelId}
+        aria-labelledby={id ? `${gaugeId}-label` : undefined}
+        aria-label={!id ? ariaLabel : undefined}
+        aria-describedby={internalLabelId}
         {...props}
       >
         <SegmentedGaugeTrack>
@@ -147,7 +170,7 @@ export const SegmentedGauge = ({
           ))}
         </SegmentedGaugeTrack>
 
-        <SegmentedGaugeLabel id={labelId}>{activeLabel}</SegmentedGaugeLabel>
+        <SegmentedGaugeLabel id={internalLabelId}>{activeLabel}</SegmentedGaugeLabel>
       </div>
     </SegmentedGaugeContext.Provider>
   )

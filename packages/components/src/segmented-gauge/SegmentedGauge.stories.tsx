@@ -1,3 +1,4 @@
+import { Label } from '@spark-ui/components/label'
 import { Meta, StoryFn } from '@storybook/react-vite'
 
 import { SegmentedGauge } from '.'
@@ -178,6 +179,35 @@ export const IntentVariants: StoryFn = () => {
           aria-label="Purple gauge"
         />
       </div>
+    </div>
+  )
+}
+
+export const WithLabel: StoryFn = () => {
+  const segmentLabels = ['Poor', 'Fair', 'Good', 'Very Good', 'Excellent']
+  const colorPerScore = {
+    0: '#fb3332',
+    1: '#f87b34',
+    2: '#fed937',
+    3: '#69ca3d',
+    4: '#1ea546',
+  }
+
+  return (
+    <div className="space-y-sm">
+      <Label
+        className="gap-sm flex items-center"
+        htmlFor="quality-rating-3"
+        id="quality-rating-3-label"
+      >
+        Quality Rating
+      </Label>
+      <SegmentedGauge
+        id="quality-rating-3"
+        value={3}
+        intent={colorPerScore[4]}
+        segmentLabels={segmentLabels}
+      />
     </div>
   )
 }
