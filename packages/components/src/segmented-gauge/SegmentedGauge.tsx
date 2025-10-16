@@ -10,11 +10,19 @@ export interface SegmentedGaugeProps {
   /**
    * The current value of the gauge
    */
-  value: number
+  value?: number
   /**
-   * Labels for each segment (required)
+   * Minimum value of the gauge (aria-valuemin)
    */
-  segmentLabels: string[]
+  min: number
+  /**
+   * Maximum value of the gauge (aria-valuemax)
+   */
+  max: number
+  /**
+   * Description text for the gauge (aria-describedby)
+   */
+  description?: string
   /**
    * Size of the gauge
    */
@@ -47,16 +55,16 @@ export interface SegmentedGaugeProps {
       index: number
       isActive: boolean
       isCurrent: boolean
-      label: string
     }[]
-    activeLabel: string
     currentIndex: number
   }) => React.ReactNode
 }
 
 export const SegmentedGauge = ({
   value,
-  segmentLabels,
+  min,
+  max,
+  description,
   size = 'sm',
   intent = 'basic',
   id,
@@ -66,11 +74,13 @@ export const SegmentedGauge = ({
   children,
   ...props
 }: SegmentedGaugeProps) => {
-  // Calculate segments, min, and max from segmentLabels
-  const segments = segmentLabels.length
-  const min = 0
-  const max = segments - 1
+  // Calculate segments from min and max
+  const segments = max - min + 1
   const currentIndex = useMemo(() => {
+    // If value is undefined or null, no segment is active
+    if (value == null) {
+      return -1
+    }
     const normalizedValue = Math.max(min, Math.min(max, value))
     const range = max - min
     const segmentSize = range / (segments - 1)
@@ -79,10 +89,6 @@ export const SegmentedGauge = ({
     // Clamp the index to valid range
     return Math.max(0, Math.min(segments - 1, Math.round(rawIndex)))
   }, [value, min, max, segments])
-
-  const activeLabel = useMemo(() => {
-    return segmentLabels[currentIndex] || `Value ${currentIndex + 1}`
-  }, [segmentLabels, currentIndex])
 
   // Generate unique IDs
   const internalLabelId = useId()
@@ -93,11 +99,10 @@ export const SegmentedGauge = ({
   const segmentsData = useMemo(() => {
     return Array.from({ length: segments }, (_, index) => ({
       index,
-      isActive: index <= currentIndex,
-      isCurrent: index === currentIndex,
-      label: segmentLabels[index] || `Segment ${index + 1}`,
+      isActive: currentIndex !== -1 && index <= currentIndex,
+      isCurrent: currentIndex !== -1 && index === currentIndex,
     }))
-  }, [segments, currentIndex, segmentLabels])
+  }, [segments, currentIndex])
 
   const contextValue = useMemo(
     () => ({
@@ -105,27 +110,13 @@ export const SegmentedGauge = ({
       min,
       max,
       segments,
-      segmentLabels,
       currentIndex,
-      activeLabel,
       size,
       intent,
       labelId: internalLabelId,
       gaugeId,
     }),
-    [
-      value,
-      min,
-      max,
-      segments,
-      segmentLabels,
-      currentIndex,
-      activeLabel,
-      size,
-      intent,
-      internalLabelId,
-      gaugeId,
-    ]
+    [value, min, max, segments, currentIndex, size, intent, internalLabelId, gaugeId]
   )
 
   // If children is provided, use render prop pattern
@@ -134,12 +125,26 @@ export const SegmentedGauge = ({
       <SegmentedGaugeContext.Provider value={contextValue}>
         {children({
           segments: segmentsData,
-          activeLabel,
           currentIndex,
         })}
       </SegmentedGaugeContext.Provider>
     )
   }
+
+  /**
+   * A `meter` role MUST have a value. If the value is not available, the component uses a `status` role instead.
+   */
+  const roleProps =
+    value != null
+      ? {
+          role: 'meter',
+          'aria-valuenow': value,
+          'aria-valuemin': min,
+          'aria-valuemax': max,
+        }
+      : {
+          role: 'status',
+        }
 
   // Default rendering
   return (
@@ -149,10 +154,7 @@ export const SegmentedGauge = ({
         data-spark-component="segmented-gauge"
         ref={ref}
         className={cx('gap-md flex items-center', className)}
-        role="meter"
-        aria-valuenow={value}
-        aria-valuemin={min}
-        aria-valuemax={max}
+        {...roleProps}
         aria-labelledby={id ? `${gaugeId}-label` : undefined}
         aria-label={!id ? ariaLabel : undefined}
         aria-describedby={internalLabelId}
@@ -165,12 +167,13 @@ export const SegmentedGauge = ({
               index={segment.index}
               isActive={segment.isActive}
               isCurrent={segment.isCurrent}
-              aria-label={segment.label}
             />
           ))}
         </SegmentedGaugeTrack>
 
-        <SegmentedGaugeLabel id={internalLabelId}>{activeLabel}</SegmentedGaugeLabel>
+        {description && (
+          <SegmentedGaugeLabel id={internalLabelId}>{description}</SegmentedGaugeLabel>
+        )}
       </div>
     </SegmentedGaugeContext.Provider>
   )

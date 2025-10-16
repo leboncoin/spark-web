@@ -1,16 +1,15 @@
 import { createContext, useContext } from 'react'
 
 export interface SegmentedGaugeContextValue {
-  value: number
+  value?: number
   min: number
   max: number
   segments: number
-  segmentLabels: string[]
   currentIndex: number
-  activeLabel: string
   size: 'sm' | 'md'
   intent: 'basic' | 'success' | 'alert' | 'danger' | 'info' | string
   labelId: string
+  gaugeId: string
 }
 
 export const SegmentedGaugeContext = createContext<SegmentedGaugeContextValue | null>(null)

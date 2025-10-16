@@ -15,7 +15,7 @@ export const SegmentedGaugeLabel = ({
   id,
   ...props
 }: SegmentedGaugeLabelProps) => {
-  const { activeLabel, labelId } = useSegmentedGaugeContext()
+  const { labelId } = useSegmentedGaugeContext()
 
   return (
     <span
@@ -26,7 +26,7 @@ export const SegmentedGaugeLabel = ({
       className={cx('default:text-on-surface default:text-body-2', className)}
       {...props}
     >
-      {children || activeLabel}
+      {children}
     </span>
   )
 }

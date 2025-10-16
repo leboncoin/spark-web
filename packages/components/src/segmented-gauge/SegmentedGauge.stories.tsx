@@ -13,58 +13,15 @@ const meta: Meta<typeof SegmentedGauge> = {
 export default meta
 
 export const Default: StoryFn = () => {
-  const colorPerScore = {
-    0: '#fb3332',
-    1: '#f87b34',
-    2: '#fed937',
-    3: '#69ca3d',
-    4: '#1ea546',
-  }
-
   return (
-    <div className="space-y-lg">
-      <SegmentedGauge
-        value={0}
-        intent={colorPerScore[0]}
-        segmentLabels={['Poor', 'Fair', 'Good', 'Very Good', 'Excellent']}
-        aria-label="Quality rating"
-      />
-      <SegmentedGauge
-        value={1}
-        intent={colorPerScore[1]}
-        segmentLabels={['Poor', 'Fair', 'Good', 'Very Good', 'Excellent']}
-        aria-label="Quality rating"
-      />
-      <SegmentedGauge
-        value={2}
-        intent={colorPerScore[2]}
-        segmentLabels={['Poor', 'Fair', 'Good', 'Very Good', 'Excellent']}
-        aria-label="Quality rating"
-      />
-      <SegmentedGauge
-        value={3}
-        intent={colorPerScore[3]}
-        segmentLabels={['Poor', 'Fair', 'Good', 'Very Good', 'Excellent']}
-        aria-label="Quality rating"
-      />
-      <SegmentedGauge
-        value={4}
-        intent={colorPerScore[4]}
-        segmentLabels={['Poor', 'Fair', 'Good', 'Very Good', 'Excellent']}
-        aria-label="Quality rating"
-      />
-    </div>
+    <SegmentedGauge value={3} min={0} max={4} description="Very Good" aria-label="Quality rating" />
   )
 }
 
 export const WithRenderProp: StoryFn = () => {
   return (
-    <SegmentedGauge
-      value={2}
-      segmentLabels={['Beginner', 'Intermediate', 'Advanced', 'Expert']}
-      aria-label="Skill level"
-    >
-      {({ segments, activeLabel }) => (
+    <SegmentedGauge value={2} min={0} max={3} aria-label="Skill level">
+      {({ segments }) => (
         <div className="gap-lg flex flex-col items-center">
           <SegmentedGauge.Track className="from-main-container to-accent-container p-md h-4 bg-gradient-to-r">
             {segments.map(segment => (
@@ -73,13 +30,12 @@ export const WithRenderProp: StoryFn = () => {
                 index={segment.index}
                 isActive={segment.isActive}
                 isCurrent={segment.isCurrent}
-                aria-label={segment.label}
                 className="rounded-lg"
               />
             ))}
           </SegmentedGauge.Track>
 
-          <SegmentedGauge.Label className="text-lg font-bold">{activeLabel}</SegmentedGauge.Label>
+          <SegmentedGauge.Label className="text-lg font-bold">Advanced</SegmentedGauge.Label>
         </div>
       )}
     </SegmentedGauge>
@@ -87,16 +43,16 @@ export const WithRenderProp: StoryFn = () => {
 }
 
 export const SizeVariants: StoryFn = () => {
-  const segmentLabels = ['Poor', 'Fair', 'Good', 'Very Good', 'Excellent']
-
   return (
     <div className="space-y-lg">
       <div className="space-y-sm">
         <h4 className="text-sm font-medium">Small (sm) - Default</h4>
         <SegmentedGauge
           value={2}
+          min={0}
+          max={4}
           size="sm"
-          segmentLabels={segmentLabels}
+          description="Good"
           aria-label="Small gauge"
         />
       </div>
@@ -105,8 +61,10 @@ export const SizeVariants: StoryFn = () => {
         <h4 className="text-sm font-medium">Medium (md)</h4>
         <SegmentedGauge
           value={2}
+          min={0}
+          max={4}
           size="md"
-          segmentLabels={segmentLabels}
+          description="Good"
           aria-label="Medium gauge"
         />
       </div>
@@ -115,84 +73,60 @@ export const SizeVariants: StoryFn = () => {
 }
 
 export const IntentVariants: StoryFn = () => {
-  const segmentLabels = ['Low', 'Medium', 'High']
+  const intents = [
+    { name: 'Basic (default)', intent: 'basic', ariaLabel: 'Basic gauge' },
+    { name: 'Success', intent: 'success', ariaLabel: 'Success gauge' },
+    { name: 'Alert', intent: 'alert', ariaLabel: 'Alert gauge' },
+    { name: 'Danger', intent: 'danger', ariaLabel: 'Danger gauge' },
+    { name: 'Info', intent: 'info', ariaLabel: 'Info gauge' },
+  ]
 
   return (
     <div className="space-y-lg">
-      <div className="space-y-sm">
-        <h4 className="text-sm font-medium">Basic (default)</h4>
-        <SegmentedGauge
-          value={1}
-          intent="basic"
-          segmentLabels={segmentLabels}
-          aria-label="Basic gauge"
-        />
-      </div>
+      {intents.map(({ name, intent, ariaLabel }) => (
+        <div key={intent} className="space-y-sm">
+          <h4 className="text-sm font-medium">{name}</h4>
+          <SegmentedGauge
+            value={1}
+            min={0}
+            max={2}
+            intent={intent}
+            description="Medium"
+            aria-label={ariaLabel}
+          />
+        </div>
+      ))}
+    </div>
+  )
+}
 
-      <div className="space-y-sm">
-        <h4 className="text-sm font-medium">Success</h4>
-        <SegmentedGauge
-          value={1}
-          intent="success"
-          segmentLabels={segmentLabels}
-          aria-label="Success gauge"
-        />
-      </div>
+export const CustomColors: StoryFn = () => {
+  const config = [
+    { value: 0, color: '#fb3332', description: 'Poor' },
+    { value: 1, color: '#f87b34', description: 'Fair' },
+    { value: 2, color: '#fed937', description: 'Good' },
+    { value: 3, color: '#69ca3d', description: 'Very Good' },
+    { value: 4, color: '#1ea546', description: 'Excellent' },
+  ]
 
-      <div className="space-y-sm">
-        <h4 className="text-sm font-medium">Alert</h4>
+  return (
+    <div className="space-y-lg">
+      {config.map(({ value, color, description }) => (
         <SegmentedGauge
-          value={1}
-          intent="alert"
-          segmentLabels={segmentLabels}
-          aria-label="Alert gauge"
+          key={value}
+          value={value}
+          min={0}
+          max={4}
+          intent={color}
+          description={description}
+          aria-label="Quality rating"
         />
-      </div>
-
-      <div className="space-y-sm">
-        <h4 className="text-sm font-medium">Danger</h4>
-        <SegmentedGauge
-          value={1}
-          intent="danger"
-          segmentLabels={segmentLabels}
-          aria-label="Danger gauge"
-        />
-      </div>
-
-      <div className="space-y-sm">
-        <h4 className="text-sm font-medium">Info</h4>
-        <SegmentedGauge
-          value={1}
-          intent="info"
-          segmentLabels={segmentLabels}
-          aria-label="Info gauge"
-        />
-      </div>
-
-      <div className="space-y-sm">
-        <h4 className="text-sm font-medium">Custom color</h4>
-
-        <SegmentedGauge
-          value={1}
-          intent="#8B5CF6"
-          segmentLabels={segmentLabels}
-          aria-label="Purple gauge"
-        />
-      </div>
+      ))}
     </div>
   )
 }
 
 export const WithLabel: StoryFn = () => {
-  const segmentLabels = ['Poor', 'Fair', 'Good', 'Very Good', 'Excellent']
-  const colorPerScore = {
-    0: '#fb3332',
-    1: '#f87b34',
-    2: '#fed937',
-    3: '#69ca3d',
-    4: '#1ea546',
-  }
-
   return (
     <div className="space-y-sm">
       <Label
@@ -205,9 +139,23 @@ export const WithLabel: StoryFn = () => {
       <SegmentedGauge
         id="quality-rating-3"
         value={3}
-        intent={colorPerScore[4]}
-        segmentLabels={segmentLabels}
+        min={0}
+        max={4}
+        intent="success"
+        description="Very Good"
       />
     </div>
+  )
+}
+
+export const WithoutValue: StoryFn = () => {
+  return (
+    <SegmentedGauge
+      value={undefined}
+      min={0}
+      max={4}
+      description="No data available"
+      aria-label="Quality rating"
+    />
   )
 }
