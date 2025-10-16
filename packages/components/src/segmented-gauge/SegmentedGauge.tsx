@@ -47,11 +47,6 @@ export interface SegmentedGaugeProps {
     }[]
     activeLabel: string
     currentIndex: number
-    SegmentedGauge: {
-      Track: typeof SegmentedGaugeTrack
-      Segment: typeof SegmentedGaugeSegment
-      Label: typeof SegmentedGaugeLabel
-    }
   }) => React.ReactNode
 }
 
@@ -120,11 +115,6 @@ export const SegmentedGauge = ({
           segments: segmentsData,
           activeLabel,
           currentIndex,
-          SegmentedGauge: {
-            Track: SegmentedGaugeTrack,
-            Segment: SegmentedGaugeSegment,
-            Label: SegmentedGaugeLabel,
-          },
         })}
       </SegmentedGaugeContext.Provider>
     )

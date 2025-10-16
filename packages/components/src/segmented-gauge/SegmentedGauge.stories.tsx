@@ -63,7 +63,7 @@ export const WithRenderProp: StoryFn = () => {
       segmentLabels={['Beginner', 'Intermediate', 'Advanced', 'Expert']}
       aria-label="Skill level"
     >
-      {({ segments, activeLabel, SegmentedGauge }) => (
+      {({ segments, activeLabel }) => (
         <div className="gap-lg flex flex-col items-center">
           <SegmentedGauge.Track className="from-main-container to-accent-container p-md h-4 bg-gradient-to-r">
             {segments.map(segment => (

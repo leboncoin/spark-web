@@ -46,7 +46,7 @@ describe('SegmentedGauge', () => {
     // Given: A SegmentedGauge with render prop children
     render(
       <SegmentedGauge value={2} segmentLabels={['A', 'B', 'C']} aria-label="Test gauge">
-        {({ segments, activeLabel, SegmentedGauge }) => (
+        {({ segments, activeLabel }) => (
           <div data-testid="custom-render">
             <SegmentedGauge.Track>
               {segments.map(segment => (
