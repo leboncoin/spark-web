@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.20.6](https://github.com/leboncoin/spark-web/compare/v10.20.5...v10.20.6) (2025-10-17)
+
+**Note:** Version bump only for package @spark-ui/icons
+
 ## [10.20.5](https://github.com/leboncoin/spark-web/compare/v10.20.4...v10.20.5) (2025-10-14)
 
 **Note:** Version bump only for package @spark-ui/icons

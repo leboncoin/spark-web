@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.20.6](https://github.com/leboncoin/spark-web/compare/v10.20.5...v10.20.6) (2025-10-17)
+
+### Bug Fixes
+
+- **components:** forward onValueChange to Input component ([0911813](https://github.com/leboncoin/spark-web/commit/0911813cbde68c943ef777f732233318696e7b6b))
+
 ## [10.20.5](https://github.com/leboncoin/spark-web/compare/v10.20.4...v10.20.5) (2025-10-14)
 
 **Note:** Version bump only for package spark
