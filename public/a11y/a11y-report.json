@@ -795,6 +795,12 @@
     "incomplete": [],
     "violations": []
   },
+  "@spark-ui/components/segmented-gauge": {
+    "timestamp": "2025-10-15T16:27:22.036Z",
+    "url": "http://localhost:3002/a11y/segmented-gauge",
+    "incomplete": [],
+    "violations": []
+  },
   "@spark-ui/components/skeleton": {
     "timestamp": "2025-09-27T14:48:33.161Z",
     "url": "http://localhost:3002/a11y/skeleton",
