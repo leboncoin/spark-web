@@ -1,7 +1,7 @@
 import { Check } from '@spark-ui/icons/Check'
 import { PenOutline } from '@spark-ui/icons/PenOutline'
 import { Meta, StoryFn } from '@storybook/react-vite'
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 
 import { FormField } from '../form-field'
 import { VisuallyHidden } from '../visually-hidden'
@@ -44,11 +44,7 @@ export const Uncontrolled: StoryFn = _args => (
 export const Controlled: StoryFn = () => {
   const [value, setValue] = useState('IPhone 12 in good condition')
 
-  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setValue(event.target.value)
-  }
-
-  return <Textarea rows={2} value={value} onChange={handleChange} aria-label="Description" />
+  return <Textarea rows={2} value={value} onValueChange={setValue} aria-label="Description" />
 }
 
 export const Resizable: StoryFn = () => (
@@ -189,15 +185,11 @@ export const FieldCharactersCount: StoryFn = () => {
   const maxLength = 90
   const [value, setValue] = useState('')
 
-  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setValue(event.target.value)
-  }
-
   return (
     <FormField name="description">
       <FormField.Label>Description</FormField.Label>
 
-      <Textarea rows={2} value={value} onChange={handleChange} maxLength={maxLength} />
+      <Textarea rows={2} value={value} onValueChange={setValue} maxLength={maxLength} />
 
       <div className="gap-md flex justify-between">
         <div className="grow">

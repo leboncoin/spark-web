@@ -16,6 +16,7 @@ const Root = ({
   rows = 1,
   isResizable = true,
   ref,
+  onValueChange,
   ...others
 }: PropsWithChildren<TextareaProps>) => {
   return (
@@ -28,6 +29,7 @@ const Root = ({
       data-spark-component="textarea"
       disabled={disabled}
       asChild
+      onValueChange={onValueChange}
     >
       <textarea ref={ref} rows={rows} {...others} />
     </Input>
