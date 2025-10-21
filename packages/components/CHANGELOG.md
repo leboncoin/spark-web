@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.20.9](https://github.com/leboncoin/spark-web/compare/v10.20.8...v10.20.9) (2025-10-21)
+
+### Bug Fixes
+
+- **components:** cursor pointer on chip clear buttons ([5a4e6c2](https://github.com/leboncoin/spark-web/commit/5a4e6c27ec1f22285990908a1b588a32f514a45a))
+
 ## [10.20.8](https://github.com/leboncoin/spark-web/compare/v10.20.7...v10.20.8) (2025-10-21)
 
 ### Bug Fixes
