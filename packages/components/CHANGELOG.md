@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.20.8](https://github.com/leboncoin/spark-web/compare/v10.20.7...v10.20.8) (2025-10-21)
+
+### Bug Fixes
+
+- **components:** fixed drawer page crashing ([2652d9e](https://github.com/leboncoin/spark-web/commit/2652d9e31e0e96a3ee90fc6f3108ef2599804e3c))
+
 ## [10.20.7](https://github.com/leboncoin/spark-web/compare/v10.20.6...v10.20.7) (2025-10-20)
 
 **Note:** Version bump only for package @spark-ui/components
