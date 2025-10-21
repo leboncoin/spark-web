@@ -1,6 +1,7 @@
 import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
 import { AriaRoles } from '@docs/helpers/AriaRoles'
+import { Callout } from '@docs/helpers/Callout'
 import { Kbd } from '../kbd'
 import { FileUpload } from '.'
 
@@ -10,7 +11,7 @@ import * as stories from './FileUpload.stories'
 
 # FileUpload
 
-TODO: description
+A file upload component that provides a flexible way to handle file selection, drag-and-drop functionality, and file previews. The component supports both simple button triggers and dropzone interfaces with customizable file rendering.
 <Canvas of={stories.Default} />
 
 ## Install
@@ -26,7 +27,10 @@ import { FileUpload } from "@spark-ui/components/file-upload"
 
 export default () => (
   <FileUpload>
-    TODO
+    <FileUpload.Trigger>
+      Upload Files
+    </FileUpload.Trigger>
+    <FileUpload.FilesPreview />
   </FileUpload>
 );
 ```
@@ -43,7 +47,7 @@ Contains all the parts of a file upload.
 
 ### _.Trigger
 
-Contains all the parts of a collapsible section.
+Triggers the file selection dialog when clicked. Can be styled as a button or rendered as any component using the `asChild` prop.
 
 <ArgTypes of={FileUpload.Trigger} />
 
@@ -53,63 +57,55 @@ Contains all the parts of a collapsible section.
 
 ### Dropzone
 
-TODO
+A drag-and-drop interface that allows users to upload files by dragging them onto the dropzone or clicking to browse files.
 
-{/* <Canvas of={stories.Controlled} /> */}
+Using `FileUpload.Trigger` inside a dropzone is optional.
 
-### Accepted files
-
-TODO
-
-{/* <Canvas of={stories.Design} /> */}
+<Canvas of={stories.Dropzone} />
 
 ### Acepted files - custom
 
-TODO
+Use the `render` prop of `FileUpload.FilesPreview` to customize the markup of the files previews.
 
-{/* <Canvas of={stories.Disabled} /> */}
+<Canvas of={stories.WithCustomFileRender} />
 
-### Multiple files
-
-TODO
-
-{/* <Canvas of={stories.DisabledItem} /> */}
-
-### Conditional Dropzone
-
-TODO 
-
-{/* <Canvas of={stories.Multiple} /> */}
+## Advanced examples
 
 ### Custom Trigger
 
-TODO 
+Use `unstyled` on the `FileUpload.Trigger` and wrap it with a Spark UI component compatible with the `asChild` prop to render the button as a different component.
 
-{/* <Canvas of={stories.Multiple} /> */}
+<Callout kind="warning" marginY="large">
+  <p>
+    a11y: It is important that the trigger remain a button (with `type="button"`) and that it is focusable and clickable.
+  </p>
+</Callout>
 
-### Clearable Trigger
-
-TODO 
-
-{/* <Canvas of={stories.Multiple} /> */}
+<Canvas of={stories.CustomTrigger} />
 
 ### Custom Dropzone
 
-TODO 
+Customize the dropzone appearance and behavior by wrapping it with other components or modifying its content. 
 
 {/* <Canvas of={stories.Multiple} /> */}
+
+### Photos Gallery
+
+<Canvas of={stories.PhotosGallery} />
 
 ## Accessibility
 
 <A11yReport of="file-upload" />
 
-Adheres to the [TODO](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/).
+Adheres to the [file upload pattern](https://www.w3.org/WAI/ARIA/apg/patterns/file-upload/).
 
 ### Keyboard Interactions
 
-TODO
+- <kbd>Tab</kbd> - Navigate to the file upload trigger
+- <kbd>Enter</kbd> or <kbd>Space</kbd> - Open file selection dialog
+- <kbd>Escape</kbd> - Close file selection dialog
 
 ### Pattern
 
-TODO
+The FileUpload component uses a context-based architecture where the main component provides file management state and the sub-components handle specific functionality like triggering file selection and displaying file previews.
 

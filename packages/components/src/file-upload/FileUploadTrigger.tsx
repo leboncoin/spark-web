@@ -1,43 +1,61 @@
 import { cx } from 'class-variance-authority'
-import { ReactNode, Ref } from 'react'
+import React, { ReactNode, Ref } from 'react'
 
+import { Button } from '../button'
 import { Slot } from '../slot'
-
-// import { useFileUploadContext } from './FileUpload'
+import { useFileUploadContext } from './FileUpload'
 
 export interface FileUploadTriggerProps {
-  asChild?: boolean
-  ref?: Ref<HTMLLabelElement>
+  ref?: Ref<HTMLButtonElement>
   className?: string
   children: ReactNode
+  asChild?: boolean
+  unstyled?: boolean
 }
 
 export const Trigger = ({
-  asChild = false,
   className,
   children,
+  asChild = false,
+  unstyled = false,
   ref,
   ...props
 }: FileUploadTriggerProps) => {
-  // const ctx = useFileUploadContext()
+  const { inputRef, triggerRef } = useFileUploadContext()
 
-  const Comp = asChild ? Slot : 'label'
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    e.preventDefault()
+    inputRef.current?.click()
+  }
+
+  const buttonComponent = unstyled ? 'button' : Button
+  const Comp = asChild ? Slot : buttonComponent
 
   return (
     <Comp
-      htmlFor="image_uploads"
-      ref={ref}
+      // htmlFor="image_uploads"
+      type="button"
+      ref={(node: HTMLElement | null) => {
+        // Forward ref to both the context ref and the user ref
+        if (triggerRef) {
+          triggerRef.current = node
+        }
+        if (ref) {
+          if (typeof ref === 'function') {
+            ref(node as HTMLButtonElement)
+          } else {
+            ref.current = node as HTMLButtonElement
+          }
+        }
+      }}
+      design="tinted"
+      intent="neutral"
       data-spark-component="file-upload-trigger"
-      className={cx('group group-focus:bg-accent relative', className)}
+      className={cx(className)}
+      onClick={handleClick}
       {...props}
     >
-      <input
-        id="image_uploads"
-        type="file"
-        name="image_uploads"
-        accept="image/png, image/jpeg"
-        className="bg-accent absolute inset-0 opacity-0"
-      />
       {children}
     </Comp>
   )
