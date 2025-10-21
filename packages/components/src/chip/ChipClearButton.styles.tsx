@@ -63,6 +63,9 @@ export const chipClearButtonStyles = cva(
         false: ['cursor-pointer'],
       },
     },
+    defaultVariants: {
+      disabled: false,
+    },
   }
 )
 
