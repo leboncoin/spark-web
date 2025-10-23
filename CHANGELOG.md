@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.21.0](https://github.com/leboncoin/spark-web/compare/v10.20.11...v10.21.0) (2025-10-23)
+
+### Bug Fixes
+
+- **components:** aria description for segmented gauge value ([3c5379f](https://github.com/leboncoin/spark-web/commit/3c5379f1ba495ddd4796e53534b53815a9fa676c))
+- **components:** properly link label to segmented gauge ([3cd12b3](https://github.com/leboncoin/spark-web/commit/3cd12b39bc15b6a7bf8f9188a203d0f9cc319fff))
+- **components:** removed SegmentedGauge from render prop ([9eb9cca](https://github.com/leboncoin/spark-web/commit/9eb9cca38ee457c12ab67fd36a2934e5e5496583))
+
+### Features
+
+- **components:** segmented gauge component ([9bcf98a](https://github.com/leboncoin/spark-web/commit/9bcf98ad38870d681935147512295b9ba038b022))
+
 ## [10.20.11](https://github.com/leboncoin/spark-web/compare/v10.20.10...v10.20.11) (2025-10-23)
 
 **Note:** Version bump only for package spark
