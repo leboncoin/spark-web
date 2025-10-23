@@ -89,7 +89,9 @@ export const Input = ({
     ref: inputRef,
   })
 
-  const hasPlaceholder = ctx.multiple ? ctx.selectedItems.length === 0 : ctx.selectedItem === null
+  const hasPlaceholder = ctx.multiple
+    ? !ctx.areSelectedItemsInTrigger || ctx.selectedItems.length === 0
+    : ctx.selectedItem === null
 
   function mergeHandlers<T extends SyntheticEvent>(
     handlerA?: (event: T) => void,
