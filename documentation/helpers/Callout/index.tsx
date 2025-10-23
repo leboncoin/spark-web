@@ -29,6 +29,7 @@ const styles = cva(['sb-unstyled p-md border-l-[4px] default:border-neutral'], {
       error: ['border-error'],
       warning: ['border-alert '],
       info: ['border-info'],
+      tip: ['border-info'],
     },
   },
   defaultVariants: {
@@ -36,9 +37,13 @@ const styles = cva(['sb-unstyled p-md border-l-[4px] default:border-neutral'], {
   },
 })
 
-export type StylesProps = ExcludeNull<VariantProps<typeof styles>>
+export type StylesProps = VariantProps<typeof styles>
 
-export function Callout({ children, kind = 'info', ...variants }: PropsWithChildren<StylesProps>) {
+interface Props extends PropsWithChildren<StylesProps> {
+  title?: string
+}
+
+export function Callout({ children, title, kind = 'info', ...variants }: Props) {
   return (
     <div className={styles({ kind, ...variants })}>
       <div className="gap-lg px-lg flex flex-col items-start">
@@ -47,7 +52,7 @@ export function Callout({ children, kind = 'info', ...variants }: PropsWithChild
             ['text-success']: kind === 'success',
             ['text-error']: kind === 'error',
             ['text-alert']: kind === 'warning',
-            ['text-info']: kind === 'info',
+            ['text-info']: kind === 'info' || kind === 'tip',
           })}
         >
           {kind === 'info' && (
@@ -55,7 +60,7 @@ export function Callout({ children, kind = 'info', ...variants }: PropsWithChild
               <Icon size="md">
                 <InfoOutline />
               </Icon>
-              Note
+              {title || 'Note'}
             </>
           )}
           {kind === 'error' && (
@@ -63,7 +68,7 @@ export function Callout({ children, kind = 'info', ...variants }: PropsWithChild
               <Icon size="md">
                 <AlertOutline />
               </Icon>
-              Caution
+              {title || 'Caution'}
             </>
           )}
           {kind === 'success' && (
@@ -71,7 +76,7 @@ export function Callout({ children, kind = 'info', ...variants }: PropsWithChild
               <Icon size="md">
                 <Check />
               </Icon>
-              Success
+              {title || 'Success'}
             </>
           )}
           {kind === 'tip' && (
@@ -79,7 +84,7 @@ export function Callout({ children, kind = 'info', ...variants }: PropsWithChild
               <Icon size="md">
                 <IdeaOutline />
               </Icon>
-              Tip
+              {title || 'Tip'}
             </>
           )}
           {kind === 'warning' && (
@@ -87,7 +92,7 @@ export function Callout({ children, kind = 'info', ...variants }: PropsWithChild
               <Icon size="md">
                 <WarningOutline />
               </Icon>
-              Warning
+              {title || 'Warning'}
             </>
           )}
         </div>

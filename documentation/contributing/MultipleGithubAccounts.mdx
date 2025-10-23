@@ -1,0 +1,75 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Contributing/Multiple Github Accounts" />
+
+# Multiple Github Accounts
+
+Let's say you work on a private repository and a public repository on the same machine.
+
+Maybe the private one belongs to a GHE organization and the public one belongs to a public GitHub account.
+
+You don't want to have to manually switch between the two accounts when you want to commit to one or the other.
+
+This guide will help you do the setup once and be done with it.
+
+## How to
+
+The idea is pretty simple: we'll have two base folders (`work` and `personal` in this guide, but feel free to use whatever you want) where the repositories will be stored according to their respective origin. All repositories within each base folder will use the same credentials, different from the default and without configuration by repository. Structure proposal below.
+
+- `work` needs to be using my professional account (GHE, example: `john.doe@mycompany.com`).
+- `personal` needs to be using my personal account (GitHub, example: `john.doe@gmail.com`).
+
+```bash
+cd ~
+touch .gitconfig-personal
+touch .gitconfig-work
+```
+
+<div className="flex flex-row gap-lg justify-between flex-wrap">
+  <div className="flex-1">
+The first one should contain the following content:
+
+```bash
+[user]
+    name = John Doe
+    email = john.doe@gmail.com
+```
+  </div>
+<div className="flex-1">
+The second one should contain the following content:
+
+```bash
+[user]
+    name = John Doe
+    email = john.doe@mycompany.com
+```
+</div>
+</div>
+
+
+Finally, open your base .gitconfig file:
+
+```bash
+open ~/.gitconfig
+```
+
+Add the following content (adapt the paths to your own):
+
+```bash
+[includeIf "gitdir:~/projects/personal/"]
+	path = ~/.gitconfig-personal
+[includeIf "gitdir:~/projects/work/"]
+	path = ~/.gitconfig-work
+```
+
+Now, the work repositories only need to be inside the ~/Projects/Work directory and all commits will use the correct credentials, without any configurations by repository. The same goes to the Personal folder repositories.
+
+## Test 
+
+You can check that a repository is using the correct credentials by running the following inside a repository folder:
+```bash
+git config --list | grep user.email
+```
+It should show "john.doe@mycompany.com" if you are using the work account, otherwise it should show "john.doe@gmail.com"
+
+**Spark should be cloned into the `personal` folder.**
