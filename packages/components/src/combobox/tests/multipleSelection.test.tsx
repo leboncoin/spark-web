@@ -373,6 +373,47 @@ describe('Combobox', () => {
       expect(getItem('Pride and Prejudice')).toHaveAttribute('aria-selected', 'true')
     })
 
+    describe('placeholder', () => {
+      it('should hide placeholder with selected items in trigger', () => {
+        render(
+          <Combobox multiple value={['book-1']}>
+            <Combobox.Trigger>
+              <Combobox.SelectedItems />
+              <Combobox.Input aria-label="Book" placeholder="Pick a book" />
+            </Combobox.Trigger>
+            <Combobox.Popover>
+              <Combobox.Items>
+                <Combobox.Item value="book-1">War and Peace</Combobox.Item>
+                <Combobox.Item value="book-2">1984</Combobox.Item>
+                <Combobox.Item value="book-3">Pride and Prejudice</Combobox.Item>
+              </Combobox.Items>
+            </Combobox.Popover>
+          </Combobox>
+        )
+
+        expect(getInput('Book')).not.toHaveAttribute('placeholder')
+      })
+
+      it('should display placeholder without selected items in trigger', () => {
+        render(
+          <Combobox multiple value={['book-1']}>
+            <Combobox.Trigger>
+              <Combobox.Input aria-label="Book" placeholder="Pick a book" />
+            </Combobox.Trigger>
+            <Combobox.Popover>
+              <Combobox.Items>
+                <Combobox.Item value="book-1">War and Peace</Combobox.Item>
+                <Combobox.Item value="book-2">1984</Combobox.Item>
+                <Combobox.Item value="book-3">Pride and Prejudice</Combobox.Item>
+              </Combobox.Items>
+            </Combobox.Popover>
+          </Combobox>
+        )
+
+        expect(getInput('Book')).toHaveAttribute('placeholder', 'Pick a book')
+      })
+    })
+
     describe('blur behaviour', () => {
       it('should not clear input value when custom value is allowed', async () => {
         const user = userEvent.setup()

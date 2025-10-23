@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 /* eslint-disable max-lines-per-function */
 import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { useCombinedState } from '@spark-ui/hooks/use-combined-state'
@@ -28,6 +27,7 @@ export interface ComboboxContextState extends DownshiftState {
   filteredItemsMap: ItemsMap
   highlightedItem: ComboboxItem | undefined
   hasPopover: boolean
+  areSelectedItemsInTrigger: boolean
   multiple: boolean
   disabled: boolean
   readOnly: boolean
@@ -35,6 +35,7 @@ export interface ComboboxContextState extends DownshiftState {
   state?: 'error' | 'alert' | 'success'
   lastInteractionType: 'mouse' | 'keyboard'
   setHasPopover: Dispatch<SetStateAction<boolean>>
+  setAreSelectedItemsInTrigger: Dispatch<SetStateAction<boolean>>
   setLastInteractionType: (type: 'mouse' | 'keyboard') => void
   setOnInputValueChange: Dispatch<SetStateAction<((v: string) => void) | null>>
   innerInputRef: RefObject<HTMLInputElement | null>
@@ -246,6 +247,9 @@ export const ComboboxProvider = ({
   const [hasPopover, setHasPopover] = useState<boolean>(
     hasChildComponent(children, 'Combobox.Popover')
   )
+
+  const [areSelectedItemsInTrigger, setAreSelectedItemsInTrigger] = useState(false)
+
   const [lastInteractionType, setLastInteractionType] = useState<'mouse' | 'keyboard'>('mouse')
 
   useEffect(() => {
@@ -426,6 +430,8 @@ export const ComboboxProvider = ({
         multiple,
         disabled,
         readOnly,
+        areSelectedItemsInTrigger,
+        setAreSelectedItemsInTrigger,
         hasPopover,
         setHasPopover,
         state,

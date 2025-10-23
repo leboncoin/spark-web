@@ -55,6 +55,11 @@ export const Trigger = ({ className, children, ref: forwardedRef }: TriggerProps
 
   useWidthIncreaseCallback(scrollableAreaRef, scrollToRight)
 
+  const hasSelectedItems = !!selectedItems
+  useEffect(() => {
+    ctx.setAreSelectedItemsInTrigger(hasSelectedItems)
+  }, [hasSelectedItems])
+
   useEffect(() => {
     const resizeObserver = new ResizeObserver(scrollToRight)
 
