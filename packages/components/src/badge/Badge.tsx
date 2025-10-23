@@ -9,6 +9,8 @@ export type BadgeProps = PropsWithChildren<Omit<BadgeItemProps, 'type'>> & {
 export const Badge = ({ children, ...props }: BadgeProps) => {
   const isStandalone = !children
 
+  console.log('test config ssh')
+
   return isStandalone ? (
     <BadgeItem type="standalone" {...props} />
   ) : (
