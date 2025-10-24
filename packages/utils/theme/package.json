@@ -15,7 +15,7 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "vite build"
+    "build": "npx postcss src/theme.css -o dist/theme.css --use postcss-import --use cssnano --no-map"
   },
   "repository": {
     "type": "git",
@@ -30,5 +30,11 @@
     "url": "https://github.com/leboncoin/spark-web/issues?q=is%3Aopen+label%3Autility+label%3Atheme"
   },
   "homepage": "https://sparkui.vercel.app",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "cssnano": "^7.1.1",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "postcss-import": "^16.1.1"
+  }
 }
