@@ -15,7 +15,7 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "npx postcss src/theme.css -o dist/theme.css --use postcss-import --use cssnano --no-map"
+    "build": "npx postcss src/theme.css -o dist/style.css --use postcss-import --use cssnano --no-map"
   },
   "repository": {
     "type": "git",
