@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.22.0](https://github.com/leboncoin/spark-web/compare/v10.21.2...v10.22.0) (2025-10-24)
+
+### Features
+
+- **theme-utils:** update output path ([f0bdf04](https://github.com/leboncoin/spark-web/commit/f0bdf0467d435102bfa2ae17967ee372df037200))
+
 ## [10.21.2](https://github.com/leboncoin/spark-web/compare/v10.21.1...v10.21.2) (2025-10-24)
 
 ### Bug Fixes
