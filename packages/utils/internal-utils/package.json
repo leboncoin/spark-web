@@ -1,6 +1,6 @@
 {
   "name": "@spark-ui/internal-utils",
-  "version": "10.22.1",
+  "version": "11.0.0",
   "description": "package for sharing reusable code and resources across the codebase",
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",

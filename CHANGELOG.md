@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.0.0](https://github.com/leboncoin/spark-web/compare/v10.22.1...v11.0.0) (2025-10-28)
+
+### Build System
+
+- packages are now ESM only ([170d3ea](https://github.com/leboncoin/spark-web/commit/170d3eaaab51766f6c9ed96b199b6034c106933d))
+
+### BREAKING CHANGES
+
+- Spark UI packages no longer support CJS imports
+
 ## [10.22.1](https://github.com/leboncoin/spark-web/compare/v10.22.0...v10.22.1) (2025-10-28)
 
 ### Bug Fixes
