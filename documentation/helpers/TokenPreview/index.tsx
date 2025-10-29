@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 export const getCssVariable = (varName: string) =>
   getComputedStyle(document.documentElement).getPropertyValue(varName)
 
@@ -25,7 +26,7 @@ export const ColorPreview = ({ bg }: { bg: string }) => {
 }
 
 export const BackgroundColorPreview = () => {
-  const bgColors = {
+  const mainColors = {
     'bg-main': {
       token: '--color-main',
       styles: 'bg-main text-on-main hover:bg-main-hovered',
@@ -58,6 +59,9 @@ export const BackgroundColorPreview = () => {
       token: '--color-basic-container',
       styles: 'bg-basic-container text-on-basic-container hover:bg-basic-container-hovered',
     },
+  }
+
+  const feedBackColors = {
     'bg-success': {
       token: '--color-success',
       styles: 'bg-success text-on-success hover:bg-success-hovered',
@@ -98,6 +102,18 @@ export const BackgroundColorPreview = () => {
       token: '--color-neutral-container',
       styles: 'bg-neutral-container text-on-neutral-container hover:bg-neutral-container-hovered',
     },
+  }
+
+  const baseColors = {
+    'bg-background': {
+      token: '--color-background',
+      styles: 'bg-background text-on-background hover:bg-background-hovered',
+    },
+    'bg-background-variant': {
+      token: '--color-background-variant',
+      styles:
+        'bg-background-variant text-on-background-variant hover:bg-background-variant-hovered',
+    },
     'bg-surface': {
       token: '--color-surface',
       styles: 'bg-surface text-on-surface hover:bg-surface-hovered',
@@ -106,18 +122,63 @@ export const BackgroundColorPreview = () => {
       token: '--color-surface-container',
       styles: 'bg-surface-container text-on-surface-container hover:bg-surface-container-hovered',
     },
+    'bg-surface-inverse': {
+      token: '--color-surface-inverse',
+      styles: 'bg-surface-inverse text-on-surface-inverse hover:bg-surface-inverse-hovered',
+    },
+    'bg-surface-dark': {
+      token: '--color-surface-dark',
+      styles: 'bg-surface-dark text-on-surface-dark hover:bg-surface-dark-hovered',
+    },
   }
 
   return (
-    <div className="sb-unstyled">
-      <div className="gap-lg grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] flex-wrap">
-        {Object.entries(bgColors).map(([bg, { token, styles }]) => (
-          <div className="gap-sm flex flex-col">
-            <div className={`w-sz-160 h-sz-56 relative rounded-lg shadow-sm ${styles}`}></div>
-            <p className="text-body-1">{bg}</p>
-            <p className="text-body-2 opacity-dim-1">{getCssVariable(token)}</p>
-          </div>
-        ))}
+    <div className="sb-unstyled gap-lg flex flex-col">
+      <div className="border-sm border-outline p-lg gap-lg flex flex-col rounded-lg">
+        <p>
+          Main colors represent the visual identity of your theme and should be vivid/strong. They
+          are used for important elements of your interfaces, such as the main call to actions and
+          elements that makes your website identity (logo, illustrations, etc)
+        </p>
+        <div className="gap-lg grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] flex-wrap">
+          {Object.entries(mainColors).map(([bg, { token, styles }]) => (
+            <div className="gap-sm flex flex-col">
+              <div className={`w-sz-160 h-sz-56 relative rounded-lg shadow-sm ${styles}`}></div>
+              <p className="text-body-1">{bg}</p>
+              <p className="text-body-2 opacity-dim-1">{getCssVariable(token)}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="border-sm border-outline p-lg gap-lg flex flex-col rounded-lg">
+        <p>Use Feedback colors to clearly convey an intent status.</p>
+        <div className="gap-lg grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] flex-wrap">
+          {Object.entries(feedBackColors).map(([bg, { token, styles }]) => (
+            <div className="gap-sm flex flex-col">
+              <div className={`w-sz-160 h-sz-56 relative rounded-lg shadow-sm ${styles}`}></div>
+              <p className="text-body-1">{bg}</p>
+              <p className="text-body-2 opacity-dim-1">{getCssVariable(token)}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="border-sm border-outline p-lg gap-lg flex flex-col rounded-lg">
+        <p>
+          Use Base colors as the foundation for surfaces, backgrounds, text, and separators within
+          the UI. These colors are fundamental in defining its overall aesthetic and readability.
+        </p>
+
+        <div className="gap-lg grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] flex-wrap">
+          {Object.entries(baseColors).map(([bg, { token, styles }]) => (
+            <div className="gap-sm flex flex-col">
+              <div className={`w-sz-160 h-sz-56 relative rounded-lg shadow-sm ${styles}`}></div>
+              <p className="text-body-1">{bg}</p>
+              <p className="text-body-2 opacity-dim-1">{getCssVariable(token)}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
