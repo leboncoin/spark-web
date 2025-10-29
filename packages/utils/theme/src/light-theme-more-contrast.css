@@ -83,6 +83,9 @@
   --color-surface-inverse: #1a1a1a;
   --color-on-surface-inverse: #f9f9f9;
   --color-surface-inverse-hovered: #3a3a3a;
+  --color-surface-dark: #1a1a1a;
+  --color-on-surface-dark: #f9f9f9;
+  --color-surface-dark-hovered: #3a3a3a;
 
   --color-outline: #4f4f4f;
   --color-outline-high: #000000;

@@ -114,6 +114,9 @@
   --color-surface-inverse: #2b3441;
   --color-on-surface-inverse: #ffffff;
   --color-surface-inverse-hovered: #3a4757;
+  --color-surface-dark: #2b3441;
+  --color-on-surface-dark: #ffffff;
+  --color-surface-dark-hovered: #3a4757;
   --color-outline: #acb8c7;
   --color-outline-high: #202730;
   --color-overlay: #202730;
