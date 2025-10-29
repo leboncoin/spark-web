@@ -30,6 +30,7 @@ body:
         2. Click on '...'
         3. Scroll down to '...'
         4. See error
+        Ideally, provide a code sandbox or repository that reproduces the issue, using the official template: https://stackblitz.com/edit/stackblitz-starters-cb6gnad6?file=app%2Fcontent.tsx.
   - type: 'input'
     id: 'spark-component'
     attributes:
