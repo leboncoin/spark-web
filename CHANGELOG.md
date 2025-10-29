@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.0.1](https://github.com/leboncoin/spark-web/compare/v11.0.0...v11.0.1) (2025-10-29)
+
+### Reverts
+
+- encourage users to use stackblitz for bugs ([56f2110](https://github.com/leboncoin/spark-web/commit/56f211050d88dde0d4bb2d3521ec031e3cddd46e))
+
 # [11.0.0](https://github.com/leboncoin/spark-web/compare/v10.22.1...v11.0.0) (2025-10-28)
 
 ### Build System
