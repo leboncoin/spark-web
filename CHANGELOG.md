@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.1.0](https://github.com/leboncoin/spark-web/compare/v11.0.1...v11.1.0) (2025-10-29)
+
+### Features
+
+- **theme-utils:** introducing surface-dark color token ([a7f694f](https://github.com/leboncoin/spark-web/commit/a7f694fa1b12d8fff981b69996061c28f8d201e3))
+
 ## [11.0.1](https://github.com/leboncoin/spark-web/compare/v11.0.0...v11.0.1) (2025-10-29)
 
 ### Reverts
