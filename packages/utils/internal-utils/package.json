@@ -2,15 +2,6 @@
   "name": "@spark-ui/internal-utils",
   "version": "11.1.0",
   "description": "package for sharing reusable code and resources across the codebase",
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs"
-    }
-  },
   "publishConfig": {
     "access": "public"
   },
@@ -19,6 +10,9 @@
     "util",
     "utility"
   ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "vite build"
   },

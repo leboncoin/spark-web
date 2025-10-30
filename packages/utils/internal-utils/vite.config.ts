@@ -12,7 +12,7 @@ export default async () => {
       target: browserslistToEsbuild.default(),
       lib: {
         entry: 'src/index.ts',
-        formats: ['es'],
+        formats: ['es', 'cjs'],
         fileName: 'index',
       },
       rollupOptions: {
