@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
-    "@babel/core": "7.28.4",
+    "@babel/core": "7.28.5",
     "@commitlint/cli": "^20.0.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@commitlint/config-workspace-scopes": "^20.0.0",
@@ -64,7 +64,7 @@
     "@types/d3": "^7.4.3",
     "@types/node": "^24.5.2",
     "@types/react": "19.2.2",
-    "@types/react-dom": "19.2.1",
+    "@types/react-dom": "19.2.2",
     "@typescript-eslint/eslint-plugin": "^8.44.1",
     "@typescript-eslint/parser": "^8.44.1",
     "@vitejs/plugin-react": "4.7.0",
@@ -95,13 +95,13 @@
     "eslint-plugin-storybook": "^10.0.0",
     "eslint-plugin-testing-library": "^7.10.0",
     "husky": "9.1.7",
-    "jsdom": "27.0.0",
+    "jsdom": "27.0.1",
     "lerna": "^8.2.4",
-    "lint-staged": "16.2.4",
+    "lint-staged": "16.2.6",
     "nx": "^21.5.3",
     "postcss": "8.5.6",
     "prettier": "3.6.2",
-    "prettier-plugin-tailwindcss": "^0.6.14",
+    "prettier-plugin-tailwindcss": "^0.7.1",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-element-to-jsx-string": "^17.0.1",
@@ -109,7 +109,7 @@
     "react-router-dom": "7.9.4",
     "react-xarrows": "^2.0.2",
     "resize-observer-polyfill": "^1.5.1",
-    "rollup": "4.52.3",
+    "rollup": "4.52.5",
     "scroll-into-view-if-needed": "^3.1.0",
     "storybook": "^10.0.0",
     "tailwindcss": "4.1.16",
@@ -125,7 +125,7 @@
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "^4.52.3",
     "@tailwindcss/oxide-linux-x64-gnu": "4.1.16",
-    "lightningcss-linux-x64-gnu": "1.30.1"
+    "lightningcss-linux-x64-gnu": "1.30.2"
   },
   "workspaces": [
     "packages/hooks",
