@@ -71,7 +71,7 @@ export function Toast({ toast }: { toast: ToastObject }) {
         {ToastIcon && <Icon size="md">{ToastIcon}</Icon>}
 
         <div className="gap-sm flex flex-col">
-          <BaseToast.Title className="text-headline-2" />
+          <BaseToast.Title className={toast.description ? 'text-headline-2' : 'text-body-1'} />
           <BaseToast.Description className="text-body-1" />
 
           {action && (
