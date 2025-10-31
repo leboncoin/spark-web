@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.1.2](https://github.com/leboncoin/spark-web/compare/v11.1.1...v11.1.2) (2025-10-31)
+
+### Bug Fixes
+
+- **components:** render toast title as desc when desc is missing ([ca161b9](https://github.com/leboncoin/spark-web/commit/ca161b993e591b7a9c602979a1c2ee14483f8d6f))
+
 ## [11.1.1](https://github.com/leboncoin/spark-web/compare/v11.1.0...v11.1.1) (2025-10-30)
 
 **Note:** Version bump only for package spark
