@@ -176,7 +176,7 @@ export const SegmentedGauge = ({
         id={gaugeId}
         data-spark-component="segmented-gauge"
         ref={ref}
-        className={cx('gap-md flex items-center', className)}
+        className={cx('gap-md flex flex-wrap items-center', className)}
         {...roleProps}
         aria-labelledby={id ? `${gaugeId}-label` : undefined}
         aria-label={!id ? ariaLabel : undefined}
