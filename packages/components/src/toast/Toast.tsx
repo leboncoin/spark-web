@@ -16,6 +16,14 @@ function getButtonIntent(intent?: ToastIntent): ButtonProps['intent'] {
   return intent as ButtonProps['intent']
 }
 
+function getCloseButtonIntent(intent?: ToastIntent): ButtonProps['intent'] {
+  if (intent === 'surfaceInverse') return 'surfaceInverse'
+  if (intent === 'surface') return 'surface'
+  if (intent === 'error') return 'danger'
+
+  return intent as ButtonProps['intent']
+}
+
 const getActionProps = (
   action: ToastData['action'],
   { toastDesign, toastIntent }: { toastDesign?: ToastDesign; toastIntent?: ToastIntent }
@@ -27,7 +35,7 @@ const getActionProps = (
   return {
     design: design ?? (toastDesign === 'filled' ? 'tinted' : 'filled'),
     intent: intent ?? getButtonIntent(toastIntent),
-    className: cx('mt-md self-start', className),
+    className: cx('mt-md self-end', className),
     onClick,
     ...rest,
   }
@@ -36,8 +44,8 @@ const getActionProps = (
 export function Toast({ toast }: { toast: ToastObject }) {
   const {
     icon: ToastIcon,
-    intent,
-    design,
+    intent = 'neutral',
+    design = 'filled',
     action,
     isClosable,
     closeLabel = 'Close',
@@ -67,17 +75,15 @@ export function Toast({ toast }: { toast: ToastObject }) {
           'calc(var(--toast-offset-y) * -1 + (var(--toast-index) * var(--gap) * -1) + var(--toast-swipe-movement-y))',
       }}
     >
-      <div className="gap-lg flex items-center">
-        {ToastIcon && <Icon size="md">{ToastIcon}</Icon>}
-
-        <div className="gap-sm flex flex-col">
-          <BaseToast.Title className={toast.description ? 'text-headline-2' : 'text-body-1'} />
-          <BaseToast.Description className="text-body-1" />
-
-          {action && (
-            <ActionButton render={<Button {...actionProps} />}>{action.label}</ActionButton>
-          )}
+      <div className="gap-sm flex flex-col">
+        <div className="gap-lg flex items-center">
+          {ToastIcon && <Icon size="md">{ToastIcon}</Icon>}
+          <div className="gap-sm flex flex-col">
+            <BaseToast.Title className={toast.description ? 'text-headline-2' : 'text-body-1'} />
+            <BaseToast.Description className="text-body-1" />
+          </div>
         </div>
+        {action && <ActionButton render={<Button {...actionProps} />}>{action.label}</ActionButton>}
       </div>
 
       {isClosable && (
@@ -87,7 +93,7 @@ export function Toast({ toast }: { toast: ToastObject }) {
             <IconButton
               aria-label={closeLabel}
               design={design}
-              intent={getButtonIntent(intent)}
+              intent={getCloseButtonIntent(intent)}
               size="sm"
             />
           }

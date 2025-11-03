@@ -2,7 +2,7 @@ import { Button } from '@spark-ui/components/button'
 import { AlertOutline } from '@spark-ui/icons/AlertOutline'
 import { Meta, StoryFn } from '@storybook/react-vite'
 
-import { ToastProvider, ToastTrigger, useToastManager } from '.'
+import { ToastProvider, useToastManager } from '.'
 
 const meta: Meta<typeof ToastProvider> = {
   title: 'Components/Toast',
@@ -20,24 +20,32 @@ const meta: Meta<typeof ToastProvider> = {
 export default meta
 
 export const Default: StoryFn = () => {
-  return (
-    <ToastTrigger
-      title="Toast with action"
-      description="This toast contains an action button and can be closed. Use F6 to access it with the keyboard."
-      icon={<AlertOutline />}
-      action={{
-        close: true,
-        label: 'Cancel',
-        onClick: () => console.log('Action canceled'),
-      }}
-      asChild
-    >
-      <Button>Open a toast</Button>
-    </ToastTrigger>
-  )
+  const toastManager = useToastManager()
+
+  const openToast = () => {
+    toastManager.add({
+      title: 'Toast with action',
+      description:
+        'This toast contains an action button and can be closed. Use F6 to access it with the keyboard.',
+      timeout: 5000,
+      data: {
+        isClosable: true,
+        icon: <AlertOutline />,
+        action: {
+          close: true,
+          label: 'Cancel',
+          onClick: () => console.log('Action canceled'),
+        },
+      },
+    })
+  }
+
+  return <Button onClick={openToast}>Open a toast</Button>
 }
 
 export const DesignAndIntents: StoryFn = () => {
+  const toastManager = useToastManager()
+
   const intents = [
     'success',
     'alert',
@@ -53,6 +61,24 @@ export const DesignAndIntents: StoryFn = () => {
   ]
   const designs = ['filled', 'tinted']
 
+  const openToast = (intent: string, design: string) => {
+    toastManager.add({
+      title: `Toast ${intent} ${design}`,
+      description: 'Some content',
+      timeout: 5000,
+      data: {
+        isClosable: true,
+        intent: intent as any,
+        design: design as any,
+        action: {
+          close: true,
+          label: 'Cancel',
+          onClick: () => console.log('Action canceled'),
+        },
+      },
+    })
+  }
+
   return (
     <div className="gap-md flex flex-wrap">
       {intents.map(intent =>
@@ -60,23 +86,14 @@ export const DesignAndIntents: StoryFn = () => {
           const buttonIntent = intent === 'error' ? 'danger' : intent
 
           return (
-            <ToastTrigger
+            <Button
               key={`${intent}-${design}`}
-              title={`Toast ${intent} ${design}`}
-              description={'Some content'}
-              intent={intent as any}
+              intent={buttonIntent as any}
               design={design as any}
-              action={{
-                close: true,
-                label: 'Cancel',
-                onClick: () => console.log('Action canceled'),
-              }}
-              asChild
+              onClick={() => openToast(intent, design)}
             >
-              <Button intent={buttonIntent as any} design={design as any}>
-                {intent} + {design}
-              </Button>
-            </ToastTrigger>
+              {intent} + {design}
+            </Button>
           )
         })
       )}
