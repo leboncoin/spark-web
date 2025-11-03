@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.1.6](https://github.com/leboncoin/spark-web/compare/v11.1.5...v11.1.6) (2025-11-03)
+
+### Bug Fixes
+
+- **components:** css updates to toast ([cc44ea9](https://github.com/leboncoin/spark-web/commit/cc44ea98fc1947f2dc0bb827de2a1ced2dc8823a))
+
 ## [11.1.5](https://github.com/leboncoin/spark-web/compare/v11.1.4...v11.1.5) (2025-11-03)
 
 ### Bug Fixes
