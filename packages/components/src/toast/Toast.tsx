@@ -16,6 +16,14 @@ function getButtonIntent(intent?: ToastIntent): ButtonProps['intent'] {
   return intent as ButtonProps['intent']
 }
 
+function getCloseButtonIntent(intent?: ToastIntent): ButtonProps['intent'] {
+  if (intent === 'surfaceInverse') return 'surfaceInverse'
+  if (intent === 'surface') return 'surface'
+  if (intent === 'error') return 'danger'
+
+  return intent as ButtonProps['intent']
+}
+
 const getActionProps = (
   action: ToastData['action'],
   { toastDesign, toastIntent }: { toastDesign?: ToastDesign; toastIntent?: ToastIntent }
@@ -36,8 +44,8 @@ const getActionProps = (
 export function Toast({ toast }: { toast: ToastObject }) {
   const {
     icon: ToastIcon,
-    intent,
-    design,
+    intent = 'neutral',
+    design = 'filled',
     action,
     isClosable,
     closeLabel = 'Close',
@@ -87,7 +95,7 @@ export function Toast({ toast }: { toast: ToastObject }) {
             <IconButton
               aria-label={closeLabel}
               design={design}
-              intent={getButtonIntent(intent)}
+              intent={getCloseButtonIntent(intent)}
               size="sm"
             />
           }
