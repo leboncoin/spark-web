@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.1.5](https://github.com/leboncoin/spark-web/compare/v11.1.4...v11.1.5) (2025-11-03)
+
+### Bug Fixes
+
+- **components:** linebreak segmented gauge segment ([ed05296](https://github.com/leboncoin/spark-web/commit/ed052962ac66e6495c287e323da7fe5923eac1f8))
+- **components:** properly wrap gauge with meter role in custom render ([32180b5](https://github.com/leboncoin/spark-web/commit/32180b540fade18464059aa478d41e254f849881))
+
 ## [11.1.4](https://github.com/leboncoin/spark-web/compare/v11.1.3...v11.1.4) (2025-11-03)
 
 **Note:** Version bump only for package spark
