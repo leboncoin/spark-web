@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 import { Label } from '@spark-ui/components/label'
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 
 import { SegmentedGauge } from '.'
@@ -49,8 +49,11 @@ describe('SegmentedGauge', () => {
         </SegmentedGauge>
       )
 
-      expect(screen.getByTestId('custom-render')).toBeInTheDocument()
-      expect(screen.getByText('C')).toBeInTheDocument()
+      const gauge = screen.getByRole('meter')
+
+      expect(gauge).toBeInTheDocument()
+      expect(within(gauge).getByTestId('custom-render')).toBeInTheDocument()
+      expect(within(gauge).getByText('C')).toBeInTheDocument()
     })
   })
 

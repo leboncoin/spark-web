@@ -4,7 +4,7 @@ import { Meta, StoryFn } from '@storybook/react-vite'
 import { SegmentedGauge } from '.'
 
 const meta: Meta<typeof SegmentedGauge> = {
-  title: 'Experimental/SegmentedGauge',
+  title: 'Components/SegmentedGauge',
   component: SegmentedGauge,
   tags: ['data-display'],
   parameters: {},
@@ -20,9 +20,15 @@ export const Default: StoryFn = () => {
 
 export const WithRenderProp: StoryFn = () => {
   return (
-    <SegmentedGauge value={2} min={0} max={3} aria-label="Skill level">
+    <SegmentedGauge
+      value={2}
+      min={0}
+      max={3}
+      aria-label="Skill level"
+      className="gap-lg flex flex-col items-center"
+    >
       {({ segments }) => (
-        <div className="gap-lg flex flex-col items-center">
+        <>
           <SegmentedGauge.Track className="from-main-container to-accent-container p-md h-4 bg-gradient-to-r">
             {segments.map((_, index) => (
               <SegmentedGauge.Segment key={index} index={index} className="rounded-lg" />
@@ -30,7 +36,7 @@ export const WithRenderProp: StoryFn = () => {
           </SegmentedGauge.Track>
 
           <SegmentedGauge.Label className="text-lg font-bold">Advanced</SegmentedGauge.Label>
-        </div>
+        </>
       )}
     </SegmentedGauge>
   )

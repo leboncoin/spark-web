@@ -72,6 +72,11 @@ export interface SegmentedGaugeProps {
    */
   'aria-label'?: string
   /**
+   * Textual representation of the current value (aria-valuetext)
+   * By default, percentage is used (e.g. "33%")
+   */
+  'aria-valuetext'?: string
+  /**
    * Additional CSS classes
    */
   className?: string
@@ -142,18 +147,6 @@ export const SegmentedGauge = ({
     [value, min, max, segments, currentIndex, size, intent, customColor, internalLabelId, gaugeId]
   )
 
-  // If children is provided, use render prop pattern
-  if (children) {
-    return (
-      <SegmentedGaugeContext.Provider value={contextValue}>
-        {children({
-          segments: segmentsData,
-          currentIndex,
-        })}
-      </SegmentedGaugeContext.Provider>
-    )
-  }
-
   /**
    * A `meter` role MUST have a value. If the value is not available, the component uses a `status` role instead.
    */
@@ -169,28 +162,36 @@ export const SegmentedGauge = ({
           role: 'status',
         }
 
-  // Default rendering
   return (
     <SegmentedGaugeContext.Provider value={contextValue}>
       <div
         id={gaugeId}
         data-spark-component="segmented-gauge"
         ref={ref}
-        className={cx('gap-md flex items-center', className)}
+        className={cx('gap-md flex flex-wrap items-center', className)}
         {...roleProps}
         aria-labelledby={id ? `${gaugeId}-label` : undefined}
         aria-label={!id ? ariaLabel : undefined}
         aria-describedby={internalLabelId}
         {...props}
       >
-        <SegmentedGaugeTrack>
-          {segmentsData.map((_, index) => (
-            <SegmentedGaugeSegment key={index} index={index} />
-          ))}
-        </SegmentedGaugeTrack>
+        {children ? (
+          children({
+            segments: segmentsData,
+            currentIndex,
+          })
+        ) : (
+          <>
+            <SegmentedGaugeTrack>
+              {segmentsData.map((_, index) => (
+                <SegmentedGaugeSegment key={index} index={index} />
+              ))}
+            </SegmentedGaugeTrack>
 
-        {description && (
-          <SegmentedGaugeLabel id={internalLabelId}>{description}</SegmentedGaugeLabel>
+            {description && (
+              <SegmentedGaugeLabel id={internalLabelId}>{description}</SegmentedGaugeLabel>
+            )}
+          </>
         )}
       </div>
     </SegmentedGaugeContext.Provider>
