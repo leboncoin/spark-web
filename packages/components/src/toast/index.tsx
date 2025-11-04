@@ -39,7 +39,7 @@ export function ToastProvider({ children, limit = 3 }: ToastProviderProps) {
 interface ToastTriggerProps
   extends React.ComponentPropsWithRef<'button'>,
     Pick<ToastObject, 'priority'>,
-    Pick<ToastData, 'design' | 'intent' | 'icon' | 'isClosable' | 'action'> {
+    Pick<ToastData, 'design' | 'intent' | 'icon' | 'isClosable' | 'action' | 'compact'> {
   children: React.ReactNode
   asChild?: boolean
   title: string
@@ -59,6 +59,7 @@ export function ToastTrigger({
   isClosable = true,
   icon,
   action,
+  compact,
   priority = 'low',
 }: ToastTriggerProps) {
   const toastManager = BaseToast.useToastManager()
@@ -78,6 +79,7 @@ export function ToastTrigger({
         isClosable,
         ...(icon && { icon }),
         action,
+        ...(compact !== undefined && { compact }),
       },
     })
   }

@@ -175,3 +175,49 @@ export const WithPromise: StoryFn = () => {
 
   return <Button onClick={runPromise}>Run Promise Toast</Button>
 }
+
+export const Compact: StoryFn = () => {
+  const toastManager = useToastManager()
+
+  const openCompactToast = () => {
+    toastManager.add({
+      title: 'Compact toast',
+      description: 'This toast uses the compact layout with inline action and close buttons.',
+      timeout: 0,
+      data: {
+        isClosable: true,
+        compact: true,
+        icon: <AlertOutline />,
+        action: {
+          close: true,
+          label: 'Undo',
+          onClick: () => console.log('Action clicked'),
+        },
+      },
+    })
+  }
+
+  const openDefaultToast = () => {
+    toastManager.add({
+      title: 'Default toast',
+      description: 'This toast uses the default layout with action button below.',
+      timeout: 0,
+      data: {
+        isClosable: true,
+        icon: <AlertOutline />,
+        action: {
+          close: true,
+          label: 'Undo',
+          onClick: () => console.log('Action clicked'),
+        },
+      },
+    })
+  }
+
+  return (
+    <div className="gap-md flex">
+      <Button onClick={openCompactToast}>Open Compact Toast</Button>
+      <Button onClick={openDefaultToast}>Open Default Toast</Button>
+    </div>
+  )
+}

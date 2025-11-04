@@ -152,6 +152,11 @@ These are the options for the `add`, `update`, and `promise` methods.
       <td>Whether to display an extra close button.</td>
     </tr>
     <tr>
+      <td><code>data.compact</code></td>
+      <td><code>boolean</code></td>
+      <td>When <code>true</code>, displays the action button and close button inline to the right of the toast instead of vertically stacked.</td>
+    </tr>
+    <tr>
       <td><code>data.action</code></td>
       <td><code>`{ label: string; onClick: () => void }`</code></td>
       <td>The action button configuration.</td>
@@ -189,6 +194,12 @@ The type string matches these states to change the styling. Each of the states a
 This example showcases all available design variants (filled and tinted) combined with all intent colors.
 
 <Canvas of={stories.DesignAndIntents} />
+
+### Compact Layout
+
+When `data.compact` is set to `true`, the toast uses a compact layout where the action button and close button are displayed inline to the right of the toast content, rather than stacked vertically. This is useful for toasts with shorter content where you want to maximize horizontal space efficiency.
+
+<Canvas of={stories.Compact} />
 
 
 
