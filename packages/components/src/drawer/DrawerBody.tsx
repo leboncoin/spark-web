@@ -23,7 +23,7 @@ export const DrawerBody = ({
 
   const { withFade } = useDrawer()
 
-  const overflow = useScrollOverflow(scrollAreaRef)
+  const { overflow } = useScrollOverflow(scrollAreaRef)
 
   return (
     <div

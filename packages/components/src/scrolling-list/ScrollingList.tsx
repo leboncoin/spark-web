@@ -84,7 +84,9 @@ export const ScrollingList = ({
 
   const snapCarouselAPI = useSnapCarousel()
 
-  const overflow = useScrollOverflow(scrollAreaRef, { precisionTreshold: 1 })
+  const { overflow, refresh: refreshOverflow } = useScrollOverflow(scrollAreaRef, {
+    precisionTreshold: 1,
+  })
 
   const { activePageIndex, pages, refresh } = snapCarouselAPI
 
@@ -113,10 +115,10 @@ export const ScrollingList = ({
       // Use requestAnimationFrame to ensure proper timing with the render cycle
       // This prevents race conditions that occur when the console is closed
       requestAnimationFrame(() => {
-        window.dispatchEvent(new Event('resize'))
+        refreshOverflow()
       })
     }
-  }, [children])
+  }, [children, refreshOverflow])
 
   const skipKeyboardNavigation = () => {
     skipAnchorRef.current?.focus()
