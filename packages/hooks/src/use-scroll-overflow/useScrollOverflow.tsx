@@ -1,10 +1,15 @@
-import { RefObject, useEffect, useState } from 'react'
+import { RefObject, useCallback, useEffect, useRef, useState } from 'react'
 
 export interface ScrollOverflow {
   top: number
   bottom: number
   left: number
   right: number
+}
+
+export interface UseScrollOverflowReturn {
+  overflow: ScrollOverflow
+  refresh: () => void
 }
 
 export function useScrollOverflow(
@@ -14,7 +19,7 @@ export function useScrollOverflow(
    * Values below this threshold are considered as "no overflow" to handle sub-pixel rendering artifacts.
    */
   { precisionTreshold = 0 }: { precisionTreshold?: number } = {}
-): ScrollOverflow {
+): UseScrollOverflowReturn {
   const [overflow, setOverflow] = useState<ScrollOverflow>({
     top: 0,
     bottom: 0,
@@ -22,30 +27,33 @@ export function useScrollOverflow(
     right: 0,
   })
 
-  useEffect(() => {
-    const checkScrollContent = () => {
-      const scrollElement = scrollRef.current
+  const precisionTresholdRef = useRef(precisionTreshold)
+  precisionTresholdRef.current = precisionTreshold
 
-      if (scrollElement) {
-        const { scrollTop, scrollHeight, clientHeight, scrollLeft, scrollWidth, clientWidth } =
-          scrollElement
+  const checkScrollContent = useCallback(() => {
+    const scrollElement = scrollRef.current
 
-        const applyPrecision = (value: number): number => {
-          return value <= precisionTreshold ? 0 : value
-        }
+    if (scrollElement) {
+      const { scrollTop, scrollHeight, clientHeight, scrollLeft, scrollWidth, clientWidth } =
+        scrollElement
 
-        const rightOverflow = scrollWidth - (scrollLeft + clientWidth)
-        const bottomOverflow = scrollHeight - (scrollTop + clientHeight)
-
-        setOverflow({
-          top: applyPrecision(scrollTop),
-          bottom: applyPrecision(bottomOverflow),
-          left: applyPrecision(scrollLeft),
-          right: applyPrecision(rightOverflow),
-        })
+      const applyPrecision = (value: number): number => {
+        return value <= precisionTresholdRef.current ? 0 : value
       }
-    }
 
+      const rightOverflow = scrollWidth - (scrollLeft + clientWidth)
+      const bottomOverflow = scrollHeight - (scrollTop + clientHeight)
+
+      setOverflow({
+        top: applyPrecision(scrollTop),
+        bottom: applyPrecision(bottomOverflow),
+        left: applyPrecision(scrollLeft),
+        right: applyPrecision(rightOverflow),
+      })
+    }
+  }, [scrollRef])
+
+  useEffect(() => {
     checkScrollContent()
 
     const scrollElement = scrollRef.current
@@ -60,7 +68,10 @@ export function useScrollOverflow(
         window.removeEventListener('resize', checkScrollContent)
       }
     }
-  }, [scrollRef])
+  }, [scrollRef, checkScrollContent])
 
-  return overflow
+  return {
+    overflow,
+    refresh: checkScrollContent,
+  }
 }

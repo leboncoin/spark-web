@@ -25,7 +25,7 @@ export const Body = ({
 
   const { withFade } = useDialog()
 
-  const overflow = useScrollOverflow(scrollAreaRef)
+  const { overflow } = useScrollOverflow(scrollAreaRef)
 
   return (
     <div
