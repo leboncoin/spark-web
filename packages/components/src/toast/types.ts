@@ -23,6 +23,7 @@ export interface ToastData {
   intent?: ToastIntent
   isClosable?: boolean
   closeLabel?: string
+  compact?: boolean
   action?: {
     close?: boolean
     label: string

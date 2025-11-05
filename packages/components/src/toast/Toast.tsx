@@ -33,13 +33,25 @@ const getActionProps = (
   const { design, intent, className, onClick, ...rest } = action
 
   return {
-    design: design ?? (toastDesign === 'filled' ? 'tinted' : 'filled'),
+    design: design ?? toastDesign,
     intent: intent ?? getButtonIntent(toastIntent),
-    className: cx('mt-md self-end', className),
+    className: cx('ml-auto', className),
     onClick,
     ...rest,
   }
 }
+
+const getToastRootProps = (toast: ToastObject, design: ToastDesign, intent: ToastIntent) => ({
+  key: toast.id,
+  swipeDirection: ['down', 'right'] as ['down', 'right'],
+  toast,
+  className: cx(toastStyles({ design, intent })),
+  style: {
+    ['--gap' as string]: 'var(--spacing-md)',
+    ['--offset-y' as string]:
+      'calc(var(--toast-offset-y) * -1 + (var(--toast-index) * var(--gap) * -1) + var(--toast-swipe-movement-y))',
+  },
+})
 
 export function Toast({ toast }: { toast: ToastObject }) {
   const {
@@ -49,60 +61,66 @@ export function Toast({ toast }: { toast: ToastObject }) {
     action,
     isClosable,
     closeLabel = 'Close',
+    compact = false,
   } = toast.data ?? {}
 
   const ActionButton = action?.close ? BaseToast.Close : BaseToast.Action
+  const actionProps = getActionProps(action, { toastDesign: design, toastIntent: intent })
+  const rootProps = getToastRootProps(toast, design, intent)
 
-  const actionProps = getActionProps(action, {
-    toastDesign: design,
-    toastIntent: intent,
-  })
+  const getCloseButton = (className?: string) => {
+    if (!isClosable) return null
+
+    return (
+      <BaseToast.Close
+        className={className}
+        render={
+          <IconButton
+            aria-label={closeLabel}
+            design={design}
+            intent={getCloseButtonIntent(intent)}
+            size="md"
+          />
+        }
+      >
+        <Icon>
+          <Close />
+        </Icon>
+      </BaseToast.Close>
+    )
+  }
 
   return (
-    <BaseToast.Root
-      key={toast.id}
-      swipeDirection={['down', 'right']}
-      toast={toast}
-      className={cx(
-        toastStyles({
-          design,
-          intent,
-        })
-      )}
-      style={{
-        ['--gap' as string]: 'var(--spacing-md)',
-        ['--offset-y' as string]:
-          'calc(var(--toast-offset-y) * -1 + (var(--toast-index) * var(--gap) * -1) + var(--toast-swipe-movement-y))',
-      }}
-    >
-      <div className="gap-sm flex flex-col">
-        <div className="gap-lg flex items-center">
+    <BaseToast.Root {...rootProps}>
+      <div className={cx('flex', compact ? 'gap-lg items-center' : 'gap-md flex-col')}>
+        <div className="gap-lg p-md flex grow items-center">
+          {/* Icon */}
           {ToastIcon && <Icon size="md">{ToastIcon}</Icon>}
-          <div className="gap-sm flex flex-col">
+          {/* Title and description */}
+          <div
+            className={cx(
+              'gap-sm flex flex-col',
+              compact && 'flex-1',
+              !compact && isClosable && 'pr-3xl'
+            )}
+          >
             <BaseToast.Title className={toast.description ? 'text-headline-2' : 'text-body-1'} />
             <BaseToast.Description className="text-body-1" />
           </div>
         </div>
-        {action && <ActionButton render={<Button {...actionProps} />}>{action.label}</ActionButton>}
-      </div>
 
-      {isClosable && (
-        <BaseToast.Close
-          className="top-sm right-sm absolute"
-          render={
-            <IconButton
-              aria-label={closeLabel}
-              design={design}
-              intent={getCloseButtonIntent(intent)}
-              size="sm"
-            />
-          }
-        >
-          <Icon>
-            <Close />
-          </Icon>
-        </BaseToast.Close>
-      )}
+        <div className={cx('flex')}>
+          {/* Action button */}
+          {action && (
+            <ActionButton render={<Button {...actionProps} />}>{action.label}</ActionButton>
+          )}
+          {/* Close button - compact layout only */}
+          {compact && getCloseButton()}
+        </div>
+
+        {/* Close button - default layout only */}
+        {!compact && getCloseButton('top-md right-md absolute')}
+      </div>
     </BaseToast.Root>
   )
 }
