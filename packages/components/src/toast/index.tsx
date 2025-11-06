@@ -19,9 +19,9 @@ interface ToastProviderProps extends React.ComponentProps<typeof BaseToast.Provi
   children: React.ReactNode
 }
 
-export function ToastProvider({ children, limit = 3 }: ToastProviderProps) {
+export function ToastProvider({ children, limit = 3, ...props }: ToastProviderProps) {
   return (
-    <BaseToast.Provider limit={limit}>
+    <BaseToast.Provider limit={limit} {...props}>
       <BaseToast.Portal>
         <BaseToast.Viewport
           className={cx(
