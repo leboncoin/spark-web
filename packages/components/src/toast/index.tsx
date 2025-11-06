@@ -91,6 +91,8 @@ export function ToastTrigger({
   )
 }
 
-export const createToastManager = BaseToast.createToastManager
+export type ToastManager = ReturnType<typeof BaseToast.createToastManager>
+
+export const createToastManager: () => ToastManager = BaseToast.createToastManager
 
 export { useToastManager }
