@@ -69,6 +69,18 @@ Use the `render` prop of `FileUpload.FilesPreview` to customize the markup of th
 
 <Canvas of={stories.WithCustomFileRender} />
 
+### With default files
+
+Use the `defaultValue` prop to initialize the component with existing files. This is useful when editing a form with previously uploaded files or when restoring files from a saved state.
+
+<Canvas of={stories.WithDefaultFiles} />
+
+### Single file
+
+Use the `multiple={false}` prop to allow only a single file to be selected. When a new file is selected, it will replace the existing file.
+
+<Canvas of={stories.SingleFile} />
+
 ## Advanced examples
 
 ### Custom Trigger

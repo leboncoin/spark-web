@@ -9,9 +9,18 @@ export interface FileUploadProps {
   children: ReactNode
   className?: string
   /**
+   * Initial files to display when the component mounts
+   */
+  defaultValue?: File[]
+  /**
    * Callback when files are selected
    */
   onFilesChange?: (files: File[]) => void
+  /**
+   * Whether multiple files can be selected
+   * @default true
+   */
+  multiple?: boolean
 }
 
 export const FileUploadContext = createContext<{
@@ -23,22 +32,27 @@ export const FileUploadContext = createContext<{
   triggerRef: React.RefObject<HTMLElement | null>
   dropzoneRef: React.RefObject<HTMLElement | null>
   deleteButtonRefs: React.MutableRefObject<HTMLButtonElement[]>
+  multiple: boolean
 } | null>(null)
 
 export const FileUpload = ({
   asChild: _asChild = false,
   children,
+  defaultValue = [],
   onFilesChange,
+  multiple = true,
 }: FileUploadProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const triggerRef = useRef<HTMLElement>(null)
   const dropzoneRef = useRef<HTMLElement>(null)
   const deleteButtonRefs = useRef<HTMLButtonElement[]>([])
-  const [files, setFiles] = useState<File[]>([])
+  const [files, setFiles] = useState<File[]>(defaultValue)
 
   const addFiles = (newFiles: File[]) => {
     setFiles(prev => {
-      const updated = [...prev, ...newFiles]
+      // If multiple is false, replace existing files with only the first new file
+      const filesToAdd = multiple ? newFiles : newFiles.slice(0, 1)
+      const updated = multiple ? [...prev, ...filesToAdd] : filesToAdd
       onFilesChange?.(updated)
 
       return updated
@@ -71,6 +85,7 @@ export const FileUpload = ({
         triggerRef,
         dropzoneRef,
         deleteButtonRefs,
+        multiple,
       }}
     >
       {/* <Comp data-spark-component="file-upload" className={cx('relative', className)} {...props}> */}
@@ -81,7 +96,7 @@ export const FileUpload = ({
           type="file"
           tabIndex={-1}
           id="image_uploads"
-          multiple
+          multiple={multiple}
           name="image_uploads"
           // accept="image/png, image/jpeg"
           className="sr-only"

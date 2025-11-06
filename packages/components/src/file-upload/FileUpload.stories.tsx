@@ -115,6 +115,29 @@ export const WithCustomFileRender: StoryFn = () => {
   )
 }
 
+export const WithDefaultFiles: StoryFn = () => {
+  // Create sample files for demonstration
+  const defaultFiles = [
+    new File([''], 'landscape.jpg', { type: 'image/jpeg' }),
+    new File([''], 'document.pdf', { type: 'application/pdf' }),
+    new File([''], 'spreadsheet.xlsx', {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    }),
+  ]
+
+  return (
+    <FileUpload defaultValue={defaultFiles}>
+      <FileUpload.Dropzone>
+        <Button asChild>
+          <FileUpload.Trigger>Upload Files</FileUpload.Trigger>
+        </Button>
+      </FileUpload.Dropzone>
+
+      <FileUpload.FilesPreview />
+    </FileUpload>
+  )
+}
+
 export const CustomDeleteButton: StoryFn = () => {
   return (
     <FileUpload>
@@ -287,6 +310,25 @@ export const PhotosGallery: StoryFn = () => {
           </div>
         ))}
       </div>
+      <FileUpload.FilesPreview />
+    </FileUpload>
+  )
+}
+
+export const SingleFile: StoryFn = () => {
+  return (
+    <FileUpload multiple={false}>
+      <FileUpload.Dropzone>
+        <Icon size="lg">
+          <Export />
+        </Icon>
+        <div className="text-subhead">
+          <p>Drag and drop a file or</p>
+
+          <FileUpload.Trigger>browse my files</FileUpload.Trigger>
+        </div>
+        <p className="text-caption text-on-surface/dim-1">Select a single file</p>
+      </FileUpload.Dropzone>
       <FileUpload.FilesPreview />
     </FileUpload>
   )
