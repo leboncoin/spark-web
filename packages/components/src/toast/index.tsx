@@ -91,4 +91,6 @@ export function ToastTrigger({
   )
 }
 
+export const createToastManager = BaseToast.createToastManager
+
 export { useToastManager }
