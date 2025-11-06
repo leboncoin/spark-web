@@ -81,6 +81,21 @@ Use the `multiple={false}` prop to allow only a single file to be selected. When
 
 <Canvas of={stories.SingleFile} />
 
+### Accept file types
+
+Use the `accept` prop to restrict the types of files that can be selected. The prop supports:
+- MIME type wildcards (e.g., `"image/*"` for all images)
+- Exact MIME types (e.g., `"image/png"`, `"application/pdf"`)
+- File extensions (e.g., `".pdf"`, `".doc"`, `".jpg"`)
+- Mixed patterns (e.g., `"image/*,.pdf,.doc"`)
+
+Files that don't match the accept pattern will be automatically filtered out.
+
+
+<Canvas of={stories.AcceptDocuments} />
+
+
+
 ## Advanced examples
 
 ### Custom Trigger

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { Button } from '@spark-ui/components/button'
 import { Icon } from '@spark-ui/components/icon'
 import { IconButton } from '@spark-ui/components/icon-button'
@@ -328,6 +329,25 @@ export const SingleFile: StoryFn = () => {
           <FileUpload.Trigger>browse my files</FileUpload.Trigger>
         </div>
         <p className="text-caption text-on-surface/dim-1">Select a single file</p>
+      </FileUpload.Dropzone>
+      <FileUpload.FilesPreview />
+    </FileUpload>
+  )
+}
+
+export const AcceptDocuments: StoryFn = () => {
+  return (
+    <FileUpload accept=".pdf,.doc,.docx">
+      <FileUpload.Dropzone>
+        <Icon size="lg">
+          <Export />
+        </Icon>
+        <div className="text-subhead">
+          <p>Drag and drop a document or</p>
+
+          <FileUpload.Trigger>browse my files</FileUpload.Trigger>
+        </div>
+        <p className="text-caption text-on-surface/dim-1">.pdf, .doc, .docx</p>
       </FileUpload.Dropzone>
       <FileUpload.FilesPreview />
     </FileUpload>

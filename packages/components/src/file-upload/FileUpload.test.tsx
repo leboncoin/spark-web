@@ -569,4 +569,212 @@ describe('FileUpload', () => {
       expect(screen.queryByText('dropped2.png')).not.toBeInTheDocument()
     })
   })
+
+  describe('Accept prop', () => {
+    it('should accept all files when accept is not provided', async () => {
+      const onFilesChange = vi.fn()
+
+      render(
+        <FileUpload onFilesChange={onFilesChange}>
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      expect(input).not.toHaveAttribute('accept')
+
+      const file1 = new File(['content1'], 'file1.jpg', { type: 'image/jpeg' })
+      const file2 = new File(['content2'], 'file2.pdf', { type: 'application/pdf' })
+
+      await userEvent.upload(input, [file1, file2])
+
+      await waitFor(() => {
+        expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
+      })
+
+      expect(screen.getByText('file1.jpg')).toBeInTheDocument()
+      expect(screen.getByText('file2.pdf')).toBeInTheDocument()
+    })
+
+    it('should filter files by MIME type wildcard', async () => {
+      const onFilesChange = vi.fn()
+
+      render(
+        <FileUpload accept="image/*" onFilesChange={onFilesChange}>
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      expect(input).toHaveAttribute('accept', 'image/*')
+
+      const file1 = new File(['content1'], 'file1.jpg', { type: 'image/jpeg' })
+      const file2 = new File(['content2'], 'file2.png', { type: 'image/png' })
+      const file3 = new File(['content3'], 'file3.pdf', { type: 'application/pdf' })
+
+      await userEvent.upload(input, [file1, file2, file3])
+
+      await waitFor(() => {
+        // Only image files should be accepted
+        expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
+      })
+
+      expect(screen.getByText('file1.jpg')).toBeInTheDocument()
+      expect(screen.getByText('file2.png')).toBeInTheDocument()
+      expect(screen.queryByText('file3.pdf')).not.toBeInTheDocument()
+    })
+
+    it('should filter files by exact MIME type', async () => {
+      const onFilesChange = vi.fn()
+
+      render(
+        <FileUpload accept="image/png,application/pdf" onFilesChange={onFilesChange}>
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      expect(input).toHaveAttribute('accept', 'image/png,application/pdf')
+
+      const file1 = new File(['content1'], 'file1.png', { type: 'image/png' })
+      const file2 = new File(['content2'], 'file2.pdf', { type: 'application/pdf' })
+      const file3 = new File(['content3'], 'file3.jpg', { type: 'image/jpeg' })
+
+      await userEvent.upload(input, [file1, file2, file3])
+
+      await waitFor(() => {
+        // Only PNG and PDF files should be accepted
+        expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
+      })
+
+      expect(screen.getByText('file1.png')).toBeInTheDocument()
+      expect(screen.getByText('file2.pdf')).toBeInTheDocument()
+      expect(screen.queryByText('file3.jpg')).not.toBeInTheDocument()
+    })
+
+    it('should filter files by extension', async () => {
+      const onFilesChange = vi.fn()
+
+      render(
+        <FileUpload accept=".pdf,.doc,.jpg" onFilesChange={onFilesChange}>
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      expect(input).toHaveAttribute('accept', '.pdf,.doc,.jpg')
+
+      const file1 = new File(['content1'], 'file1.pdf', { type: 'application/pdf' })
+      const file2 = new File(['content2'], 'file2.doc', { type: 'application/msword' })
+      const file3 = new File(['content3'], 'file3.jpg', { type: 'image/jpeg' })
+      const file4 = new File(['content4'], 'file4.png', { type: 'image/png' })
+
+      await userEvent.upload(input, [file1, file2, file3, file4])
+
+      await waitFor(() => {
+        // Only files with .pdf, .doc, or .jpg extensions should be accepted
+        expect(onFilesChange).toHaveBeenCalledWith([file1, file2, file3])
+      })
+
+      expect(screen.getByText('file1.pdf')).toBeInTheDocument()
+      expect(screen.getByText('file2.doc')).toBeInTheDocument()
+      expect(screen.getByText('file3.jpg')).toBeInTheDocument()
+      expect(screen.queryByText('file4.png')).not.toBeInTheDocument()
+    })
+
+    it('should filter files by mixed MIME types and extensions', async () => {
+      const onFilesChange = vi.fn()
+
+      render(
+        <FileUpload accept="image/*,.pdf,.doc" onFilesChange={onFilesChange}>
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      expect(input).toHaveAttribute('accept', 'image/*,.pdf,.doc')
+
+      const file1 = new File(['content1'], 'file1.jpg', { type: 'image/jpeg' })
+      const file2 = new File(['content2'], 'file2.pdf', { type: 'application/pdf' })
+      const file3 = new File(['content3'], 'file3.doc', { type: 'application/msword' })
+      const file4 = new File(['content4'], 'file4.txt', { type: 'text/plain' })
+
+      await userEvent.upload(input, [file1, file2, file3, file4])
+
+      await waitFor(() => {
+        // Images, PDFs, and DOC files should be accepted
+        expect(onFilesChange).toHaveBeenCalledWith([file1, file2, file3])
+      })
+
+      expect(screen.getByText('file1.jpg')).toBeInTheDocument()
+      expect(screen.getByText('file2.pdf')).toBeInTheDocument()
+      expect(screen.getByText('file3.doc')).toBeInTheDocument()
+      expect(screen.queryByText('file4.txt')).not.toBeInTheDocument()
+    })
+
+    it('should filter files when dropped on dropzone', async () => {
+      const onFilesChange = vi.fn()
+
+      render(
+        <FileUpload accept="image/*" onFilesChange={onFilesChange}>
+          <FileUpload.Dropzone>Drop files here</FileUpload.Dropzone>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const dropzone = screen.getByRole('button', { name: 'Drop files here' })
+      const file1 = new File(['content1'], 'dropped1.jpg', { type: 'image/jpeg' })
+      const file2 = new File(['content2'], 'dropped2.pdf', { type: 'application/pdf' })
+
+      // Simulate drag and drop
+      const dropEvent = new Event('drop', { bubbles: true }) as any
+      dropEvent.dataTransfer = {
+        files: [file1, file2],
+      }
+      dropzone.dispatchEvent(dropEvent)
+
+      await waitFor(() => {
+        // Only image files should be accepted
+        expect(onFilesChange).toHaveBeenCalled()
+        const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
+        expect(lastCall?.[0]).toHaveLength(1)
+        expect(lastCall?.[0]?.[0]?.name).toBe('dropped1.jpg')
+      })
+
+      expect(screen.getByText('dropped1.jpg')).toBeInTheDocument()
+      expect(screen.queryByText('dropped2.pdf')).not.toBeInTheDocument()
+    })
+
+    it('should handle case-insensitive extension matching', async () => {
+      const onFilesChange = vi.fn()
+
+      render(
+        <FileUpload accept=".PDF,.JPG" onFilesChange={onFilesChange}>
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      const file1 = new File(['content1'], 'file1.PDF', { type: 'application/pdf' })
+      const file2 = new File(['content2'], 'file2.jpg', { type: 'image/jpeg' })
+      const file3 = new File(['content3'], 'file3.JPG', { type: 'image/jpeg' })
+
+      await userEvent.upload(input, [file1, file2, file3])
+
+      await waitFor(() => {
+        // All files should be accepted (case-insensitive)
+        expect(onFilesChange).toHaveBeenCalledWith([file1, file2, file3])
+      })
+
+      expect(screen.getByText('file1.PDF')).toBeInTheDocument()
+      expect(screen.getByText('file2.jpg')).toBeInTheDocument()
+      expect(screen.getByText('file3.JPG')).toBeInTheDocument()
+    })
+  })
 })
