@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.2.2](https://github.com/leboncoin/spark-web/compare/v11.2.1...v11.2.2) (2025-11-06)
+
+### Bug Fixes
+
+- **components:** expose toast manager ([978e6e9](https://github.com/leboncoin/spark-web/commit/978e6e960d6b9c60b8b8814a2d58f81806b5e4e9))
+
 ## [11.2.1](https://github.com/leboncoin/spark-web/compare/v11.2.0...v11.2.1) (2025-11-05)
 
 ### Bug Fixes
