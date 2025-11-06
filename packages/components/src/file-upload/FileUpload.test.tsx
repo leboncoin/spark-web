@@ -995,4 +995,246 @@ describe('FileUpload', () => {
       expect(screen.queryByText('file4.gif')).not.toBeInTheDocument()
     })
   })
+
+  describe('File size validation', () => {
+    it('should filter files by maxFileSize', async () => {
+      const onFileSizeError = vi.fn()
+      const onFilesChange = vi.fn()
+      const maxFileSize = 1024 // 1 KB
+
+      render(
+        <FileUpload
+          maxFileSize={maxFileSize}
+          onFileSizeError={onFileSizeError}
+          onFilesChange={onFilesChange}
+        >
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      const file1 = new File(['content1'], 'file1.jpg', { type: 'image/jpeg' }) // Small file
+      const file2 = new File(['x'.repeat(2000)], 'file2.jpg', { type: 'image/jpeg' }) // Large file (> 1KB)
+
+      await userEvent.upload(input, [file1, file2])
+
+      await waitFor(() => {
+        // Only the small file should be accepted
+        expect(onFilesChange).toHaveBeenCalledWith([file1])
+        expect(onFileSizeError).toHaveBeenCalled()
+      })
+
+      expect(screen.getByText('file1.jpg')).toBeInTheDocument()
+      expect(screen.queryByText('file2.jpg')).not.toBeInTheDocument()
+    })
+
+    it('should call onFileSizeError when file exceeds maxFileSize', async () => {
+      const onFileSizeError = vi.fn()
+      const onFilesChange = vi.fn()
+      const maxFileSize = 1024 // 1 KB
+
+      render(
+        <FileUpload
+          maxFileSize={maxFileSize}
+          onFileSizeError={onFileSizeError}
+          onFilesChange={onFilesChange}
+        >
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      const largeFile = new File(['x'.repeat(2000)], 'large.jpg', { type: 'image/jpeg' })
+
+      await userEvent.upload(input, largeFile)
+
+      await waitFor(() => {
+        expect(onFileSizeError).toHaveBeenCalledWith(
+          largeFile,
+          expect.stringContaining('is too large')
+        )
+        expect(onFileSizeError).toHaveBeenCalledWith(
+          largeFile,
+          expect.stringContaining('Maximum size is')
+        )
+      })
+    })
+
+    it('should filter files by minFileSize', async () => {
+      const onFileSizeError = vi.fn()
+      const onFilesChange = vi.fn()
+      const minFileSize = 100 // 100 bytes
+
+      render(
+        <FileUpload
+          minFileSize={minFileSize}
+          onFileSizeError={onFileSizeError}
+          onFilesChange={onFilesChange}
+        >
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      const smallFile = new File(['x'], 'small.jpg', { type: 'image/jpeg' }) // Very small file
+      const largeFile = new File(['x'.repeat(200)], 'large.jpg', { type: 'image/jpeg' }) // Large enough file
+
+      await userEvent.upload(input, [smallFile, largeFile])
+
+      await waitFor(() => {
+        // Only the large enough file should be accepted
+        expect(onFilesChange).toHaveBeenCalledWith([largeFile])
+        expect(onFileSizeError).toHaveBeenCalled()
+      })
+
+      expect(screen.queryByText('small.jpg')).not.toBeInTheDocument()
+      expect(screen.getByText('large.jpg')).toBeInTheDocument()
+    })
+
+    it('should call onFileSizeError when file is smaller than minFileSize', async () => {
+      const onFileSizeError = vi.fn()
+      const onFilesChange = vi.fn()
+      const minFileSize = 100 // 100 bytes
+
+      render(
+        <FileUpload
+          minFileSize={minFileSize}
+          onFileSizeError={onFileSizeError}
+          onFilesChange={onFilesChange}
+        >
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      const smallFile = new File(['x'], 'small.jpg', { type: 'image/jpeg' })
+
+      await userEvent.upload(input, smallFile)
+
+      await waitFor(() => {
+        expect(onFileSizeError).toHaveBeenCalledWith(
+          smallFile,
+          expect.stringContaining('is too small')
+        )
+        expect(onFileSizeError).toHaveBeenCalledWith(
+          smallFile,
+          expect.stringContaining('Minimum size is')
+        )
+      })
+    })
+
+    it('should filter files by both minFileSize and maxFileSize', async () => {
+      const onFileSizeError = vi.fn()
+      const onFilesChange = vi.fn()
+      const minFileSize = 100 // 100 bytes
+      const maxFileSize = 1024 // 1 KB
+
+      render(
+        <FileUpload
+          minFileSize={minFileSize}
+          maxFileSize={maxFileSize}
+          onFileSizeError={onFileSizeError}
+          onFilesChange={onFilesChange}
+        >
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      const tooSmall = new File(['x'], 'small.jpg', { type: 'image/jpeg' })
+      const valid = new File(['x'.repeat(200)], 'valid.jpg', { type: 'image/jpeg' })
+      const tooLarge = new File(['x'.repeat(2000)], 'large.jpg', { type: 'image/jpeg' })
+
+      await userEvent.upload(input, [tooSmall, valid, tooLarge])
+
+      await waitFor(() => {
+        // Only the valid file should be accepted
+        expect(onFilesChange).toHaveBeenCalledWith([valid])
+        expect(onFileSizeError).toHaveBeenCalledTimes(2)
+      })
+
+      expect(screen.queryByText('small.jpg')).not.toBeInTheDocument()
+      expect(screen.getByText('valid.jpg')).toBeInTheDocument()
+      expect(screen.queryByText('large.jpg')).not.toBeInTheDocument()
+    })
+
+    it('should work with drag and drop', async () => {
+      const onFileSizeError = vi.fn()
+      const onFilesChange = vi.fn()
+      const maxFileSize = 1024 // 1 KB
+
+      render(
+        <FileUpload
+          maxFileSize={maxFileSize}
+          onFileSizeError={onFileSizeError}
+          onFilesChange={onFilesChange}
+        >
+          <FileUpload.Dropzone>Drop files here</FileUpload.Dropzone>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const dropzone = screen.getByRole('button', { name: 'Drop files here' })
+      const file1 = new File(['content1'], 'dropped1.jpg', { type: 'image/jpeg' })
+      const file2 = new File(['x'.repeat(2000)], 'dropped2.jpg', { type: 'image/jpeg' })
+
+      // Simulate drag and drop
+      const dropEvent = new Event('drop', { bubbles: true }) as any
+      dropEvent.dataTransfer = {
+        files: [file1, file2],
+      }
+      dropzone.dispatchEvent(dropEvent)
+
+      await waitFor(() => {
+        // Only the small file should be accepted
+        expect(onFilesChange).toHaveBeenCalled()
+        const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
+        expect(lastCall?.[0]).toHaveLength(1)
+        expect(lastCall?.[0]?.[0]?.name).toBe('dropped1.jpg')
+        expect(onFileSizeError).toHaveBeenCalled()
+      })
+
+      expect(screen.getByText('dropped1.jpg')).toBeInTheDocument()
+      expect(screen.queryByText('dropped2.jpg')).not.toBeInTheDocument()
+    })
+
+    it('should work with accept prop', async () => {
+      const onFileSizeError = vi.fn()
+      const onFilesChange = vi.fn()
+      const maxFileSize = 1024 // 1 KB
+
+      render(
+        <FileUpload
+          accept="image/*"
+          maxFileSize={maxFileSize}
+          onFileSizeError={onFileSizeError}
+          onFilesChange={onFilesChange}
+        >
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      const file1 = new File(['content1'], 'file1.jpg', { type: 'image/jpeg' })
+      const file2 = new File(['x'.repeat(2000)], 'file2.jpg', { type: 'image/jpeg' })
+      const file3 = new File(['content3'], 'file3.pdf', { type: 'application/pdf' })
+
+      await userEvent.upload(input, [file1, file2, file3])
+
+      await waitFor(() => {
+        // Only the small image file should be accepted (PDF is filtered by accept, large image by size)
+        expect(onFilesChange).toHaveBeenCalledWith([file1])
+      })
+
+      expect(screen.getByText('file1.jpg')).toBeInTheDocument()
+      expect(screen.queryByText('file2.jpg')).not.toBeInTheDocument()
+      expect(screen.queryByText('file3.pdf')).not.toBeInTheDocument()
+    })
+  })
 })

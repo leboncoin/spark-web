@@ -99,6 +99,12 @@ Use the `maxFiles` prop to limit the number of files that can be uploaded. When 
 
 <Canvas of={stories.MaxFiles} />
 
+### File size limits
+
+Use the `maxFileSize` and `minFileSize` props to restrict the size of files that can be uploaded. File sizes are specified in bytes. Files that don't meet the size requirements will be automatically filtered out. You can use the `onFileSizeError` callback to handle size validation errors and display specific error messages for each rejected file.
+
+<Canvas of={stories.FileSizeLimit} />
+
 ## Advanced examples
 
 ### Custom Trigger

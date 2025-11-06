@@ -386,3 +386,39 @@ export const MaxFiles: StoryFn = () => {
     </FileUpload>
   )
 }
+
+export const FileSizeLimit: StoryFn = () => {
+  const [errorMessages, setErrorMessages] = useState<string[]>([])
+
+  const handleFileSizeError = (_file: File, error: string) => {
+    setErrorMessages(prev => [...prev, error])
+  }
+
+  const maxFileSize = 100 * 1024 // 100KB
+
+  return (
+    <FileUpload maxFileSize={maxFileSize} onFileSizeError={handleFileSizeError}>
+      <FileUpload.Dropzone>
+        <Icon size="lg">
+          <Export />
+        </Icon>
+        <div className="text-subhead">
+          <p>Drag and drop files or</p>
+
+          <FileUpload.Trigger>browse my files</FileUpload.Trigger>
+        </div>
+        <p className="text-caption text-on-surface/dim-1">Maximum 100ko per file</p>
+      </FileUpload.Dropzone>
+      <FileUpload.FilesPreview />
+      {errorMessages.length > 0 && (
+        <div className="mt-md space-y-xs">
+          {errorMessages.map((error, index) => (
+            <p key={index} className="text-caption text-error" role="alert">
+              {error}
+            </p>
+          ))}
+        </div>
+      )}
+    </FileUpload>
+  )
+}
