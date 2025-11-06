@@ -21,12 +21,14 @@ export const Trigger = ({
   ref,
   ...props
 }: FileUploadTriggerProps) => {
-  const { inputRef, triggerRef } = useFileUploadContext()
+  const { inputRef, triggerRef, disabled, readOnly } = useFileUploadContext()
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation()
     e.preventDefault()
-    inputRef.current?.click()
+    if (!disabled && !readOnly) {
+      inputRef.current?.click()
+    }
   }
 
   const buttonComponent = unstyled ? 'button' : Button
@@ -53,6 +55,7 @@ export const Trigger = ({
       intent="neutral"
       data-spark-component="file-upload-trigger"
       className={cx(className)}
+      disabled={disabled || readOnly}
       onClick={handleClick}
       {...props}
     >

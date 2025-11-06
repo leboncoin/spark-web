@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { createContext, ReactNode, Ref, useContext, useRef, useState } from 'react'
 
 /**
@@ -143,6 +144,14 @@ export interface FileUploadProps {
    * @param error - The error message
    */
   onFileSizeError?: (file: File, error: string) => void
+  /**
+   * When `true`, prevents the user from interacting with the file upload
+   */
+  disabled?: boolean
+  /**
+   * When `true`, sets the file upload to read-only mode
+   */
+  readOnly?: boolean
 }
 
 export const FileUploadContext = createContext<{
@@ -157,6 +166,8 @@ export const FileUploadContext = createContext<{
   multiple: boolean
   maxFiles?: number
   maxFilesReached: boolean
+  disabled: boolean
+  readOnly: boolean
 } | null>(null)
 
 export const FileUpload = ({
@@ -171,6 +182,8 @@ export const FileUpload = ({
   maxFileSize,
   minFileSize,
   onFileSizeError,
+  disabled = false,
+  readOnly = false,
 }: FileUploadProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const triggerRef = useRef<HTMLElement>(null)
@@ -179,6 +192,11 @@ export const FileUpload = ({
   const [files, setFiles] = useState<File[]>(defaultValue)
 
   const addFiles = (newFiles: File[]) => {
+    // Don't allow adding files when disabled or readOnly
+    if (disabled || readOnly) {
+      return
+    }
+
     setFiles(prev => {
       // Filter files by accept pattern if provided
       let filteredFiles = newFiles
@@ -229,6 +247,11 @@ export const FileUpload = ({
   }
 
   const removeFile = (index: number) => {
+    // Don't allow removing files when disabled or readOnly
+    if (disabled || readOnly) {
+      return
+    }
+
     setFiles(prev => {
       const updated = prev.filter((_, i) => i !== index)
       onFilesChange?.(updated)
@@ -238,6 +261,11 @@ export const FileUpload = ({
   }
 
   const clearFiles = () => {
+    // Don't allow clearing files when disabled or readOnly
+    if (disabled || readOnly) {
+      return
+    }
+
     setFiles([])
     onFilesChange?.([])
     deleteButtonRefs.current = []
@@ -259,6 +287,8 @@ export const FileUpload = ({
         multiple,
         maxFiles,
         maxFilesReached,
+        disabled,
+        readOnly,
       }}
     >
       {/* <Comp data-spark-component="file-upload" className={cx('relative', className)} {...props}> */}
@@ -272,9 +302,11 @@ export const FileUpload = ({
           multiple={multiple}
           name="image_uploads"
           accept={accept}
+          disabled={disabled}
+          readOnly={readOnly && !disabled}
           className="sr-only"
           onChange={e => {
-            if (e.target.files) {
+            if (e.target.files && !disabled && !readOnly) {
               addFiles(Array.from(e.target.files))
             }
           }}

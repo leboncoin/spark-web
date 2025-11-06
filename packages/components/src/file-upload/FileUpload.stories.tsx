@@ -118,13 +118,13 @@ export const WithCustomFileRender: StoryFn = () => {
 }
 
 export const WithDefaultFiles: StoryFn = () => {
-  // Create sample files for demonstration
+  // Create sample files for demonstration with realistic sizes
   const defaultFiles = [
-    new File([''], 'landscape.jpg', { type: 'image/jpeg' }),
-    new File([''], 'document.pdf', { type: 'application/pdf' }),
-    new File([''], 'spreadsheet.xlsx', {
+    new File([new ArrayBuffer(1024 * 500)], 'landscape.jpg', { type: 'image/jpeg' }), // ~500 KB
+    new File([new ArrayBuffer(1024 * 200)], 'document.pdf', { type: 'application/pdf' }), // ~200 KB
+    new File([new ArrayBuffer(1024 * 150)], 'spreadsheet.xlsx', {
       type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    }),
+    }), // ~150 KB
   ]
 
   return (
@@ -419,6 +419,54 @@ export const FileSizeLimit: StoryFn = () => {
           ))}
         </div>
       )}
+    </FileUpload>
+  )
+}
+
+export const Disabled: StoryFn = () => {
+  const files = [
+    new File([''], 'document1.pdf', { type: 'application/pdf' }),
+    new File([''], 'document2.pdf', { type: 'application/pdf' }),
+  ]
+
+  return (
+    <FileUpload disabled defaultValue={files}>
+      <FileUpload.Dropzone>
+        <Icon size="lg">
+          <Export />
+        </Icon>
+        <div className="text-subhead">
+          <p>Drag and drop files or</p>
+
+          <FileUpload.Trigger>browse my files</FileUpload.Trigger>
+        </div>
+        <p className="text-caption text-on-surface/dim-1">Disabled state</p>
+      </FileUpload.Dropzone>
+      <FileUpload.FilesPreview />
+    </FileUpload>
+  )
+}
+
+export const ReadOnly: StoryFn = () => {
+  const files = [
+    new File([''], 'document1.pdf', { type: 'application/pdf' }),
+    new File([''], 'document2.pdf', { type: 'application/pdf' }),
+  ]
+
+  return (
+    <FileUpload readOnly defaultValue={files}>
+      <FileUpload.Dropzone>
+        <Icon size="lg">
+          <Export />
+        </Icon>
+        <div className="text-subhead">
+          <p>Drag and drop files or</p>
+
+          <FileUpload.Trigger>browse my files</FileUpload.Trigger>
+        </div>
+        <p className="text-caption text-on-surface/dim-1">Read-only state</p>
+      </FileUpload.Dropzone>
+      <FileUpload.FilesPreview />
     </FileUpload>
   )
 }

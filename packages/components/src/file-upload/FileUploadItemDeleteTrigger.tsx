@@ -19,10 +19,16 @@ export const ItemDeleteTrigger = ({
   onClick,
   ...props
 }: FileUploadItemDeleteTriggerProps) => {
-  const { removeFile, triggerRef, dropzoneRef, deleteButtonRefs } = useFileUploadContext()
+  const { removeFile, triggerRef, dropzoneRef, deleteButtonRefs, disabled, readOnly } =
+    useFileUploadContext()
   const buttonRef = useRef<HTMLButtonElement>(null)
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // Don't allow removing files when disabled or readOnly
+    if (disabled || readOnly) {
+      return
+    }
+
     // Remove the file
     removeFile(fileIndex)
 
@@ -75,6 +81,7 @@ export const ItemDeleteTrigger = ({
       data-spark-component="file-upload-item-delete-trigger"
       className={cx(className)}
       onClick={handleClick}
+      disabled={disabled || readOnly}
       size="sm"
       design="ghost"
       intent="surfaceInverse"

@@ -1237,4 +1237,297 @@ describe('FileUpload', () => {
       expect(screen.queryByText('file3.pdf')).not.toBeInTheDocument()
     })
   })
+
+  describe('Disabled and ReadOnly states', () => {
+    it('should disable input when disabled is true', () => {
+      render(
+        <FileUpload disabled>
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      expect(input).toHaveAttribute('disabled')
+      expect(input).not.toHaveAttribute('readOnly')
+    })
+
+    it('should set readOnly on input when readOnly is true', () => {
+      render(
+        <FileUpload readOnly>
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      expect(input).toHaveAttribute('readOnly')
+      expect(input).not.toHaveAttribute('disabled')
+    })
+
+    it('should disable trigger when disabled is true', () => {
+      render(
+        <FileUpload disabled>
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+        </FileUpload>
+      )
+
+      const trigger = screen.getByRole('button', { name: 'Upload' })
+      expect(trigger).toBeDisabled()
+    })
+
+    it('should disable trigger when readOnly is true', () => {
+      render(
+        <FileUpload readOnly>
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+        </FileUpload>
+      )
+
+      const trigger = screen.getByRole('button', { name: 'Upload' })
+      expect(trigger).toBeDisabled()
+    })
+
+    it('should not allow file selection when disabled', async () => {
+      const onFilesChange = vi.fn()
+
+      render(
+        <FileUpload disabled onFilesChange={onFilesChange}>
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      const file = new File(['content'], 'file.jpg', { type: 'image/jpeg' })
+
+      await userEvent.upload(input, file)
+
+      // Wait a bit to ensure no state update occurs
+      await new Promise(resolve => setTimeout(resolve, 100))
+
+      expect(onFilesChange).not.toHaveBeenCalled()
+      expect(screen.queryByText('file.jpg')).not.toBeInTheDocument()
+    })
+
+    it('should not allow file selection when readOnly', async () => {
+      const onFilesChange = vi.fn()
+
+      render(
+        <FileUpload readOnly onFilesChange={onFilesChange}>
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      const file = new File(['content'], 'file.jpg', { type: 'image/jpeg' })
+
+      await userEvent.upload(input, file)
+
+      // Wait a bit to ensure no state update occurs
+      await new Promise(resolve => setTimeout(resolve, 100))
+
+      expect(onFilesChange).not.toHaveBeenCalled()
+      expect(screen.queryByText('file.jpg')).not.toBeInTheDocument()
+    })
+
+    it('should not allow file removal when disabled', async () => {
+      const user = userEvent.setup()
+      const onFilesChange = vi.fn()
+      const files = [
+        new File(['content1'], 'file1.jpg', { type: 'image/jpeg' }),
+        new File(['content2'], 'file2.png', { type: 'image/png' }),
+      ]
+
+      render(
+        <FileUpload disabled defaultValue={files} onFilesChange={onFilesChange}>
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      expect(screen.getByText('file1.jpg')).toBeInTheDocument()
+      expect(screen.getByText('file2.png')).toBeInTheDocument()
+
+      const deleteButtons = screen.getAllByLabelText('Delete file')
+      const deleteButton = deleteButtons[0]
+      expect(deleteButton).toBeDisabled()
+
+      if (deleteButton) {
+        await user.click(deleteButton)
+      }
+
+      // Wait a bit to ensure no state update occurs
+      await new Promise(resolve => setTimeout(resolve, 100))
+
+      expect(onFilesChange).not.toHaveBeenCalled()
+      expect(screen.getByText('file1.jpg')).toBeInTheDocument()
+      expect(screen.getByText('file2.png')).toBeInTheDocument()
+    })
+
+    it('should not allow file removal when readOnly', async () => {
+      const user = userEvent.setup()
+      const onFilesChange = vi.fn()
+      const files = [
+        new File(['content1'], 'file1.jpg', { type: 'image/jpeg' }),
+        new File(['content2'], 'file2.png', { type: 'image/png' }),
+      ]
+
+      render(
+        <FileUpload readOnly defaultValue={files} onFilesChange={onFilesChange}>
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      expect(screen.getByText('file1.jpg')).toBeInTheDocument()
+      expect(screen.getByText('file2.png')).toBeInTheDocument()
+
+      const deleteButtons = screen.getAllByLabelText('Delete file')
+      const deleteButton = deleteButtons[0]
+      expect(deleteButton).toBeDisabled()
+
+      if (deleteButton) {
+        await user.click(deleteButton)
+      }
+
+      // Wait a bit to ensure no state update occurs
+      await new Promise(resolve => setTimeout(resolve, 100))
+
+      expect(onFilesChange).not.toHaveBeenCalled()
+      expect(screen.getByText('file1.jpg')).toBeInTheDocument()
+      expect(screen.getByText('file2.png')).toBeInTheDocument()
+    })
+
+    it('should not allow drag and drop when disabled', async () => {
+      const onFilesChange = vi.fn()
+
+      render(
+        <FileUpload disabled onFilesChange={onFilesChange}>
+          <FileUpload.Dropzone>Drop files here</FileUpload.Dropzone>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const dropzone = screen.getByRole('button', { name: 'Drop files here' })
+      expect(dropzone).toHaveAttribute('aria-disabled', 'true')
+      expect(dropzone).not.toHaveAttribute('aria-readonly')
+      expect(dropzone).toHaveAttribute('tabIndex', '-1')
+
+      const file = new File(['content'], 'dropped.jpg', { type: 'image/jpeg' })
+
+      // Simulate drag and drop
+      const dropEvent = new Event('drop', { bubbles: true }) as any
+      dropEvent.dataTransfer = {
+        files: [file],
+      }
+      dropzone.dispatchEvent(dropEvent)
+
+      // Wait a bit to ensure no state update occurs
+      await new Promise(resolve => setTimeout(resolve, 100))
+
+      expect(onFilesChange).not.toHaveBeenCalled()
+      expect(screen.queryByText('dropped.jpg')).not.toBeInTheDocument()
+    })
+
+    it('should not allow drag and drop when readOnly', async () => {
+      const onFilesChange = vi.fn()
+
+      render(
+        <FileUpload readOnly onFilesChange={onFilesChange}>
+          <FileUpload.Dropzone>Drop files here</FileUpload.Dropzone>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const dropzone = screen.getByRole('button', { name: 'Drop files here' })
+      expect(dropzone).not.toHaveAttribute('aria-disabled')
+      expect(dropzone).toHaveAttribute('tabIndex', '-1')
+
+      const file = new File(['content'], 'dropped.jpg', { type: 'image/jpeg' })
+
+      // Simulate drag and drop
+      const dropEvent = new Event('drop', { bubbles: true }) as any
+      dropEvent.dataTransfer = {
+        files: [file],
+      }
+      dropzone.dispatchEvent(dropEvent)
+
+      // Wait a bit to ensure no state update occurs
+      await new Promise(resolve => setTimeout(resolve, 100))
+
+      expect(onFilesChange).not.toHaveBeenCalled()
+      expect(screen.queryByText('dropped.jpg')).not.toBeInTheDocument()
+    })
+
+    it('should not trigger file selection when dropzone is clicked and disabled', async () => {
+      const user = userEvent.setup()
+      const inputClick = vi.fn()
+
+      render(
+        <FileUpload disabled>
+          <FileUpload.Dropzone>Drop files here</FileUpload.Dropzone>
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      input.click = inputClick
+
+      const dropzone = screen.getByRole('button', { name: 'Drop files here' })
+      await user.click(dropzone)
+
+      expect(inputClick).not.toHaveBeenCalled()
+    })
+
+    it('should not trigger file selection when dropzone is clicked and readOnly', async () => {
+      const user = userEvent.setup()
+      const inputClick = vi.fn()
+
+      render(
+        <FileUpload readOnly>
+          <FileUpload.Dropzone>Drop files here</FileUpload.Dropzone>
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      input.click = inputClick
+
+      const dropzone = screen.getByRole('button', { name: 'Drop files here' })
+      await user.click(dropzone)
+
+      expect(inputClick).not.toHaveBeenCalled()
+    })
+
+    it('should display existing files when disabled', () => {
+      const files = [
+        new File(['content1'], 'file1.jpg', { type: 'image/jpeg' }),
+        new File(['content2'], 'file2.png', { type: 'image/png' }),
+      ]
+
+      render(
+        <FileUpload disabled defaultValue={files}>
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      expect(screen.getByText('file1.jpg')).toBeInTheDocument()
+      expect(screen.getByText('file2.png')).toBeInTheDocument()
+    })
+
+    it('should display existing files when readOnly', () => {
+      const files = [
+        new File(['content1'], 'file1.jpg', { type: 'image/jpeg' }),
+        new File(['content2'], 'file2.png', { type: 'image/png' }),
+      ]
+
+      render(
+        <FileUpload readOnly defaultValue={files}>
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      expect(screen.getByText('file1.jpg')).toBeInTheDocument()
+      expect(screen.getByText('file2.png')).toBeInTheDocument()
+    })
+  })
 })

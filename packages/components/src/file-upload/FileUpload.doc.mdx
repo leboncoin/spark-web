@@ -105,6 +105,18 @@ Use the `maxFileSize` and `minFileSize` props to restrict the size of files that
 
 <Canvas of={stories.FileSizeLimit} />
 
+### Disabled state
+
+Use the `disabled` prop to prevent user interaction with the file upload component. When disabled, users cannot add, remove, or modify files. The component is visually disabled with reduced opacity and a "not-allowed" cursor. Existing files are still displayed but cannot be modified. Disabled fields do not participate in form submission.
+
+<Canvas of={stories.Disabled} />
+
+### Read-only state
+
+Use the `readOnly` prop to set the file upload to read-only mode. Similar to disabled, users cannot add, remove, or modify files, but the component maintains a more subtle visual appearance (no opacity reduction). Existing files are displayed but cannot be modified. Read-only fields participate in form submission.
+
+<Canvas of={stories.ReadOnly} />
+
 ## Advanced examples
 
 ### Custom Trigger

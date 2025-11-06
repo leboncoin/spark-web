@@ -23,30 +23,43 @@ export function Dropzone({
     e.preventDefault()
     e.stopPropagation()
     e.currentTarget.setAttribute('data-drag-over', 'false')
+
+    // Don't allow dropping files when disabled or readOnly
+    if (ctx.disabled || ctx.readOnly) {
+      return
+    }
+
     const files = e.dataTransfer.files
     onFiles?.(files)
 
     // Add files to the context
-    ctx.addFiles(Array.from(files))
-    if (ctx.inputRef.current) {
-      // Optionnel : pour déclencher l'événement "change"
-      const dataTransfer = new DataTransfer()
-      Array.from(files).forEach(f => dataTransfer.items.add(f))
-      ctx.inputRef.current.files = dataTransfer.files
-      ctx.inputRef.current.dispatchEvent(new Event('change', { bubbles: true }))
+    // Convert to array - handle both FileList and array (for tests)
+    let filesArray: File[] = []
+    if (files) {
+      filesArray = Array.isArray(files) ? [...files] : Array.from(files)
+    }
+
+    if (filesArray.length > 0) {
+      ctx.addFiles(filesArray)
     }
   }
 
   const handleClick = () => {
-    ctx.inputRef.current?.click()
+    if (!ctx.disabled && !ctx.readOnly) {
+      ctx.inputRef.current?.click()
+    }
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
-      ctx.inputRef.current?.click()
+      if (!ctx.disabled && !ctx.readOnly) {
+        ctx.inputRef.current?.click()
+      }
     }
   }
+
+  const isDisabled = ctx.disabled || ctx.readOnly
 
   return (
     <div
@@ -57,7 +70,8 @@ export function Dropzone({
         }
       }}
       role="button"
-      tabIndex={0}
+      tabIndex={isDisabled ? -1 : 0}
+      aria-disabled={ctx.disabled ? true : undefined}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       onDrop={handleDrop}
@@ -72,13 +86,19 @@ export function Dropzone({
               'gap-lg flex flex-col items-center justify-center text-center',
               'default:p-xl',
               'transition-colors duration-200',
-              'hover:bg-surface-hovered',
+              !isDisabled && 'hover:bg-surface-hovered',
               'data-[drag-over=true]:border-outline-high data-[drag-over=true]:bg-surface-hovered data-[drag-over=true]:border-solid',
+              // Disabled: more visually disabled (opacity + cursor)
+              ctx.disabled && 'cursor-not-allowed opacity-50',
+              // ReadOnly: less visually disabled (just cursor, no opacity)
+              ctx.readOnly && !ctx.disabled && 'cursor-default',
               className
             )
       }
       onDragEnter={e => {
-        e.currentTarget.setAttribute('data-drag-over', 'true')
+        if (!isDisabled) {
+          e.currentTarget.setAttribute('data-drag-over', 'true')
+        }
       }}
       onDragLeave={e => {
         e.currentTarget.setAttribute('data-drag-over', 'false')
