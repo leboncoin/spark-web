@@ -91,10 +91,13 @@ Use the `accept` prop to restrict the types of files that can be selected. The p
 
 Files that don't match the accept pattern will be automatically filtered out.
 
-
 <Canvas of={stories.AcceptDocuments} />
 
+### Maximum files
 
+Use the `maxFiles` prop to limit the number of files that can be uploaded. When the limit is reached, additional files will be rejected. You can use the `onMaxFilesReached` callback to handle this case and display an error message.
+
+<Canvas of={stories.MaxFiles} />
 
 ## Advanced examples
 

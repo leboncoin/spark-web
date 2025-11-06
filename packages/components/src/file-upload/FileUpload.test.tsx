@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 /* eslint-disable max-lines */
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
@@ -775,6 +776,223 @@ describe('FileUpload', () => {
       expect(screen.getByText('file1.PDF')).toBeInTheDocument()
       expect(screen.getByText('file2.jpg')).toBeInTheDocument()
       expect(screen.getByText('file3.JPG')).toBeInTheDocument()
+    })
+  })
+
+  describe('MaxFiles prop', () => {
+    it('should limit the number of files when maxFiles is set', async () => {
+      const onFilesChange = vi.fn()
+
+      render(
+        <FileUpload maxFiles={2} onFilesChange={onFilesChange}>
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      const file1 = new File(['content1'], 'file1.jpg', { type: 'image/jpeg' })
+      const file2 = new File(['content2'], 'file2.png', { type: 'image/png' })
+      const file3 = new File(['content3'], 'file3.pdf', { type: 'application/pdf' })
+
+      await userEvent.upload(input, [file1, file2, file3])
+
+      await waitFor(() => {
+        // Only first 2 files should be added
+        expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
+      })
+
+      expect(screen.getByText('file1.jpg')).toBeInTheDocument()
+      expect(screen.getByText('file2.png')).toBeInTheDocument()
+      expect(screen.queryByText('file3.pdf')).not.toBeInTheDocument()
+    })
+
+    it('should call onMaxFilesReached when limit is exceeded', async () => {
+      const onMaxFilesReached = vi.fn()
+      const onFilesChange = vi.fn()
+
+      render(
+        <FileUpload
+          maxFiles={2}
+          onMaxFilesReached={onMaxFilesReached}
+          onFilesChange={onFilesChange}
+        >
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      const file1 = new File(['content1'], 'file1.jpg', { type: 'image/jpeg' })
+      const file2 = new File(['content2'], 'file2.png', { type: 'image/png' })
+      const file3 = new File(['content3'], 'file3.pdf', { type: 'application/pdf' })
+
+      await userEvent.upload(input, [file1, file2, file3])
+
+      await waitFor(() => {
+        // 3 files attempted, 2 accepted, 1 rejected
+        expect(onMaxFilesReached).toHaveBeenCalledWith(2, 1)
+      })
+    })
+
+    it('should reject all files when already at max', async () => {
+      const onMaxFilesReached = vi.fn()
+      const onFilesChange = vi.fn()
+      const initialFiles = [
+        new File(['content1'], 'initial1.jpg', { type: 'image/jpeg' }),
+        new File(['content2'], 'initial2.png', { type: 'image/png' }),
+      ]
+
+      render(
+        <FileUpload
+          maxFiles={2}
+          defaultValue={initialFiles}
+          onMaxFilesReached={onMaxFilesReached}
+          onFilesChange={onFilesChange}
+        >
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      expect(screen.getByText('initial1.jpg')).toBeInTheDocument()
+      expect(screen.getByText('initial2.png')).toBeInTheDocument()
+
+      const initialCallCount = onFilesChange.mock.calls.length
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      const newFile = new File(['content3'], 'new.jpg', { type: 'image/jpeg' })
+
+      await userEvent.upload(input, newFile)
+
+      await waitFor(() => {
+        expect(onMaxFilesReached).toHaveBeenCalledWith(2, 1)
+      })
+
+      // onFilesChange should not be called again when files are rejected
+      expect(onFilesChange).toHaveBeenCalledTimes(initialCallCount)
+      expect(screen.queryByText('new.jpg')).not.toBeInTheDocument()
+      // Initial files should still be present
+      expect(screen.getByText('initial1.jpg')).toBeInTheDocument()
+      expect(screen.getByText('initial2.png')).toBeInTheDocument()
+    })
+
+    it('should work with drag and drop', async () => {
+      const onMaxFilesReached = vi.fn()
+      const onFilesChange = vi.fn()
+
+      render(
+        <FileUpload
+          maxFiles={2}
+          onMaxFilesReached={onMaxFilesReached}
+          onFilesChange={onFilesChange}
+        >
+          <FileUpload.Dropzone>Drop files here</FileUpload.Dropzone>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const dropzone = screen.getByRole('button', { name: 'Drop files here' })
+      const file1 = new File(['content1'], 'dropped1.jpg', { type: 'image/jpeg' })
+      const file2 = new File(['content2'], 'dropped2.png', { type: 'image/png' })
+      const file3 = new File(['content3'], 'dropped3.pdf', { type: 'application/pdf' })
+
+      // Simulate drag and drop
+      const dropEvent = new Event('drop', { bubbles: true }) as any
+      dropEvent.dataTransfer = {
+        files: [file1, file2, file3],
+      }
+      dropzone.dispatchEvent(dropEvent)
+
+      await waitFor(() => {
+        // 3 files attempted, 2 accepted, 1 rejected
+        expect(onMaxFilesReached).toHaveBeenCalledWith(2, 1)
+        const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
+        expect(lastCall?.[0]).toHaveLength(2)
+      })
+
+      expect(screen.getByText('dropped1.jpg')).toBeInTheDocument()
+      expect(screen.getByText('dropped2.png')).toBeInTheDocument()
+      expect(screen.queryByText('dropped3.pdf')).not.toBeInTheDocument()
+    })
+
+    it('should work with multiple=false', async () => {
+      const onMaxFilesReached = vi.fn()
+      const onFilesChange = vi.fn()
+
+      render(
+        <FileUpload
+          multiple={false}
+          maxFiles={1}
+          onMaxFilesReached={onMaxFilesReached}
+          onFilesChange={onFilesChange}
+        >
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      const file1 = new File(['content1'], 'file1.jpg', { type: 'image/jpeg' })
+
+      await userEvent.upload(input, file1)
+
+      await waitFor(() => {
+        expect(onFilesChange).toHaveBeenCalledWith([file1])
+      })
+
+      expect(screen.getByText('file1.jpg')).toBeInTheDocument()
+
+      // Try to add another file
+      const file2 = new File(['content2'], 'file2.png', { type: 'image/png' })
+
+      await userEvent.upload(input, file2)
+
+      await waitFor(() => {
+        expect(onMaxFilesReached).toHaveBeenCalledWith(1, 1)
+        // File should be replaced (multiple=false), but maxFiles should prevent it
+        const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
+        expect(lastCall?.[0]).toHaveLength(1)
+        expect(lastCall?.[0]?.[0]?.name).toBe('file1.jpg')
+      })
+
+      expect(screen.queryByText('file2.png')).not.toBeInTheDocument()
+    })
+
+    it('should work with accept prop', async () => {
+      const onMaxFilesReached = vi.fn()
+      const onFilesChange = vi.fn()
+
+      render(
+        <FileUpload
+          accept="image/*"
+          maxFiles={2}
+          onMaxFilesReached={onMaxFilesReached}
+          onFilesChange={onFilesChange}
+        >
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      const file1 = new File(['content1'], 'file1.jpg', { type: 'image/jpeg' })
+      const file2 = new File(['content2'], 'file2.png', { type: 'image/png' })
+      const file3 = new File(['content3'], 'file3.pdf', { type: 'application/pdf' })
+      const file4 = new File(['content4'], 'file4.gif', { type: 'image/gif' })
+
+      await userEvent.upload(input, [file1, file2, file3, file4])
+
+      await waitFor(() => {
+        // Only image files should be accepted, and only first 2 should be added
+        expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
+        // 4 files attempted, accept filters to 3 images, maxFiles=2 accepts 2, so 1 rejected
+        expect(onMaxFilesReached).toHaveBeenCalledWith(2, 1)
+      })
+
+      expect(screen.getByText('file1.jpg')).toBeInTheDocument()
+      expect(screen.getByText('file2.png')).toBeInTheDocument()
+      expect(screen.queryByText('file3.pdf')).not.toBeInTheDocument()
+      expect(screen.queryByText('file4.gif')).not.toBeInTheDocument()
     })
   })
 })

@@ -5,6 +5,7 @@ import { IconButton } from '@spark-ui/components/icon-button'
 import { TextLink } from '@spark-ui/components/text-link'
 import { Export } from '@spark-ui/icons/Export'
 import { Meta, StoryFn } from '@storybook/react-vite'
+import { useState } from 'react'
 
 import { FileUpload } from '.'
 
@@ -350,6 +351,38 @@ export const AcceptDocuments: StoryFn = () => {
         <p className="text-caption text-on-surface/dim-1">.pdf, .doc, .docx</p>
       </FileUpload.Dropzone>
       <FileUpload.FilesPreview />
+    </FileUpload>
+  )
+}
+
+export const MaxFiles: StoryFn = () => {
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+
+  const handleMaxFilesReached = (maxFiles: number, rejectedCount: number) => {
+    setErrorMessage(
+      `Maximum ${maxFiles} file${maxFiles > 1 ? 's' : ''} allowed. ${rejectedCount} file${rejectedCount > 1 ? 's were' : ' was'} rejected.`
+    )
+  }
+
+  return (
+    <FileUpload maxFiles={3} onMaxFilesReached={handleMaxFilesReached}>
+      <FileUpload.Dropzone>
+        <Icon size="lg">
+          <Export />
+        </Icon>
+        <div className="text-subhead">
+          <p>Drag and drop files or</p>
+
+          <FileUpload.Trigger>browse my files</FileUpload.Trigger>
+        </div>
+        <p className="text-caption text-on-surface/dim-1">Maximum 3 files</p>
+      </FileUpload.Dropzone>
+      <FileUpload.FilesPreview />
+      {errorMessage && (
+        <p className="mt-md text-caption text-error" role="alert">
+          {errorMessage}
+        </p>
+      )}
     </FileUpload>
   )
 }

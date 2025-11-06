@@ -72,6 +72,17 @@ export interface FileUploadProps {
    * @example "image/png,image/jpeg,.pdf"
    */
   accept?: string
+  /**
+   * Maximum number of files that can be uploaded
+   * Files beyond this limit will be rejected
+   */
+  maxFiles?: number
+  /**
+   * Callback when the maximum number of files is reached
+   * @param maxFiles - The maximum number of files allowed
+   * @param rejectedCount - The number of files that were rejected
+   */
+  onMaxFilesReached?: (maxFiles: number, rejectedCount: number) => void
 }
 
 export const FileUploadContext = createContext<{
@@ -84,6 +95,8 @@ export const FileUploadContext = createContext<{
   dropzoneRef: React.RefObject<HTMLElement | null>
   deleteButtonRefs: React.MutableRefObject<HTMLButtonElement[]>
   multiple: boolean
+  maxFiles?: number
+  maxFilesReached: boolean
 } | null>(null)
 
 export const FileUpload = ({
@@ -93,6 +106,8 @@ export const FileUpload = ({
   onFilesChange,
   multiple = true,
   accept,
+  maxFiles,
+  onMaxFilesReached,
 }: FileUploadProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const triggerRef = useRef<HTMLElement>(null)
@@ -109,7 +124,28 @@ export const FileUpload = ({
       }
 
       // If multiple is false, replace existing files with only the first new file
-      const filesToAdd = multiple ? filteredFiles : filteredFiles.slice(0, 1)
+      let filesToAdd = multiple ? filteredFiles : filteredFiles.slice(0, 1)
+
+      // Apply maxFiles limit if provided
+      if (maxFiles !== undefined) {
+        const currentCount = prev.length
+        const remainingSlots = maxFiles - currentCount
+
+        if (remainingSlots <= 0) {
+          // Already at max, reject all new files
+          onMaxFilesReached?.(maxFiles, filesToAdd.length)
+
+          return prev
+        }
+
+        if (filesToAdd.length > remainingSlots) {
+          // Too many files, only take what fits
+          const rejectedCount = filesToAdd.length - remainingSlots
+          onMaxFilesReached?.(maxFiles, rejectedCount)
+          filesToAdd = filesToAdd.slice(0, remainingSlots)
+        }
+      }
+
       const updated = multiple ? [...prev, ...filesToAdd] : filesToAdd
       onFilesChange?.(updated)
 
@@ -132,6 +168,8 @@ export const FileUpload = ({
     deleteButtonRefs.current = []
   }
 
+  const maxFilesReached = maxFiles !== undefined && files.length >= maxFiles
+
   return (
     <FileUploadContext.Provider
       value={{
@@ -144,6 +182,8 @@ export const FileUpload = ({
         dropzoneRef,
         deleteButtonRefs,
         multiple,
+        maxFiles,
+        maxFilesReached,
       }}
     >
       {/* <Comp data-spark-component="file-upload" className={cx('relative', className)} {...props}> */}
