@@ -6,9 +6,8 @@ import { Tag } from '@spark-ui/components/tag'
 import { TextLink } from '@spark-ui/components/text-link'
 import { Export } from '@spark-ui/icons/Export'
 import { Meta, StoryFn } from '@storybook/react-vite'
-import { useState } from 'react'
 
-import { FileUpload } from '.'
+import { FileUpload, type FileUploadFileError } from '.'
 
 const meta: Meta<typeof FileUpload> = {
   title: 'Experimental/FileUpload',
@@ -38,7 +37,19 @@ export const Default: StoryFn = () => {
             Upload
           </FileUpload.Trigger>
 
-          <FileUpload.FilesPreview />
+          <FileUpload.Context>
+            {({ acceptedFiles }) => (
+              <ul className="gap-md my-md flex default:flex-col">
+                {acceptedFiles.map((file, index) => (
+                  <FileUpload.AcceptedFile
+                    key={`${file.name}-${file.size}-${index}`}
+                    file={file}
+                    fileIndex={index}
+                  />
+                ))}
+              </ul>
+            )}
+          </FileUpload.Context>
         </FileUpload>
       </div>
       <div className="gap-lg flex flex-1 grow flex-col">
@@ -55,7 +66,19 @@ export const Default: StoryFn = () => {
             </div>
             <p className="text-caption text-on-surface/dim-1">.png, .jpg up to 5MB</p>
           </FileUpload.Dropzone>
-          <FileUpload.FilesPreview />
+          <FileUpload.Context>
+            {({ acceptedFiles }) => (
+              <ul className="gap-md my-md flex default:flex-col">
+                {acceptedFiles.map((file, index) => (
+                  <FileUpload.AcceptedFile
+                    key={`${file.name}-${file.size}-${index}`}
+                    file={file}
+                    fileIndex={index}
+                  />
+                ))}
+              </ul>
+            )}
+          </FileUpload.Context>
         </FileUpload>
       </div>
     </div>
@@ -76,7 +99,19 @@ export const Dropzone: StoryFn = () => {
         </div>
         <p className="text-caption text-on-surface/dim-1">.png, .jpg up to 5MB</p>
       </FileUpload.Dropzone>
-      <FileUpload.FilesPreview />
+      <FileUpload.Context>
+        {({ acceptedFiles }) => (
+          <ul className="gap-md my-md flex default:flex-col">
+            {acceptedFiles.map((file, index) => (
+              <FileUpload.AcceptedFile
+                key={`${file.name}-${file.size}-${index}`}
+                file={file}
+                fileIndex={index}
+              />
+            ))}
+          </ul>
+        )}
+      </FileUpload.Context>
     </FileUpload>
   )
 }
@@ -89,7 +124,19 @@ export const CustomTrigger: StoryFn = () => {
           <FileUpload.Trigger unstyled>As a link</FileUpload.Trigger>
         </TextLink>
 
-        <FileUpload.FilesPreview />
+        <FileUpload.Context>
+          {({ acceptedFiles }) => (
+            <ul className="gap-md my-md flex default:flex-col">
+              {acceptedFiles.map((file, index) => (
+                <FileUpload.AcceptedFile
+                  key={`${file.name}-${file.size}-${index}`}
+                  file={file}
+                  fileIndex={index}
+                />
+              ))}
+            </ul>
+          )}
+        </FileUpload.Context>
       </FileUpload>
       <FileUpload>
         <FileUpload.Trigger asChild>
@@ -100,7 +147,19 @@ export const CustomTrigger: StoryFn = () => {
           </IconButton>
         </FileUpload.Trigger>
 
-        <FileUpload.FilesPreview />
+        <FileUpload.Context>
+          {({ acceptedFiles }) => (
+            <ul className="gap-md my-md flex default:flex-col">
+              {acceptedFiles.map((file, index) => (
+                <FileUpload.AcceptedFile
+                  key={`${file.name}-${file.size}-${index}`}
+                  file={file}
+                  fileIndex={index}
+                />
+              ))}
+            </ul>
+          )}
+        </FileUpload.Context>
       </FileUpload>
     </div>
   )
@@ -157,31 +216,38 @@ export const WithCustomFileRender: StoryFn = () => {
         </Button>
       </FileUpload.Dropzone>
 
-      <FileUpload.FilesPreview
-        className="flex flex-row flex-wrap"
-        renderFile={(file, index) => (
-          <li className="size-sz-160 relative overflow-hidden rounded-lg shadow-md">
-            <FileUpload.PreviewImage file={file} fallback="📄" className="size-full" />
+      <FileUpload.Context>
+        {({ acceptedFiles }) =>
+          acceptedFiles.length === 0 ? (
+            <div className="py-md text-caption text-on-surface/dim-2 text-center">
+              No files uploaded yet
+            </div>
+          ) : (
+            <ul className="gap-md my-md flex flex-row flex-wrap">
+              {acceptedFiles.map((file, index) => (
+                <li
+                  key={`${file.name}-${file.size}-${index}`}
+                  className="size-sz-160 relative overflow-hidden rounded-lg shadow-md"
+                >
+                  <FileUpload.PreviewImage file={file} fallback="📄" className="size-full" />
 
-            <FileUpload.ItemDeleteTrigger
-              fileIndex={index}
-              design="filled"
-              intent="surface"
-              className="top-md right-md absolute"
-              aria-label="Delete file"
-            />
+                  <FileUpload.ItemDeleteTrigger
+                    fileIndex={index}
+                    design="filled"
+                    intent="surface"
+                    className="top-md right-md absolute"
+                    aria-label="Delete file"
+                  />
 
-            <Tag asChild className="bottom-md absolute left-1/2 -translate-x-1/2">
-              <FileUpload.ItemFileName>{file.name}</FileUpload.ItemFileName>
-            </Tag>
-          </li>
-        )}
-        renderEmpty={() => (
-          <div className="py-md text-caption text-on-surface/dim-2 text-center">
-            No files uploaded yet
-          </div>
-        )}
-      />
+                  <Tag asChild className="bottom-md absolute left-1/2 -translate-x-1/2">
+                    <FileUpload.ItemFileName>{file.name}</FileUpload.ItemFileName>
+                  </Tag>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </FileUpload.Context>
     </FileUpload>
   )
 }
@@ -205,7 +271,19 @@ export const WithDefaultFiles: StoryFn = () => {
         </Button>
       </FileUpload.Dropzone>
 
-      <FileUpload.FilesPreview />
+      <FileUpload.Context>
+        {({ acceptedFiles }) => (
+          <ul className="gap-md my-md flex default:flex-col">
+            {acceptedFiles.map((file, index) => (
+              <FileUpload.AcceptedFile
+                key={`${file.name}-${file.size}-${index}`}
+                file={file}
+                fileIndex={index}
+              />
+            ))}
+          </ul>
+        )}
+      </FileUpload.Context>
     </FileUpload>
   )
 }
@@ -219,33 +297,41 @@ export const CustomDeleteButton: StoryFn = () => {
         </Button>
       </FileUpload.Dropzone>
 
-      <FileUpload.FilesPreview
-        renderFile={(file, index) => (
-          <FileUpload.Item className="gap-md bg-accent-container">
-            <FileUpload.PreviewImage file={file} fallback="📄" />
-            <div className="flex-1">
-              <FileUpload.ItemFileName className="text-on-accent-container font-medium">
-                {file.name}
-              </FileUpload.ItemFileName>
-              <FileUpload.ItemSizeText className="text-on-accent-container/dim-2">
-                {`${(file.size / 1024).toFixed(1)} KB`}
-              </FileUpload.ItemSizeText>
+      <FileUpload.Context>
+        {({ acceptedFiles, formatFileSize, locale }) =>
+          acceptedFiles.length === 0 ? (
+            <div className="py-md text-caption text-on-surface/dim-2 text-center">
+              No files uploaded yet
             </div>
-            <FileUpload.ItemDeleteTrigger
-              fileIndex={index}
-              design="filled"
-              intent="danger"
-              size="md"
-              aria-label={`Remove ${file.name}`}
-            />
-          </FileUpload.Item>
-        )}
-        renderEmpty={() => (
-          <div className="py-md text-caption text-on-surface/dim-2 text-center">
-            No files uploaded yet
-          </div>
-        )}
-      />
+          ) : (
+            <ul className="gap-md my-md flex default:flex-col">
+              {acceptedFiles.map((file, index) => (
+                <FileUpload.Item
+                  key={`${file.name}-${file.size}-${index}`}
+                  className="gap-md bg-accent-container"
+                >
+                  <FileUpload.PreviewImage file={file} fallback="📄" />
+                  <div className="flex-1">
+                    <FileUpload.ItemFileName className="text-on-accent-container font-medium">
+                      {file.name}
+                    </FileUpload.ItemFileName>
+                    <FileUpload.ItemSizeText className="text-on-accent-container/dim-2">
+                      {formatFileSize(file.size, locale)}
+                    </FileUpload.ItemSizeText>
+                  </div>
+                  <FileUpload.ItemDeleteTrigger
+                    fileIndex={index}
+                    design="filled"
+                    intent="danger"
+                    size="md"
+                    aria-label={`Remove ${file.name}`}
+                  />
+                </FileUpload.Item>
+              ))}
+            </ul>
+          )
+        }
+      </FileUpload.Context>
     </FileUpload>
   )
 }
@@ -267,33 +353,41 @@ export const FocusTest: StoryFn = () => {
           </Button>
         </FileUpload.Dropzone>
 
-        <FileUpload.FilesPreview
-          renderFile={(file, index) => (
-            <FileUpload.Item className="gap-md bg-accent-container">
-              <FileUpload.PreviewImage file={file} fallback="📄" />
-              <div className="flex-1">
-                <FileUpload.ItemFileName className="text-on-accent-container font-medium">
-                  {file.name} (index: {index})
-                </FileUpload.ItemFileName>
-                <FileUpload.ItemSizeText className="text-on-accent-container/dim-2">
-                  {`${(file.size / 1024).toFixed(1)} KB`}
-                </FileUpload.ItemSizeText>
+        <FileUpload.Context>
+          {({ acceptedFiles }) =>
+            acceptedFiles.length === 0 ? (
+              <div className="py-md text-caption text-on-surface/dim-2 text-center">
+                No files uploaded yet. Upload some files to test focus management.
               </div>
-              <FileUpload.ItemDeleteTrigger
-                fileIndex={index}
-                design="filled"
-                intent="danger"
-                size="md"
-                aria-label={`Remove ${file.name}`}
-              />
-            </FileUpload.Item>
-          )}
-          renderEmpty={() => (
-            <div className="py-md text-caption text-on-surface/dim-2 text-center">
-              No files uploaded yet. Upload some files to test focus management.
-            </div>
-          )}
-        />
+            ) : (
+              <ul className="gap-md my-md flex default:flex-col">
+                {acceptedFiles.map((file, index) => (
+                  <FileUpload.Item
+                    key={`${file.name}-${file.size}-${index}`}
+                    className="gap-md bg-accent-container"
+                  >
+                    <FileUpload.PreviewImage file={file} fallback="📄" />
+                    <div className="flex-1">
+                      <FileUpload.ItemFileName className="text-on-accent-container font-medium">
+                        {file.name} (index: {index})
+                      </FileUpload.ItemFileName>
+                      <FileUpload.ItemSizeText className="text-on-accent-container/dim-2">
+                        {`${(file.size / 1024).toFixed(1)} KB`}
+                      </FileUpload.ItemSizeText>
+                    </div>
+                    <FileUpload.ItemDeleteTrigger
+                      fileIndex={index}
+                      design="filled"
+                      intent="danger"
+                      size="md"
+                      aria-label={`Remove ${file.name}`}
+                    />
+                  </FileUpload.Item>
+                ))}
+              </ul>
+            )
+          }
+        </FileUpload.Context>
       </FileUpload>
     </div>
   )
@@ -308,33 +402,41 @@ export const FocusManagement: StoryFn = () => {
         </Button>
       </FileUpload.Dropzone>
 
-      <FileUpload.FilesPreview
-        renderFile={(file, index) => (
-          <FileUpload.Item className="gap-md bg-accent-container">
-            <FileUpload.PreviewImage file={file} fallback="📄" />
-            <div className="flex-1">
-              <FileUpload.ItemFileName className="text-on-accent-container font-medium">
-                {file.name}
-              </FileUpload.ItemFileName>
-              <FileUpload.ItemSizeText className="text-on-accent-container/dim-2">
-                {`${(file.size / 1024).toFixed(1)} KB`}
-              </FileUpload.ItemSizeText>
+      <FileUpload.Context>
+        {({ acceptedFiles }) =>
+          acceptedFiles.length === 0 ? (
+            <div className="py-md text-caption text-on-surface/dim-2 text-center">
+              No files uploaded yet. Upload some files to test focus management.
             </div>
-            <FileUpload.ItemDeleteTrigger
-              fileIndex={index}
-              design="filled"
-              intent="danger"
-              size="md"
-              aria-label={`Remove ${file.name}`}
-            />
-          </FileUpload.Item>
-        )}
-        renderEmpty={() => (
-          <div className="py-md text-caption text-on-surface/dim-2 text-center">
-            No files uploaded yet. Upload some files to test focus management.
-          </div>
-        )}
-      />
+          ) : (
+            <ul className="gap-md my-md flex default:flex-col">
+              {acceptedFiles.map((file, index) => (
+                <FileUpload.Item
+                  key={`${file.name}-${file.size}-${index}`}
+                  className="gap-md bg-accent-container"
+                >
+                  <FileUpload.PreviewImage file={file} fallback="📄" />
+                  <div className="flex-1">
+                    <FileUpload.ItemFileName className="text-on-accent-container font-medium">
+                      {file.name}
+                    </FileUpload.ItemFileName>
+                    <FileUpload.ItemSizeText className="text-on-accent-container/dim-2">
+                      {`${(file.size / 1024).toFixed(1)} KB`}
+                    </FileUpload.ItemSizeText>
+                  </div>
+                  <FileUpload.ItemDeleteTrigger
+                    fileIndex={index}
+                    design="filled"
+                    intent="danger"
+                    size="md"
+                    aria-label={`Remove ${file.name}`}
+                  />
+                </FileUpload.Item>
+              ))}
+            </ul>
+          )
+        }
+      </FileUpload.Context>
     </FileUpload>
   )
 }
@@ -352,26 +454,35 @@ export const PhotosGallery: StoryFn = () => {
           Add {remainingPhotos} pictures
         </div>
 
-        <FileUpload.FilesPreview
-          renderFile={(file, index) => (
-            <FileUpload.Item className="gap-md bg-accent-container">
-              <FileUpload.PreviewImage file={file} fallback="📄" />
-              <div className="flex-1">
-                <FileUpload.ItemFileName className="text-on-accent-container font-medium">
-                  {file.name}
-                </FileUpload.ItemFileName>
-                <FileUpload.ItemSizeText className="text-on-accent-container/dim-2">
-                  {`${(file.size / 1024).toFixed(1)} KB`}
-                </FileUpload.ItemSizeText>
-              </div>
-              <FileUpload.ItemDeleteTrigger
-                fileIndex={index}
-                className="text-error hover:text-error-hovered focus-visible:u-outline"
-                aria-label="Delete file"
-              />
-            </FileUpload.Item>
-          )}
-        />
+        <FileUpload.Context>
+          {({ acceptedFiles }) =>
+            acceptedFiles.length > 0 && (
+              <ul className="gap-md my-md flex default:flex-col">
+                {acceptedFiles.map((file, index) => (
+                  <FileUpload.Item
+                    key={`${file.name}-${file.size}-${index}`}
+                    className="gap-md bg-accent-container"
+                  >
+                    <FileUpload.PreviewImage file={file} fallback="📄" />
+                    <div className="flex-1">
+                      <FileUpload.ItemFileName className="text-on-accent-container font-medium">
+                        {file.name}
+                      </FileUpload.ItemFileName>
+                      <FileUpload.ItemSizeText className="text-on-accent-container/dim-2">
+                        {`${(file.size / 1024).toFixed(1)} KB`}
+                      </FileUpload.ItemSizeText>
+                    </div>
+                    <FileUpload.ItemDeleteTrigger
+                      fileIndex={index}
+                      className="text-error hover:text-error-hovered focus-visible:u-outline"
+                      aria-label="Delete file"
+                    />
+                  </FileUpload.Item>
+                ))}
+              </ul>
+            )
+          }
+        </FileUpload.Context>
 
         {Array.from({ length: maxPhotos }).map((_, idx) => (
           <div
@@ -382,7 +493,19 @@ export const PhotosGallery: StoryFn = () => {
           </div>
         ))}
       </div>
-      <FileUpload.FilesPreview />
+      <FileUpload.Context>
+        {({ acceptedFiles }) => (
+          <ul className="gap-md my-md flex default:flex-col">
+            {acceptedFiles.map((file, index) => (
+              <FileUpload.AcceptedFile
+                key={`${file.name}-${file.size}-${index}`}
+                file={file}
+                fileIndex={index}
+              />
+            ))}
+          </ul>
+        )}
+      </FileUpload.Context>
     </FileUpload>
   )
 }
@@ -401,94 +524,19 @@ export const SingleFile: StoryFn = () => {
         </div>
         <p className="text-caption text-on-surface/dim-1">Select a single file</p>
       </FileUpload.Dropzone>
-      <FileUpload.FilesPreview />
-    </FileUpload>
-  )
-}
-
-export const AcceptDocuments: StoryFn = () => {
-  return (
-    <FileUpload accept=".pdf,.doc,.docx">
-      <FileUpload.Dropzone>
-        <Icon size="lg">
-          <Export />
-        </Icon>
-        <div className="text-subhead">
-          <p>Drag and drop a document or</p>
-
-          <FileUpload.Trigger>browse my files</FileUpload.Trigger>
-        </div>
-        <p className="text-caption text-on-surface/dim-1">.pdf, .doc, .docx</p>
-      </FileUpload.Dropzone>
-      <FileUpload.FilesPreview />
-    </FileUpload>
-  )
-}
-
-export const MaxFiles: StoryFn = () => {
-  const [errorMessage, setErrorMessage] = useState<string | null>(null)
-
-  const handleMaxFilesReached = (maxFiles: number, rejectedCount: number) => {
-    setErrorMessage(
-      `Maximum ${maxFiles} file${maxFiles > 1 ? 's' : ''} allowed. ${rejectedCount} file${rejectedCount > 1 ? 's were' : ' was'} rejected.`
-    )
-  }
-
-  return (
-    <FileUpload maxFiles={3} onMaxFilesReached={handleMaxFilesReached}>
-      <FileUpload.Dropzone>
-        <Icon size="lg">
-          <Export />
-        </Icon>
-        <div className="text-subhead">
-          <p>Drag and drop files or</p>
-
-          <FileUpload.Trigger>browse my files</FileUpload.Trigger>
-        </div>
-        <p className="text-caption text-on-surface/dim-1">Maximum 3 files</p>
-      </FileUpload.Dropzone>
-      <FileUpload.FilesPreview />
-      {errorMessage && (
-        <p className="mt-md text-caption text-error" role="alert">
-          {errorMessage}
-        </p>
-      )}
-    </FileUpload>
-  )
-}
-
-export const FileSizeLimit: StoryFn = () => {
-  const [errorMessages, setErrorMessages] = useState<string[]>([])
-
-  const handleFileSizeError = (_file: File, error: string) => {
-    setErrorMessages(prev => [...prev, error])
-  }
-
-  const maxFileSize = 100 * 1024 // 100KB
-
-  return (
-    <FileUpload maxFileSize={maxFileSize} onFileSizeError={handleFileSizeError}>
-      <FileUpload.Dropzone>
-        <Icon size="lg">
-          <Export />
-        </Icon>
-        <div className="text-subhead">
-          <p>Drag and drop files or</p>
-
-          <FileUpload.Trigger>browse my files</FileUpload.Trigger>
-        </div>
-        <p className="text-caption text-on-surface/dim-1">Maximum 100ko per file</p>
-      </FileUpload.Dropzone>
-      <FileUpload.FilesPreview />
-      {errorMessages.length > 0 && (
-        <div className="mt-md space-y-xs">
-          {errorMessages.map((error, index) => (
-            <p key={index} className="text-caption text-error" role="alert">
-              {error}
-            </p>
-          ))}
-        </div>
-      )}
+      <FileUpload.Context>
+        {({ acceptedFiles }) => (
+          <ul className="gap-md my-md flex default:flex-col">
+            {acceptedFiles.map((file, index) => (
+              <FileUpload.AcceptedFile
+                key={`${file.name}-${file.size}-${index}`}
+                file={file}
+                fileIndex={index}
+              />
+            ))}
+          </ul>
+        )}
+      </FileUpload.Context>
     </FileUpload>
   )
 }
@@ -512,7 +560,19 @@ export const Disabled: StoryFn = () => {
         </div>
         <p className="text-caption text-on-surface/dim-1">Disabled state</p>
       </FileUpload.Dropzone>
-      <FileUpload.FilesPreview />
+      <FileUpload.Context>
+        {({ acceptedFiles }) => (
+          <ul className="gap-md my-md flex default:flex-col">
+            {acceptedFiles.map((file, index) => (
+              <FileUpload.AcceptedFile
+                key={`${file.name}-${file.size}-${index}`}
+                file={file}
+                fileIndex={index}
+              />
+            ))}
+          </ul>
+        )}
+      </FileUpload.Context>
     </FileUpload>
   )
 }
@@ -536,7 +596,85 @@ export const ReadOnly: StoryFn = () => {
         </div>
         <p className="text-caption text-on-surface/dim-1">Read-only state</p>
       </FileUpload.Dropzone>
-      <FileUpload.FilesPreview />
+      <FileUpload.Context>
+        {({ acceptedFiles }) => (
+          <ul className="gap-md my-md flex default:flex-col">
+            {acceptedFiles.map((file, index) => (
+              <FileUpload.AcceptedFile
+                key={`${file.name}-${file.size}-${index}`}
+                file={file}
+                fileIndex={index}
+              />
+            ))}
+          </ul>
+        )}
+      </FileUpload.Context>
+    </FileUpload>
+  )
+}
+
+export const ErrorHandling: StoryFn = () => {
+  const errorMessages: Record<FileUploadFileError, string> = {
+    TOO_MANY_FILES: 'Too many files selected (max 3 allowed)',
+    FILE_INVALID_TYPE: 'Invalid file type (only images and PDFs allowed)',
+    FILE_TOO_LARGE: 'File too large (max 1MB)',
+    FILE_TOO_SMALL: 'File too small (min 1KB)',
+    FILE_INVALID: 'Invalid file',
+    FILE_EXISTS: 'File already exists',
+  }
+
+  return (
+    <FileUpload
+      maxFiles={3}
+      maxFileSize={1024 * 1024} // 1MB
+      minFileSize={1024} // 1KB
+      accept="image/*,application/pdf"
+    >
+      <FileUpload.Dropzone>
+        <Icon size="lg">
+          <Export />
+        </Icon>
+        <div className="text-subhead">
+          <p>Drag and drop files or</p>
+
+          <FileUpload.Trigger>Select Files</FileUpload.Trigger>
+        </div>
+        <p className="text-caption text-on-surface/dim-1">
+          File Upload with Validation (max 3 files, 1KB-1MB, images/PDFs only)
+        </p>
+      </FileUpload.Dropzone>
+
+      {/* Using Context with AcceptedFile and RejectedFile components */}
+      <FileUpload.Context>
+        {({ acceptedFiles, rejectedFiles }) => (
+          <div className="mt-lg">
+            {acceptedFiles.length ? (
+              <ul className="gap-md my-md flex default:flex-col">
+                {acceptedFiles.map((file, index) => (
+                  <FileUpload.AcceptedFile
+                    key={`${file.name}-${file.size}-${index}`}
+                    file={file}
+                    fileIndex={index}
+                  />
+                ))}
+              </ul>
+            ) : null}
+
+            {rejectedFiles.length ? (
+              <ul className="gap-md my-md flex default:flex-col">
+                {rejectedFiles.map((rejectedFile, index) => (
+                  <FileUpload.RejectedFile
+                    key={`rejected-${rejectedFile.file.name}-${rejectedFile.file.size}-${index}`}
+                    rejectedFile={rejectedFile}
+                    renderError={error => errorMessages[error] || `❓ ${error}`}
+                    data-status="rejected"
+                  />
+                ))}
+              </ul>
+            ) : null}
+          </div>
+        )}
+      </FileUpload.Context>
     </FileUpload>
   )
 }

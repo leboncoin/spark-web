@@ -30,7 +30,15 @@ export default () => (
     <FileUpload.Trigger>
       Upload Files
     </FileUpload.Trigger>
-    <FileUpload.FilesPreview />
+    <FileUpload.Context>
+      {({ acceptedFiles }) => (
+        <ul>
+          {acceptedFiles.map((file, index) => (
+            <FileUpload.AcceptedFile key={index} file={file} fileIndex={index} />
+          ))}
+        </ul>
+      )}
+    </FileUpload.Context>
   </FileUpload>
 );
 ```
@@ -57,7 +65,7 @@ Triggers the file selection dialog when clicked. Can be styled as a button or re
 
 ### Acepted files - custom
 
-Use the `render` prop of `FileUpload.FilesPreview` to customize the markup of the files previews.
+Use `FileUpload.Context` to access `acceptedFiles` and customize the markup of the files previews.
 
 <Canvas of={stories.WithCustomFileRender} />
 
@@ -73,29 +81,31 @@ Use the `multiple={false}` prop to allow only a single file to be selected. When
 
 <Canvas of={stories.SingleFile} />
 
-### Accept file types
 
-Use the `accept` prop to restrict the types of files that can be selected. The prop supports:
-- MIME type wildcards (e.g., `"image/*"` for all images)
-- Exact MIME types (e.g., `"image/png"`, `"application/pdf"`)
-- File extensions (e.g., `".pdf"`, `".doc"`, `".jpg"`)
-- Mixed patterns (e.g., `"image/*,.pdf,.doc"`)
 
-Files that don't match the accept pattern will be automatically filtered out.
+### Error Handling
 
-<Canvas of={stories.AcceptDocuments} />
+The FileUpload component provides comprehensive validation and error handling capabilities. You can set various constraints and handle different types of validation errors:
 
-### Maximum files
+**Built-in Validation Props:**
 
-Use the `maxFiles` prop to limit the number of files that can be uploaded. When the limit is reached, additional files will be rejected. You can use the `onMaxFilesReached` callback to handle this case and display an error message.
+- `maxFiles` - Maximum number of files allowed
+- `maxFileSize` - Maximum file size in bytes
+- `minFileSize` - Minimum file size in bytes
+- `accept` - Allowed MIME types or file extensions
 
-<Canvas of={stories.MaxFiles} />
+**Built-in Error Types:**
 
-### File size limits
+- `TOO_MANY_FILES` - Exceeds maxFiles limit
+- `FILE_INVALID_TYPE` - File type not in accept list
+- `FILE_TOO_LARGE` - File size exceeds maxFileSize
+- `FILE_TOO_SMALL` - File size below minFileSize
+- `FILE_INVALID` - Generic validation failure
+- `FILE_EXISTS` - Duplicate file detected
 
-Use the `maxFileSize` and `minFileSize` props to restrict the size of files that can be uploaded. File sizes are specified in bytes. Files that don't meet the size requirements will be automatically filtered out. You can use the `onFileSizeError` callback to handle size validation errors and display specific error messages for each rejected file.
+Use `FileUpload.Context` to access `acceptedFiles` and `rejectedFiles`, then use `FileUpload.AcceptedFile` and `FileUpload.RejectedFile` components to display files with their validation errors. Each rejected file can have multiple error codes, allowing you to show all validation issues at once.
 
-<Canvas of={stories.FileSizeLimit} />
+<Canvas of={stories.ErrorHandling} />
 
 ### Disabled state
 
