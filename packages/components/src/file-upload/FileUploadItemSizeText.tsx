@@ -20,7 +20,7 @@ export const ItemSizeText = ({
   return (
     <p
       data-spark-component="file-upload-item-size-text"
-      className={cx('text-caption text-on-surface/dim-2', className)}
+      className={cx('text-caption', className)}
       {...props}
     >
       {children}

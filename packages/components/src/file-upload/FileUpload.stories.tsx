@@ -2,6 +2,7 @@
 import { Button } from '@spark-ui/components/button'
 import { Icon } from '@spark-ui/components/icon'
 import { IconButton } from '@spark-ui/components/icon-button'
+import { Tag } from '@spark-ui/components/tag'
 import { TextLink } from '@spark-ui/components/text-link'
 import { Export } from '@spark-ui/icons/Export'
 import { Meta, StoryFn } from '@storybook/react-vite'
@@ -26,16 +27,38 @@ export default meta
 
 export const Default: StoryFn = () => {
   return (
-    <FileUpload>
-      <FileUpload.Trigger>
-        <Icon>
-          <Export />
-        </Icon>
-        Upload
-      </FileUpload.Trigger>
+    <div className="gap-lg flex flex-row">
+      <div className="gap-lg flex flex-1 flex-col">
+        <Tag>Trigger</Tag>
+        <FileUpload>
+          <FileUpload.Trigger>
+            <Icon>
+              <Export />
+            </Icon>
+            Upload
+          </FileUpload.Trigger>
 
-      <FileUpload.FilesPreview />
-    </FileUpload>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      </div>
+      <div className="gap-lg flex flex-1 grow flex-col">
+        <Tag>Trigger + Dropzone</Tag>
+        <FileUpload>
+          <FileUpload.Dropzone>
+            <Icon size="lg">
+              <Export />
+            </Icon>
+            <div className="text-subhead">
+              <p>Drag and drop a file or</p>
+
+              <FileUpload.Trigger>browse my files</FileUpload.Trigger>
+            </div>
+            <p className="text-caption text-on-surface/dim-1">.png, .jpg up to 5MB</p>
+          </FileUpload.Dropzone>
+          <FileUpload.FilesPreview />
+        </FileUpload>
+      </div>
+    </div>
   )
 }
 
@@ -84,8 +107,50 @@ export const CustomTrigger: StoryFn = () => {
 }
 
 export const WithCustomFileRender: StoryFn = () => {
+  // Helper function to create image files with real SVG data
+  const createImageFile = (name: string, svgContent: string): File => {
+    const blob = new Blob([svgContent], { type: 'image/svg+xml' })
+
+    return new File([blob], name, { type: 'image/svg+xml' })
+  }
+
+  // Create sample image files with real SVG data for demonstration
+  const landscapeSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+    <defs>
+      <linearGradient id="landscapeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+        <stop offset="50%" style="stop-color:#87CEEB;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#E0F6FF;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+    <rect width="800" height="600" fill="url(#landscapeGrad)"/>
+    <ellipse cx="400" cy="450" rx="300" ry="100" fill="#90EE90" opacity="0.8"/>
+    <circle cx="150" cy="150" r="60" fill="#FFD700" opacity="0.9"/>
+    <polygon points="200,200 250,100 300,200" fill="#8B4513"/>
+    <polygon points="250,100 300,50 350,100" fill="#228B22"/>
+  </svg>`
+
+  const portraitSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+    <defs>
+      <linearGradient id="portraitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#FF6B9D;stop-opacity:1" />
+        <stop offset="50%" style="stop-color:#C44569;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#8B2E5C;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+    <rect width="600" height="800" fill="url(#portraitGrad)"/>
+    <circle cx="300" cy="250" r="80" fill="#FFE5B4"/>
+    <ellipse cx="300" cy="400" rx="120" ry="180" fill="#FFB6C1"/>
+    <rect x="250" y="550" width="100" height="200" rx="10" fill="#8B4513"/>
+  </svg>`
+
+  const defaultFiles = [
+    createImageFile('landscape.svg', landscapeSvg),
+    createImageFile('portrait.svg', portraitSvg),
+  ]
+
   return (
-    <FileUpload>
+    <FileUpload defaultValue={defaultFiles}>
       <FileUpload.Dropzone>
         <Button asChild>
           <FileUpload.Trigger>Upload Files</FileUpload.Trigger>
@@ -95,7 +160,7 @@ export const WithCustomFileRender: StoryFn = () => {
       <FileUpload.FilesPreview
         className="flex flex-row flex-wrap"
         renderFile={(file, index) => (
-          <li className="size-sz-160 border-sm border-outline relative overflow-hidden rounded-lg">
+          <li className="size-sz-160 relative overflow-hidden rounded-lg shadow-md">
             <FileUpload.PreviewImage file={file} fallback="📄" className="size-full" />
 
             <FileUpload.ItemDeleteTrigger
@@ -105,6 +170,10 @@ export const WithCustomFileRender: StoryFn = () => {
               className="top-md right-md absolute"
               aria-label="Delete file"
             />
+
+            <Tag asChild className="bottom-md absolute left-1/2 -translate-x-1/2">
+              <FileUpload.ItemFileName>{file.name}</FileUpload.ItemFileName>
+            </Tag>
           </li>
         )}
         renderEmpty={() => (
@@ -118,13 +187,14 @@ export const WithCustomFileRender: StoryFn = () => {
 }
 
 export const WithDefaultFiles: StoryFn = () => {
-  // Create sample files for demonstration with realistic sizes
+  // Create sample files for demonstration with different sizes to showcase all units
   const defaultFiles = [
-    new File([new ArrayBuffer(1024 * 500)], 'landscape.jpg', { type: 'image/jpeg' }), // ~500 KB
-    new File([new ArrayBuffer(1024 * 200)], 'document.pdf', { type: 'application/pdf' }), // ~200 KB
-    new File([new ArrayBuffer(1024 * 150)], 'spreadsheet.xlsx', {
-      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    }), // ~150 KB
+    new File([new ArrayBuffer(500)], 'small.txt', { type: 'text/plain' }), // 500 bytes
+    new File([new ArrayBuffer(1024 * 1.5)], 'medium.jpg', { type: 'image/jpeg' }), // 1.5 KB
+    new File([new ArrayBuffer(1024 * 1024 * 2.3)], 'large.pdf', { type: 'application/pdf' }), // 2.3 MB
+    new File([new ArrayBuffer(1024 * 1024 * 1024 * 1.8)], 'huge.zip', {
+      type: 'application/zip',
+    }), // 1.8 GB
   ]
 
   return (
@@ -424,13 +494,13 @@ export const FileSizeLimit: StoryFn = () => {
 }
 
 export const Disabled: StoryFn = () => {
-  const files = [
-    new File([''], 'document1.pdf', { type: 'application/pdf' }),
-    new File([''], 'document2.pdf', { type: 'application/pdf' }),
+  const defaultFiles = [
+    new File([new ArrayBuffer(1024 * 500)], 'landscape.jpg', { type: 'image/jpeg' }), // ~500 KB
+    new File([new ArrayBuffer(1024 * 200)], 'document.pdf', { type: 'application/pdf' }), // ~200 KB
   ]
 
   return (
-    <FileUpload disabled defaultValue={files}>
+    <FileUpload disabled defaultValue={defaultFiles}>
       <FileUpload.Dropzone>
         <Icon size="lg">
           <Export />
@@ -448,13 +518,13 @@ export const Disabled: StoryFn = () => {
 }
 
 export const ReadOnly: StoryFn = () => {
-  const files = [
-    new File([''], 'document1.pdf', { type: 'application/pdf' }),
-    new File([''], 'document2.pdf', { type: 'application/pdf' }),
+  const defaultFiles = [
+    new File([new ArrayBuffer(1024 * 500)], 'landscape.jpg', { type: 'image/jpeg' }), // ~500 KB
+    new File([new ArrayBuffer(1024 * 200)], 'document.pdf', { type: 'application/pdf' }), // ~200 KB
   ]
 
   return (
-    <FileUpload readOnly defaultValue={files}>
+    <FileUpload readOnly defaultValue={defaultFiles}>
       <FileUpload.Dropzone>
         <Icon size="lg">
           <Export />

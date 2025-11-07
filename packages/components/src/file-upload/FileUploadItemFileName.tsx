@@ -20,7 +20,7 @@ export const ItemFileName = ({
   return (
     <p
       data-spark-component="file-upload-item-file-name"
-      className={cx('text-body-2 text-on-surface truncate font-medium', className)}
+      className={cx('text-body-2 truncate font-medium', className)}
       {...props}
     >
       {children}

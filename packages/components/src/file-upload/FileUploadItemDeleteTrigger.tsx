@@ -83,8 +83,8 @@ export const ItemDeleteTrigger = ({
       onClick={handleClick}
       disabled={disabled || readOnly}
       size="sm"
-      design="ghost"
-      intent="surfaceInverse"
+      design="contrast"
+      intent="surface"
       {...props}
     >
       <Icon size="sm">

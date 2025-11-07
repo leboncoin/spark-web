@@ -1,91 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import { createContext, ReactNode, Ref, useContext, useRef, useState } from 'react'
 
-/**
- * Validates if a file matches the accept patterns
- * Supports MIME types (e.g., "image/*", "image/png", "application/pdf")
- * and file extensions (e.g., ".pdf", ".doc", ".jpg")
- */
-function validateFileAccept(file: File, accept: string): boolean {
-  if (!accept) {
-    return true
-  }
-
-  const patterns = accept.split(',').map(pattern => pattern.trim())
-
-  return patterns.some(pattern => {
-    // Handle MIME type patterns (e.g., "image/*", "image/png")
-    if (pattern.includes('/')) {
-      if (pattern.endsWith('/*')) {
-        // Wildcard MIME type (e.g., "image/*")
-        const baseType = pattern.slice(0, -2)
-
-        return file.type.startsWith(baseType + '/')
-      }
-      // Exact MIME type (e.g., "image/png")
-
-      return file.type === pattern
-    }
-
-    // Handle file extension patterns (e.g., ".pdf", ".doc")
-    if (pattern.startsWith('.')) {
-      const extension = pattern.toLowerCase()
-      const fileName = file.name.toLowerCase()
-
-      return fileName.endsWith(extension)
-    }
-
-    // Handle extension without dot (e.g., "pdf", "doc")
-    const extension = '.' + pattern.toLowerCase()
-    const fileName = file.name.toLowerCase()
-
-    return fileName.endsWith(extension)
-  })
-}
-
-/**
- * Validates if a file size is within the allowed range
- * @param file - The file to validate
- * @param minFileSize - Minimum file size in bytes
- * @param maxFileSize - Maximum file size in bytes
- * @returns Object with validation result and error message if invalid
- */
-function validateFileSize(
-  file: File,
-  minFileSize?: number,
-  maxFileSize?: number
-): { valid: boolean; error?: string } {
-  if (minFileSize !== undefined && file.size < minFileSize) {
-    return {
-      valid: false,
-      error: `File "${file.name}" is too small. Minimum size is ${formatFileSize(minFileSize)}.`,
-    }
-  }
-
-  if (maxFileSize !== undefined && file.size > maxFileSize) {
-    return {
-      valid: false,
-      error: `File "${file.name}" is too large. Maximum size is ${formatFileSize(maxFileSize)}.`,
-    }
-  }
-
-  return { valid: true }
-}
-
-/**
- * Formats file size in bytes to human-readable format
- */
-function formatFileSize(bytes: number): string {
-  if (bytes === 0) {
-    return '0 Bytes'
-  }
-
-  const k = 1024
-  const sizes = ['Bytes', 'KB', 'MB', 'GB']
-  const i = Math.floor(Math.log(bytes) / Math.log(k))
-
-  return `${Math.round((bytes / Math.pow(k, i)) * 100) / 100} ${sizes[i]}`
-}
+import { validateFileAccept, validateFileSize } from './utils'
 
 export interface FileUploadProps {
   /**
@@ -152,6 +68,12 @@ export interface FileUploadProps {
    * When `true`, sets the file upload to read-only mode
    */
   readOnly?: boolean
+  /**
+   * The [BCP47](https://www.ietf.org/rfc/bcp/bcp47.txt) language code for the locale.
+   * Used for formatting file sizes and error messages.
+   * @default Browser locale or 'en' if not available
+   */
+  locale?: string
 }
 
 export const FileUploadContext = createContext<{
@@ -168,6 +90,7 @@ export const FileUploadContext = createContext<{
   maxFilesReached: boolean
   disabled: boolean
   readOnly: boolean
+  locale: string
 } | null>(null)
 
 export const FileUpload = ({
@@ -184,7 +107,12 @@ export const FileUpload = ({
   onFileSizeError,
   disabled = false,
   readOnly = false,
+  locale,
 }: FileUploadProps) => {
+  // Get default locale from browser or fallback to 'en'
+  const defaultLocale =
+    locale || (typeof navigator !== 'undefined' && navigator.language ? navigator.language : 'en')
+
   const inputRef = useRef<HTMLInputElement>(null)
   const triggerRef = useRef<HTMLElement>(null)
   const dropzoneRef = useRef<HTMLElement>(null)
@@ -207,7 +135,7 @@ export const FileUpload = ({
       // Filter files by size if provided
       if (minFileSize !== undefined || maxFileSize !== undefined) {
         filteredFiles = filteredFiles.filter(file => {
-          const validation = validateFileSize(file, minFileSize, maxFileSize)
+          const validation = validateFileSize(file, minFileSize, maxFileSize, defaultLocale)
           if (!validation.valid && validation.error) {
             onFileSizeError?.(file, validation.error)
           }
@@ -289,6 +217,7 @@ export const FileUpload = ({
         maxFilesReached,
         disabled,
         readOnly,
+        locale: defaultLocale,
       }}
     >
       {/* <Comp data-spark-component="file-upload" className={cx('relative', className)} {...props}> */}

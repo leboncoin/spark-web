@@ -8,6 +8,7 @@ import { Item } from './FileUploadItem'
 import { ItemDeleteTrigger } from './FileUploadItemDeleteTrigger'
 import { ItemFileName } from './FileUploadItemFileName'
 import { ItemSizeText } from './FileUploadItemSizeText'
+import { formatFileSize } from './utils'
 
 export interface FileUploadFilesPreviewProps {
   /**
@@ -35,7 +36,7 @@ export const FilesPreview = ({
   renderEmpty,
   ...props
 }: FileUploadFilesPreviewProps) => {
-  const { files = [] } = useFileUploadContext()
+  const { files = [], locale } = useFileUploadContext()
 
   if (files.length === 0) {
     return renderEmpty ? (
@@ -57,13 +58,19 @@ export const FilesPreview = ({
             renderFile(file, index)
           ) : (
             <Item key={`${file.name}-${file.size}-${index}`}>
-              <Icon size="md">
-                <CvOutline />
-              </Icon>
+              <div className="size-sz-40 bg-support-container flex items-center justify-center rounded-md">
+                <Icon size="md">
+                  <CvOutline />
+                </Icon>
+              </div>
 
               <div className="min-w-0 flex-1">
-                <ItemFileName>{file.name}</ItemFileName>
-                <ItemSizeText>{`${(file.size / 1024).toFixed(1)} KB`}</ItemSizeText>
+                <div className="gap-md flex flex-row items-center justify-between">
+                  <ItemFileName>{file.name}</ItemFileName>
+                  <ItemSizeText className="opacity-dim-1">
+                    {formatFileSize(file.size, locale)}
+                  </ItemSizeText>
+                </div>
               </div>
 
               <ItemDeleteTrigger aria-label="Delete file" fileIndex={index} />

@@ -22,7 +22,7 @@ export const Item = ({
       data-spark-component="file-upload-item"
       className={cx(
         'relative',
-        'default:border-sm default:border-outline default:p-lg default:rounded-md',
+        'default:bg-surface default:border-sm default:border-outline default:p-md default:rounded-md',
         'gap-md flex items-center justify-between default:w-full',
         className
       )}
