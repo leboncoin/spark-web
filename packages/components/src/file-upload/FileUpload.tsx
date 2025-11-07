@@ -285,23 +285,21 @@ export const FileUpload = ({
       const updated = multiple ? [...prev, ...filesToAdd] : filesToAdd
       onFilesChange?.(updated)
 
-      // Add rejected files to state after updating accepted files
+      // Add rejected files to state synchronously
       // Note: newRejectedFiles is mutated inside this setFiles callback, so it should be populated by now
-      // Copy the array to avoid closure issues with setTimeout
+      // Copy the array to avoid closure issues
       const rejectedFilesToAdd = [...newRejectedFiles]
       if (rejectedFilesToAdd.length > 0) {
-        // Use setTimeout to ensure this runs after the state update
-        setTimeout(() => {
-          setRejectedFiles(prevRejected => {
-            // Filter out any duplicates that might already exist
-            const existingKeys = new Set(prevRejected.map(r => `${r.file.name}-${r.file.size}`))
-            const newUniqueRejected = rejectedFilesToAdd.filter(
-              r => !existingKeys.has(`${r.file.name}-${r.file.size}`)
-            )
+        // Update rejectedFiles synchronously - React will batch both state updates
+        setRejectedFiles(prevRejected => {
+          // Filter out any duplicates that might already exist
+          const existingKeys = new Set(prevRejected.map(r => `${r.file.name}-${r.file.size}`))
+          const newUniqueRejected = rejectedFilesToAdd.filter(
+            r => !existingKeys.has(`${r.file.name}-${r.file.size}`)
+          )
 
-            return [...prevRejected, ...newUniqueRejected]
-          })
-        }, 0)
+          return [...prevRejected, ...newUniqueRejected]
+        })
       }
 
       return updated

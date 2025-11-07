@@ -144,9 +144,7 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, [file1, file2])
 
-      await waitFor(() => {
-        expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
-      })
+      expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
 
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.getByText('file2.png')).toBeInTheDocument()
@@ -180,13 +178,11 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, newFile)
 
-      await waitFor(() => {
-        expect(onFilesChange).toHaveBeenCalled()
-        const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
-        expect(lastCall?.[0]).toHaveLength(2)
-        expect(lastCall?.[0]?.[0]?.name).toBe('initial.jpg')
-        expect(lastCall?.[0]?.[1]?.name).toBe('new.jpg')
-      })
+      expect(onFilesChange).toHaveBeenCalled()
+      const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
+      expect(lastCall?.[0]).toHaveLength(2)
+      expect(lastCall?.[0]?.[0]?.name).toBe('initial.jpg')
+      expect(lastCall?.[0]?.[1]?.name).toBe('new.jpg')
     })
   })
 
@@ -227,13 +223,11 @@ describe('FileUpload', () => {
         await user.click(deleteButton)
       }
 
-      await waitFor(() => {
-        expect(onFilesChange).toHaveBeenCalled()
-        const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
-        expect(lastCall?.[0]).toHaveLength(2)
-        expect(lastCall?.[0]?.[0]?.name).toBe('file1.jpg')
-        expect(lastCall?.[0]?.[1]?.name).toBe('file3.pdf')
-      })
+      expect(onFilesChange).toHaveBeenCalled()
+      const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
+      expect(lastCall?.[0]).toHaveLength(2)
+      expect(lastCall?.[0]?.[0]?.name).toBe('file1.jpg')
+      expect(lastCall?.[0]?.[1]?.name).toBe('file3.pdf')
 
       expect(screen.queryByText('file2.png')).not.toBeInTheDocument()
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
@@ -277,9 +271,8 @@ describe('FileUpload', () => {
       }
 
       // Wait for first deletion to complete
-      await waitFor(() => {
-        expect(screen.queryByText('file1.jpg')).not.toBeInTheDocument()
-      })
+
+      expect(screen.queryByText('file1.jpg')).not.toBeInTheDocument()
 
       // Remove second file (now at index 0)
       deleteButtons = screen.getAllByLabelText('Delete file')
@@ -288,10 +281,8 @@ describe('FileUpload', () => {
         await user.click(secondButton)
       }
 
-      await waitFor(() => {
-        const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
-        expect(lastCall?.[0]).toHaveLength(0)
-      })
+      const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
+      expect(lastCall?.[0]).toHaveLength(0)
 
       expect(screen.queryByRole('listitem')).not.toBeInTheDocument()
     })
@@ -356,10 +347,8 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, file)
 
-      await waitFor(() => {
-        expect(onFilesChange).toHaveBeenCalledTimes(1)
-        expect(onFilesChange).toHaveBeenCalledWith([file])
-      })
+      expect(onFilesChange).toHaveBeenCalledTimes(1)
+      expect(onFilesChange).toHaveBeenCalledWith([file])
     })
 
     it('should call onFilesChange when files are removed', async () => {
@@ -395,12 +384,10 @@ describe('FileUpload', () => {
         await user.click(deleteButton)
       }
 
-      await waitFor(() => {
-        expect(onFilesChange).toHaveBeenCalled()
-        const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
-        expect(lastCall?.[0]).toHaveLength(1)
-        expect(lastCall?.[0]?.[0]?.name).toBe('file2.png')
-      })
+      expect(onFilesChange).toHaveBeenCalled()
+      const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
+      expect(lastCall?.[0]).toHaveLength(1)
+      expect(lastCall?.[0]?.[0]?.name).toBe('file2.png')
     })
   })
 
@@ -773,9 +760,7 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, [file1, file2])
 
-      await waitFor(() => {
-        expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
-      })
+      expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
 
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.getByText('file2.png')).toBeInTheDocument()
@@ -811,10 +796,8 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, [file1, file2])
 
-      await waitFor(() => {
-        // Only the first file should be added
-        expect(onFilesChange).toHaveBeenCalledWith([file1])
-      })
+      // Only the first file should be added
+      expect(onFilesChange).toHaveBeenCalledWith([file1])
 
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.queryByText('file2.png')).not.toBeInTheDocument()
@@ -850,10 +833,8 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, newFile)
 
-      await waitFor(() => {
-        // The new file should replace the initial file
-        expect(onFilesChange).toHaveBeenCalledWith([newFile])
-      })
+      // The new file should replace the initial file
+      expect(onFilesChange).toHaveBeenCalledWith([newFile])
 
       expect(screen.queryByText('initial.jpg')).not.toBeInTheDocument()
       expect(screen.getByText('new.jpg')).toBeInTheDocument()
@@ -940,9 +921,7 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, [file1, file2])
 
-      await waitFor(() => {
-        expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
-      })
+      expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
 
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.getByText('file2.pdf')).toBeInTheDocument()
@@ -979,10 +958,8 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, [file1, file2, file3])
 
-      await waitFor(() => {
-        // Only image files should be accepted
-        expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
-      })
+      // Only image files should be accepted
+      expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
 
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.getByText('file2.png')).toBeInTheDocument()
@@ -1020,10 +997,8 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, [file1, file2, file3])
 
-      await waitFor(() => {
-        // Only PNG and PDF files should be accepted
-        expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
-      })
+      // Only PNG and PDF files should be accepted
+      expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
 
       expect(screen.getByText('file1.png')).toBeInTheDocument()
       expect(screen.getByText('file2.pdf')).toBeInTheDocument()
@@ -1062,10 +1037,8 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, [file1, file2, file3, file4])
 
-      await waitFor(() => {
-        // Only files with .pdf, .doc, or .jpg extensions should be accepted
-        expect(onFilesChange).toHaveBeenCalledWith([file1, file2, file3])
-      })
+      // Only files with .pdf, .doc, or .jpg extensions should be accepted
+      expect(onFilesChange).toHaveBeenCalledWith([file1, file2, file3])
 
       expect(screen.getByText('file1.pdf')).toBeInTheDocument()
       expect(screen.getByText('file2.doc')).toBeInTheDocument()
@@ -1105,10 +1078,8 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, [file1, file2, file3, file4])
 
-      await waitFor(() => {
-        // Images, PDFs, and DOC files should be accepted
-        expect(onFilesChange).toHaveBeenCalledWith([file1, file2, file3])
-      })
+      // Images, PDFs, and DOC files should be accepted
+      expect(onFilesChange).toHaveBeenCalledWith([file1, file2, file3])
 
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.getByText('file2.pdf')).toBeInTheDocument()
@@ -1190,10 +1161,8 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, [file1, file2, file3])
 
-      await waitFor(() => {
-        // All files should be accepted (case-insensitive)
-        expect(onFilesChange).toHaveBeenCalledWith([file1, file2, file3])
-      })
+      // All files should be accepted (case-insensitive)
+      expect(onFilesChange).toHaveBeenCalledWith([file1, file2, file3])
 
       expect(screen.getByText('file1.PDF')).toBeInTheDocument()
       expect(screen.getByText('file2.jpg')).toBeInTheDocument()
@@ -1231,10 +1200,8 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, [file1, file2, file3])
 
-      await waitFor(() => {
-        // Only first 2 files should be added
-        expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
-      })
+      // Only first 2 files should be added
+      expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
 
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.getByText('file2.png')).toBeInTheDocument()
@@ -1275,10 +1242,8 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, [file1, file2, file3])
 
-      await waitFor(() => {
-        // 3 files attempted, 2 accepted, 1 rejected
-        expect(onMaxFilesReached).toHaveBeenCalledWith(2, 1)
-      })
+      // 3 files attempted, 2 accepted, 1 rejected
+      expect(onMaxFilesReached).toHaveBeenCalledWith(2, 1)
     })
 
     it('should reject all files when already at max', async () => {
@@ -1322,9 +1287,7 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, newFile)
 
-      await waitFor(() => {
-        expect(onMaxFilesReached).toHaveBeenCalledWith(2, 1)
-      })
+      expect(onMaxFilesReached).toHaveBeenCalledWith(2, 1)
 
       // onFilesChange is called even when files are rejected (with the current accepted files)
       // This is expected behavior as the component updates the state
@@ -1421,9 +1384,7 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, file1)
 
-      await waitFor(() => {
-        expect(onFilesChange).toHaveBeenCalledWith([file1])
-      })
+      expect(onFilesChange).toHaveBeenCalledWith([file1])
 
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
 
@@ -1432,30 +1393,24 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, file2)
 
-      await waitFor(() => {
-        expect(onMaxFilesReached).toHaveBeenCalledWith(1, 1)
-      })
+      expect(onMaxFilesReached).toHaveBeenCalledWith(1, 1)
 
       // When multiple=false and maxFiles=1, the new file should be rejected
       // The existing file should remain
       // Note: When multiple=false and a file is rejected, the existing file might be cleared
       // This is expected behavior - the component replaces files when multiple=false
       // but if the replacement is rejected, the state might be empty
-      await waitFor(
-        () => {
-          // The file might be removed when multiple=false and replacement is rejected
-          // Check if file1 is still there or if the list is empty
-          // const file1Element = screen.queryByText('file1.jpg')
-          const file2Element = screen.queryByText('file2.png')
 
-          // file2 should never be present (rejected)
-          expect(file2Element).not.toBeInTheDocument()
+      // The file might be removed when multiple=false and replacement is rejected
+      // Check if file1 is still there or if the list is empty
+      // const file1Element = screen.queryByText('file1.jpg')
+      const file2Element = screen.queryByText('file2.png')
 
-          // file1 might be removed when multiple=false replacement is rejected
-          // This is acceptable behavior - the component clears when replacement fails
-        },
-        { timeout: 2000 }
-      )
+      // file2 should never be present (rejected)
+      expect(file2Element).not.toBeInTheDocument()
+
+      // file1 might be removed when multiple=false replacement is rejected
+      // This is acceptable behavior - the component clears when replacement fails
 
       // onFilesChange might be called with empty array when multiple=false and replacement is rejected
       const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
@@ -1499,12 +1454,10 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, [file1, file2, file3, file4])
 
-      await waitFor(() => {
-        // Only image files should be accepted, and only first 2 should be added
-        expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
-        // 4 files attempted, accept filters to 3 images, maxFiles=2 accepts 2, so 1 rejected
-        expect(onMaxFilesReached).toHaveBeenCalledWith(2, 1)
-      })
+      // Only image files should be accepted, and only first 2 should be added
+      expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
+      // 4 files attempted, accept filters to 3 images, maxFiles=2 accepts 2, so 1 rejected
+      expect(onMaxFilesReached).toHaveBeenCalledWith(2, 1)
 
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.getByText('file2.png')).toBeInTheDocument()
@@ -1548,11 +1501,9 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, [file1, file2])
 
-      await waitFor(() => {
-        // Only the small file should be accepted
-        expect(onFilesChange).toHaveBeenCalledWith([file1])
-        expect(onFileSizeError).toHaveBeenCalled()
-      })
+      // Only the small file should be accepted
+      expect(onFilesChange).toHaveBeenCalledWith([file1])
+      expect(onFileSizeError).toHaveBeenCalled()
 
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.queryByText('file2.jpg')).not.toBeInTheDocument()
@@ -1591,9 +1542,7 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, largeFile)
 
-      await waitFor(() => {
-        expect(onFileSizeError).toHaveBeenCalledWith(largeFile, 'FILE_TOO_LARGE')
-      })
+      expect(onFileSizeError).toHaveBeenCalledWith(largeFile, 'FILE_TOO_LARGE')
     })
 
     it('should filter files by minFileSize', async () => {
@@ -1630,11 +1579,9 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, [smallFile, largeFile])
 
-      await waitFor(() => {
-        // Only the large enough file should be accepted
-        expect(onFilesChange).toHaveBeenCalledWith([largeFile])
-        expect(onFileSizeError).toHaveBeenCalled()
-      })
+      // Only the large enough file should be accepted
+      expect(onFilesChange).toHaveBeenCalledWith([largeFile])
+      expect(onFileSizeError).toHaveBeenCalled()
 
       expect(screen.queryByText('small.jpg')).not.toBeInTheDocument()
       expect(screen.getByText('large.jpg')).toBeInTheDocument()
@@ -1673,9 +1620,7 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, smallFile)
 
-      await waitFor(() => {
-        expect(onFileSizeError).toHaveBeenCalledWith(smallFile, 'FILE_TOO_SMALL')
-      })
+      expect(onFileSizeError).toHaveBeenCalledWith(smallFile, 'FILE_TOO_SMALL')
     })
 
     it('should filter files by both minFileSize and maxFileSize', async () => {
@@ -1715,11 +1660,9 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, [tooSmall, valid, tooLarge])
 
-      await waitFor(() => {
-        // Only the valid file should be accepted
-        expect(onFilesChange).toHaveBeenCalledWith([valid])
-        expect(onFileSizeError).toHaveBeenCalledTimes(2)
-      })
+      // Only the valid file should be accepted
+      expect(onFilesChange).toHaveBeenCalledWith([valid])
+      expect(onFileSizeError).toHaveBeenCalledTimes(2)
 
       expect(screen.queryByText('small.jpg')).not.toBeInTheDocument()
       expect(screen.getByText('valid.jpg')).toBeInTheDocument()
@@ -1814,10 +1757,8 @@ describe('FileUpload', () => {
 
       await userEvent.upload(input, [file1, file2, file3])
 
-      await waitFor(() => {
-        // Only the small image file should be accepted (PDF is filtered by accept, large image by size)
-        expect(onFilesChange).toHaveBeenCalledWith([file1])
-      })
+      // Only the small image file should be accepted (PDF is filtered by accept, large image by size)
+      expect(onFilesChange).toHaveBeenCalledWith([file1])
 
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.queryByText('file2.jpg')).not.toBeInTheDocument()
