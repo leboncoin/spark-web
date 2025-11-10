@@ -2,7 +2,7 @@
 import { ArrowVerticalLeft } from '@spark-ui/icons/ArrowVerticalLeft'
 import { ArrowVerticalRight } from '@spark-ui/icons/ArrowVerticalRight'
 import { Tabs as RadixTabs } from 'radix-ui'
-import { type ReactElement, Ref, useEffect, useRef, useState } from 'react'
+import { type ReactElement, type ReactNode, Ref, useEffect, useRef, useState } from 'react'
 
 import { Button } from '../button'
 import { Icon } from '../icon'
@@ -22,6 +22,11 @@ export interface TabsListProps extends Omit<RadixTabs.TabsListProps, 'children'>
    */
   loop?: boolean
   children: ReactElement[] | ReactElement
+  /**
+   * Optional popups to render absolutely positioned over the tabs.
+   * These should be TabsPopup components that will be visually associated with triggers.
+   */
+  popups?: ReactNode
   ref?: Ref<HTMLDivElement>
 }
 
@@ -35,6 +40,7 @@ export const TabsList = ({
   asChild = false,
   loop = false,
   children,
+  popups,
   className,
   ref,
   ...rest
@@ -146,16 +152,22 @@ export const TabsList = ({
         </Button>
       )}
 
-      <RadixTabs.List
-        data-spark-component="tabs-list"
-        ref={listRef}
-        className={listStyles()}
-        asChild={asChild}
-        loop={loop}
-        {...rest}
-      >
-        {children}
-      </RadixTabs.List>
+      <div className="relative">
+        <RadixTabs.List
+          data-spark-component="tabs-list"
+          ref={listRef}
+          className={listStyles()}
+          asChild={asChild}
+          loop={loop}
+          {...rest}
+        >
+          {children}
+        </RadixTabs.List>
+
+        {popups && (
+          <div className="top-lg pointer-events-none absolute right-0 flex w-full">{popups}</div>
+        )}
+      </div>
 
       {arrows.next !== 'hidden' && (
         <Button
