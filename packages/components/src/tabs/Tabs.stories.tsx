@@ -615,25 +615,22 @@ export const WithPopup: StoryFn = _args => {
         <Tag className="mb-md flex">with TabsPopup (try Shift+F10 on focused tabs)</Tag>
         <Tabs value={activeTab} onValueChange={setActiveTab} onPopupKeyDown={handlePopupKeyDown}>
           <Tabs.List
-            popups={tabs.map(tab => {
-              if (!tab.popupContent) return null
-
-              return (
-                <Tabs.Popup
-                  key={tab.value}
-                  tabValue={tab.value}
-                  isTabActive={activeTab === tab.value}
-                >
-                  {tab.popupContent}
-                </Tabs.Popup>
-              )
-            })}
+            popups={tabs.map(tab => (
+              <Tabs.Popup
+                key={tab.value}
+                tabValue={tab.value}
+                isTabActive={activeTab === tab.value}
+              >
+                {tab.popupContent || null}
+              </Tabs.Popup>
+            ))}
           >
             {tabs.map(tab => (
               <Tabs.Trigger
                 key={tab.value}
                 value={tab.value}
                 aria-haspopup={tab.popupContent ? 'true' : undefined}
+                className={tab.popupContent ? 'pr-sz-44' : undefined}
               >
                 {tab.label}
               </Tabs.Trigger>
