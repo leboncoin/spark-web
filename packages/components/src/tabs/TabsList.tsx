@@ -165,7 +165,7 @@ export const TabsList = ({
         </RadixTabs.List>
 
         {popups && (
-          <div className="top-lg pointer-events-none absolute right-0 flex w-full">{popups}</div>
+          <div className="pointer-events-none absolute inset-0 flex items-center">{popups}</div>
         )}
       </div>
 
