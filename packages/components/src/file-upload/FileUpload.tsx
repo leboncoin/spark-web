@@ -141,6 +141,7 @@ export const FileUpload = ({
       return
     }
 
+    const processedFiles = newFiles.length
     const newRejectedFiles: RejectedFile[] = []
 
     // Helper function to check if a file already exists
@@ -283,7 +284,18 @@ export const FileUpload = ({
       }
 
       const updated = multiple ? [...prev, ...filesToAdd] : filesToAdd
-      onFilesChange?.(updated)
+      // Call onFilesChange if:
+      // 1. Files were added (filesToAdd.length > 0)
+      // 2. State changed (updated.length !== prev.length)
+      // 3. Files were processed and there are existing files (to notify about rejection attempt)
+      // Don't call if all files were rejected and there were no previous files
+      if (
+        filesToAdd.length > 0 ||
+        updated.length !== prev.length ||
+        (processedFiles > 0 && prev.length > 0)
+      ) {
+        onFilesChange?.(updated)
+      }
 
       // Add rejected files to state synchronously
       // Note: newRejectedFiles is mutated inside this setFiles callback, so it should be populated by now
@@ -376,7 +388,11 @@ export const FileUpload = ({
             if (e.target.files && !disabled && !readOnly) {
               addFiles(Array.from(e.target.files))
               // Reset input value to allow selecting the same file again
-              e.target.value = ''
+              try {
+                e.target.value = ''
+              } catch {
+                // Ignore error if value is read-only (e.g., in tests)
+              }
             }
           }}
         />

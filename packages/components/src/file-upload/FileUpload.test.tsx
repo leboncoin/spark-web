@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { FileUpload } from '.'
+import { uploadFiles } from './test-utils'
 
 describe('FileUpload', () => {
   beforeEach(() => {
@@ -142,7 +143,7 @@ describe('FileUpload', () => {
       const file1 = new File(['content1'], 'file1.jpg', { type: 'image/jpeg' })
       const file2 = new File(['content2'], 'file2.png', { type: 'image/png' })
 
-      await userEvent.upload(input, [file1, file2])
+      uploadFiles(input, [file1, file2])
 
       expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
 
@@ -176,7 +177,7 @@ describe('FileUpload', () => {
       const input = document.querySelector('input[type="file"]') as HTMLInputElement
       const newFile = new File(['new content'], 'new.jpg', { type: 'image/jpeg' })
 
-      await userEvent.upload(input, newFile)
+      uploadFiles(input, newFile)
 
       expect(onFilesChange).toHaveBeenCalled()
       const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
@@ -345,7 +346,7 @@ describe('FileUpload', () => {
       const input = document.querySelector('input[type="file"]') as HTMLInputElement
       const file = new File(['content'], 'test.jpg', { type: 'image/jpeg' })
 
-      await userEvent.upload(input, file)
+      uploadFiles(input, file)
 
       expect(onFilesChange).toHaveBeenCalledTimes(1)
       expect(onFilesChange).toHaveBeenCalledWith([file])
@@ -564,9 +565,7 @@ describe('FileUpload', () => {
   })
 
   describe('RejectedFile', () => {
-    // TODO: Fix rejected files rendering - files are not being added to state correctly
-    // The setTimeout in FileUpload.tsx may need to be refactored to use useEffect or flushSync
-    it.skip('should render rejected file with error messages using renderError', async () => {
+    it('should render rejected file with error messages using renderError', async () => {
       const onFilesChange = vi.fn()
       const errorMessages: Record<string, string> = {
         FILE_INVALID_TYPE: 'Invalid file type',
@@ -608,15 +607,12 @@ describe('FileUpload', () => {
       )
 
       const input = document.querySelector('input[type="file"]') as HTMLInputElement
+      expect(input).toBeInTheDocument()
       const invalidFile = new File(['content'], 'test.pdf', { type: 'application/pdf' })
 
-      await userEvent.upload(input, invalidFile)
+      uploadFiles(input, invalidFile)
 
-      // Wait for rejected files to be added to state (setTimeout in FileUpload)
-      // The setTimeout(0) in FileUpload needs time to execute
-      // First wait a bit for the setTimeout to execute
-      await new Promise(resolve => setTimeout(resolve, 100))
-
+      // Files are now updated synchronously, so we can check immediately
       await waitFor(
         () => {
           expect(screen.getByText('test.pdf')).toBeInTheDocument()
@@ -626,9 +622,7 @@ describe('FileUpload', () => {
       )
     })
 
-    // TODO: Fix rejected files rendering - files are not being added to state correctly
-    // The setTimeout in FileUpload.tsx may need to be refactored to use useEffect or flushSync
-    it.skip('should render multiple errors for a rejected file', async () => {
+    it('should render multiple errors for a rejected file', async () => {
       const onFilesChange = vi.fn()
       const errorMessages: Record<string, string> = {
         TOO_MANY_FILES: 'Too many files',
@@ -677,13 +671,9 @@ describe('FileUpload', () => {
       const input = document.querySelector('input[type="file"]') as HTMLInputElement
       const invalidFile = new File(['content'], 'test.pdf', { type: 'application/pdf' })
 
-      await userEvent.upload(input, invalidFile)
+      uploadFiles(input, invalidFile)
 
-      // Wait for rejected files to be added to state (setTimeout in FileUpload)
-      // The setTimeout(0) in FileUpload needs time to execute
-      // First wait a bit for the setTimeout to execute
-      await new Promise(resolve => setTimeout(resolve, 100))
-
+      // Files are now updated synchronously, so we can check immediately
       await waitFor(
         () => {
           expect(screen.getByText('test.pdf')).toBeInTheDocument()
@@ -758,7 +748,7 @@ describe('FileUpload', () => {
       const file1 = new File(['content1'], 'file1.jpg', { type: 'image/jpeg' })
       const file2 = new File(['content2'], 'file2.png', { type: 'image/png' })
 
-      await userEvent.upload(input, [file1, file2])
+      uploadFiles(input, [file1, file2])
 
       expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
 
@@ -794,7 +784,7 @@ describe('FileUpload', () => {
       const file1 = new File(['content1'], 'file1.jpg', { type: 'image/jpeg' })
       const file2 = new File(['content2'], 'file2.png', { type: 'image/png' })
 
-      await userEvent.upload(input, [file1, file2])
+      uploadFiles(input, [file1, file2])
 
       // Only the first file should be added
       expect(onFilesChange).toHaveBeenCalledWith([file1])
@@ -831,7 +821,7 @@ describe('FileUpload', () => {
       const input = document.querySelector('input[type="file"]') as HTMLInputElement
       const newFile = new File(['new content'], 'new.jpg', { type: 'image/jpeg' })
 
-      await userEvent.upload(input, newFile)
+      uploadFiles(input, newFile)
 
       // The new file should replace the initial file
       expect(onFilesChange).toHaveBeenCalledWith([newFile])
@@ -919,7 +909,7 @@ describe('FileUpload', () => {
       const file1 = new File(['content1'], 'file1.jpg', { type: 'image/jpeg' })
       const file2 = new File(['content2'], 'file2.pdf', { type: 'application/pdf' })
 
-      await userEvent.upload(input, [file1, file2])
+      uploadFiles(input, [file1, file2])
 
       expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
 
@@ -956,7 +946,7 @@ describe('FileUpload', () => {
       const file2 = new File(['content2'], 'file2.png', { type: 'image/png' })
       const file3 = new File(['content3'], 'file3.pdf', { type: 'application/pdf' })
 
-      await userEvent.upload(input, [file1, file2, file3])
+      uploadFiles(input, [file1, file2, file3])
 
       // Only image files should be accepted
       expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
@@ -995,7 +985,7 @@ describe('FileUpload', () => {
       const file2 = new File(['content2'], 'file2.pdf', { type: 'application/pdf' })
       const file3 = new File(['content3'], 'file3.jpg', { type: 'image/jpeg' })
 
-      await userEvent.upload(input, [file1, file2, file3])
+      uploadFiles(input, [file1, file2, file3])
 
       // Only PNG and PDF files should be accepted
       expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
@@ -1035,7 +1025,7 @@ describe('FileUpload', () => {
       const file3 = new File(['content3'], 'file3.jpg', { type: 'image/jpeg' })
       const file4 = new File(['content4'], 'file4.png', { type: 'image/png' })
 
-      await userEvent.upload(input, [file1, file2, file3, file4])
+      uploadFiles(input, [file1, file2, file3, file4])
 
       // Only files with .pdf, .doc, or .jpg extensions should be accepted
       expect(onFilesChange).toHaveBeenCalledWith([file1, file2, file3])
@@ -1076,7 +1066,7 @@ describe('FileUpload', () => {
       const file3 = new File(['content3'], 'file3.doc', { type: 'application/msword' })
       const file4 = new File(['content4'], 'file4.txt', { type: 'text/plain' })
 
-      await userEvent.upload(input, [file1, file2, file3, file4])
+      uploadFiles(input, [file1, file2, file3, file4])
 
       // Images, PDFs, and DOC files should be accepted
       expect(onFilesChange).toHaveBeenCalledWith([file1, file2, file3])
@@ -1159,7 +1149,7 @@ describe('FileUpload', () => {
       const file2 = new File(['content2'], 'file2.jpg', { type: 'image/jpeg' })
       const file3 = new File(['content3'], 'file3.JPG', { type: 'image/jpeg' })
 
-      await userEvent.upload(input, [file1, file2, file3])
+      uploadFiles(input, [file1, file2, file3])
 
       // All files should be accepted (case-insensitive)
       expect(onFilesChange).toHaveBeenCalledWith([file1, file2, file3])
@@ -1198,7 +1188,7 @@ describe('FileUpload', () => {
       const file2 = new File(['content2'], 'file2.png', { type: 'image/png' })
       const file3 = new File(['content3'], 'file3.pdf', { type: 'application/pdf' })
 
-      await userEvent.upload(input, [file1, file2, file3])
+      uploadFiles(input, [file1, file2, file3])
 
       // Only first 2 files should be added
       expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
@@ -1240,7 +1230,7 @@ describe('FileUpload', () => {
       const file2 = new File(['content2'], 'file2.png', { type: 'image/png' })
       const file3 = new File(['content3'], 'file3.pdf', { type: 'application/pdf' })
 
-      await userEvent.upload(input, [file1, file2, file3])
+      uploadFiles(input, [file1, file2, file3])
 
       // 3 files attempted, 2 accepted, 1 rejected
       expect(onMaxFilesReached).toHaveBeenCalledWith(2, 1)
@@ -1285,7 +1275,7 @@ describe('FileUpload', () => {
       const input = document.querySelector('input[type="file"]') as HTMLInputElement
       const newFile = new File(['content3'], 'new.jpg', { type: 'image/jpeg' })
 
-      await userEvent.upload(input, newFile)
+      uploadFiles(input, newFile)
 
       expect(onMaxFilesReached).toHaveBeenCalledWith(2, 1)
 
@@ -1382,7 +1372,7 @@ describe('FileUpload', () => {
       const input = document.querySelector('input[type="file"]') as HTMLInputElement
       const file1 = new File(['content1'], 'file1.jpg', { type: 'image/jpeg' })
 
-      await userEvent.upload(input, file1)
+      uploadFiles(input, file1)
 
       expect(onFilesChange).toHaveBeenCalledWith([file1])
 
@@ -1391,7 +1381,7 @@ describe('FileUpload', () => {
       // Try to add another file
       const file2 = new File(['content2'], 'file2.png', { type: 'image/png' })
 
-      await userEvent.upload(input, file2)
+      uploadFiles(input, file2)
 
       expect(onMaxFilesReached).toHaveBeenCalledWith(1, 1)
 
@@ -1452,7 +1442,7 @@ describe('FileUpload', () => {
       const file3 = new File(['content3'], 'file3.pdf', { type: 'application/pdf' })
       const file4 = new File(['content4'], 'file4.gif', { type: 'image/gif' })
 
-      await userEvent.upload(input, [file1, file2, file3, file4])
+      uploadFiles(input, [file1, file2, file3, file4])
 
       // Only image files should be accepted, and only first 2 should be added
       expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
@@ -1499,7 +1489,7 @@ describe('FileUpload', () => {
       const file1 = new File(['content1'], 'file1.jpg', { type: 'image/jpeg' }) // Small file
       const file2 = new File(['x'.repeat(2000)], 'file2.jpg', { type: 'image/jpeg' }) // Large file (> 1KB)
 
-      await userEvent.upload(input, [file1, file2])
+      uploadFiles(input, [file1, file2])
 
       // Only the small file should be accepted
       expect(onFilesChange).toHaveBeenCalledWith([file1])
@@ -1540,7 +1530,7 @@ describe('FileUpload', () => {
       const input = document.querySelector('input[type="file"]') as HTMLInputElement
       const largeFile = new File(['x'.repeat(2000)], 'large.jpg', { type: 'image/jpeg' })
 
-      await userEvent.upload(input, largeFile)
+      uploadFiles(input, largeFile)
 
       expect(onFileSizeError).toHaveBeenCalledWith(largeFile, 'FILE_TOO_LARGE')
     })
@@ -1577,7 +1567,7 @@ describe('FileUpload', () => {
       const smallFile = new File(['x'], 'small.jpg', { type: 'image/jpeg' }) // Very small file
       const largeFile = new File(['x'.repeat(200)], 'large.jpg', { type: 'image/jpeg' }) // Large enough file
 
-      await userEvent.upload(input, [smallFile, largeFile])
+      uploadFiles(input, [smallFile, largeFile])
 
       // Only the large enough file should be accepted
       expect(onFilesChange).toHaveBeenCalledWith([largeFile])
@@ -1618,7 +1608,7 @@ describe('FileUpload', () => {
       const input = document.querySelector('input[type="file"]') as HTMLInputElement
       const smallFile = new File(['x'], 'small.jpg', { type: 'image/jpeg' })
 
-      await userEvent.upload(input, smallFile)
+      uploadFiles(input, smallFile)
 
       expect(onFileSizeError).toHaveBeenCalledWith(smallFile, 'FILE_TOO_SMALL')
     })
@@ -1658,7 +1648,7 @@ describe('FileUpload', () => {
       const valid = new File(['x'.repeat(200)], 'valid.jpg', { type: 'image/jpeg' })
       const tooLarge = new File(['x'.repeat(2000)], 'large.jpg', { type: 'image/jpeg' })
 
-      await userEvent.upload(input, [tooSmall, valid, tooLarge])
+      uploadFiles(input, [tooSmall, valid, tooLarge])
 
       // Only the valid file should be accepted
       expect(onFilesChange).toHaveBeenCalledWith([valid])
@@ -1755,7 +1745,7 @@ describe('FileUpload', () => {
       const file2 = new File(['x'.repeat(2000)], 'file2.jpg', { type: 'image/jpeg' })
       const file3 = new File(['content3'], 'file3.pdf', { type: 'application/pdf' })
 
-      await userEvent.upload(input, [file1, file2, file3])
+      uploadFiles(input, [file1, file2, file3])
 
       // Only the small image file should be accepted (PDF is filtered by accept, large image by size)
       expect(onFilesChange).toHaveBeenCalledWith([file1])
@@ -1838,7 +1828,7 @@ describe('FileUpload', () => {
       const input = document.querySelector('input[type="file"]') as HTMLInputElement
       const file = new File(['content'], 'file.jpg', { type: 'image/jpeg' })
 
-      await userEvent.upload(input, file)
+      uploadFiles(input, file)
 
       // Wait a bit to ensure no state update occurs
       await new Promise(resolve => setTimeout(resolve, 100))
@@ -1872,7 +1862,7 @@ describe('FileUpload', () => {
       const input = document.querySelector('input[type="file"]') as HTMLInputElement
       const file = new File(['content'], 'file.jpg', { type: 'image/jpeg' })
 
-      await userEvent.upload(input, file)
+      uploadFiles(input, file)
 
       // Wait a bit to ensure no state update occurs
       await new Promise(resolve => setTimeout(resolve, 100))
