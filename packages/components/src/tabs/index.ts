@@ -1,7 +1,7 @@
 import { Tabs as Root } from './Tabs'
 import { TabsContent as Content } from './TabsContent'
 import { TabsList as List } from './TabsList'
-import { TabsPopupWrapper as Popup } from './TabsPopupWrapper'
+import { TabsPopup as Popup } from './TabsPopup'
 import { TabsTrigger as Trigger } from './TabsTrigger'
 
 export const Tabs: typeof Root & {
@@ -24,6 +24,6 @@ Popup.displayName = 'Tabs.Popup'
 
 export { type TabsContentProps } from './TabsContent'
 export { type TabsListProps } from './TabsList'
-export { type TabsPopupWrapperProps as TabsPopupProps } from './TabsPopupWrapper'
+export { type TabsPopupProps } from './TabsPopup'
 export { type TabsProps, type TabsRootProps } from './Tabs'
 export { type TabsTriggerProps } from './TabsTrigger'
