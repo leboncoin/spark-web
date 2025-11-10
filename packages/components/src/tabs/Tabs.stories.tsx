@@ -3,10 +3,14 @@ import { Tag } from '@spark-ui/components/tag'
 import { ConversationFill } from '@spark-ui/icons/ConversationFill'
 import { FireFill } from '@spark-ui/icons/FireFill'
 import { MailFill } from '@spark-ui/icons/MailFill'
+import { MoreMenuHorizontal } from '@spark-ui/icons/MoreMenuHorizontal'
 import type { Meta, StoryFn } from '@storybook/react-vite'
-import type { ReactNode } from 'react'
+import { type ReactNode, useState } from 'react'
 
+import { Button } from '../button'
 import { Icon } from '../icon'
+import { IconButton } from '../icon-button'
+import { Popover } from '../popover'
 import { Tabs } from '.'
 
 const meta: Meta<typeof Tabs> = {
@@ -506,6 +510,139 @@ export const Disabled: StoryFn = _args => {
           {tabs.map(({ content, value }) => (
             <Tabs.Content key={value} value={value}>
               <p>{content}</p>
+            </Tabs.Content>
+          ))}
+        </Tabs>
+      </div>
+    </div>
+  )
+}
+
+export const WithPopup: StoryFn = _args => {
+  const [openPopup, setOpenPopup] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState('tab1')
+
+  const handlePopupKeyDown = (tabValue: string) => {
+    setOpenPopup(tabValue)
+  }
+
+  const tabs = [
+    {
+      value: 'tab1',
+      label: <span>Inbox</span>,
+      content: <p>Your inbox is empty</p>,
+      popupContent: (
+        <Popover
+          open={openPopup === 'tab1'}
+          onOpenChange={open => setOpenPopup(open ? 'tab1' : null)}
+        >
+          <Popover.Trigger asChild>
+            <IconButton
+              size="sm"
+              intent="surface"
+              shape="rounded"
+              aria-label="Options for Inbox tab"
+              tabIndex={-1}
+            >
+              <Icon size="sm">
+                <MoreMenuHorizontal />
+              </Icon>
+            </IconButton>
+          </Popover.Trigger>
+          <Popover.Content side="bottom" align="start">
+            <div className="gap-xs p-md flex flex-col">
+              <Button size="sm" intent="surface" className="justify-start">
+                Close tab
+              </Button>
+              <Button size="sm" intent="surface" className="justify-start">
+                Duplicate tab
+              </Button>
+              <hr className="border-outline my-xs" />
+              <Button size="sm" intent="surface" className="justify-start">
+                Move to new window
+              </Button>
+            </div>
+          </Popover.Content>
+        </Popover>
+      ),
+    },
+    {
+      value: 'tab2',
+      label: <span>Today</span>,
+      content: <p>Make some coffee</p>,
+      popupContent: (
+        <Popover
+          open={openPopup === 'tab2'}
+          onOpenChange={open => setOpenPopup(open ? 'tab2' : null)}
+        >
+          <Popover.Trigger asChild>
+            <IconButton
+              size="sm"
+              intent="surface"
+              shape="rounded"
+              aria-label="Options for Today tab"
+              tabIndex={-1}
+            >
+              <Icon size="sm">
+                <MoreMenuHorizontal />
+              </Icon>
+            </IconButton>
+          </Popover.Trigger>
+          <Popover.Content side="bottom" align="start">
+            <div className="gap-xs p-md flex flex-col">
+              <Button size="sm" intent="surface" className="justify-start">
+                Close tab
+              </Button>
+              <Button size="sm" intent="surface" className="justify-start">
+                Duplicate tab
+              </Button>
+            </div>
+          </Popover.Content>
+        </Popover>
+      ),
+    },
+    {
+      value: 'tab3',
+      label: <span>Upcoming</span>,
+      content: <p>Order more coffee</p>,
+      // No popup for this tab
+    },
+  ]
+
+  return (
+    <div className="gap-lg flex flex-col">
+      <div>
+        <Tag className="mb-md flex">with TabsPopup (try Shift+F10 on focused tabs)</Tag>
+        <Tabs value={activeTab} onValueChange={setActiveTab} onPopupKeyDown={handlePopupKeyDown}>
+          <Tabs.List
+            popups={tabs.map(tab => {
+              if (!tab.popupContent) return null
+
+              return (
+                <Tabs.Popup
+                  key={tab.value}
+                  tabValue={tab.value}
+                  isTabActive={activeTab === tab.value}
+                >
+                  {tab.popupContent}
+                </Tabs.Popup>
+              )
+            })}
+          >
+            {tabs.map(tab => (
+              <Tabs.Trigger
+                key={tab.value}
+                value={tab.value}
+                aria-haspopup={tab.popupContent ? 'true' : undefined}
+              >
+                {tab.label}
+              </Tabs.Trigger>
+            ))}
+          </Tabs.List>
+
+          {tabs.map(tab => (
+            <Tabs.Content key={tab.value} value={tab.value}>
+              {tab.content}
             </Tabs.Content>
           ))}
         </Tabs>
