@@ -1,4 +1,5 @@
 /* eslint-disable max-lines-per-function */
+import { useCombinedState } from '@spark-ui/hooks/use-combined-state'
 import { createContext, ReactNode, Ref, useContext, useRef, useState } from 'react'
 
 import { validateFileAccept, validateFileSize } from './utils'
@@ -12,9 +13,14 @@ export interface FileUploadProps {
   children: ReactNode
   className?: string
   /**
-   * Initial files to display when the component mounts
+   * Initial files to display when the component mounts (uncontrolled mode)
    */
   defaultValue?: File[]
+  /**
+   * Controlled files value (controlled mode)
+   * When provided, the component becomes controlled
+   */
+  value?: File[]
   /**
    * Callback when files are selected
    */
@@ -95,6 +101,7 @@ export const FileUploadContext = createContext<{
   rejectedFiles: RejectedFile[]
   addFiles: (files: File[]) => void
   removeFile: (index: number) => void
+  removeRejectedFile: (index: number) => void
   clearFiles: () => void
   clearRejectedFiles: () => void
   triggerRef: React.RefObject<HTMLElement | null>
@@ -112,6 +119,7 @@ export const FileUpload = ({
   asChild: _asChild = false,
   children,
   defaultValue = [],
+  value: controlledValue,
   onFilesChange,
   multiple = true,
   accept,
@@ -132,7 +140,13 @@ export const FileUpload = ({
   const triggerRef = useRef<HTMLElement>(null)
   const dropzoneRef = useRef<HTMLElement>(null)
   const deleteButtonRefs = useRef<HTMLButtonElement[]>([])
-  const [files, setFiles] = useState<File[]>(defaultValue)
+  const [filesState, setFilesState, ,] = useCombinedState(
+    controlledValue,
+    defaultValue,
+    onFilesChange
+  )
+  const files = filesState ?? []
+  const setFiles = setFilesState as (value: File[] | ((prev: File[]) => File[])) => void
   const [rejectedFiles, setRejectedFiles] = useState<RejectedFile[]>([])
 
   const addFiles = (newFiles: File[]) => {
@@ -141,7 +155,9 @@ export const FileUpload = ({
       return
     }
 
-    const processedFiles = newFiles.length
+    // Reset rejectedFiles at the start of each new file addition attempt
+    setRejectedFiles([])
+
     const newRejectedFiles: RejectedFile[] = []
 
     // Helper function to check if a file already exists
@@ -177,11 +193,12 @@ export const FileUpload = ({
       }
     }
 
-    setFiles(prev => {
+    setFiles((prev: File[]) => {
+      const currentFiles = prev ?? []
       // Check maxFiles limit FIRST for all files (even if they will be rejected by other validations)
       // This allows a file to have multiple error codes (e.g., FILE_INVALID_TYPE + TOO_MANY_FILES)
       if (maxFiles !== undefined) {
-        const currentCount = prev.length
+        const currentCount = currentFiles.length
         const remainingSlots = maxFiles - currentCount
 
         if (remainingSlots <= 0) {
@@ -233,7 +250,7 @@ export const FileUpload = ({
         const fileKey = `${file.name}-${file.size}`
 
         // Check if file already exists in previously accepted files
-        const existsInPrev = fileExists(file, prev)
+        const existsInPrev = fileExists(file, currentFiles)
         if (existsInPrev) {
           duplicateFiles.push(file)
           addRejectedFile(file, 'FILE_EXISTS')
@@ -262,7 +279,7 @@ export const FileUpload = ({
       // Note: We already checked maxFiles at the beginning for ALL files to allow multiple error codes
       // This second check is to prevent adding files when we're at the limit
       if (maxFiles !== undefined) {
-        const currentCount = prev.length
+        const currentCount = currentFiles.length
         const remainingSlots = maxFiles - currentCount
 
         if (remainingSlots <= 0) {
@@ -273,46 +290,23 @@ export const FileUpload = ({
           onMaxFilesReached?.(maxFiles, filesToAdd.length)
           filesToAdd = []
         } else if (filesToAdd.length > remainingSlots) {
-          // Too many files, only take what fits
-          const rejectedByMax = filesToAdd.slice(remainingSlots)
-          rejectedByMax.forEach(file => {
+          // Reject all files if batch exceeds limit ("all or nothing" approach)
+          filesToAdd.forEach(file => {
             addRejectedFile(file, 'TOO_MANY_FILES')
           })
-          onMaxFilesReached?.(maxFiles, rejectedByMax.length)
-          filesToAdd = filesToAdd.slice(0, remainingSlots)
+          onMaxFilesReached?.(maxFiles, filesToAdd.length)
+          filesToAdd = []
         }
       }
 
-      const updated = multiple ? [...prev, ...filesToAdd] : filesToAdd
-      // Call onFilesChange if:
-      // 1. Files were added (filesToAdd.length > 0)
-      // 2. State changed (updated.length !== prev.length)
-      // 3. Files were processed and there are existing files (to notify about rejection attempt)
-      // Don't call if all files were rejected and there were no previous files
-      if (
-        filesToAdd.length > 0 ||
-        updated.length !== prev.length ||
-        (processedFiles > 0 && prev.length > 0)
-      ) {
-        onFilesChange?.(updated)
-      }
+      const updated = multiple ? [...currentFiles, ...filesToAdd] : filesToAdd
 
       // Add rejected files to state synchronously
       // Note: newRejectedFiles is mutated inside this setFiles callback, so it should be populated by now
       // Copy the array to avoid closure issues
       const rejectedFilesToAdd = [...newRejectedFiles]
-      if (rejectedFilesToAdd.length > 0) {
-        // Update rejectedFiles synchronously - React will batch both state updates
-        setRejectedFiles(prevRejected => {
-          // Filter out any duplicates that might already exist
-          const existingKeys = new Set(prevRejected.map(r => `${r.file.name}-${r.file.size}`))
-          const newUniqueRejected = rejectedFilesToAdd.filter(
-            r => !existingKeys.has(`${r.file.name}-${r.file.size}`)
-          )
-
-          return [...prevRejected, ...newUniqueRejected]
-        })
-      }
+      // Replace rejectedFiles completely (not accumulate)
+      setRejectedFiles(rejectedFilesToAdd)
 
       return updated
     })
@@ -324,9 +318,16 @@ export const FileUpload = ({
       return
     }
 
-    setFiles(prev => {
-      const updated = prev.filter((_, i) => i !== index)
-      onFilesChange?.(updated)
+    setFiles((prev: File[]) => {
+      const currentFiles = prev ?? []
+      const updated = currentFiles.filter((_: File, i: number) => i !== index)
+
+      // Clean up TOO_MANY_FILES errors if we're now below the maxFiles limit
+      if (maxFiles !== undefined && updated.length < maxFiles) {
+        setRejectedFiles(prevRejected =>
+          prevRejected.filter(rejected => !rejected.errors.includes('TOO_MANY_FILES'))
+        )
+      }
 
       return updated
     })
@@ -339,8 +340,17 @@ export const FileUpload = ({
     }
 
     setFiles([])
-    onFilesChange?.([])
+    setRejectedFiles([])
     deleteButtonRefs.current = []
+  }
+
+  const removeRejectedFile = (index: number) => {
+    // Don't allow removing rejected files when disabled or readOnly
+    if (disabled || readOnly) {
+      return
+    }
+
+    setRejectedFiles(prev => prev.filter((_, i) => i !== index))
   }
 
   const clearRejectedFiles = () => {
@@ -357,6 +367,7 @@ export const FileUpload = ({
         rejectedFiles,
         addFiles,
         removeFile,
+        removeRejectedFile,
         clearFiles,
         clearRejectedFiles,
         triggerRef,

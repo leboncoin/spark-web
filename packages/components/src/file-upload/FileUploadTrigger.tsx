@@ -5,12 +5,10 @@ import { Button, type ButtonProps } from '../button'
 import { Slot } from '../slot'
 import { useFileUploadContext } from './FileUpload'
 
-export interface FileUploadTriggerProps
-  extends Omit<ButtonProps, 'children' | 'asChild' | 'disabled' | 'design' | 'intent'> {
+export interface FileUploadTriggerProps extends Omit<ButtonProps, 'children' | 'disabled'> {
   ref?: Ref<HTMLButtonElement>
   className?: string
   children: ReactNode
-  asChild?: boolean
   unstyled?: boolean
 }
 
@@ -19,6 +17,8 @@ export const Trigger = ({
   children,
   asChild = false,
   unstyled = false,
+  design = 'filled',
+  intent = 'basic',
   ref,
   ...props
 }: FileUploadTriggerProps) => {
@@ -52,8 +52,8 @@ export const Trigger = ({
           }
         }
       }}
-      design="tinted"
-      intent="neutral"
+      design={design}
+      intent={intent}
       data-spark-component="file-upload-trigger"
       className={cx(className)}
       disabled={disabled || readOnly}

@@ -11,6 +11,7 @@ import {
 import { Item } from './FileUploadItem'
 import { ItemFileName } from './FileUploadItemFileName'
 import { ItemSizeText } from './FileUploadItemSizeText'
+import { RejectedFileDeleteTrigger } from './FileUploadRejectedFileDeleteTrigger'
 import { formatFileSize } from './utils'
 
 export interface FileUploadRejectedFileProps extends ComponentPropsWithoutRef<'li'> {
@@ -24,6 +25,10 @@ export interface FileUploadRejectedFileProps extends ComponentPropsWithoutRef<'l
    */
   rejectedFile: RejectedFileType
   /**
+   * The index of the rejected file in the rejectedFiles array
+   */
+  rejectedFileIndex: number
+  /**
    * Function to render the error message for each error code
    * @param error - The error code
    * @returns The error message to display
@@ -36,6 +41,7 @@ export const RejectedFile = ({
   asChild: _asChild = false,
   className,
   rejectedFile,
+  rejectedFileIndex,
   renderError,
   ...props
 }: FileUploadRejectedFileProps) => {
@@ -66,6 +72,11 @@ export const RejectedFile = ({
           </div>
         </div>
       </div>
+
+      <RejectedFileDeleteTrigger
+        aria-label={`Remove ${rejectedFile.file.name} error`}
+        rejectedFileIndex={rejectedFileIndex}
+      />
     </Item>
   )
 }

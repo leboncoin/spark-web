@@ -62,12 +62,11 @@ Triggers the file selection dialog when clicked. Can be styled as a button or re
 
 ## Examples
 
+### Controlled
 
-### Acepted files - custom
+The FileUpload component supports both controlled and uncontrolled modes. In controlled mode, you manage the files state externally using the `value` prop and update it via the `onFilesChange` callback. This is useful when you need to synchronize the file list with external state management, form libraries, or when you want to programmatically control the files.
 
-Use `FileUpload.Context` to access `acceptedFiles` and customize the markup of the files previews.
-
-<Canvas of={stories.WithCustomFileRender} />
+<Canvas of={stories.Controlled} />
 
 ### With default files
 
@@ -144,6 +143,12 @@ Use `unstyled` on the `FileUpload.Trigger` and wrap it with a Spark UI component
 Customize the dropzone appearance and behavior by wrapping it with other components or modifying its content. 
 
 {/* <Canvas of={stories.Multiple} /> */}
+
+### Custom files preview
+
+Use `FileUpload.Context` to access `acceptedFiles` and customize the markup of the files previews.
+
+<Canvas of={stories.WithCustomFileRender} />
 
 ### Photos Gallery
 

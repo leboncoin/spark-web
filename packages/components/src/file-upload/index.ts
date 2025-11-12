@@ -8,6 +8,7 @@ import { ItemFileName } from './FileUploadItemFileName'
 import { ItemSizeText } from './FileUploadItemSizeText'
 import { PreviewImage } from './FileUploadPreviewImage'
 import { RejectedFile as RejectedFileComponent } from './FileUploadRejectedFile'
+import { RejectedFileDeleteTrigger } from './FileUploadRejectedFileDeleteTrigger'
 import { Trigger } from './FileUploadTrigger'
 
 export type { RejectedFile, FileUploadFileError }
@@ -23,6 +24,7 @@ export const FileUpload: typeof Root & {
   PreviewImage: typeof PreviewImage
   AcceptedFile: typeof AcceptedFile
   RejectedFile: typeof RejectedFileComponent
+  RejectedFileDeleteTrigger: typeof RejectedFileDeleteTrigger
 } = Object.assign(Root, {
   Trigger,
   Dropzone,
@@ -34,6 +36,7 @@ export const FileUpload: typeof Root & {
   PreviewImage,
   AcceptedFile,
   RejectedFile: RejectedFileComponent,
+  RejectedFileDeleteTrigger,
 })
 
 FileUpload.displayName = 'FileUpload'
@@ -47,3 +50,4 @@ ItemDeleteTrigger.displayName = 'FileUpload.ItemDeleteTrigger'
 PreviewImage.displayName = 'FileUpload.PreviewImage'
 AcceptedFile.displayName = 'FileUpload.AcceptedFile'
 RejectedFileComponent.displayName = 'FileUpload.RejectedFile'
+RejectedFileDeleteTrigger.displayName = 'FileUpload.RejectedFileDeleteTrigger'

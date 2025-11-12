@@ -60,7 +60,7 @@ export const Default: StoryFn = () => {
             <Icon size="lg">
               <Export />
             </Icon>
-            <div className="text-subhead">
+            <div className="text-subhead gap-md flex flex-col">
               <p>Drag and drop a file or</p>
 
               <FileUpload.Trigger>browse my files</FileUpload.Trigger>
@@ -93,7 +93,7 @@ export const Dropzone: StoryFn = () => {
         <Icon size="lg">
           <Export />
         </Icon>
-        <div className="text-subhead">
+        <div className="text-subhead gap-md flex flex-col">
           <p>Drag and drop a file or</p>
 
           <FileUpload.Trigger>browse my files</FileUpload.Trigger>
@@ -286,6 +286,71 @@ export const WithDefaultFiles: StoryFn = () => {
         )}
       </FileUpload.Context>
     </FileUpload>
+  )
+}
+
+export const Controlled: StoryFn = () => {
+  const [files, setFiles] = useState<File[]>([])
+
+  return (
+    <div className="gap-lg flex flex-col">
+      <div className="gap-md flex flex-col">
+        <p className="text-body-2">
+          In controlled mode, the component's files are managed by external state via the{' '}
+          <code className="text-caption bg-surface-container px-xs py-xxs rounded-sm">value</code>{' '}
+          prop. Use{' '}
+          <code className="text-caption bg-surface-container px-xs py-xxs rounded-sm">
+            onFilesChange
+          </code>{' '}
+          to update your state when files are added or removed.
+        </p>
+        <div className="gap-sm flex">
+          <Button
+            onClick={() => {
+              const newFile = new File(['content'], `file-${Date.now()}.txt`, {
+                type: 'text/plain',
+              })
+              setFiles(prev => [...prev, newFile])
+            }}
+          >
+            Add File Programmatically
+          </Button>
+          <Button
+            onClick={() => {
+              setFiles([])
+            }}
+            design="outlined"
+          >
+            Clear All Files
+          </Button>
+        </div>
+        <p className="text-caption text-on-surface/dim-2">
+          Current files count: <strong>{files.length}</strong>
+        </p>
+      </div>
+
+      <FileUpload value={files} onFilesChange={setFiles}>
+        <FileUpload.Dropzone>
+          <Button asChild>
+            <FileUpload.Trigger>Upload Files</FileUpload.Trigger>
+          </Button>
+        </FileUpload.Dropzone>
+
+        <FileUpload.Context>
+          {({ acceptedFiles }) => (
+            <ul className="gap-md my-md flex default:flex-col">
+              {acceptedFiles.map((file, index) => (
+                <FileUpload.AcceptedFile
+                  key={`${file.name}-${file.size}-${index}`}
+                  file={file}
+                  fileIndex={index}
+                />
+              ))}
+            </ul>
+          )}
+        </FileUpload.Context>
+      </FileUpload>
+    </div>
   )
 }
 
@@ -518,7 +583,7 @@ export const SingleFile: StoryFn = () => {
         <Icon size="lg">
           <Export />
         </Icon>
-        <div className="text-subhead">
+        <div className="text-subhead gap-md flex flex-col">
           <p>Drag and drop a file or</p>
 
           <FileUpload.Trigger>browse my files</FileUpload.Trigger>
@@ -554,7 +619,7 @@ export const Disabled: StoryFn = () => {
         <Icon size="lg">
           <Export />
         </Icon>
-        <div className="text-subhead">
+        <div className="text-subhead gap-md flex flex-col">
           <p>Drag and drop files or</p>
 
           <FileUpload.Trigger>browse my files</FileUpload.Trigger>
@@ -590,7 +655,7 @@ export const ReadOnly: StoryFn = () => {
         <Icon size="lg">
           <Export />
         </Icon>
-        <div className="text-subhead">
+        <div className="text-subhead gap-md flex flex-col">
           <p>Drag and drop files or</p>
 
           <FileUpload.Trigger>browse my files</FileUpload.Trigger>
@@ -635,7 +700,7 @@ export const ErrorHandling: StoryFn = () => {
         <Icon size="lg">
           <Export />
         </Icon>
-        <div className="text-subhead">
+        <div className="text-subhead gap-md flex flex-col">
           <p>Drag and drop files or</p>
 
           <FileUpload.Trigger>Select Files</FileUpload.Trigger>
@@ -670,6 +735,7 @@ export const ErrorHandling: StoryFn = () => {
                     <FileUpload.RejectedFile
                       key={`rejected-${rejectedFile.file.name}-${rejectedFile.file.size}-${index}`}
                       rejectedFile={rejectedFile}
+                      rejectedFileIndex={index}
                       renderError={error => errorMessages[error] || `❓ ${error}`}
                       data-status="rejected"
                     />
@@ -768,7 +834,7 @@ export const WithProgress: StoryFn = () => {
         <Icon size="lg">
           <Export />
         </Icon>
-        <div className="text-subhead">
+        <div className="text-subhead gap-md flex flex-col">
           <p>Drag and drop files or</p>
 
           <FileUpload.Trigger isLoading={isUploading} loadingText="Uploading files...">
