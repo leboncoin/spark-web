@@ -1,11 +1,12 @@
 import { cx } from 'class-variance-authority'
 import React, { ReactNode, Ref } from 'react'
 
-import { Button } from '../button'
+import { Button, type ButtonProps } from '../button'
 import { Slot } from '../slot'
 import { useFileUploadContext } from './FileUpload'
 
-export interface FileUploadTriggerProps {
+export interface FileUploadTriggerProps
+  extends Omit<ButtonProps, 'children' | 'asChild' | 'disabled' | 'design' | 'intent'> {
   ref?: Ref<HTMLButtonElement>
   className?: string
   children: ReactNode

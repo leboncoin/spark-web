@@ -6,6 +6,7 @@ import { Tag } from '@spark-ui/components/tag'
 import { TextLink } from '@spark-ui/components/text-link'
 import { Export } from '@spark-ui/icons/Export'
 import { Meta, StoryFn } from '@storybook/react-vite'
+import { useEffect, useRef, useState } from 'react'
 
 import { FileUpload, type FileUploadFileError } from '.'
 
@@ -646,33 +647,150 @@ export const ErrorHandling: StoryFn = () => {
 
       {/* Using Context with AcceptedFile and RejectedFile components */}
       <FileUpload.Context>
-        {({ acceptedFiles, rejectedFiles }) => (
-          <div className="mt-lg">
-            {acceptedFiles.length ? (
-              <ul className="gap-md my-md flex default:flex-col">
-                {acceptedFiles.map((file, index) => (
-                  <FileUpload.AcceptedFile
-                    key={`${file.name}-${file.size}-${index}`}
-                    file={file}
-                    fileIndex={index}
-                  />
-                ))}
-              </ul>
-            ) : null}
+        {({ acceptedFiles, rejectedFiles, ...rest }) => {
+          console.log(rest, acceptedFiles, rejectedFiles)
 
-            {rejectedFiles.length ? (
-              <ul className="gap-md my-md flex default:flex-col">
-                {rejectedFiles.map((rejectedFile, index) => (
-                  <FileUpload.RejectedFile
-                    key={`rejected-${rejectedFile.file.name}-${rejectedFile.file.size}-${index}`}
-                    rejectedFile={rejectedFile}
-                    renderError={error => errorMessages[error] || `❓ ${error}`}
-                    data-status="rejected"
-                  />
-                ))}
-              </ul>
-            ) : null}
-          </div>
+          return (
+            <div className="mt-lg">
+              {acceptedFiles.length ? (
+                <ul className="gap-md my-md flex default:flex-col">
+                  {acceptedFiles.map((file, index) => (
+                    <FileUpload.AcceptedFile
+                      key={`${file.name}-${file.size}-${index}`}
+                      file={file}
+                      fileIndex={index}
+                    />
+                  ))}
+                </ul>
+              ) : null}
+
+              {rejectedFiles.length ? (
+                <ul className="gap-md my-md flex default:flex-col">
+                  {rejectedFiles.map((rejectedFile, index) => (
+                    <FileUpload.RejectedFile
+                      key={`rejected-${rejectedFile.file.name}-${rejectedFile.file.size}-${index}`}
+                      rejectedFile={rejectedFile}
+                      renderError={error => errorMessages[error] || `❓ ${error}`}
+                      data-status="rejected"
+                    />
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          )
+        }}
+      </FileUpload.Context>
+    </FileUpload>
+  )
+}
+
+export const WithProgress: StoryFn = () => {
+  const [files, setFiles] = useState<File[]>([])
+  const [uploadProgress, setUploadProgress] = useState<Record<number, number>>({})
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  const previousFilesLengthRef = useRef<number>(0)
+
+  // Automatically trigger upload when files are added
+  useEffect(() => {
+    // Only start upload if new files were added (not on initial render)
+    if (files.length > previousFilesLengthRef.current) {
+      // Clear any existing interval
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
+
+      // Initialize progress for new files only
+      setUploadProgress(prev => {
+        const initialProgress: Record<number, number> = { ...prev }
+        files.forEach((_, index) => {
+          // Only initialize progress for new files (those without progress)
+          if (initialProgress[index] === undefined) {
+            initialProgress[index] = 0
+          }
+        })
+
+        return initialProgress
+      })
+
+      // Simulate upload progress
+      intervalRef.current = setInterval(() => {
+        setUploadProgress(prev => {
+          const newProgress: Record<number, number> = {}
+          let allComplete = true
+
+          files.forEach((_, index) => {
+            const current = prev[index] ?? 0
+
+            if (current < 100) {
+              // Simulate variable upload speed (10-20% per interval)
+              const increment = Math.random() * 10 + 10
+              newProgress[index] = Math.min(current + increment, 100)
+              allComplete = false
+            } else {
+              newProgress[index] = 100
+            }
+          })
+
+          if (allComplete) {
+            if (intervalRef.current) {
+              clearInterval(intervalRef.current)
+              intervalRef.current = null
+            }
+          }
+
+          return newProgress
+        })
+      }, 300)
+    }
+
+    previousFilesLengthRef.current = files.length
+
+    // Cleanup on unmount
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
+    }
+  }, [files])
+
+  // Check if at least one file is uploading (progress < 100)
+  const isUploading = files.some((_, index) => {
+    const progress = uploadProgress[index]
+
+    return progress !== undefined && progress < 100
+  })
+
+  return (
+    <FileUpload onFilesChange={setFiles}>
+      <FileUpload.Dropzone>
+        <Icon size="lg">
+          <Export />
+        </Icon>
+        <div className="text-subhead">
+          <p>Drag and drop files or</p>
+
+          <FileUpload.Trigger isLoading={isUploading} loadingText="Uploading files...">
+            browse my files
+          </FileUpload.Trigger>
+        </div>
+        <p className="text-caption text-on-surface/dim-1">
+          Files will automatically start uploading with progress indicator
+        </p>
+      </FileUpload.Dropzone>
+      <FileUpload.Context>
+        {({ acceptedFiles }) => (
+          <ul className="gap-md my-md flex default:flex-col">
+            {acceptedFiles.map((file, index) => (
+              <FileUpload.AcceptedFile
+                key={`${file.name}-${file.size}-${index}`}
+                file={file}
+                fileIndex={index}
+                uploadProgress={uploadProgress[index]}
+              />
+            ))}
+          </ul>
         )}
       </FileUpload.Context>
     </FileUpload>

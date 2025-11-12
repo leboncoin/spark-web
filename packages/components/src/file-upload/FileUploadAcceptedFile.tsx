@@ -2,6 +2,7 @@ import { CvOutline } from '@spark-ui/icons/CvOutline'
 import { ComponentPropsWithoutRef, Ref } from 'react'
 
 import { Icon } from '../icon'
+import { Progress } from '../progress'
 import { useFileUploadContext } from './FileUpload'
 import { Item } from './FileUploadItem'
 import { ItemDeleteTrigger } from './FileUploadItemDeleteTrigger'
@@ -23,6 +24,10 @@ export interface FileUploadAcceptedFileProps extends ComponentPropsWithoutRef<'l
    * The index of the file in the accepted files array
    */
   fileIndex: number
+  /**
+   * Upload progress value (0-100). When provided, displays a progress bar at the bottom of the file item.
+   */
+  uploadProgress?: number
   className?: string
 }
 
@@ -31,6 +36,7 @@ export const AcceptedFile = ({
   className,
   file,
   fileIndex,
+  uploadProgress,
   ...props
 }: FileUploadAcceptedFileProps) => {
   const { locale } = useFileUploadContext()
@@ -48,6 +54,15 @@ export const AcceptedFile = ({
           <ItemFileName>{file.name}</ItemFileName>
           <ItemSizeText className="opacity-dim-1">{formatFileSize(file.size, locale)}</ItemSizeText>
         </div>
+        {uploadProgress !== undefined && (
+          <div className="mt-md">
+            <Progress
+              value={uploadProgress}
+              max={100}
+              aria-label={`Upload progress: ${uploadProgress}%`}
+            />
+          </div>
+        )}
       </div>
 
       <ItemDeleteTrigger aria-label="Delete file" fileIndex={fileIndex} />

@@ -1045,8 +1045,105 @@ describe('FileUpload - Acceptance Criteria', () => {
   })
 
   describe('AC29: The component displays a progress indicator during upload', () => {
-    it.todo('should display progress indicator during upload')
-    it.todo('should update progress indicator as upload progresses')
+    it('should display progress indicator during upload', () => {
+      // GIVEN a FileUpload component with defaultValue and uploadProgress
+      const file = new File(['content'], 'test.jpg', { type: 'image/jpeg' })
+      render(
+        <FileUpload defaultValue={[file]}>
+          <FileUpload.Context>
+            {({ acceptedFiles }) => (
+              <ul>
+                {acceptedFiles.map((f, index) => (
+                  <FileUpload.AcceptedFile
+                    key={index}
+                    file={f}
+                    fileIndex={index}
+                    uploadProgress={50}
+                  />
+                ))}
+              </ul>
+            )}
+          </FileUpload.Context>
+        </FileUpload>
+      )
+
+      // WHEN the component is rendered with uploadProgress
+      // THEN the progress indicator should be displayed
+      const progress = screen.getByRole('progressbar')
+      expect(progress).toBeInTheDocument()
+      expect(progress).toHaveAttribute('aria-valuenow', '50')
+    })
+
+    it('should update progress indicator as upload progresses', () => {
+      // GIVEN a FileUpload component with defaultValue
+      const file = new File(['content'], 'test.jpg', { type: 'image/jpeg' })
+      const { rerender } = render(
+        <FileUpload defaultValue={[file]}>
+          <FileUpload.Context>
+            {({ acceptedFiles }) => (
+              <ul>
+                {acceptedFiles.map((f, index) => (
+                  <FileUpload.AcceptedFile
+                    key={index}
+                    file={f}
+                    fileIndex={index}
+                    uploadProgress={25}
+                  />
+                ))}
+              </ul>
+            )}
+          </FileUpload.Context>
+        </FileUpload>
+      )
+
+      // WHEN the uploadProgress changes
+      rerender(
+        <FileUpload defaultValue={[file]}>
+          <FileUpload.Context>
+            {({ acceptedFiles }) => (
+              <ul>
+                {acceptedFiles.map((f, index) => (
+                  <FileUpload.AcceptedFile
+                    key={index}
+                    file={f}
+                    fileIndex={index}
+                    uploadProgress={75}
+                  />
+                ))}
+              </ul>
+            )}
+          </FileUpload.Context>
+        </FileUpload>
+      )
+
+      // THEN the progress indicator should be updated
+      const progress = screen.getByRole('progressbar')
+      expect(progress).toBeInTheDocument()
+      expect(progress).toHaveAttribute('aria-valuenow', '75')
+    })
+
+    it('should not display progress indicator when uploadProgress is undefined', () => {
+      // GIVEN a FileUpload component with defaultValue but no uploadProgress
+      const file = new File(['content'], 'test.jpg', { type: 'image/jpeg' })
+      render(
+        <FileUpload defaultValue={[file]}>
+          <FileUpload.Context>
+            {({ acceptedFiles }) => (
+              <ul>
+                {acceptedFiles.map((f, index) => (
+                  <FileUpload.AcceptedFile key={index} file={f} fileIndex={index} />
+                ))}
+              </ul>
+            )}
+          </FileUpload.Context>
+        </FileUpload>
+      )
+
+      // WHEN the component is rendered without uploadProgress
+      // THEN the progress indicator should not be displayed
+      const progress = screen.queryByRole('progressbar')
+      expect(progress).not.toBeInTheDocument()
+    })
   })
 
   describe('AC30: The component allows canceling an upload in progress', () => {

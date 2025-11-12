@@ -119,6 +119,12 @@ Use the `readOnly` prop to set the file upload to read-only mode. Similar to dis
 
 <Canvas of={stories.ReadOnly} />
 
+### Upload progress
+
+Use the `uploadProgress` prop on `FileUpload.AcceptedFile` to display a progress bar during file upload. The progress value should be between 0 and 100. The progress bar is displayed at the bottom of the file item container.
+
+<Canvas of={stories.WithProgress} />
+
 ## Advanced examples
 
 ### Custom Trigger
