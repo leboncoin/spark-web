@@ -1,0 +1,172 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { AriaRoles } from '@docs/helpers/AriaRoles'
+import { Callout } from '@docs/helpers/Callout'
+import { Kbd } from '../kbd'
+import { FileUpload } from '.'
+
+import * as stories from './FileUpload.stories'
+
+<Meta of={stories} />
+
+# FileUpload
+
+A file upload component that provides a flexible way to handle file selection, drag-and-drop functionality, and file previews. The component supports both simple button triggers and dropzone interfaces with customizable file rendering.
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { FileUpload } from "@spark-ui/components/file-upload"
+
+export default () => (
+  <FileUpload>
+    <FileUpload.Trigger>
+      Upload Files
+    </FileUpload.Trigger>
+    <FileUpload.Context>
+      {({ acceptedFiles }) => (
+        <ul>
+          {acceptedFiles.map((file, index) => (
+            <FileUpload.AcceptedFile key={index} file={file} fileIndex={index} />
+          ))}
+        </ul>
+      )}
+    </FileUpload.Context>
+  </FileUpload>
+);
+```
+
+
+
+## API Reference
+
+### FileUpload
+
+Contains all the parts of a file upload.
+
+<ArgTypes of={FileUpload} />
+
+### _.Trigger
+
+Triggers the file selection dialog when clicked. Can be styled as a button or rendered as any component using the `asChild` prop.
+
+<ArgTypes of={FileUpload.Trigger} />
+
+
+## Examples
+
+### Controlled
+
+The FileUpload component supports both controlled and uncontrolled modes. In controlled mode, you manage the files state externally using the `value` prop and update it via the `onFilesChange` callback. This is useful when you need to synchronize the file list with external state management, form libraries, or when you want to programmatically control the files.
+
+<Canvas of={stories.Controlled} />
+
+### With default files
+
+Use the `defaultValue` prop to initialize the component with existing files. This is useful when editing a form with previously uploaded files or when restoring files from a saved state.
+
+<Canvas of={stories.WithDefaultFiles} />
+
+### Single file
+
+Use the `multiple={false}` prop to allow only a single file to be selected. When a new file is selected, it will replace the existing file.
+
+<Canvas of={stories.SingleFile} />
+
+
+
+### Error Handling
+
+The FileUpload component provides comprehensive validation and error handling capabilities. You can set various constraints and handle different types of validation errors:
+
+**Built-in Validation Props:**
+
+- `maxFiles` - Maximum number of files allowed
+- `maxFileSize` - Maximum file size in bytes
+- `minFileSize` - Minimum file size in bytes
+- `accept` - Allowed MIME types or file extensions
+
+**Built-in Error Types:**
+
+- `TOO_MANY_FILES` - Exceeds maxFiles limit
+- `FILE_INVALID_TYPE` - File type not in accept list
+- `FILE_TOO_LARGE` - File size exceeds maxFileSize
+- `FILE_TOO_SMALL` - File size below minFileSize
+- `FILE_INVALID` - Generic validation failure
+- `FILE_EXISTS` - Duplicate file detected
+
+Use `FileUpload.Context` to access `acceptedFiles` and `rejectedFiles`, then use `FileUpload.AcceptedFile` and `FileUpload.RejectedFile` components to display files with their validation errors. Each rejected file can have multiple error codes, allowing you to show all validation issues at once.
+
+<Canvas of={stories.ErrorHandling} />
+
+### Disabled state
+
+Use the `disabled` prop to prevent user interaction with the file upload component. When disabled, users cannot add, remove, or modify files. The component is visually disabled with reduced opacity and a "not-allowed" cursor. Existing files are still displayed but cannot be modified. Disabled fields do not participate in form submission.
+
+<Canvas of={stories.Disabled} />
+
+### Read-only state
+
+Use the `readOnly` prop to set the file upload to read-only mode. Similar to disabled, users cannot add, remove, or modify files, but the component maintains a more subtle visual appearance (no opacity reduction). Existing files are displayed but cannot be modified. Read-only fields participate in form submission.
+
+<Canvas of={stories.ReadOnly} />
+
+### Upload progress
+
+Use the `uploadProgress` prop on `FileUpload.AcceptedFile` to display a progress bar during file upload. The progress value should be between 0 and 100. The progress bar is displayed at the bottom of the file item container.
+
+<Canvas of={stories.WithProgress} />
+
+## Advanced examples
+
+### Custom Trigger
+
+Use `unstyled` on the `FileUpload.Trigger` and wrap it with a Spark UI component compatible with the `asChild` prop to render the button as a different component.
+
+<Callout kind="warning" marginY="large">
+  <p>
+    a11y: It is important that the trigger remain a button (with `type="button"`) and that it is focusable and clickable.
+  </p>
+</Callout>
+
+<Canvas of={stories.CustomTrigger} />
+
+### Custom Dropzone
+
+Customize the dropzone appearance and behavior by wrapping it with other components or modifying its content. 
+
+{/* <Canvas of={stories.Multiple} /> */}
+
+### Custom files preview
+
+Use `FileUpload.Context` to access `acceptedFiles` and customize the markup of the files previews.
+
+<Canvas of={stories.WithCustomFileRender} />
+
+### Photos Gallery
+
+<Canvas of={stories.PhotosGallery} />
+
+## Accessibility
+
+<A11yReport of="file-upload" />
+
+Adheres to the [file upload pattern](https://www.w3.org/WAI/ARIA/apg/patterns/file-upload/).
+
+### Keyboard Interactions
+
+- <kbd>Tab</kbd> - Navigate to the file upload trigger
+- <kbd>Enter</kbd> or <kbd>Space</kbd> - Open file selection dialog
+- <kbd>Escape</kbd> - Close file selection dialog
+
+### Pattern
+
+The FileUpload component uses a context-based architecture where the main component provides file management state and the sub-components handle specific functionality like triggering file selection and displaying file previews.
+
