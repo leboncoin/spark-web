@@ -1,3 +1,9 @@
+import { CvOutline } from '@spark-ui/icons/CvOutline'
+import { FilePdfOutline } from '@spark-ui/icons/FilePdfOutline'
+import { ImageOutline } from '@spark-ui/icons/ImageOutline'
+import { PlayOutline } from '@spark-ui/icons/PlayOutline'
+import { createElement, ReactElement } from 'react'
+
 /**
  * Validates if a file matches the accept patterns
  * Supports MIME types (e.g., "image/*", "image/png", "application/pdf")
@@ -137,4 +143,32 @@ export function formatFileSize(bytes: number, locale?: string): string {
   })
 
   return formatter.format(size)
+}
+
+/**
+ * Returns the appropriate icon component based on the file type
+ * @param file - The file to get the icon for
+ * @returns React element representing the icon component
+ */
+export function getFileIcon(file: File): ReactElement {
+  const fileType = file.type.toLowerCase()
+  const fileName = file.name.toLowerCase()
+
+  // Check for images
+  if (fileType.startsWith('image/') || /\.(jpg|jpeg|png|gif|bmp|webp|svg|ico)$/i.test(fileName)) {
+    return createElement(ImageOutline)
+  }
+
+  // Check for PDFs
+  if (fileType === 'application/pdf' || fileName.endsWith('.pdf')) {
+    return createElement(FilePdfOutline)
+  }
+
+  // Check for videos
+  if (fileType.startsWith('video/') || /\.(mp4|avi|mov|wmv|flv|webm|mkv)$/i.test(fileName)) {
+    return createElement(PlayOutline)
+  }
+
+  // Default icon for other file types
+  return createElement(CvOutline)
 }

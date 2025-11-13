@@ -259,8 +259,8 @@ export const WithDefaultFiles: StoryFn = () => {
     new File([new ArrayBuffer(500)], 'small.txt', { type: 'text/plain' }), // 500 bytes
     new File([new ArrayBuffer(1024 * 1.5)], 'medium.jpg', { type: 'image/jpeg' }), // 1.5 KB
     new File([new ArrayBuffer(1024 * 1024 * 2.3)], 'large.pdf', { type: 'application/pdf' }), // 2.3 MB
-    new File([new ArrayBuffer(1024 * 1024 * 1024 * 1.8)], 'huge.zip', {
-      type: 'application/zip',
+    new File([new ArrayBuffer(1024 * 1024 * 1024 * 1.8)], 'huge.mp4', {
+      type: 'video/mp4',
     }), // 1.8 GB
   ]
 
