@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.3.0](https://github.com/leboncoin/spark-web/compare/v11.2.5...v11.3.0) (2025-11-13)
+
+### Bug Fixes
+
+- **components:** acceptance tests ([ac5471f](https://github.com/leboncoin/spark-web/commit/ac5471fd114388bea1b2a216383467b6cc13b998))
+- **components:** synchronous tests for file upload ([185ff8e](https://github.com/leboncoin/spark-web/commit/185ff8eb18b079c944086c11f5b250a8e13bf3d7))
+
+### Features
+
+- **components:** accept file types ([180e1a7](https://github.com/leboncoin/spark-web/commit/180e1a7144a38d9b2bf97a2132fcbfe68a2b4ed6))
+- **components:** custom render of files previews ([3f94a19](https://github.com/leboncoin/spark-web/commit/3f94a19a5678795e8bfb8b8469e5b78dc404785e))
+- **components:** disabled and readonly modes ([8e3a893](https://github.com/leboncoin/spark-web/commit/8e3a8937d5a08216c260139e47f70432e0eb6168))
+- **components:** file upload component ([ff4e532](https://github.com/leboncoin/spark-web/commit/ff4e532a5b951ab824be35718dab1391c7c8524c))
+- **components:** file validation ([ca1324e](https://github.com/leboncoin/spark-web/commit/ca1324e2c0add5090d673c9ee0e6c4c95b11d11c))
+- **components:** max files prop ([482fb96](https://github.com/leboncoin/spark-web/commit/482fb9659f9991837acd17be9bd0e1fd4b5f15d8))
+- **components:** max files size ([497bb28](https://github.com/leboncoin/spark-web/commit/497bb28929e85abadf43e5e0024a74a81632d62b))
+- **components:** single file mode ([6d31adb](https://github.com/leboncoin/spark-web/commit/6d31adb4bac7c91501eb3de8ada26fb599303bf6))
+- **components:** upload progress bar ([28b22a7](https://github.com/leboncoin/spark-web/commit/28b22a7c80f39782f180ef2d2698661db8a63a19))
+- **components:** upload progress bar ([2969dec](https://github.com/leboncoin/spark-web/commit/2969decffe58cc3dd60bd6ed956420b813ed7337))
+- **components:** using locale for file size ([46ef5be](https://github.com/leboncoin/spark-web/commit/46ef5be12369040e3f7ade1ddd0b7ace709b5de4))
+
 ## [11.2.5](https://github.com/leboncoin/spark-web/compare/v11.2.4...v11.2.5) (2025-11-10)
 
 **Note:** Version bump only for package spark
