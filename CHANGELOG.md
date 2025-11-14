@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.3.1](https://github.com/leboncoin/spark-web/compare/v11.3.0...v11.3.1) (2025-11-14)
+
+### Bug Fixes
+
+- **components:** avatar loading state ([7cd4352](https://github.com/leboncoin/spark-web/commit/7cd43523069e1a9392ef174623049ea77f49e5f8))
+
 # [11.3.0](https://github.com/leboncoin/spark-web/compare/v11.2.5...v11.3.0) (2025-11-13)
 
 ### Bug Fixes
