@@ -3,6 +3,7 @@ import { Tag } from '@spark-ui/components/tag'
 import { AccountOutline } from '@spark-ui/icons/AccountOutline'
 import { ShareOutline } from '@spark-ui/icons/ShareOutline'
 import type { Meta, StoryFn, StoryObj } from '@storybook/react-vite'
+import { useEffect, useState } from 'react'
 
 import { Button } from '../button'
 import { Icon } from '../icon'
@@ -171,16 +172,6 @@ export const Placeholder: StoryFn = () => {
             </Avatar.User>
           </Avatar>
         </div>
-        <div className="gap-md flex flex-col">
-          <Tag className="flex">Custom - spinner</Tag>
-          <Avatar username="John Doe">
-            <Avatar.User>
-              <Avatar.Placeholder>
-                <Spinner size="sm" />
-              </Avatar.Placeholder>
-            </Avatar.User>
-          </Avatar>
-        </div>
       </div>
     </div>
   )
@@ -253,6 +244,50 @@ export const CustomAction: StoryFn = () => {
             Edit
           </Button>
         </Avatar.Action>
+      </Avatar>
+    </div>
+  )
+}
+
+export const AlternatingImage: StoryFn = () => {
+  const [currentImage, setCurrentImage] = useState<string | undefined>(
+    'https://picsum.photos/200?random=1'
+  )
+  const [isLoading, setIsLoading] = useState(!!currentImage)
+
+  useEffect(() => {
+    if (currentImage) {
+      setIsLoading(true)
+    } else {
+      setIsLoading(false)
+    }
+  }, [currentImage])
+
+  const handleLoadNewImage = () => {
+    setCurrentImage(`https://picsum.photos/200?random=${Date.now()}`)
+  }
+
+  const handleNoImage = () => {
+    setCurrentImage(undefined)
+  }
+
+  return (
+    <div className="gap-xl flex flex-col items-start">
+      <div className="gap-md flex">
+        <Button onClick={handleLoadNewImage}>Load new image</Button>
+        <Button onClick={handleNoImage} design="outlined">
+          No image
+        </Button>
+      </div>
+      <Avatar size="xl" username="John Doe">
+        <Avatar.User>
+          <Avatar.Placeholder>{isLoading ? <Spinner size="sm" /> : null}</Avatar.Placeholder>
+          <Avatar.Image
+            src={currentImage}
+            onLoad={() => setIsLoading(false)}
+            onError={() => setIsLoading(false)}
+          />
+        </Avatar.User>
       </Avatar>
     </div>
   )

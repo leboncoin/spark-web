@@ -1,5 +1,5 @@
 import { cx } from 'class-variance-authority'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Slot } from '../slot'
 import { useAvatarContext } from './context'
@@ -8,13 +8,40 @@ export interface AvatarImageProps extends React.ImgHTMLAttributes<HTMLImageEleme
   asChild?: boolean
 }
 
-export const AvatarImage = ({ className, asChild, src, ...props }: AvatarImageProps) => {
+export const AvatarImage = ({
+  className,
+  asChild,
+  src,
+  onLoad,
+  onError,
+  ...props
+}: AvatarImageProps) => {
   const { username, isOnline, onlineText } = useAvatarContext()
   const Comp = asChild ? Slot : 'img'
 
   const [isVisible, setIsVisible] = useState(false)
 
   const accessibleName = isOnline && onlineText ? `${username} (${onlineText})` : username
+
+  // Reset visibility when src changes
+  useEffect(() => {
+    setIsVisible(false)
+  }, [src])
+
+  // Don't render the image if src is undefined or null
+  if (!src) {
+    return null
+  }
+
+  const handleLoad = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    setIsVisible(true)
+    onLoad?.(event)
+  }
+
+  const handleError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    setIsVisible(false)
+    onError?.(event)
+  }
 
   return (
     <Comp
@@ -29,9 +56,8 @@ export const AvatarImage = ({ className, asChild, src, ...props }: AvatarImagePr
       )}
       alt={accessibleName}
       src={src}
-      onLoad={() => {
-        setIsVisible(true)
-      }}
+      onLoad={handleLoad}
+      onError={handleError}
       {...props}
     />
   )
