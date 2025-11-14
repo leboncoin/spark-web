@@ -1,7 +1,12 @@
 /* eslint-disable max-lines */
+import { CvOutline } from '@spark-ui/icons/CvOutline'
+import { FilePdfOutline } from '@spark-ui/icons/FilePdfOutline'
+import { ImageOutline } from '@spark-ui/icons/ImageOutline'
+import { PlayOutline } from '@spark-ui/icons/PlayOutline'
+import { isValidElement } from 'react'
 import { describe, expect, it } from 'vitest'
 
-import { formatFileSize, validateFileAccept, validateFileSize } from './utils'
+import { formatFileSize, getFileIcon, validateFileAccept, validateFileSize } from './utils'
 
 describe('validateFileAccept', () => {
   it('should return true when accept is empty', () => {
@@ -364,6 +369,210 @@ describe('formatFileSize', () => {
       expect(formatFileSize(1024 * 1024 - 1, 'en')).toBe('1,024 kB')
       // French locale uses non-breaking space as thousands separator, Intl uses lowercase "ko"
       expect(formatFileSize(1024 * 1024 - 1, 'fr')).toBe('1\u202f024\u202fko')
+    })
+  })
+})
+
+describe('getFileIcon', () => {
+  describe('Image files', () => {
+    it('should return ImageOutline for image MIME types', () => {
+      const file1 = new File(['content'], 'test.jpg', { type: 'image/jpeg' })
+      const file2 = new File(['content'], 'test.png', { type: 'image/png' })
+      const file3 = new File(['content'], 'test.gif', { type: 'image/gif' })
+      const file4 = new File(['content'], 'test.webp', { type: 'image/webp' })
+
+      const icon1 = getFileIcon(file1)
+      const icon2 = getFileIcon(file2)
+      const icon3 = getFileIcon(file3)
+      const icon4 = getFileIcon(file4)
+
+      expect(isValidElement(icon1)).toBe(true)
+      expect(icon1.type).toBe(ImageOutline)
+      expect(isValidElement(icon2)).toBe(true)
+      expect(icon2.type).toBe(ImageOutline)
+      expect(isValidElement(icon3)).toBe(true)
+      expect(icon3.type).toBe(ImageOutline)
+      expect(isValidElement(icon4)).toBe(true)
+      expect(icon4.type).toBe(ImageOutline)
+    })
+
+    it('should return ImageOutline for image file extensions even without MIME type', () => {
+      const file1 = new File(['content'], 'test.jpg', { type: '' })
+      const file2 = new File(['content'], 'test.jpeg', { type: '' })
+      const file3 = new File(['content'], 'test.png', { type: '' })
+      const file4 = new File(['content'], 'test.gif', { type: '' })
+      const file5 = new File(['content'], 'test.bmp', { type: '' })
+      const file6 = new File(['content'], 'test.webp', { type: '' })
+      const file7 = new File(['content'], 'test.svg', { type: '' })
+      const file8 = new File(['content'], 'test.ico', { type: '' })
+
+      expect(getFileIcon(file1).type).toBe(ImageOutline)
+      expect(getFileIcon(file2).type).toBe(ImageOutline)
+      expect(getFileIcon(file3).type).toBe(ImageOutline)
+      expect(getFileIcon(file4).type).toBe(ImageOutline)
+      expect(getFileIcon(file5).type).toBe(ImageOutline)
+      expect(getFileIcon(file6).type).toBe(ImageOutline)
+      expect(getFileIcon(file7).type).toBe(ImageOutline)
+      expect(getFileIcon(file8).type).toBe(ImageOutline)
+    })
+
+    it('should handle case-insensitive image extensions', () => {
+      const file1 = new File(['content'], 'test.JPG', { type: '' })
+      const file2 = new File(['content'], 'test.PNG', { type: '' })
+      const file3 = new File(['content'], 'test.JpEg', { type: '' })
+
+      expect(getFileIcon(file1).type).toBe(ImageOutline)
+      expect(getFileIcon(file2).type).toBe(ImageOutline)
+      expect(getFileIcon(file3).type).toBe(ImageOutline)
+    })
+  })
+
+  describe('PDF files', () => {
+    it('should return FilePdfOutline for PDF MIME type', () => {
+      const file = new File(['content'], 'test.pdf', { type: 'application/pdf' })
+
+      const icon = getFileIcon(file)
+
+      expect(isValidElement(icon)).toBe(true)
+      expect(icon.type).toBe(FilePdfOutline)
+    })
+
+    it('should return FilePdfOutline for PDF extension even without MIME type', () => {
+      const file = new File(['content'], 'test.pdf', { type: '' })
+
+      const icon = getFileIcon(file)
+
+      expect(isValidElement(icon)).toBe(true)
+      expect(icon.type).toBe(FilePdfOutline)
+    })
+
+    it('should handle case-insensitive PDF extension', () => {
+      const file1 = new File(['content'], 'test.PDF', { type: '' })
+      const file2 = new File(['content'], 'test.Pdf', { type: '' })
+
+      expect(getFileIcon(file1).type).toBe(FilePdfOutline)
+      expect(getFileIcon(file2).type).toBe(FilePdfOutline)
+    })
+  })
+
+  describe('Video files', () => {
+    it('should return PlayOutline for video MIME types', () => {
+      const file1 = new File(['content'], 'test.mp4', { type: 'video/mp4' })
+      const file2 = new File(['content'], 'test.avi', { type: 'video/x-msvideo' })
+      const file3 = new File(['content'], 'test.webm', { type: 'video/webm' })
+
+      expect(getFileIcon(file1).type).toBe(PlayOutline)
+      expect(getFileIcon(file2).type).toBe(PlayOutline)
+      expect(getFileIcon(file3).type).toBe(PlayOutline)
+    })
+
+    it('should return PlayOutline for video file extensions even without MIME type', () => {
+      const file1 = new File(['content'], 'test.mp4', { type: '' })
+      const file2 = new File(['content'], 'test.avi', { type: '' })
+      const file3 = new File(['content'], 'test.mov', { type: '' })
+      const file4 = new File(['content'], 'test.wmv', { type: '' })
+      const file5 = new File(['content'], 'test.flv', { type: '' })
+      const file6 = new File(['content'], 'test.webm', { type: '' })
+      const file7 = new File(['content'], 'test.mkv', { type: '' })
+
+      expect(getFileIcon(file1).type).toBe(PlayOutline)
+      expect(getFileIcon(file2).type).toBe(PlayOutline)
+      expect(getFileIcon(file3).type).toBe(PlayOutline)
+      expect(getFileIcon(file4).type).toBe(PlayOutline)
+      expect(getFileIcon(file5).type).toBe(PlayOutline)
+      expect(getFileIcon(file6).type).toBe(PlayOutline)
+      expect(getFileIcon(file7).type).toBe(PlayOutline)
+    })
+
+    it('should handle case-insensitive video extensions', () => {
+      const file1 = new File(['content'], 'test.MP4', { type: '' })
+      const file2 = new File(['content'], 'test.Avi', { type: '' })
+
+      expect(getFileIcon(file1).type).toBe(PlayOutline)
+      expect(getFileIcon(file2).type).toBe(PlayOutline)
+    })
+  })
+
+  describe('Default icon for other file types', () => {
+    it('should return CvOutline for text files', () => {
+      const file = new File(['content'], 'test.txt', { type: 'text/plain' })
+
+      const icon = getFileIcon(file)
+
+      expect(isValidElement(icon)).toBe(true)
+      expect(icon.type).toBe(CvOutline)
+    })
+
+    it('should return CvOutline for unknown file types', () => {
+      const file = new File(['content'], 'test.unknown', { type: 'application/unknown' })
+
+      const icon = getFileIcon(file)
+
+      expect(isValidElement(icon)).toBe(true)
+      expect(icon.type).toBe(CvOutline)
+    })
+
+    it('should return CvOutline for files without type and unknown extension', () => {
+      const file = new File(['content'], 'test.xyz', { type: '' })
+
+      const icon = getFileIcon(file)
+
+      expect(isValidElement(icon)).toBe(true)
+      expect(icon.type).toBe(CvOutline)
+    })
+
+    it('should return CvOutline for files without extension and unknown MIME type', () => {
+      const file = new File(['content'], 'test', { type: 'application/octet-stream' })
+
+      const icon = getFileIcon(file)
+
+      expect(isValidElement(icon)).toBe(true)
+      expect(icon.type).toBe(CvOutline)
+    })
+
+    it('should return CvOutline for zip files', () => {
+      const file = new File(['content'], 'test.zip', { type: 'application/zip' })
+
+      const icon = getFileIcon(file)
+
+      expect(isValidElement(icon)).toBe(true)
+      expect(icon.type).toBe(CvOutline)
+    })
+
+    it('should return CvOutline for doc files', () => {
+      const file = new File(['content'], 'test.doc', { type: 'application/msword' })
+
+      const icon = getFileIcon(file)
+
+      expect(isValidElement(icon)).toBe(true)
+      expect(icon.type).toBe(CvOutline)
+    })
+  })
+
+  describe('Priority handling', () => {
+    it('should prioritize MIME type over extension when both are present', () => {
+      // File with PDF extension but image MIME type should use image icon
+      const file = new File(['content'], 'test.pdf', { type: 'image/jpeg' })
+
+      const icon = getFileIcon(file)
+
+      expect(icon.type).toBe(ImageOutline)
+    })
+
+    it('should use extension as fallback when MIME type is empty', () => {
+      const file = new File(['content'], 'test.jpg', { type: '' })
+
+      const icon = getFileIcon(file)
+
+      expect(icon.type).toBe(ImageOutline)
+    })
+
+    it('should use extension as fallback when MIME type is unknown', () => {
+      const file = new File(['content'], 'test.pdf', { type: 'application/unknown' })
+
+      const icon = getFileIcon(file)
+
+      expect(icon.type).toBe(FilePdfOutline)
     })
   })
 })

@@ -1,4 +1,3 @@
-import { CvOutline } from '@spark-ui/icons/CvOutline'
 import { ComponentPropsWithoutRef, Ref } from 'react'
 
 import { Icon } from '../icon'
@@ -8,7 +7,7 @@ import { Item } from './FileUploadItem'
 import { ItemDeleteTrigger } from './FileUploadItemDeleteTrigger'
 import { ItemFileName } from './FileUploadItemFileName'
 import { ItemSizeText } from './FileUploadItemSizeText'
-import { formatFileSize } from './utils'
+import { formatFileSize, getFileIcon } from './utils'
 
 export interface FileUploadAcceptedFileProps extends ComponentPropsWithoutRef<'li'> {
   /**
@@ -44,9 +43,7 @@ export const AcceptedFile = ({
   return (
     <Item className={className} {...props}>
       <div className="size-sz-40 bg-support-container flex items-center justify-center rounded-md">
-        <Icon size="md">
-          <CvOutline />
-        </Icon>
+        <Icon size="md">{getFileIcon(file)}</Icon>
       </div>
 
       <div className="min-w-0 flex-1">
