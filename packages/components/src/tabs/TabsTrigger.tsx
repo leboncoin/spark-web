@@ -1,5 +1,5 @@
 import { Tabs as RadixTabs } from 'radix-ui'
-import { type FocusEvent, Ref } from 'react'
+import { type FocusEvent, type KeyboardEvent, Ref } from 'react'
 
 import { useTabsContext } from './TabsContext'
 import { triggerVariants } from './TabsTrigger.styles'
@@ -33,9 +33,10 @@ export const TabsTrigger = ({
   children,
   className,
   ref,
+  onKeyDown,
   ...rest
 }: TabsTriggerProps) => {
-  const { intent, size } = useTabsContext()
+  const { intent, size, onPopupKeyDown } = useTabsContext()
 
   const scrollToFocusedElement = ({ target }: FocusEvent<HTMLButtonElement>) =>
     target.scrollIntoView({
@@ -43,6 +44,17 @@ export const TabsTrigger = ({
       block: 'nearest',
       inline: 'nearest',
     })
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+    // Handle Shift+F10 for popup
+    if (e.key === 'F10' && e.shiftKey && onPopupKeyDown) {
+      e.preventDefault()
+      onPopupKeyDown(value)
+    }
+
+    // Call original onKeyDown if provided
+    onKeyDown?.(e)
+  }
 
   return (
     <RadixTabs.Trigger
@@ -53,6 +65,7 @@ export const TabsTrigger = ({
       disabled={disabled}
       value={value}
       onFocus={scrollToFocusedElement}
+      onKeyDown={handleKeyDown}
       {...rest}
     >
       {children}
