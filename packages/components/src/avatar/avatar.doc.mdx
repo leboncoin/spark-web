@@ -133,6 +133,14 @@ The Avatar component comes in 5 different sizes.
 
 <Canvas of={stories.Sizes} />
 
+## Advanced Usage
+
+### Image loading state
+
+When loading avatar images, especially from external sources or when the image source changes dynamically, it's important to provide visual feedback to users. This example demonstrates how to manage the loading state by displaying a spinner in the placeholder while the image is loading. The spinner is shown when an image source is provided and automatically hidden once the image loads successfully or if an error occurs. This provides a better user experience by indicating that content is being loaded rather than showing a broken image or empty state.
+
+<Canvas of={stories.AlternatingImage} />
+
 ## Accessibility
 
 <A11yReport of="avatar" />
