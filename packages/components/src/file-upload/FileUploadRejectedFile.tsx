@@ -34,6 +34,10 @@ export interface FileUploadRejectedFileProps extends ComponentPropsWithoutRef<'l
    * @returns The error message to display
    */
   renderError: (error: FileUploadFileError) => string
+  /**
+   * Accessible label for the delete button
+   */
+  deleteButtonAriaLabel: string
   className?: string
 }
 
@@ -43,6 +47,7 @@ export const RejectedFile = ({
   rejectedFile,
   rejectedFileIndex,
   renderError,
+  deleteButtonAriaLabel,
   ...props
 }: FileUploadRejectedFileProps) => {
   const { locale } = useFileUploadContext()
@@ -74,7 +79,7 @@ export const RejectedFile = ({
       </div>
 
       <RejectedFileDeleteTrigger
-        aria-label={`Remove ${rejectedFile.file.name} error`}
+        aria-label={deleteButtonAriaLabel}
         rejectedFileIndex={rejectedFileIndex}
       />
     </Item>

@@ -27,6 +27,14 @@ export interface FileUploadAcceptedFileProps extends ComponentPropsWithoutRef<'l
    * Upload progress value (0-100). When provided, displays a progress bar at the bottom of the file item.
    */
   uploadProgress?: number
+  /**
+   * Accessible label for the delete button
+   */
+  deleteButtonAriaLabel: string
+  /**
+   * Accessible label for the progress bar. Required when uploadProgress is provided.
+   */
+  progressAriaLabel?: string
   className?: string
 }
 
@@ -36,6 +44,8 @@ export const AcceptedFile = ({
   file,
   fileIndex,
   uploadProgress,
+  deleteButtonAriaLabel,
+  progressAriaLabel,
   ...props
 }: FileUploadAcceptedFileProps) => {
   const { locale } = useFileUploadContext()
@@ -53,16 +63,12 @@ export const AcceptedFile = ({
         </div>
         {uploadProgress !== undefined && (
           <div className="mt-md">
-            <Progress
-              value={uploadProgress}
-              max={100}
-              aria-label={`Upload progress: ${uploadProgress}%`}
-            />
+            <Progress value={uploadProgress} max={100} aria-label={progressAriaLabel} />
           </div>
         )}
       </div>
 
-      <ItemDeleteTrigger aria-label="Delete file" fileIndex={fileIndex} />
+      <ItemDeleteTrigger aria-label={deleteButtonAriaLabel} fileIndex={fileIndex} />
     </Item>
   )
 }
