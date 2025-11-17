@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.4.2](https://github.com/leboncoin/spark-web/compare/v11.4.1...v11.4.2) (2025-11-17)
+
+### Bug Fixes
+
+- **components:** aria labels on delete buttons ([d567c8f](https://github.com/leboncoin/spark-web/commit/d567c8fb2a0c8783a426aceb6a8389f02372519f))
+
 ## [11.4.1](https://github.com/leboncoin/spark-web/compare/v11.4.0...v11.4.1) (2025-11-17)
 
 **Note:** Version bump only for package spark
