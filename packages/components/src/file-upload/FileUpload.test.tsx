@@ -42,6 +42,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -86,6 +87,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -112,6 +114,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -141,6 +144,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -180,6 +184,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -225,6 +230,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -233,7 +239,11 @@ describe('FileUpload', () => {
         </FileUpload>
       )
 
-      const deleteButtons = screen.getAllByLabelText('Delete file')
+      const deleteButtons = [
+        screen.getByLabelText('Delete file1.jpg'),
+        screen.getByLabelText('Delete file2.png'),
+        screen.getByLabelText('Delete file3.pdf'),
+      ]
       expect(deleteButtons).toHaveLength(3)
 
       // WHEN the delete button for the second file is clicked
@@ -274,6 +284,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -282,7 +293,10 @@ describe('FileUpload', () => {
         </FileUpload>
       )
 
-      let deleteButtons = screen.getAllByLabelText('Delete file')
+      let deleteButtons = [
+        screen.getByLabelText('Delete file1.jpg'),
+        screen.getByLabelText('Delete file2.png'),
+      ]
       expect(deleteButtons).toHaveLength(2)
 
       // WHEN the first file is deleted
@@ -294,7 +308,7 @@ describe('FileUpload', () => {
       expect(screen.queryByText('file1.jpg')).not.toBeInTheDocument()
 
       // WHEN the second file is deleted
-      deleteButtons = screen.getAllByLabelText('Delete file')
+      deleteButtons = [screen.getByLabelText('Delete file2.png')]
       const secondButton = deleteButtons[0]
       if (secondButton) {
         await user.click(secondButton)
@@ -326,6 +340,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -356,6 +371,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -395,6 +411,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -403,8 +420,7 @@ describe('FileUpload', () => {
         </FileUpload>
       )
 
-      const deleteButtons = screen.getAllByLabelText('Delete file')
-      const deleteButton = deleteButtons[0]
+      const deleteButton = screen.getByLabelText('Delete file1.jpg')
 
       // WHEN a file is deleted
       if (deleteButton) {
@@ -482,6 +498,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -561,6 +578,7 @@ describe('FileUpload', () => {
                       key={`${file.name}-${index}`}
                       file={file}
                       fileIndex={index}
+                      deleteButtonAriaLabel={`Delete ${file.name}`}
                     />
                   ))}
                 </ul>
@@ -593,6 +611,7 @@ describe('FileUpload', () => {
                       key={`${file.name}-${index}`}
                       file={file}
                       fileIndex={index}
+                      deleteButtonAriaLabel={`Delete ${file.name}`}
                     />
                   ))}
                 </ul>
@@ -629,6 +648,7 @@ describe('FileUpload', () => {
                         key={`${file.name}-${index}`}
                         file={file}
                         fileIndex={index}
+                        deleteButtonAriaLabel={`Delete ${file.name}`}
                       />
                     ))}
                   </ul>
@@ -641,6 +661,7 @@ describe('FileUpload', () => {
                         rejectedFile={rejectedFile}
                         rejectedFileIndex={index}
                         renderError={error => errorMessages[error] || error}
+                        deleteButtonAriaLabel={`Remove ${rejectedFile.file.name} error`}
                       />
                     ))}
                   </ul>
@@ -690,6 +711,7 @@ describe('FileUpload', () => {
                         rejectedFile={rejectedFile}
                         rejectedFileIndex={index}
                         renderError={error => errorMessages[error] || error}
+                        deleteButtonAriaLabel={`Remove ${rejectedFile.file.name} error`}
                       />
                     ))}
                   </ul>
@@ -746,6 +768,7 @@ describe('FileUpload', () => {
                         rejectedFile={rejectedFile}
                         rejectedFileIndex={index}
                         renderError={error => errorMessages[error] || error}
+                        deleteButtonAriaLabel={`Remove ${rejectedFile.file.name} error`}
                       />
                     ))}
                   </ul>
@@ -783,6 +806,7 @@ describe('FileUpload', () => {
                         rejectedFile={rejectedFile}
                         rejectedFileIndex={index}
                         renderError={error => errorMessages[error] || error}
+                        deleteButtonAriaLabel={`Remove ${rejectedFile.file.name} error`}
                       />
                     ))}
                   </ul>
@@ -826,6 +850,7 @@ describe('FileUpload', () => {
                         key={`${file.name}-${index}`}
                         file={file}
                         fileIndex={index}
+                        deleteButtonAriaLabel={`Delete ${file.name}`}
                       />
                     ))}
                   </ul>
@@ -838,6 +863,7 @@ describe('FileUpload', () => {
                         rejectedFile={rejectedFile}
                         rejectedFileIndex={index}
                         renderError={error => errorMessages[error] || error}
+                        deleteButtonAriaLabel={`Remove ${rejectedFile.file.name} error`}
                       />
                     ))}
                   </ul>
@@ -921,6 +947,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -959,6 +986,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -998,6 +1026,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1036,6 +1065,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1087,6 +1117,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1125,6 +1156,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1165,6 +1197,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1206,6 +1239,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1248,6 +1282,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1290,6 +1325,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1336,6 +1372,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1398,6 +1435,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1441,6 +1479,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1486,6 +1525,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1533,6 +1573,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1587,6 +1628,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1655,6 +1697,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1704,6 +1747,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1765,6 +1809,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1804,6 +1849,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1847,6 +1893,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1888,6 +1935,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1933,6 +1981,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -1987,6 +2036,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -2081,6 +2131,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -2118,6 +2169,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -2160,6 +2212,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -2171,8 +2224,7 @@ describe('FileUpload', () => {
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.getByText('file2.png')).toBeInTheDocument()
 
-      const deleteButtons = screen.getAllByLabelText('Delete file')
-      const deleteButton = deleteButtons[0]
+      const deleteButton = screen.getByLabelText('Delete file1.jpg')
       expect(deleteButton).toBeDisabled()
 
       // WHEN the delete button is clicked
@@ -2209,6 +2261,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -2220,8 +2273,7 @@ describe('FileUpload', () => {
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.getByText('file2.png')).toBeInTheDocument()
 
-      const deleteButtons = screen.getAllByLabelText('Delete file')
-      const deleteButton = deleteButtons[0]
+      const deleteButton = screen.getByLabelText('Delete file1.jpg')
       expect(deleteButton).toBeDisabled()
 
       // WHEN the delete button is clicked
@@ -2253,6 +2305,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -2298,6 +2351,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -2391,6 +2445,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -2422,6 +2477,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -2455,6 +2511,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -2484,6 +2541,7 @@ describe('FileUpload', () => {
                       key={`${file.name}-${index}`}
                       file={file}
                       fileIndex={index}
+                      deleteButtonAriaLabel={`Delete ${file.name}`}
                     />
                   ))}
                 </ul>
@@ -2526,6 +2584,7 @@ describe('FileUpload', () => {
                       key={`${file.name}-${index}`}
                       file={file}
                       fileIndex={index}
+                      deleteButtonAriaLabel={`Delete ${file.name}`}
                     />
                   ))}
                 </ul>
@@ -2541,7 +2600,10 @@ describe('FileUpload', () => {
       expect(screen.getByText('file2.png')).toBeInTheDocument()
 
       // WHEN a file is deleted
-      const deleteButtons = screen.getAllByRole('button', { name: 'Delete file' })
+      const deleteButtons = [
+        screen.getByRole('button', { name: 'Delete file1.jpg' }),
+        screen.getByRole('button', { name: 'Delete file2.png' }),
+      ]
       expect(deleteButtons).toHaveLength(2)
       const firstDeleteButton = deleteButtons[0]!
       await userEvent.click(firstDeleteButton)
@@ -2581,6 +2643,7 @@ describe('FileUpload', () => {
                         key={`${file.name}-${index}`}
                         file={file}
                         fileIndex={index}
+                        deleteButtonAriaLabel={`Delete ${file.name}`}
                       />
                     ))}
                   </ul>
@@ -2625,6 +2688,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -2654,6 +2718,7 @@ describe('FileUpload', () => {
                     key={`${file.name}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -2773,6 +2838,7 @@ describe('FileUpload', () => {
                         rejectedFile={rejected}
                         rejectedFileIndex={index}
                         renderError={error => error}
+                        deleteButtonAriaLabel={`Remove ${rejected.file.name} error`}
                       />
                     ))}
                   </ul>
@@ -2940,6 +3006,8 @@ describe('FileUpload', () => {
                     file={f}
                     fileIndex={index}
                     uploadProgress={50}
+                    deleteButtonAriaLabel={`Delete ${f.name}`}
+                    progressAriaLabel="Upload progress: 50%"
                   />
                 ))}
               </ul>
@@ -2963,7 +3031,12 @@ describe('FileUpload', () => {
             {({ acceptedFiles }) => (
               <ul>
                 {acceptedFiles.map((f, index) => (
-                  <FileUpload.AcceptedFile key={index} file={f} fileIndex={index} />
+                  <FileUpload.AcceptedFile
+                    key={index}
+                    file={f}
+                    fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${f.name}`}
+                  />
                 ))}
               </ul>
             )}

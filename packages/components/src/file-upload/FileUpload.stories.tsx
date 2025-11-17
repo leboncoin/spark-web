@@ -46,6 +46,7 @@ export const Default: StoryFn = () => {
                     key={`${file.name}-${file.size}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -75,6 +76,7 @@ export const Default: StoryFn = () => {
                     key={`${file.name}-${file.size}-${index}`}
                     file={file}
                     fileIndex={index}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
               </ul>
@@ -108,6 +110,7 @@ export const Dropzone: StoryFn = () => {
                 key={`${file.name}-${file.size}-${index}`}
                 file={file}
                 fileIndex={index}
+                deleteButtonAriaLabel={`Delete ${file.name}`}
               />
             ))}
           </ul>
@@ -133,6 +136,7 @@ export const CustomTrigger: StoryFn = () => {
                   key={`${file.name}-${file.size}-${index}`}
                   file={file}
                   fileIndex={index}
+                  deleteButtonAriaLabel={`Delete ${file.name}`}
                 />
               ))}
             </ul>
@@ -156,6 +160,7 @@ export const CustomTrigger: StoryFn = () => {
                   key={`${file.name}-${file.size}-${index}`}
                   file={file}
                   fileIndex={index}
+                  deleteButtonAriaLabel={`Delete ${file.name}`}
                 />
               ))}
             </ul>
@@ -280,6 +285,7 @@ export const WithDefaultFiles: StoryFn = () => {
                 key={`${file.name}-${file.size}-${index}`}
                 file={file}
                 fileIndex={index}
+                deleteButtonAriaLabel={`Delete ${file.name}`}
               />
             ))}
           </ul>
@@ -344,6 +350,7 @@ export const Controlled: StoryFn = () => {
                   key={`${file.name}-${file.size}-${index}`}
                   file={file}
                   fileIndex={index}
+                  deleteButtonAriaLabel={`Delete ${file.name}`}
                 />
               ))}
             </ul>
@@ -567,6 +574,7 @@ export const PhotosGallery: StoryFn = () => {
                 key={`${file.name}-${file.size}-${index}`}
                 file={file}
                 fileIndex={index}
+                deleteButtonAriaLabel={`Delete ${file.name}`}
               />
             ))}
           </ul>
@@ -598,6 +606,7 @@ export const SingleFile: StoryFn = () => {
                 key={`${file.name}-${file.size}-${index}`}
                 file={file}
                 fileIndex={index}
+                deleteButtonAriaLabel={`Delete ${file.name}`}
               />
             ))}
           </ul>
@@ -634,6 +643,7 @@ export const Disabled: StoryFn = () => {
                 key={`${file.name}-${file.size}-${index}`}
                 file={file}
                 fileIndex={index}
+                deleteButtonAriaLabel={`Delete ${file.name}`}
               />
             ))}
           </ul>
@@ -670,6 +680,7 @@ export const ReadOnly: StoryFn = () => {
                 key={`${file.name}-${file.size}-${index}`}
                 file={file}
                 fileIndex={index}
+                deleteButtonAriaLabel={`Delete ${file.name}`}
               />
             ))}
           </ul>
@@ -724,6 +735,7 @@ export const ErrorHandling: StoryFn = () => {
                       key={`${file.name}-${file.size}-${index}`}
                       file={file}
                       fileIndex={index}
+                      deleteButtonAriaLabel={`Delete ${file.name}`}
                     />
                   ))}
                 </ul>
@@ -737,6 +749,7 @@ export const ErrorHandling: StoryFn = () => {
                       rejectedFile={rejectedFile}
                       rejectedFileIndex={index}
                       renderError={error => errorMessages[error] || `❓ ${error}`}
+                      deleteButtonAriaLabel={`Remove ${rejectedFile.file.name} error`}
                       data-status="rejected"
                     />
                   ))}
@@ -854,6 +867,8 @@ export const WithProgress: StoryFn = () => {
                 file={file}
                 fileIndex={index}
                 uploadProgress={uploadProgress[index]}
+                deleteButtonAriaLabel={`Delete ${file.name}`}
+                progressAriaLabel={`Upload progress: ${uploadProgress[index] ?? 0}%`}
               />
             ))}
           </ul>
