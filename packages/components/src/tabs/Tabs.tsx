@@ -18,11 +18,6 @@ export interface TabsProps
    * @default false
    */
   forceMount?: boolean
-  /**
-   * Callback fired when Shift+F10 is pressed on a tab trigger.
-   * Used to open associated popups. Receives the tab value.
-   */
-  onPopupKeyDown?: (tabValue: string) => void
   ref?: Ref<HTMLDivElement>
 }
 
@@ -41,7 +36,6 @@ export const Tabs = ({
   asChild = false,
   forceMount = false,
   orientation = 'horizontal',
-  onPopupKeyDown,
   children,
   className,
   ref,
@@ -54,7 +48,6 @@ export const Tabs = ({
         size,
         orientation,
         forceMount,
-        onPopupKeyDown,
       }}
     >
       <RadixTabs.Root

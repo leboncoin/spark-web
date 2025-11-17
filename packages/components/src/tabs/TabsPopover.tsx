@@ -1,25 +1,25 @@
 import { cx } from 'class-variance-authority'
 import { forwardRef, type ReactNode, type Ref } from 'react'
 
-export interface TabsPopupProps {
+export interface TabsPopoverProps {
   /**
-   * The tab value this popup is associated with
+   * The tab value this popover is associated with (automatically set by Tabs.Trigger)
    */
-  tabValue: string
+  tabValue?: string
   /**
-   * Whether this tab is currently active
+   * Whether this tab is currently active (automatically set by Tabs.Trigger)
    */
-  isTabActive: boolean
+  isTabActive?: boolean
   /**
-   * Whether the popup is open
+   * Whether the popover is open
    */
   open?: boolean
   /**
-   * Callback when popup open state changes
+   * Callback when popover open state changes
    */
   onOpenChange?: (open: boolean) => void
   /**
-   * The popup content - typically a Popover or other overlay component
+   * The popover content - typically a Popover or other overlay component
    */
   children: ReactNode
   /**
@@ -29,17 +29,16 @@ export interface TabsPopupProps {
   ref?: Ref<HTMLDivElement>
 }
 
-export const TabsPopup = forwardRef<HTMLDivElement, TabsPopupProps>(
+export const TabsPopover = forwardRef<HTMLDivElement, TabsPopoverProps>(
   ({ tabValue, isTabActive, children, className, ...rest }, ref) => {
     return (
       <div
         ref={ref}
-        key={`popup-${tabValue}`}
         className={cx(
-          'pr-md pointer-events-auto relative flex flex-1 items-center justify-end',
+          'right-md mr-md pointer-events-auto absolute top-1/2 -translate-y-1/2',
           className
         )}
-        data-spark-component="tabs-popup"
+        data-spark-component="tabs-popover"
         data-tab-value={tabValue}
         data-tab-active={isTabActive}
         {...rest}
@@ -50,4 +49,4 @@ export const TabsPopup = forwardRef<HTMLDivElement, TabsPopupProps>(
   }
 )
 
-TabsPopup.displayName = 'Tabs.Popup'
+TabsPopover.displayName = 'Tabs.Popover'

@@ -6,7 +6,6 @@ import type { TabsTriggerVariantsProps } from './TabsTrigger.styles'
 export type TabsContextInterface = TabsTriggerVariantsProps &
   Pick<RadixTabs.TabsProps, 'orientation'> & {
     forceMount?: boolean
-    onPopupKeyDown?: (tabValue: string) => void
   }
 
 export const TabsContext = createContext<TabsContextInterface>({} as TabsContextInterface)
