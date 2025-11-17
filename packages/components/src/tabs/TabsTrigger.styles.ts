@@ -37,10 +37,26 @@ export const triggerVariants = cva(
         sm: ['h-sz-36 min-w-sz-36 text-body-2'],
         md: ['h-sz-40 min-w-sz-40 text-body-1'],
       },
+      hasMenu: {
+        true: 'pr-3xl',
+      },
+      orientation: {
+        horizontal: '',
+        vertical: '',
+      },
     },
+    compoundVariants: [
+      {
+        hasMenu: true,
+        orientation: 'vertical',
+        class: 'w-full',
+      },
+    ],
     defaultVariants: {
       intent: 'basic',
       size: 'md',
+      hasMenu: false,
+      orientation: 'horizontal',
     },
   }
 )

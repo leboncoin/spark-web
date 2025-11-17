@@ -7,7 +7,7 @@ import type { TabsTriggerVariantsProps } from './TabsTrigger.styles'
 
 export interface TabsProps
   extends Omit<RadixTabs.TabsProps, 'activationMode'>,
-    PropsWithChildren<TabsTriggerVariantsProps> {
+    PropsWithChildren<Omit<TabsTriggerVariantsProps, 'orientation'>> {
   /**
    * Change the component to the HTML tag or custom component of the only child. This will merge the original component props with the props of the supplied element/component and change the underlying DOM node.
    * @default false
@@ -18,11 +18,6 @@ export interface TabsProps
    * @default false
    */
   forceMount?: boolean
-  /**
-   * Callback fired when Shift+F10 is pressed on a tab trigger.
-   * Used to open associated popups. Receives the tab value.
-   */
-  onPopupKeyDown?: (tabValue: string) => void
   ref?: Ref<HTMLDivElement>
 }
 
@@ -41,7 +36,6 @@ export const Tabs = ({
   asChild = false,
   forceMount = false,
   orientation = 'horizontal',
-  onPopupKeyDown,
   children,
   className,
   ref,
@@ -54,7 +48,6 @@ export const Tabs = ({
         size,
         orientation,
         forceMount,
-        onPopupKeyDown,
       }}
     >
       <RadixTabs.Root
