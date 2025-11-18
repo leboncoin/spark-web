@@ -8,9 +8,6 @@ import {
   type RejectedFile as RejectedFileType,
   useFileUploadContext,
 } from './FileUpload'
-import { Item } from './FileUploadItem'
-import { ItemFileName } from './FileUploadItemFileName'
-import { ItemSizeText } from './FileUploadItemSizeText'
 import { RejectedFileDeleteTrigger } from './FileUploadRejectedFileDeleteTrigger'
 import { formatFileSize } from './utils'
 
@@ -24,10 +21,6 @@ export interface FileUploadRejectedFileProps extends ComponentPropsWithoutRef<'l
    * The rejected file to display
    */
   rejectedFile: RejectedFileType
-  /**
-   * The index of the rejected file in the rejectedFiles array
-   */
-  rejectedFileIndex: number
   /**
    * Function to render the error message for each error code
    * @param error - The error code
@@ -45,7 +38,6 @@ export const RejectedFile = ({
   asChild: _asChild = false,
   className,
   rejectedFile,
-  rejectedFileIndex,
   renderError,
   deleteButtonAriaLabel,
   ...props
@@ -53,7 +45,17 @@ export const RejectedFile = ({
   const { locale } = useFileUploadContext()
 
   return (
-    <Item className={cx('border-error border-md', className)} {...props}>
+    <li
+      data-spark-component="file-upload-rejected-file"
+      className={cx(
+        'relative',
+        'default:bg-surface default:border-sm default:border-outline default:p-md default:rounded-md',
+        'gap-md flex items-center justify-between default:w-full',
+        'border-error border-md',
+        className
+      )}
+      {...props}
+    >
       <div className="size-sz-40 bg-error-container flex items-center justify-center rounded-md">
         <Icon size="md" className="text-error">
           <WarningOutline />
@@ -63,10 +65,10 @@ export const RejectedFile = ({
       <div className="min-w-0 flex-1">
         <div className="gap-md flex flex-col">
           <div className="gap-md flex flex-row items-center justify-between">
-            <ItemFileName>{rejectedFile.file.name}</ItemFileName>
-            <ItemSizeText className="opacity-dim-1">
+            <p className="text-body-2 truncate font-medium">{rejectedFile.file.name}</p>
+            <p className="text-caption opacity-dim-1">
               {formatFileSize(rejectedFile.file.size, locale)}
-            </ItemSizeText>
+            </p>
           </div>
           <div className="gap-xs flex flex-col">
             {rejectedFile.errors.map((error, errorIndex) => (
@@ -78,11 +80,8 @@ export const RejectedFile = ({
         </div>
       </div>
 
-      <RejectedFileDeleteTrigger
-        aria-label={deleteButtonAriaLabel}
-        rejectedFileIndex={rejectedFileIndex}
-      />
-    </Item>
+      <RejectedFileDeleteTrigger aria-label={deleteButtonAriaLabel} rejectedFile={rejectedFile} />
+    </li>
   )
 }
 

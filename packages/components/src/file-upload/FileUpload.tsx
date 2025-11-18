@@ -22,9 +22,21 @@ export interface FileUploadProps {
    */
   value?: File[]
   /**
-   * Callback when files are selected
+   * Callback when files are accepted
+   * @param details - Details about the accepted files
    */
-  onFilesChange?: (files: File[]) => void
+  onFileAccept?: (details: FileAcceptDetails) => void
+  /**
+   * Callback when files are rejected
+   * @param details - Details about the rejected files and their errors
+   */
+  onFileReject?: (details: FileRejectDetails) => void
+  /**
+   * Callback when files change (both accepted and rejected)
+   * For controlled mode, use this to update the value prop by extracting details.acceptedFiles
+   * @param details - Details about both accepted and rejected files
+   */
+  onFileChange?: (details: FileChangeDetails) => void
   /**
    * Whether multiple files can be selected
    * @default true
@@ -45,12 +57,6 @@ export interface FileUploadProps {
    */
   maxFiles?: number
   /**
-   * Callback when the maximum number of files is reached
-   * @param maxFiles - The maximum number of files allowed
-   * @param rejectedCount - The number of files that were rejected
-   */
-  onMaxFilesReached?: (maxFiles: number, rejectedCount: number) => void
-  /**
    * Maximum file size in bytes
    * Files larger than this will be rejected
    */
@@ -60,12 +66,6 @@ export interface FileUploadProps {
    * Files smaller than this will be rejected
    */
   minFileSize?: number
-  /**
-   * Callback when a file size validation error occurs
-   * @param file - The file that failed validation
-   * @param error - The error message
-   */
-  onFileSizeError?: (file: File, error: string) => void
   /**
    * When `true`, prevents the user from interacting with the file upload
    */
@@ -95,6 +95,19 @@ export interface RejectedFile {
   errors: FileUploadFileError[]
 }
 
+export interface FileAcceptDetails {
+  files: File[]
+}
+
+export interface FileRejectDetails {
+  files: RejectedFile[]
+}
+
+export interface FileChangeDetails {
+  acceptedFiles: File[]
+  rejectedFiles: RejectedFile[]
+}
+
 export const FileUploadContext = createContext<{
   inputRef: React.RefObject<HTMLInputElement | null>
   files: File[]
@@ -120,14 +133,14 @@ export const FileUpload = ({
   children,
   defaultValue = [],
   value: controlledValue,
-  onFilesChange,
+  onFileAccept,
+  onFileReject,
+  onFileChange,
   multiple = true,
   accept,
   maxFiles,
-  onMaxFilesReached,
   maxFileSize,
   minFileSize,
-  onFileSizeError,
   disabled = false,
   readOnly = false,
   locale,
@@ -140,11 +153,10 @@ export const FileUpload = ({
   const triggerRef = useRef<HTMLElement>(null)
   const dropzoneRef = useRef<HTMLElement>(null)
   const deleteButtonRefs = useRef<HTMLButtonElement[]>([])
-  const [filesState, setFilesState, ,] = useCombinedState(
-    controlledValue,
-    defaultValue,
-    onFilesChange
-  )
+  
+  // For controlled mode, use onFileChange to update value prop
+  // useCombinedState doesn't need a callback - we'll call onFileChange manually in addFiles/removeFile
+  const [filesState, setFilesState, ,] = useCombinedState(controlledValue, defaultValue)
   const files = filesState ?? []
   const setFiles = setFilesState as (value: File[] | ((prev: File[]) => File[])) => void
   const [rejectedFiles, setRejectedFiles] = useState<RejectedFile[]>([])
@@ -185,11 +197,6 @@ export const FileUpload = ({
           file,
           errors: [error],
         })
-      }
-
-      // Call onFileSizeError callback if provided
-      if (onFileSizeError) {
-        onFileSizeError(file, error)
       }
     }
 
@@ -287,14 +294,12 @@ export const FileUpload = ({
           filesToAdd.forEach(file => {
             addRejectedFile(file, 'TOO_MANY_FILES')
           })
-          onMaxFilesReached?.(maxFiles, filesToAdd.length)
           filesToAdd = []
         } else if (filesToAdd.length > remainingSlots) {
           // Reject all files if batch exceeds limit ("all or nothing" approach)
           filesToAdd.forEach(file => {
             addRejectedFile(file, 'TOO_MANY_FILES')
           })
-          onMaxFilesReached?.(maxFiles, filesToAdd.length)
           filesToAdd = []
         }
       }
@@ -307,6 +312,24 @@ export const FileUpload = ({
       const rejectedFilesToAdd = [...newRejectedFiles]
       // Replace rejectedFiles completely (not accumulate)
       setRejectedFiles(rejectedFilesToAdd)
+
+      // Call callbacks with the calculated values
+      // Note: These callbacks are called synchronously with the new values
+      // React will update the state asynchronously, but the callbacks receive the correct new values
+      if (filesToAdd.length > 0 && onFileAccept) {
+        onFileAccept({ files: filesToAdd })
+      }
+
+      if (rejectedFilesToAdd.length > 0 && onFileReject) {
+        onFileReject({ files: rejectedFilesToAdd })
+      }
+
+      if (onFileChange) {
+        onFileChange({
+          acceptedFiles: updated,
+          rejectedFiles: rejectedFilesToAdd,
+        })
+      }
 
       return updated
     })
@@ -323,10 +346,20 @@ export const FileUpload = ({
       const updated = currentFiles.filter((_: File, i: number) => i !== index)
 
       // Clean up TOO_MANY_FILES errors if we're now below the maxFiles limit
+      let updatedRejectedFiles = rejectedFiles
       if (maxFiles !== undefined && updated.length < maxFiles) {
-        setRejectedFiles(prevRejected =>
-          prevRejected.filter(rejected => !rejected.errors.includes('TOO_MANY_FILES'))
+        updatedRejectedFiles = rejectedFiles.filter(
+          rejected => !rejected.errors.includes('TOO_MANY_FILES')
         )
+        setRejectedFiles(updatedRejectedFiles)
+      }
+
+      // Call onFileChange for controlled mode
+      if (onFileChange) {
+        onFileChange({
+          acceptedFiles: updated,
+          rejectedFiles: updatedRejectedFiles,
+        })
       }
 
       return updated
@@ -342,6 +375,14 @@ export const FileUpload = ({
     setFiles([])
     setRejectedFiles([])
     deleteButtonRefs.current = []
+
+    // Call onFileChange for controlled mode
+    if (onFileChange) {
+      onFileChange({
+        acceptedFiles: [],
+        rejectedFiles: [],
+      })
+    }
   }
 
   const removeRejectedFile = (index: number) => {

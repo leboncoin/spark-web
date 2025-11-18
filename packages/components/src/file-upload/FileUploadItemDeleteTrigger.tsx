@@ -8,20 +8,23 @@ import { useFileUploadContext } from './FileUpload'
 
 export interface FileUploadItemDeleteTriggerProps extends React.ComponentProps<typeof IconButton> {
   /**
-   * Index of the file to delete
+   * The file to delete
    */
-  fileIndex: number
+  file: File
 }
 
 export const ItemDeleteTrigger = ({
   className,
-  fileIndex,
+  file,
   onClick,
   ...props
 }: FileUploadItemDeleteTriggerProps) => {
-  const { removeFile, triggerRef, dropzoneRef, deleteButtonRefs, disabled, readOnly } =
+  const { removeFile, triggerRef, dropzoneRef, deleteButtonRefs, disabled, readOnly, files } =
     useFileUploadContext()
   const buttonRef = useRef<HTMLButtonElement>(null)
+
+  // Find the index of the file using name + size (consistent with duplicate detection logic)
+  const fileIndex = files.findIndex(f => f.name === file.name && f.size === file.size)
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     // Don't allow removing files when disabled or readOnly

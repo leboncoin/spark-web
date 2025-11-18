@@ -1,12 +1,10 @@
+import { cx } from 'class-variance-authority'
 import { ComponentPropsWithoutRef, Ref } from 'react'
 
 import { Icon } from '../icon'
 import { Progress } from '../progress'
 import { useFileUploadContext } from './FileUpload'
-import { Item } from './FileUploadItem'
 import { ItemDeleteTrigger } from './FileUploadItemDeleteTrigger'
-import { ItemFileName } from './FileUploadItemFileName'
-import { ItemSizeText } from './FileUploadItemSizeText'
 import { formatFileSize, getFileIcon } from './utils'
 
 export interface FileUploadAcceptedFileProps extends ComponentPropsWithoutRef<'li'> {
@@ -19,10 +17,6 @@ export interface FileUploadAcceptedFileProps extends ComponentPropsWithoutRef<'l
    * The file to display
    */
   file: File
-  /**
-   * The index of the file in the accepted files array
-   */
-  fileIndex: number
   /**
    * Upload progress value (0-100). When provided, displays a progress bar at the bottom of the file item.
    */
@@ -42,7 +36,6 @@ export const AcceptedFile = ({
   asChild: _asChild = false,
   className,
   file,
-  fileIndex,
   uploadProgress,
   deleteButtonAriaLabel,
   progressAriaLabel,
@@ -51,15 +44,24 @@ export const AcceptedFile = ({
   const { locale } = useFileUploadContext()
 
   return (
-    <Item className={className} {...props}>
+    <li
+      data-spark-component="file-upload-accepted-file"
+      className={cx(
+        'relative',
+        'default:bg-surface default:border-sm default:border-outline default:p-md default:rounded-md',
+        'gap-md flex items-center justify-between default:w-full',
+        className
+      )}
+      {...props}
+    >
       <div className="size-sz-40 bg-support-container flex items-center justify-center rounded-md">
         <Icon size="md">{getFileIcon(file)}</Icon>
       </div>
 
       <div className="min-w-0 flex-1">
         <div className="gap-md flex flex-row items-center justify-between">
-          <ItemFileName>{file.name}</ItemFileName>
-          <ItemSizeText className="opacity-dim-1">{formatFileSize(file.size, locale)}</ItemSizeText>
+          <p className="text-body-2 truncate font-medium">{file.name}</p>
+          <p className="text-caption opacity-dim-1">{formatFileSize(file.size, locale)}</p>
         </div>
         {uploadProgress !== undefined && (
           <div className="mt-md">
@@ -68,8 +70,8 @@ export const AcceptedFile = ({
         )}
       </div>
 
-      <ItemDeleteTrigger aria-label={deleteButtonAriaLabel} fileIndex={fileIndex} />
-    </Item>
+      <ItemDeleteTrigger aria-label={deleteButtonAriaLabel} file={file} />
+    </li>
   )
 }
 

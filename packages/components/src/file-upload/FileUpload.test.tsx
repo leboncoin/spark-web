@@ -41,7 +41,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -86,7 +85,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -113,7 +111,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -130,11 +127,11 @@ describe('FileUpload', () => {
 
   describe('File selection', () => {
     it('should add files when files are selected via input', async () => {
-      // GIVEN a FileUpload component with onFilesChange callback
-      const onFilesChange = vi.fn()
+      // GIVEN a FileUpload component with onFileChange callback
+      const onFileChange = vi.fn()
 
       render(
-        <FileUpload onFilesChange={onFilesChange}>
+        <FileUpload onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -143,7 +140,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -162,19 +158,22 @@ describe('FileUpload', () => {
       // WHEN files are selected via input
       uploadFiles(input, [file1, file2])
 
-      // THEN onFilesChange should be called with the files and they should be displayed
-      expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
+      // THEN onFileChange should be called with the files and they should be displayed
+      expect(onFileChange).toHaveBeenCalledWith({
+        acceptedFiles: [file1, file2],
+        rejectedFiles: [],
+      })
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.getByText('file2.png')).toBeInTheDocument()
     })
 
     it('should append files when multiple selections are made', async () => {
-      // GIVEN a FileUpload component with defaultValue and onFilesChange callback
-      const onFilesChange = vi.fn()
+      // GIVEN a FileUpload component with defaultValue and onFileChange callback
+      const onFileChange = vi.fn()
       const initialFile = new File(['content'], 'initial.jpg', { type: 'image/jpeg' })
 
       render(
-        <FileUpload defaultValue={[initialFile]} onFilesChange={onFilesChange}>
+        <FileUpload defaultValue={[initialFile]} onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -183,7 +182,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -199,20 +197,20 @@ describe('FileUpload', () => {
       // WHEN a new file is selected
       uploadFiles(input, newFile)
 
-      // THEN onFilesChange should be called with both files appended
-      expect(onFilesChange).toHaveBeenCalled()
-      const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
-      expect(lastCall?.[0]).toHaveLength(2)
-      expect(lastCall?.[0]?.[0]?.name).toBe('initial.jpg')
-      expect(lastCall?.[0]?.[1]?.name).toBe('new.jpg')
+      // THEN onFileChange should be called with both files appended
+      expect(onFileChange).toHaveBeenCalled()
+      const lastCall = onFileChange.mock.calls[onFileChange.mock.calls.length - 1]
+      expect(lastCall?.[0]?.acceptedFiles).toHaveLength(2)
+      expect(lastCall?.[0]?.acceptedFiles?.[0]?.name).toBe('initial.jpg')
+      expect(lastCall?.[0]?.acceptedFiles?.[1]?.name).toBe('new.jpg')
     })
   })
 
   describe('File removal', () => {
     it('should remove file when delete button is clicked', async () => {
-      // GIVEN a FileUpload component with defaultValue and onFilesChange callback
+      // GIVEN a FileUpload component with defaultValue and onFileChange callback
       const user = userEvent.setup()
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
       const files = [
         new File(['content1'], 'file1.jpg', { type: 'image/jpeg' }),
         new File(['content2'], 'file2.png', { type: 'image/png' }),
@@ -220,7 +218,7 @@ describe('FileUpload', () => {
       ]
 
       render(
-        <FileUpload defaultValue={files} onFilesChange={onFilesChange}>
+        <FileUpload defaultValue={files} onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -229,7 +227,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -252,12 +249,12 @@ describe('FileUpload', () => {
         await user.click(deleteButton)
       }
 
-      // THEN onFilesChange should be called with the remaining files and the file should be removed
-      expect(onFilesChange).toHaveBeenCalled()
-      const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
-      expect(lastCall?.[0]).toHaveLength(2)
-      expect(lastCall?.[0]?.[0]?.name).toBe('file1.jpg')
-      expect(lastCall?.[0]?.[1]?.name).toBe('file3.pdf')
+      // THEN onFileChange should be called with the remaining files and the file should be removed
+      expect(onFileChange).toHaveBeenCalled()
+      const lastCall = onFileChange.mock.calls[onFileChange.mock.calls.length - 1]
+      expect(lastCall?.[0]?.acceptedFiles).toHaveLength(2)
+      expect(lastCall?.[0]?.acceptedFiles?.[0]?.name).toBe('file1.jpg')
+      expect(lastCall?.[0]?.acceptedFiles?.[1]?.name).toBe('file3.pdf')
 
       expect(screen.queryByText('file2.png')).not.toBeInTheDocument()
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
@@ -265,16 +262,16 @@ describe('FileUpload', () => {
     })
 
     it('should remove all files when all delete buttons are clicked', async () => {
-      // GIVEN a FileUpload component with defaultValue and onFilesChange callback
+      // GIVEN a FileUpload component with defaultValue and onFileChange callback
       const user = userEvent.setup()
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
       const files = [
         new File(['content1'], 'file1.jpg', { type: 'image/jpeg' }),
         new File(['content2'], 'file2.png', { type: 'image/png' }),
       ]
 
       render(
-        <FileUpload defaultValue={files} onFilesChange={onFilesChange}>
+        <FileUpload defaultValue={files} onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -283,7 +280,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -314,9 +310,9 @@ describe('FileUpload', () => {
         await user.click(secondButton)
       }
 
-      // THEN onFilesChange should be called with an empty array and no files should be displayed
-      const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
-      expect(lastCall?.[0]).toHaveLength(0)
+      // THEN onFileChange should be called with an empty array and no files should be displayed
+      const lastCall = onFileChange.mock.calls[onFileChange.mock.calls.length - 1]
+      expect(lastCall?.[0]?.acceptedFiles).toHaveLength(0)
       expect(screen.queryByRole('listitem')).not.toBeInTheDocument()
     })
   })
@@ -339,7 +335,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -355,13 +350,13 @@ describe('FileUpload', () => {
     })
   })
 
-  describe('onFilesChange callback', () => {
-    it('should call onFilesChange when files are added', async () => {
-      // GIVEN a FileUpload component with onFilesChange callback
-      const onFilesChange = vi.fn()
+  describe('onFileChange callback', () => {
+    it('should call onFileChange when files are added', async () => {
+      // GIVEN a FileUpload component with onFileChange callback
+      const onFileChange = vi.fn()
 
       render(
-        <FileUpload onFilesChange={onFilesChange}>
+        <FileUpload onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -370,7 +365,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -386,22 +380,25 @@ describe('FileUpload', () => {
       // WHEN a file is selected
       uploadFiles(input, file)
 
-      // THEN onFilesChange should be called with the file
-      expect(onFilesChange).toHaveBeenCalledTimes(1)
-      expect(onFilesChange).toHaveBeenCalledWith([file])
+      // THEN onFileChange should be called with the file
+      expect(onFileChange).toHaveBeenCalledTimes(1)
+      expect(onFileChange).toHaveBeenCalledWith({
+        acceptedFiles: [file],
+        rejectedFiles: [],
+      })
     })
 
-    it('should call onFilesChange when files are removed', async () => {
-      // GIVEN a FileUpload component with defaultValue and onFilesChange callback
+    it('should call onFileChange when files are removed', async () => {
+      // GIVEN a FileUpload component with defaultValue and onFileChange callback
       const user = userEvent.setup()
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
       const files = [
         new File(['content'], 'file1.jpg', { type: 'image/jpeg' }),
         new File(['content'], 'file2.png', { type: 'image/png' }),
       ]
 
       render(
-        <FileUpload defaultValue={files} onFilesChange={onFilesChange}>
+        <FileUpload defaultValue={files} onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -410,7 +407,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -427,11 +423,11 @@ describe('FileUpload', () => {
         await user.click(deleteButton)
       }
 
-      // THEN onFilesChange should be called with the remaining files
-      expect(onFilesChange).toHaveBeenCalled()
-      const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
-      expect(lastCall?.[0]).toHaveLength(1)
-      expect(lastCall?.[0]?.[0]?.name).toBe('file2.png')
+      // THEN onFileChange should be called with the remaining files
+      expect(onFileChange).toHaveBeenCalled()
+      const lastCall = onFileChange.mock.calls[onFileChange.mock.calls.length - 1]
+      expect(lastCall?.[0]?.acceptedFiles).toHaveLength(1)
+      expect(lastCall?.[0]?.acceptedFiles?.[0]?.name).toBe('file2.png')
     })
   })
 
@@ -484,11 +480,11 @@ describe('FileUpload', () => {
     })
 
     it('should add files when files are dropped', async () => {
-      // GIVEN a FileUpload component with onFilesChange callback and dropzone
-      const onFilesChange = vi.fn()
+      // GIVEN a FileUpload component with onFileChange callback and dropzone
+      const onFileChange = vi.fn()
 
       render(
-        <FileUpload onFilesChange={onFilesChange}>
+        <FileUpload onFileChange={onFileChange}>
           <FileUpload.Dropzone>Drop files here</FileUpload.Dropzone>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -497,7 +493,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -518,13 +513,13 @@ describe('FileUpload', () => {
       }
       dropzone.dispatchEvent(dropEvent)
 
-      // THEN onFilesChange should be called with the dropped files and they should be displayed
+      // THEN onFileChange should be called with the dropped files and they should be displayed
       await waitFor(() => {
-        expect(onFilesChange).toHaveBeenCalled()
-        const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
-        expect(lastCall?.[0]).toHaveLength(2)
-        expect(lastCall?.[0]?.[0]?.name).toBe('dropped1.jpg')
-        expect(lastCall?.[0]?.[1]?.name).toBe('dropped2.png')
+        expect(onFileChange).toHaveBeenCalled()
+        const lastCall = onFileChange.mock.calls[onFileChange.mock.calls.length - 1]
+        expect(lastCall?.[0]?.acceptedFiles).toHaveLength(2)
+        expect(lastCall?.[0]?.acceptedFiles?.[0]?.name).toBe('dropped1.jpg')
+        expect(lastCall?.[0]?.acceptedFiles?.[1]?.name).toBe('dropped2.png')
       })
 
       expect(screen.getByText('dropped1.jpg')).toBeInTheDocument()
@@ -577,7 +572,6 @@ describe('FileUpload', () => {
                     <FileUpload.AcceptedFile
                       key={`${file.name}-${index}`}
                       file={file}
-                      fileIndex={index}
                       deleteButtonAriaLabel={`Delete ${file.name}`}
                     />
                   ))}
@@ -610,7 +604,6 @@ describe('FileUpload', () => {
                     <FileUpload.AcceptedFile
                       key={`${file.name}-${index}`}
                       file={file}
-                      fileIndex={index}
                       deleteButtonAriaLabel={`Delete ${file.name}`}
                     />
                   ))}
@@ -629,14 +622,14 @@ describe('FileUpload', () => {
   describe('RejectedFile', () => {
     it('should render rejected file with error messages using renderError', async () => {
       // GIVEN a FileUpload component with accept and maxFileSize restrictions
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
       const errorMessages: Record<string, string> = {
         FILE_INVALID_TYPE: 'Invalid file type',
         FILE_TOO_LARGE: 'File too large',
       }
 
       render(
-        <FileUpload accept="image/*" maxFileSize={1024} onFilesChange={onFilesChange}>
+        <FileUpload accept="image/*" maxFileSize={1024} onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles, rejectedFiles }) => (
@@ -647,7 +640,6 @@ describe('FileUpload', () => {
                       <FileUpload.AcceptedFile
                         key={`${file.name}-${index}`}
                         file={file}
-                        fileIndex={index}
                         deleteButtonAriaLabel={`Delete ${file.name}`}
                       />
                     ))}
@@ -659,7 +651,6 @@ describe('FileUpload', () => {
                       <FileUpload.RejectedFile
                         key={`rejected-${rejectedFile.file.name}-${index}`}
                         rejectedFile={rejectedFile}
-                        rejectedFileIndex={index}
                         renderError={error => errorMessages[error] || error}
                         deleteButtonAriaLabel={`Remove ${rejectedFile.file.name} error`}
                       />
@@ -692,13 +683,13 @@ describe('FileUpload', () => {
     it('should allow removing a rejected file by clicking the delete button', async () => {
       // GIVEN a FileUpload component with accept restriction
       const user = userEvent.setup()
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
       const errorMessages: Record<string, string> = {
         FILE_INVALID_TYPE: 'Invalid file type',
       }
 
       render(
-        <FileUpload accept="image/*" onFilesChange={onFilesChange}>
+        <FileUpload accept="image/*" onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ rejectedFiles }) => (
@@ -709,7 +700,6 @@ describe('FileUpload', () => {
                       <FileUpload.RejectedFile
                         key={`rejected-${rejectedFile.file.name}-${index}`}
                         rejectedFile={rejectedFile}
-                        rejectedFileIndex={index}
                         renderError={error => errorMessages[error] || error}
                         deleteButtonAriaLabel={`Remove ${rejectedFile.file.name} error`}
                       />
@@ -749,13 +739,13 @@ describe('FileUpload', () => {
     it('should not allow removing rejected files when disabled', async () => {
       // GIVEN a FileUpload component with a rejected file
       const user = userEvent.setup()
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
       const errorMessages: Record<string, string> = {
         FILE_INVALID_TYPE: 'Invalid file type',
       }
 
       const { rerender } = render(
-        <FileUpload accept="image/*" onFilesChange={onFilesChange}>
+        <FileUpload accept="image/*" onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ rejectedFiles }) => (
@@ -766,7 +756,6 @@ describe('FileUpload', () => {
                       <FileUpload.RejectedFile
                         key={`rejected-${rejectedFile.file.name}-${index}`}
                         rejectedFile={rejectedFile}
-                        rejectedFileIndex={index}
                         renderError={error => errorMessages[error] || error}
                         deleteButtonAriaLabel={`Remove ${rejectedFile.file.name} error`}
                       />
@@ -793,7 +782,7 @@ describe('FileUpload', () => {
 
       // WHEN the component is disabled
       rerender(
-        <FileUpload accept="image/*" disabled onFilesChange={onFilesChange}>
+        <FileUpload accept="image/*" disabled onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ rejectedFiles }) => (
@@ -804,7 +793,6 @@ describe('FileUpload', () => {
                       <FileUpload.RejectedFile
                         key={`rejected-${rejectedFile.file.name}-${index}`}
                         rejectedFile={rejectedFile}
-                        rejectedFileIndex={index}
                         renderError={error => errorMessages[error] || error}
                         deleteButtonAriaLabel={`Remove ${rejectedFile.file.name} error`}
                       />
@@ -826,7 +814,7 @@ describe('FileUpload', () => {
 
     it('should render multiple errors for a rejected file', async () => {
       // GIVEN a FileUpload component with maxFiles and accept restrictions, and an existing file
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
       const errorMessages: Record<string, string> = {
         TOO_MANY_FILES: 'Too many files',
         FILE_INVALID_TYPE: 'Invalid file type',
@@ -837,7 +825,7 @@ describe('FileUpload', () => {
           maxFiles={1}
           accept="image/*"
           defaultValue={[new File(['content'], 'existing.jpg', { type: 'image/jpeg' })]}
-          onFilesChange={onFilesChange}
+          onFileChange={onFileChange}
         >
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
@@ -849,7 +837,6 @@ describe('FileUpload', () => {
                       <FileUpload.AcceptedFile
                         key={`${file.name}-${index}`}
                         file={file}
-                        fileIndex={index}
                         deleteButtonAriaLabel={`Delete ${file.name}`}
                       />
                     ))}
@@ -861,7 +848,6 @@ describe('FileUpload', () => {
                       <FileUpload.RejectedFile
                         key={`rejected-${rejectedFile.file.name}-${index}`}
                         rejectedFile={rejectedFile}
-                        rejectedFileIndex={index}
                         renderError={error => errorMessages[error] || error}
                         deleteButtonAriaLabel={`Remove ${rejectedFile.file.name} error`}
                       />
@@ -933,11 +919,11 @@ describe('FileUpload', () => {
 
   describe('Multiple prop', () => {
     it('should allow multiple files by default', async () => {
-      // GIVEN a FileUpload component with onFilesChange callback
-      const onFilesChange = vi.fn()
+      // GIVEN a FileUpload component with onFileChange callback
+      const onFileChange = vi.fn()
 
       render(
-        <FileUpload onFilesChange={onFilesChange}>
+        <FileUpload onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -946,7 +932,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -965,18 +950,21 @@ describe('FileUpload', () => {
       // WHEN multiple files are selected
       uploadFiles(input, [file1, file2])
 
-      // THEN onFilesChange should be called with all files and they should be displayed
-      expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
+      // THEN onFileChange should be called with all files and they should be displayed
+      expect(onFileChange).toHaveBeenCalledWith({
+        acceptedFiles: [file1, file2],
+        rejectedFiles: [],
+      })
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.getByText('file2.png')).toBeInTheDocument()
     })
 
     it('should not allow multiple files when multiple is false', async () => {
       // GIVEN a FileUpload component with multiple={false}
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
 
       render(
-        <FileUpload multiple={false} onFilesChange={onFilesChange}>
+        <FileUpload multiple={false} onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -985,7 +973,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1005,18 +992,21 @@ describe('FileUpload', () => {
       uploadFiles(input, [file1, file2])
 
       // THEN only the first file should be added
-      expect(onFilesChange).toHaveBeenCalledWith([file1])
+      expect(onFileChange).toHaveBeenCalledWith({
+        acceptedFiles: [file1],
+        rejectedFiles: [],
+      })
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.queryByText('file2.png')).not.toBeInTheDocument()
     })
 
     it('should replace existing file when multiple is false and new file is selected', async () => {
       // GIVEN a FileUpload component with multiple={false} and defaultValue
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
       const initialFile = new File(['content'], 'initial.jpg', { type: 'image/jpeg' })
 
       render(
-        <FileUpload multiple={false} defaultValue={[initialFile]} onFilesChange={onFilesChange}>
+        <FileUpload multiple={false} defaultValue={[initialFile]} onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -1025,7 +1015,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1044,18 +1033,21 @@ describe('FileUpload', () => {
       uploadFiles(input, newFile)
 
       // THEN the new file should replace the initial file
-      expect(onFilesChange).toHaveBeenCalledWith([newFile])
+      expect(onFileChange).toHaveBeenCalledWith({
+        acceptedFiles: [newFile],
+        rejectedFiles: [],
+      })
       expect(screen.queryByText('initial.jpg')).not.toBeInTheDocument()
       expect(screen.getByText('new.jpg')).toBeInTheDocument()
     })
 
     it('should replace existing file when multiple is false and files are dropped', async () => {
       // GIVEN a FileUpload component with multiple={false}, defaultValue, and dropzone
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
       const initialFile = new File(['content'], 'initial.jpg', { type: 'image/jpeg' })
 
       render(
-        <FileUpload multiple={false} defaultValue={[initialFile]} onFilesChange={onFilesChange}>
+        <FileUpload multiple={false} defaultValue={[initialFile]} onFileChange={onFileChange}>
           <FileUpload.Dropzone>Drop files here</FileUpload.Dropzone>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -1064,7 +1056,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1089,10 +1080,10 @@ describe('FileUpload', () => {
 
       // THEN only the first dropped file should replace the initial file
       await waitFor(() => {
-        expect(onFilesChange).toHaveBeenCalled()
-        const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
-        expect(lastCall?.[0]).toHaveLength(1)
-        expect(lastCall?.[0]?.[0]?.name).toBe('dropped1.jpg')
+        expect(onFileChange).toHaveBeenCalled()
+        const lastCall = onFileChange.mock.calls[onFileChange.mock.calls.length - 1]
+        expect(lastCall?.[0]?.acceptedFiles).toHaveLength(1)
+        expect(lastCall?.[0]?.acceptedFiles?.[0]?.name).toBe('dropped1.jpg')
       })
 
       expect(screen.queryByText('initial.jpg')).not.toBeInTheDocument()
@@ -1104,10 +1095,10 @@ describe('FileUpload', () => {
   describe('Accept prop', () => {
     it('should accept all files when accept is not provided', async () => {
       // GIVEN a FileUpload component without accept prop
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
 
       render(
-        <FileUpload onFilesChange={onFilesChange}>
+        <FileUpload onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -1116,7 +1107,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1136,17 +1126,20 @@ describe('FileUpload', () => {
       uploadFiles(input, [file1, file2])
 
       // THEN all files should be accepted
-      expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
+      expect(onFileChange).toHaveBeenCalledWith({
+        acceptedFiles: [file1, file2],
+        rejectedFiles: [],
+      })
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.getByText('file2.pdf')).toBeInTheDocument()
     })
 
     it('should filter files by MIME type wildcard', async () => {
       // GIVEN a FileUpload component with accept="image/*"
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
 
       render(
-        <FileUpload accept="image/*" onFilesChange={onFilesChange}>
+        <FileUpload accept="image/*" onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -1155,7 +1148,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1176,7 +1168,15 @@ describe('FileUpload', () => {
       uploadFiles(input, [file1, file2, file3])
 
       // THEN only image files should be accepted
-      expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
+      expect(onFileChange).toHaveBeenCalledWith({
+        acceptedFiles: [file1, file2],
+        rejectedFiles: [
+          {
+            file: file3,
+            errors: ['FILE_INVALID_TYPE'],
+          },
+        ],
+      })
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.getByText('file2.png')).toBeInTheDocument()
       expect(screen.queryByText('file3.pdf')).not.toBeInTheDocument()
@@ -1184,10 +1184,10 @@ describe('FileUpload', () => {
 
     it('should filter files by exact MIME type', async () => {
       // GIVEN a FileUpload component with accept="image/png,application/pdf"
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
 
       render(
-        <FileUpload accept="image/png,application/pdf" onFilesChange={onFilesChange}>
+        <FileUpload accept="image/png,application/pdf" onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -1196,7 +1196,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1217,7 +1216,15 @@ describe('FileUpload', () => {
       uploadFiles(input, [file1, file2, file3])
 
       // THEN only PNG and PDF files should be accepted
-      expect(onFilesChange).toHaveBeenCalledWith([file1, file2])
+      expect(onFileChange).toHaveBeenCalledWith({
+        acceptedFiles: [file1, file2],
+        rejectedFiles: [
+          {
+            file: file3,
+            errors: ['FILE_INVALID_TYPE'],
+          },
+        ],
+      })
 
       expect(screen.getByText('file1.png')).toBeInTheDocument()
       expect(screen.getByText('file2.pdf')).toBeInTheDocument()
@@ -1226,10 +1233,10 @@ describe('FileUpload', () => {
 
     it('should filter files by extension', async () => {
       // GIVEN a FileUpload component with accept=".pdf,.doc,.jpg"
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
 
       render(
-        <FileUpload accept=".pdf,.doc,.jpg" onFilesChange={onFilesChange}>
+        <FileUpload accept=".pdf,.doc,.jpg" onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -1238,7 +1245,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1260,7 +1266,15 @@ describe('FileUpload', () => {
       uploadFiles(input, [file1, file2, file3, file4])
 
       // THEN only files with .pdf, .doc, or .jpg extensions should be accepted
-      expect(onFilesChange).toHaveBeenCalledWith([file1, file2, file3])
+      expect(onFileChange).toHaveBeenCalledWith({
+        acceptedFiles: [file1, file2, file3],
+        rejectedFiles: [
+          {
+            file: file4,
+            errors: ['FILE_INVALID_TYPE'],
+          },
+        ],
+      })
       expect(screen.getByText('file1.pdf')).toBeInTheDocument()
       expect(screen.getByText('file2.doc')).toBeInTheDocument()
       expect(screen.getByText('file3.jpg')).toBeInTheDocument()
@@ -1269,10 +1283,10 @@ describe('FileUpload', () => {
 
     it('should filter files by mixed MIME types and extensions', async () => {
       // GIVEN a FileUpload component with accept="image/*,.pdf,.doc"
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
 
       render(
-        <FileUpload accept="image/*,.pdf,.doc" onFilesChange={onFilesChange}>
+        <FileUpload accept="image/*,.pdf,.doc" onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -1281,7 +1295,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1303,7 +1316,15 @@ describe('FileUpload', () => {
       uploadFiles(input, [file1, file2, file3, file4])
 
       // THEN images, PDFs, and DOC files should be accepted
-      expect(onFilesChange).toHaveBeenCalledWith([file1, file2, file3])
+      expect(onFileChange).toHaveBeenCalledWith({
+        acceptedFiles: [file1, file2, file3],
+        rejectedFiles: [
+          {
+            file: file4,
+            errors: ['FILE_INVALID_TYPE'],
+          },
+        ],
+      })
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.getByText('file2.pdf')).toBeInTheDocument()
       expect(screen.getByText('file3.doc')).toBeInTheDocument()
@@ -1312,10 +1333,10 @@ describe('FileUpload', () => {
 
     it('should filter files when dropped on dropzone', async () => {
       // GIVEN a FileUpload component with accept="image/*" and dropzone
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
 
       render(
-        <FileUpload accept="image/*" onFilesChange={onFilesChange}>
+        <FileUpload accept="image/*" onFileChange={onFileChange}>
           <FileUpload.Dropzone>Drop files here</FileUpload.Dropzone>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -1324,7 +1345,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1347,10 +1367,10 @@ describe('FileUpload', () => {
 
       // THEN only image files should be accepted
       await waitFor(() => {
-        expect(onFilesChange).toHaveBeenCalled()
-        const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
-        expect(lastCall?.[0]).toHaveLength(1)
-        expect(lastCall?.[0]?.[0]?.name).toBe('dropped1.jpg')
+        expect(onFileChange).toHaveBeenCalled()
+        const lastCall = onFileChange.mock.calls[onFileChange.mock.calls.length - 1]
+        expect(lastCall?.[0]?.acceptedFiles).toHaveLength(1)
+        expect(lastCall?.[0]?.acceptedFiles?.[0]?.name).toBe('dropped1.jpg')
       })
 
       expect(screen.getByText('dropped1.jpg')).toBeInTheDocument()
@@ -1359,10 +1379,10 @@ describe('FileUpload', () => {
 
     it('should handle case-insensitive extension matching', async () => {
       // GIVEN a FileUpload component with accept=".PDF,.JPG"
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
 
       render(
-        <FileUpload accept=".PDF,.JPG" onFilesChange={onFilesChange}>
+        <FileUpload accept=".PDF,.JPG" onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -1371,7 +1391,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1390,7 +1409,10 @@ describe('FileUpload', () => {
       uploadFiles(input, [file1, file2, file3])
 
       // THEN all files should be accepted (case-insensitive)
-      expect(onFilesChange).toHaveBeenCalledWith([file1, file2, file3])
+      expect(onFileChange).toHaveBeenCalledWith({
+        acceptedFiles: [file1, file2, file3],
+        rejectedFiles: [],
+      })
       expect(screen.getByText('file1.PDF')).toBeInTheDocument()
       expect(screen.getByText('file2.jpg')).toBeInTheDocument()
       expect(screen.getByText('file3.JPG')).toBeInTheDocument()
@@ -1398,11 +1420,11 @@ describe('FileUpload', () => {
   })
 
   describe('MaxFiles prop', () => {
-    it('should call onMaxFilesReached when maxFiles limit is reached', async () => {
-      // GIVEN a FileUpload component with maxFiles={1} and onMaxFilesReached callback
-      const onMaxFilesReached = vi.fn()
+    it('should call onFileReject when maxFiles limit is reached', async () => {
+      // GIVEN a FileUpload component with maxFiles={1} and onFileReject callback
+      const onFileReject = vi.fn()
       render(
-        <FileUpload maxFiles={1} onMaxFilesReached={onMaxFilesReached}>
+        <FileUpload maxFiles={1} onFileReject={onFileReject}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
         </FileUpload>
       )
@@ -1416,16 +1438,18 @@ describe('FileUpload', () => {
       // WHEN a file is selected that exceeds the limit
       await userEvent.upload(input, file2)
 
-      // THEN onMaxFilesReached should be called
-      expect(onMaxFilesReached).toHaveBeenCalledWith(1, 1)
+      // THEN onFileReject should be called with rejected file
+      expect(onFileReject).toHaveBeenCalledWith({
+        files: [{ file: file2, errors: ['TOO_MANY_FILES'] }],
+      })
     })
 
     it('should limit the number of files when maxFiles is set', async () => {
       // GIVEN a FileUpload component with maxFiles={2}
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
 
       render(
-        <FileUpload maxFiles={2} onFilesChange={onFilesChange}>
+        <FileUpload maxFiles={2} onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -1434,7 +1458,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1453,23 +1476,27 @@ describe('FileUpload', () => {
       uploadFiles(input, [file1, file2, file3])
 
       // THEN all files should be rejected when batch exceeds maxFiles ("all or nothing" approach)
-      expect(onFilesChange).toHaveBeenCalledWith([])
+      expect(onFileChange).toHaveBeenCalledWith({
+        acceptedFiles: [],
+        rejectedFiles: expect.arrayContaining([
+          expect.objectContaining({
+            file: expect.any(File),
+            errors: expect.arrayContaining(['TOO_MANY_FILES']),
+          }),
+        ]),
+      })
       expect(screen.queryByText('file1.jpg')).not.toBeInTheDocument()
       expect(screen.queryByText('file2.png')).not.toBeInTheDocument()
       expect(screen.queryByText('file3.pdf')).not.toBeInTheDocument()
     })
 
-    it('should call onMaxFilesReached when limit is exceeded', async () => {
-      // GIVEN a FileUpload component with maxFiles={2} and onMaxFilesReached callback
-      const onMaxFilesReached = vi.fn()
-      const onFilesChange = vi.fn()
+    it('should call onFileReject when limit is exceeded', async () => {
+      // GIVEN a FileUpload component with maxFiles={2} and onFileReject callback
+      const onFileReject = vi.fn()
+      const onFileChange = vi.fn()
 
       render(
-        <FileUpload
-          maxFiles={2}
-          onMaxFilesReached={onMaxFilesReached}
-          onFilesChange={onFilesChange}
-        >
+        <FileUpload maxFiles={2} onFileReject={onFileReject} onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -1478,7 +1505,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1496,14 +1522,21 @@ describe('FileUpload', () => {
       // WHEN more files than maxFiles are selected
       uploadFiles(input, [file1, file2, file3])
 
-      // THEN onMaxFilesReached should be called with the limit and attempted count
-      expect(onMaxFilesReached).toHaveBeenCalledWith(2, 3)
+      // THEN onFileReject should be called with rejected files
+      expect(onFileReject).toHaveBeenCalledWith({
+        files: expect.arrayContaining([
+          expect.objectContaining({
+            file: expect.any(File),
+            errors: expect.arrayContaining(['TOO_MANY_FILES']),
+          }),
+        ]),
+      })
     })
 
     it('should reject all files when already at max', async () => {
       // GIVEN a FileUpload component with maxFiles={2} and defaultValue at the limit
-      const onMaxFilesReached = vi.fn()
-      const onFilesChange = vi.fn()
+      const onFileReject = vi.fn()
+      const onFileChange = vi.fn()
       const initialFiles = [
         new File(['content1'], 'initial1.jpg', { type: 'image/jpeg' }),
         new File(['content2'], 'initial2.png', { type: 'image/png' }),
@@ -1513,8 +1546,8 @@ describe('FileUpload', () => {
         <FileUpload
           maxFiles={2}
           defaultValue={initialFiles}
-          onMaxFilesReached={onMaxFilesReached}
-          onFilesChange={onFilesChange}
+          onFileReject={onFileReject}
+          onFileChange={onFileChange}
         >
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
@@ -1524,7 +1557,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1543,11 +1575,13 @@ describe('FileUpload', () => {
       // WHEN a new file is selected when already at max
       uploadFiles(input, newFile)
 
-      // THEN onMaxFilesReached should be called and the new file should be rejected
-      expect(onMaxFilesReached).toHaveBeenCalledWith(2, 1)
-      expect(onFilesChange).toHaveBeenCalled()
-      const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
-      expect(lastCall?.[0]).toHaveLength(2)
+      // THEN onFileReject should be called and the new file should be rejected
+      expect(onFileReject).toHaveBeenCalledWith({
+        files: [{ file: newFile, errors: ['TOO_MANY_FILES'] }],
+      })
+      expect(onFileChange).toHaveBeenCalled()
+      const lastCall = onFileChange.mock.calls[onFileChange.mock.calls.length - 1]
+      expect(lastCall?.[0]?.acceptedFiles).toHaveLength(2)
       expect(screen.queryByText('new.jpg')).not.toBeInTheDocument()
       expect(screen.getByText('initial1.jpg')).toBeInTheDocument()
       expect(screen.getByText('initial2.png')).toBeInTheDocument()
@@ -1555,15 +1589,11 @@ describe('FileUpload', () => {
 
     it('should work with drag and drop', async () => {
       // GIVEN a FileUpload component with maxFiles={2} and dropzone
-      const onMaxFilesReached = vi.fn()
-      const onFilesChange = vi.fn()
+      const onFileReject = vi.fn()
+      const onFileChange = vi.fn()
 
       render(
-        <FileUpload
-          maxFiles={2}
-          onMaxFilesReached={onMaxFilesReached}
-          onFilesChange={onFilesChange}
-        >
+        <FileUpload maxFiles={2} onFileReject={onFileReject} onFileChange={onFileChange}>
           <FileUpload.Dropzone>Drop files here</FileUpload.Dropzone>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -1572,7 +1602,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1596,10 +1625,17 @@ describe('FileUpload', () => {
 
       // THEN all files should be rejected when batch exceeds maxFiles ("all or nothing" approach)
       await waitFor(() => {
-        expect(onMaxFilesReached).toHaveBeenCalledWith(2, 3)
-        expect(onFilesChange).toHaveBeenCalled()
-        const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
-        expect(lastCall?.[0]).toHaveLength(0)
+        expect(onFileReject).toHaveBeenCalledWith({
+          files: expect.arrayContaining([
+            expect.objectContaining({
+              file: expect.any(File),
+              errors: expect.arrayContaining(['TOO_MANY_FILES']),
+            }),
+          ]),
+        })
+        expect(onFileChange).toHaveBeenCalled()
+        const lastCall = onFileChange.mock.calls[onFileChange.mock.calls.length - 1]
+        expect(lastCall?.[0]?.acceptedFiles).toHaveLength(0)
       })
 
       expect(screen.queryByText('dropped1.jpg')).not.toBeInTheDocument()
@@ -1609,15 +1645,15 @@ describe('FileUpload', () => {
 
     it('should work with multiple=false', async () => {
       // GIVEN a FileUpload component with multiple={false} and maxFiles={1}
-      const onMaxFilesReached = vi.fn()
-      const onFilesChange = vi.fn()
+      const onFileReject = vi.fn()
+      const onFileChange = vi.fn()
 
       render(
         <FileUpload
           multiple={false}
           maxFiles={1}
-          onMaxFilesReached={onMaxFilesReached}
-          onFilesChange={onFilesChange}
+          onFileReject={onFileReject}
+          onFileChange={onFileChange}
         >
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
@@ -1627,7 +1663,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1643,15 +1678,20 @@ describe('FileUpload', () => {
       // WHEN a first file is selected
       uploadFiles(input, file1)
 
-      expect(onFilesChange).toHaveBeenCalledWith([file1])
+      expect(onFileChange).toHaveBeenCalledWith({
+        acceptedFiles: [file1],
+        rejectedFiles: [],
+      })
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
 
       // WHEN another file is selected
       const file2 = new File(['content2'], 'file2.png', { type: 'image/png' })
       uploadFiles(input, file2)
 
-      // THEN onMaxFilesReached should be called
-      expect(onMaxFilesReached).toHaveBeenCalledWith(1, 1)
+      // THEN onFileReject should be called
+      expect(onFileReject).toHaveBeenCalledWith({
+        files: [{ file: file2, errors: ['TOO_MANY_FILES'] }],
+      })
 
       // When multiple=false and maxFiles=1, the new file should be rejected
       // The existing file should remain
@@ -1670,23 +1710,23 @@ describe('FileUpload', () => {
       // file1 might be removed when multiple=false replacement is rejected
       // This is acceptable behavior - the component clears when replacement fails
 
-      // onFilesChange might be called with empty array when multiple=false and replacement is rejected
-      const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
+      // onFileChange might be called with empty array when multiple=false and replacement is rejected
+      const lastCall = onFileChange.mock.calls[onFileChange.mock.calls.length - 1]
       // The last call might be empty array or still contain file1
       expect(lastCall?.[0]).toBeDefined()
     })
 
     it('should work with accept prop', async () => {
       // GIVEN a FileUpload component with accept="image/*" and maxFiles={2}
-      const onMaxFilesReached = vi.fn()
-      const onFilesChange = vi.fn()
+      const onFileReject = vi.fn()
+      const onFileChange = vi.fn()
 
       render(
         <FileUpload
           accept="image/*"
           maxFiles={2}
-          onMaxFilesReached={onMaxFilesReached}
-          onFilesChange={onFilesChange}
+          onFileReject={onFileReject}
+          onFileChange={onFileChange}
         >
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
@@ -1696,7 +1736,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1716,8 +1755,23 @@ describe('FileUpload', () => {
       uploadFiles(input, [file1, file2, file3, file4])
 
       // THEN all files should be rejected when batch exceeds maxFiles ("all or nothing" approach)
-      expect(onFilesChange).toHaveBeenCalledWith([])
-      expect(onMaxFilesReached).toHaveBeenCalledWith(2, 3)
+      expect(onFileChange).toHaveBeenCalledWith({
+        acceptedFiles: [],
+        rejectedFiles: expect.arrayContaining([
+          expect.objectContaining({
+            file: expect.any(File),
+            errors: expect.arrayContaining(['TOO_MANY_FILES']),
+          }),
+        ]),
+      })
+      expect(onFileReject).toHaveBeenCalledWith({
+        files: expect.arrayContaining([
+          expect.objectContaining({
+            file: expect.any(File),
+            errors: expect.arrayContaining(['TOO_MANY_FILES']),
+          }),
+        ]),
+      })
       expect(screen.queryByText('file1.jpg')).not.toBeInTheDocument()
       expect(screen.queryByText('file2.png')).not.toBeInTheDocument()
       expect(screen.queryByText('file3.pdf')).not.toBeInTheDocument()
@@ -1728,15 +1782,15 @@ describe('FileUpload', () => {
   describe('File size validation', () => {
     it('should filter files by maxFileSize', async () => {
       // GIVEN a FileUpload component with maxFileSize restriction
-      const onFileSizeError = vi.fn()
-      const onFilesChange = vi.fn()
+      const onFileReject = vi.fn()
+      const onFileChange = vi.fn()
       const maxFileSize = 1024 // 1 KB
 
       render(
         <FileUpload
           maxFileSize={maxFileSize}
-          onFileSizeError={onFileSizeError}
-          onFilesChange={onFilesChange}
+          onFileReject={onFileReject}
+          onFileChange={onFileChange}
         >
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
@@ -1746,7 +1800,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1764,16 +1817,24 @@ describe('FileUpload', () => {
       uploadFiles(input, [file1, file2])
 
       // THEN only the small file should be accepted
-      expect(onFilesChange).toHaveBeenCalledWith([file1])
-      expect(onFileSizeError).toHaveBeenCalled()
+      expect(onFileChange).toHaveBeenCalledWith({
+        acceptedFiles: [file1],
+        rejectedFiles: [
+          {
+            file: file2,
+            errors: ['FILE_TOO_LARGE'],
+          },
+        ],
+      })
+      expect(onFileReject).toHaveBeenCalled()
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.queryByText('file2.jpg')).not.toBeInTheDocument()
     })
 
-    it('should call onFileSizeError when file is below minFileSize', async () => {
-      const onFileSizeError = vi.fn()
+    it('should call onFileReject when file is below minFileSize', async () => {
+      const onFileReject = vi.fn()
       render(
-        <FileUpload minFileSize={1000} onFileSizeError={onFileSizeError}>
+        <FileUpload minFileSize={1000} onFileReject={onFileReject}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
         </FileUpload>
       )
@@ -1784,21 +1845,23 @@ describe('FileUpload', () => {
       // WHEN a file below minFileSize is selected
       await userEvent.upload(input, smallFile)
 
-      // THEN onFileSizeError should be called with the file and error code
-      expect(onFileSizeError).toHaveBeenCalledWith(smallFile, 'FILE_TOO_SMALL')
+      // THEN onFileReject should be called with the file and error code
+      expect(onFileReject).toHaveBeenCalledWith({
+        files: [{ file: smallFile, errors: ['FILE_TOO_SMALL'] }],
+      })
     })
 
-    it('should call onFileSizeError when file exceeds maxFileSize', async () => {
+    it('should call onFileReject when file exceeds maxFileSize', async () => {
       // GIVEN a FileUpload component with maxFileSize restriction
-      const onFileSizeError = vi.fn()
-      const onFilesChange = vi.fn()
+      const onFileReject = vi.fn()
+      const onFileChange = vi.fn()
       const maxFileSize = 1024 // 1 KB
 
       render(
         <FileUpload
           maxFileSize={maxFileSize}
-          onFileSizeError={onFileSizeError}
-          onFilesChange={onFilesChange}
+          onFileReject={onFileReject}
+          onFileChange={onFileChange}
         >
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
@@ -1808,7 +1871,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1824,21 +1886,23 @@ describe('FileUpload', () => {
       // WHEN a file exceeding maxFileSize is selected
       uploadFiles(input, largeFile)
 
-      // THEN onFileSizeError should be called with the file and error code
-      expect(onFileSizeError).toHaveBeenCalledWith(largeFile, 'FILE_TOO_LARGE')
+      // THEN onFileReject should be called with the file and error code
+      expect(onFileReject).toHaveBeenCalledWith({
+        files: [{ file: largeFile, errors: ['FILE_TOO_LARGE'] }],
+      })
     })
 
     it('should filter files by minFileSize', async () => {
       // GIVEN a FileUpload component with minFileSize restriction
-      const onFileSizeError = vi.fn()
-      const onFilesChange = vi.fn()
+      const onFileReject = vi.fn()
+      const onFileChange = vi.fn()
       const minFileSize = 100 // 100 bytes
 
       render(
         <FileUpload
           minFileSize={minFileSize}
-          onFileSizeError={onFileSizeError}
-          onFilesChange={onFilesChange}
+          onFileReject={onFileReject}
+          onFileChange={onFileChange}
         >
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
@@ -1848,7 +1912,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1866,23 +1929,31 @@ describe('FileUpload', () => {
       uploadFiles(input, [smallFile, largeFile])
 
       // THEN only the large enough file should be accepted
-      expect(onFilesChange).toHaveBeenCalledWith([largeFile])
-      expect(onFileSizeError).toHaveBeenCalled()
+      expect(onFileChange).toHaveBeenCalledWith({
+        acceptedFiles: [largeFile],
+        rejectedFiles: [
+          {
+            file: smallFile,
+            errors: ['FILE_TOO_SMALL'],
+          },
+        ],
+      })
+      expect(onFileReject).toHaveBeenCalled()
       expect(screen.queryByText('small.jpg')).not.toBeInTheDocument()
       expect(screen.getByText('large.jpg')).toBeInTheDocument()
     })
 
-    it('should call onFileSizeError when file is smaller than minFileSize', async () => {
+    it('should call onFileReject when file is smaller than minFileSize', async () => {
       // GIVEN a FileUpload component with minFileSize restriction
-      const onFileSizeError = vi.fn()
-      const onFilesChange = vi.fn()
+      const onFileReject = vi.fn()
+      const onFileChange = vi.fn()
       const minFileSize = 100 // 100 bytes
 
       render(
         <FileUpload
           minFileSize={minFileSize}
-          onFileSizeError={onFileSizeError}
-          onFilesChange={onFilesChange}
+          onFileReject={onFileReject}
+          onFileChange={onFileChange}
         >
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
@@ -1892,7 +1963,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1908,14 +1978,16 @@ describe('FileUpload', () => {
       // WHEN a file smaller than minFileSize is selected
       uploadFiles(input, smallFile)
 
-      // THEN onFileSizeError should be called with the file and error code
-      expect(onFileSizeError).toHaveBeenCalledWith(smallFile, 'FILE_TOO_SMALL')
+      // THEN onFileReject should be called with the file and error code
+      expect(onFileReject).toHaveBeenCalledWith({
+        files: [{ file: smallFile, errors: ['FILE_TOO_SMALL'] }],
+      })
     })
 
     it('should filter files by both minFileSize and maxFileSize', async () => {
       // GIVEN a FileUpload component with both minFileSize and maxFileSize restrictions
-      const onFileSizeError = vi.fn()
-      const onFilesChange = vi.fn()
+      const onFileReject = vi.fn()
+      const onFileChange = vi.fn()
       const minFileSize = 100 // 100 bytes
       const maxFileSize = 1024 // 1 KB
 
@@ -1923,8 +1995,8 @@ describe('FileUpload', () => {
         <FileUpload
           minFileSize={minFileSize}
           maxFileSize={maxFileSize}
-          onFileSizeError={onFileSizeError}
-          onFilesChange={onFilesChange}
+          onFileReject={onFileReject}
+          onFileChange={onFileChange}
         >
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
@@ -1934,7 +2006,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -1953,8 +2024,23 @@ describe('FileUpload', () => {
       uploadFiles(input, [tooSmall, valid, tooLarge])
 
       // THEN only the valid file should be accepted
-      expect(onFilesChange).toHaveBeenCalledWith([valid])
-      expect(onFileSizeError).toHaveBeenCalledTimes(2)
+      expect(onFileChange).toHaveBeenCalledWith({
+        acceptedFiles: [valid],
+        rejectedFiles: expect.any(Array),
+      })
+      expect(onFileReject).toHaveBeenCalledTimes(1)
+      expect(onFileReject).toHaveBeenCalledWith({
+        files: expect.arrayContaining([
+          expect.objectContaining({
+            file: tooSmall,
+            errors: expect.arrayContaining(['FILE_TOO_SMALL']),
+          }),
+          expect.objectContaining({
+            file: tooLarge,
+            errors: expect.arrayContaining(['FILE_TOO_LARGE']),
+          }),
+        ]),
+      })
       expect(screen.queryByText('small.jpg')).not.toBeInTheDocument()
       expect(screen.getByText('valid.jpg')).toBeInTheDocument()
       expect(screen.queryByText('large.jpg')).not.toBeInTheDocument()
@@ -1962,15 +2048,15 @@ describe('FileUpload', () => {
 
     it('should work with drag and drop', async () => {
       // GIVEN a FileUpload component with maxFileSize restriction and dropzone
-      const onFileSizeError = vi.fn()
-      const onFilesChange = vi.fn()
+      const onFileReject = vi.fn()
+      const onFileChange = vi.fn()
       const maxFileSize = 1024 // 1 KB
 
       render(
         <FileUpload
           maxFileSize={maxFileSize}
-          onFileSizeError={onFileSizeError}
-          onFilesChange={onFilesChange}
+          onFileReject={onFileReject}
+          onFileChange={onFileChange}
         >
           <FileUpload.Dropzone>Drop files here</FileUpload.Dropzone>
           <FileUpload.Context>
@@ -1980,7 +2066,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -2003,11 +2088,11 @@ describe('FileUpload', () => {
 
       // THEN only the small file should be accepted
       await waitFor(() => {
-        expect(onFilesChange).toHaveBeenCalled()
-        const lastCall = onFilesChange.mock.calls[onFilesChange.mock.calls.length - 1]
-        expect(lastCall?.[0]).toHaveLength(1)
-        expect(lastCall?.[0]?.[0]?.name).toBe('dropped1.jpg')
-        expect(onFileSizeError).toHaveBeenCalled()
+        expect(onFileChange).toHaveBeenCalled()
+        const lastCall = onFileChange.mock.calls[onFileChange.mock.calls.length - 1]
+        expect(lastCall?.[0]?.acceptedFiles).toHaveLength(1)
+        expect(lastCall?.[0]?.acceptedFiles?.[0]?.name).toBe('dropped1.jpg')
+        expect(onFileReject).toHaveBeenCalled()
       })
 
       expect(screen.getByText('dropped1.jpg')).toBeInTheDocument()
@@ -2016,16 +2101,16 @@ describe('FileUpload', () => {
 
     it('should work with accept prop', async () => {
       // GIVEN a FileUpload component with accept="image/*" and maxFileSize restriction
-      const onFileSizeError = vi.fn()
-      const onFilesChange = vi.fn()
+      const onFileReject = vi.fn()
+      const onFileChange = vi.fn()
       const maxFileSize = 1024 // 1 KB
 
       render(
         <FileUpload
           accept="image/*"
           maxFileSize={maxFileSize}
-          onFileSizeError={onFileSizeError}
-          onFilesChange={onFilesChange}
+          onFileReject={onFileReject}
+          onFileChange={onFileChange}
         >
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
@@ -2035,7 +2120,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -2054,7 +2138,19 @@ describe('FileUpload', () => {
       uploadFiles(input, [file1, file2, file3])
 
       // THEN only the small image file should be accepted (PDF is filtered by accept, large image by size)
-      expect(onFilesChange).toHaveBeenCalledWith([file1])
+      expect(onFileChange).toHaveBeenCalledWith({
+        acceptedFiles: [file1],
+        rejectedFiles: expect.arrayContaining([
+          expect.objectContaining({
+            file: file2,
+            errors: expect.arrayContaining(['FILE_TOO_LARGE']),
+          }),
+          expect.objectContaining({
+            file: file3,
+            errors: expect.arrayContaining(['FILE_INVALID_TYPE']),
+          }),
+        ]),
+      })
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.queryByText('file2.jpg')).not.toBeInTheDocument()
       expect(screen.queryByText('file3.pdf')).not.toBeInTheDocument()
@@ -2118,10 +2214,10 @@ describe('FileUpload', () => {
 
     it('should not allow file selection when disabled', async () => {
       // GIVEN a FileUpload component with disabled prop
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
 
       render(
-        <FileUpload disabled onFilesChange={onFilesChange}>
+        <FileUpload disabled onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -2130,7 +2226,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -2149,17 +2244,17 @@ describe('FileUpload', () => {
       // Wait a bit to ensure no state update occurs
       await new Promise(resolve => setTimeout(resolve, 100))
 
-      // THEN onFilesChange should not be called and the file should not be displayed
-      expect(onFilesChange).not.toHaveBeenCalled()
+      // THEN onFileChange should not be called and the file should not be displayed
+      expect(onFileChange).not.toHaveBeenCalled()
       expect(screen.queryByText('file.jpg')).not.toBeInTheDocument()
     })
 
     it('should not allow file selection when readOnly', async () => {
       // GIVEN a FileUpload component with readOnly prop
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
 
       render(
-        <FileUpload readOnly onFilesChange={onFilesChange}>
+        <FileUpload readOnly onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -2168,7 +2263,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -2187,22 +2281,22 @@ describe('FileUpload', () => {
       // Wait a bit to ensure no state update occurs
       await new Promise(resolve => setTimeout(resolve, 100))
 
-      // THEN onFilesChange should not be called and the file should not be displayed
-      expect(onFilesChange).not.toHaveBeenCalled()
+      // THEN onFileChange should not be called and the file should not be displayed
+      expect(onFileChange).not.toHaveBeenCalled()
       expect(screen.queryByText('file.jpg')).not.toBeInTheDocument()
     })
 
     it('should not allow file removal when disabled', async () => {
       // GIVEN a FileUpload component with disabled prop and defaultValue
       const user = userEvent.setup()
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
       const files = [
         new File(['content1'], 'file1.jpg', { type: 'image/jpeg' }),
         new File(['content2'], 'file2.png', { type: 'image/png' }),
       ]
 
       render(
-        <FileUpload disabled defaultValue={files} onFilesChange={onFilesChange}>
+        <FileUpload disabled defaultValue={files} onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -2211,7 +2305,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -2235,8 +2328,8 @@ describe('FileUpload', () => {
       // Wait a bit to ensure no state update occurs
       await new Promise(resolve => setTimeout(resolve, 100))
 
-      // THEN onFilesChange should not be called and files should remain
-      expect(onFilesChange).not.toHaveBeenCalled()
+      // THEN onFileChange should not be called and files should remain
+      expect(onFileChange).not.toHaveBeenCalled()
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.getByText('file2.png')).toBeInTheDocument()
     })
@@ -2244,14 +2337,14 @@ describe('FileUpload', () => {
     it('should not allow file removal when readOnly', async () => {
       // GIVEN a FileUpload component with readOnly prop and defaultValue
       const user = userEvent.setup()
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
       const files = [
         new File(['content1'], 'file1.jpg', { type: 'image/jpeg' }),
         new File(['content2'], 'file2.png', { type: 'image/png' }),
       ]
 
       render(
-        <FileUpload readOnly defaultValue={files} onFilesChange={onFilesChange}>
+        <FileUpload readOnly defaultValue={files} onFileChange={onFileChange}>
           <FileUpload.Trigger>Upload</FileUpload.Trigger>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -2260,7 +2353,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -2284,18 +2376,18 @@ describe('FileUpload', () => {
       // Wait a bit to ensure no state update occurs
       await new Promise(resolve => setTimeout(resolve, 100))
 
-      // THEN onFilesChange should not be called and files should remain
-      expect(onFilesChange).not.toHaveBeenCalled()
+      // THEN onFileChange should not be called and files should remain
+      expect(onFileChange).not.toHaveBeenCalled()
       expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       expect(screen.getByText('file2.png')).toBeInTheDocument()
     })
 
     it('should not allow drag and drop when disabled', async () => {
       // GIVEN a FileUpload component with disabled prop and dropzone
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
 
       render(
-        <FileUpload disabled onFilesChange={onFilesChange}>
+        <FileUpload disabled onFileChange={onFileChange}>
           <FileUpload.Dropzone>Drop files here</FileUpload.Dropzone>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -2304,7 +2396,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -2331,17 +2422,17 @@ describe('FileUpload', () => {
       // Wait a bit to ensure no state update occurs
       await new Promise(resolve => setTimeout(resolve, 100))
 
-      // THEN onFilesChange should not be called and the file should not be displayed
-      expect(onFilesChange).not.toHaveBeenCalled()
+      // THEN onFileChange should not be called and the file should not be displayed
+      expect(onFileChange).not.toHaveBeenCalled()
       expect(screen.queryByText('dropped.jpg')).not.toBeInTheDocument()
     })
 
     it('should not allow drag and drop when readOnly', async () => {
       // GIVEN a FileUpload component with readOnly prop and dropzone
-      const onFilesChange = vi.fn()
+      const onFileChange = vi.fn()
 
       render(
-        <FileUpload readOnly onFilesChange={onFilesChange}>
+        <FileUpload readOnly onFileChange={onFileChange}>
           <FileUpload.Dropzone>Drop files here</FileUpload.Dropzone>
           <FileUpload.Context>
             {({ acceptedFiles }) => (
@@ -2350,7 +2441,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -2376,8 +2466,8 @@ describe('FileUpload', () => {
       // Wait a bit to ensure no state update occurs
       await new Promise(resolve => setTimeout(resolve, 100))
 
-      // THEN onFilesChange should not be called and the file should not be displayed
-      expect(onFilesChange).not.toHaveBeenCalled()
+      // THEN onFileChange should not be called and the file should not be displayed
+      expect(onFileChange).not.toHaveBeenCalled()
       expect(screen.queryByText('dropped.jpg')).not.toBeInTheDocument()
     })
 
@@ -2444,7 +2534,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -2476,7 +2565,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -2510,7 +2598,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -2525,13 +2612,13 @@ describe('FileUpload', () => {
       expect(screen.getByText('file2.png')).toBeInTheDocument()
     })
 
-    it('should call onFilesChange when files are added in controlled mode', async () => {
+    it('should call onFileChange when files are added in controlled mode', async () => {
       // GIVEN a FileUpload component in controlled mode
       const ControlledWrapper = () => {
         const [files, setFiles] = useState<File[]>([])
 
         return (
-          <FileUpload value={files} onFilesChange={setFiles}>
+          <FileUpload value={files} onFileChange={details => setFiles(details.acceptedFiles)}>
             <FileUpload.Trigger>Upload</FileUpload.Trigger>
             <FileUpload.Context>
               {({ acceptedFiles }) => (
@@ -2540,7 +2627,6 @@ describe('FileUpload', () => {
                     <FileUpload.AcceptedFile
                       key={`${file.name}-${index}`}
                       file={file}
-                      fileIndex={index}
                       deleteButtonAriaLabel={`Delete ${file.name}`}
                     />
                   ))}
@@ -2559,13 +2645,13 @@ describe('FileUpload', () => {
       // WHEN a file is selected
       uploadFiles(input, file1)
 
-      // THEN the component should update automatically via onFilesChange -> setFiles
+      // THEN the component should update automatically via onFileChange -> setFiles
       await waitFor(() => {
         expect(screen.getByText('file1.jpg')).toBeInTheDocument()
       })
     })
 
-    it('should call onFilesChange when files are removed in controlled mode', async () => {
+    it('should call onFileChange when files are removed in controlled mode', async () => {
       // GIVEN a FileUpload component in controlled mode with initial files
       const file1 = new File(['content1'], 'file1.jpg', { type: 'image/jpeg' })
       const file2 = new File(['content2'], 'file2.png', { type: 'image/png' })
@@ -2574,7 +2660,7 @@ describe('FileUpload', () => {
         const [files, setFiles] = useState<File[]>([file1, file2])
 
         return (
-          <FileUpload value={files} onFilesChange={setFiles}>
+          <FileUpload value={files} onFileChange={details => setFiles(details.acceptedFiles)}>
             <FileUpload.Trigger>Upload</FileUpload.Trigger>
             <FileUpload.Context>
               {({ acceptedFiles }) => (
@@ -2583,7 +2669,6 @@ describe('FileUpload', () => {
                     <FileUpload.AcceptedFile
                       key={`${file.name}-${index}`}
                       file={file}
-                      fileIndex={index}
                       deleteButtonAriaLabel={`Delete ${file.name}`}
                     />
                   ))}
@@ -2608,7 +2693,7 @@ describe('FileUpload', () => {
       const firstDeleteButton = deleteButtons[0]!
       await userEvent.click(firstDeleteButton)
 
-      // THEN the component should update automatically via onFilesChange -> setFiles
+      // THEN the component should update automatically via onFileChange -> setFiles
       await waitFor(() => {
         expect(screen.queryByText('file1.jpg')).not.toBeInTheDocument()
       })
@@ -2633,7 +2718,7 @@ describe('FileUpload', () => {
             >
               Add file2
             </button>
-            <FileUpload value={files} onFilesChange={setFiles}>
+            <FileUpload value={files} onFileChange={details => setFiles(details.acceptedFiles)}>
               <FileUpload.Trigger>Upload</FileUpload.Trigger>
               <FileUpload.Context>
                 {({ acceptedFiles }) => (
@@ -2642,7 +2727,6 @@ describe('FileUpload', () => {
                       <FileUpload.AcceptedFile
                         key={`${file.name}-${index}`}
                         file={file}
-                        fileIndex={index}
                         deleteButtonAriaLabel={`Delete ${file.name}`}
                       />
                     ))}
@@ -2687,7 +2771,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -2717,7 +2800,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -2836,7 +2918,6 @@ describe('FileUpload', () => {
                       <FileUpload.RejectedFile
                         key={index}
                         rejectedFile={rejected}
-                        rejectedFileIndex={index}
                         renderError={error => error}
                         deleteButtonAriaLabel={`Remove ${rejected.file.name} error`}
                       />
@@ -2895,31 +2976,6 @@ describe('FileUpload', () => {
       // THEN an image preview should be displayed
       const img = document.querySelector('img')
       expect(img).toBeInTheDocument()
-    })
-  })
-
-  describe('Item', () => {
-    it('should allow creating custom file items', () => {
-      // GIVEN a FileUpload component with defaultValue and custom Item
-      const file = new File(['content'], 'test.jpg', { type: 'image/jpeg' })
-      render(
-        <FileUpload defaultValue={[file]}>
-          <FileUpload.Context>
-            {({ acceptedFiles }) => (
-              <ul>
-                {acceptedFiles.map((f, index) => (
-                  <FileUpload.Item key={index}>
-                    <div data-testid="custom-item">Custom: {f.name}</div>
-                  </FileUpload.Item>
-                ))}
-              </ul>
-            )}
-          </FileUpload.Context>
-        </FileUpload>
-      )
-
-      // THEN custom file items should be rendered
-      expect(screen.getByTestId('custom-item')).toHaveTextContent('Custom: test.jpg')
     })
   })
 
@@ -3004,7 +3060,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={index}
                     file={f}
-                    fileIndex={index}
                     uploadProgress={50}
                     deleteButtonAriaLabel={`Delete ${f.name}`}
                     progressAriaLabel="Upload progress: 50%"
@@ -3034,7 +3089,6 @@ describe('FileUpload', () => {
                   <FileUpload.AcceptedFile
                     key={index}
                     file={f}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${f.name}`}
                   />
                 ))}
