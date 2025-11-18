@@ -22,7 +22,8 @@ export const Trigger = ({
   ref,
   ...props
 }: FileUploadTriggerProps) => {
-  const { inputRef, triggerRef, disabled, readOnly } = useFileUploadContext()
+  const { inputRef, triggerRef, disabled, readOnly, description, isInvalid, isRequired } =
+    useFileUploadContext()
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -37,7 +38,6 @@ export const Trigger = ({
 
   return (
     <Comp
-      // htmlFor="image_uploads"
       type="button"
       ref={(node: HTMLElement | null) => {
         // Forward ref to both the context ref and the user ref
@@ -58,6 +58,9 @@ export const Trigger = ({
       className={cx(className)}
       disabled={disabled || readOnly}
       onClick={handleClick}
+      aria-describedby={description}
+      aria-invalid={isInvalid}
+      aria-required={isRequired}
       {...props}
     >
       {children}

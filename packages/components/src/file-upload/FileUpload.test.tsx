@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event'
 import { useState } from 'react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
+import { FormField } from '../form-field'
 import { FileUpload } from '.'
 import { uploadFiles } from './test-utils'
 
@@ -3101,6 +3102,204 @@ describe('FileUpload', () => {
       // THEN no progress indicator should be displayed
       const progress = screen.queryByRole('progressbar')
       expect(progress).not.toBeInTheDocument()
+    })
+  })
+
+  describe('FormField integration', () => {
+    it('should render label within field', () => {
+      const name = 'file-upload'
+      const label = 'Upload files'
+
+      render(
+        <FormField name={name}>
+          <FormField.Label>{label}</FormField.Label>
+
+          <FileUpload>
+            <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          </FileUpload>
+        </FormField>
+      )
+
+      const inputEl = document.querySelector(`input[name="${name}"]`)
+
+      expect(inputEl).toBeInTheDocument()
+      expect(inputEl).toHaveAttribute('name', name)
+      expect(screen.getByLabelText(label)).toBeInTheDocument()
+    })
+
+    it('should render with required property within field', () => {
+      render(
+        <FormField name="file-upload" isRequired>
+          <FormField.Label>Upload files</FormField.Label>
+
+          <FileUpload>
+            <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          </FileUpload>
+        </FormField>
+      )
+
+      const inputEl = document.querySelector('input[name="file-upload"]')
+
+      expect(inputEl).toBeRequired()
+    })
+
+    it('should render with helper message within field', () => {
+      const name = 'file-upload'
+      const label = 'Upload files'
+      const helperText = 'Accepted formats: PDF, JPG, PNG. Maximum file size: 5MB'
+
+      render(
+        <FormField name={name}>
+          <FormField.Label>{label}</FormField.Label>
+
+          <FileUpload>
+            <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          </FileUpload>
+
+          <FormField.HelperMessage>{helperText}</FormField.HelperMessage>
+        </FormField>
+      )
+
+      const inputEl = document.querySelector(`input[name="${name}"]`)
+
+      expect(inputEl).toHaveAccessibleDescription(helperText)
+    })
+
+    it('should render with validation error within field', () => {
+      const name = 'file-upload'
+      const label = 'Upload files'
+      const errorText = 'Please upload at least one file'
+
+      render(
+        <FormField name={name} state="error">
+          <FormField.Label>{label}</FormField.Label>
+
+          <FileUpload>
+            <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          </FileUpload>
+
+          <FormField.ErrorMessage>{errorText}</FormField.ErrorMessage>
+        </FormField>
+      )
+
+      const inputEl = document.querySelector(`input[name="${name}"]`)
+
+      expect(inputEl).toBeInvalid()
+      expect(inputEl).toHaveAccessibleDescription(errorText)
+    })
+
+    it('should be read only when field is read only', () => {
+      const label = 'Upload files'
+
+      render(
+        <FormField readOnly>
+          <FormField.Label>{label}</FormField.Label>
+
+          <FileUpload>
+            <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          </FileUpload>
+        </FormField>
+      )
+
+      const inputEl = document.querySelector('input[type="file"]')
+
+      expect(inputEl).toHaveAttribute('readOnly')
+    })
+
+    it('should be disabled when field is disabled', () => {
+      const label = 'Upload files'
+
+      render(
+        <FormField disabled>
+          <FormField.Label>{label}</FormField.Label>
+
+          <FileUpload>
+            <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          </FileUpload>
+        </FormField>
+      )
+
+      const inputEl = document.querySelector('input[type="file"]')
+
+      expect(inputEl).toBeDisabled()
+    })
+
+    it('should apply aria-describedby and aria-invalid to trigger when field has error', () => {
+      const label = 'Upload files'
+      const errorText = 'Please upload at least one file'
+
+      render(
+        <FormField name="file-upload" state="error">
+          <FormField.Label>{label}</FormField.Label>
+
+          <FileUpload>
+            <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          </FileUpload>
+
+          <FormField.ErrorMessage>{errorText}</FormField.ErrorMessage>
+        </FormField>
+      )
+
+      const trigger = screen.getByRole('button', { name: 'Upload' })
+      const errorMessage = screen.getByText(errorText)
+
+      expect(trigger).toHaveAttribute('aria-describedby', errorMessage.getAttribute('id'))
+      expect(trigger).toHaveAttribute('aria-invalid', 'true')
+    })
+
+    it('should apply aria-describedby and aria-invalid to dropzone when field has error', () => {
+      const label = 'Upload files'
+      const errorText = 'Please upload at least one file'
+
+      render(
+        <FormField name="file-upload" state="error">
+          <FormField.Label>{label}</FormField.Label>
+
+          <FileUpload>
+            <FileUpload.Dropzone>Drop files here</FileUpload.Dropzone>
+          </FileUpload>
+
+          <FormField.ErrorMessage>{errorText}</FormField.ErrorMessage>
+        </FormField>
+      )
+
+      const dropzone = screen.getByRole('button', { name: 'Drop files here' })
+      const errorMessage = screen.getByText(errorText)
+
+      expect(dropzone).toHaveAttribute('aria-describedby', errorMessage.getAttribute('id'))
+      expect(dropzone).toHaveAttribute('aria-invalid', 'true')
+    })
+
+    it('should apply aria-required to trigger when field is required', () => {
+      render(
+        <FormField name="file-upload" isRequired>
+          <FormField.Label>Upload files</FormField.Label>
+
+          <FileUpload>
+            <FileUpload.Trigger>Upload</FileUpload.Trigger>
+          </FileUpload>
+        </FormField>
+      )
+
+      const trigger = screen.getByRole('button', { name: 'Upload' })
+
+      expect(trigger).toHaveAttribute('aria-required', 'true')
+    })
+
+    it('should apply aria-required to dropzone when field is required', () => {
+      render(
+        <FormField name="file-upload" isRequired>
+          <FormField.Label>Upload files</FormField.Label>
+
+          <FileUpload>
+            <FileUpload.Dropzone>Drop files here</FileUpload.Dropzone>
+          </FileUpload>
+        </FormField>
+      )
+
+      const dropzone = screen.getByRole('button', { name: 'Drop files here' })
+
+      expect(dropzone).toHaveAttribute('aria-required', 'true')
     })
   })
 })

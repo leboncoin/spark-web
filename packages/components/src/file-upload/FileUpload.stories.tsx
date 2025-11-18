@@ -9,6 +9,7 @@ import { Export } from '@spark-ui/icons/Export'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useEffect, useRef, useState } from 'react'
 
+import { FormField } from '../form-field'
 import { FileUpload, type FileUploadFileError, type RejectedFile } from '.'
 
 const meta: Meta<typeof FileUpload> = {
@@ -691,5 +692,150 @@ export const WithProgress: StoryFn = () => {
         )}
       </FileUpload.Context>
     </FileUpload>
+  )
+}
+
+export const FieldLabel: StoryFn = _args => {
+  return (
+    <FormField name="file-upload">
+      <FormField.Label>Upload files</FormField.Label>
+
+      <FileUpload>
+        <FileUpload.Dropzone>
+          <Icon size="lg">
+            <Export />
+          </Icon>
+          <div className="text-subhead gap-md flex flex-col">
+            <p>Drag and drop files or</p>
+
+            <FileUpload.Trigger>browse my files</FileUpload.Trigger>
+          </div>
+        </FileUpload.Dropzone>
+        <FileUpload.Context>
+          {({ acceptedFiles }) => (
+            <ul className="gap-md my-md flex default:flex-col">
+              {acceptedFiles.map((file, index) => (
+                <FileUpload.AcceptedFile
+                  key={`${file.name}-${file.size}-${index}`}
+                  file={file}
+                  deleteButtonAriaLabel={`Delete ${file.name}`}
+                />
+              ))}
+            </ul>
+          )}
+        </FileUpload.Context>
+      </FileUpload>
+    </FormField>
+  )
+}
+
+export const FieldRequired: StoryFn = _args => {
+  return (
+    <div>
+      <p className="mb-xl">* Required fields</p>
+      <FormField name="file-upload" isRequired>
+        <FormField.Label>Upload files</FormField.Label>
+
+        <FileUpload>
+          <FileUpload.Dropzone>
+            <Icon size="lg">
+              <Export />
+            </Icon>
+            <div className="text-subhead gap-md flex flex-col">
+              <p>Drag and drop files or</p>
+
+              <FileUpload.Trigger>browse my files</FileUpload.Trigger>
+            </div>
+          </FileUpload.Dropzone>
+          <FileUpload.Context>
+            {({ acceptedFiles }) => (
+              <ul className="gap-md my-md flex default:flex-col">
+                {acceptedFiles.map((file, index) => (
+                  <FileUpload.AcceptedFile
+                    key={`${file.name}-${file.size}-${index}`}
+                    file={file}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
+                  />
+                ))}
+              </ul>
+            )}
+          </FileUpload.Context>
+        </FileUpload>
+      </FormField>
+    </div>
+  )
+}
+
+export const FieldHelperMessage: StoryFn = _args => {
+  return (
+    <FormField name="file-upload">
+      <FormField.Label>Upload files</FormField.Label>
+
+      <FileUpload>
+        <FileUpload.Dropzone>
+          <Icon size="lg">
+            <Export />
+          </Icon>
+          <div className="text-subhead gap-md flex flex-col">
+            <p>Drag and drop files or</p>
+
+            <FileUpload.Trigger>browse my files</FileUpload.Trigger>
+          </div>
+        </FileUpload.Dropzone>
+        <FileUpload.Context>
+          {({ acceptedFiles }) => (
+            <ul className="gap-md my-md flex default:flex-col">
+              {acceptedFiles.map((file, index) => (
+                <FileUpload.AcceptedFile
+                  key={`${file.name}-${file.size}-${index}`}
+                  file={file}
+                  deleteButtonAriaLabel={`Delete ${file.name}`}
+                />
+              ))}
+            </ul>
+          )}
+        </FileUpload.Context>
+      </FileUpload>
+
+      <FormField.HelperMessage>
+        Accepted formats: PDF, JPG, PNG. Maximum file size: 5MB
+      </FormField.HelperMessage>
+    </FormField>
+  )
+}
+
+export const FieldInvalid: StoryFn = _args => {
+  return (
+    <FormField name="file-upload" state="error">
+      <FormField.Label>Upload files</FormField.Label>
+
+      <FileUpload>
+        <FileUpload.Dropzone>
+          <Icon size="lg">
+            <Export />
+          </Icon>
+          <div className="text-subhead gap-md flex flex-col">
+            <p>Drag and drop files or</p>
+
+            <FileUpload.Trigger>browse my files</FileUpload.Trigger>
+          </div>
+        </FileUpload.Dropzone>
+        <FileUpload.Context>
+          {({ acceptedFiles }) => (
+            <ul className="gap-md my-md flex default:flex-col">
+              {acceptedFiles.map((file, index) => (
+                <FileUpload.AcceptedFile
+                  key={`${file.name}-${file.size}-${index}`}
+                  file={file}
+                  deleteButtonAriaLabel={`Delete ${file.name}`}
+                />
+              ))}
+            </ul>
+          )}
+        </FileUpload.Context>
+      </FileUpload>
+
+      <FormField.ErrorMessage>Please upload at least one file</FormField.ErrorMessage>
+    </FormField>
   )
 }
