@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.4.3](https://github.com/leboncoin/spark-web/compare/v11.4.2...v11.4.3) (2025-11-18)
+
+### Bug Fixes
+
+- **components:** cleanup stories ([189df88](https://github.com/leboncoin/spark-web/commit/189df88356c777201c37e4f87f2e64635c080634))
+
 ## [11.4.2](https://github.com/leboncoin/spark-web/compare/v11.4.1...v11.4.2) (2025-11-17)
 
 ### Bug Fixes

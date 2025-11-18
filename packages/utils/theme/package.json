@@ -1,6 +1,6 @@
 {
   "name": "@spark-ui/theme-utils",
-  "version": "11.4.2",
+  "version": "11.4.3",
   "description": "package for managing Spark theme configuration",
   "publishConfig": {
     "access": "public"
