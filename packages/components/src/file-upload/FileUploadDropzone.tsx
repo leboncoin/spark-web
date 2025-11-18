@@ -5,12 +5,10 @@ import { useFileUploadContext } from './FileUpload'
 
 export function Dropzone({
   children,
-  onFiles,
   className,
   unstyled = false,
 }: {
   children?: React.ReactNode
-  onFiles?: (files: FileList) => void
   className?: string
   unstyled?: boolean
 }) {
@@ -30,7 +28,6 @@ export function Dropzone({
     }
 
     const files = e.dataTransfer.files
-    onFiles?.(files)
 
     // Add files to the context
     // Convert to array - handle both FileList and array (for tests)
@@ -82,11 +79,11 @@ export function Dropzone({
         unstyled
           ? className
           : cx(
-              'default:bg-surface default:border-sm default:border-outline default:rounded-lg default:border-dashed',
+              'default:bg-surface default:border-sm default:border-outline default:relative default:rounded-lg default:border-dashed',
               'gap-lg flex flex-col items-center justify-center text-center',
               'default:p-xl',
               'transition-colors duration-200',
-              !isDisabled && 'hover:bg-surface-hovered',
+              !isDisabled && 'default:hover:bg-surface-hovered',
               'data-[drag-over=true]:border-outline-high data-[drag-over=true]:bg-surface-hovered data-[drag-over=true]:border-solid',
               // Disabled: more visually disabled (opacity + cursor)
               ctx.disabled && 'cursor-not-allowed opacity-50',

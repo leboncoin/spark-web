@@ -34,7 +34,7 @@ export default () => (
       {({ acceptedFiles }) => (
         <ul>
           {acceptedFiles.map((file, index) => (
-            <FileUpload.AcceptedFile key={index} file={file} fileIndex={index} />
+            <FileUpload.AcceptedFile key={index} file={file} />
           ))}
         </ul>
       )}
@@ -43,7 +43,37 @@ export default () => (
 );
 ```
 
+## Callbacks
 
+The FileUpload component provides several callback props that allow you to respond to file selection and validation events:
+
+- **`onFileAccept`** - Called when files are accepted after validation. Receives details about the accepted files.
+  ```tsx
+  onFileAccept?: (details: FileAcceptDetails) => void
+  
+  interface FileAcceptDetails {
+    files: File[]
+  }
+  ```
+
+- **`onFileReject`** - Called when files are rejected due to validation errors. Receives details about the rejected files and their error codes.
+  ```tsx
+  onFileReject?: (details: FileRejectDetails) => void
+  
+  interface FileRejectDetails {
+    files: RejectedFile[]
+  }
+  ```
+
+- **`onFileChange`** - Called when files change (both accepted and rejected). Receives details about both accepted and rejected files. Use this for controlled mode by extracting `details.acceptedFiles` to update the `value` prop.
+  ```tsx
+  onFileChange?: (details: FileChangeDetails) => void
+  
+  interface FileChangeDetails {
+    acceptedFiles: File[]
+    rejectedFiles: RejectedFile[]
+  }
+  ```
 
 ## API Reference
 
@@ -59,12 +89,36 @@ Triggers the file selection dialog when clicked. Can be styled as a button or re
 
 <ArgTypes of={FileUpload.Trigger} />
 
+### _.Dropzone
+
+Provides a drag-and-drop area for file selection. Can be customized with children and supports the `unstyled` prop to remove default styling.
+
+<ArgTypes of={FileUpload.Dropzone} />
+
+### _.Context
+
+A render prop component that provides access to `acceptedFiles`, `rejectedFiles`, `formatFileSize`, and `locale` from the FileUpload context.
+
+<ArgTypes of={FileUpload.Context} />
+
+### _.AcceptedFile
+
+Displays an accepted file with its name, size, and a delete button. Supports upload progress display via the `uploadProgress` prop.
+
+<ArgTypes of={FileUpload.AcceptedFile} />
+
+### _.RejectedFile
+
+Displays a rejected file with its name, size, error messages, and a delete button. Requires a `renderError` function to customize error message display.
+
+<ArgTypes of={FileUpload.RejectedFile} />
+
 
 ## Examples
 
 ### Controlled
 
-The FileUpload component supports both controlled and uncontrolled modes. In controlled mode, you manage the files state externally using the `value` prop and update it via the `onFilesChange` callback. This is useful when you need to synchronize the file list with external state management, form libraries, or when you want to programmatically control the files.
+The FileUpload component supports both controlled and uncontrolled modes. In controlled mode, you manage the files state externally using the `value` prop and update it via the `onFileChange` callback by extracting `details.acceptedFiles`. This is useful when you need to synchronize the file list with external state management, form libraries, or when you want to programmatically control the files.
 
 <Canvas of={stories.Controlled} />
 
@@ -140,9 +194,9 @@ Use `unstyled` on the `FileUpload.Trigger` and wrap it with a Spark UI component
 
 ### Custom Dropzone
 
-Customize the dropzone appearance and behavior by wrapping it with other components or modifying its content. 
+Customize the dropzone appearance and behavior by wrapping it with other components or modifying its content. This example demonstrates the use of sub-components such as `FileUpload.PreviewImage` to display image previews and `FileUpload.ItemDeleteTrigger` to add a delete button. You can also use `FileUpload.RejectedFileDeleteTrigger` for rejected files.
 
-{/* <Canvas of={stories.Multiple} /> */}
+<Canvas of={stories.CustomDropzone} />
 
 ### Custom files preview
 
@@ -150,9 +204,6 @@ Use `FileUpload.Context` to access `acceptedFiles` and customize the markup of t
 
 <Canvas of={stories.WithCustomFileRender} />
 
-### Photos Gallery
-
-<Canvas of={stories.PhotosGallery} />
 
 ## Accessibility
 

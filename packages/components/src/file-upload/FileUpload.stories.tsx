@@ -4,11 +4,12 @@ import { Icon } from '@spark-ui/components/icon'
 import { IconButton } from '@spark-ui/components/icon-button'
 import { Tag } from '@spark-ui/components/tag'
 import { TextLink } from '@spark-ui/components/text-link'
+import { AddImageOutline } from '@spark-ui/icons/AddImageOutline'
 import { Export } from '@spark-ui/icons/Export'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useEffect, useRef, useState } from 'react'
 
-import { FileUpload, type FileUploadFileError } from '.'
+import { FileUpload, type FileUploadFileError, type RejectedFile } from '.'
 
 const meta: Meta<typeof FileUpload> = {
   title: 'Experimental/FileUpload',
@@ -45,7 +46,6 @@ export const Default: StoryFn = () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${file.size}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -75,7 +75,6 @@ export const Default: StoryFn = () => {
                   <FileUpload.AcceptedFile
                     key={`${file.name}-${file.size}-${index}`}
                     file={file}
-                    fileIndex={index}
                     deleteButtonAriaLabel={`Delete ${file.name}`}
                   />
                 ))}
@@ -85,38 +84,6 @@ export const Default: StoryFn = () => {
         </FileUpload>
       </div>
     </div>
-  )
-}
-
-export const Dropzone: StoryFn = () => {
-  return (
-    <FileUpload>
-      <FileUpload.Dropzone>
-        <Icon size="lg">
-          <Export />
-        </Icon>
-        <div className="text-subhead gap-md flex flex-col">
-          <p>Drag and drop a file or</p>
-
-          <FileUpload.Trigger>browse my files</FileUpload.Trigger>
-        </div>
-        <p className="text-caption text-on-surface/dim-1">.png, .jpg up to 5MB</p>
-      </FileUpload.Dropzone>
-      <FileUpload.Context>
-        {({ acceptedFiles }) => (
-          <ul className="gap-md my-md flex default:flex-col">
-            {acceptedFiles.map((file, index) => (
-              <FileUpload.AcceptedFile
-                key={`${file.name}-${file.size}-${index}`}
-                file={file}
-                fileIndex={index}
-                deleteButtonAriaLabel={`Delete ${file.name}`}
-              />
-            ))}
-          </ul>
-        )}
-      </FileUpload.Context>
-    </FileUpload>
   )
 }
 
@@ -135,7 +102,6 @@ export const CustomTrigger: StoryFn = () => {
                 <FileUpload.AcceptedFile
                   key={`${file.name}-${file.size}-${index}`}
                   file={file}
-                  fileIndex={index}
                   deleteButtonAriaLabel={`Delete ${file.name}`}
                 />
               ))}
@@ -159,7 +125,6 @@ export const CustomTrigger: StoryFn = () => {
                 <FileUpload.AcceptedFile
                   key={`${file.name}-${file.size}-${index}`}
                   file={file}
-                  fileIndex={index}
                   deleteButtonAriaLabel={`Delete ${file.name}`}
                 />
               ))}
@@ -168,6 +133,55 @@ export const CustomTrigger: StoryFn = () => {
         </FileUpload.Context>
       </FileUpload>
     </div>
+  )
+}
+
+export const CustomDropzone: StoryFn = () => {
+  const [files, setFiles] = useState<File[]>([])
+
+  return (
+    <FileUpload
+      multiple={false}
+      value={files}
+      onFileChange={details => setFiles(details.acceptedFiles)}
+      accept="image/*"
+    >
+      {files.length === 0 ? (
+        <FileUpload.Dropzone className="size-sz-160 border-solid">
+          <Icon size="xl" className="text-primary">
+            <AddImageOutline />
+          </Icon>
+          <p className="text-subhead">Upload image</p>
+        </FileUpload.Dropzone>
+      ) : (
+        <FileUpload.Context>
+          {({ acceptedFiles }) => {
+            const file = acceptedFiles[0] as File
+
+            return (
+              <div
+                key={`${file.name}-${file.size}`}
+                className="size-sz-160 relative overflow-hidden rounded-lg shadow-md"
+              >
+                <FileUpload.PreviewImage file={file} fallback="📄" className="size-full" />
+
+                <FileUpload.ItemDeleteTrigger
+                  file={file}
+                  design="filled"
+                  intent="surface"
+                  className="top-md right-md absolute"
+                  aria-label="Delete file"
+                />
+
+                <Tag className="bottom-md absolute left-1/2 max-w-[calc(100%-var(--spacing-lg))] -translate-x-1/2 truncate text-ellipsis">
+                  <span className="truncate">{file.name}</span>
+                </Tag>
+              </div>
+            )
+          }}
+        </FileUpload.Context>
+      )}
+    </FileUpload>
   )
 }
 
@@ -238,15 +252,15 @@ export const WithCustomFileRender: StoryFn = () => {
                   <FileUpload.PreviewImage file={file} fallback="📄" className="size-full" />
 
                   <FileUpload.ItemDeleteTrigger
-                    fileIndex={index}
+                    file={file}
                     design="filled"
                     intent="surface"
                     className="top-md right-md absolute"
                     aria-label="Delete file"
                   />
 
-                  <Tag asChild className="bottom-md absolute left-1/2 -translate-x-1/2">
-                    <FileUpload.ItemFileName>{file.name}</FileUpload.ItemFileName>
+                  <Tag className="bottom-md absolute left-1/2 -translate-x-1/2">
+                    <p className="text-body-2 truncate font-medium">{file.name}</p>
                   </Tag>
                 </li>
               ))}
@@ -284,7 +298,6 @@ export const WithDefaultFiles: StoryFn = () => {
               <FileUpload.AcceptedFile
                 key={`${file.name}-${file.size}-${index}`}
                 file={file}
-                fileIndex={index}
                 deleteButtonAriaLabel={`Delete ${file.name}`}
               />
             ))}
@@ -297,19 +310,20 @@ export const WithDefaultFiles: StoryFn = () => {
 
 export const Controlled: StoryFn = () => {
   const [files, setFiles] = useState<File[]>([])
+  const [rejectedFiles, setRejectedFiles] = useState<RejectedFile[]>([])
+
+  const errorMessages: Record<FileUploadFileError, string> = {
+    TOO_MANY_FILES: 'Too many files',
+    FILE_INVALID_TYPE: 'Invalid file type',
+    FILE_TOO_LARGE: 'File too large',
+    FILE_TOO_SMALL: 'File too small',
+    FILE_INVALID: 'File invalid',
+    FILE_EXISTS: 'File already exists',
+  }
 
   return (
     <div className="gap-lg flex flex-col">
       <div className="gap-md flex flex-col">
-        <p className="text-body-2">
-          In controlled mode, the component's files are managed by external state via the{' '}
-          <code className="text-caption bg-surface-container px-xs py-xxs rounded-sm">value</code>{' '}
-          prop. Use{' '}
-          <code className="text-caption bg-surface-container px-xs py-xxs rounded-sm">
-            onFilesChange
-          </code>{' '}
-          to update your state when files are added or removed.
-        </p>
         <div className="gap-sm flex">
           <Button
             onClick={() => {
@@ -324,18 +338,33 @@ export const Controlled: StoryFn = () => {
           <Button
             onClick={() => {
               setFiles([])
+              setRejectedFiles([])
             }}
             design="outlined"
           >
             Clear All Files
           </Button>
         </div>
-        <p className="text-caption text-on-surface/dim-2">
-          Current files count: <strong>{files.length}</strong>
-        </p>
+        <div className="gap-md flex">
+          <p className="text-caption text-on-surface/dim-2">
+            Accepted files: <strong>{files.length}</strong>
+          </p>
+          <p className="text-caption text-on-surface/dim-2">
+            Rejected files: <strong>{rejectedFiles.length}</strong>
+          </p>
+        </div>
       </div>
 
-      <FileUpload value={files} onFilesChange={setFiles}>
+      <FileUpload
+        value={files}
+        onFileChange={details => {
+          setFiles(details.acceptedFiles)
+          setRejectedFiles(details.rejectedFiles)
+        }}
+        accept="image/*,application/pdf"
+        maxFiles={3}
+        maxFileSize={1024 * 1024} // 1MB
+      >
         <FileUpload.Dropzone>
           <Button asChild>
             <FileUpload.Trigger>Upload Files</FileUpload.Trigger>
@@ -343,244 +372,37 @@ export const Controlled: StoryFn = () => {
         </FileUpload.Dropzone>
 
         <FileUpload.Context>
-          {({ acceptedFiles }) => (
-            <ul className="gap-md my-md flex default:flex-col">
-              {acceptedFiles.map((file, index) => (
-                <FileUpload.AcceptedFile
-                  key={`${file.name}-${file.size}-${index}`}
-                  file={file}
-                  fileIndex={index}
-                  deleteButtonAriaLabel={`Delete ${file.name}`}
-                />
-              ))}
-            </ul>
+          {({ acceptedFiles, rejectedFiles: contextRejectedFiles }) => (
+            <div className="gap-md mt-md flex flex-col">
+              {acceptedFiles.length > 0 && (
+                <ul className="gap-md flex default:flex-col">
+                  {acceptedFiles.map((file, index) => (
+                    <FileUpload.AcceptedFile
+                      key={`${file.name}-${file.size}-${index}`}
+                      file={file}
+                      deleteButtonAriaLabel={`Delete ${file.name}`}
+                    />
+                  ))}
+                </ul>
+              )}
+
+              {contextRejectedFiles.length > 0 && (
+                <ul className="gap-md flex default:flex-col">
+                  {contextRejectedFiles.map((rejectedFile, index) => (
+                    <FileUpload.RejectedFile
+                      key={`rejected-${rejectedFile.file.name}-${rejectedFile.file.size}-${index}`}
+                      rejectedFile={rejectedFile}
+                      renderError={error => errorMessages[error] || `❓ ${error}`}
+                      deleteButtonAriaLabel={`Remove ${rejectedFile.file.name} error`}
+                    />
+                  ))}
+                </ul>
+              )}
+            </div>
           )}
         </FileUpload.Context>
       </FileUpload>
     </div>
-  )
-}
-
-export const CustomDeleteButton: StoryFn = () => {
-  return (
-    <FileUpload>
-      <FileUpload.Dropzone>
-        <Button asChild>
-          <FileUpload.Trigger>Upload Files</FileUpload.Trigger>
-        </Button>
-      </FileUpload.Dropzone>
-
-      <FileUpload.Context>
-        {({ acceptedFiles, formatFileSize, locale }) =>
-          acceptedFiles.length === 0 ? (
-            <div className="py-md text-caption text-on-surface/dim-2 text-center">
-              No files uploaded yet
-            </div>
-          ) : (
-            <ul className="gap-md my-md flex default:flex-col">
-              {acceptedFiles.map((file, index) => (
-                <FileUpload.Item
-                  key={`${file.name}-${file.size}-${index}`}
-                  className="gap-md bg-accent-container"
-                >
-                  <FileUpload.PreviewImage file={file} fallback="📄" />
-                  <div className="flex-1">
-                    <FileUpload.ItemFileName className="text-on-accent-container font-medium">
-                      {file.name}
-                    </FileUpload.ItemFileName>
-                    <FileUpload.ItemSizeText className="text-on-accent-container/dim-2">
-                      {formatFileSize(file.size, locale)}
-                    </FileUpload.ItemSizeText>
-                  </div>
-                  <FileUpload.ItemDeleteTrigger
-                    fileIndex={index}
-                    design="filled"
-                    intent="danger"
-                    size="md"
-                    aria-label={`Remove ${file.name}`}
-                  />
-                </FileUpload.Item>
-              ))}
-            </ul>
-          )
-        }
-      </FileUpload.Context>
-    </FileUpload>
-  )
-}
-
-export const FocusTest: StoryFn = () => {
-  return (
-    <div className="space-y-lg">
-      <h3 className="text-heading-3">Test de gestion du focus</h3>
-      <p className="text-body-2 text-on-surface/dim-2">
-        Uploadez plusieurs fichiers, puis supprimez-les avec Tab + Enter pour tester la gestion du
-        focus. Le focus devrait aller sur le bouton suivant, ou sur le précédent si c'est le
-        dernier.
-      </p>
-
-      <FileUpload>
-        <FileUpload.Dropzone>
-          <Button asChild>
-            <FileUpload.Trigger>Upload Files</FileUpload.Trigger>
-          </Button>
-        </FileUpload.Dropzone>
-
-        <FileUpload.Context>
-          {({ acceptedFiles }) =>
-            acceptedFiles.length === 0 ? (
-              <div className="py-md text-caption text-on-surface/dim-2 text-center">
-                No files uploaded yet. Upload some files to test focus management.
-              </div>
-            ) : (
-              <ul className="gap-md my-md flex default:flex-col">
-                {acceptedFiles.map((file, index) => (
-                  <FileUpload.Item
-                    key={`${file.name}-${file.size}-${index}`}
-                    className="gap-md bg-accent-container"
-                  >
-                    <FileUpload.PreviewImage file={file} fallback="📄" />
-                    <div className="flex-1">
-                      <FileUpload.ItemFileName className="text-on-accent-container font-medium">
-                        {file.name} (index: {index})
-                      </FileUpload.ItemFileName>
-                      <FileUpload.ItemSizeText className="text-on-accent-container/dim-2">
-                        {`${(file.size / 1024).toFixed(1)} KB`}
-                      </FileUpload.ItemSizeText>
-                    </div>
-                    <FileUpload.ItemDeleteTrigger
-                      fileIndex={index}
-                      design="filled"
-                      intent="danger"
-                      size="md"
-                      aria-label={`Remove ${file.name}`}
-                    />
-                  </FileUpload.Item>
-                ))}
-              </ul>
-            )
-          }
-        </FileUpload.Context>
-      </FileUpload>
-    </div>
-  )
-}
-
-export const FocusManagement: StoryFn = () => {
-  return (
-    <FileUpload>
-      <FileUpload.Dropzone>
-        <Button asChild>
-          <FileUpload.Trigger>Upload Files</FileUpload.Trigger>
-        </Button>
-      </FileUpload.Dropzone>
-
-      <FileUpload.Context>
-        {({ acceptedFiles }) =>
-          acceptedFiles.length === 0 ? (
-            <div className="py-md text-caption text-on-surface/dim-2 text-center">
-              No files uploaded yet. Upload some files to test focus management.
-            </div>
-          ) : (
-            <ul className="gap-md my-md flex default:flex-col">
-              {acceptedFiles.map((file, index) => (
-                <FileUpload.Item
-                  key={`${file.name}-${file.size}-${index}`}
-                  className="gap-md bg-accent-container"
-                >
-                  <FileUpload.PreviewImage file={file} fallback="📄" />
-                  <div className="flex-1">
-                    <FileUpload.ItemFileName className="text-on-accent-container font-medium">
-                      {file.name}
-                    </FileUpload.ItemFileName>
-                    <FileUpload.ItemSizeText className="text-on-accent-container/dim-2">
-                      {`${(file.size / 1024).toFixed(1)} KB`}
-                    </FileUpload.ItemSizeText>
-                  </div>
-                  <FileUpload.ItemDeleteTrigger
-                    fileIndex={index}
-                    design="filled"
-                    intent="danger"
-                    size="md"
-                    aria-label={`Remove ${file.name}`}
-                  />
-                </FileUpload.Item>
-              ))}
-            </ul>
-          )
-        }
-      </FileUpload.Context>
-    </FileUpload>
-  )
-}
-
-export const PhotosGallery: StoryFn = () => {
-  const maxPhotos = 5
-  const remainingPhotos = maxPhotos
-
-  return (
-    <FileUpload>
-      <FileUpload.Dropzone unstyled className="bg-success absolute inset-0" />
-
-      <div className="gap-xl flex flex-wrap">
-        <div className="z-dropdown size-sz-144 border-sm border-outline flex items-center justify-center rounded-lg">
-          Add {remainingPhotos} pictures
-        </div>
-
-        <FileUpload.Context>
-          {({ acceptedFiles }) =>
-            acceptedFiles.length > 0 && (
-              <ul className="gap-md my-md flex default:flex-col">
-                {acceptedFiles.map((file, index) => (
-                  <FileUpload.Item
-                    key={`${file.name}-${file.size}-${index}`}
-                    className="gap-md bg-accent-container"
-                  >
-                    <FileUpload.PreviewImage file={file} fallback="📄" />
-                    <div className="flex-1">
-                      <FileUpload.ItemFileName className="text-on-accent-container font-medium">
-                        {file.name}
-                      </FileUpload.ItemFileName>
-                      <FileUpload.ItemSizeText className="text-on-accent-container/dim-2">
-                        {`${(file.size / 1024).toFixed(1)} KB`}
-                      </FileUpload.ItemSizeText>
-                    </div>
-                    <FileUpload.ItemDeleteTrigger
-                      fileIndex={index}
-                      className="text-error hover:text-error-hovered focus-visible:u-outline"
-                      aria-label="Delete file"
-                    />
-                  </FileUpload.Item>
-                ))}
-              </ul>
-            )
-          }
-        </FileUpload.Context>
-
-        {Array.from({ length: maxPhotos }).map((_, idx) => (
-          <div
-            key={idx}
-            className="z-dropdown size-sz-144 border-sm border-outline pointer-events-none flex items-center justify-center rounded-lg"
-          >
-            Photo {idx + 1}
-          </div>
-        ))}
-      </div>
-      <FileUpload.Context>
-        {({ acceptedFiles }) => (
-          <ul className="gap-md my-md flex default:flex-col">
-            {acceptedFiles.map((file, index) => (
-              <FileUpload.AcceptedFile
-                key={`${file.name}-${file.size}-${index}`}
-                file={file}
-                fileIndex={index}
-                deleteButtonAriaLabel={`Delete ${file.name}`}
-              />
-            ))}
-          </ul>
-        )}
-      </FileUpload.Context>
-    </FileUpload>
   )
 }
 
@@ -605,7 +427,6 @@ export const SingleFile: StoryFn = () => {
               <FileUpload.AcceptedFile
                 key={`${file.name}-${file.size}-${index}`}
                 file={file}
-                fileIndex={index}
                 deleteButtonAriaLabel={`Delete ${file.name}`}
               />
             ))}
@@ -642,7 +463,6 @@ export const Disabled: StoryFn = () => {
               <FileUpload.AcceptedFile
                 key={`${file.name}-${file.size}-${index}`}
                 file={file}
-                fileIndex={index}
                 deleteButtonAriaLabel={`Delete ${file.name}`}
               />
             ))}
@@ -679,7 +499,6 @@ export const ReadOnly: StoryFn = () => {
               <FileUpload.AcceptedFile
                 key={`${file.name}-${file.size}-${index}`}
                 file={file}
-                fileIndex={index}
                 deleteButtonAriaLabel={`Delete ${file.name}`}
               />
             ))}
@@ -734,7 +553,6 @@ export const ErrorHandling: StoryFn = () => {
                     <FileUpload.AcceptedFile
                       key={`${file.name}-${file.size}-${index}`}
                       file={file}
-                      fileIndex={index}
                       deleteButtonAriaLabel={`Delete ${file.name}`}
                     />
                   ))}
@@ -747,7 +565,6 @@ export const ErrorHandling: StoryFn = () => {
                     <FileUpload.RejectedFile
                       key={`rejected-${rejectedFile.file.name}-${rejectedFile.file.size}-${index}`}
                       rejectedFile={rejectedFile}
-                      rejectedFileIndex={index}
                       renderError={error => errorMessages[error] || `❓ ${error}`}
                       deleteButtonAriaLabel={`Remove ${rejectedFile.file.name} error`}
                       data-status="rejected"
@@ -842,7 +659,7 @@ export const WithProgress: StoryFn = () => {
   })
 
   return (
-    <FileUpload onFilesChange={setFiles}>
+    <FileUpload onFileChange={details => setFiles(details.acceptedFiles)}>
       <FileUpload.Dropzone>
         <Icon size="lg">
           <Export />
@@ -865,7 +682,6 @@ export const WithProgress: StoryFn = () => {
               <FileUpload.AcceptedFile
                 key={`${file.name}-${file.size}-${index}`}
                 file={file}
-                fileIndex={index}
                 uploadProgress={uploadProgress[index]}
                 deleteButtonAriaLabel={`Delete ${file.name}`}
                 progressAriaLabel={`Upload progress: ${uploadProgress[index] ?? 0}%`}

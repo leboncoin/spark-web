@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
 import { cx } from 'class-variance-authority'

@@ -4,24 +4,30 @@ import { useRef } from 'react'
 
 import { Icon } from '../icon'
 import { IconButton } from '../icon-button'
-import { useFileUploadContext } from './FileUpload'
+import { type RejectedFile as RejectedFileType, useFileUploadContext } from './FileUpload'
 
 export interface FileUploadRejectedFileDeleteTriggerProps
   extends React.ComponentProps<typeof IconButton> {
   /**
-   * Index of the rejected file to remove
+   * The rejected file to remove
    */
-  rejectedFileIndex: number
+  rejectedFile: RejectedFileType
 }
 
 export const RejectedFileDeleteTrigger = ({
   className,
-  rejectedFileIndex,
+  rejectedFile,
   onClick,
   ...props
 }: FileUploadRejectedFileDeleteTriggerProps) => {
-  const { removeRejectedFile, triggerRef, dropzoneRef, disabled, readOnly } = useFileUploadContext()
+  const { removeRejectedFile, triggerRef, dropzoneRef, disabled, readOnly, rejectedFiles } =
+    useFileUploadContext()
   const buttonRef = useRef<HTMLButtonElement>(null)
+
+  // Find the index of the rejected file using name + size (consistent with duplicate detection logic)
+  const rejectedFileIndex = rejectedFiles.findIndex(
+    rf => rf.file.name === rejectedFile.file.name && rf.file.size === rejectedFile.file.size
+  )
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     // Don't allow removing rejected files when disabled or readOnly
