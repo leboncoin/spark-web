@@ -205,6 +205,42 @@ Use `FileUpload.Context` to access `acceptedFiles` and customize the markup of t
 <Canvas of={stories.WithCustomFileRender} />
 
 
+## Form field
+
+When using the `FileUpload` component you might want to use it in combination with `FormField` to add a proper label, error message, etc.
+
+### Label
+
+Use `FormField.Label` to add a label to the file upload. The label provides visual context and can display the required indicator.
+
+<Callout kind="info">
+  **Note**: Unlike other form components, the `FormField.Label` is not automatically linked to the trigger button or dropzone via `aria-labelledby`. The accessible name of the button/dropzone remains their natural text content. The label is still useful for visual consistency, required indicators, and form structure.
+</Callout>
+
+<Canvas of={stories.FieldLabel} />
+
+### Required
+
+Use the `isRequired` prop of the `FormField` to indicate that the file upload is required.
+
+<Callout kind="warning">
+  If your form has mandatory fields, you must include an explicit note at the top of the form, outside of the input fields, to inform users that certain fields are required.
+</Callout>
+
+<Canvas of={stories.FieldRequired} />
+
+### Helper message
+
+Use the `FormField.HelperMessage` component to provide a description to the file upload.
+
+<Canvas of={stories.FieldHelperMessage} />
+
+### Validation
+
+Set the `state` prop of the `FormField` to `error` to indicate that the file upload is invalid. Optionally use the `FormField.ErrorMessage` to describe why the file upload is invalid.
+
+<Canvas of={stories.FieldInvalid} />
+
 ## Accessibility
 
 <A11yReport of="file-upload" />

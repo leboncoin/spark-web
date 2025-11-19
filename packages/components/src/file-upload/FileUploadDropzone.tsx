@@ -69,6 +69,9 @@ export function Dropzone({
       role="button"
       tabIndex={isDisabled ? -1 : 0}
       aria-disabled={ctx.disabled ? true : undefined}
+      aria-describedby={ctx.description}
+      aria-invalid={ctx.isInvalid}
+      aria-required={ctx.isRequired}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       onDrop={handleDrop}

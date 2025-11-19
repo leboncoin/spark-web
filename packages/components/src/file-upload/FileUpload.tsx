@@ -1,6 +1,8 @@
+/* eslint-disable max-lines */
 /* eslint-disable max-lines-per-function */
+import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { useCombinedState } from '@spark-ui/hooks/use-combined-state'
-import { createContext, ReactNode, Ref, useContext, useRef, useState } from 'react'
+import { createContext, ReactNode, Ref, useContext, useId, useRef, useState } from 'react'
 
 import { validateFileAccept, validateFileSize } from './utils'
 
@@ -126,7 +128,12 @@ export const FileUploadContext = createContext<{
   disabled: boolean
   readOnly: boolean
   locale: string
+  description?: string
+  isInvalid?: boolean
+  isRequired?: boolean
 } | null>(null)
+
+const ID_PREFIX = ':file-upload'
 
 export const FileUpload = ({
   asChild: _asChild = false,
@@ -141,19 +148,41 @@ export const FileUpload = ({
   maxFiles,
   maxFileSize,
   minFileSize,
-  disabled = false,
-  readOnly = false,
+  disabled: disabledProp = false,
+  readOnly: readOnlyProp = false,
   locale,
 }: FileUploadProps) => {
+  const field = useFormFieldControl()
+  const {
+    id: fieldId,
+    name: fieldName,
+    isInvalid,
+    isRequired,
+    description,
+    disabled: fieldDisabled,
+    readOnly: fieldReadOnly,
+  } = field
+
   // Get default locale from browser or fallback to 'en'
   const defaultLocale =
     locale || (typeof navigator !== 'undefined' && navigator.language ? navigator.language : 'en')
+
+  // Generate unique ID if none provided by FormField
+  const internalId = useId()
+  const inputId = fieldId || `${ID_PREFIX}-${internalId}`
+
+  // Use FormField name or undefined (no hardcoded fallback)
+  const inputName = fieldName
 
   const inputRef = useRef<HTMLInputElement>(null)
   const triggerRef = useRef<HTMLElement>(null)
   const dropzoneRef = useRef<HTMLElement>(null)
   const deleteButtonRefs = useRef<HTMLButtonElement[]>([])
-  
+
+  // Merge FormField props with component props (FormField takes precedence)
+  const disabled = fieldDisabled ?? disabledProp
+  const readOnly = fieldReadOnly ?? readOnlyProp
+
   // For controlled mode, use onFileChange to update value prop
   // useCombinedState doesn't need a callback - we'll call onFileChange manually in addFiles/removeFile
   const [filesState, setFilesState, ,] = useCombinedState(controlledValue, defaultValue)
@@ -420,6 +449,9 @@ export const FileUpload = ({
         disabled,
         readOnly,
         locale: defaultLocale,
+        description,
+        isInvalid,
+        isRequired,
       }}
     >
       {/* <Comp data-spark-component="file-upload" className={cx('relative', className)} {...props}> */}
@@ -429,12 +461,15 @@ export const FileUpload = ({
           ref={inputRef}
           type="file"
           tabIndex={-1}
-          id="image_uploads"
+          id={inputId}
           multiple={multiple}
-          name="image_uploads"
+          name={inputName}
           accept={accept}
           disabled={disabled}
           readOnly={readOnly && !disabled}
+          required={isRequired}
+          aria-invalid={isInvalid}
+          aria-describedby={description}
           className="sr-only"
           onChange={e => {
             if (e.target.files && !disabled && !readOnly) {
