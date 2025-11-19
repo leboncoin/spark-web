@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.5.0](https://github.com/leboncoin/spark-web/compare/v11.4.3...v11.5.0) (2025-11-19)
+
+### Features
+
+- **components:** file upload FormField compatibility ([cda3005](https://github.com/leboncoin/spark-web/commit/cda30056241024f8fb461cfaf19a41311b017530))
+
 ## [11.4.3](https://github.com/leboncoin/spark-web/compare/v11.4.2...v11.4.3) (2025-11-18)
 
 ### Bug Fixes
