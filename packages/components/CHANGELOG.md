@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.5.1](https://github.com/leboncoin/spark-web/compare/v11.5.0...v11.5.1) (2025-11-20)
+
+### Bug Fixes
+
+- **components:** file upload a11y adjustments ([5509268](https://github.com/leboncoin/spark-web/commit/5509268e30530055bf5bf92602d91d3958436a24))
+
 # [11.5.0](https://github.com/leboncoin/spark-web/compare/v11.4.3...v11.5.0) (2025-11-19)
 
 ### Features

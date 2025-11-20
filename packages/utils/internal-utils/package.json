@@ -1,6 +1,6 @@
 {
   "name": "@spark-ui/internal-utils",
-  "version": "11.5.0",
+  "version": "11.5.1",
   "description": "package for sharing reusable code and resources across the codebase",
   "publishConfig": {
     "access": "public"
