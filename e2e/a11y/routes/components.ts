@@ -20,6 +20,7 @@ export const a11yComponents = {
   divider: 'divider',
   drawer: 'drawer',
   dropdown: 'dropdown',
+  'file-upload': 'file-upload',
   'form-field': 'form-field',
   icon: 'icon',
   'icon-button': 'icon-button',

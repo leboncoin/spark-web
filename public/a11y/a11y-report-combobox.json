@@ -1,6 +1,6 @@
 {
   "@spark-ui/components/combobox": {
-    "timestamp": "2025-09-27T14:48:12.733Z",
+    "timestamp": "2025-11-20T15:04:09.866Z",
     "url": "http://localhost:3002/a11y/combobox",
     "incomplete": [
       {
@@ -11,11 +11,13 @@
           "wcag2a",
           "wcag412",
           "EN-301-549",
-          "EN-9.4.1.2"
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-7.1.1"
         ],
         "description": "Ensure all ARIA attributes have valid values",
         "help": "ARIA attributes must conform to valid values",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-valid-attr-value?application=playwright",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr-value?application=playwright",
         "nodes": [
           {
             "any": [],
@@ -24,18 +26,18 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "controlsWithinPopup",
-                  "needsReview": "aria-controls=\":combobox-field-«r1»-menu\""
+                  "needsReview": "aria-controls=\":combobox-field-_r_1_-menu\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\":combobox-field-«r1»-menu\""
+                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\":combobox-field-_r_1_-menu\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<input data-spark-component=\"combobox-input\" placeholder=\"Pick a book\" class=\"max-w-full shrink-0 grow basis-[80px] h-sz-28 bg-surface px-sm text-body-1 text-ellipsis outline-hidden disabled:text-on-surface/dim-3 disabled:cursor-not-allowed disabled:bg-transparent read-only:text-on-surface read-only:cursor-default read-only:bg-transparent\" aria-activedescendant=\"\" aria-autocomplete=\"list\" aria-controls=\":combobox-field-«r1»-menu\" aria-expanded=\"false\" aria-labelledby=\":combobox-label-«r0»\" autocomplete=\"off\" id=\":combobox-field-«r1»\" role=\"combobox\" aria-label=\"Book\" aria-haspopup=\"dialog\" data-state=\"open\" type=\"text\" value=\"\">",
+            "html": "<input data-spark-component=\"combobox-input\" placeholder=\"Pick a book\" class=\"max-w-full shrink-0 ...\" aria-activedescendan...=\"\" aria-autocomplete=\"list\" aria-controls=\":combobox-field-_r_1...\" aria-expanded=\"false\" aria-labelledby=\":combobox-label-_r_0...\" autocomplete=\"off\" id=\":combobox-field-_r ...>",
             "target": [
-              "#\\:combobox-field-«r1»"
+              "#\\:combobox-field-_r_1_"
             ]
           },
           {
@@ -45,18 +47,18 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "controlsWithinPopup",
-                  "needsReview": "aria-controls=\":combobox-field-«r5»-menu\""
+                  "needsReview": "aria-controls=\":combobox-field-_r_5_-menu\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\":combobox-field-«r5»-menu\""
+                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\":combobox-field-_r_5_-menu\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<input data-spark-component=\"combobox-input\" class=\"max-w-full shrink-0 grow basis-[80px] h-sz-28 bg-surface px-sm text-body-1 text-ellipsis outline-hidden disabled:text-on-surface/dim-3 disabled:cursor-not-allowed disabled:bg-transparent read-only:text-on-surface read-only:cursor-default read-only:bg-transparent\" aria-activedescendant=\"\" aria-autocomplete=\"list\" aria-controls=\":combobox-field-«r5»-menu\" aria-expanded=\"true\" aria-labelledby=\":combobox-label-«r4»\" autocomplete=\"off\" id=\":combobox-field-«r5»\" role=\"combobox\" aria-label=\"Book\" aria-haspopup=\"dialog\" data-state=\"open\" type=\"text\" value=\"\">",
+            "html": "<input data-spark-component=\"combobox-input\" class=\"max-w-full shrink-0 ...\" aria-activedescendan...=\"\" aria-autocomplete=\"list\" aria-controls=\":combobox-field-_r_5...\" aria-expanded=\"true\" aria-labelledby=\":combobox-label-_r_4...\" autocomplete=\"off\" id=\":combobox-field-_r_5...\" role=\"combobox\" aria ...>",
             "target": [
-              "#\\:combobox-field-«r5»"
+              "#\\:combobox-field-_r_5_"
             ]
           }
         ]

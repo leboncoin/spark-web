@@ -3,7 +3,6 @@ import { Button } from '@spark-ui/components/button'
 import { Icon } from '@spark-ui/components/icon'
 import { IconButton } from '@spark-ui/components/icon-button'
 import { Tag } from '@spark-ui/components/tag'
-import { TextLink } from '@spark-ui/components/text-link'
 import { AddImageOutline } from '@spark-ui/icons/AddImageOutline'
 import { Export } from '@spark-ui/icons/Export'
 import { Meta, StoryFn } from '@storybook/react-vite'
@@ -92,9 +91,9 @@ export const CustomTrigger: StoryFn = () => {
   return (
     <div>
       <FileUpload>
-        <TextLink asChild>
-          <FileUpload.Trigger unstyled>As a link</FileUpload.Trigger>
-        </TextLink>
+        <FileUpload.Trigger design="ghost" underline>
+          Button with custom props
+        </FileUpload.Trigger>
 
         <FileUpload.Context>
           {({ acceptedFiles }) => (
@@ -111,13 +110,13 @@ export const CustomTrigger: StoryFn = () => {
         </FileUpload.Context>
       </FileUpload>
       <FileUpload>
-        <FileUpload.Trigger asChild>
-          <IconButton aria-label="Upload">
+        <IconButton aria-label="Upload" asChild>
+          <FileUpload.Trigger unstyled>
             <Icon>
               <Export />
             </Icon>
-          </IconButton>
-        </FileUpload.Trigger>
+          </FileUpload.Trigger>
+        </IconButton>
 
         <FileUpload.Context>
           {({ acceptedFiles }) => (

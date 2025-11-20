@@ -1,7 +1,12 @@
 import { cx } from 'class-variance-authority'
-import { useRef } from 'react'
+import { createContext, useContext, useRef } from 'react'
 
 import { useFileUploadContext } from './FileUpload'
+
+// Context to signal that we're inside a Dropzone
+export const DropzoneContext = createContext<boolean>(false)
+
+export const useDropzoneContext = () => useContext(DropzoneContext)
 
 export function Dropzone({
   children,
@@ -59,53 +64,55 @@ export function Dropzone({
   const isDisabled = ctx.disabled || ctx.readOnly
 
   return (
-    <div
-      ref={node => {
-        dropzoneRef.current = node
-        if (ctx.dropzoneRef) {
-          ctx.dropzoneRef.current = node
+    <DropzoneContext.Provider value={true}>
+      <div
+        ref={node => {
+          dropzoneRef.current = node
+          if (ctx.dropzoneRef) {
+            ctx.dropzoneRef.current = node
+          }
+        }}
+        role="button"
+        tabIndex={isDisabled ? -1 : 0}
+        aria-disabled={ctx.disabled ? true : undefined}
+        aria-describedby={ctx.description}
+        aria-invalid={ctx.isInvalid}
+        aria-required={ctx.isRequired}
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        onDrop={handleDrop}
+        onDragOver={e => {
+          e.preventDefault()
+        }}
+        className={
+          unstyled
+            ? className
+            : cx(
+                'default:bg-surface default:border-sm default:border-outline default:relative default:rounded-lg default:border-dashed',
+                'gap-lg flex flex-col items-center justify-center text-center',
+                'default:p-xl',
+                'transition-colors duration-200',
+                !isDisabled && 'default:hover:bg-surface-hovered',
+                'data-[drag-over=true]:border-outline-high data-[drag-over=true]:bg-surface-hovered data-[drag-over=true]:border-solid',
+                // Disabled: more visually disabled (opacity + cursor)
+                ctx.disabled && 'cursor-not-allowed opacity-50',
+                // ReadOnly: less visually disabled (just cursor, no opacity)
+                ctx.readOnly && !ctx.disabled && 'cursor-default',
+                className
+              )
         }
-      }}
-      role="button"
-      tabIndex={isDisabled ? -1 : 0}
-      aria-disabled={ctx.disabled ? true : undefined}
-      aria-describedby={ctx.description}
-      aria-invalid={ctx.isInvalid}
-      aria-required={ctx.isRequired}
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
-      onDrop={handleDrop}
-      onDragOver={e => {
-        e.preventDefault()
-      }}
-      className={
-        unstyled
-          ? className
-          : cx(
-              'default:bg-surface default:border-sm default:border-outline default:relative default:rounded-lg default:border-dashed',
-              'gap-lg flex flex-col items-center justify-center text-center',
-              'default:p-xl',
-              'transition-colors duration-200',
-              !isDisabled && 'default:hover:bg-surface-hovered',
-              'data-[drag-over=true]:border-outline-high data-[drag-over=true]:bg-surface-hovered data-[drag-over=true]:border-solid',
-              // Disabled: more visually disabled (opacity + cursor)
-              ctx.disabled && 'cursor-not-allowed opacity-50',
-              // ReadOnly: less visually disabled (just cursor, no opacity)
-              ctx.readOnly && !ctx.disabled && 'cursor-default',
-              className
-            )
-      }
-      onDragEnter={e => {
-        if (!isDisabled) {
-          e.currentTarget.setAttribute('data-drag-over', 'true')
-        }
-      }}
-      onDragLeave={e => {
-        e.currentTarget.setAttribute('data-drag-over', 'false')
-      }}
-    >
-      {children}
-    </div>
+        onDragEnter={e => {
+          if (!isDisabled) {
+            e.currentTarget.setAttribute('data-drag-over', 'true')
+          }
+        }}
+        onDragLeave={e => {
+          e.currentTarget.setAttribute('data-drag-over', 'false')
+        }}
+      >
+        {children}
+      </div>
+    </DropzoneContext.Provider>
   )
 }
 
