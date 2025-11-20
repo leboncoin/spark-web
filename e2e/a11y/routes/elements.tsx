@@ -15,6 +15,7 @@ import { A11yDialog } from '../pages/Dialog'
 import { A11yDivider } from '../pages/Divider'
 import { A11yDrawer } from '../pages/Drawer'
 import { A11yDropdown } from '../pages/Dropdown'
+import { A11yFileUpload } from '../pages/FileUpload'
 import { A11yFormField } from '../pages/FormField'
 import { A11yIcon } from '../pages/Icon'
 import { A11yIconButton } from '../pages/IconButton'
@@ -64,6 +65,7 @@ export const a11yElements: Record<A11yComponentsKey, ComponentType> = {
   divider: A11yDivider,
   drawer: A11yDrawer,
   dropdown: A11yDropdown,
+  'file-upload': A11yFileUpload,
   'form-field': A11yFormField,
   icon: A11yIcon,
   'icon-button': A11yIconButton,

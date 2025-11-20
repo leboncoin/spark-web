@@ -1,6 +1,6 @@
 {
   "@spark-ui/components/popover": {
-    "timestamp": "2025-09-27T14:48:26.892Z",
+    "timestamp": "2025-11-20T15:04:51.909Z",
     "url": "http://localhost:3002/a11y/popover",
     "incomplete": [
       {
@@ -11,11 +11,13 @@
           "wcag2a",
           "wcag412",
           "EN-301-549",
-          "EN-9.4.1.2"
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-7.1.1"
         ],
         "description": "Ensure all ARIA attributes have valid values",
         "help": "ARIA attributes must conform to valid values",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-valid-attr-value?application=playwright",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr-value?application=playwright",
         "nodes": [
           {
             "any": [],
@@ -24,18 +26,18 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "controlsWithinPopup",
-                  "needsReview": "aria-controls=\"radix-«r0»\""
+                  "needsReview": "aria-controls=\"radix-_r_0_\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-«r0»\""
+                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-_r_0_\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"popover-trigger\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap default:px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"false\" aria-controls=\"radix-«r0»\" data-state=\"closed\">",
+            "html": "<button data-spark-component=\"popover-trigger\" type=\"button\" class=\"u-shadow-border-tran...\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"false\" aria-controls=\"radix-_r_0_\" data-state=\"closed\">",
             "target": [
-              "button[aria-controls=\"radix-«r0»\"]"
+              "button[aria-controls=\"radix-_r_0_\"]"
             ]
           },
           {
@@ -45,18 +47,18 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "controlsWithinPopup",
-                  "needsReview": "aria-controls=\"radix-«r1»\""
+                  "needsReview": "aria-controls=\"radix-_r_1_\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-«r1»\""
+                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-_r_1_\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"popover-trigger\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap default:px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"false\" aria-controls=\"radix-«r1»\" data-state=\"closed\">",
+            "html": "<button data-spark-component=\"popover-trigger\" type=\"button\" class=\"u-shadow-border-tran...\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"false\" aria-controls=\"radix-_r_1_\" data-state=\"closed\">",
             "target": [
-              "button[aria-controls=\"radix-«r1»\"]"
+              "button[aria-controls=\"radix-_r_1_\"]"
             ]
           }
         ]

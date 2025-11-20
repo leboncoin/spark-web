@@ -1,6 +1,6 @@
 {
   "@spark-ui/components/alert-dialog": {
-    "timestamp": "2025-09-27T14:48:02.736Z",
+    "timestamp": "2025-11-20T15:03:42.604Z",
     "url": "http://localhost:3002/a11y/alert-dialog",
     "incomplete": [
       {
@@ -13,11 +13,13 @@
           "TTv5",
           "TT6.a",
           "EN-301-549",
-          "EN-9.4.1.2"
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-7.1.1"
         ],
         "description": "Ensure aria-hidden elements are not focusable nor contain focusable elements",
         "help": "ARIA hidden element must not be focusable or contain focusable elements",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-hidden-focus?application=playwright",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-hidden-focus?application=playwright",
         "nodes": [
           {
             "any": [],
@@ -79,11 +81,13 @@
           "wcag2a",
           "wcag412",
           "EN-301-549",
-          "EN-9.4.1.2"
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-7.1.1"
         ],
         "description": "Ensure all ARIA attributes have valid values",
         "help": "ARIA attributes must conform to valid values",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-valid-attr-value?application=playwright",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr-value?application=playwright",
         "nodes": [
           {
             "any": [],
@@ -92,16 +96,16 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "controlsWithinPopup",
-                  "needsReview": "aria-controls=\"radix-«r0»\""
+                  "needsReview": "aria-controls=\"radix-_r_0_\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-«r0»\""
+                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-_r_0_\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"alert-dialog-title\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap default:px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer text-on-error bg-error hover:bg-error-hovered enabled:active:bg-error-hovered focus-visible:bg-error-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-«r0»\" data-state=\"open\">",
+            "html": "<button data-spark-component=\"alert-dialog-title\" type=\"button\" class=\"u-shadow-border-tran...\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-_r_0_\" data-state=\"open\">",
             "target": [
               "button[aria-haspopup=\"dialog\"]"
             ]

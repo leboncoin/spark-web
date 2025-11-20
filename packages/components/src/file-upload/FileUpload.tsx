@@ -161,6 +161,7 @@ export const FileUpload = ({
     description,
     disabled: fieldDisabled,
     readOnly: fieldReadOnly,
+    labelId,
   } = field
 
   // Get default locale from browser or fallback to 'en'
@@ -470,6 +471,12 @@ export const FileUpload = ({
           required={isRequired}
           aria-invalid={isInvalid}
           aria-describedby={description}
+          // Hardcoded aria-label is acceptable here because:
+          // 1. The input is visually hidden (sr-only) and not keyboard accessible (tabIndex={-1})
+          // 2. Users never interact directly with this input - they interact via Trigger/Dropzone
+          // 3. Screen readers will announce the Trigger/Dropzone content (which can be translated) instead
+          // 4. This is only used as a fallback when no FormField.Label is present
+          aria-label={!labelId ? 'Upload files test' : undefined}
           className="sr-only"
           onChange={e => {
             if (e.target.files && !disabled && !readOnly) {

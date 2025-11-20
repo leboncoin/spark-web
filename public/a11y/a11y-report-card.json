@@ -1,6 +1,6 @@
 {
   "@spark-ui/components/card": {
-    "timestamp": "2025-09-27T14:48:08.414Z",
+    "timestamp": "2025-11-20T15:03:58.988Z",
     "url": "http://localhost:3002/a11y/card",
     "incomplete": [
       {
@@ -15,11 +15,13 @@
           "TTv5",
           "TT9.a",
           "EN-301-549",
-          "EN-9.2.4.1"
+          "EN-9.2.4.1",
+          "RGAAv4",
+          "RGAA-12.7.1"
         ],
         "description": "Ensure each page has at least one mechanism for a user to bypass navigation and jump straight to the content",
         "help": "Page must have means to bypass repeated blocks",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/bypass?application=playwright",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/bypass?application=playwright",
         "nodes": [
           {
             "any": [

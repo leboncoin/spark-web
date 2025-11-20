@@ -1,12 +1,12 @@
 {
   "@spark-ui/components/accordion": {
-    "timestamp": "2025-09-27T14:48:00.948Z",
+    "timestamp": "2025-11-20T15:03:41.081Z",
     "url": "http://localhost:3002/a11y/accordion",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/alert-dialog": {
-    "timestamp": "2025-09-27T14:48:02.736Z",
+    "timestamp": "2025-11-20T15:03:42.604Z",
     "url": "http://localhost:3002/a11y/alert-dialog",
     "incomplete": [
       {
@@ -19,11 +19,13 @@
           "TTv5",
           "TT6.a",
           "EN-301-549",
-          "EN-9.4.1.2"
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-7.1.1"
         ],
         "description": "Ensure aria-hidden elements are not focusable nor contain focusable elements",
         "help": "ARIA hidden element must not be focusable or contain focusable elements",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-hidden-focus?application=playwright",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-hidden-focus?application=playwright",
         "nodes": [
           {
             "any": [],
@@ -85,11 +87,13 @@
           "wcag2a",
           "wcag412",
           "EN-301-549",
-          "EN-9.4.1.2"
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-7.1.1"
         ],
         "description": "Ensure all ARIA attributes have valid values",
         "help": "ARIA attributes must conform to valid values",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-valid-attr-value?application=playwright",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr-value?application=playwright",
         "nodes": [
           {
             "any": [],
@@ -98,16 +102,16 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "controlsWithinPopup",
-                  "needsReview": "aria-controls=\"radix-«r0»\""
+                  "needsReview": "aria-controls=\"radix-_r_0_\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-«r0»\""
+                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-_r_0_\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"alert-dialog-title\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap default:px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer text-on-error bg-error hover:bg-error-hovered enabled:active:bg-error-hovered focus-visible:bg-error-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-«r0»\" data-state=\"open\">",
+            "html": "<button data-spark-component=\"alert-dialog-title\" type=\"button\" class=\"u-shadow-border-tran...\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-_r_0_\" data-state=\"open\">",
             "target": [
               "button[aria-haspopup=\"dialog\"]"
             ]
@@ -118,19 +122,19 @@
     "violations": []
   },
   "@spark-ui/components/avatar": {
-    "timestamp": "2025-09-27T14:48:03.873Z",
+    "timestamp": "2025-11-20T15:03:46.659Z",
     "url": "http://localhost:3002/a11y/avatar",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/badge": {
-    "timestamp": "2025-09-27T14:48:05.051Z",
+    "timestamp": "2025-11-20T15:03:49.622Z",
     "url": "http://localhost:3002/a11y/badge",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/breadcrumb": {
-    "timestamp": "2025-09-27T14:48:06.159Z",
+    "timestamp": "2025-11-20T15:03:53.551Z",
     "url": "http://localhost:3002/a11y/breadcrumb",
     "incomplete": [
       {
@@ -145,11 +149,13 @@
           "TTv5",
           "TT9.a",
           "EN-301-549",
-          "EN-9.2.4.1"
+          "EN-9.2.4.1",
+          "RGAAv4",
+          "RGAA-12.7.1"
         ],
         "description": "Ensure each page has at least one mechanism for a user to bypass navigation and jump straight to the content",
         "help": "Page must have means to bypass repeated blocks",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/bypass?application=playwright",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/bypass?application=playwright",
         "nodes": [
           {
             "any": [
@@ -189,13 +195,13 @@
     "violations": []
   },
   "@spark-ui/components/button": {
-    "timestamp": "2025-09-27T14:48:07.294Z",
+    "timestamp": "2025-11-20T15:03:56.592Z",
     "url": "http://localhost:3002/a11y/button",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/card": {
-    "timestamp": "2025-09-27T14:48:08.414Z",
+    "timestamp": "2025-11-20T15:03:58.988Z",
     "url": "http://localhost:3002/a11y/card",
     "incomplete": [
       {
@@ -210,11 +216,13 @@
           "TTv5",
           "TT9.a",
           "EN-301-549",
-          "EN-9.2.4.1"
+          "EN-9.2.4.1",
+          "RGAAv4",
+          "RGAA-12.7.1"
         ],
         "description": "Ensure each page has at least one mechanism for a user to bypass navigation and jump straight to the content",
         "help": "Page must have means to bypass repeated blocks",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/bypass?application=playwright",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/bypass?application=playwright",
         "nodes": [
           {
             "any": [
@@ -254,25 +262,25 @@
     "violations": []
   },
   "@spark-ui/components/checkbox": {
-    "timestamp": "2025-09-27T14:48:09.447Z",
+    "timestamp": "2025-11-20T15:04:00.879Z",
     "url": "http://localhost:3002/a11y/checkbox",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/chip": {
-    "timestamp": "2025-09-27T14:48:10.492Z",
+    "timestamp": "2025-11-20T15:04:04.605Z",
     "url": "http://localhost:3002/a11y/chip",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/collapsible": {
-    "timestamp": "2025-09-27T14:48:11.549Z",
+    "timestamp": "2025-11-20T15:04:07.318Z",
     "url": "http://localhost:3002/a11y/collapsible",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/combobox": {
-    "timestamp": "2025-09-27T14:48:12.733Z",
+    "timestamp": "2025-11-20T15:04:09.866Z",
     "url": "http://localhost:3002/a11y/combobox",
     "incomplete": [
       {
@@ -283,11 +291,13 @@
           "wcag2a",
           "wcag412",
           "EN-301-549",
-          "EN-9.4.1.2"
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-7.1.1"
         ],
         "description": "Ensure all ARIA attributes have valid values",
         "help": "ARIA attributes must conform to valid values",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-valid-attr-value?application=playwright",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr-value?application=playwright",
         "nodes": [
           {
             "any": [],
@@ -296,18 +306,18 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "controlsWithinPopup",
-                  "needsReview": "aria-controls=\":combobox-field-«r1»-menu\""
+                  "needsReview": "aria-controls=\":combobox-field-_r_1_-menu\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\":combobox-field-«r1»-menu\""
+                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\":combobox-field-_r_1_-menu\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<input data-spark-component=\"combobox-input\" placeholder=\"Pick a book\" class=\"max-w-full shrink-0 grow basis-[80px] h-sz-28 bg-surface px-sm text-body-1 text-ellipsis outline-hidden disabled:text-on-surface/dim-3 disabled:cursor-not-allowed disabled:bg-transparent read-only:text-on-surface read-only:cursor-default read-only:bg-transparent\" aria-activedescendant=\"\" aria-autocomplete=\"list\" aria-controls=\":combobox-field-«r1»-menu\" aria-expanded=\"false\" aria-labelledby=\":combobox-label-«r0»\" autocomplete=\"off\" id=\":combobox-field-«r1»\" role=\"combobox\" aria-label=\"Book\" aria-haspopup=\"dialog\" data-state=\"open\" type=\"text\" value=\"\">",
+            "html": "<input data-spark-component=\"combobox-input\" placeholder=\"Pick a book\" class=\"max-w-full shrink-0 ...\" aria-activedescendan...=\"\" aria-autocomplete=\"list\" aria-controls=\":combobox-field-_r_1...\" aria-expanded=\"false\" aria-labelledby=\":combobox-label-_r_0...\" autocomplete=\"off\" id=\":combobox-field-_r ...>",
             "target": [
-              "#\\:combobox-field-«r1»"
+              "#\\:combobox-field-_r_1_"
             ]
           },
           {
@@ -317,18 +327,18 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "controlsWithinPopup",
-                  "needsReview": "aria-controls=\":combobox-field-«r5»-menu\""
+                  "needsReview": "aria-controls=\":combobox-field-_r_5_-menu\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\":combobox-field-«r5»-menu\""
+                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\":combobox-field-_r_5_-menu\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<input data-spark-component=\"combobox-input\" class=\"max-w-full shrink-0 grow basis-[80px] h-sz-28 bg-surface px-sm text-body-1 text-ellipsis outline-hidden disabled:text-on-surface/dim-3 disabled:cursor-not-allowed disabled:bg-transparent read-only:text-on-surface read-only:cursor-default read-only:bg-transparent\" aria-activedescendant=\"\" aria-autocomplete=\"list\" aria-controls=\":combobox-field-«r5»-menu\" aria-expanded=\"true\" aria-labelledby=\":combobox-label-«r4»\" autocomplete=\"off\" id=\":combobox-field-«r5»\" role=\"combobox\" aria-label=\"Book\" aria-haspopup=\"dialog\" data-state=\"open\" type=\"text\" value=\"\">",
+            "html": "<input data-spark-component=\"combobox-input\" class=\"max-w-full shrink-0 ...\" aria-activedescendan...=\"\" aria-autocomplete=\"list\" aria-controls=\":combobox-field-_r_5...\" aria-expanded=\"true\" aria-labelledby=\":combobox-label-_r_4...\" autocomplete=\"off\" id=\":combobox-field-_r_5...\" role=\"combobox\" aria ...>",
             "target": [
-              "#\\:combobox-field-«r5»"
+              "#\\:combobox-field-_r_5_"
             ]
           }
         ]
@@ -337,7 +347,7 @@
     "violations": []
   },
   "@spark-ui/components/dialog": {
-    "timestamp": "2025-09-27T14:48:13.909Z",
+    "timestamp": "2025-11-20T15:04:12.829Z",
     "url": "http://localhost:3002/a11y/dialog",
     "incomplete": [
       {
@@ -350,11 +360,13 @@
           "TTv5",
           "TT6.a",
           "EN-301-549",
-          "EN-9.4.1.2"
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-7.1.1"
         ],
         "description": "Ensure aria-hidden elements are not focusable nor contain focusable elements",
         "help": "ARIA hidden element must not be focusable or contain focusable elements",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-hidden-focus?application=playwright",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-hidden-focus?application=playwright",
         "nodes": [
           {
             "any": [],
@@ -416,11 +428,13 @@
           "wcag2a",
           "wcag412",
           "EN-301-549",
-          "EN-9.4.1.2"
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-7.1.1"
         ],
         "description": "Ensure all ARIA attributes have valid values",
         "help": "ARIA attributes must conform to valid values",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-valid-attr-value?application=playwright",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr-value?application=playwright",
         "nodes": [
           {
             "any": [],
@@ -429,16 +443,16 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "controlsWithinPopup",
-                  "needsReview": "aria-controls=\"radix-«r0»\""
+                  "needsReview": "aria-controls=\"radix-_r_0_\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-«r0»\""
+                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-_r_0_\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"dialog-trigger\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap default:px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-«r0»\" data-state=\"open\">",
+            "html": "<button data-spark-component=\"dialog-trigger\" type=\"button\" class=\"u-shadow-border-tran...\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-_r_0_\" data-state=\"open\">",
             "target": [
               "button[data-spark-component=\"dialog-trigger\"]"
             ]
@@ -450,18 +464,18 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "noId",
-                  "needsReview": "aria-describedby=\"radix-«r2»\""
+                  "needsReview": "aria-describedby=\"radix-_r_2_\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "ARIA attribute element ID does not exist on the page: aria-describedby=\"radix-«r2»\""
+                "message": "ARIA attribute element ID does not exist on the page: aria-describedby=\"radix-_r_2_\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<div role=\"dialog\" id=\"radix-«r0»\" aria-describedby=\"radix-«r2»\" aria-labelledby=\"radix-«r1»\" data-state=\"open\" data-spark-component=\"dialog-content\" class=\"z-modal flex flex-col bg-surface group focus-visible:outline-hidden focus-visible:u-outline [&amp;:not(:has(footer))]:pb-lg [&amp;:not(:has(header))]:pt-lg max-w-sz-672 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-h-[80%] shadow-md rounded-lg data-[state=open]:animate-fade-in data-[state=closed]:animate-fade-out w-full\" tabindex=\"-1\" style=\"pointer-events: auto;\">",
+            "html": "<div role=\"dialog\" id=\"radix-_r_0_\" aria-describedby=\"radix-_r_2_\" aria-labelledby=\"radix-_r_1_\" data-state=\"open\" data-spark-component=\"dialog-content\" class=\"z-modal flex flex-co...\" tabindex=\"-1\" style=\"pointer-events: auto...\">",
             "target": [
-              "#radix-«r0»"
+              "#radix-_r_0_"
             ]
           }
         ]
@@ -470,13 +484,13 @@
     "violations": []
   },
   "@spark-ui/components/divider": {
-    "timestamp": "2025-09-27T14:48:15.005Z",
+    "timestamp": "2025-11-20T15:04:14.843Z",
     "url": "http://localhost:3002/a11y/divider",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/drawer": {
-    "timestamp": "2025-09-27T14:48:16.123Z",
+    "timestamp": "2025-11-20T15:04:18.984Z",
     "url": "http://localhost:3002/a11y/drawer",
     "incomplete": [
       {
@@ -489,11 +503,13 @@
           "TTv5",
           "TT6.a",
           "EN-301-549",
-          "EN-9.4.1.2"
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-7.1.1"
         ],
         "description": "Ensure aria-hidden elements are not focusable nor contain focusable elements",
         "help": "ARIA hidden element must not be focusable or contain focusable elements",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-hidden-focus?application=playwright",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-hidden-focus?application=playwright",
         "nodes": [
           {
             "any": [],
@@ -555,11 +571,13 @@
           "wcag2a",
           "wcag412",
           "EN-301-549",
-          "EN-9.4.1.2"
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-7.1.1"
         ],
         "description": "Ensure all ARIA attributes have valid values",
         "help": "ARIA attributes must conform to valid values",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-valid-attr-value?application=playwright",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr-value?application=playwright",
         "nodes": [
           {
             "any": [],
@@ -568,16 +586,16 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "controlsWithinPopup",
-                  "needsReview": "aria-controls=\"radix-«r0»\""
+                  "needsReview": "aria-controls=\"radix-_r_0_\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-«r0»\""
+                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-_r_0_\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"drawer-trigger\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap default:px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-«r0»\" data-state=\"open\">",
+            "html": "<button data-spark-component=\"drawer-trigger\" type=\"button\" class=\"u-shadow-border-tran...\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-_r_0_\" data-state=\"open\">",
             "target": [
               "button[data-spark-component=\"drawer-trigger\"]"
             ]
@@ -588,7 +606,7 @@
     "violations": []
   },
   "@spark-ui/components/dropdown": {
-    "timestamp": "2025-09-27T14:48:17.165Z",
+    "timestamp": "2025-11-20T15:04:22.549Z",
     "url": "http://localhost:3002/a11y/dropdown",
     "incomplete": [
       {
@@ -599,11 +617,13 @@
           "wcag2a",
           "wcag412",
           "EN-301-549",
-          "EN-9.4.1.2"
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-7.1.1"
         ],
         "description": "Ensure all ARIA attributes have valid values",
         "help": "ARIA attributes must conform to valid values",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-valid-attr-value?application=playwright",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr-value?application=playwright",
         "nodes": [
           {
             "any": [],
@@ -612,18 +632,18 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "controlsWithinPopup",
-                  "needsReview": "aria-controls=\":dropdown-input-«r1»-menu\""
+                  "needsReview": "aria-controls=\":dropdown-input-_r_1_-menu\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\":dropdown-input-«r1»-menu\""
+                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\":dropdown-input-_r_1_-menu\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button type=\"button\" class=\"flex w-full items-center justify-between min-h-sz-44 rounded-lg bg-surface text-on-surface px-lg text-body-1 ring-1 outline-hidden ring-inset focus:ring-2 focus:ring-focus ring-outline default:hover:ring-outline-high\" aria-activedescendant=\"\" aria-controls=\":dropdown-input-«r1»-menu\" aria-expanded=\"false\" aria-haspopup=\"listbox\" aria-labelledby=\":dropdown-label-«r0»\" id=\":dropdown-input-«r1»-toggle-button\" role=\"combobox\" tabindex=\"0\" data-spark-component=\"dropdown-trigger\" data-state=\"open\">",
+            "html": "<button type=\"button\" class=\"flex w-full items-ce...\" aria-activedescendan...=\"\" aria-controls=\":dropdown-input-_r_1...\" aria-expanded=\"false\" aria-haspopup=\"listbox\" aria-labelledby=\":dropdown-label-_r_0...\" id=\":dropdown-input-_r_1...\" role=\"combobox\" tabindex=\"0\" data-spark-component=\"dropdown-tr ...>",
             "target": [
-              "#\\:dropdown-input-«r1»-toggle-button"
+              "#\\:dropdown-input-_r_1_-toggle-button"
             ]
           },
           {
@@ -633,18 +653,18 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "controlsWithinPopup",
-                  "needsReview": "aria-controls=\":dropdown-input-«r5»-menu\""
+                  "needsReview": "aria-controls=\":dropdown-input-_r_5_-menu\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\":dropdown-input-«r5»-menu\""
+                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\":dropdown-input-_r_5_-menu\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button type=\"button\" class=\"flex w-full items-center justify-between min-h-sz-44 rounded-lg bg-surface text-on-surface px-lg text-body-1 ring-1 outline-hidden ring-inset focus:ring-2 focus:ring-focus ring-outline default:hover:ring-outline-high\" aria-activedescendant=\"\" aria-controls=\":dropdown-input-«r5»-menu\" aria-expanded=\"false\" aria-haspopup=\"listbox\" aria-labelledby=\":dropdown-label-«r4»\" id=\":dropdown-input-«r5»-toggle-button\" role=\"combobox\" tabindex=\"0\" data-spark-component=\"dropdown-trigger\" data-state=\"open\">",
+            "html": "<button type=\"button\" class=\"flex w-full items-ce...\" aria-activedescendan...=\"\" aria-controls=\":dropdown-input-_r_5...\" aria-expanded=\"false\" aria-haspopup=\"listbox\" aria-labelledby=\":dropdown-label-_r_4...\" id=\":dropdown-input-_r_5...\" role=\"combobox\" tabindex=\"0\" data-spark-component=\"dropdown-tr ...>",
             "target": [
-              "#\\:dropdown-input-«r5»-toggle-button"
+              "#\\:dropdown-input-_r_5_-toggle-button"
             ]
           }
         ]
@@ -652,56 +672,62 @@
     ],
     "violations": []
   },
+  "@spark-ui/components/file-upload": {
+    "timestamp": "2025-11-20T15:04:26.361Z",
+    "url": "http://localhost:3002/a11y/file-upload",
+    "incomplete": [],
+    "violations": []
+  },
   "@spark-ui/components/form-field": {
-    "timestamp": "2025-09-27T14:48:18.211Z",
+    "timestamp": "2025-11-20T15:04:28.005Z",
     "url": "http://localhost:3002/a11y/form-field",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/icon": {
-    "timestamp": "2025-09-27T14:48:19.239Z",
+    "timestamp": "2025-11-20T15:04:32.287Z",
     "url": "http://localhost:3002/a11y/icon",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/icon-button": {
-    "timestamp": "2025-09-27T14:48:20.357Z",
+    "timestamp": "2025-11-20T15:04:35.429Z",
     "url": "http://localhost:3002/a11y/icon-button",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/input": {
-    "timestamp": "2025-09-27T14:48:21.374Z",
+    "timestamp": "2025-11-20T15:04:38.561Z",
     "url": "http://localhost:3002/a11y/input",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/kbd": {
-    "timestamp": "2025-09-27T14:48:22.413Z",
+    "timestamp": "2025-11-20T15:04:40.354Z",
     "url": "http://localhost:3002/a11y/kbd",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/label": {
-    "timestamp": "2025-09-27T14:48:23.538Z",
+    "timestamp": "2025-11-20T15:04:42.782Z",
     "url": "http://localhost:3002/a11y/label",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/link-box": {
-    "timestamp": "2025-09-27T14:48:24.849Z",
+    "timestamp": "2025-11-20T15:04:46.316Z",
     "url": "http://localhost:3002/a11y/link-box",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/pagination": {
-    "timestamp": "2025-09-27T14:48:26.013Z",
+    "timestamp": "2025-11-20T15:04:49.196Z",
     "url": "http://localhost:3002/a11y/pagination",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/popover": {
-    "timestamp": "2025-09-27T14:48:26.892Z",
+    "timestamp": "2025-11-20T15:04:51.909Z",
     "url": "http://localhost:3002/a11y/popover",
     "incomplete": [
       {
@@ -712,11 +738,13 @@
           "wcag2a",
           "wcag412",
           "EN-301-549",
-          "EN-9.4.1.2"
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-7.1.1"
         ],
         "description": "Ensure all ARIA attributes have valid values",
         "help": "ARIA attributes must conform to valid values",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-valid-attr-value?application=playwright",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr-value?application=playwright",
         "nodes": [
           {
             "any": [],
@@ -725,18 +753,18 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "controlsWithinPopup",
-                  "needsReview": "aria-controls=\"radix-«r0»\""
+                  "needsReview": "aria-controls=\"radix-_r_0_\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-«r0»\""
+                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-_r_0_\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"popover-trigger\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap default:px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"false\" aria-controls=\"radix-«r0»\" data-state=\"closed\">",
+            "html": "<button data-spark-component=\"popover-trigger\" type=\"button\" class=\"u-shadow-border-tran...\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"false\" aria-controls=\"radix-_r_0_\" data-state=\"closed\">",
             "target": [
-              "button[aria-controls=\"radix-«r0»\"]"
+              "button[aria-controls=\"radix-_r_0_\"]"
             ]
           },
           {
@@ -746,18 +774,18 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "controlsWithinPopup",
-                  "needsReview": "aria-controls=\"radix-«r1»\""
+                  "needsReview": "aria-controls=\"radix-_r_1_\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-«r1»\""
+                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-_r_1_\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"popover-trigger\" type=\"button\" class=\"u-shadow-border-transition box-border inline-flex items-center justify-center gap-md whitespace-nowrap default:px-lg text-body-1 font-bold focus-visible:u-outline min-w-sz-44 h-sz-44 rounded-lg cursor-pointer bg-main text-on-main hover:bg-main-hovered enabled:active:bg-main-hovered focus-visible:bg-main-hovered\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"false\" aria-controls=\"radix-«r1»\" data-state=\"closed\">",
+            "html": "<button data-spark-component=\"popover-trigger\" type=\"button\" class=\"u-shadow-border-tran...\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"false\" aria-controls=\"radix-_r_1_\" data-state=\"closed\">",
             "target": [
-              "button[aria-controls=\"radix-«r1»\"]"
+              "button[aria-controls=\"radix-_r_1_\"]"
             ]
           }
         ]
@@ -766,97 +794,91 @@
     "violations": []
   },
   "@spark-ui/components/progress": {
-    "timestamp": "2025-09-27T14:48:27.916Z",
+    "timestamp": "2025-11-20T15:04:54.401Z",
     "url": "http://localhost:3002/a11y/progress",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/progress-tracker": {
-    "timestamp": "2025-09-27T14:48:28.812Z",
+    "timestamp": "2025-11-20T15:04:57.486Z",
     "url": "http://localhost:3002/a11y/progress-tracker",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/radio-group": {
-    "timestamp": "2025-09-27T14:48:30.048Z",
+    "timestamp": "2025-11-20T15:04:59.519Z",
     "url": "http://localhost:3002/a11y/radio-group",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/rating": {
-    "timestamp": "2025-09-27T14:48:31.090Z",
+    "timestamp": "2025-11-20T15:05:03.129Z",
     "url": "http://localhost:3002/a11y/rating",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/select": {
-    "timestamp": "2025-09-27T14:48:32.137Z",
+    "timestamp": "2025-11-20T15:05:06.121Z",
     "url": "http://localhost:3002/a11y/select",
     "incomplete": [],
     "violations": []
   },
-  "@spark-ui/components/segmented-gauge": {
-    "timestamp": "2025-10-15T16:27:22.036Z",
-    "url": "http://localhost:3002/a11y/segmented-gauge",
-    "incomplete": [],
-    "violations": []
-  },
   "@spark-ui/components/skeleton": {
-    "timestamp": "2025-09-27T14:48:33.161Z",
+    "timestamp": "2025-11-20T15:05:08.893Z",
     "url": "http://localhost:3002/a11y/skeleton",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/slider": {
-    "timestamp": "2025-09-27T14:48:34.311Z",
+    "timestamp": "2025-11-20T15:05:12.637Z",
     "url": "http://localhost:3002/a11y/slider",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/snackbar": {
-    "timestamp": "2025-09-27T14:48:35.456Z",
+    "timestamp": "2025-11-20T15:05:15.471Z",
     "url": "http://localhost:3002/a11y/snackbar",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/spinner": {
-    "timestamp": "2025-09-27T14:48:36.471Z",
+    "timestamp": "2025-11-20T15:05:18.949Z",
     "url": "http://localhost:3002/a11y/spinner",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/stepper": {
-    "timestamp": "2025-09-27T14:48:37.626Z",
+    "timestamp": "2025-11-20T15:05:23.140Z",
     "url": "http://localhost:3002/a11y/stepper",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/switch": {
-    "timestamp": "2025-09-27T14:48:38.781Z",
+    "timestamp": "2025-11-20T15:05:25.978Z",
     "url": "http://localhost:3002/a11y/switch",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/tabs": {
-    "timestamp": "2025-09-27T14:48:39.940Z",
+    "timestamp": "2025-11-20T15:05:28.614Z",
     "url": "http://localhost:3002/a11y/tabs",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/tag": {
-    "timestamp": "2025-09-27T14:48:41.168Z",
+    "timestamp": "2025-11-20T15:05:32.051Z",
     "url": "http://localhost:3002/a11y/tag",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/textarea": {
-    "timestamp": "2025-09-27T14:48:42.298Z",
+    "timestamp": "2025-11-20T15:05:34.734Z",
     "url": "http://localhost:3002/a11y/textarea",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/text-link": {
-    "timestamp": "2025-09-27T14:48:43.460Z",
+    "timestamp": "2025-11-20T15:05:37.964Z",
     "url": "http://localhost:3002/a11y/text-link",
     "incomplete": [
       {
@@ -871,11 +893,13 @@
           "TTv5",
           "TT9.a",
           "EN-301-549",
-          "EN-9.2.4.1"
+          "EN-9.2.4.1",
+          "RGAAv4",
+          "RGAA-12.7.1"
         ],
         "description": "Ensure each page has at least one mechanism for a user to bypass navigation and jump straight to the content",
         "help": "Page must have means to bypass repeated blocks",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/bypass?application=playwright",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/bypass?application=playwright",
         "nodes": [
           {
             "any": [
@@ -915,7 +939,7 @@
     "violations": []
   },
   "@spark-ui/components/visually-hidden": {
-    "timestamp": "2025-09-27T14:48:44.599Z",
+    "timestamp": "2025-11-20T15:05:41.840Z",
     "url": "http://localhost:3002/a11y/visually-hidden",
     "incomplete": [],
     "violations": []
