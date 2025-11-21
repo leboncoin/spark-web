@@ -1,10 +1,24 @@
-/* eslint-disable max-lines */
 /* eslint-disable max-lines-per-function */
 import { useFormFieldControl } from '@spark-ui/components/form-field'
-import { useCombinedState } from '@spark-ui/hooks/use-combined-state'
-import { createContext, ReactNode, Ref, useContext, useId, useRef, useState } from 'react'
+import { createContext, ReactNode, Ref, useContext, useId, useRef } from 'react'
 
-import { validateFileAccept, validateFileSize } from './utils'
+import {
+  type FileAcceptDetails,
+  type FileChangeDetails,
+  type FileRejectDetails,
+  type FileUploadFileError,
+  type RejectedFile,
+  useFileUploadState,
+} from './useFileUploadState'
+
+// Re-export types for backward compatibility
+export type {
+  FileAcceptDetails,
+  FileChangeDetails,
+  FileRejectDetails,
+  FileUploadFileError,
+  RejectedFile,
+}
 
 export interface FileUploadProps {
   /**
@@ -84,32 +98,6 @@ export interface FileUploadProps {
   locale?: string
 }
 
-export type FileUploadFileError =
-  | 'TOO_MANY_FILES'
-  | 'FILE_INVALID_TYPE'
-  | 'FILE_TOO_LARGE'
-  | 'FILE_TOO_SMALL'
-  | 'FILE_INVALID'
-  | 'FILE_EXISTS'
-
-export interface RejectedFile {
-  file: File
-  errors: FileUploadFileError[]
-}
-
-export interface FileAcceptDetails {
-  files: File[]
-}
-
-export interface FileRejectDetails {
-  files: RejectedFile[]
-}
-
-export interface FileChangeDetails {
-  acceptedFiles: File[]
-  rejectedFiles: RejectedFile[]
-}
-
 export const FileUploadContext = createContext<{
   inputRef: React.RefObject<HTMLInputElement | null>
   files: File[]
@@ -153,27 +141,13 @@ export const FileUpload = ({
   locale,
 }: FileUploadProps) => {
   const field = useFormFieldControl()
-  const {
-    id: fieldId,
-    name: fieldName,
-    isInvalid,
-    isRequired,
-    description,
-    disabled: fieldDisabled,
-    readOnly: fieldReadOnly,
-    labelId,
-  } = field
-
-  // Get default locale from browser or fallback to 'en'
-  const defaultLocale =
-    locale || (typeof navigator !== 'undefined' && navigator.language ? navigator.language : 'en')
 
   // Generate unique ID if none provided by FormField
   const internalId = useId()
-  const inputId = fieldId || `${ID_PREFIX}-${internalId}`
+  const inputId = field.id || `${ID_PREFIX}-${internalId}`
 
   // Use FormField name or undefined (no hardcoded fallback)
-  const inputName = fieldName
+  const inputName = field.name
 
   const inputRef = useRef<HTMLInputElement>(null)
   const triggerRef = useRef<HTMLElement>(null)
@@ -181,254 +155,40 @@ export const FileUpload = ({
   const deleteButtonRefs = useRef<HTMLButtonElement[]>([])
 
   // Merge FormField props with component props (FormField takes precedence)
-  const disabled = fieldDisabled ?? disabledProp
-  const readOnly = fieldReadOnly ?? readOnlyProp
+  const disabled = field.disabled ?? disabledProp
+  const readOnly = field.readOnly ?? readOnlyProp
 
-  // For controlled mode, use onFileChange to update value prop
-  // useCombinedState doesn't need a callback - we'll call onFileChange manually in addFiles/removeFile
-  const [filesState, setFilesState, ,] = useCombinedState(controlledValue, defaultValue)
-  const files = filesState ?? []
-  const setFiles = setFilesState as (value: File[] | ((prev: File[]) => File[])) => void
-  const [rejectedFiles, setRejectedFiles] = useState<RejectedFile[]>([])
+  // Use the file upload state hook to manage all file operations
+  const {
+    files,
+    rejectedFiles,
+    addFiles,
+    removeFile,
+    removeRejectedFile,
+    clearFiles: clearFilesFromHook,
+    clearRejectedFiles,
+    maxFilesReached,
+  } = useFileUploadState({
+    defaultValue,
+    value: controlledValue,
+    onFileAccept,
+    onFileReject,
+    onFileChange,
+    multiple,
+    accept,
+    maxFiles,
+    maxFileSize,
+    minFileSize,
+    disabled,
+    readOnly,
+    locale,
+  })
 
-  const addFiles = (newFiles: File[]) => {
-    // Don't allow adding files when disabled or readOnly
-    if (disabled || readOnly) {
-      return
-    }
-
-    // Reset rejectedFiles at the start of each new file addition attempt
-    setRejectedFiles([])
-
-    const newRejectedFiles: RejectedFile[] = []
-
-    // Helper function to check if a file already exists
-    // Compares by name and size to detect duplicates (lastModified can differ when re-selecting the same file)
-    const fileExists = (file: File, existingFiles: File[]): boolean => {
-      return existingFiles.some(
-        existingFile => existingFile.name === file.name && existingFile.size === file.size
-      )
-    }
-
-    // Helper function to add or update rejected file
-    const addRejectedFile = (file: File, error: FileUploadFileError) => {
-      const existingRejection = newRejectedFiles.find(
-        rejected => rejected.file.name === file.name && rejected.file.size === file.size
-      )
-
-      if (existingRejection) {
-        // Add error to existing rejection if not already present
-        if (!existingRejection.errors.includes(error)) {
-          existingRejection.errors.push(error)
-        }
-      } else {
-        // Create new rejection
-        newRejectedFiles.push({
-          file,
-          errors: [error],
-        })
-      }
-    }
-
-    setFiles((prev: File[]) => {
-      const currentFiles = prev ?? []
-      // Check maxFiles limit FIRST for all files (even if they will be rejected by other validations)
-      // This allows a file to have multiple error codes (e.g., FILE_INVALID_TYPE + TOO_MANY_FILES)
-      if (maxFiles !== undefined) {
-        const currentCount = currentFiles.length
-        const remainingSlots = maxFiles - currentCount
-
-        if (remainingSlots <= 0) {
-          // Already at max, mark all new files with TOO_MANY_FILES error
-          newFiles.forEach(file => {
-            addRejectedFile(file, 'TOO_MANY_FILES')
-          })
-        }
-      }
-
-      // Track files rejected by accept pattern
-      let filteredFiles = newFiles
-      if (accept) {
-        const rejectedByAccept = newFiles.filter(file => !validateFileAccept(file, accept))
-        rejectedByAccept.forEach(file => {
-          addRejectedFile(file, 'FILE_INVALID_TYPE')
-        })
-        filteredFiles = newFiles.filter(file => validateFileAccept(file, accept))
-      }
-
-      // Track files rejected by size
-      let validSizeFiles = filteredFiles
-      if (minFileSize !== undefined || maxFileSize !== undefined) {
-        validSizeFiles = filteredFiles.filter(file => {
-          const validation = validateFileSize(file, minFileSize, maxFileSize, defaultLocale)
-          if (!validation.valid) {
-            if (maxFileSize !== undefined && file.size > maxFileSize) {
-              addRejectedFile(file, 'FILE_TOO_LARGE')
-            } else if (minFileSize !== undefined && file.size < minFileSize) {
-              addRejectedFile(file, 'FILE_TOO_SMALL')
-            } else {
-              addRejectedFile(file, 'FILE_INVALID')
-            }
-
-            return false
-          }
-
-          return true
-        })
-      }
-
-      // Check for duplicate files (both against existing files and within the current batch)
-      // This must be done AFTER size validation but BEFORE maxFiles check
-      const seenFiles = new Map<string, File>()
-      const duplicateFiles: File[] = []
-      const uniqueFiles = validSizeFiles.filter(file => {
-        // Create a unique key for the file (name + size)
-        // Using name and size only, as lastModified can differ when re-selecting the same file
-        const fileKey = `${file.name}-${file.size}`
-
-        // Check if file already exists in previously accepted files
-        const existsInPrev = fileExists(file, currentFiles)
-        if (existsInPrev) {
-          duplicateFiles.push(file)
-          addRejectedFile(file, 'FILE_EXISTS')
-
-          return false
-        }
-
-        // Check if file already exists in the current batch
-        if (seenFiles.has(fileKey)) {
-          duplicateFiles.push(file)
-          addRejectedFile(file, 'FILE_EXISTS')
-
-          return false
-        }
-
-        // Mark this file as seen
-        seenFiles.set(fileKey, file)
-
-        return true
-      })
-
-      // If multiple is false, replace existing files with only the first new file
-      let filesToAdd = multiple ? uniqueFiles : uniqueFiles.slice(0, 1)
-
-      // Track files rejected by maxFiles limit (only for files that passed other validations)
-      // Note: We already checked maxFiles at the beginning for ALL files to allow multiple error codes
-      // This second check is to prevent adding files when we're at the limit
-      if (maxFiles !== undefined) {
-        const currentCount = currentFiles.length
-        const remainingSlots = maxFiles - currentCount
-
-        if (remainingSlots <= 0) {
-          // Already at max, reject all new files (they should already have TOO_MANY_FILES error from the first check)
-          filesToAdd.forEach(file => {
-            addRejectedFile(file, 'TOO_MANY_FILES')
-          })
-          filesToAdd = []
-        } else if (filesToAdd.length > remainingSlots) {
-          // Reject all files if batch exceeds limit ("all or nothing" approach)
-          filesToAdd.forEach(file => {
-            addRejectedFile(file, 'TOO_MANY_FILES')
-          })
-          filesToAdd = []
-        }
-      }
-
-      const updated = multiple ? [...currentFiles, ...filesToAdd] : filesToAdd
-
-      // Add rejected files to state synchronously
-      // Note: newRejectedFiles is mutated inside this setFiles callback, so it should be populated by now
-      // Copy the array to avoid closure issues
-      const rejectedFilesToAdd = [...newRejectedFiles]
-      // Replace rejectedFiles completely (not accumulate)
-      setRejectedFiles(rejectedFilesToAdd)
-
-      // Call callbacks with the calculated values
-      // Note: These callbacks are called synchronously with the new values
-      // React will update the state asynchronously, but the callbacks receive the correct new values
-      if (filesToAdd.length > 0 && onFileAccept) {
-        onFileAccept({ files: filesToAdd })
-      }
-
-      if (rejectedFilesToAdd.length > 0 && onFileReject) {
-        onFileReject({ files: rejectedFilesToAdd })
-      }
-
-      if (onFileChange) {
-        onFileChange({
-          acceptedFiles: updated,
-          rejectedFiles: rejectedFilesToAdd,
-        })
-      }
-
-      return updated
-    })
-  }
-
-  const removeFile = (index: number) => {
-    // Don't allow removing files when disabled or readOnly
-    if (disabled || readOnly) {
-      return
-    }
-
-    setFiles((prev: File[]) => {
-      const currentFiles = prev ?? []
-      const updated = currentFiles.filter((_: File, i: number) => i !== index)
-
-      // Clean up TOO_MANY_FILES errors if we're now below the maxFiles limit
-      let updatedRejectedFiles = rejectedFiles
-      if (maxFiles !== undefined && updated.length < maxFiles) {
-        updatedRejectedFiles = rejectedFiles.filter(
-          rejected => !rejected.errors.includes('TOO_MANY_FILES')
-        )
-        setRejectedFiles(updatedRejectedFiles)
-      }
-
-      // Call onFileChange for controlled mode
-      if (onFileChange) {
-        onFileChange({
-          acceptedFiles: updated,
-          rejectedFiles: updatedRejectedFiles,
-        })
-      }
-
-      return updated
-    })
-  }
-
+  // Override clearFiles to also clear deleteButtonRefs
   const clearFiles = () => {
-    // Don't allow clearing files when disabled or readOnly
-    if (disabled || readOnly) {
-      return
-    }
-
-    setFiles([])
-    setRejectedFiles([])
+    clearFilesFromHook()
     deleteButtonRefs.current = []
-
-    // Call onFileChange for controlled mode
-    if (onFileChange) {
-      onFileChange({
-        acceptedFiles: [],
-        rejectedFiles: [],
-      })
-    }
   }
-
-  const removeRejectedFile = (index: number) => {
-    // Don't allow removing rejected files when disabled or readOnly
-    if (disabled || readOnly) {
-      return
-    }
-
-    setRejectedFiles(prev => prev.filter((_, i) => i !== index))
-  }
-
-  const clearRejectedFiles = () => {
-    setRejectedFiles([])
-  }
-
-  const maxFilesReached = maxFiles !== undefined && files.length >= maxFiles
 
   return (
     <FileUploadContext.Provider
@@ -449,10 +209,12 @@ export const FileUpload = ({
         maxFilesReached,
         disabled,
         readOnly,
-        locale: defaultLocale,
-        description,
-        isInvalid,
-        isRequired,
+        locale:
+          locale ||
+          (typeof navigator !== 'undefined' && navigator.language ? navigator.language : 'en'),
+        description: field.description,
+        isInvalid: field.isInvalid,
+        isRequired: field.isRequired,
       }}
     >
       {/* <Comp data-spark-component="file-upload" className={cx('relative', className)} {...props}> */}
@@ -468,15 +230,15 @@ export const FileUpload = ({
           accept={accept}
           disabled={disabled}
           readOnly={readOnly && !disabled}
-          required={isRequired}
-          aria-invalid={isInvalid}
-          aria-describedby={description}
+          required={field.isRequired}
+          aria-invalid={field.isInvalid}
+          aria-describedby={field.description}
           // Hardcoded aria-label is acceptable here because:
           // 1. The input is visually hidden (sr-only) and not keyboard accessible (tabIndex={-1})
           // 2. Users never interact directly with this input - they interact via Trigger/Dropzone
           // 3. Screen readers will announce the Trigger/Dropzone content (which can be translated) instead
           // 4. This is only used as a fallback when no FormField.Label is present
-          aria-label={!labelId ? 'Upload files test' : undefined}
+          aria-label={!field.labelId ? 'Upload files' : undefined}
           className="sr-only"
           onChange={e => {
             if (e.target.files && !disabled && !readOnly) {

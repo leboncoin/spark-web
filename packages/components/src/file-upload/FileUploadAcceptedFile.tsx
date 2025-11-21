@@ -8,10 +8,6 @@ import { ItemDeleteTrigger } from './FileUploadItemDeleteTrigger'
 import { formatFileSize, getFileIcon } from './utils'
 
 export interface FileUploadAcceptedFileProps extends ComponentPropsWithoutRef<'li'> {
-  /**
-   * Change the default rendered element for the one passed as a child, merging their props and behavior.
-   */
-  asChild?: boolean
   ref?: Ref<HTMLLIElement>
   /**
    * The file to display
@@ -33,7 +29,6 @@ export interface FileUploadAcceptedFileProps extends ComponentPropsWithoutRef<'l
 }
 
 export const AcceptedFile = ({
-  asChild: _asChild = false,
   className,
   file,
   uploadProgress,

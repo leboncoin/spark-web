@@ -2,10 +2,6 @@ import { cx } from 'class-variance-authority'
 import { ComponentPropsWithoutRef, Ref, useEffect, useState } from 'react'
 
 export interface FileUploadPreviewImageProps extends ComponentPropsWithoutRef<'div'> {
-  /**
-   * Change the default rendered element for the one passed as a child, merging their props and behavior.
-   */
-  asChild?: boolean
   ref?: Ref<HTMLDivElement>
   className?: string
   /**
@@ -19,7 +15,6 @@ export interface FileUploadPreviewImageProps extends ComponentPropsWithoutRef<'d
 }
 
 export const PreviewImage = ({
-  asChild: _asChild = false,
   className,
   file,
   fallback = '📄',

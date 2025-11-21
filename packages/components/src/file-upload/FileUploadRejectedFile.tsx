@@ -12,10 +12,6 @@ import { RejectedFileDeleteTrigger } from './FileUploadRejectedFileDeleteTrigger
 import { formatFileSize } from './utils'
 
 export interface FileUploadRejectedFileProps extends ComponentPropsWithoutRef<'li'> {
-  /**
-   * Change the default rendered element for the one passed as a child, merging their props and behavior.
-   */
-  asChild?: boolean
   ref?: Ref<HTMLLIElement>
   /**
    * The rejected file to display
@@ -35,7 +31,6 @@ export interface FileUploadRejectedFileProps extends ComponentPropsWithoutRef<'l
 }
 
 export const RejectedFile = ({
-  asChild: _asChild = false,
   className,
   rejectedFile,
   renderError,

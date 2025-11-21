@@ -36,7 +36,7 @@ export const ItemDeleteTrigger = ({
     removeFile(fileIndex)
 
     // Handle focus after removal
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       // Get all remaining delete buttons from the refs array
       const remainingButtons = deleteButtonRefs.current.filter(Boolean)
 
@@ -57,7 +57,7 @@ export const ItemDeleteTrigger = ({
           focusTarget.focus()
         }
       }
-    }, 0)
+    })
 
     onClick?.(e)
   }

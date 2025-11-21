@@ -545,9 +545,7 @@ export const ErrorHandling: StoryFn = () => {
 
       {/* Using Context with AcceptedFile and RejectedFile components */}
       <FileUpload.Context>
-        {({ acceptedFiles, rejectedFiles, ...rest }) => {
-          console.log(rest, acceptedFiles, rejectedFiles)
-
+        {({ acceptedFiles, rejectedFiles }) => {
           return (
             <div className="mt-lg">
               {acceptedFiles.length ? (
