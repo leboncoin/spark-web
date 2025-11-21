@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.6.0](https://github.com/leboncoin/spark-web/compare/v11.5.1...v11.6.0) (2025-11-21)
+
+### Features
+
+- **components:** stable FileUpload component ([0161202](https://github.com/leboncoin/spark-web/commit/0161202da45bf43b2b141ad2c15bc051060cd692))
+
 ## [11.5.1](https://github.com/leboncoin/spark-web/compare/v11.5.0...v11.5.1) (2025-11-20)
 
 ### Bug Fixes
