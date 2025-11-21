@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.6.1](https://github.com/leboncoin/spark-web/compare/v11.6.0...v11.6.1) (2025-11-21)
+
+**Note:** Version bump only for package @spark-ui/hooks
+
 # [11.6.0](https://github.com/leboncoin/spark-web/compare/v11.5.1...v11.6.0) (2025-11-21)
 
 **Note:** Version bump only for package @spark-ui/hooks
