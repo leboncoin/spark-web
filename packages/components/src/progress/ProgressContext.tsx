@@ -9,6 +9,7 @@ export interface ProgressContextValue {
   shape: 'square' | 'rounded'
   intent: ProgressIndicatorStylesProps['intent']
   onLabelId: (id?: string) => void
+  onComplete?: () => void
 }
 
 export const ProgressContext = createContext<ProgressContextValue | null>(null)

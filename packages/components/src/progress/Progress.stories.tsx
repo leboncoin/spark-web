@@ -51,12 +51,20 @@ export const Default: StoryFn = () => {
 
         return newValue
       })
-    }, 500)
+    }, 1000)
   }
 
   return (
     <div className="gap-lg flex flex-col">
-      <Progress max={max} value={value} aria-label="Loading" ref={progressRef} />
+      <Progress
+        max={max}
+        value={value}
+        aria-label="Loading"
+        ref={progressRef}
+        onComplete={() => {
+          console.log('animation complete')
+        }}
+      />
 
       {value !== 0 && (
         <div

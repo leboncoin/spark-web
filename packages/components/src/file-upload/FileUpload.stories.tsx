@@ -6,13 +6,13 @@ import { Tag } from '@spark-ui/components/tag'
 import { AddImageOutline } from '@spark-ui/icons/AddImageOutline'
 import { Export } from '@spark-ui/icons/Export'
 import { Meta, StoryFn } from '@storybook/react-vite'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 import { FormField } from '../form-field'
 import { FileUpload, type FileUploadFileError, type RejectedFile } from '.'
 
 const meta: Meta<typeof FileUpload> = {
-  title: 'Experimental/FileUpload',
+  title: 'Components/FileUpload',
   component: FileUpload,
   tags: ['data-entry'],
   parameters: {
@@ -274,14 +274,17 @@ export const WithCustomFileRender: StoryFn = () => {
 
 export const WithDefaultFiles: StoryFn = () => {
   // Create sample files for demonstration with different sizes to showcase all units
-  const defaultFiles = [
-    new File([new ArrayBuffer(500)], 'small.txt', { type: 'text/plain' }), // 500 bytes
-    new File([new ArrayBuffer(1024 * 1.5)], 'medium.jpg', { type: 'image/jpeg' }), // 1.5 KB
-    new File([new ArrayBuffer(1024 * 1024 * 2.3)], 'large.pdf', { type: 'application/pdf' }), // 2.3 MB
-    new File([new ArrayBuffer(1024 * 1024 * 1024 * 1.8)], 'huge.mp4', {
-      type: 'video/mp4',
-    }), // 1.8 GB
-  ]
+  const defaultFiles = useMemo(
+    () => [
+      new File([new ArrayBuffer(500)], 'small.txt', { type: 'text/plain' }), // 500 bytes
+      new File([new ArrayBuffer(1024 * 1.5)], 'medium.jpg', { type: 'image/jpeg' }), // 1.5 KB
+      new File([new ArrayBuffer(1024 * 1024 * 2.3)], 'large.pdf', { type: 'application/pdf' }), // 2.3 MB
+      new File([new ArrayBuffer(1024 * 1024 * 1024 * 1.8)], 'huge.mp4', {
+        type: 'video/mp4',
+      }), // 1.8 GB
+    ],
+    []
+  )
 
   return (
     <FileUpload defaultValue={defaultFiles}>
@@ -542,9 +545,7 @@ export const ErrorHandling: StoryFn = () => {
 
       {/* Using Context with AcceptedFile and RejectedFile components */}
       <FileUpload.Context>
-        {({ acceptedFiles, rejectedFiles, ...rest }) => {
-          console.log(rest, acceptedFiles, rejectedFiles)
-
+        {({ acceptedFiles, rejectedFiles }) => {
           return (
             <div className="mt-lg">
               {acceptedFiles.length ? (

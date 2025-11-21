@@ -8,6 +8,7 @@ import {
 } from './FileUpload'
 import { AcceptedFile } from './FileUploadAcceptedFile'
 import { Context } from './FileUploadContext'
+import { FILE_UPLOAD_ERRORS } from './constants'
 import { Dropzone } from './FileUploadDropzone'
 import { ItemDeleteTrigger } from './FileUploadItemDeleteTrigger'
 import { PreviewImage } from './FileUploadPreviewImage'
@@ -22,6 +23,8 @@ export type {
   RejectedFile,
   FileUploadFileError,
 }
+
+export { FILE_UPLOAD_ERRORS }
 
 export const FileUpload: typeof Root & {
   Trigger: typeof Trigger

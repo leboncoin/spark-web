@@ -1,5 +1,5 @@
 import { cx } from 'class-variance-authority'
-import { ComponentPropsWithoutRef, Ref } from 'react'
+import { ComponentPropsWithoutRef, Ref, useCallback, useEffect, useState } from 'react'
 
 import { Icon } from '../icon'
 import { Progress } from '../progress'
@@ -8,10 +8,6 @@ import { ItemDeleteTrigger } from './FileUploadItemDeleteTrigger'
 import { formatFileSize, getFileIcon } from './utils'
 
 export interface FileUploadAcceptedFileProps extends ComponentPropsWithoutRef<'li'> {
-  /**
-   * Change the default rendered element for the one passed as a child, merging their props and behavior.
-   */
-  asChild?: boolean
   ref?: Ref<HTMLLIElement>
   /**
    * The file to display
@@ -33,7 +29,6 @@ export interface FileUploadAcceptedFileProps extends ComponentPropsWithoutRef<'l
 }
 
 export const AcceptedFile = ({
-  asChild: _asChild = false,
   className,
   file,
   uploadProgress,
@@ -42,6 +37,20 @@ export const AcceptedFile = ({
   ...props
 }: FileUploadAcceptedFileProps) => {
   const { locale } = useFileUploadContext()
+  const [showProgress, setShowProgress] = useState(uploadProgress !== undefined)
+
+  useEffect(() => {
+    // Reset showProgress when uploadProgress becomes defined
+    if (uploadProgress !== undefined) {
+      setShowProgress(true)
+    } else {
+      setShowProgress(false)
+    }
+  }, [uploadProgress])
+
+  const handleProgressComplete = useCallback(() => {
+    setShowProgress(false)
+  }, [])
 
   return (
     <li
@@ -54,18 +63,21 @@ export const AcceptedFile = ({
       )}
       {...props}
     >
-      <div className="size-sz-40 bg-support-container flex items-center justify-center rounded-md">
+      <div className="size-sz-36 bg-support-container flex items-center justify-center rounded-md">
         <Icon size="md">{getFileIcon(file)}</Icon>
       </div>
 
-      <div className="min-w-0 flex-1">
-        <div className="gap-md flex flex-row items-center justify-between">
-          <p className="text-body-2 truncate font-medium">{file.name}</p>
-          <p className="text-caption opacity-dim-1">{formatFileSize(file.size, locale)}</p>
-        </div>
-        {uploadProgress !== undefined && (
-          <div className="mt-md">
-            <Progress value={uploadProgress} max={100} aria-label={progressAriaLabel} />
+      <div className="gap-md relative flex min-w-0 flex-1 flex-row items-center justify-between self-stretch">
+        <p className="text-body-2 truncate font-medium">{file.name}</p>
+        <p className="text-caption opacity-dim-1">{formatFileSize(file.size, locale)}</p>
+        {showProgress && uploadProgress !== undefined && (
+          <div className="absolute bottom-0 left-0 w-full">
+            <Progress
+              value={uploadProgress}
+              max={100}
+              aria-label={progressAriaLabel}
+              onComplete={handleProgressComplete}
+            />
           </div>
         )}
       </div>

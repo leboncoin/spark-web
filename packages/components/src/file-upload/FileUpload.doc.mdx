@@ -97,7 +97,90 @@ Provides a drag-and-drop area for file selection. Can be customized with childre
 
 ### _.Context
 
-A render prop component that provides access to `acceptedFiles`, `rejectedFiles`, `formatFileSize`, and `locale` from the FileUpload context.
+A render prop component that provides access to the FileUpload internal state and utilities. Use this component when you need to build custom file previews or access file data programmatically.
+
+The component uses a render prop pattern, where you pass a function as children that receives the context data:
+
+```tsx
+<FileUpload.Context>
+  {({ acceptedFiles, rejectedFiles, formatFileSize, locale }) => {
+    // Your custom rendering logic
+  }}
+</FileUpload.Context>
+```
+
+#### Exposed Data
+
+The render prop function receives an object with the following properties:
+
+- **`acceptedFiles`** - `File[]`  
+  An array of files that have passed validation and were accepted. Each item is a native `File` object with properties like `name`, `size`, `type`, etc.
+
+- **`rejectedFiles`** - `RejectedFile[]`  
+  An array of files that were rejected during validation. Each rejected file contains:
+  - `file`: `File` - The rejected file object
+  - `errors`: `FileUploadFileError[]` - An array of error codes indicating why the file was rejected. Possible error codes:
+    - `TOO_MANY_FILES` - Exceeds the `maxFiles` limit
+    - `FILE_INVALID_TYPE` - File type not in the `accept` list
+    - `FILE_TOO_LARGE` - File size exceeds `maxFileSize`
+    - `FILE_TOO_SMALL` - File size below `minFileSize`
+    - `FILE_INVALID` - Generic validation failure
+    - `FILE_EXISTS` - Duplicate file detected
+  
+  You can use the `FILE_UPLOAD_ERRORS` constant object to reference these error codes instead of using string literals.
+
+- **`formatFileSize`** - `(bytes: number, locale?: string) => string`  
+  A utility function to format file sizes in bytes to a human-readable format. The function uses `Intl.NumberFormat` to format sizes according to the locale, supporting units from bytes to gigabytes.
+  
+  **Parameters:**
+  - `bytes`: The file size in bytes
+  - `locale` (optional): A [BCP47](https://www.ietf.org/rfc/bcp/bcp47.txt) language code (e.g., `'en'`, `'fr'`). If not provided, uses the locale from the FileUpload component.
+  
+  **Returns:** A formatted string with the appropriate unit (e.g., `"1.5 MB"`, `"1,5 Mo"`).
+  
+  **Examples:**
+  ```tsx
+  formatFileSize(1024)           // "1 kB" (or "1 ko" in French)
+  formatFileSize(1024 * 1024)    // "1 MB" (or "1 Mo" in French)
+  formatFileSize(1536, 'en')     // "1.5 kB"
+  formatFileSize(1536, 'fr')     // "1,5 ko"
+  ```
+
+- **`locale`** - `string`  
+  The [BCP47](https://www.ietf.org/rfc/bcp/bcp47.txt) language code used for formatting file sizes and error messages. This value comes from the `locale` prop of the FileUpload component, or defaults to the browser locale (or `'en'` if not available).
+
+#### Usage Example
+
+```tsx
+<FileUpload>
+  <FileUpload.Trigger>Upload Files</FileUpload.Trigger>
+  <FileUpload.Context>
+    {({ acceptedFiles, rejectedFiles, formatFileSize, locale }) => (
+      <div>
+        {acceptedFiles.length > 0 && (
+          <ul>
+            {acceptedFiles.map((file, index) => (
+              <li key={index}>
+                {file.name} - {formatFileSize(file.size, locale)}
+              </li>
+            ))}
+          </ul>
+        )}
+        {rejectedFiles.length > 0 && (
+          <div>
+            <p>Rejected files:</p>
+            {rejectedFiles.map((rejected, index) => (
+              <div key={index}>
+                {rejected.file.name}: {rejected.errors.join(', ')}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    )}
+  </FileUpload.Context>
+</FileUpload>
+```
 
 <ArgTypes of={FileUpload.Context} />
 
@@ -156,6 +239,21 @@ The FileUpload component provides comprehensive validation and error handling ca
 - `FILE_INVALID` - Generic validation failure
 - `FILE_EXISTS` - Duplicate file detected
 
+You can use the `FILE_UPLOAD_ERRORS` constant object to reference these error codes in your code instead of using string literals:
+
+```tsx
+import { FileUpload, FILE_UPLOAD_ERRORS } from '@spark-ui/components/file-upload'
+
+const errorMessages = {
+  [FILE_UPLOAD_ERRORS.TOO_MANY_FILES]: 'Too many files selected',
+  [FILE_UPLOAD_ERRORS.FILE_INVALID_TYPE]: 'Invalid file type',
+  [FILE_UPLOAD_ERRORS.FILE_TOO_LARGE]: 'File too large',
+  [FILE_UPLOAD_ERRORS.FILE_TOO_SMALL]: 'File too small',
+  [FILE_UPLOAD_ERRORS.FILE_INVALID]: 'Invalid file',
+  [FILE_UPLOAD_ERRORS.FILE_EXISTS]: 'File already exists',
+}
+```
+
 Use `FileUpload.Context` to access `acceptedFiles` and `rejectedFiles`, then use `FileUpload.AcceptedFile` and `FileUpload.RejectedFile` components to display files with their validation errors. Each rejected file can have multiple error codes, allowing you to show all validation issues at once.
 
 <Canvas of={stories.ErrorHandling} />
@@ -200,7 +298,11 @@ Customize the dropzone appearance and behavior by wrapping it with other compone
 
 ### Custom files preview
 
-Use `FileUpload.Context` to access `acceptedFiles` and customize the markup of the files previews.
+Use `FileUpload.Context` to access `acceptedFiles` and customize the markup of the files previews. Several components are available to help you build custom previews:
+
+- **`FileUpload.PreviewImage`** - Displays an image preview for image files, with automatic fallback for non-image files or when preview fails
+- **`FileUpload.ItemDeleteTrigger`** - Provides a delete button for accepted files with proper focus management
+- **`FileUpload.RejectedFileDeleteTrigger`** - Provides a delete button for rejected files with proper focus management
 
 <Canvas of={stories.WithCustomFileRender} />
 
