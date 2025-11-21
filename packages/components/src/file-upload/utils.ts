@@ -2,7 +2,7 @@ import { CvOutline } from '@spark-ui/icons/CvOutline'
 import { FilePdfOutline } from '@spark-ui/icons/FilePdfOutline'
 import { ImageOutline } from '@spark-ui/icons/ImageOutline'
 import { PlayOutline } from '@spark-ui/icons/PlayOutline'
-import { createElement, ReactElement } from 'react'
+import { createElement, ReactElement, type RefObject } from 'react'
 
 /**
  * Validates if a file matches the accept patterns
@@ -171,4 +171,59 @@ export function getFileIcon(file: File): ReactElement {
 
   // Default icon for other file types
   return createElement(CvOutline)
+}
+
+/**
+ * Checks if an element is focusable
+ * @param element - The element to check
+ * @returns True if the element is focusable
+ */
+function isFocusable(element: HTMLElement | null): boolean {
+  if (!element) {
+    return false
+  }
+
+  // Check if element has tabIndex >= 0 (not -1)
+  const tabIndex = element.tabIndex
+  if (tabIndex >= 0) {
+    return true
+  }
+
+  // Check if element is naturally focusable (input, button, select, textarea, a with href, etc.)
+  const isContentEditable = String(element.contentEditable) === 'true'
+  const naturallyFocusable: boolean =
+    element instanceof HTMLInputElement ||
+    element instanceof HTMLButtonElement ||
+    element instanceof HTMLSelectElement ||
+    element instanceof HTMLTextAreaElement ||
+    (element instanceof HTMLAnchorElement && Boolean(element.href)) ||
+    isContentEditable
+
+  return naturallyFocusable
+}
+
+/**
+ * Finds the first focusable element from a list of candidates
+ * Falls back to inputRef if no other element is focusable
+ * @param candidates - Array of candidate elements to check
+ * @param inputRef - Input element to use as last resort
+ * @returns The first focusable element, or null if none found
+ */
+export function findFocusableElement(
+  candidates: (HTMLElement | null)[],
+  inputRef: RefObject<HTMLInputElement | null>
+): HTMLElement | null {
+  // Try each candidate in order
+  for (const candidate of candidates) {
+    if (isFocusable(candidate)) {
+      return candidate
+    }
+  }
+
+  // Last resort: use inputRef (even though it has tabIndex={-1}, we can still focus it programmatically)
+  if (inputRef.current) {
+    return inputRef.current
+  }
+
+  return null
 }
