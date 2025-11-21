@@ -110,6 +110,7 @@ export const FileUploadContext = createContext<{
   triggerRef: React.RefObject<HTMLElement | null>
   dropzoneRef: React.RefObject<HTMLElement | null>
   deleteButtonRefs: React.MutableRefObject<HTMLButtonElement[]>
+  rejectedFileDeleteButtonRefs: React.MutableRefObject<HTMLButtonElement[]>
   multiple: boolean
   maxFiles?: number
   maxFilesReached: boolean
@@ -153,6 +154,7 @@ export const FileUpload = ({
   const triggerRef = useRef<HTMLElement>(null)
   const dropzoneRef = useRef<HTMLElement>(null)
   const deleteButtonRefs = useRef<HTMLButtonElement[]>([])
+  const rejectedFileDeleteButtonRefs = useRef<HTMLButtonElement[]>([])
 
   // Merge FormField props with component props (FormField takes precedence)
   const disabled = field.disabled ?? disabledProp
@@ -190,6 +192,12 @@ export const FileUpload = ({
     deleteButtonRefs.current = []
   }
 
+  // Override clearRejectedFiles to also clear rejectedFileDeleteButtonRefs
+  const clearRejectedFilesWithRefs = () => {
+    clearRejectedFiles()
+    rejectedFileDeleteButtonRefs.current = []
+  }
+
   return (
     <FileUploadContext.Provider
       value={{
@@ -200,10 +208,11 @@ export const FileUpload = ({
         removeFile,
         removeRejectedFile,
         clearFiles,
-        clearRejectedFiles,
+        clearRejectedFiles: clearRejectedFilesWithRefs,
         triggerRef,
         dropzoneRef,
         deleteButtonRefs,
+        rejectedFileDeleteButtonRefs,
         multiple,
         maxFiles,
         maxFilesReached,

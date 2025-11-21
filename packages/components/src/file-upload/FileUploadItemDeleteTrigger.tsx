@@ -5,6 +5,7 @@ import { useRef } from 'react'
 import { Icon } from '../icon'
 import { IconButton } from '../icon-button'
 import { useFileUploadContext } from './FileUpload'
+import { findFocusableElement } from './utils'
 
 export interface FileUploadItemDeleteTriggerProps extends React.ComponentProps<typeof IconButton> {
   /**
@@ -19,8 +20,16 @@ export const ItemDeleteTrigger = ({
   onClick,
   ...props
 }: FileUploadItemDeleteTriggerProps) => {
-  const { removeFile, triggerRef, dropzoneRef, deleteButtonRefs, disabled, readOnly, files } =
-    useFileUploadContext()
+  const {
+    removeFile,
+    triggerRef,
+    dropzoneRef,
+    deleteButtonRefs,
+    inputRef,
+    disabled,
+    readOnly,
+    files,
+  } = useFileUploadContext()
   const buttonRef = useRef<HTMLButtonElement>(null)
 
   // Find the index of the file using name + size (consistent with duplicate detection logic)
@@ -51,8 +60,11 @@ export const ItemDeleteTrigger = ({
           nextButton.focus()
         }
       } else {
-        // No more files, focus on trigger or dropzone
-        const focusTarget = triggerRef.current || dropzoneRef.current
+        // No more files, find a focusable element (trigger, dropzone, or input as last resort)
+        const focusTarget = findFocusableElement(
+          [triggerRef.current, dropzoneRef.current],
+          inputRef
+        )
         if (focusTarget) {
           focusTarget.focus()
         }
