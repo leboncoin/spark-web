@@ -11,6 +11,10 @@ export interface ProgressProps
     Pick<ProgressIndicatorStylesProps, 'intent'> {
   shape?: 'square' | 'rounded'
   isIndeterminate?: boolean
+  /**
+   * Callback called when the progress reaches its maximum value and the transition animation completes.
+   */
+  onComplete?: () => void
   ref?: Ref<HTMLDivElement>
 }
 
@@ -21,6 +25,7 @@ export const Progress = ({
   shape = 'square',
   intent = 'basic',
   isIndeterminate = false,
+  onComplete,
   children = <ProgressBar />,
   ref,
   ...others
@@ -28,8 +33,16 @@ export const Progress = ({
   const [labelId, setLabelId] = useState<string>()
 
   const value = useMemo(() => {
-    return { value: valueProp ?? 0, max, intent, shape, isIndeterminate, onLabelId: setLabelId }
-  }, [max, valueProp, intent, shape, isIndeterminate, setLabelId])
+    return {
+      value: valueProp ?? 0,
+      max,
+      intent,
+      shape,
+      isIndeterminate,
+      onLabelId: setLabelId,
+      onComplete,
+    }
+  }, [max, valueProp, intent, shape, isIndeterminate, setLabelId, onComplete])
 
   return (
     <ProgressContext.Provider data-spark-component="progress" value={value}>
