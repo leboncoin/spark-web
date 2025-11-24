@@ -48,8 +48,8 @@ import { useSortableList } from "@spark-ui/hooks/use-sortable-list"
 ### Return Value
 
 #### `getItemProps`
-- **Type:** `(item: T, index: number) => SortableItemProps<TElement>`
-- **Description:** Function that returns props to spread on a sortable item element. Includes:
+- **Type:** `<TElement extends HTMLElement = HTMLElement>(item: T, index: number) => SortableItemProps<TElement>`
+- **Description:** Generic function that returns props to spread on a sortable item element. The element type `TElement` is inferred from usage or can be explicitly provided. Includes:
   - `draggable`: `boolean` - Whether the item is draggable
   - `onDragStart`: Handler for drag start event
   - `onDragEnter`: Handler for drag enter event
@@ -79,7 +79,7 @@ You can use this attribute to style drop targets with TailwindCSS:
 
 ```tsx
 <li
-  {...getItemProps(item, index)}
+  {...getItemProps<HTMLLIElement>(item, index)}
   className="data-drag-over:bg-success data-drag-over:border-success"
 >
   {item.name}

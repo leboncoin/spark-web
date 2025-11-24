@@ -711,7 +711,7 @@ export const Sortable: StoryFn = () => {
 
   const [files, setFiles] = useState<File[]>(defaultFiles)
 
-  const { getItemProps } = useSortableList<File, HTMLLIElement>({
+  const { getItemProps } = useSortableList({
     items: files,
     onReorder: setFiles,
     getItemKey: (file: File) => `${file.name}-${file.size}`,
@@ -740,7 +740,7 @@ export const Sortable: StoryFn = () => {
           ) : (
             <ul className="gap-md my-md flex default:flex-col">
               {acceptedFiles.map((file, index) => {
-                const sortableProps = getItemProps(file, index)
+                const sortableProps = getItemProps<HTMLLIElement>(file, index)
 
                 return (
                   <FileUpload.AcceptedFile

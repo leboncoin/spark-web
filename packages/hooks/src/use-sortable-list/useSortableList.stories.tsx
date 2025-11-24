@@ -29,7 +29,7 @@ export const Default: StoryFn = () => {
     { id: '10', name: 'Item 10' },
   ])
 
-  const { getItemProps } = useSortableList<SimpleItem, HTMLLIElement>({
+  const { getItemProps } = useSortableList({
     items,
     onReorder: setItems,
     getItemKey: item => item.id,
@@ -38,7 +38,7 @@ export const Default: StoryFn = () => {
   return (
     <ul className="gap-md flex flex-row flex-wrap">
       {items.map((item, index) => {
-        const props = getItemProps(item, index)
+        const props = getItemProps<HTMLLIElement>(item, index)
 
         return (
           <li

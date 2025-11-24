@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Ref, useRef } from 'react'
 
 export interface UseSortableListOptions<T> {
@@ -61,14 +62,17 @@ export interface SortableItemProps<TElement extends HTMLElement = HTMLElement> {
   ref: Ref<TElement>
 }
 
-export interface UseSortableListReturn<T, TElement extends HTMLElement = HTMLElement> {
+export interface UseSortableListReturn<T> {
   /**
    * Get props to spread on a sortable item element (includes ref)
    * @param item - The item to get props for
    * @param index - The current index of the item in the list
    * @returns Props object to spread on the element
    */
-  getItemProps: (item: T, index: number) => SortableItemProps<TElement>
+  getItemProps: <TElement extends HTMLElement = HTMLElement>(
+    item: T,
+    index: number
+  ) => SortableItemProps<TElement>
 }
 
 /**
@@ -96,14 +100,14 @@ export interface UseSortableListReturn<T, TElement extends HTMLElement = HTMLEle
  * )
  * ```
  */
-export function useSortableList<T, TElement extends HTMLElement = HTMLElement>({
+export function useSortableList<T>({
   items,
   onReorder,
   getItemKey,
-}: UseSortableListOptions<T>): UseSortableListReturn<T, TElement> {
+}: UseSortableListOptions<T>): UseSortableListReturn<T> {
   // Refs to maintain focus after keyboard reordering
   // Uses a key based on the item rather than index
-  const itemRefs = useRef<Map<string, TElement>>(new Map())
+  const itemRefs = useRef<Map<string, HTMLElement>>(new Map())
 
   const handleDragStart = (e: React.DragEvent, index: number) => {
     e.dataTransfer.effectAllowed = 'move'
@@ -196,7 +200,10 @@ export function useSortableList<T, TElement extends HTMLElement = HTMLElement>({
     }
   }
 
-  const getItemProps = (item: T, index: number): SortableItemProps<TElement> => {
+  const getItemProps = <TElement extends HTMLElement = HTMLElement>(
+    item: T,
+    index: number
+  ): SortableItemProps<TElement> => {
     const itemKey = getItemKey(item)
 
     return {
@@ -211,7 +218,7 @@ export function useSortableList<T, TElement extends HTMLElement = HTMLElement>({
       tabIndex: 0,
       ref: (node: TElement | null) => {
         if (node) {
-          itemRefs.current.set(itemKey, node)
+          itemRefs.current.set(itemKey, node as HTMLElement)
         } else {
           itemRefs.current.delete(itemKey)
         }
