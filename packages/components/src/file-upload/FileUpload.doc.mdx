@@ -306,6 +306,17 @@ Use `FileUpload.Context` to access `acceptedFiles` and customize the markup of t
 
 <Canvas of={stories.WithCustomFileRender} />
 
+### Sortable files
+
+You can make the file previews sortable using drag and drop. This example uses the [`useSortableList`](/docs/hooks-usesortablelist--docs) hook to implement drag and drop reordering with the HTML5 Drag and Drop API. The component uses controlled mode to manage the file order state, allowing users to reorder files by dragging them.
+
+The implementation includes:
+- Drag and drop reordering with visual feedback (opacity change during drag)
+- Keyboard navigation support (Arrow Up/Down keys to reorder)
+- Controlled mode to keep the file order synchronized with external state
+
+<Canvas of={stories.Sortable} />
+
 
 ## Form field
 

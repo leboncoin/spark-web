@@ -3,6 +3,7 @@ import { Button } from '@spark-ui/components/button'
 import { Icon } from '@spark-ui/components/icon'
 import { IconButton } from '@spark-ui/components/icon-button'
 import { Tag } from '@spark-ui/components/tag'
+import { useSortableList } from '@spark-ui/hooks/use-sortable-list'
 import { AddImageOutline } from '@spark-ui/icons/AddImageOutline'
 import { Export } from '@spark-ui/icons/Export'
 import { Meta, StoryFn } from '@storybook/react-vite'
@@ -690,6 +691,71 @@ export const WithProgress: StoryFn = () => {
             ))}
           </ul>
         )}
+      </FileUpload.Context>
+    </FileUpload>
+  )
+}
+
+export const Sortable: StoryFn = () => {
+  const defaultFiles = useMemo(
+    () => [
+      new File([new ArrayBuffer(500)], 'small.txt', { type: 'text/plain' }), // 500 bytes
+      new File([new ArrayBuffer(1024 * 1.5)], 'medium.jpg', { type: 'image/jpeg' }), // 1.5 KB
+      new File([new ArrayBuffer(1024 * 1024 * 2.3)], 'large.pdf', { type: 'application/pdf' }), // 2.3 MB
+      new File([new ArrayBuffer(1024 * 1024 * 1024 * 1.8)], 'huge.mp4', {
+        type: 'video/mp4',
+      }), // 1.8 GB
+    ],
+    []
+  )
+
+  const [files, setFiles] = useState<File[]>(defaultFiles)
+
+  const { getItemProps } = useSortableList<File, HTMLLIElement>({
+    items: files,
+    onReorder: setFiles,
+    getItemKey: (file: File) => `${file.name}-${file.size}`,
+  })
+
+  return (
+    <FileUpload
+      value={files}
+      onFileChange={details => {
+        setFiles(details.acceptedFiles)
+      }}
+      accept="image/*"
+    >
+      <FileUpload.Dropzone>
+        <Button asChild>
+          <FileUpload.Trigger>Upload Files</FileUpload.Trigger>
+        </Button>
+      </FileUpload.Dropzone>
+
+      <FileUpload.Context>
+        {({ acceptedFiles }) => {
+          return acceptedFiles.length === 0 ? (
+            <div className="py-md text-caption text-on-surface/dim-2 text-center">
+              No files uploaded yet
+            </div>
+          ) : (
+            <ul className="gap-md my-md flex default:flex-col">
+              {acceptedFiles.map((file, index) => {
+                const sortableProps = getItemProps(file, index)
+
+                return (
+                  <FileUpload.AcceptedFile
+                    key={`${file.name}-${file.size}-${index}`}
+                    file={file}
+                    {...sortableProps}
+                    className="data-drag-over:border-outline-high cursor-move"
+                    aria-label={`Drag to reorder ${file.name}`}
+                    deleteButtonAriaLabel={`Delete ${file.name}`}
+                  />
+                )
+              })}
+            </ul>
+          )
+        }}
       </FileUpload.Context>
     </FileUpload>
   )

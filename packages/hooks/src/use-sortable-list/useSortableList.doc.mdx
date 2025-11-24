@@ -1,0 +1,95 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+
+import * as stories from './useSortableList.stories'
+
+<Meta of={stories} />
+
+# useSortableList
+
+> Hook to make a list of items sortable via drag and drop and keyboard navigation.
+
+The `useSortableList` hook provides a simple way to implement sortable lists with drag and drop functionality and keyboard navigation. It handles all the drag and drop events, keyboard interactions, and focus management automatically.
+
+## Install
+
+```
+npm install @spark-ui/hooks
+```
+
+## Import
+
+```
+import { useSortableList } from "@spark-ui/hooks/use-sortable-list"
+```
+
+## Usage
+
+<Canvas of={stories.Default} />
+
+## API Reference
+
+### Options
+
+#### `items`
+- **Type:** `T[]`
+- **Required:** Yes
+- **Description:** The list of items to be sortable.
+
+#### `onReorder`
+- **Type:** `(newItems: T[]) => void`
+- **Required:** Yes
+- **Description:** Callback called when items are reordered. Receives the new ordered array of items.
+
+#### `getItemKey`
+- **Type:** `(item: T) => string`
+- **Required:** Yes
+- **Description:** Function to generate a unique key for each item. This key is used to track items during reordering and maintain focus.
+
+### Return Value
+
+#### `getItemProps`
+- **Type:** `(item: T, index: number) => SortableItemProps<TElement>`
+- **Description:** Function that returns props to spread on a sortable item element. Includes:
+  - `draggable`: `boolean` - Whether the item is draggable
+  - `onDragStart`: Handler for drag start event
+  - `onDragEnter`: Handler for drag enter event
+  - `onDragOver`: Handler for drag over event
+  - `onDragLeave`: Handler for drag leave event
+  - `onDragEnd`: Handler for drag end event
+  - `onDrop`: Handler for drop event
+  - `onKeyDown`: Handler for keyboard navigation (ArrowUp/ArrowDown)
+  - `tabIndex`: `number` - Tab index for keyboard navigation (0)
+  - `ref`: Ref callback to attach to the item element
+
+**Note:** The hook applies inline styles for visual feedback during drag operations (opacity). You can add your own `className` prop to the element without conflicts.
+
+## Features
+
+- **Drag and Drop**: Full HTML5 drag and drop support with visual feedback
+- **Keyboard Navigation**: ArrowUp/ArrowDown keys to reorder items
+- **Focus Management**: Automatically maintains focus on moved items after reordering
+- **Type Safe**: Fully typed with TypeScript generics
+- **Flexible**: Works with any type of item, not just specific types
+
+## Visual Feedback
+
+During drag operations, the hook automatically manages a `data-drag-over` attribute on drop target elements. This attribute is added when dragging over a valid drop target and removed when leaving it or after the drop completes.
+
+You can use this attribute to style drop targets with TailwindCSS:
+
+```tsx
+<li
+  {...getItemProps(item, index)}
+  className="data-drag-over:bg-success data-drag-over:border-success"
+>
+  {item.name}
+</li>
+```
+
+The attribute is automatically cleaned up after drag operations complete, so you don't need to manage it manually.
+
+## Keyboard Interactions
+
+- **ArrowUp**: Moves the current item up in the list
+- **ArrowDown**: Moves the current item down in the list
+
