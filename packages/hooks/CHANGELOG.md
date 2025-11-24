@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.7.0](https://github.com/leboncoin/spark-web/compare/v11.6.1...v11.7.0) (2025-11-24)
+
+### Bug Fixes
+
+- **hooks:** make generic usage optional on useSortableList ([e435a16](https://github.com/leboncoin/spark-web/commit/e435a1614201599a19dc2cc5125b88e474a4c32a))
+
+### Features
+
+- **hooks:** useSortableList hook ([dd34c3d](https://github.com/leboncoin/spark-web/commit/dd34c3d7856f3fe4426c55d7e7600f0e2df38aa7))
+
 ## [11.6.1](https://github.com/leboncoin/spark-web/compare/v11.6.0...v11.6.1) (2025-11-21)
 
 **Note:** Version bump only for package @spark-ui/hooks

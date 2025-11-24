@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
-  "version": "11.6.1",
+  "version": "11.7.0",
   "command": {
     "publish": {
       "conventionalCommits": true,
