@@ -31,7 +31,7 @@ export default () => (
       <Tabs.Trigger />
     </Tabs.List>
     <Tabs.Content />
-  </Tabs.Content>
+  </Tabs>
 );
 ```
 
@@ -114,6 +114,12 @@ This can be useful if your tabs load heavy resources on mount, such as heavy ima
 
 <Canvas of={stories.ForceMount} />
 
+### With Popover
+
+You can add optional popovers to each tab trigger using the `renderMenu` prop on `Tabs.Trigger`. The popover is automatically positioned next to its trigger (right side for vertical orientation, bottom for horizontal). Press <Kbd>Shift</Kbd>+<Kbd>F10</Kbd> on a focused tab to open its associated popover.
+
+<Canvas of={stories.WithPopover} />
+
 ## Accessibility
 
 <A11yReport of="tabs" />
@@ -139,6 +145,7 @@ Adheres to the [Tabs WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/pa
   its associated content.
 - <Kbd>Home</Kbd>: Moves focus to the first trigger and activates its associated content.
 - <Kbd>End</Kbd>: Moves focus to the last trigger and activates its associated content.
+- <Kbd>Shift</Kbd>+<Kbd>F10</Kbd>: Opens the popover associated with the focused trigger (if available).
 
 ### Roles
 
