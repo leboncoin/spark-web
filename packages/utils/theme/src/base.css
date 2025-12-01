@@ -2,11 +2,6 @@
 @import './custom-variants.css';
 @import './utilities.css';
 
-@import './light-theme.css';
-@import './dark-theme.css';
-@import './light-theme-more-contrast.css';
-@import './dark-theme-more-contrast.css';
-
 @theme {
   --breakpoint-*: initial;
   --color-*: initial;
@@ -228,3 +223,4 @@
   --z-index-toast: 1700;
   --z-index-tooltip: 1800;
 }
+
