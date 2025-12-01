@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.0.0](https://github.com/leboncoin/spark-web/compare/v11.7.1...v12.0.0) (2025-12-01)
+
+### Code Refactoring
+
+- **theme-utils:** enable modular CSS imports for base and themes ([fe10839](https://github.com/leboncoin/spark-web/commit/fe10839080da3e1d8853331347ba94fc28c8122e))
+
+### BREAKING CHANGES
+
+- **theme-utils:** new imports for themes
+
 ## [11.7.1](https://github.com/leboncoin/spark-web/compare/v11.7.0...v11.7.1) (2025-11-25)
 
 **Note:** Version bump only for package @spark-ui/theme-utils
