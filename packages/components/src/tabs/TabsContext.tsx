@@ -4,7 +4,9 @@ import { createContext, useContext } from 'react'
 import type { TabsTriggerVariantsProps } from './TabsTrigger.styles'
 
 export type TabsContextInterface = TabsTriggerVariantsProps &
-  Pick<RadixTabs.TabsProps, 'orientation'> & { forceMount?: boolean }
+  Pick<RadixTabs.TabsProps, 'orientation'> & {
+    forceMount?: boolean
+  }
 
 export const TabsContext = createContext<TabsContextInterface>({} as TabsContextInterface)
 

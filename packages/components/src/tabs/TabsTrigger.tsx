@@ -1,7 +1,9 @@
+import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
 import { Tabs as RadixTabs } from 'radix-ui'
-import { type FocusEvent, Ref } from 'react'
+import { type FocusEvent, type KeyboardEvent, type ReactNode, Ref, useRef } from 'react'
 
 import { useTabsContext } from './TabsContext'
+import { type ConfiguredPopoverComponent, Popover } from './TabsPopoverAbstraction'
 import { triggerVariants } from './TabsTrigger.styles'
 
 export interface TabsTriggerProps extends RadixTabs.TabsTriggerProps {
@@ -19,6 +21,21 @@ export interface TabsTriggerProps extends RadixTabs.TabsTriggerProps {
    * @default false
    */
   disabled?: boolean
+  /**
+   * Function that receives a pre-configured Popover component and returns the popover structure.
+   * @example
+   * renderMenu={({ Popover }) => (
+   *   <Popover>
+   *     <Popover.Trigger aria-label="Options">
+   *       <CustomIcon />
+   *     </Popover.Trigger>
+   *     <Popover.Content>
+   *       <Button>Action</Button>
+   *     </Popover.Content>
+   *   </Popover>
+   * )}
+   */
+  renderMenu?: (props: { Popover: ConfiguredPopoverComponent }) => ReactNode
   ref?: Ref<HTMLButtonElement>
 }
 
@@ -33,30 +50,73 @@ export const TabsTrigger = ({
   children,
   className,
   ref,
+  onKeyDown,
+  renderMenu,
   ...rest
 }: TabsTriggerProps) => {
-  const { intent, size } = useTabsContext()
+  const { intent, size, orientation } = useTabsContext()
+  const popoverTriggerRef = useRef<HTMLButtonElement>(null)
+  const tabsTriggerRef = useRef<HTMLButtonElement>(null)
 
-  const scrollToFocusedElement = ({ target }: FocusEvent<HTMLButtonElement>) =>
-    target.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'nearest',
-    })
+  // Combine internal ref with forwarded ref
+  const mergedRef = useMergeRefs(ref, tabsTriggerRef)
 
-  return (
+  const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+    // Handle Shift+F10 for popover
+    if (e.key === 'F10' && e.shiftKey && renderMenu && popoverTriggerRef.current) {
+      e.preventDefault()
+      popoverTriggerRef.current.click()
+    }
+
+    // Call original onKeyDown if provided
+    onKeyDown?.(e)
+  }
+
+  const hasMenu = !!renderMenu
+  const popoverSide = orientation === 'vertical' ? 'right' : 'bottom'
+
+  const trigger = (
     <RadixTabs.Trigger
       data-spark-component="tabs-trigger"
-      ref={ref}
-      className={triggerVariants({ intent, size, className })}
+      ref={mergedRef}
+      className={triggerVariants({
+        intent,
+        size,
+        hasMenu,
+        orientation: orientation ?? 'horizontal',
+        className,
+      })}
       asChild={asChild}
       disabled={disabled}
       value={value}
-      onFocus={scrollToFocusedElement}
+      onFocus={({ target }: FocusEvent<HTMLButtonElement>) =>
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'nearest',
+        })
+      }
+      onKeyDown={handleKeyDown}
+      aria-haspopup={hasMenu ? 'true' : undefined}
       {...rest}
     >
       {children}
     </RadixTabs.Trigger>
+  )
+
+  if (!hasMenu) {
+    return trigger
+  }
+
+  return (
+    <div className={orientation === 'vertical' ? 'relative w-full' : 'relative'}>
+      {trigger}
+      <div className="right-md mr-md pointer-events-auto absolute top-1/2 -translate-y-1/2">
+        <Popover popoverSide={popoverSide} popoverTriggerRef={popoverTriggerRef}>
+          {PopoverAbstraction => renderMenu?.({ Popover: PopoverAbstraction })}
+        </Popover>
+      </div>
+    </div>
   )
 }
 

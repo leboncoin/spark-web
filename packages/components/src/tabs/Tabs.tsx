@@ -7,7 +7,7 @@ import type { TabsTriggerVariantsProps } from './TabsTrigger.styles'
 
 export interface TabsProps
   extends Omit<RadixTabs.TabsProps, 'activationMode'>,
-    PropsWithChildren<TabsTriggerVariantsProps> {
+    PropsWithChildren<Omit<TabsTriggerVariantsProps, 'orientation'>> {
   /**
    * Change the component to the HTML tag or custom component of the only child. This will merge the original component props with the props of the supplied element/component and change the underlying DOM node.
    * @default false

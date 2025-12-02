@@ -4,8 +4,9 @@ import { ConversationFill } from '@spark-ui/icons/ConversationFill'
 import { FireFill } from '@spark-ui/icons/FireFill'
 import { MailFill } from '@spark-ui/icons/MailFill'
 import type { Meta, StoryFn } from '@storybook/react-vite'
-import type { ReactNode } from 'react'
+import { type ReactNode } from 'react'
 
+import { Button } from '../button'
 import { Icon } from '../icon'
 import { Tabs } from '.'
 
@@ -508,6 +509,114 @@ export const Disabled: StoryFn = _args => {
               <p>{content}</p>
             </Tabs.Content>
           ))}
+        </Tabs>
+      </div>
+    </div>
+  )
+}
+
+export const WithPopover: StoryFn = _args => {
+  return (
+    <div className="gap-lg flex flex-col">
+      <div>
+        <Tag className="mb-md flex">with renderMenu (try Shift+F10 on focused tabs)</Tag>
+        <Tabs defaultValue="tab1" orientation="vertical">
+          <Tabs.List>
+            <Tabs.Trigger
+              value="tab1"
+              renderMenu={({ Popover }) => (
+                <Popover>
+                  <Popover.Trigger aria-label="Options for Inbox tab" />
+                  <Popover.Portal>
+                    <Popover.Content>
+                      <Button intent="surface" className="justify-start">
+                        Close tab
+                      </Button>
+                      <Button intent="surface" className="justify-start">
+                        Duplicate tab
+                      </Button>
+                    </Popover.Content>
+                  </Popover.Portal>
+                </Popover>
+              )}
+            >
+              <span>Inbox</span>
+            </Tabs.Trigger>
+
+            <Tabs.Trigger
+              value="tab2"
+              renderMenu={({ Popover }) => (
+                <Popover>
+                  <Popover.Trigger aria-label="Options for Today tab" />
+                  <Popover.Portal>
+                    <Popover.Content>
+                      <Button intent="surface" className="justify-start">
+                        Close tab
+                      </Button>
+                      <Button intent="surface" className="justify-start">
+                        Duplicate tab
+                      </Button>
+                    </Popover.Content>
+                  </Popover.Portal>
+                </Popover>
+              )}
+            >
+              <span>Today</span>
+            </Tabs.Trigger>
+
+            <Tabs.Trigger value="tab3">
+              <span>Upcoming</span>
+            </Tabs.Trigger>
+          </Tabs.List>
+
+          <Tabs.Content value="tab1">
+            <p>Your inbox is empty</p>
+          </Tabs.Content>
+          <Tabs.Content value="tab2">
+            <p>Make some coffee</p>
+          </Tabs.Content>
+          <Tabs.Content value="tab3">
+            <p>Order more coffee</p>
+          </Tabs.Content>
+        </Tabs>
+      </div>
+
+      <div>
+        <Tag className="mb-md flex">horizontal orientation (popover appears below)</Tag>
+        <Tabs defaultValue="tab1" orientation="horizontal">
+          <Tabs.List>
+            <Tabs.Trigger
+              value="tab1"
+              renderMenu={({ Popover }) => (
+                <Popover>
+                  <Popover.Trigger aria-label="Options for Inbox tab" />
+                  <Popover.Portal>
+                    <Popover.Content>
+                      <Button intent="surface" className="justify-start">
+                        Close tab
+                      </Button>
+                      <Button intent="surface" className="justify-start">
+                        Duplicate tab
+                      </Button>
+                    </Popover.Content>
+                  </Popover.Portal>
+                </Popover>
+              )}
+            >
+              <span>Inbox</span>
+            </Tabs.Trigger>
+
+            <Tabs.Trigger value="tab2">
+              <span>Today</span>
+            </Tabs.Trigger>
+          </Tabs.List>
+
+          <Tabs.Content value="tab1">
+            <p>Your inbox is empty</p>
+          </Tabs.Content>
+          <Tabs.Content value="tab2">
+            <p>Make some coffee</p>
+          </Tabs.Content>
         </Tabs>
       </div>
     </div>

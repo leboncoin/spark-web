@@ -1,8 +1,10 @@
-import { render, screen } from '@testing-library/react'
+/* eslint-disable max-lines */
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { mockResizeObserver } from 'jsdom-testing-mocks'
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 
+import { Button } from '../button'
 import { Tabs, TabsListProps, TabsProps } from '.'
 import { type TabItem } from './Tabs.stories'
 
@@ -250,6 +252,148 @@ describe('Tabs', () => {
 
         expect(screen.getAllByRole('tabpanel').at(-1)).toHaveClass('data-[state=inactive]:hidden')
       })
+    })
+  })
+
+  describe('with menu', () => {
+    it('should render menu structure and set accessibility attributes', () => {
+      const CustomIcon = () => <span data-testid="custom-icon">Custom</span>
+
+      render(
+        <Tabs defaultValue="tab1">
+          <Tabs.List>
+            <Tabs.Trigger
+              value="tab1"
+              renderMenu={({ Popover }) => (
+                <Popover>
+                  <Popover.Trigger aria-label="Options for tab">
+                    <CustomIcon />
+                  </Popover.Trigger>
+                  <Popover.Content>
+                    <Button>Action</Button>
+                  </Popover.Content>
+                </Popover>
+              )}
+            >
+              Tab 1
+            </Tabs.Trigger>
+            <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
+          </Tabs.List>
+          <Tabs.Content value="tab1">Content 1</Tabs.Content>
+          <Tabs.Content value="tab2">Content 2</Tabs.Content>
+        </Tabs>
+      )
+
+      // Menu trigger should be rendered
+      expect(screen.getByLabelText('Options for tab')).toBeInTheDocument()
+      // Custom icon should be used
+      expect(screen.getByTestId('custom-icon')).toBeInTheDocument()
+      // Tab with menu should have aria-haspopup
+      const tabWithMenu = screen.getByRole('tab', { name: 'Tab 1' })
+      const tabWithoutMenu = screen.getByRole('tab', { name: 'Tab 2' })
+      expect(tabWithMenu).toHaveAttribute('aria-haspopup', 'true')
+      expect(tabWithoutMenu).not.toHaveAttribute('aria-haspopup')
+    })
+
+    it('should open menu via click or keyboard shortcut and display content', async () => {
+      const user = userEvent.setup()
+
+      render(
+        <Tabs defaultValue="tab1">
+          <Tabs.List>
+            <Tabs.Trigger
+              value="tab1"
+              renderMenu={({ Popover }) => (
+                <Popover>
+                  <Popover.Trigger aria-label="Options for tab" />
+                  <Popover.Content>
+                    <Button>Close tab</Button>
+                    <Button>Duplicate tab</Button>
+                  </Popover.Content>
+                </Popover>
+              )}
+            >
+              Tab 1
+            </Tabs.Trigger>
+          </Tabs.List>
+          <Tabs.Content value="tab1">Content 1</Tabs.Content>
+        </Tabs>
+      )
+
+      // Open menu via click
+      const menuTrigger = screen.getByLabelText('Options for tab')
+      await user.click(menuTrigger)
+      expect(screen.getByText('Close tab')).toBeInTheDocument()
+      expect(screen.getByText('Duplicate tab')).toBeInTheDocument()
+
+      // Close menu
+      await user.keyboard('{Escape}')
+      await waitFor(() => {
+        expect(screen.queryByText('Close tab')).not.toBeInTheDocument()
+      })
+
+      // Open menu via Shift+F10
+      const tabTrigger = screen.getByRole('tab', { name: 'Tab 1' })
+      await user.click(tabTrigger)
+      await user.keyboard('{Shift>}{F10}{/Shift}')
+
+      await waitFor(() => {
+        expect(screen.getByText('Close tab')).toBeInTheDocument()
+      })
+    })
+
+    it('should apply default props to MenuContent and allow overriding them', async () => {
+      const user = userEvent.setup()
+
+      render(
+        <Tabs defaultValue="tab1" orientation="vertical">
+          <Tabs.List>
+            <Tabs.Trigger
+              value="tab1"
+              renderMenu={({ Popover }) => (
+                <Popover>
+                  <Popover.Trigger aria-label="Options" />
+                  <Popover.Content>
+                    <Button>Default props</Button>
+                  </Popover.Content>
+                </Popover>
+              )}
+            >
+              Tab 1
+            </Tabs.Trigger>
+            <Tabs.Trigger
+              value="tab2"
+              renderMenu={({ Popover }) => (
+                <Popover>
+                  <Popover.Trigger aria-label="Options 2" />
+                  <Popover.Content side="top" align="end" className="custom-class">
+                    <Button>Overridden props</Button>
+                  </Popover.Content>
+                </Popover>
+              )}
+            >
+              Tab 2
+            </Tabs.Trigger>
+          </Tabs.List>
+          <Tabs.Content value="tab1">Content 1</Tabs.Content>
+          <Tabs.Content value="tab2">Content 2</Tabs.Content>
+        </Tabs>
+      )
+
+      // Test default props
+      await user.click(screen.getByLabelText('Options'))
+      const defaultMenuContent = screen
+        .getByText('Default props')
+        .closest('[data-spark-component="popover-content"]')
+      expect(defaultMenuContent).toHaveClass('gap-sm', 'flex', 'flex-col')
+
+      // Close and test overridden props
+      await user.keyboard('{Escape}')
+      await user.click(screen.getByLabelText('Options 2'))
+      const overriddenMenuContent = screen
+        .getByText('Overridden props')
+        .closest('[data-spark-component="popover-content"]')
+      expect(overriddenMenuContent).toHaveClass('custom-class')
     })
   })
 })
