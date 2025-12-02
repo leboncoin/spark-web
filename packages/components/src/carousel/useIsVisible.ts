@@ -1,30 +1,34 @@
-import { useLayoutEffect, useState, RefObject } from 'react'
+import { RefObject, useEffect, useState } from 'react'
 
+import { useCarouselContext } from './Carousel'
+
+/**
+ * Hook to track slide visibility using the centralized IntersectionObserver.
+ * This optimizes performance by using a single observer per carousel instead of one per slide.
+ */
 export function useIsVisible(
   elementRef: RefObject<HTMLElement | null>,
-  parentRef: RefObject<HTMLElement | null>
+  _parentRef: RefObject<HTMLElement | null>
 ) {
   const [isVisible, setIsVisible] = useState(true)
+  const ctx = useCarouselContext()
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const el = elementRef.current
-    const parent = parentRef.current
+    if (!el) return
 
-    if (!parent || !el) return
+    // Extract stable functions from context to avoid unnecessary re-renders
+    const { registerSlide, unregisterSlide } = ctx
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry) {
-          setIsVisible(entry.isIntersecting)
-        }
-      },
-      { root: parent, threshold: 0.2 }
-    )
+    // Register the slide with the centralized observer
+    registerSlide(el, setIsVisible)
 
-    observer.observe(el)
-
-    return () => observer.disconnect()
-  })
+    // Cleanup: unregister when the component unmounts
+    return () => {
+      unregisterSlide(el)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [elementRef]) // Only depend on elementRef, registerSlide/unregisterSlide are stable callbacks
 
   return isVisible
 }

@@ -20,6 +20,7 @@ import {
   ComputedTriggerProps,
   UseCarouselProps,
 } from './types'
+import { useCarouselVisibility } from './useCarouselVisibility'
 import { useEvent } from './useEvent'
 import { useIsMounted } from './useIsMounted'
 import { useScrollEnd } from './useScrollEnd'
@@ -53,6 +54,9 @@ export const useCarousel = ({
   const isMountedRef = useIsMounted()
   const isMounted = isMountedRef.current
   const onPageChange = useEvent(onPageChangeProp)
+
+  // Centralized visibility management with a single IntersectionObserver per carousel
+  const { registerSlide, unregisterSlide, isSlideVisible } = useCarouselVisibility(carouselRef)
 
   const [pageSnapPoints] = useSnapPoints([], {
     carouselRef,
@@ -182,6 +186,10 @@ export const useCarousel = ({
     scrollTo,
     scrollPrev,
     scrollNext,
+    // visibility management
+    registerSlide,
+    unregisterSlide,
+    isSlideVisible,
     // anatomy
     getRootProps: (): ComputedRootProps => ({
       id: `carousel::${carouselId}:`,

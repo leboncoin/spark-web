@@ -734,3 +734,49 @@ export const MaxDots: StoryFn = () => {
     </div>
   )
 }
+
+// export const DebugCarousel: StoryFn = _args => {
+//   return (
+//     <div className="gap-lg flex flex-col">
+//       {Array.from({ length: 35 }).map((_, carouselIndex) => (
+//         <Carousel
+//           key={carouselIndex}
+//           // slidesPerPage={2}
+//           // slidesPerMove={1}
+//           aria-label={`Carousel ${carouselIndex + 1}`}
+//         >
+//           <Carousel.Viewport>
+//             <Carousel.Slides>
+//               {Array.from({ length: 10 }).map((_, slideIndex) => (
+//                 <Carousel.Slide
+//                   key={slideIndex}
+//                   aria-label={`Slide ${slideIndex + 1} of carousel ${carouselIndex + 1}`}
+//                   className="flex items-center"
+//                 >
+//                   <RandomImage imgHeight={256} imgWidth={512} className="h-sz-256 object-contain" />
+//                   {/* <Button className="bottom-lg right-lg absolute">Read article</Button> */}
+//                 </Carousel.Slide>
+//               ))}
+//             </Carousel.Slides>
+//             <Carousel.Controls>
+//               <Carousel.PrevButton aria-label="Previous group of items" />
+//               <Carousel.NextButton aria-label="Next group of items" />
+//             </Carousel.Controls>
+//           </Carousel.Viewport>
+
+//           <Carousel.PagePicker>
+//             {({ pages }) =>
+//               pages.map(page => (
+//                 <Carousel.PageIndicator
+//                   key={page}
+//                   index={page}
+//                   aria-label={`Go to page ${page + 1}`}
+//                 />
+//               ))
+//             }
+//           </Carousel.PagePicker>
+//         </Carousel>
+//       ))}
+//     </div>
+//   )
+// }

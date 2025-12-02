@@ -3,12 +3,18 @@ import { describe, expect, it, vi } from 'vitest'
 
 import { Carousel } from '.'
 
-const MockIntersectionObserver = vi.fn(() => ({
-  disconnect: vi.fn(),
-  observe: vi.fn(),
-  takeRecords: vi.fn(),
-  unobserve: vi.fn(),
-}))
+// Mock IntersectionObserver as a constructible class
+class MockIntersectionObserver {
+  disconnect = vi.fn()
+  observe = vi.fn()
+  takeRecords = vi.fn()
+  unobserve = vi.fn()
+
+  constructor(
+    public callback: IntersectionObserverCallback,
+    public options?: IntersectionObserverInit
+  ) {}
+}
 
 vi.stubGlobal('IntersectionObserver', MockIntersectionObserver)
 
