@@ -164,4 +164,8 @@ export interface CarouselAPI extends AnatomyPropsSetters {
   snapStop: UseCarouselProps['snapStop']
   scrollBehavior: UseCarouselProps['scrollBehavior']
   maxDots: number
+  // Visibility management
+  registerSlide: (element: HTMLElement | null, callback: (isVisible: boolean) => void) => void
+  unregisterSlide: (element: HTMLElement | null) => void
+  isSlideVisible: (element: HTMLElement | null) => boolean
 }
