@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [12.1.1](https://github.com/leboncoin/spark-web/compare/v12.1.0...v12.1.1) (2025-12-02)
+
+### Bug Fixes
+
+- **components:** reducing nb of intersectionObservers ([285336f](https://github.com/leboncoin/spark-web/commit/285336f03ca3fc7d1c0c2b823af952cdc6c641c8))
+
 # [12.1.0](https://github.com/leboncoin/spark-web/compare/v12.0.1...v12.1.0) (2025-12-02)
 
 ### Bug Fixes
