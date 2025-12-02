@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.1.0](https://github.com/leboncoin/spark-web/compare/v12.0.1...v12.1.0) (2025-12-02)
+
+### Bug Fixes
+
+- **components:** align popups properly with tabs ([6c4da3d](https://github.com/leboncoin/spark-web/commit/6c4da3dbdce8c604610cfab7bddd74343cc9084b))
+- **components:** renderMenu prop on tabs triggers ([d8c2a95](https://github.com/leboncoin/spark-web/commit/d8c2a955ca9d7cd0325f6837a13376608372583e))
+
+### Features
+
+- **components:** add popups to Tabs ([c13044c](https://github.com/leboncoin/spark-web/commit/c13044c1937e0c69670f2710888b2a8594e24d9c))
+
 ## [12.0.1](https://github.com/leboncoin/spark-web/compare/v12.0.0...v12.0.1) (2025-12-02)
 
 **Note:** Version bump only for package @spark-ui/components
