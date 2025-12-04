@@ -130,14 +130,14 @@ export const AsLink: StoryFn = () => {
 export const CustomBorder: StoryFn = () => {
   return (
     <div className="gap-3xl from-main to-support p-xl flex bg-gradient-to-br">
-      <Avatar design="circle" username="John Doe" isOnline onlineText="Online">
+      <Avatar shape="circle" username="John Doe" isOnline onlineText="Online">
         <Avatar.User className="border-lg border-surface">
           <Avatar.Placeholder />
           <Avatar.Image src={avatarImg} />
         </Avatar.User>
         <Avatar.OnlineBadge />
       </Avatar>
-      <Avatar design="circle" username="John Doe" isOnline onlineText="Online">
+      <Avatar shape="circle" username="John Doe" isOnline onlineText="Online">
         <Avatar.User className="border-lg border-outline">
           <Avatar.Placeholder />
           <Avatar.Image src={avatarImg} />
@@ -181,7 +181,7 @@ export const Shapes: StoryFn = () => {
   return (
     <div>
       <div className="gap-xl flex flex-wrap items-start">
-        <Avatar design="circle" username="John Doe" isOnline onlineText="Online">
+        <Avatar shape="circle" username="John Doe" isOnline onlineText="Online">
           <Avatar.User>
             <Avatar.Placeholder />
             <Avatar.Image src={avatarImg} />
@@ -189,7 +189,7 @@ export const Shapes: StoryFn = () => {
           <Avatar.Action ariaLabel="Edit account" />
           <Avatar.OnlineBadge />
         </Avatar>
-        <Avatar design="square" username="John Doe" isOnline onlineText="Online">
+        <Avatar shape="square" username="John Doe" isOnline onlineText="Online">
           <Avatar.User>
             <Avatar.Placeholder />
             <Avatar.Image src={avatarImg} />

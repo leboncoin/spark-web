@@ -1,6 +1,7 @@
 import * as React from 'react'
-import { AvatarImage } from './AvatarImage'
+
 import { AvatarAction } from './AvatarAction'
+import { AvatarImage } from './AvatarImage'
 
 export interface AvatarContextValue {
   size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
@@ -8,7 +9,7 @@ export interface AvatarContextValue {
   onlineText?: string
   username: string
   src?: string
-  design: 'circle' | 'square'
+  shape: 'circle' | 'square'
   pixelSize: number
 }
 
@@ -18,7 +19,7 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   onlineText?: string
   username: string
   asChild?: boolean
-  design?: 'circle' | 'square'
+  shape?: 'circle' | 'square'
 }
 
 export interface AvatarComponent

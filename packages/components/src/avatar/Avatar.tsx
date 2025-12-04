@@ -24,7 +24,7 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
       username,
       asChild,
       children,
-      design = 'circle',
+      shape = 'circle',
       ...props
     },
     ref
@@ -36,10 +36,10 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
         isOnline,
         onlineText,
         username,
-        design,
+        shape,
         pixelSize: sizeMap[size],
       }),
-      [size, isOnline, username, design, onlineText]
+      [size, isOnline, username, shape, onlineText]
     )
 
     return (

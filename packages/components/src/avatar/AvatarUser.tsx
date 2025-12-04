@@ -8,7 +8,7 @@ export interface AvatarImageProps extends React.ImgHTMLAttributes<HTMLDivElement
 }
 
 export const AvatarUser = ({ asChild, children, className, ...props }: AvatarImageProps) => {
-  const { design, isOnline, onlineText, username } = useAvatarContext()
+  const { shape, isOnline, onlineText, username } = useAvatarContext()
   const Comp = asChild ? Slot : 'div'
 
   const accessibleName = isOnline && onlineText ? `${username} (${onlineText})` : username
@@ -22,8 +22,8 @@ export const AvatarUser = ({ asChild, children, className, ...props }: AvatarIma
         'group default:border-outline relative size-full overflow-hidden',
         'focus-visible:u-outline',
         {
-          'default:rounded-full': design === 'circle',
-          'default:rounded-md': design === 'square',
+          'default:rounded-full': shape === 'circle',
+          'default:rounded-md': shape === 'square',
           'hover:opacity-dim-1 cursor-pointer': asChild || props.onClick,
         },
         className
