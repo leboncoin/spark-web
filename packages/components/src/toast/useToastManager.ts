@@ -13,5 +13,5 @@ export function useToastManager(): UseToastManagerReturnValue {
   return {
     ...baseToastManager,
     closeAll,
-  }
+  } as UseToastManagerReturnValue
 }

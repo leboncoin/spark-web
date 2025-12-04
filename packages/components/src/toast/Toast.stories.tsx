@@ -221,3 +221,31 @@ export const Compact: StoryFn = () => {
     </div>
   )
 }
+
+export const WithJSX: StoryFn = () => {
+  const toastManager = useToastManager()
+
+  const openToastWithJSX = () => {
+    toastManager.add({
+      title: (
+        <>
+          <span>Payment</span>
+          <span className="text-accent"> processed</span>
+        </>
+      ),
+      description: (
+        <span>
+          Your payment of <strong>€29.99</strong> has been processed successfully.
+        </span>
+      ),
+      timeout: 0,
+      data: {
+        isClosable: true,
+        intent: 'success',
+        design: 'tinted',
+      },
+    })
+  }
+
+  return <Button onClick={openToastWithJSX}>Open toast with JSX</Button>
+}

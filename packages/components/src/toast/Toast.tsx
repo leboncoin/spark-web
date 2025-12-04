@@ -90,6 +90,42 @@ export function Toast({ toast }: { toast: ToastObject }) {
     )
   }
 
+  const renderTitle = () => {
+    // Check ToastData first for JSX, then fallback to toast.title (string)
+    const title = toast.data?.title ?? toast.title
+    const hasDescription = !!(toast.data?.description ?? toast.description)
+
+    if (typeof title !== 'string' && title !== undefined) {
+      return (
+        <BaseToast.Title
+          className={hasDescription ? 'text-headline-2' : 'text-body-1'}
+          render={<div />}
+        >
+          {title}
+        </BaseToast.Title>
+      )
+    }
+
+    return <BaseToast.Title className={hasDescription ? 'text-headline-2' : 'text-body-1'} />
+  }
+
+  const renderDescription = () => {
+    // Check ToastData first for JSX, then fallback to toast.description (string)
+    const description = toast.data?.description ?? toast.description
+
+    if (!description) return null
+
+    if (typeof description !== 'string') {
+      return (
+        <BaseToast.Description className="text-body-1 break-all" render={<div />}>
+          {description}
+        </BaseToast.Description>
+      )
+    }
+
+    return <BaseToast.Description className="text-body-1 break-all" />
+  }
+
   return (
     <BaseToast.Root {...rootProps}>
       <div className={cx('flex', compact ? 'gap-lg items-center' : 'gap-md flex-col')}>
@@ -104,8 +140,8 @@ export function Toast({ toast }: { toast: ToastObject }) {
               !compact && isClosable && 'pr-3xl'
             )}
           >
-            <BaseToast.Title className={toast.description ? 'text-headline-2' : 'text-body-1'} />
-            <BaseToast.Description className="text-body-1" />
+            {renderTitle()}
+            {renderDescription()}
           </div>
         </div>
 
