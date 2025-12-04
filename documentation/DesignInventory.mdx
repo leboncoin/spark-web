@@ -1,0 +1,700 @@
+import { useState, useId } from 'react'
+import { Meta } from '@storybook/addon-docs/blocks'
+import { Card } from '@docs/helpers/Card'
+import { Tag } from '@spark-ui/components/tag'
+import { Button } from '@spark-ui/components/button'
+import { IconButton } from '@spark-ui/components/icon-button'
+import { LikeOutline } from '@spark-ui/icons/LikeOutline'
+import { BookmarkOutline } from '@spark-ui/icons/BookmarkOutline'
+import { Icon } from '@spark-ui/components/icon'
+import { Label } from '@spark-ui/components/label'
+import { RadioGroup } from '@spark-ui/components/radio-group'
+import { Switch } from '@spark-ui/components/switch'
+import { VisuallyHidden } from '@spark-ui/components/visually-hidden'
+import { cx } from 'class-variance-authority'
+import Xarrow, { Xwrapper } from "react-xarrows";
+import { getCssVariable, getComputedCssVariable, BackgroundColorPreview, TextColorPreview, OutlineColorPreview } from '@docs/helpers/TokenPreview'
+
+<Meta title="Components Principles/Design Inventory" />
+
+# Design inventory
+
+export const intents = ['main', 'support', 'accent', 'basic', 'success', 'alert', 'danger', 'info', 'neutral', 'surface', 'surfaceInverse']
+
+export const designs = ['filled', 'outlined', 'tinted', 'ghost', 'contrast', 'dashed']
+
+export const shapes = ['rounded', 'square', 'pill', 'circle']
+
+export const sizes = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', 'current', 'full']
+
+export const states = ['alert', 'error', 'success']
+
+export const components = [
+    {
+        name: 'Accordion', 
+        intents: [],
+        designs: ['filled', 'outlined'],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'AlertDialog', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'Avatar', 
+        intents: [],
+        designs: [],
+        shapes: ['circle', 'square'],
+        sizes: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+        states: [],
+        defaults: { size: 'xl', shape: 'circle' },
+    },
+    {
+        name: 'Badge', 
+        intents: ['main', 'support', 'accent', 'basic', 'success', 'alert', 'danger', 'info', 'neutral', 'surface'],
+        designs: [],
+        shapes: [],
+        sizes: ['sm', 'md'],
+        states: [],
+        defaults: { intent: 'danger', size: 'md' },
+    },
+    {
+        name: 'Breadcrumb', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'Button', 
+        intents: ['main', 'support', 'accent', 'basic', 'success', 'alert', 'danger', 'info', 'neutral', 'surface', 'surfaceInverse'],
+        designs: ['filled', 'outlined', 'tinted', 'ghost', 'contrast'],
+        shapes: ['rounded', 'square', 'pill'],
+        sizes: ['sm', 'md', 'lg'],
+        states: [],
+        defaults: { design: 'filled', intent: 'main', size: 'md', shape: 'rounded' },
+    },
+    {
+        name: 'Card', 
+        intents: ['main', 'support', 'accent', 'basic', 'success', 'alert', 'danger', 'info', 'neutral', 'surface', 'surfaceInverse'],
+        designs: ['filled', 'outlined', 'tinted'],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: { design: 'filled', intent: 'surface' },
+    },
+    {
+        name: 'Carousel', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'CarouselPageIndicator', 
+        intents: ['basic', 'surface'],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'Checkbox', 
+        intents: ['main', 'support', 'accent', 'basic', 'success', 'alert', 'danger', 'info', 'neutral'],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: { intent: 'basic' },
+    },
+    {
+        name: 'CheckboxGroup', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: ['alert', 'error', 'success'],
+        defaults: {},
+    },
+    {
+        name: 'Chip', 
+        intents: ['main', 'support', 'accent', 'basic', 'success', 'alert', 'danger', 'info', 'neutral', 'surface'],
+        designs: ['outlined', 'tinted', 'dashed'],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: { design: 'outlined', intent: 'basic' },
+    },
+    {
+        name: 'Collapsible', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'Combobox', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: ['alert', 'error', 'success'],
+        defaults: {},
+    },
+    {
+        name: 'Dialog', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'Divider', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'Drawer', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'Dropdown', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: ['alert', 'error', 'success'],
+        defaults: {},
+    },
+    {
+        name: 'FileUpload', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'FormField', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: ['alert', 'error', 'success'],
+        defaults: {},
+    },
+    {
+        name: 'Icon', 
+        intents: ['main', 'support', 'accent', 'basic', 'success', 'alert', 'danger', 'info', 'neutral'],
+        designs: [],
+        shapes: [],
+        sizes: ['current', 'sm', 'md', 'lg', 'xl'],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'IconButton', 
+        intents: ['main', 'support', 'accent', 'basic', 'success', 'alert', 'danger', 'info', 'neutral', 'surface', 'surfaceInverse'],
+        designs: ['filled', 'outlined', 'tinted', 'ghost', 'contrast'],
+        shapes: ['rounded', 'square', 'pill'],
+        sizes: ['sm', 'md', 'lg'],
+        states: [],
+        defaults: { design: 'filled', intent: 'main', size: 'md', shape: 'rounded' },
+    },
+    {
+        name: 'InputGroup', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: ['alert', 'error', 'success'],
+        defaults: {},
+    },
+    {
+        name: 'Kbd', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'Label', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'LinkBox', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'Pagination', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'Popover', 
+        intents: ['main', 'support', 'accent', 'basic', 'success', 'alert', 'danger', 'info', 'neutral', 'surface'],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: { intent: 'surface' },
+    },
+    {
+        name: 'Portal', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'Progress', 
+        intents: ['main', 'support', 'accent', 'basic', 'success', 'alert', 'danger', 'info', 'neutral'],
+        designs: [],
+        shapes: ['square', 'rounded'],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'ProgressTracker', 
+        intents: ['basic', 'neutral', 'success'],
+        designs: [],
+        shapes: [],
+        sizes: ['sm', 'md', 'lg'],
+        states: [],
+        defaults: { intent: 'basic', size: 'lg' },
+    },
+    {
+        name: 'RadioGroup', 
+        intents: ['main', 'support', 'accent', 'basic', 'success', 'alert', 'danger', 'info', 'neutral'],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: { intent: 'basic' },
+    },
+    {
+        name: 'Rating', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: ['sm', 'md', 'lg'],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'ScrollingList', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'Select', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: ['alert', 'error', 'success'],
+        defaults: {},
+    },
+    {
+        name: 'SegmentedGauge', 
+        intents: ['main', 'support', 'accent', 'basic', 'success', 'alert', 'danger', 'info', 'neutral'],
+        designs: [],
+        shapes: [],
+        sizes: ['sm', 'md'],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'Skeleton', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'Slider', 
+        intents: ['main', 'support', 'accent', 'basic', 'success', 'alert', 'danger', 'info', 'neutral'],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: { intent: 'basic' },
+    },
+    {
+        name: 'Snackbar', 
+        intents: ['main', 'support', 'accent', 'basic', 'success', 'alert', 'danger', 'info', 'neutral'],
+        designs: ['filled', 'tinted'],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: { design: 'filled', intent: 'neutral' },
+    },
+    {
+        name: 'Spinner', 
+        intents: ['main', 'support', 'accent', 'basic', 'success', 'alert', 'danger', 'info', 'neutral'],
+        designs: [],
+        shapes: [],
+        sizes: ['current', 'sm', 'md', 'full'],
+        states: [],
+        defaults: { intent: 'current', size: 'current' },
+    },
+    {
+        name: 'Stepper', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'Switch', 
+        intents: ['main', 'support', 'accent', 'basic', 'success', 'alert', 'danger', 'info', 'neutral'],
+        designs: [],
+        shapes: [],
+        sizes: ['sm', 'md'],
+        states: [],
+        defaults: { intent: 'basic', size: 'sm' },
+    },
+    {
+        name: 'Tabs', 
+        intents: ['main', 'support', 'basic'],
+        designs: [],
+        shapes: [],
+        sizes: ['xs', 'sm', 'md'],
+        states: [],
+        defaults: { intent: 'basic', size: 'md' },
+    },
+    {
+        name: 'Tag', 
+        intents: ['main', 'support', 'accent', 'basic', 'success', 'alert', 'danger', 'info', 'neutral', 'surface'],
+        designs: ['filled', 'outlined', 'tinted'],
+        shapes: ['square', 'rounded', 'pill'],
+        sizes: ['md', 'lg'],
+        states: [],
+        defaults: { design: 'filled', intent: 'basic', size: 'md', shape: 'pill' },
+    },
+    {
+        name: 'TextareaGroup', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+    {
+        name: 'TextLink', 
+        intents: ['main', 'support', 'accent', 'basic', 'success', 'alert', 'danger', 'info', 'neutral'],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: { intent: 'current' },
+    },
+    {
+        name: 'Toast', 
+        intents: ['main', 'support', 'accent', 'basic', 'success', 'alert', 'danger', 'info', 'neutral', 'surface', 'surfaceInverse'],
+        designs: ['filled', 'tinted'],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: { design: 'filled', intent: 'neutral' },
+    },
+    {
+        name: 'VisuallyHidden', 
+        intents: [],
+        designs: [],
+        shapes: [],
+        sizes: [],
+        states: [],
+        defaults: {},
+    },
+]
+
+export function IntentsTable() {
+  const [hideEmptyIntents, setHideEmptyIntents] = useState(true)
+  const filteredComponents = hideEmptyIntents 
+    ? components.filter(component => component.intents.length > 0)
+    : components
+
+  return (
+    <>
+      <div className="mb-lg flex items-center gap-md">
+        <Switch checked={hideEmptyIntents} onCheckedChange={setHideEmptyIntents} id="hide-empty-intents" />
+        <Label htmlFor="hide-empty-intents">Hide components without intent prop</Label>
+      </div>
+      <table className="w-full border-collapse">
+        <thead>
+          <tr className="border-b border-border">
+            <th className="text-left p-md font-semibold">-</th>
+            
+            {intents.map((intent) => (
+              <th key={intent} className="text-left p-md font-semibold">{intent}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+        {filteredComponents.map((component) => (
+          <tr key={component.name} className="border-b border-border">
+            <td className="p-md font-bold">{component.name}</td>
+            {intents.map((intent) => {
+              const isDefault = component.defaults?.intent === intent
+              const isSupported = component.intents.includes(intent)
+              return (
+                <td key={intent} className={`p-md`}>
+                  {isSupported ? '✅' : '❌'}{isDefault ? ' (default)' : ''}
+                </td>
+              )
+            })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  )
+}
+
+export function DesignsTable() {
+  const [hideEmptyDesigns, setHideEmptyDesigns] = useState(true)
+  const filteredComponents = hideEmptyDesigns 
+    ? components.filter(component => component.designs && component.designs.length > 0)
+    : components
+
+  return (
+    <>
+      <div className="mb-lg flex items-center gap-md">
+        <Switch checked={hideEmptyDesigns} onCheckedChange={setHideEmptyDesigns} id="hide-empty-designs" />
+        <Label htmlFor="hide-empty-designs">Hide components without design prop</Label>
+      </div>
+      <table className="w-full border-collapse">
+        <thead>
+          <tr className="border-b border-border">
+            <th className="text-left p-md font-semibold">-</th>
+            
+            {designs.map((design) => (
+              <th key={design} className="text-left p-md font-semibold">{design}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+        {filteredComponents.map((component) => (
+          <tr key={component.name} className="border-b border-border">
+            <td className="p-md font-bold">{component.name}</td>
+            {designs.map((design) => {
+              const isDefault = component.defaults?.design === design
+              const isSupported = component.designs?.includes(design)
+              return (
+                <td key={design} className={`p-md`}>
+                  {isSupported ? '✅' : '❌'}{isDefault ? ' (default)' : ''}
+                </td>
+              )
+            })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  )
+}
+
+export function ShapesTable() {
+  const [hideEmptyShapes, setHideEmptyShapes] = useState(true)
+  const filteredComponents = hideEmptyShapes 
+    ? components.filter(component => component.shapes && component.shapes.length > 0)
+    : components
+
+  return (
+    <>
+      <div className="mb-lg flex items-center gap-md">
+        <Switch checked={hideEmptyShapes} onCheckedChange={setHideEmptyShapes} id="hide-empty-shapes" />
+        <Label htmlFor="hide-empty-shapes">Hide components without shape prop</Label>
+      </div>
+      <table className="w-full border-collapse">
+        <thead>
+          <tr className="border-b border-border">
+            <th className="text-left p-md font-semibold">-</th>
+            
+            {shapes.map((shape) => (
+              <th key={shape} className="text-left p-md font-semibold">{shape}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+        {filteredComponents.map((component) => (
+          <tr key={component.name} className="border-b border-border">
+            <td className="p-md font-bold">{component.name}</td>
+            {shapes.map((shape) => {
+              const isDefault = component.defaults?.shape === shape
+              const isSupported = component.shapes?.includes(shape)
+              return (
+                <td key={shape} className={`p-md`}>
+                  {isSupported ? '✅' : '❌'}{isDefault ? ' (default)' : ''}
+                </td>
+              )
+            })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  )
+}
+
+export function SizesTable() {
+  const [hideEmptySizes, setHideEmptySizes] = useState(true)
+  const filteredComponents = hideEmptySizes 
+    ? components.filter(component => component.sizes && component.sizes.length > 0)
+    : components
+
+  return (
+    <>
+      <div className="mb-lg flex items-center gap-md">
+        <Switch checked={hideEmptySizes} onCheckedChange={setHideEmptySizes} id="hide-empty-sizes" />
+        <Label htmlFor="hide-empty-sizes">Hide components without size prop</Label>
+      </div>
+      <table className="w-full border-collapse">
+        <thead>
+          <tr className="border-b border-border">
+            <th className="text-left p-md font-semibold">-</th>
+            
+            {sizes.map((size) => (
+              <th key={size} className="text-left p-md font-semibold">{size}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+        {filteredComponents.map((component) => (
+          <tr key={component.name} className="border-b border-border">
+            <td className="p-md font-bold">{component.name}</td>
+            {sizes.map((size) => {
+              const isDefault = component.defaults?.size === size
+              const isSupported = component.sizes?.includes(size)
+              return (
+                <td key={size} className={`p-md`}>
+                  {isSupported ? '✅' : '❌'}{isDefault ? ' (default)' : ''}
+                </td>
+              )
+            })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  )
+}
+
+export function StatesTable() {
+  const [hideEmptyStates, setHideEmptyStates] = useState(true)
+  const filteredComponents = hideEmptyStates 
+    ? components.filter(component => component.states && component.states.length > 0)
+    : components
+
+  return (
+    <>
+      <div className="mb-lg flex items-center gap-md">
+        <Switch checked={hideEmptyStates} onCheckedChange={setHideEmptyStates} id="hide-empty-states" />
+        <Label htmlFor="hide-empty-states">Hide components without state prop</Label>
+      </div>
+      <table className="w-full border-collapse">
+        <thead>
+          <tr className="border-b border-border">
+            <th className="text-left p-md font-semibold">-</th>
+            
+            {states.map((state) => (
+              <th key={state} className="text-left p-md font-semibold">{state}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+        {filteredComponents.map((component) => (
+          <tr key={component.name} className="border-b border-border">
+            <td className="p-md font-bold">{component.name}</td>
+            {states.map((state) => {
+              const isDefault = component.defaults?.state === state
+              const isSupported = component.states?.includes(state)
+              return (
+                <td key={state} className={`p-md`}>
+                  {isSupported ? '✅' : '❌'}{isDefault ? ' (default)' : ''}
+                </td>
+              )
+            })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  )
+}
+
+## Intents
+
+<IntentsTable />
+
+## Designs
+
+<DesignsTable />
+
+## Shapes
+
+<ShapesTable />
+
+## Sizes
+
+<SizesTable />
+
+## States
+
+<StatesTable />

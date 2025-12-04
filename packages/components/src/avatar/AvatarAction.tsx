@@ -21,7 +21,7 @@ export const AvatarAction = ({
   ...props
 }: AvatarActionProps) => {
   const Comp = asChild ? Slot : IconButton
-  const { pixelSize, design } = useAvatarContext()
+  const { pixelSize, shape } = useAvatarContext()
 
   function getBadgePosition(circleSize: number) {
     const angleRad = ((90 - angle) * Math.PI) / 180
@@ -42,12 +42,12 @@ export const AvatarAction = ({
       data-spark-component="avatar-action"
       style={{
         position: 'absolute',
-        ...(design === 'circle' ? { left: `${position.x}px`, top: `${position.y}px` } : {}),
-        ...(design === 'square' ? { right: '0px', bottom: '0px' } : {}),
+        ...(shape === 'circle' ? { left: `${position.x}px`, top: `${position.y}px` } : {}),
+        ...(shape === 'square' ? { right: '0px', bottom: '0px' } : {}),
       }}
       className={cx(
         'z-raised',
-        design === 'circle'
+        shape === 'circle'
           ? '-translate-x-1/2 -translate-y-1/2'
           : 'translate-x-1/4 translate-y-1/4',
         { 'shadow-sm': !isCustomElement },

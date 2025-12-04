@@ -8,7 +8,7 @@ interface AvatarOnlineBadgeProps extends ComponentPropsWithoutRef<'div'> {
 }
 
 export const AvatarOnlineBadge = ({ angle = 135, ...props }: AvatarOnlineBadgeProps) => {
-  const { isOnline, pixelSize, design, onlineText, size } = useAvatarContext()
+  const { isOnline, pixelSize, shape, onlineText, size } = useAvatarContext()
 
   if (!isOnline) return null
 
@@ -30,13 +30,13 @@ export const AvatarOnlineBadge = ({ angle = 135, ...props }: AvatarOnlineBadgePr
       role="status"
       aria-label={onlineText}
       style={{
-        ...(design === 'circle'
+        ...(shape === 'circle'
           ? { left: `${badgePosition.x}px`, top: `${badgePosition.y}px` }
           : { right: '0px', bottom: '0px' }),
       }}
       className={cx(
         'bg-success outline-surface absolute rounded-full',
-        design === 'circle'
+        shape === 'circle'
           ? '-translate-x-1/2 -translate-y-1/2'
           : 'translate-x-1/4 translate-y-1/4',
         ['lg', 'xl', '2xl'].includes(size) ? cx('size-sz-12 outline-4') : cx('size-sz-8 outline-2')

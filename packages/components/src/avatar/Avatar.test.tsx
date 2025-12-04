@@ -168,7 +168,7 @@ describe('Avatar', () => {
   })
 
   describe('Design', () => {
-    it('should render with circle design by default', () => {
+    it('should render with circle shape by default', () => {
       render(
         <Avatar username="John Doe">
           <Avatar.User>
@@ -182,9 +182,9 @@ describe('Avatar', () => {
       expect(screen.getByTitle('John Doe')).toHaveClass('default:rounded-full')
     })
 
-    it('should render with square design when specified', () => {
+    it('should render with square shape when specified', () => {
       render(
-        <Avatar username="John Doe" design="square">
+        <Avatar username="John Doe" shape="square">
           <Avatar.User>
             <Avatar.Placeholder />
             <Avatar.Image src="avatar.png" />
