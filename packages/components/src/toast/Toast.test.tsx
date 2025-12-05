@@ -110,6 +110,82 @@ describe('Toast', () => {
         // Then the toast should be closed
         expect(toast).not.toBeInTheDocument()
       })
+
+      it('should render a toast with JSX in title', () => {
+        const Implementation = () => {
+          const toastManager = useToastManager()
+
+          return (
+            <button
+              type="button"
+              onClick={() =>
+                toastManager.add({
+                  title: (
+                    <span>
+                      <strong>File uploaded</strong> successfully
+                    </span>
+                  ),
+                  description: 'Your document has been processed.',
+                  timeout: 0,
+                })
+              }
+            >
+              Show me a toast
+            </button>
+          )
+        }
+
+        render(
+          <ToastProvider>
+            <Implementation />
+          </ToastProvider>
+        )
+
+        fireEvent.click(screen.getByText('Show me a toast'))
+
+        const toast = screen.getByRole('dialog')
+        expect(toast).toBeInTheDocument()
+        expect(screen.getByText('File uploaded')).toBeInTheDocument()
+        expect(screen.getByText('successfully')).toBeInTheDocument()
+      })
+
+      it('should render a toast with JSX in description', () => {
+        const Implementation = () => {
+          const toastManager = useToastManager()
+
+          return (
+            <button
+              type="button"
+              onClick={() =>
+                toastManager.add({
+                  title: 'Upload complete',
+                  description: (
+                    <span>
+                      Your file has been uploaded. <a href="/files">View it here</a>
+                    </span>
+                  ),
+                  timeout: 0,
+                })
+              }
+            >
+              Show me a toast
+            </button>
+          )
+        }
+
+        render(
+          <ToastProvider>
+            <Implementation />
+          </ToastProvider>
+        )
+
+        fireEvent.click(screen.getByText('Show me a toast'))
+
+        const toast = screen.getByRole('dialog', { name: 'Upload complete' })
+        expect(toast).toBeInTheDocument()
+        expect(screen.getByText('Your file has been uploaded.')).toBeInTheDocument()
+        expect(screen.getByText('View it here')).toBeInTheDocument()
+      })
     })
   })
 })

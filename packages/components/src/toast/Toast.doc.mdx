@@ -1,6 +1,7 @@
 import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
 import { AriaRoles } from '@docs/helpers/AriaRoles'
+import { Callout } from '@docs/helpers/Callout'
 import { Kbd } from '../kbd'
 import { ToastProvider, useToastManager } from '.'
 
@@ -105,13 +106,13 @@ These are the options for the `add`, `update`, and `promise` methods.
   <tbody>
     <tr>
       <td><code>title</code></td>
-      <td><code>string</code></td>
-      <td>The title of the toast.</td>
+      <td><code>string | React.ReactNode</code></td>
+      <td>The title of the toast. Can be a string or JSX for custom formatting.</td>
     </tr>
     <tr>
       <td><code>description</code></td>
-      <td><code>string</code></td>
-      <td>The description of the toast.</td>
+      <td><code>string | React.ReactNode</code></td>
+      <td>The description of the toast. Can be a string or JSX for custom formatting.</td>
     </tr>
     <tr>
       <td><code>timeout</code></td>
@@ -205,6 +206,20 @@ When `data.compact` is set to `true`, the toast uses a compact layout where the 
 
 
 
+
+## Advanced Examples
+
+### JSX Content
+
+Both `title` and `description` props accept JSX content, allowing you to create rich, formatted toast messages with custom styling, links, or other interactive elements.
+
+<Callout kind="warning">
+  <p>
+    Only use non-interactive, text-based elements in <code>title</code> and <code>description</code> props. Avoid interactive elements like buttons, inputs, or clickable components as they may cause accessibility and usability issues.
+  </p>
+</Callout>
+
+<Canvas of={stories.WithJSX} />
 
 ## Accessibility
 

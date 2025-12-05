@@ -24,6 +24,8 @@ export interface ToastData {
   isClosable?: boolean
   closeLabel?: string
   compact?: boolean
+  title?: React.ReactNode
+  description?: React.ReactNode
   action?: {
     close?: boolean
     label: string
@@ -33,8 +35,14 @@ export interface ToastData {
 
 export type ToastObject = BaseToast.Root.ToastObject<ToastData>
 
-interface AddOptions extends Omit<ToastObject, 'id' | 'animation' | 'height' | 'ref' | 'limited'> {
+export interface AddOptions
+  extends Omit<
+    ToastObject,
+    'id' | 'animation' | 'height' | 'ref' | 'limited' | 'title' | 'description'
+  > {
   id?: string
+  title?: string | React.ReactNode
+  description?: string | React.ReactNode
 }
 
 type UpdateOptions = Partial<AddOptions>

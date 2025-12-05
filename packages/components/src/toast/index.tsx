@@ -37,13 +37,13 @@ export function ToastProvider({ children, limit = 3, ...props }: ToastProviderPr
 }
 
 interface ToastTriggerProps
-  extends React.ComponentPropsWithRef<'button'>,
+  extends Omit<React.ComponentPropsWithRef<'button'>, 'title'>,
     Pick<ToastObject, 'priority'>,
     Pick<ToastData, 'design' | 'intent' | 'icon' | 'isClosable' | 'action' | 'compact'> {
   children: React.ReactNode
   asChild?: boolean
-  title: string
-  description?: string
+  title: string | React.ReactNode
+  description?: string | React.ReactNode
   timeout?: number
 }
 
@@ -62,7 +62,7 @@ export function ToastTrigger({
   compact,
   priority = 'low',
 }: ToastTriggerProps) {
-  const toastManager = BaseToast.useToastManager()
+  const toastManager = useToastManager()
 
   const Component = asChild ? Slot : 'button'
 
