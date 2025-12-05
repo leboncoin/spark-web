@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.2.0](https://github.com/leboncoin/spark-web/compare/v12.1.2...v12.2.0) (2025-12-05)
+
+### Features
+
+- **components:** allow dynamic jsx markup in toast ([0f5b9f5](https://github.com/leboncoin/spark-web/commit/0f5b9f574e9022a5a348be1c7dbac53c8aafd1f1))
+
 ## [12.1.2](https://github.com/leboncoin/spark-web/compare/v12.1.1...v12.1.2) (2025-12-04)
 
 **Note:** Version bump only for package spark
