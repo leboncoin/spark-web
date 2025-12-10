@@ -1,13 +1,27 @@
-import { Ref } from 'react'
+import { AlertDialog as BaseAlertDialog } from '@base-ui-components/react/alert-dialog'
+import { ComponentProps, Ref } from 'react'
 
-import { Dialog, DialogCloseProps } from '../dialog'
+import { useRenderSlot } from './useRenderSlot'
 
-export type AlertDialogActionProps = DialogCloseProps & {
+export interface AlertDialogActionProps
+  extends Omit<ComponentProps<typeof BaseAlertDialog.Close>, 'render'> {
+  /**
+   * Change the default rendered element for the one passed as a child, merging their props and behavior.
+   */
+  asChild?: boolean
   ref?: Ref<HTMLButtonElement>
 }
 
-export const AlertDialogAction = (props: AlertDialogActionProps) => {
-  return <Dialog.Close data-spark-component="alert-dialog-action" {...props} />
+export const AlertDialogAction = ({ asChild = false, ...props }: AlertDialogActionProps) => {
+  const renderSlot = useRenderSlot(asChild, 'button')
+
+  return (
+    <BaseAlertDialog.Close
+      data-spark-component="alert-dialog-action"
+      render={renderSlot}
+      {...props}
+    />
+  )
 }
 
 AlertDialogAction.displayName = 'AlertDialog.Action'

@@ -139,6 +139,26 @@ Use `open` and `onOpenChange` props to control the state of the dialog. This is 
 
 <Canvas of={stories.Controlled} />
 
+### Fade effect
+
+Use `withFade` to add a fade effect to indicate content overflow. It uses an alpha css mask to be compatible no matter which background is behind your content.
+
+<Canvas of={stories.Fade} />
+
+### Inset
+
+When set to `true`, this option will remove the internal padding of the `AlertDialog.Body` component. This allows you to have an image or any content that occupies the full width, for example.
+
+<Canvas of={stories.Inset} />
+
+## Advanced Examples
+
+### Forward focus
+
+Use `initialFocus` and a `ref` to direct focus to a specific element when the dialog opens.
+
+<Canvas of={stories.ForwardFocus} />
+
 ## Accessibility
 
 <A11yReport of="alert-dialog" />
@@ -147,7 +167,7 @@ Adheres to the [Alert and Message Dialogs WAI-ARIA design pattern](https://www.w
 
 ### Guidelines
 
-- Usage of `Dialog.Title` is **mandatory**. It serves as the accessible name for the dialog. If you prefer not to display the title, you can wrap it with `VisuallyHidden`.
+- Usage of `AlertDialog.Title` is **mandatory**. It serves as the accessible name for the dialog. If you prefer not to display the title, you can wrap it with `VisuallyHidden`.
 
 ### Keyboard Interactions
 

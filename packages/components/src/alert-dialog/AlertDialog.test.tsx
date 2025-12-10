@@ -99,7 +99,6 @@ describe('AlertDialog', () => {
 
   it('should open when trigger is clicked', async () => {
     const user = userEvent.setup()
-    const onOpenAutoFocus = vitest.fn()
 
     render(
       <AlertDialog>
@@ -107,7 +106,7 @@ describe('AlertDialog', () => {
 
         <AlertDialog.Portal>
           <AlertDialog.Overlay />
-          <AlertDialog.Content onOpenAutoFocus={onOpenAutoFocus}>
+          <AlertDialog.Content>
             <AlertDialog.Title>Delete account</AlertDialog.Title>
 
             <AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
@@ -123,7 +122,6 @@ describe('AlertDialog', () => {
     const dialogEl = screen.getByRole('alertdialog', { name: 'Delete account' })
 
     expect(dialogEl).toBeInTheDocument()
-    expect(onOpenAutoFocus).toHaveBeenCalled()
   })
 
   it('should close when action button is clicked', async () => {
@@ -156,33 +154,10 @@ describe('AlertDialog', () => {
   })
 
   it('should close when esc is pressed', async () => {
-    const onEscapeKeyDown = vitest.fn()
+    const onOpenChange = vitest.fn()
 
     render(
-      <AlertDialog defaultOpen>
-        <AlertDialog.Portal>
-          <AlertDialog.Overlay />
-
-          <AlertDialog.Content onEscapeKeyDown={onEscapeKeyDown}>
-            <AlertDialog.Title>Delete account</AlertDialog.Title>
-          </AlertDialog.Content>
-        </AlertDialog.Portal>
-      </AlertDialog>
-    )
-
-    expect(screen.getByRole('alertdialog', { name: 'Delete account' })).toBeInTheDocument()
-
-    fireEvent.keyDown(document.activeElement as Element, { key: 'Escape' })
-
-    expect(screen.queryByRole('alertdialog', { name: 'Delete account' })).not.toBeInTheDocument()
-    expect(onEscapeKeyDown).toHaveBeenCalled()
-  })
-
-  it('should not close when is clicked outside', async () => {
-    const user = userEvent.setup()
-
-    render(
-      <AlertDialog defaultOpen>
+      <AlertDialog defaultOpen onOpenChange={onOpenChange}>
         <AlertDialog.Portal>
           <AlertDialog.Overlay />
 
@@ -195,12 +170,39 @@ describe('AlertDialog', () => {
 
     expect(screen.getByRole('alertdialog', { name: 'Delete account' })).toBeInTheDocument()
 
-    await expect(user.click(document.body)).rejects.toThrowError()
+    fireEvent.keyDown(document.activeElement as Element, { key: 'Escape' })
 
-    expect(screen.getByRole('alertdialog', { name: 'Delete account' })).toBeInTheDocument()
+    expect(screen.queryByRole('alertdialog', { name: 'Delete account' })).not.toBeInTheDocument()
+    expect(onOpenChange).toHaveBeenCalledWith(false)
   })
 
-  it('should focus on less destructive action when is opened', () => {
+  it('should not close when is clicked outside', async () => {
+    const user = userEvent.setup()
+    const onOpenChange = vitest.fn()
+
+    render(
+      <AlertDialog defaultOpen onOpenChange={onOpenChange}>
+        <AlertDialog.Portal>
+          <AlertDialog.Overlay />
+
+          <AlertDialog.Content>
+            <AlertDialog.Title>Delete account</AlertDialog.Title>
+          </AlertDialog.Content>
+        </AlertDialog.Portal>
+      </AlertDialog>
+    )
+
+    expect(screen.getByRole('alertdialog', { name: 'Delete account' })).toBeInTheDocument()
+
+    // Click outside the dialog
+    await user.click(document.body)
+
+    // Dialog should still be open (alert dialogs don't close on outside click)
+    expect(screen.getByRole('alertdialog', { name: 'Delete account' })).toBeInTheDocument()
+    expect(onOpenChange).not.toHaveBeenCalled()
+  })
+
+  it('should focus on less destructive action when is opened', async () => {
     render(
       <AlertDialog defaultOpen>
         <AlertDialog.Portal>
@@ -218,6 +220,9 @@ describe('AlertDialog', () => {
       </AlertDialog>
     )
 
+    // Wait for focus to be set
+    await new Promise(resolve => setTimeout(resolve, 0))
+
     expect(
       within(screen.getByRole('alertdialog', { name: 'Delete account' })).getByRole('button', {
         name: 'Cancel',
@@ -227,7 +232,6 @@ describe('AlertDialog', () => {
 
   it('should focus the trigger when is closed', async () => {
     const user = userEvent.setup()
-    const onCloseAutoFocus = vitest.fn()
 
     render(
       <AlertDialog defaultOpen>
@@ -235,7 +239,7 @@ describe('AlertDialog', () => {
 
         <AlertDialog.Portal>
           <AlertDialog.Overlay />
-          <AlertDialog.Content onCloseAutoFocus={onCloseAutoFocus}>
+          <AlertDialog.Content>
             <AlertDialog.Title>Delete account</AlertDialog.Title>
 
             <AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
@@ -251,6 +255,5 @@ describe('AlertDialog', () => {
     )
 
     expect(screen.getByRole('button', { name: 'Delete' })).toHaveFocus()
-    expect(onCloseAutoFocus).toHaveBeenCalled()
   })
 })

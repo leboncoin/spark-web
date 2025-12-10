@@ -1,13 +1,20 @@
-import { Ref } from 'react'
+import { AlertDialog as BaseAlertDialog } from '@base-ui-components/react/alert-dialog'
+import { cx } from 'class-variance-authority'
+import { ComponentProps, Ref } from 'react'
 
-import { Dialog, DialogTitleProps } from '../dialog'
-
-export type AlertDialogTitleProps = DialogTitleProps & {
-  ref?: Ref<HTMLParagraphElement>
+export interface AlertDialogTitleProps
+  extends Omit<ComponentProps<typeof BaseAlertDialog.Title>, 'render'> {
+  ref?: Ref<HTMLHeadingElement>
 }
 
-export const AlertDialogTitle = (props: AlertDialogTitleProps) => {
-  return <Dialog.Title data-spark-component="alert-dialog-title" {...props} />
+export const AlertDialogTitle = ({ className, ...props }: AlertDialogTitleProps) => {
+  return (
+    <BaseAlertDialog.Title
+      data-spark-component="alert-dialog-title"
+      className={cx('text-headline-1 text-on-surface', className)}
+      {...props}
+    />
+  )
 }
 
 AlertDialogTitle.displayName = 'AlertDialog.Title'

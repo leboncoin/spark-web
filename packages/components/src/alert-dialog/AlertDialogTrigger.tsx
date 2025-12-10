@@ -1,13 +1,27 @@
-import { Ref } from 'react'
+import { AlertDialog as BaseAlertDialog } from '@base-ui-components/react/alert-dialog'
+import { ComponentProps, Ref } from 'react'
 
-import { Dialog, DialogTriggerProps } from '../dialog'
+import { useRenderSlot } from './useRenderSlot'
 
-export type AlertDialogTriggerProps = DialogTriggerProps & {
+export interface AlertDialogTriggerProps
+  extends Omit<ComponentProps<typeof BaseAlertDialog.Trigger>, 'render'> {
+  /**
+   * Change the default rendered element for the one passed as a child, merging their props and behavior.
+   */
+  asChild?: boolean
   ref?: Ref<HTMLButtonElement>
 }
 
-export const AlertDialogTrigger = (props: AlertDialogTriggerProps) => {
-  return <Dialog.Trigger data-spark-component="alert-dialog-title" {...props} />
+export const AlertDialogTrigger = ({ asChild = false, ...props }: AlertDialogTriggerProps) => {
+  const renderSlot = useRenderSlot(asChild, 'button')
+
+  return (
+    <BaseAlertDialog.Trigger
+      data-spark-component="alert-dialog-trigger"
+      render={renderSlot}
+      {...props}
+    />
+  )
 }
 
 AlertDialogTrigger.displayName = 'AlertDialog.Trigger'
