@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.0.1-beta.0](https://github.com/leboncoin/spark-web/compare/v12.2.0...v13.0.1-beta.0) (2025-12-11)
+
+### Features
+
+- **components:** migrated alert dialog to Base UI ([dc0f9c8](https://github.com/leboncoin/spark-web/commit/dc0f9c88674c51b90dc6c8e2ab819be7bb8f8fdc))
+
+### BREAKING CHANGES
+
+- **components:** See migration guide
+
 # [13.0.0](https://github.com/leboncoin/spark-web/compare/v12.2.0...v13.0.0) (2025-12-11)
 
 ### Features
