@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.0.1-beta.0](https://github.com/leboncoin/spark-web/compare/v12.2.0...v13.0.1-beta.0) (2025-12-11)
+
+**Note:** Version bump only for package @spark-ui/theme-utils
+
+# [13.0.0](https://github.com/leboncoin/spark-web/compare/v12.2.0...v13.0.0) (2025-12-11)
+
+**Note:** Version bump only for package @spark-ui/theme-utils
+
 # [12.2.0](https://github.com/leboncoin/spark-web/compare/v12.1.2...v12.2.0) (2025-12-05)
 
 **Note:** Version bump only for package @spark-ui/theme-utils

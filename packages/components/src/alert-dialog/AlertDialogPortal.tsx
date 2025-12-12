@@ -1,9 +1,10 @@
-import { Dialog, DialogPortalProps } from '../dialog'
+import { AlertDialog as BaseAlertDialog } from '@base-ui-components/react/alert-dialog'
+import { ComponentProps } from 'react'
 
-export type AlertDialogPortalProps = DialogPortalProps
+export type AlertDialogPortalProps = ComponentProps<typeof BaseAlertDialog.Portal>
 
 export const AlertDialogPortal = (props: AlertDialogPortalProps) => {
-  return <Dialog.Portal data-spark-component="alert-dialog-portal" {...props} />
+  return <BaseAlertDialog.Portal data-spark-component="alert-dialog-portal" {...props} />
 }
 
 AlertDialogPortal.displayName = 'AlertDialog.Portal'

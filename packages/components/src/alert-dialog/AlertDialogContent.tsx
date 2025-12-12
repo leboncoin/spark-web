@@ -1,57 +1,42 @@
+import { AlertDialog as BaseAlertDialog } from '@base-ui-components/react/alert-dialog'
 import { cx } from 'class-variance-authority'
-import { composeEventHandlers } from 'radix-ui/internal'
-import { Ref, useMemo, useRef } from 'react'
+import { ComponentProps, Ref } from 'react'
 
-import { Dialog, DialogContentProps } from '../dialog'
-import { AlertDialogContext } from './AlertDialogContext'
+import { dialogContentStyles } from '../dialog/DialogContent.styles'
+import { useAlertDialog } from './AlertDialogContext'
 
-export type AlertDialogContentProps = Omit<
-  DialogContentProps,
-  'size' | 'isNarrow' | 'onPointerDownOutside' | 'onInteractOutside'
-> & {
+export interface AlertDialogContentProps
+  extends Omit<ComponentProps<typeof BaseAlertDialog.Popup>, 'render'> {
   ref?: Ref<HTMLDivElement>
 }
 
-export const AlertDialogContent = ({
-  className,
-  onOpenAutoFocus,
-  ref,
-  ...others
-}: AlertDialogContentProps) => {
-  const cancelRef = useRef<HTMLButtonElement | null>(null)
+export const AlertDialogContent = ({ className, ref, initialFocus, ...others }: AlertDialogContentProps) => {
+  const { cancelRef } = useAlertDialog()
 
-  const value = useMemo(() => {
-    return { cancelRef }
-  }, [])
-
-  const handleOpenAutoFocus = (event: Event) => {
-    event.preventDefault()
-    cancelRef.current?.focus({ preventScroll: true })
-  }
-
-  const handlePointerDownOutside = (event: Event) => {
-    event.preventDefault()
-  }
-
-  const handleInteractOutside = (event: Event) => {
-    event.preventDefault()
-  }
+  // Default: focus the cancel button when dialog opens
+  // Users can override by passing their own initialFocus prop (RefObject, false, true, or function)
+  const handleInitialFocus = initialFocus !== undefined ? initialFocus : () => cancelRef.current
 
   return (
-    <AlertDialogContext.Provider value={value}>
-      <Dialog.Content
-        ref={ref}
-        data-spark-component="alert-dialog-content"
-        {...others}
-        className={cx(className, 'min-w-sz-288')}
-        role="alertdialog"
-        size="md"
-        onOpenAutoFocus={composeEventHandlers(onOpenAutoFocus, handleOpenAutoFocus)}
-        onPointerDownOutside={handlePointerDownOutside}
-        onInteractOutside={handleInteractOutside}
-        isNarrow
-      />
-    </AlertDialogContext.Provider>
+    <BaseAlertDialog.Popup
+      ref={ref}
+      data-spark-component="alert-dialog-content"
+      role="alertdialog"
+      className={state =>
+        cx(
+          dialogContentStyles({ size: 'md', isNarrow: true }),
+          'min-w-sz-288',
+          // Base UI automatically adds data-[starting-style] and data-[ending-style] attributes
+          // Transition with opacity and scale for smooth open/close animations
+          'transition-all duration-150',
+          'data-starting-style:scale-90 data-starting-style:opacity-0',
+          'data-ending-style:scale-90 data-ending-style:opacity-0',
+          typeof className === 'function' ? className(state) : className
+        )
+      }
+      initialFocus={handleInitialFocus}
+      {...others}
+    />
   )
 }
 
