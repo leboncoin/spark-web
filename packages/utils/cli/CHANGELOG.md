@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.0.1](https://github.com/leboncoin/spark-web/compare/v14.0.0-beta.0...v13.0.1) (2025-12-12)
+
+### Bug Fixes
+
+- **cli-utils:** improve beta release workflow ([26a8024](https://github.com/leboncoin/spark-web/commit/26a8024b4be3e8e89a1884ac447f49cda267425c))
+
 ## [13.0.1-beta.0](https://github.com/leboncoin/spark-web/compare/v12.2.0...v13.0.1-beta.0) (2025-12-11)
 
 **Note:** Version bump only for package @spark-ui/cli-utils
