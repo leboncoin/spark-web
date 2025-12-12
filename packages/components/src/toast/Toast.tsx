@@ -117,13 +117,13 @@ export function Toast({ toast }: { toast: ToastObject }) {
 
     if (typeof description !== 'string') {
       return (
-        <BaseToast.Description className="text-body-1 break-all" render={<div />}>
+        <BaseToast.Description className="text-body-1" render={<div />}>
           {description}
         </BaseToast.Description>
       )
     }
 
-    return <BaseToast.Description className="text-body-1 break-all" />
+    return <BaseToast.Description className="text-body-1" />
   }
 
   return (
