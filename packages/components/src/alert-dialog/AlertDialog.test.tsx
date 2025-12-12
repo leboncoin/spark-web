@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vitest } from 'vitest'
 
@@ -220,14 +220,17 @@ describe('AlertDialog', () => {
       </AlertDialog>
     )
 
-    // Wait for focus to be set
-    await new Promise(resolve => setTimeout(resolve, 0))
-
-    expect(
-      within(screen.getByRole('alertdialog', { name: 'Delete account' })).getByRole('button', {
+    const cancelButton = within(screen.getByRole('alertdialog', { name: 'Delete account' })).getByRole(
+      'button',
+      {
         name: 'Cancel',
-      })
-    ).toHaveFocus()
+      }
+    )
+
+    // Wait for focus to be set
+    await waitFor(() => {
+      expect(cancelButton).toHaveFocus()
+    })
   })
 
   it('should focus the trigger when is closed', async () => {
