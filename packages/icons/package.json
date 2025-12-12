@@ -1,6 +1,6 @@
 {
   "name": "@spark-ui/icons",
-  "version": "13.0.1",
+  "version": "13.0.2",
   "description": "spark-ui icons",
   "publishConfig": {
     "access": "public"

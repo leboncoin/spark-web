@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.0.2](https://github.com/leboncoin/spark-web/compare/v13.0.1...v13.0.2) (2025-12-12)
+
+### Bug Fixes
+
+- **components:** removing linebreak behavior from toast ([2ef64ff](https://github.com/leboncoin/spark-web/commit/2ef64ff02b511244d5e50ccd313ae52c0d65f025))
+
 ## [13.0.1](https://github.com/leboncoin/spark-web/compare/v14.0.0-beta.0...v13.0.1) (2025-12-12)
 
 ### Bug Fixes
