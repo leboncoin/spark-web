@@ -10,5 +10,9 @@
       "conventionalCommits": true
     }
   },
-  "ignoreChanges": ["**/CHANGELOG.md", "**/node_modules/**", "**/*.md"]
+  "ignoreChanges": [
+    "**/CHANGELOG.md",
+    "**/node_modules/**",
+    "**/*.md"
+  ]
 }
