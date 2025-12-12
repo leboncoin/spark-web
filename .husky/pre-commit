@@ -1,1 +1,11 @@
 npm run lint:staged
+
+# Check if on main branch and lerna.json contains prerelease version
+branch=$(git branch --show-current 2>/dev/null || echo "")
+if [ "$branch" = "main" ]; then
+  if grep -E '"(alpha|beta|rc)\.[0-9]+"' lerna.json 2>/dev/null; then
+    echo "❌ ERROR: Cannot commit prerelease version to main branch!"
+    echo "   Please update lerna.json to use a stable version."
+    exit 1
+  fi
+fi

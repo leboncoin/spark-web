@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
-  "version": "14.0.0-beta.0",
+  "version": "13.0.0",
   "command": {
     "publish": {
       "conventionalCommits": true,
@@ -10,5 +10,9 @@
       "conventionalCommits": true
     }
   },
-  "ignoreChanges": ["**/CHANGELOG.md", "**/node_modules/**", "**/*.md"]
+  "ignoreChanges": [
+    "**/CHANGELOG.md",
+    "**/node_modules/**",
+    "**/*.md"
+  ]
 }
