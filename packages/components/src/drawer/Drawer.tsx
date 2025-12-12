@@ -1,47 +1,48 @@
-import { Dialog as RadixDrawer } from 'radix-ui'
-import { type ReactElement, ReactNode } from 'react'
+import { Dialog as BaseDialog } from '@base-ui-components/react/dialog'
+import { ComponentProps, type ReactElement } from 'react'
 
 import { DrawerProvider } from './DrawerContext'
 
-export interface DrawerProps {
-  /**
-   * Children of the component.
-   */
-  children?: RadixDrawer.DialogProps['children']
+export interface DrawerProps
+  extends Omit<ComponentProps<typeof BaseDialog.Root>, 'onOpenChange' | 'render'> {
   /**
    * Specifies if the dialog is open or not.
    */
-  open?: RadixDrawer.DialogProps['open']
+  open?: boolean
   /**
    * Default open state.
    */
-  defaultOpen?: RadixDrawer.DialogProps['defaultOpen']
+  defaultOpen?: boolean
   /**
    * Handler executed on every dialog open state change.
    */
-  onOpenChange?: RadixDrawer.DialogProps['onOpenChange']
+  onOpenChange?: (open: boolean) => void
   /**
    * Specifies if the dialog is a modal.
    */
-  modal?: RadixDrawer.DialogProps['modal']
+  modal?: boolean
   /**
    * Specifies if the drawer should have a fade animation on its body (in case it is scrollable).
    */
   withFade?: boolean
+  /**
+   * Change the default rendered element for the one passed as a child, merging their props and behavior.
+   */
+  asChild?: boolean
 }
 
-export interface DialogProps {
-  children?: ReactNode
-  open?: boolean
-  defaultOpen?: boolean
-  onOpenChange?(open: boolean): void
-  modal?: boolean
-}
+export const Drawer = ({ onOpenChange, withFade = false, ...props }: DrawerProps): ReactElement => {
+  const handleOpenChange = onOpenChange
+    ? (open: boolean, _eventDetails: unknown) => {
+        onOpenChange(open)
+      }
+    : undefined
 
-export const Drawer = ({ children, withFade = false, ...rest }: DrawerProps): ReactElement => (
-  <DrawerProvider withFade={withFade}>
-    <RadixDrawer.Root {...rest}>{children}</RadixDrawer.Root>
-  </DrawerProvider>
-)
+  return (
+    <DrawerProvider withFade={withFade}>
+      <BaseDialog.Root data-spark-component="drawer" onOpenChange={handleOpenChange} {...props} />
+    </DrawerProvider>
+  )
+}
 
 Drawer.displayName = 'Drawer.Root'

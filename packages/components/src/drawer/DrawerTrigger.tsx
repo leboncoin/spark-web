@@ -1,16 +1,21 @@
-import { Dialog as RadixDrawer } from 'radix-ui'
-import { type ReactElement, Ref } from 'react'
+import { Dialog as BaseDialog } from '@base-ui-components/react/dialog'
+import { ComponentProps, Ref } from 'react'
 
-export interface DrawerTriggerProps extends RadixDrawer.DialogTriggerProps {
+import { useRenderSlot } from './useRenderSlot'
+
+export interface DrawerTriggerProps
+  extends Omit<ComponentProps<typeof BaseDialog.Trigger>, 'render'> {
   /**
-   * Change the component to the HTML tag or custom component of the only child. This will merge the original component props with the props of the supplied element/component and change the underlying DOM node.
+   * Change the default rendered element for the one passed as a child, merging their props and behavior.
    */
   asChild?: boolean
   ref?: Ref<HTMLButtonElement>
 }
 
-export const DrawerTrigger = (props: DrawerTriggerProps): ReactElement => (
-  <RadixDrawer.Trigger data-spark-component="drawer-trigger" {...props} />
-)
+export const DrawerTrigger = ({ asChild = false, ...props }: DrawerTriggerProps) => {
+  const renderSlot = useRenderSlot(asChild, 'button')
+
+  return <BaseDialog.Trigger data-spark-component="drawer-trigger" render={renderSlot} {...props} />
+}
 
 DrawerTrigger.displayName = 'Drawer.Trigger'

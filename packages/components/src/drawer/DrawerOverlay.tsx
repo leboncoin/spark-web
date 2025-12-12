@@ -1,24 +1,29 @@
+import { Dialog as BaseDialog } from '@base-ui-components/react/dialog'
 import { cx } from 'class-variance-authority'
-import { Dialog as RadixDrawer } from 'radix-ui'
-import { type ReactElement, Ref } from 'react'
+import { ComponentProps, Ref } from 'react'
 
-export type DrawerOverlayProps = RadixDrawer.DialogOverlayProps & {
+export interface DrawerOverlayProps
+  extends Omit<ComponentProps<typeof BaseDialog.Backdrop>, 'render'> {
   ref?: Ref<HTMLDivElement>
 }
 
-export const DrawerOverlay = ({ className, ref, ...rest }: DrawerOverlayProps): ReactElement => (
-  <RadixDrawer.Overlay
-    data-spark-component="drawer-overlay"
-    ref={ref}
-    className={cx(
-      ['fixed', 'top-0', 'left-0', 'w-screen', 'h-screen', 'z-overlay'],
-      ['bg-overlay/dim-1'],
-      ['data-[state=open]:animate-fade-in'],
-      ['data-[state=closed]:animate-fade-out'],
-      className
-    )}
-    {...rest}
-  />
-)
+export const DrawerOverlay = ({ className, ...props }: DrawerOverlayProps) => {
+  return (
+    <BaseDialog.Backdrop
+      data-spark-component="drawer-overlay"
+      className={state =>
+        cx(
+          'z-overlay fixed top-0 left-0 h-screen w-screen',
+          'bg-overlay/dim-1',
+          // Base UI automatically adds data-[starting-style] and data-[ending-style] attributes
+          'data-[starting-style]:animate-fade-in',
+          'data-[ending-style]:animate-fade-out',
+          typeof className === 'function' ? className(state) : className
+        )
+      }
+      {...props}
+    />
+  )
+}
 
 DrawerOverlay.displayName = 'Drawer.Overlay'
