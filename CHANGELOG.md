@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.0.3-beta.0](https://github.com/leboncoin/spark-web/compare/v13.0.2...v13.0.3-beta.0) (2025-12-12)
+
+### Features
+
+- **components:** migrating to base ui ([5b839c6](https://github.com/leboncoin/spark-web/commit/5b839c619eb432cb012d3eec19829063511be3b3))
+
+### BREAKING CHANGES
+
+- **components:** changed props, check migration guide
+
 ## [13.0.2](https://github.com/leboncoin/spark-web/compare/v13.0.1...v13.0.2) (2025-12-12)
 
 ### Bug Fixes
