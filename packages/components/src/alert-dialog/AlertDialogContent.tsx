@@ -1,4 +1,4 @@
-import { AlertDialog as BaseAlertDialog } from '@base-ui-components/react/alert-dialog'
+import { AlertDialog as BaseAlertDialog } from '@base-ui/react/alert-dialog'
 import { cx } from 'class-variance-authority'
 import { ComponentProps, Ref } from 'react'
 
@@ -10,7 +10,12 @@ export interface AlertDialogContentProps
   ref?: Ref<HTMLDivElement>
 }
 
-export const AlertDialogContent = ({ className, ref, initialFocus, ...others }: AlertDialogContentProps) => {
+export const AlertDialogContent = ({
+  className,
+  ref,
+  initialFocus,
+  ...others
+}: AlertDialogContentProps) => {
   const { cancelRef } = useAlertDialog()
 
   // Default: focus the cancel button when dialog opens
