@@ -1,4 +1,4 @@
-import { AlertDialog as BaseAlertDialog } from '@base-ui-components/react/alert-dialog'
+import { AlertDialog as BaseAlertDialog } from '@base-ui/react/alert-dialog'
 import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
 import { ComponentProps, Ref } from 'react'
 

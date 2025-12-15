@@ -1,4 +1,4 @@
-import { AlertDialog as BaseAlertDialog } from '@base-ui-components/react/alert-dialog'
+import { AlertDialog as BaseAlertDialog } from '@base-ui/react/alert-dialog'
 import { ComponentProps, Ref } from 'react'
 
 import { useRenderSlot } from './useRenderSlot'

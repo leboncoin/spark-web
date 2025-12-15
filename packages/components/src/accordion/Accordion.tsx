@@ -1,13 +1,10 @@
-import { Accordion as BaseAccordion } from '@base-ui-components/react/accordion'
+import { Accordion as BaseAccordion } from '@base-ui/react/accordion'
 import { cx } from 'class-variance-authority'
 import { ComponentProps, createContext, Ref, useContext } from 'react'
 
 import { useRenderSlot } from './useRenderSlot'
 
-type ExtentedZagInterface = Omit<
-  ComponentProps<typeof BaseAccordion.Root>,
-  'openMultiple' | 'render'
->
+type ExtentedZagInterface = Omit<ComponentProps<typeof BaseAccordion.Root>, 'multiple' | 'render'>
 
 export interface AccordionProps extends ExtentedZagInterface {
   /**
@@ -47,7 +44,7 @@ export const Accordion = ({
       <BaseAccordion.Root
         data-spark-component="accordion"
         ref={ref}
-        openMultiple={multiple}
+        multiple={multiple}
         hiddenUntilFound={hiddenUntilFound}
         className={cx('bg-surface h-fit rounded-lg', className)}
         render={renderSlot}

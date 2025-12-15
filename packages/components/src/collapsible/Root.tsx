@@ -1,4 +1,4 @@
-import { Collapsible } from '@base-ui-components/react/collapsible'
+import { Collapsible } from '@base-ui/react/collapsible'
 import { type ComponentProps } from 'react'
 
 import { useRenderSlot } from './useRenderSlot'
