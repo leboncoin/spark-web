@@ -166,9 +166,19 @@ The `Dialog` component can be effortlessly combined with a form element.
 
 ### Forward focus
 
-Use `onOpenAutoFocus` and a `ref` to direct focus to a specific element when the dialog opens.
+Use `initialFocus` and a `ref` to direct focus to a specific element when the dialog opens.
 
 <Canvas of={stories.ForwardFocus} />
+
+### Nested dialogs
+
+Nested dialog are supported. It works with either `Dialog`, `AlertDialog` or `Drawer` components.
+
+**We strongly advise against using nested dialogs, as it can be confusing for users and it's not a common pattern.**
+
+A common/legit use case for nested dialogs is to display a confirmation dialog (AlertDialog) inside a drawer or dialog.
+
+<Canvas of={stories.NestedDialogs} />
 
 ## Accessibility
 

@@ -134,12 +134,12 @@ useEffect(() => {
 
 **Note:** The keyboard event listener approach works because Base UI's Drawer closes on Escape key automatically. The listener will fire before the drawer closes, allowing you to execute custom logic.
 
-### 2. Transition Attributes: `data-[state=open]` → `data-[starting-style]` / `data-[ending-style]`
+### 2. Transition Attributes: `data-[state=open]` → `data-open` / `data-closed` and `data-[starting-style]` / `data-[ending-style]` → `data-starting-style` / `data-ending-style`
 
 **Status:** ⚠️ **Breaking change** (for custom CSS/styling)
 
 - **Radix UI:** Used `data-[state=open]` and `data-[state=closed]` attributes for transitions
-- **Base UI:** Uses `data-[starting-style]` and `data-[ending-style]` attributes for transitions
+- **Base UI:** Uses `data-open` and `data-closed` attributes for `Drawer.Content`, and `data-starting-style` and `data-ending-style` attributes (without brackets) for `Drawer.Overlay`
 - **Impact:** If you have custom CSS targeting `data-[state=open]` or `data-[state=closed]` on `Drawer.Content` or `Drawer.Overlay`, it will no longer work.
 
 **Migration:**
@@ -163,11 +163,11 @@ useEffect(() => {
 }
 
 /* ✅ After (Base UI) */
-.drawer-content[data-starting-style] {
+.drawer-content[data-open] {
   animation: slide-in-right 0.4s;
 }
 
-.drawer-content[data-ending-style] {
+.drawer-content[data-closed] {
   animation: slide-out-right 0.2s;
 }
 
@@ -182,46 +182,80 @@ useEffect(() => {
 
 **Note:** The default transitions (`animate-slide-in-*`, `animate-slide-out-*`, `animate-fade-in`, and `animate-fade-out`) are automatically applied and work out of the box. You only need to migrate if you have custom transition styles.
 
-### 3. `onInteractOutside` Event Type
+**Important:** Base UI uses `data-open`/`data-closed` for `Drawer.Content` and `data-starting-style`/`data-ending-style` (without brackets) for `Drawer.Overlay`.
 
-**Status:** ⚠️ **Breaking change** (event type change)
+### 3. Removed Prop: `onInteractOutside`
 
-The `onInteractOutside` prop on `Drawer.Content` now receives a generic `Event` instead of a specific `PointerEvent`. The handler signature has changed:
+**Status:** ⚠️ **Breaking change** (prop removed)
+
+The `onInteractOutside` prop has been removed from `Drawer.Content` as it is not supported by Base UI:
+
+- `onInteractOutside?: (event: Event) => void` - Removed
+
+**Migration:**
 
 ```tsx
-// ❌ Before (Radix UI)
+// ❌ Before (no longer supported)
 <Drawer.Content
-  onInteractOutside={(event: PointerEvent) => {
-    // event is a PointerEvent
+  onInteractOutside={(event) => {
+    // Prevent closing when clicking outside
+    event.preventDefault()
   }}
-/>
+>
+  {/* ... */}
+</Drawer.Content>
 
-// ✅ After (Base UI)
-<Drawer.Content
-  onInteractOutside={(event: Event) => {
-    // event is a generic Event, cast to PointerEvent if needed
-    const pointerEvent = event as PointerEvent
-  }}
-/>
+// ✅ After (use modal prop to control outside interaction)
+<Drawer.Content modal={true}>
+  {/* Drawer will close on outside click by default */}
+</Drawer.Content>
 ```
 
-**Note:** The existing implementation in Spark already handles this correctly by casting the event when needed.
+**Note:** Base UI handles outside interactions automatically. If you need to prevent closing on outside click, you can use the `modal` prop or handle the `onOpenChange` event on the `Drawer` root component.
+
+### 4. Portal Z-Index Changes
+
+**Status:** ⚠️ **Breaking change** (for custom CSS/styling)
+
+- **Radix UI:** Portal had no default z-index classes
+- **Base UI:** Portal now has `z-modal absolute` classes applied by default
+
+**Migration:**
+
+If you have custom CSS targeting the Portal z-index, you may need to adjust:
+
+```css
+/* ❌ Before (Radix UI) */
+.drawer-portal {
+  /* No default z-index */
+}
+
+/* ✅ After (Base UI) */
+.drawer-portal {
+  z-index: var(--z-modal);
+  position: absolute;
+}
+```
+
+**Note:** The default z-index values are automatically applied. You only need to migrate if you have custom z-index overrides. The Overlay z-index remains unchanged (`z-overlay`).
 
 ## Migration Checklist
 
-- [ ] ⚠️ Remove any usage of `onOpenAutoFocus` on `Drawer.Content`
-- [ ] ⚠️ Remove any usage of `onCloseAutoFocus` on `Drawer.Content`
-- [ ] ⚠️ Remove any usage of `onEscapeKeyDown` on `Drawer.Content`
-- [ ] ⚠️ Update custom CSS targeting `data-[state=open]` or `data-[state=closed]` to use `data-[starting-style]` and `data-[ending-style]` instead
-- [ ] ⚠️ Update `onInteractOutside` handlers if they rely on specific PointerEvent properties
+- [ ] ⚠️ Remove any usage of `onOpenAutoFocus` on `Drawer.Content` (use `initialFocus` prop instead)
+- [ ] ⚠️ Remove any usage of `onCloseAutoFocus` on `Drawer.Content` (use `finalFocus` prop instead)
+- [ ] ⚠️ Remove any usage of `onEscapeKeyDown` on `Drawer.Content` (use `onOpenChange` on `Drawer` root instead)
+- [ ] ⚠️ Remove any usage of `onInteractOutside` on `Drawer.Content`
+- [ ] ⚠️ Update custom CSS targeting `data-[state=open]` or `data-[state=closed]` on `Drawer.Content` to use `data-open` and `data-closed` instead
+- [ ] ⚠️ Update custom CSS targeting `data-[state=open]` or `data-[state=closed]` on `Drawer.Overlay` to use `data-starting-style` and `data-ending-style` instead (without brackets)
+- [ ] ⚠️ Review custom z-index overrides for `Drawer.Portal` if applicable
 
 ## Summary
 
 Most consumers won't need any changes. The migration only requires action if you:
 
-- Use the removed event handler props (`onOpenAutoFocus`, `onCloseAutoFocus`, `onEscapeKeyDown`)
+- Use the removed event handler props (`onOpenAutoFocus`, `onCloseAutoFocus`, `onEscapeKeyDown`, `onInteractOutside`)
 - Have custom CSS targeting the old transition attributes (`data-[state=open]`, `data-[state=closed]`)
-- Have custom `onInteractOutside` handlers that rely on specific PointerEvent properties
+- Have custom z-index overrides for Portal
 
 All other functionality remains the same and works automatically.
 

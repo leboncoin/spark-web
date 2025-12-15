@@ -5,6 +5,15 @@ export const drawerContentStyles = cva(
     'fixed z-modal flex flex-col bg-surface shadow-md',
     // Base UI uses data-open and data-closed for transitions
     'data-open:animation-duration-400 data-closed:animation-duration-200',
+    // Nested dialog effect
+    'data-nested-dialog-open:after:pointer-events-none',
+    'after:bg-transparent',
+    'after:transition-all',
+    'after:duration-200',
+    'data-nested-dialog-open:after:inset-0',
+    'data-nested-dialog-open:after:absolute',
+    'data-nested-dialog-open:after:rounded-[inherit]',
+    'data-nested-dialog-open:after:bg-overlay/dim-3',
   ],
   {
     variants: {
