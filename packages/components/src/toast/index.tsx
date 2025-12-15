@@ -1,4 +1,4 @@
-import { Toast as BaseToast } from '@base-ui-components/react/toast'
+import { Toast as BaseToast } from '@base-ui/react/toast'
 import { Slot } from '@spark-ui/components/slot'
 import { cx } from 'class-variance-authority'
 import * as React from 'react'

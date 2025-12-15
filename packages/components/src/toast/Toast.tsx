@@ -1,4 +1,4 @@
-import { Toast as BaseToast } from '@base-ui-components/react/toast'
+import { Toast as BaseToast } from '@base-ui/react/toast'
 import { Button, ButtonProps } from '@spark-ui/components/button'
 import { Icon } from '@spark-ui/components/icon'
 import { IconButton } from '@spark-ui/components/icon-button'

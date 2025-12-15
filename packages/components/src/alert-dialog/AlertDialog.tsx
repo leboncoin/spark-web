@@ -1,4 +1,4 @@
-import { AlertDialog as BaseAlertDialog } from '@base-ui-components/react/alert-dialog'
+import { AlertDialog as BaseAlertDialog } from '@base-ui/react/alert-dialog'
 import { ComponentProps, Ref, useRef } from 'react'
 
 import { AlertDialogProvider } from './AlertDialogContext'
