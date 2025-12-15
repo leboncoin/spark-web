@@ -1,11 +1,16 @@
+/* eslint-disable max-lines */
+import { AlertDialog } from '@spark-ui/components/alert-dialog'
+import { Button } from '@spark-ui/components/button'
+import { Card } from '@spark-ui/components/card'
+import { Drawer } from '@spark-ui/components/drawer'
+import { FormField } from '@spark-ui/components/form-field'
+import { Input } from '@spark-ui/components/input'
+import { RadioGroup } from '@spark-ui/components/radio-group'
+import { Tabs } from '@spark-ui/components/tabs'
+import { ToastProvider, useToastManager } from '@spark-ui/components/toast'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { FormEvent, useRef, useState } from 'react'
 
-import { Button } from '../button'
-import { FormField } from '../form-field'
-import { Input } from '../input'
-import { RadioGroup } from '../radio-group'
-import { Tabs } from '../tabs'
 import { Dialog, type DialogContentProps } from '.'
 
 const meta: Meta<typeof Dialog> = {
@@ -19,6 +24,13 @@ const meta: Meta<typeof Dialog> = {
       allowFullscreen: true,
     },
   },
+  decorators: [
+    Story => (
+      <ToastProvider>
+        <Story />
+      </ToastProvider>
+    ),
+  ],
 }
 
 export default meta
@@ -299,13 +311,7 @@ export const ForwardFocus = () => {
       <Dialog.Portal>
         <Dialog.Overlay />
 
-        <Dialog.Content
-          className="pb-xl"
-          onOpenAutoFocus={e => {
-            e.preventDefault()
-            fieldToFocus.current?.focus()
-          }}
-        >
+        <Dialog.Content className="pb-xl" initialFocus={fieldToFocus}>
           <Dialog.Header>
             <Dialog.Title>Forward focus</Dialog.Title>
           </Dialog.Header>
@@ -320,5 +326,218 @@ export const ForwardFocus = () => {
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog>
+  )
+}
+
+// Advanced Examples
+
+export const NestedDialogs = () => {
+  const [open, setOpen] = useState(false)
+
+  const closeParentDialog = () => {
+    setOpen(false)
+  }
+
+  return (
+    <>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <Dialog.Trigger asChild>
+          <Button>Account settings</Button>
+        </Dialog.Trigger>
+
+        <Dialog.Portal>
+          <Dialog.Overlay />
+
+          <Dialog.Content size="lg">
+            <Dialog.Header>
+              <Dialog.Title>Account settings</Dialog.Title>
+            </Dialog.Header>
+
+            <Dialog.Body className="gap-lg flex flex-col">
+              <Dialog.Description>Manage your account settings and preferences.</Dialog.Description>
+            </Dialog.Body>
+
+            <Dialog.Footer className="gap-lg flex justify-end">
+              <AlertDialog>
+                <AlertDialog.Trigger asChild>
+                  <Button intent="danger">Delete account</Button>
+                </AlertDialog.Trigger>
+
+                <AlertDialog.Portal>
+                  <AlertDialog.Overlay />
+
+                  <AlertDialog.Content>
+                    <AlertDialog.Header>
+                      <AlertDialog.Title>Delete account</AlertDialog.Title>
+                    </AlertDialog.Header>
+
+                    <AlertDialog.Body>
+                      <Card intent="danger" design="tinted">
+                        <Card.Content>
+                          <AlertDialog.Description>
+                            Are you sure you want to delete your account? You can not undo this
+                            action afterwards.
+                          </AlertDialog.Description>
+                        </Card.Content>
+                      </Card>
+                    </AlertDialog.Body>
+
+                    <AlertDialog.Footer className="gap-lg flex justify-end">
+                      <AlertDialog.Cancel asChild>
+                        <Button intent="neutral" design="ghost">
+                          Cancel
+                        </Button>
+                      </AlertDialog.Cancel>
+
+                      <AlertDialog.Action asChild>
+                        <Button intent="danger" onClick={closeParentDialog}>
+                          Confirm deletion
+                        </Button>
+                      </AlertDialog.Action>
+                    </AlertDialog.Footer>
+                  </AlertDialog.Content>
+                </AlertDialog.Portal>
+              </AlertDialog>
+              <Dialog.Close asChild>
+                <Button intent="basic" design="outlined">
+                  Close
+                </Button>
+              </Dialog.Close>
+            </Dialog.Footer>
+
+            <Dialog.CloseButton aria-label="Close dialog with nested drawer" />
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog>
+    </>
+  )
+}
+
+export const SparkLayers = () => {
+  const toastManager = useToastManager()
+
+  const openToast = () => {
+    toastManager.add({
+      title: 'Toast with action',
+      description:
+        'This toast contains an action button and can be closed. Use F6 to access it with the keyboard.',
+      timeout: 0,
+      data: {
+        isClosable: true,
+        action: {
+          close: true,
+          label: 'Cancel',
+          onClick: () => console.log('Action canceled'),
+        },
+      },
+    })
+  }
+
+  return (
+    <>
+      <div className="bg-surface z-dropdown p-lg bottom-md right-md fixed shadow-md">
+        This element should remain below the overlay
+      </div>
+      <Dialog>
+        <Dialog.Trigger asChild>
+          <Button>Open dialog</Button>
+        </Dialog.Trigger>
+
+        <Dialog.Portal>
+          <Dialog.Overlay />
+
+          <Dialog.Content>
+            <Dialog.Header>
+              <Dialog.Title>Notifications</Dialog.Title>
+            </Dialog.Header>
+
+            <Dialog.Body className="gap-lg flex flex-col">
+              <Dialog.Description>You are all caught up. Good job!</Dialog.Description>
+            </Dialog.Body>
+
+            <Dialog.Footer className="gap-lg flex justify-end">
+              <Drawer>
+                <Drawer.Trigger asChild>
+                  <Button intent="accent" design="tinted">
+                    Customize
+                  </Button>
+                </Drawer.Trigger>
+
+                <Drawer.Portal>
+                  <Drawer.Overlay />
+
+                  <Drawer.Content size="sm">
+                    <Drawer.Header>
+                      <Drawer.Title>Customize notifications</Drawer.Title>
+                    </Drawer.Header>
+
+                    <Drawer.Body className="gap-md flex flex-col">
+                      <Drawer.Description>Review your settings here.</Drawer.Description>
+                      <Button onClick={openToast}>Show toast</Button>
+                      <Card intent="danger" design="tinted">
+                        <Card.Content>
+                          <p>
+                            Danger zone - click on the button below to delete your notifications.
+                          </p>
+                          <AlertDialog>
+                            <AlertDialog.Trigger asChild>
+                              <Button intent="danger">Delete</Button>
+                            </AlertDialog.Trigger>
+
+                            <AlertDialog.Portal>
+                              <AlertDialog.Overlay />
+
+                              <AlertDialog.Content>
+                                <AlertDialog.Header>
+                                  <AlertDialog.Title>Delete notifications</AlertDialog.Title>
+                                </AlertDialog.Header>
+
+                                <AlertDialog.Body>
+                                  <AlertDialog.Description>
+                                    Are you sure? You can not undo this action afterwards.
+                                  </AlertDialog.Description>
+                                </AlertDialog.Body>
+
+                                <AlertDialog.Footer className="gap-lg flex justify-end">
+                                  <AlertDialog.Cancel asChild>
+                                    <Button intent="neutral" design="ghost">
+                                      Cancel
+                                    </Button>
+                                  </AlertDialog.Cancel>
+
+                                  <AlertDialog.Action asChild>
+                                    <Button intent="danger">Delete</Button>
+                                  </AlertDialog.Action>
+                                </AlertDialog.Footer>
+                              </AlertDialog.Content>
+                            </AlertDialog.Portal>
+                          </AlertDialog>
+                        </Card.Content>
+                      </Card>
+                    </Drawer.Body>
+
+                    <Drawer.Footer className="gap-md flex justify-end">
+                      <Drawer.Close asChild>
+                        <Button intent="basic" design="outlined">
+                          Close
+                        </Button>
+                      </Drawer.Close>
+                    </Drawer.Footer>
+                    <Drawer.CloseButton aria-label="Close nested Drawer" />
+                  </Drawer.Content>
+                </Drawer.Portal>
+              </Drawer>
+              <Dialog.Close asChild>
+                <Button intent="basic" design="outlined">
+                  Close
+                </Button>
+              </Dialog.Close>
+            </Dialog.Footer>
+
+            <Dialog.CloseButton aria-label="Close dialog with nested drawer" />
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog>
+    </>
   )
 }

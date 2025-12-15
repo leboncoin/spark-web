@@ -124,13 +124,13 @@ describe('Dialog', () => {
   })
 
   it('should close when esc is pressed', async () => {
-    const onEscapeKeyDown = vitest.fn()
+    const onOpenChange = vitest.fn()
 
     render(
-      <Dialog defaultOpen>
+      <Dialog defaultOpen onOpenChange={onOpenChange}>
         <Dialog.Portal>
           <Dialog.Overlay />
-          <Dialog.Content onEscapeKeyDown={onEscapeKeyDown}>
+          <Dialog.Content>
             <Dialog.Header>
               <Dialog.Title>Edit profile</Dialog.Title>
             </Dialog.Header>
@@ -159,7 +159,7 @@ describe('Dialog', () => {
     fireEvent.keyDown(document.activeElement as Element, { key: 'Escape' })
 
     expect(screen.queryByRole('dialog', { name: 'Edit profile' })).not.toBeInTheDocument()
-    expect(onEscapeKeyDown).toHaveBeenCalled()
+    expect(onOpenChange).toHaveBeenCalledWith(false)
   })
 
   it('should handle the inset prop', async () => {

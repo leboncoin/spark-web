@@ -1,4 +1,4 @@
-import { Dialog as BaseDialog } from '@base-ui-components/react/dialog'
+import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import { cx } from 'class-variance-authority'
 import { ComponentProps, Ref } from 'react'
 
