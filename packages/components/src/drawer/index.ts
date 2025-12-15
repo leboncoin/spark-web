@@ -1,5 +1,6 @@
 import { Drawer as Root } from './Drawer'
 import { DrawerBody } from './DrawerBody'
+import { DrawerClose } from './DrawerClose'
 import { DrawerCloseButton } from './DrawerCloseButton'
 import { DrawerContent } from './DrawerContent'
 import { DrawerDescription } from './DrawerDescription' // aria-describedby
@@ -18,6 +19,7 @@ export const Drawer: typeof Root & {
   Header: typeof DrawerHeader
   Body: typeof DrawerBody
   Footer: typeof DrawerFooter
+  Close: typeof DrawerClose
   CloseButton: typeof DrawerCloseButton
   Title: typeof DrawerTitle
   Description: typeof DrawerDescription
@@ -29,6 +31,7 @@ export const Drawer: typeof Root & {
   Header: DrawerHeader,
   Body: DrawerBody,
   Footer: DrawerFooter,
+  Close: DrawerClose,
   CloseButton: DrawerCloseButton,
   Title: DrawerTitle,
   Description: DrawerDescription,
@@ -42,6 +45,7 @@ DrawerContent.displayName = 'Drawer.Content'
 DrawerHeader.displayName = 'Drawer.Header'
 DrawerBody.displayName = 'Drawer.Body'
 DrawerFooter.displayName = 'Drawer.Footer'
+DrawerClose.displayName = 'Drawer.Close'
 DrawerCloseButton.displayName = 'Drawer.CloseButton'
 DrawerTitle.displayName = 'Drawer.Title'
 DrawerDescription.displayName = 'Drawer.Description'

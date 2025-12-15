@@ -1,14 +1,14 @@
+import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import { cx } from 'class-variance-authority'
-import { Dialog as RadixDialog } from 'radix-ui'
-import { Ref } from 'react'
+import { ComponentProps, Ref } from 'react'
 
-export type TitleProps = RadixDialog.DialogTitleProps & {
+export type TitleProps = ComponentProps<typeof BaseDialog.Title> & {
   ref?: Ref<HTMLHeadingElement>
 }
 
 export const Title = ({ className, ref, ...others }: TitleProps) => {
   return (
-    <RadixDialog.Title
+    <BaseDialog.Title
       data-spark-component="dialog-title"
       ref={ref}
       className={cx(

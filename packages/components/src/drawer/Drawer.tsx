@@ -1,4 +1,4 @@
-import { Dialog as BaseDialog } from '@base-ui-components/react/dialog'
+import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import { ComponentProps, type ReactElement } from 'react'
 
 import { DrawerProvider } from './DrawerContext'

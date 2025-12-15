@@ -16,8 +16,8 @@ export const AlertDialogOverlay = ({ className, ...props }: AlertDialogOverlayPr
           'z-overlay fixed top-0 left-0 h-screen w-screen',
           'bg-overlay/dim-1',
           // Base UI automatically adds data-[starting-style] and data-[ending-style] attributes
-          'data-[starting-style]:animate-fade-in',
-          'data-[ending-style]:animate-fade-out',
+          'data-starting-style:animate-fade-in',
+          'data-ending-style:animate-fade-out',
           typeof className === 'function' ? className(state) : className
         )
       }
