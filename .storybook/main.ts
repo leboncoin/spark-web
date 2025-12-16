@@ -1,26 +1,16 @@
-import { fileURLToPath } from "node:url";
-import { dirname } from "node:path";
 import { mergeConfig } from 'vite'
 import type { StorybookConfig } from '@storybook/react-vite'
 
 import { docgenConfig } from '../config/plugins/sparkDocgen/constants.ts'
 
+/**
+ * StorybookConfig:
+ * https://storybook.js.org/docs/api/main-config/main-config
+ */
 const config: StorybookConfig = {
-  async viteFinal(config, _options) {
-    // This is where we can override vite config for Storybook
-    return mergeConfig(config, {
-      plugins: [],
-      resolve: {
-        ...config.resolve,
-        alias: {
-          ...config.resolve?.alias,
-          '@spark-ui/components': '/packages/components/src',
-        },
-      },
-    })
-  },
-  core: {
-    disableTelemetry: true,
+  framework: {
+    name: '@storybook/react-vite',
+    options: {},
   },
   stories: [
     '../documentation/*.mdx',
@@ -30,12 +20,19 @@ const config: StorybookConfig = {
     '!..packages/icons/**/*.doc.mdx',
     '!..packages/icons/**/*.stories.tsx',
   ],
-  addons: [getAbsolutePath("@storybook/addon-a11y"), getAbsolutePath("@storybook/addon-designs"), getAbsolutePath("@storybook/addon-docs")],
-  staticDirs: ['../public'],
-  framework: {
-    name: getAbsolutePath("@storybook/react-vite"),
-    options: {},
+  addons: ['@storybook/addon-a11y', '@storybook/addon-designs', '@storybook/addon-docs'],
+  core: {
+    disableTelemetry: true,
   },
+  docs: {
+    docsMode: false,
+  },
+  features: {
+    actions: false,
+    controls: false,
+    viewport: true,
+  },
+  staticDirs: ['../public'],
   typescript: {
     check: true,
     reactDocgen: 'react-docgen-typescript',
@@ -51,13 +48,19 @@ const config: StorybookConfig = {
       },
     },
   },
-  docs: {
-    // autodocs: true,
+  async viteFinal(config, _options) {
+    // This is where we can override vite config for Storybook
+    return mergeConfig(config, {
+      plugins: [],
+      resolve: {
+        ...config.resolve,
+        alias: {
+          ...config.resolve?.alias,
+          '@spark-ui/components': '/packages/components/src',
+        },
+      },
+    })
   },
 }
 
 export default config
-
-function getAbsolutePath(value: string): any {
-  return dirname(fileURLToPath(import.meta.resolve(`${value}/package.json`)));
-}
