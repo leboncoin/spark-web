@@ -1,7 +1,9 @@
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useState } from 'react'
 
+import { AlertDialog } from '../alert-dialog'
 import { Button } from '../button'
+import { Card } from '../card'
 import { RadioGroup } from '../radio-group'
 import { Drawer, type DrawerContentProps } from '.'
 
@@ -285,5 +287,87 @@ export const Side = () => {
         </Drawer.Portal>
       </Drawer>
     </>
+  )
+}
+
+// Advanced Examples
+
+export const NestedDialog: StoryFn = () => {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
+  const closeParentDrawer = () => {
+    setIsDrawerOpen(false)
+  }
+
+  return (
+    <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+      <Drawer.Trigger asChild>
+        <Button>Account settings</Button>
+      </Drawer.Trigger>
+
+      <Drawer.Portal>
+        <Drawer.Overlay />
+
+        <Drawer.Content size="lg">
+          <Drawer.Header>
+            <Drawer.Title>Account settings</Drawer.Title>
+          </Drawer.Header>
+
+          <Drawer.Body className="gap-lg flex flex-col">
+            <Drawer.Description>Manage your account settings and preferences.</Drawer.Description>
+          </Drawer.Body>
+
+          <Drawer.Footer className="gap-lg flex justify-end">
+            <AlertDialog>
+              <AlertDialog.Trigger asChild>
+                <Button intent="danger">Delete account</Button>
+              </AlertDialog.Trigger>
+
+              <AlertDialog.Portal>
+                <AlertDialog.Overlay />
+
+                <AlertDialog.Content>
+                  <AlertDialog.Header>
+                    <AlertDialog.Title>Delete account</AlertDialog.Title>
+                  </AlertDialog.Header>
+
+                  <AlertDialog.Body>
+                    <Card intent="danger" design="tinted">
+                      <Card.Content>
+                        <AlertDialog.Description>
+                          Are you sure you want to delete your account? You can not undo this action
+                          afterwards.
+                        </AlertDialog.Description>
+                      </Card.Content>
+                    </Card>
+                  </AlertDialog.Body>
+
+                  <AlertDialog.Footer className="gap-lg flex justify-end">
+                    <AlertDialog.Cancel asChild>
+                      <Button intent="neutral" design="ghost">
+                        Cancel
+                      </Button>
+                    </AlertDialog.Cancel>
+
+                    <AlertDialog.Action asChild>
+                      <Button intent="danger" onClick={closeParentDrawer}>
+                        Confirm deletion
+                      </Button>
+                    </AlertDialog.Action>
+                  </AlertDialog.Footer>
+                </AlertDialog.Content>
+              </AlertDialog.Portal>
+            </AlertDialog>
+            <Drawer.Close asChild>
+              <Button intent="basic" design="outlined">
+                Close
+              </Button>
+            </Drawer.Close>
+          </Drawer.Footer>
+
+          <Drawer.CloseButton aria-label="Close drawer with nested dialog" />
+        </Drawer.Content>
+      </Drawer.Portal>
+    </Drawer>
   )
 }

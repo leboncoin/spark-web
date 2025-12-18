@@ -1,10 +1,17 @@
-import { Dialog as RadixDrawer } from 'radix-ui'
-import { type ReactElement } from 'react'
+import { Dialog as BaseDialog } from '@base-ui/react/dialog'
+import { cx } from 'class-variance-authority'
+import { ComponentProps } from 'react'
 
-export type DrawerPortalProps = RadixDrawer.DialogPortalProps
+export type DrawerPortalProps = ComponentProps<typeof BaseDialog.Portal>
 
-export const DrawerPortal = ({ children, ...rest }: DrawerPortalProps): ReactElement => (
-  <RadixDrawer.Portal {...rest}>{children}</RadixDrawer.Portal>
-)
+export const DrawerPortal = ({ className, ...props }: DrawerPortalProps) => {
+  return (
+    <BaseDialog.Portal
+      data-spark-component="drawer-portal"
+      className={cx(className, 'z-modal absolute')}
+      {...props}
+    />
+  )
+}
 
 DrawerPortal.displayName = 'Drawer.Portal'

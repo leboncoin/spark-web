@@ -1,10 +1,13 @@
-import { Dialog as RadixDialog } from 'radix-ui'
-import { type ReactElement, Ref, useEffect } from 'react'
+import { Dialog as BaseDialog } from '@base-ui/react/dialog'
+import { cx } from 'class-variance-authority'
+import { ComponentProps, Ref, useEffect } from 'react'
 
 import { dialogContentStyles, type DialogContentStylesProps } from './DialogContent.styles'
 import { useDialog } from './DialogContext'
 
-export interface ContentProps extends RadixDialog.DialogContentProps, DialogContentStylesProps {
+export interface ContentProps
+  extends Omit<ComponentProps<typeof BaseDialog.Popup>, 'render'>,
+    DialogContentStylesProps {
   /**
    * When set to true, the content will adjust its width to fit the content rather than taking up the full available width.
    */
@@ -13,14 +16,12 @@ export interface ContentProps extends RadixDialog.DialogContentProps, DialogCont
 }
 
 export const Content = ({
-  children,
   className,
   isNarrow = false,
   size = 'md',
-  onInteractOutside,
   ref,
   ...rest
-}: ContentProps): ReactElement => {
+}: ContentProps) => {
   const { setIsFullScreen } = useDialog()
 
   useEffect(() => {
@@ -30,33 +31,21 @@ export const Content = ({
   }, [setIsFullScreen, size])
 
   return (
-    <RadixDialog.Content
-      data-spark-component="dialog-content"
+    <BaseDialog.Popup
       ref={ref}
-      className={dialogContentStyles({
-        className,
-        isNarrow,
-        size,
-      })}
-      onInteractOutside={e => {
-        const isForegroundElement = (e.target as HTMLElement).closest('.z-toast, .z-popover')
-
-        /**
-         * The focus trap of the dialog applies `pointer-events-none` on the body of the page in the background, but
-         * some components with an higher z-index have `pointer-events-auto` applied on them to remain interactive and ignore the focust trap (ex: a Snackbar with actions).
-         *
-         * Clicking on the snackbar will be considered as an "outside click" and close the dialog. We want to prevent this.
-         */
-        if (isForegroundElement) {
-          e.preventDefault()
-        }
-
-        onInteractOutside?.(e)
-      }}
+      data-spark-component="dialog-content"
+      role="dialog"
+      className={state =>
+        cx(
+          dialogContentStyles({
+            isNarrow,
+            size,
+            className: typeof className === 'function' ? className(state) : className,
+          })
+        )
+      }
       {...rest}
-    >
-      {children}
-    </RadixDialog.Content>
+    />
   )
 }
 

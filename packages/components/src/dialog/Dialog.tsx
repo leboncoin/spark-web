@@ -1,61 +1,46 @@
-import { Dialog as RadixDialog } from 'radix-ui'
-import { type ReactElement, useEffect, useRef } from 'react'
+import { Dialog as BaseDialog } from '@base-ui/react/dialog'
+import { ComponentProps, type ReactElement } from 'react'
 
 import { DialogProvider } from './DialogContext'
 
-export interface DialogProps {
-  /**
-   * Children of the component.
-   */
-  children?: RadixDialog.DialogProps['children']
+export interface DialogProps
+  extends Omit<ComponentProps<typeof BaseDialog.Root>, 'onOpenChange' | 'render'> {
   /**
    * Specifies if the dialog is open or not.
    */
-  open?: RadixDialog.DialogProps['open']
+  open?: boolean
   /**
    * Default open state.
    */
-  defaultOpen?: RadixDialog.DialogProps['defaultOpen']
+  defaultOpen?: boolean
   /**
-   * Handler executen on every dialog open state change.
+   * Handler executed on every dialog open state change.
    */
-  onOpenChange?: RadixDialog.DialogProps['onOpenChange']
+  onOpenChange?: (open: boolean) => void
   /**
    * Specifies if the dialog is a modal.
    */
-  modal?: RadixDialog.DialogProps['modal']
+  modal?: boolean
   /**
    * Specifies if the dialog should have a fade animation on its body (in case it is scrollable).
    */
   withFade?: boolean
+  /**
+   * Change the default rendered element for the one passed as a child, merging their props and behavior.
+   */
+  asChild?: boolean
 }
 
-export const Dialog = ({ children, withFade = false, ...rest }: DialogProps): ReactElement => {
-  const open = rest.open
-  const activeElementRef = useRef<Element>(null)
-
-  /**
-   * This function captures the active element when the Dialog is opened
-   * and sets focus back to it when the Dialog is closed.
-   */
-  function handleActiveElementFocus() {
-    if (open && document.activeElement) {
-      activeElementRef.current = document.activeElement
-    }
-
-    if (!open) {
-      setTimeout(() => {
-        if (!(activeElementRef.current instanceof HTMLElement)) return
-        activeElementRef.current.focus()
-      }, 0)
-    }
-  }
-
-  useEffect(handleActiveElementFocus, [open])
+export const Dialog = ({ withFade = false, onOpenChange, ...props }: DialogProps): ReactElement => {
+  const handleOpenChange = onOpenChange
+    ? (open: boolean, _eventDetails: unknown) => {
+        onOpenChange(open)
+      }
+    : undefined
 
   return (
     <DialogProvider withFade={withFade}>
-      <RadixDialog.Root {...rest}>{children}</RadixDialog.Root>
+      <BaseDialog.Root data-spark-component="dialog" onOpenChange={handleOpenChange} {...props} />
     </DialogProvider>
   )
 }
