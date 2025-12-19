@@ -3,6 +3,7 @@ import { Icon } from '@spark-ui/components/icon'
 import { ShareExpand } from '@spark-ui/icons/ShareExpand'
 import { WarningOutline } from '@spark-ui/icons/WarningOutline'
 import React, { ReactNode, useEffect, useState } from 'react'
+import { INITIAL_VIEWPORTS } from 'storybook/viewport'
 
 import '../src/tailwind.css'
 import './sb-theming.css'
@@ -56,9 +57,9 @@ const preview = {
     colorScheme: {
       name: 'Color scheme',
       description: 'Set the color scheme',
-      defaultValue: 'system',
+      defaultValue: 'light',
       toolbar: {
-        dynamicTitle: true,
+        dynamicTitle: false,
         items: [
           { value: 'system', right: '⚙️', title: 'System color scheme' },
           { value: 'light', right: '⚪️', title: 'Light (forced)' },
@@ -69,7 +70,7 @@ const preview = {
     highContrast: {
       name: 'a11y - High contrast',
       description: 'Toggle high contrast',
-      defaultValue: 'system',
+      defaultValue: 'false',
       toolbar: {
         dynamicTitle: true,
         items: [
@@ -86,11 +87,18 @@ const preview = {
       // Optional flag to prevent the automatic check
       manual: true,
     },
+    viewport: { value: 'ipad', isRotated: false },
+    colorScheme: 'light',
+    highContrast: 'false',
   },
 
   parameters: {
+    viewport: {
+      options: INITIAL_VIEWPORTS,
+    },
     docs: {
       container: ExampleContainer,
+      codePanel: true,
       toc: {
         headingSelector: 'h2, h3',
       },
