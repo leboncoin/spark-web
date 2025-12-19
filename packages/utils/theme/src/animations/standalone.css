@@ -71,4 +71,16 @@
       left: calc(100% - 24px);
     }
   }
+
+  --animate-standalone-caret-blink: caret-blink 1s step-end infinite;
+  @keyframes caret-blink {
+    0%,
+    50% {
+      opacity: 1;
+    }
+    51%,
+    100% {
+      opacity: 0;
+    }
+  }
 }

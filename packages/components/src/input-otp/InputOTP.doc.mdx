@@ -1,0 +1,205 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { Callout } from '@docs/helpers/Callout'
+
+import { InputOTP } from '.'
+
+import * as stories from './InputOTP.stories'
+
+<Meta of={stories} />
+
+# InputOTP
+
+Component used to get user input in multiple separate input fields, typically used for verification codes, PINs, or OTPs.
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Import
+
+```tsx
+import { InputOTP } from '@spark-ui/components/input-otp'
+```
+
+## Anatomy
+
+```tsx
+import { InputOTP } from '@spark-ui/components/input-otp'
+
+export default () => (
+  <InputOTP>
+    <InputOTP.Group>
+      <InputOTP.Slot />
+      <InputOTP.Slot />
+      <InputOTP.Slot />
+    </InputOTP.Group>
+    <InputOTP.Separator />
+    <InputOTP.Group>
+      <InputOTP.Slot />
+      <InputOTP.Slot />
+      <InputOTP.Slot />
+    </InputOTP.Group>
+  </InputOTP>
+)
+```
+
+**Note:** The `maxLength` prop and `index` prop on each `InputOTP.Slot` are now optional. They are automatically detected and assigned based on the number of slots in the children. You can still provide them explicitly if needed for advanced use cases.
+
+## API Reference
+
+### InputOTP
+
+Component used to get user input in multiple separate input fields, typically used for verification codes, PINs, or OTPs.
+
+<ArgTypes of={InputOTP} />
+
+### _.Group
+
+Groups multiple slots together. Use this to visually group slots, for example when you want to separate them with a separator.
+
+<ArgTypes of={InputOTP.Group} />
+
+### _.Slot
+
+Individual slot that displays a single character from the input value. The index is automatically assigned based on position, but can be provided explicitly if needed.
+
+<ArgTypes of={InputOTP.Slot} />
+
+### _.Separator
+
+Visual separator between groups of slots. Typically used to separate different parts of a code (e.g., between groups of digits).
+
+<ArgTypes of={InputOTP.Separator} />
+
+## Examples
+
+### Uncontrolled
+
+Use `defaultValue` prop to set the default value. Optionally `onValueChange` prop can be used to know when the value changes.
+
+<Canvas of={stories.Uncontrolled} />
+
+### Controlled
+
+Use `value` and `onValueChange` props to control the value of the input.
+
+<Canvas of={stories.Controlled} />
+
+### Number Type
+
+Use `type="number"` to restrict input to numeric values only.
+
+<Canvas of={stories.NumberType} />
+
+### Password Type
+
+Use `type="password"` to mask the input values.
+
+<Canvas of={stories.PasswordType} />
+
+### Force Uppercase
+
+Use `forceUppercase` prop to automatically convert lowercase letters to uppercase.
+
+<Canvas of={stories.ForceUppercase} />
+
+### Invalid State
+
+Use `isValid={false}` to show the invalid state styling.
+
+<Canvas of={stories.InvalidState} />
+
+### Disabled
+
+Use `disabled` prop to disable the input.
+
+<Canvas of={stories.Disabled} />
+
+### With Placeholder
+
+Use `placeholder` prop to show a placeholder character in empty slots.
+
+<Canvas of={stories.WithPlaceholder} />
+
+### Filter Characters
+
+Use `pattern` prop to filter allowed characters using a regular expression. The pattern is used to filter characters in real-time as the user types.
+
+<Canvas of={stories.FilterCharacters} />
+
+## Form field
+
+When using the `InputOTP` component you might want to use it in combination with `FormField` to add a proper label, error message, etc.
+
+### Helper message
+
+Use the `FormField.HelperMessage` component to provide a description to the input.
+
+<Canvas of={stories.FieldHelperMessage} />
+
+#### Hidden label
+
+In certain cases, a visible label may not be necessary, such as when using an input as a searcher. To achieve this behavior, use the `VisuallyHidden` component.
+
+<Canvas of={stories.FieldHiddenLabel} />
+
+### Label
+
+Use `FormField.Label` to add a label to the input.
+
+<Canvas of={stories.FieldLabel} />
+
+### Required
+
+Use the `isRequired` prop of the `FormField` to indicate that the input is required.
+
+<Callout kind="warning">
+  If your form has mandatory fields, you must include an explicit note at the top of the form, outside of the input fields, to inform users that certain fields are required.
+</Callout>
+
+<Canvas of={stories.FieldRequired} />
+
+### Validation
+
+Set the `state` prop of the `FormField` to `error` to indicate that the input is invalid. Optionally use the `FormField.ErrorMessage` to describe why the input is invalid.
+
+<Canvas of={stories.FieldInvalid} />
+
+## Accessibility
+
+<A11yReport />
+
+### Keyboard Interactions
+
+- **Tab**: Move focus to the input
+- **Shift + Tab**: Move focus away from the input
+- **Arrow Left**: Move cursor to the previous position
+- **Arrow Right**: Move cursor to the next position
+- **Backspace**: Delete the current character and move cursor back
+- **Any character**: Enter the character and move cursor forward
+- **Paste**: Paste multiple characters at once
+
+### ARIA Attributes
+
+The component includes proper ARIA attributes for accessibility:
+- The container uses `role="group"` to indicate that the slots form a single logical unit
+- `aria-labelledby` links the group and input to a label (when used with `FormField`)
+- `aria-describedby` links the group to helper/error messages (when used with `FormField`)
+- The input has a unique `id` attribute
+- The `data-valid` attribute on slots indicates the validation state
+- The container has `data-spark-component="input-otp"` for identification
+
+### Best Practices
+
+- **Always use with FormField**: For the best accessibility experience, wrap `InputOTP` in a `FormField` component
+- **Provide a label**: Use `FormField.Label` to give the code input a clear, accessible name
+- **Use `inputMode`**: Help mobile keyboards show the appropriate keyboard layout (e.g., `inputMode="numeric"` for numeric codes)
+- **Consider `type="number"`**: For numeric codes, use `type="number"` to filter non-numeric input
+- **Use validation states**: Use `FormField`'s `state` prop or `isValid` prop to provide visual feedback for validation errors
+- **Hidden input**: When a `name` prop is provided, a hidden input is automatically created for proper form submission
+- **Automatic detection**: The `maxLength` is automatically detected from the number of `InputOTP.Slot` components. You can still provide it explicitly if needed
