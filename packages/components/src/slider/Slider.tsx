@@ -1,5 +1,5 @@
 import { Slider as RadixSlider } from 'radix-ui'
-import { type PropsWithChildren, Ref } from 'react'
+import { type PropsWithChildren, Ref, useRef } from 'react'
 
 import { rootStyles } from './Slider.styles'
 import { SliderContext } from './SliderContext'
@@ -66,23 +66,55 @@ export const Slider = ({
   children,
   className,
   ref,
+  onValueCommit,
+  onValueChange,
   ...rest
-}: SliderProps) => (
-  <SliderContext.Provider value={{ intent, shape }}>
-    <RadixSlider.Root
-      ref={ref}
-      data-spark-component="slider"
-      asChild={asChild}
-      className={rootStyles({ className })}
-      dir="ltr"
-      orientation="horizontal"
-      inverted={false}
-      minStepsBetweenThumbs={0}
-      {...rest}
-    >
-      {children}
-    </RadixSlider.Root>
-  </SliderContext.Provider>
-)
+}: SliderProps) => {
+  /**
+   * There is a know issue in Chromium related to some trackpads causing `onValueCommit` not to fire.
+   * This is a workaround to ensure `onValueCommit` is called when the user is done interacting with the slider.
+   *
+   * In case `onValueCommit` is not triggered, we used a local ref to the slider value and trigger the commit using the `onLostPointerCapture` event.
+   *
+   * Issues:
+   *  https://github.com/radix-ui/primitives/issues/1760
+   *  https://issues.chromium.org/issues/41488929
+   */
+  const cachedValue = useRef(rest.value)
+  const shouldCommit = useRef(false)
+
+  return (
+    <SliderContext.Provider value={{ intent, shape }}>
+      <RadixSlider.Root
+        ref={ref}
+        data-spark-component="slider"
+        asChild={asChild}
+        className={rootStyles({ className })}
+        dir="ltr"
+        orientation="horizontal"
+        inverted={false}
+        minStepsBetweenThumbs={0}
+        onValueChange={value => {
+          shouldCommit.current = true
+          cachedValue.current = value
+          onValueChange?.(cachedValue.current)
+        }}
+        onValueCommit={value => {
+          shouldCommit.current = false
+          onValueCommit?.(value)
+        }}
+        onLostPointerCapture={() => {
+          if (cachedValue.current && shouldCommit.current) {
+            onValueCommit?.(cachedValue.current)
+          }
+          shouldCommit.current = false
+        }}
+        {...rest}
+      >
+        {children}
+      </RadixSlider.Root>
+    </SliderContext.Provider>
+  )
+}
 
 Slider.displayName = 'Slider'
