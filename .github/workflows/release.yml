@@ -100,12 +100,10 @@ jobs:
           # Fetch latest from origin to compare
           git fetch origin main --tags 2>/dev/null || true
           UNPUSHED_COMMITS=$(git log origin/main..HEAD --oneline 2>/dev/null || echo "")
-          # Check for unpushed tags
-          UNPUSHED_TAGS=$(git tag -l | while read tag; do
-            if ! git ls-remote --tags origin | grep -q "refs/tags/$tag$"; then
-              echo "$tag"
-            fi
-          done)
+          # Check for unpushed tags - optimized: fetch remote tags once
+          REMOTE_TAGS=$(git ls-remote --tags origin 2>/dev/null | sed 's/.*refs\/tags\///' | sed 's/\^{}$//' | sort -u || echo "")
+          LOCAL_TAGS=$(git tag -l | sort)
+          UNPUSHED_TAGS=$(comm -23 <(echo "$LOCAL_TAGS") <(echo "$REMOTE_TAGS") 2>/dev/null || echo "")
           if [ -n "$UNPUSHED_COMMITS" ] || [ -n "$UNPUSHED_TAGS" ]; then
             echo "📤 Found unpushed items:"
             if [ -n "$UNPUSHED_COMMITS" ]; then
