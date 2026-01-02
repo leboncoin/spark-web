@@ -53,6 +53,11 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git remote set-url origin https://x-access-token:${{ secrets.SPARK_SA_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          # Ensure we're on the main branch and it's tracking origin/main
+          git checkout main
+          git branch --set-upstream-to=origin/main main
+          # Verify remote is correctly configured
+          git remote -v
       - name: Install
         if: steps.check-release.outputs.skip == 'false'
         uses: ./.github/composite-actions/install
@@ -63,7 +68,21 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish
         if: steps.check-release.outputs.skip == 'false'
-        run: npm run release
+        env:
+          # Ensure Nx Release can push by setting git config
+          GIT_TERMINAL_PROMPT: 0
+        run: |
+          # Verify git remote before running release
+          echo "🔍 Verifying git configuration..."
+          git remote -v
+          git config --get remote.origin.url
+          # Run release
+          npm run release
+          # Verify if commits were created
+          echo "📋 Recent commits:"
+          git log --oneline -5
+          echo "📋 Recent tags:"
+          git tag -l --sort=-version:refname | head -5
   deploy:
     needs: [release]
     runs-on: ubuntu-latest
