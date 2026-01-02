@@ -3,7 +3,10 @@
     "default": {
       "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "test"]
+        "cacheableOperations": [
+          "build",
+          "test"
+        ]
       }
     }
   },
@@ -33,7 +36,8 @@
       "commitMessage": "chore: release packages [skip ci]",
       "tag": true,
       "tagMessage": "chore: release {projectName} v{version}",
-      "stageChanges": false
+      "stageChanges": false,
+      "push": true
     },
     "projectsRelationship": "fixed"
   }

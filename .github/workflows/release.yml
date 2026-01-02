@@ -9,6 +9,9 @@ concurrency:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -36,7 +39,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git remote set-url origin https://x-access-token:${{ secrets.SPARK_SA_TOKEN }}@github.com/$GITHUB_REPOSITORY
       - name: Install
         if: steps.check-release.outputs.skip == 'false'
         uses: ./.github/composite-actions/install
