@@ -47,6 +47,13 @@ jobs:
           else
             echo "skip=false" >> $GITHUB_OUTPUT
           fi
+      - name: Fetch tags from remote
+        if: steps.check-release.outputs.skip == 'false'
+        run: |
+          # Fetch all tags from remote to ensure we have the latest state
+          git fetch origin --tags --force
+          echo "📋 Latest tags on remote:"
+          git tag -l --sort=-version:refname | head -5
       - name: Identity
         if: steps.check-release.outputs.skip == 'false'
         run: |
@@ -56,6 +63,9 @@ jobs:
           # Ensure we're on the main branch and it's tracking origin/main
           git checkout main
           git branch --set-upstream-to=origin/main main
+          # Configure git to use the token for push operations
+          git config --global credential.helper store
+          echo "https://x-access-token:${{ secrets.SPARK_SA_TOKEN }}@github.com" > ~/.git-credentials
           # Verify remote is correctly configured
           git remote -v
       - name: Install
@@ -72,6 +82,8 @@ jobs:
           # Ensure Nx Release can push by setting git config
           GIT_TERMINAL_PROMPT: 0
         run: |
+          # Reconfigure remote just before release to ensure token is fresh
+          git remote set-url origin https://x-access-token:${{ secrets.SPARK_SA_TOKEN }}@github.com/$GITHUB_REPOSITORY
           # Verify git remote before running release
           echo "🔍 Verifying git configuration..."
           git remote -v
@@ -83,6 +95,33 @@ jobs:
           git log --oneline -5
           echo "📋 Recent tags:"
           git tag -l --sort=-version:refname | head -5
+          # Check if there are unpushed commits/tags and push them
+          echo "🔍 Checking for unpushed commits and tags..."
+          # Fetch latest from origin to compare
+          git fetch origin main --tags 2>/dev/null || true
+          UNPUSHED_COMMITS=$(git log origin/main..HEAD --oneline 2>/dev/null || echo "")
+          # Check for unpushed tags
+          UNPUSHED_TAGS=$(git tag -l | while read tag; do
+            if ! git ls-remote --tags origin | grep -q "refs/tags/$tag$"; then
+              echo "$tag"
+            fi
+          done)
+          if [ -n "$UNPUSHED_COMMITS" ] || [ -n "$UNPUSHED_TAGS" ]; then
+            echo "📤 Found unpushed items:"
+            if [ -n "$UNPUSHED_COMMITS" ]; then
+              echo "  Commits:"
+              echo "$UNPUSHED_COMMITS" | sed 's/^/    /'
+            fi
+            if [ -n "$UNPUSHED_TAGS" ]; then
+              echo "  Tags:"
+              echo "$UNPUSHED_TAGS" | sed 's/^/    /'
+            fi
+            echo "📤 Pushing commits and tags now..."
+            git push origin main --follow-tags
+            echo "✅ Successfully pushed commits and tags"
+          else
+            echo "ℹ️  All commits and tags are already pushed"
+          fi
   deploy:
     needs: [release]
     runs-on: ubuntu-latest
