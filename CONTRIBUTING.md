@@ -27,7 +27,7 @@ This project follows a monorepo structure. Each folder inside `packages` is an i
 ### Tooling
 
 - [NPM](https://www.npmjs.com/) as package manager and to handle workspaces
-- [Lerna](https://github.com/lerna/lerna) to manage and publish packages
+- [Nx](https://nx.dev/) to manage and publish packages (with Nx Release)
 - [Vite](https://vitejs.dev/) to bundle packages
 - [Storybook](https://storybook.js.org/) for rapid UI component development and testing
 - [Vitest](https://vitest.dev/) and RTL for testing components and hooks

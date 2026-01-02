@@ -15,7 +15,7 @@ This file provides context and instructions for AI coding agents working on the 
 ### Monorepo Structure
 - **Package Manager**: NPM with workspaces
 - **Build Tool**: Vite + TSUP
-- **Monorepo Management**: Lerna + Nx
+- **Monorepo Management**: Nx (with Nx Release for versioning and publishing)
 - **Node Version**: 22.x
 
 ### Packages

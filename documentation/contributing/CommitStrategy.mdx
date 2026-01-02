@@ -42,9 +42,9 @@ Checkout [specification docs](https://www.conventionalcommits.org/en/v1.0.0/#spe
 
 In order to enforce the convention, [commitlint](https://github.com/conventional-changelog/commitlint) checks if your commit messages meet the conventional commit format using [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional).
 
-## Lerna Integration
+## Nx Integration
 
-In order to automatically detect and enforce the lerna package and workspace names as scopes, we are using [@commitlint/config-lerna-scopes](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-lerna-scopes)
+Nx Release uses conventional commits to automatically determine version bumps (patch, minor, major) based on commit messages. The commitlint configuration enforces the conventional commit format.
 
 ## Further reading
 

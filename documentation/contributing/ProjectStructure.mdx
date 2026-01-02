@@ -4,16 +4,16 @@ import { Meta } from '@storybook/addon-docs/blocks'
 
 # Project architecture
 
-Spark is a monorepo project managed by [Lerna](https://lerna.js.org/) and organized according to a modular architecture. The project follows modern Design System design principles with clear separation of responsibilities.
+Spark is a monorepo project managed by [Nx](https://nx.dev/) and organized according to a modular architecture. The project follows modern Design System design principles with clear separation of responsibilities.
 
 ## General architecture
 
 The project is organized as follows:
 
-- **`packages/`** : Main directory containing all publishable packages, managed by Lerna
+- **`packages/`** : Main directory containing all publishable packages, managed by Nx
 - **`documentation/`** : MDX files documented by Storybook for the Design System
 - **`e2e/`** : End-to-end and accessibility tests with Playwright
-- **`src/`** : Source code not managed by Lerna (configuration, global styles)
+- **`src/`** : Source code not managed by Nx (configuration, global styles)
 - **`storybook/`** : Storybook configuration and build
 
 ## Packages
@@ -181,7 +181,7 @@ npm run build
 npm run build:watch
 
 # Build a specific package
-lerna run build --scope=@spark-ui/components
+nx build @spark-ui/components
 ```
 
 ### Testing and quality
@@ -236,7 +236,7 @@ Every published package follows a consistent structure regardless of its type:
 - **Storybook** : Component documentation and development
 - **Vitest** : Unit testing
 - **Playwright** : End-to-end and accessibility testing
-- **Lerna** : Monorepo management
+- **Nx** : Monorepo management
 - **Tsup** : Build and bundling
 
 ## Best practices
@@ -246,7 +246,7 @@ Every published package follows a consistent structure regardless of its type:
 3. **Types** : Use strict TypeScript with well-defined interfaces
 4. **Testing** : Complete test coverage with accessibility tests
 5. **Documentation** : Keep documentation up to date with usage examples
-6. **Versioning** : Use semantic versioning with Lerna
+6. **Versioning** : Use semantic versioning with Nx Release
 
 This modular architecture enables efficient maintenance, maximum reusability and Design System scalability while maintaining technical and visual consistency.
 
