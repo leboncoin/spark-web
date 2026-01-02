@@ -1,7 +1,33 @@
 import { mergeConfig } from 'vite'
 import type { StorybookConfig } from '@storybook/react-vite'
+import { type ParserOptions } from 'react-docgen-typescript'
 
-import { docgenConfig } from '../config/plugins/sparkDocgen/constants.ts'
+const docgenConfig: ParserOptions = {
+  shouldExtractLiteralValuesFromEnum: true,
+  shouldRemoveUndefinedFromOptional: true,
+
+  propFilter: prop => {
+    const prohibitedPropsRegexesNew = [/\/node_modules\/@types\/react\/.*.d.ts/]
+
+    if (prop.declarations && prop.declarations?.length > 0) {
+      const isProhibitedProps = prop.declarations.some(declaration =>
+        prohibitedPropsRegexesNew.some(regex => regex.test(declaration.fileName))
+      )
+
+      return !isProhibitedProps
+    }
+
+    return true
+  },
+  /**
+   * There is a bug in Storybook.
+   * For children of a compound component, we must tell it how to get the name for each part of the compound.
+   * If not, we lost the docgen for the props of the sub-components.
+   */
+  componentNameResolver: expression => {
+    return expression.getName()
+  },
+}
 
 /**
  * StorybookConfig:
@@ -36,17 +62,7 @@ const config: StorybookConfig = {
   typescript: {
     check: true,
     reactDocgen: 'react-docgen-typescript',
-    reactDocgenTypescriptOptions: {
-      ...docgenConfig,
-      /**
-       * There is a bug in Storybook.
-       * For children of a compound component, we must tell it how to get the name for each part of the compound.
-       * If not, we lost the docgen for the props of the sub-components.
-       */
-      componentNameResolver: expression => {
-        return expression.getName()
-      },
-    },
+    reactDocgenTypescriptOptions: docgenConfig,
   },
   async viteFinal(config, _options) {
     // This is where we can override vite config for Storybook
