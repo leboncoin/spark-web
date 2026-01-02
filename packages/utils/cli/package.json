@@ -40,6 +40,8 @@
     "pascal-case": "4.0.0"
   },
   "devDependencies": {
-    "@types/fs-extra": "11.0.4"
+    "@types/fs-extra": "11.0.4",
+    "concat-stream": "^2.0.0",
+    "cross-spawn": "^7.0.6"
   }
 }

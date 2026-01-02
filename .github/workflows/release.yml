@@ -17,11 +17,6 @@ jobs:
           fetch-depth: 0
       - name: Validate version (no prerelease on main)
         run: |
-          if grep -E '"(alpha|beta|rc)\.[0-9]+"' lerna.json; then
-            echo "❌ ERROR: lerna.json contains a prerelease version on main branch!"
-            echo "   Prerelease versions should never be on main."
-            exit 1
-          fi
           if find packages -name "package.json" -type f -exec grep -lE '"(alpha|beta|rc)\.[0-9]+"' {} \; | grep -q .; then
             echo "❌ ERROR: One or more package.json files contain a prerelease version on main branch!"
             echo "   Prerelease versions should never be on main."

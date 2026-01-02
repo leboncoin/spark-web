@@ -8,5 +8,33 @@
     }
   },
   "extends": "nx/presets/npm.json",
-  "$schema": "./node_modules/nx/schemas/nx-schema.json"
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "release": {
+    "projects": [
+      "packages/components",
+      "packages/hooks",
+      "packages/icons",
+      "packages/utils/internal-utils",
+      "packages/utils/theme",
+      "packages/utils/cli"
+    ],
+    "version": {
+      "conventionalCommits": true,
+      "preVersionCommand": "npm run build"
+    },
+    "changelog": {
+      "automaticFromRef": true,
+      "workspaceChangelog": false,
+      "projectChangelogs": true
+    },
+    "releaseTagPattern": "v{version}",
+    "git": {
+      "commit": true,
+      "commitMessage": "chore: release packages [skip ci]",
+      "tag": true,
+      "tagMessage": "chore: release {projectName} v{version}",
+      "stageChanges": false
+    },
+    "projectsRelationship": "fixed"
+  }
 }
