@@ -134,12 +134,39 @@ useEffect(() => {
 
 **Note:** The keyboard event listener approach works because Base UI's AlertDialog closes on Escape key automatically. The listener will fire before the dialog closes, allowing you to execute custom logic.
 
-### 2. Transition Attributes: `data-[state=open]` → `data-[starting-style]` / `data-[ending-style]`
+### 2. Portal Z-Index Changes
+
+**Status:** ⚠️ **Breaking change** (for custom CSS/styling)
+
+- **Radix UI:** Portal had no default z-index classes
+- **Base UI:** Portal now has `z-modal absolute` classes applied by default
+- **Overlay:** Still has `z-overlay` class (unchanged)
+
+**Migration:**
+
+If you have custom CSS targeting the Portal z-index, you may need to adjust:
+
+```css
+/* ❌ Before (Radix UI) */
+.alert-dialog-portal {
+  /* No default z-index */
+}
+
+/* ✅ After (Base UI) */
+.alert-dialog-portal {
+  z-index: var(--z-modal);
+  position: absolute;
+}
+```
+
+**Note:** The default z-index values are automatically applied. You only need to migrate if you have custom z-index overrides. The Overlay z-index remains unchanged (`z-overlay`).
+
+### 3. Transition Attributes: `data-[state=open]` → `data-open` / `data-closed` and `data-[starting-style]` / `data-[ending-style]` → `data-starting-style` / `data-ending-style`
 
 **Status:** ⚠️ **Breaking change** (for custom CSS/styling)
 
 - **Radix UI:** Used `data-[state=open]` and `data-[state=closed]` attributes for transitions
-- **Base UI:** Uses `data-[starting-style]` and `data-[ending-style]` attributes for transitions
+- **Base UI:** Uses `data-open` and `data-closed` attributes for `AlertDialog.Content`, and `data-starting-style` and `data-ending-style` attributes (without brackets) for `AlertDialog.Overlay`
 - **Impact:** If you have custom CSS targeting `data-[state=open]` or `data-[state=closed]` on `AlertDialog.Content` or `AlertDialog.Overlay`, it will no longer work.
 
 **Migration:**
@@ -154,24 +181,44 @@ useEffect(() => {
   animation: fade-out 0.2s;
 }
 
-/* ✅ After (Base UI) */
-.alert-dialog-content[data-starting-style] {
+.alert-dialog-overlay[data-state="open"] {
   animation: fade-in 0.2s;
 }
 
-.alert-dialog-content[data-ending-style] {
+.alert-dialog-overlay[data-state="closed"] {
+  animation: fade-out 0.2s;
+}
+
+/* ✅ After (Base UI) */
+.alert-dialog-content[data-open] {
+  animation: fade-in 0.2s;
+}
+
+.alert-dialog-content[data-closed] {
+  animation: fade-out 0.2s;
+}
+
+.alert-dialog-overlay[data-starting-style] {
+  animation: fade-in 0.2s;
+}
+
+.alert-dialog-overlay[data-ending-style] {
   animation: fade-out 0.2s;
 }
 ```
 
 **Note:** The default transitions (`animate-fade-in` and `animate-fade-out`) are automatically applied and work out of the box. You only need to migrate if you have custom transition styles.
 
+**Important:** Base UI uses `data-open`/`data-closed` for `AlertDialog.Content` and `data-starting-style`/`data-ending-style` (without brackets) for `AlertDialog.Overlay`.
+
 ## Migration Checklist
 
-- [ ] ⚠️ Remove any usage of `onOpenAutoFocus` on `AlertDialog.Content`
-- [ ] ⚠️ Remove any usage of `onCloseAutoFocus` on `AlertDialog.Content`
-- [ ] ⚠️ Remove any usage of `onEscapeKeyDown` on `AlertDialog.Content`
-- [ ] ⚠️ Update custom CSS targeting `data-[state=open]` or `data-[state=closed]` to use `data-[starting-style]` and `data-[ending-style]` instead
+- [ ] ⚠️ Remove any usage of `onOpenAutoFocus` on `AlertDialog.Content` (use `initialFocus` prop instead)
+- [ ] ⚠️ Remove any usage of `onCloseAutoFocus` on `AlertDialog.Content` (use `finalFocus` prop instead)
+- [ ] ⚠️ Remove any usage of `onEscapeKeyDown` on `AlertDialog.Content` (use `onOpenChange` on `AlertDialog` root instead)
+- [ ] ⚠️ Update custom CSS targeting `data-[state=open]` or `data-[state=closed]` on `AlertDialog.Content` to use `data-open` and `data-closed` instead
+- [ ] ⚠️ Update custom CSS targeting `data-[state=open]` or `data-[state=closed]` on `AlertDialog.Overlay` to use `data-starting-style` and `data-ending-style` instead (without brackets)
+- [ ] ⚠️ Review custom z-index overrides for `AlertDialog.Portal` if applicable
 
 ## Summary
 
@@ -179,5 +226,6 @@ Most consumers won't need any changes. The migration only requires action if you
 
 - Use the removed event handler props (`onOpenAutoFocus`, `onCloseAutoFocus`, `onEscapeKeyDown`)
 - Have custom CSS targeting the old transition attributes (`data-[state=open]`, `data-[state=closed]`)
+- Have custom z-index overrides for Portal
 
 All other functionality remains the same and works automatically.

@@ -1,29 +1,25 @@
+import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import { cx } from 'class-variance-authority'
-import { Dialog as RadixDialog } from 'radix-ui'
-import { type ReactElement, Ref } from 'react'
+import { ComponentProps, Ref } from 'react'
 
-import { useDialog } from './DialogContext'
-
-export type OverlayProps = RadixDialog.DialogOverlayProps & {
+export interface OverlayProps extends Omit<ComponentProps<typeof BaseDialog.Backdrop>, 'render'> {
   ref?: Ref<HTMLDivElement>
 }
 
-export const Overlay = ({ className, ref, ...rest }: OverlayProps): ReactElement | null => {
-  const { isFullScreen } = useDialog()
-
+export const Overlay = ({ className, ...props }: OverlayProps) => {
   return (
-    <RadixDialog.Overlay
+    <BaseDialog.Backdrop
       data-spark-component="dialog-overlay"
-      ref={ref}
-      className={cx(
-        isFullScreen ? 'hidden' : 'fixed',
-        ['top-0', 'left-0', 'w-screen', 'h-screen', 'z-overlay'],
-        ['bg-overlay/dim-1'],
-        ['data-[state=open]:animate-fade-in'],
-        ['data-[state=closed]:animate-fade-out'],
-        className
-      )}
-      {...rest}
+      className={state =>
+        cx(
+          'z-overlay size-screen fixed inset-0',
+          'bg-overlay/dim-1',
+          'data-starting-style:animate-fade-in',
+          'data-ending-style:animate-fade-out',
+          typeof className === 'function' ? className(state) : className
+        )
+      }
+      {...props}
     />
   )
 }

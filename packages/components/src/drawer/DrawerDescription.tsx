@@ -1,12 +1,13 @@
-import { Dialog as RadixDrawer } from 'radix-ui'
-import { Ref } from 'react'
+import { Dialog as BaseDialog } from '@base-ui/react/dialog'
+import { ComponentProps, Ref } from 'react'
 
-export type DrawerDescriptionProps = RadixDrawer.DialogDescriptionProps & {
+export interface DrawerDescriptionProps
+  extends Omit<ComponentProps<typeof BaseDialog.Description>, 'render'> {
   ref?: Ref<HTMLParagraphElement>
 }
 
-export const DrawerDescription = (props: DrawerDescriptionProps) => (
-  <RadixDrawer.Description data-spark-component="drawer-description" {...props} />
-)
+export const DrawerDescription = (props: DrawerDescriptionProps) => {
+  return <BaseDialog.Description data-spark-component="drawer-description" {...props} />
+}
 
 DrawerDescription.displayName = 'Drawer.Description'
