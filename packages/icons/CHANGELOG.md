@@ -1,3 +1,17 @@
+## 13.1.1 (2026-01-02)
+
+### 🩹 Fixes
+
+- only fetch tags once in ci ([89fa1e2f3](https://github.com/leboncoin/spark-web/commit/89fa1e2f3))
+- manual push of changelog updates ([7441c98d2](https://github.com/leboncoin/spark-web/commit/7441c98d2))
+- release with nx release ([5c6d44316](https://github.com/leboncoin/spark-web/commit/5c6d44316))
+- safety check to avoid publishing beta ([bf4d8ef6a](https://github.com/leboncoin/spark-web/commit/bf4d8ef6a))
+- auto push chore commits after merging ([61f0d5f6e](https://github.com/leboncoin/spark-web/commit/61f0d5f6e))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 # Change Log
 
 All notable changes to this project will be documented in this file.
