@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.1.0](https://github.com/leboncoin/spark-web/compare/v13.0.7...v13.1.0) (2026-01-02)
+
+### Features
+
+- **components:** added new InputOTP component ([17abe73](https://github.com/leboncoin/spark-web/commit/17abe73ef93942ba1e49b2db6601bfb2d04c71d5))
+
 ## [13.0.7](https://github.com/leboncoin/spark-web/compare/v13.0.6...v13.0.7) (2026-01-02)
 
 **Note:** Version bump only for package @spark-ui/theme-utils
