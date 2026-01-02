@@ -1,3 +1,13 @@
+## 13.1.2 (2026-01-02)
+
+### 🩹 Fixes
+
+- **components:** removed useless comment ([5648b15fb](https://github.com/leboncoin/spark-web/commit/5648b15fb))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 13.1.1 (2026-01-02)
 
 ### 🩹 Fixes
