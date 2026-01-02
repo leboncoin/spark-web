@@ -189,8 +189,9 @@ export const InputOTP = ({
     }
 
     const detectedLength = countSlots(children)
+    const DEFAULT_MAX_LENGTH = 4
 
-    return detectedLength > 0 ? detectedLength : 4 // fallback to 4 if no slots found
+    return detectedLength > 0 ? detectedLength : DEFAULT_MAX_LENGTH // fallback to 4 if no slots found
   }, [maxLengthProp, children])
 
   // Assign indexes to slots automatically
