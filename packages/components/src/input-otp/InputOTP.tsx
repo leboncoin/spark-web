@@ -241,7 +241,6 @@ export const InputOTP = ({
     'aria-label' in others ? (others['aria-label'] as string | undefined) : undefined
   const { 'aria-label': _, ...restOthers } = others
 
-  // Determine accessible name props
   const getAccessibleNameProps = (): Record<string, string | undefined> => {
     if (labelId) {
       return { 'aria-labelledby': labelId }
