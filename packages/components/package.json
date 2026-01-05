@@ -44,7 +44,8 @@
     "a11y"
   ],
   "scripts": {
-    "build": "NODE_OPTIONS='--max-old-space-size=8192' vite build"
+    "build": "NODE_OPTIONS='--max-old-space-size=16384' tsup",
+    "build:vite": "NODE_OPTIONS='--max-old-space-size=8192' vite build"
   },
   "dependencies": {
     "@base-ui/react": "1.0.0",
