@@ -1,3 +1,13 @@
+## 13.1.4 (2026-01-05)
+
+### 🩹 Fixes
+
+- **cli-utils:** improved type generation at build time ([b962a5546](https://github.com/leboncoin/spark-web/commit/b962a5546))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 13.1.3 (2026-01-05)
 
 ### 🩹 Fixes

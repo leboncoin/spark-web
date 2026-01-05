@@ -1,3 +1,7 @@
+## 13.1.4 (2026-01-05)
+
+This was a version bump only for @spark-ui/theme-utils to align it with other projects, there were no code changes.
+
 ## 13.1.3 (2026-01-05)
 
 ### 🩹 Fixes
