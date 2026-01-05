@@ -1,3 +1,13 @@
+## 13.1.3 (2026-01-05)
+
+### 🩹 Fixes
+
+- **components:** zagjs previous version to investigate bugs ([42ca62c82](https://github.com/leboncoin/spark-web/commit/42ca62c82))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 13.1.2 (2026-01-02)
 
 ### 🩹 Fixes
