@@ -88,8 +88,33 @@ jobs:
           echo "🔍 Verifying git configuration..."
           git remote -v
           git config --get remote.origin.url
+
+          # Find the latest stable tag (excluding prerelease tags)
+          LATEST_STABLE_TAG=$(git tag -l "v*" | grep -vE "-(alpha|beta|rc)" | sort -V | tail -1)
+          echo "📌 Latest stable tag: $LATEST_STABLE_TAG"
+
+          # Temporarily remove prerelease tags locally to prevent Nx from using them as reference
+          # This doesn't affect the tags on remote, so beta versions remain published on npm
+          PRERELEASE_TAGS=$(git tag -l "v*" | grep -E "-(alpha|beta|rc)" || echo "")
+          if [ -n "$PRERELEASE_TAGS" ]; then
+            echo "🧹 Temporarily removing prerelease tags locally (they remain on remote)..."
+            echo "$PRERELEASE_TAGS" | while read tag; do
+              git tag -d "$tag" 2>/dev/null || true
+            done
+            echo "✅ Prerelease tags removed locally"
+          else
+            echo "ℹ️  No prerelease tags found"
+          fi
+
           # Run release
           npm run release
+
+          # Restore prerelease tags locally (they still exist on remote)
+          if [ -n "$PRERELEASE_TAGS" ]; then
+            echo "🔄 Restoring prerelease tags locally..."
+            git fetch origin --tags --force 2>/dev/null || true
+            echo "✅ Prerelease tags restored"
+          fi
           # Verify if commits were created
           echo "📋 Recent commits:"
           git log --oneline -5
