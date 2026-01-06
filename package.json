@@ -11,7 +11,7 @@
     "build": "nx run-many -t build",
     "build:watch": "nx watch -- nx run-many -t build",
     "release": "nx release --yes",
-    "release:beta": "nx release --prerelease=beta --tag=beta --yes",
+    "release:beta": "node bin/release-beta.js",
     "storybook:start": "storybook dev -p 6006",
     "storybook:build": "storybook build -o dist",
     "test": "vitest",
