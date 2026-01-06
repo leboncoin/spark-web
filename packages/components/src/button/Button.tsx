@@ -17,7 +17,7 @@ export interface ButtonProps
    */
   isLoading?: boolean
   /**
-   * If your loading state should only display a spinner, it's better to specify a label for it (a11y).
+   * If your loading state should only display a spinner, it is better to specify a label for it (a11y).
    */
   loadingLabel?: string
   /**
