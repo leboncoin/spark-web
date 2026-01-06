@@ -1,3 +1,13 @@
+## 13.1.5 (2026-01-06)
+
+### 🩹 Fixes
+
+- **components:** republish new vitebuild for components ([000d28b55](https://github.com/leboncoin/spark-web/commit/000d28b55))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 13.1.4 (2026-01-05)
 
 This was a version bump only for @spark-ui/cli-utils to align it with other projects, there were no code changes.

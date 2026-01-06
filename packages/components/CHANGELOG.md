@@ -1,3 +1,14 @@
+## 13.1.5 (2026-01-06)
+
+### 🩹 Fixes
+
+- **components:** fixed typo in button doc ([77369eaff](https://github.com/leboncoin/spark-web/commit/77369eaff))
+- **components:** republish new vitebuild for components ([000d28b55](https://github.com/leboncoin/spark-web/commit/000d28b55))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 13.1.4 (2026-01-05)
 
 ### 🩹 Fixes
