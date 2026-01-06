@@ -1,11 +1,29 @@
-import type { AriaButtonOptions } from '@react-aria/button'
-import type { NumberFieldAria } from '@react-aria/numberfield'
-import type { NumberFieldStateOptions } from '@react-stately/numberfield'
-import type { AriaNumberFieldProps } from '@react-types/numberfield'
-import type { Ref, RefObject } from 'react'
+import { NumberField } from '@base-ui-components/react/number-field'
+import { type ComponentProps, type ReactNode, type Ref } from 'react'
 
 import type { IconButtonProps } from '../icon-button'
-import type { InputGroupProps, InputProps } from '../input'
+import type { InputProps } from '../input'
+
+export interface StepperProps
+  extends Omit<ComponentProps<typeof NumberField.Root>, 'render' | 'min' | 'max' | 'format'> {
+  children: ReactNode
+  /**
+   * Assign a specific state to the group, either `error`, `alert` or `success`. The outline styles will be updated.
+   */
+  state?: 'error' | 'alert' | 'success'
+  /**
+   * The minimum value of the input element.
+   */
+  minValue?: number
+  /**
+   * The maximum value of the input element.
+   */
+  maxValue?: number
+  /**
+   * Options to format the input value.
+   */
+  formatOptions?: Intl.NumberFormatOptions
+}
 
 /**
  * As we're using React Spectrum library to build this component, we also want
@@ -15,81 +33,9 @@ import type { InputGroupProps, InputProps } from '../input'
 export type StepperButtonProps = Omit<
   IconButtonProps,
   'shape' | 'size' | 'disabled' | 'asChild' | 'isLoading' | 'loadingLabel'
-> &
-  Omit<
-    AriaButtonOptions<'button'>,
-    | 'elementType'
-    | 'href'
-    | 'target'
-    | 'isDisabled'
-    | 'excludeFromTabOrder'
-    | 'aria-label'
-    | 'preventFocusOnPress'
-  > & {
-    disabled?: boolean
-    ref?: Ref<HTMLButtonElement>
-  }
-
-type SpectrumNumberFieldPropsFilter =
-  | 'isDisabled'
-  | 'isReadOnly'
-  | 'isRequired'
-  | 'isInvalid'
-  | 'validationState'
-  | 'validationBehavior'
-  | 'validate'
-  | 'label'
-  | 'description'
-  | 'errorMessage'
-  | 'isWheelDisabled'
-  | 'id'
-  | 'onCopy'
-  | 'onCut'
-  | 'onPaste'
-  | 'onCompositionStart'
-  | 'onCompositionEnd'
-  | 'onCompositionUpdate'
-  | 'onSelect'
-  | 'onBeforeInput'
-  | 'onInput'
-
-export interface UseStepperArgs
-  extends Omit<
-    Omit<NumberFieldStateOptions, 'locale'> &
-      Omit<AriaNumberFieldProps, 'incrementAriaLabel' | 'decrementAriaLabel'>,
-    SpectrumNumberFieldPropsFilter
-  > {
-  inputRef: RefObject<HTMLInputElement | null>
-  /**
-   * Sets the component as interactive or not.
-   */
-  disabled?: boolean
-  /**
-   * Sets the component as editable or not.
-   */
-  readOnly?: boolean
-  /**
-   * Sets the component as mandatory for form validation.
-   */
-  required?: boolean
-  /**
-   * The [BCP47](https://www.ietf.org/rfc/bcp/bcp47.txt) language code for the locale.
-   * @default 'fr'
-   */
-  locale?: string
-}
-
-export type UseStepperReturn = Pick<
-  NumberFieldAria,
-  'groupProps' | 'inputProps' | 'incrementButtonProps' | 'decrementButtonProps'
->
-
-export type StepperProps = Omit<
-  Omit<UseStepperArgs, 'inputRef' | 'aria-label'> & Omit<InputGroupProps, 'onClear'>,
-  'onChange'
 > & {
-  onValueChange?: (e: number) => void
-  ref?: Ref<HTMLDivElement>
+  disabled?: boolean
+  ref?: Ref<HTMLButtonElement>
 }
 
 export type StepperInputProps = Omit<InputProps, 'asChild'> & {
