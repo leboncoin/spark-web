@@ -1,12 +1,12 @@
-import { Dialog as RadixDialog } from 'radix-ui'
-import { Ref } from 'react'
+import { Dialog as BaseDialog } from '@base-ui/react/dialog'
+import { ComponentProps, Ref } from 'react'
 
-export type DescriptionProps = RadixDialog.DialogDescriptionProps & {
+export type DescriptionProps = ComponentProps<typeof BaseDialog.Description> & {
   ref?: Ref<HTMLParagraphElement>
 }
 
 export const Description = (props: DescriptionProps) => (
-  <RadixDialog.Description data-spark-component="dialog-description" {...props} />
+  <BaseDialog.Description data-spark-component="dialog-description" {...props} />
 )
 
 Description.displayName = 'Dialog.Description'

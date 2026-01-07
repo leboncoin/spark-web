@@ -140,6 +140,18 @@ Pick a size among `sm`, `md`, `lg`, `fluid` and `fullscreen`.
 
 <Canvas of={stories.Sizes} />
 
+## Advanced Examples
+
+### Nested dialog
+
+Nested dialogs are supported. It works with either `Dialog`, `AlertDialog` or `Drawer` components.
+
+**We strongly advise against using nested dialogs, as it can be confusing for users and it's not a common pattern.**
+
+A common/legit use case for nested dialogs is to display a confirmation dialog (AlertDialog) inside a drawer.
+
+<Canvas of={stories.NestedDialog} />
+
 
 
 ## Accessibility
