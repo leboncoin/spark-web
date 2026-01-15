@@ -163,6 +163,19 @@ export const Statuses: StoryFn = _args => (
   </div>
 )
 
+export const ThumbWithValue: StoryFn = _args => {
+  const [value, setValue] = useState([50])
+
+  return (
+    <Slider className="mt-md" onValueChange={setValue} value={value} name="default-slider">
+      <Slider.Track />
+      <Slider.Thumb className="relative" aria-label="Power">
+        <span className="absolute -top-full left-1/2 -translate-x-1/2">{value}</span>
+      </Slider.Thumb>
+    </Slider>
+  )
+}
+
 export const FormFieldLabel: StoryFn = _args => (
   <form action="">
     <FormField name="volume">
