@@ -22,7 +22,7 @@ export const SliderThumb = ({
   ref: forwardedRef,
   ...rest
 }: SliderThumbProps) => {
-  const { intent } = useSliderContext()
+  const { intent, fieldLabelId, fieldId } = useSliderContext()
 
   const innerRef = useRef(null)
   const ref = forwardedRef || innerRef
@@ -42,6 +42,7 @@ export const SliderThumb = ({
       data-spark-component="slider-thumb"
       ref={ref}
       asChild={asChild}
+      id={fieldId}
       onPointerDown={(e: PointerEvent<HTMLSpanElement>) => {
         setInteractionType(e)
         onPointerDown?.(e)
@@ -55,6 +56,7 @@ export const SliderThumb = ({
         onBlur?.(e)
       }}
       className={thumbVariants({ intent, className })}
+      aria-labelledby={fieldLabelId}
       {...rest}
     />
   )

@@ -1,3 +1,4 @@
+import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { Slider as RadixSlider } from 'radix-ui'
 import { type PropsWithChildren, Ref } from 'react'
 
@@ -34,6 +35,7 @@ export interface SliderProps
   onValueCommit?: (value: number[]) => void
   /**
    * The name of the slider. Submitted with its owning form as part of a name/value pair.
+   * If wrapped with a FormField with a name, will be inherited from it.
    */
   name?: string
   /**
@@ -41,6 +43,15 @@ export interface SliderProps
    * @default false
    */
   disabled?: boolean
+  /**
+   * Use `state` prop to assign a specific state to the slider, choosing from: `error`, `alert` and `success`.
+   * You could also wrap `Slider` with a `FormField` and pass the prop to `FormField` instead.
+   */
+  state?: 'error' | 'alert' | 'success'
+  /**
+   * Sets the slider as interactive or not.
+   */
+  readOnly?: boolean
   /**
    * The minimum value for the range.
    * @default 0
@@ -61,28 +72,53 @@ export interface SliderProps
 
 export const Slider = ({
   asChild = false,
-  intent = 'basic',
+  intent: intentProp = 'basic',
   shape = 'square',
   children,
   className,
   ref,
+  disabled: disabledProp,
+  readOnly: readOnlyProp,
+  state: stateProp,
+  name: nameProp,
   ...rest
-}: SliderProps) => (
-  <SliderContext.Provider value={{ intent, shape }}>
-    <RadixSlider.Root
-      ref={ref}
-      data-spark-component="slider"
-      asChild={asChild}
-      className={rootStyles({ className })}
-      dir="ltr"
-      orientation="horizontal"
-      inverted={false}
-      minStepsBetweenThumbs={0}
-      {...rest}
+}: SliderProps) => {
+  const field = useFormFieldControl()
+
+  const disabled = field.disabled ?? disabledProp
+  const readOnly = field.readOnly ?? readOnlyProp
+  const state = field.state || stateProp
+  const name = field.name ?? nameProp
+
+  const intent = state || intentProp
+
+  return (
+    <SliderContext.Provider
+      value={{
+        intent,
+        shape,
+        fieldLabelId: field.labelId,
+        fieldId: field.id,
+      }}
     >
-      {children}
-    </RadixSlider.Root>
-  </SliderContext.Provider>
-)
+      <RadixSlider.Root
+        ref={ref}
+        data-spark-component="slider"
+        asChild={asChild}
+        className={rootStyles({ className })}
+        dir="ltr"
+        orientation="horizontal"
+        inverted={false}
+        minStepsBetweenThumbs={0}
+        disabled={disabled || readOnly}
+        name={name}
+        aria-describedby={field.description}
+        {...rest}
+      >
+        {children}
+      </RadixSlider.Root>
+    </SliderContext.Provider>
+  )
+}
 
 Slider.displayName = 'Slider'

@@ -1,3 +1,4 @@
+import { FormField } from '@spark-ui/components/form-field'
 import { Tag } from '@spark-ui/components/tag'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useState } from 'react'
@@ -144,3 +145,51 @@ export const RestrictedValues: StoryFn = () => {
     </div>
   )
 }
+
+const states: SliderProps['state'][] = ['error', 'alert', 'success']
+
+export const Statuses: StoryFn = _args => (
+  <div className="gap-xl grid grid-cols-3">
+    {states.map(state => (
+      <div key={state} className="grow">
+        <Tag className="mb-md flex">{state}</Tag>
+
+        <Slider defaultValue={[75]} state={state}>
+          <Slider.Track />
+          <Slider.Thumb aria-label={`Power ${state}`} />
+        </Slider>
+      </div>
+    ))}
+  </div>
+)
+
+export const FormFieldLabel: StoryFn = _args => (
+  <form action="">
+    <FormField name="volume">
+      <FormField.Label>Volume</FormField.Label>
+      <Slider defaultValue={[50]}>
+        <Slider.Track />
+        <Slider.Thumb />
+      </Slider>
+    </FormField>
+  </form>
+)
+
+export const FormFieldHelperMessage: StoryFn = _args => (
+  <div className="gap-xl grid grid-cols-3">
+    {states.map(state => (
+      <FormField key={state} name={`volume-${state}`} state={state}>
+        <FormField.Label>Volume</FormField.Label>
+        <Slider defaultValue={[50]}>
+          <Slider.Track />
+          <Slider.Thumb />
+        </Slider>
+        <FormField.HelperMessage>
+          {state === 'error' && 'Volume must be between 30 and 70'}
+          {state === 'alert' && 'Volume is getting high'}
+          {state === 'success' && 'Volume is optimal'}
+        </FormField.HelperMessage>
+      </FormField>
+    ))}
+  </div>
+)

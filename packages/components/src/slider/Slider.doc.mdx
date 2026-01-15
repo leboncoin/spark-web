@@ -92,6 +92,28 @@ Use `disabled` prop to indicate that slider is disabled.
 
 <Canvas of={stories.Disabled} />
 
+### Status
+
+Use `state` prop to assign a specific state to the Slider, choosing from: `error`, `alert` and `success`. By doing so, the color styles will be updated.
+
+You could also wrap `Slider` with a `FormField` and pass the prop to `FormField` instead.
+
+<Canvas of={stories.Statuses} />
+
+## Form field
+
+### Label
+
+Use `FormField.Label` to add a label to the slider.
+
+<Canvas of={stories.FormFieldLabel} />
+
+### Helper message
+
+Use `FormField.HelperMessage` to add a helper message to the slider.
+
+<Canvas of={stories.FormFieldHelperMessage} />
+
 ## Advanced Examples
 
 ### Restricted values
