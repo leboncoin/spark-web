@@ -133,21 +133,9 @@ describe('Slider', () => {
       const slider = screen.getByRole('slider', { name: 'Volume' })
       expect(slider).toBeInTheDocument()
       expect(screen.getByText('Volume must be between 30 and 70')).toBeInTheDocument()
-    })
 
-    it('should apply state as intent to slider', () => {
-      render(
-        <FormField state="error">
-          <FormField.Label>Volume</FormField.Label>
-          <Slider defaultValue={[50]}>
-            <Slider.Track />
-            <Slider.Thumb />
-          </Slider>
-        </FormField>
-      )
-
-      const slider = screen.getByRole('slider')
-      expect(slider).toHaveClass('bg-error')
+      const sliderRoot = slider.closest('[data-spark-component="slider"]')
+      expect(sliderRoot).toHaveAttribute('aria-invalid', 'true')
     })
   })
 

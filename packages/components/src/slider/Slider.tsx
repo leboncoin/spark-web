@@ -44,11 +44,6 @@ export interface SliderProps
    */
   disabled?: boolean
   /**
-   * Use `state` prop to assign a specific state to the slider, choosing from: `error`, `alert` and `success`.
-   * You could also wrap `Slider` with a `FormField` and pass the prop to `FormField` instead.
-   */
-  state?: 'error' | 'alert' | 'success'
-  /**
    * Sets the slider as interactive or not.
    */
   readOnly?: boolean
@@ -72,14 +67,13 @@ export interface SliderProps
 
 export const Slider = ({
   asChild = false,
-  intent: intentProp = 'basic',
+  intent = 'basic',
   shape = 'square',
   children,
   className,
   ref,
   disabled: disabledProp,
   readOnly: readOnlyProp,
-  state: stateProp,
   name: nameProp,
   ...rest
 }: SliderProps) => {
@@ -87,10 +81,9 @@ export const Slider = ({
 
   const disabled = field.disabled ?? disabledProp
   const readOnly = field.readOnly ?? readOnlyProp
-  const state = field.state || stateProp
   const name = field.name ?? nameProp
 
-  const intent = state || intentProp
+  console.log('✅ field ', field.disabled)
 
   return (
     <SliderContext.Provider
@@ -113,6 +106,7 @@ export const Slider = ({
         disabled={disabled || readOnly}
         name={name}
         aria-describedby={field.description}
+        aria-invalid={field.isInvalid}
         {...rest}
       >
         {children}

@@ -146,24 +146,7 @@ export const RestrictedValues: StoryFn = () => {
   )
 }
 
-const states: SliderProps['state'][] = ['error', 'alert', 'success']
-
-export const Statuses: StoryFn = _args => (
-  <div className="gap-xl grid grid-cols-3">
-    {states.map(state => (
-      <div key={state} className="grow">
-        <Tag className="mb-md flex">{state}</Tag>
-
-        <Slider defaultValue={[75]} state={state}>
-          <Slider.Track />
-          <Slider.Thumb aria-label={`Power ${state}`} />
-        </Slider>
-      </div>
-    ))}
-  </div>
-)
-
-export const ThumbWithValue: StoryFn = _args => {
+export const ThumbWithValue: StoryFn = () => {
   const [value, setValue] = useState([50])
 
   return (
@@ -189,20 +172,23 @@ export const FormFieldLabel: StoryFn = _args => (
 )
 
 export const FormFieldHelperMessage: StoryFn = _args => (
-  <div className="gap-xl grid grid-cols-3">
-    {states.map(state => (
-      <FormField key={state} name={`volume-${state}`} state={state}>
-        <FormField.Label>Volume</FormField.Label>
-        <Slider defaultValue={[50]}>
-          <Slider.Track />
-          <Slider.Thumb />
-        </Slider>
-        <FormField.HelperMessage>
-          {state === 'error' && 'Volume must be between 30 and 70'}
-          {state === 'alert' && 'Volume is getting high'}
-          {state === 'success' && 'Volume is optimal'}
-        </FormField.HelperMessage>
-      </FormField>
-    ))}
-  </div>
+  <FormField name="volume">
+    <FormField.Label>Volume</FormField.Label>
+    <Slider defaultValue={[50]}>
+      <Slider.Track />
+      <Slider.Thumb />
+    </Slider>
+    <FormField.HelperMessage>set up the volume</FormField.HelperMessage>
+  </FormField>
+)
+
+export const FormFieldValidation: StoryFn = _args => (
+  <FormField name="volume" state="error">
+    <FormField.Label>Volume</FormField.Label>
+    <Slider defaultValue={[50]}>
+      <Slider.Track />
+      <Slider.Thumb />
+    </Slider>
+    <FormField.ErrorMessage>oops</FormField.ErrorMessage>
+  </FormField>
 )
