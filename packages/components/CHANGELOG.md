@@ -1,3 +1,15 @@
+## 13.2.0 (2026-01-16)
+
+### 🚀 Features
+
+- **components:** small tweaks following feedbacks ([f1c3e983b](https://github.com/leboncoin/spark-web/commit/f1c3e983b))
+- **components:** add custom thumb example for Slider ([4ee27b82c](https://github.com/leboncoin/spark-web/commit/4ee27b82c))
+- **components:** add FormField compatibility for Slider ([c52cbf93f](https://github.com/leboncoin/spark-web/commit/c52cbf93f))
+
+### ❤️ Thank You
+
+- acd02
+
 ## 13.1.5 (2026-01-06)
 
 ### 🩹 Fixes
