@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { mockResizeObserver } from 'jsdom-testing-mocks'
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 
+import { FormField } from '../form-field'
 import { Slider } from '.'
 
 describe('Slider', () => {
@@ -114,5 +115,79 @@ describe('Slider', () => {
 
     thumb.blur()
     expect(thumb).toHaveAttribute('data-interaction', 'blur')
+  })
+
+  describe('statuses (combined with FormField)', () => {
+    it('should render error message when field is in error', () => {
+      render(
+        <FormField state="error">
+          <FormField.Label>Volume</FormField.Label>
+          <Slider defaultValue={[50]}>
+            <Slider.Track />
+            <Slider.Thumb />
+          </Slider>
+          <FormField.ErrorMessage>Volume must be between 30 and 70</FormField.ErrorMessage>
+        </FormField>
+      )
+
+      const slider = screen.getByRole('slider', { name: 'Volume' })
+      expect(slider).toBeInTheDocument()
+      expect(screen.getByText('Volume must be between 30 and 70')).toBeInTheDocument()
+
+      const sliderRoot = slider.closest('[data-spark-component="slider"]')
+      expect(sliderRoot).toHaveAttribute('aria-invalid', 'true')
+    })
+  })
+
+  describe('usage with FormField', () => {
+    it('should associate label with slider element correctly via aria-labelledby', () => {
+      render(
+        <FormField>
+          <FormField.Label>Volume</FormField.Label>
+          <Slider defaultValue={[50]}>
+            <Slider.Track />
+            <Slider.Thumb />
+          </Slider>
+        </FormField>
+      )
+
+      const slider = screen.getByRole('slider', { name: 'Volume' })
+      expect(slider).toBeInTheDocument()
+      expect(slider).toHaveAttribute('aria-labelledby')
+    })
+
+    it('should inherit disabled state from FormField', () => {
+      render(
+        <FormField disabled>
+          <FormField.Label>Volume</FormField.Label>
+          <Slider defaultValue={[50]}>
+            <Slider.Track />
+            <Slider.Thumb />
+          </Slider>
+        </FormField>
+      )
+
+      const sliderRoot = screen
+        .getByRole('slider', { name: 'Volume' })
+        .closest('[data-spark-component="slider"]')
+      expect(sliderRoot).toHaveAttribute('aria-disabled', 'true')
+    })
+
+    it('should inherit name from FormField', () => {
+      render(
+        <form>
+          <FormField name="volume">
+            <FormField.Label>Volume</FormField.Label>
+            <Slider defaultValue={[50]}>
+              <Slider.Track />
+              <Slider.Thumb />
+            </Slider>
+          </FormField>
+        </form>
+      )
+
+      const hiddenInput = screen.getByDisplayValue('50')
+      expect(hiddenInput).toHaveAttribute('name', 'volume')
+    })
   })
 })

@@ -1,3 +1,4 @@
+import { FormField } from '@spark-ui/components/form-field'
 import { Tag } from '@spark-ui/components/tag'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useState } from 'react'
@@ -144,3 +145,50 @@ export const RestrictedValues: StoryFn = () => {
     </div>
   )
 }
+
+export const ThumbWithValue: StoryFn = () => {
+  const [value, setValue] = useState([50])
+
+  return (
+    <Slider className="mt-md" onValueChange={setValue} value={value} name="default-slider">
+      <Slider.Track />
+      <Slider.Thumb className="relative" aria-label="Power">
+        <span className="absolute -top-full left-1/2 -translate-x-1/2">{value}</span>
+      </Slider.Thumb>
+    </Slider>
+  )
+}
+
+export const FormFieldLabel: StoryFn = _args => (
+  <form action="">
+    <FormField name="volume">
+      <FormField.Label>Volume</FormField.Label>
+      <Slider defaultValue={[50]}>
+        <Slider.Track />
+        <Slider.Thumb />
+      </Slider>
+    </FormField>
+  </form>
+)
+
+export const FormFieldHelperMessage: StoryFn = _args => (
+  <FormField name="volume">
+    <FormField.Label>Volume</FormField.Label>
+    <Slider defaultValue={[50]}>
+      <Slider.Track />
+      <Slider.Thumb />
+    </Slider>
+    <FormField.HelperMessage>set up the volume</FormField.HelperMessage>
+  </FormField>
+)
+
+export const FormFieldValidation: StoryFn = _args => (
+  <FormField name="volume" state="error">
+    <FormField.Label>Volume</FormField.Label>
+    <Slider defaultValue={[50]}>
+      <Slider.Track />
+      <Slider.Thumb />
+    </Slider>
+    <FormField.ErrorMessage>oops</FormField.ErrorMessage>
+  </FormField>
+)
