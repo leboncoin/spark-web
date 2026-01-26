@@ -1,3 +1,13 @@
+# 14.0.0 (2026-01-26)
+
+### 🩹 Fixes
+
+- improve beta publishing management ([6f05cf68d](https://github.com/leboncoin/spark-web/commit/6f05cf68d))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 13.2.0 (2026-01-16)
 
 This was a version bump only for @spark-ui/icons to align it with other projects, there were no code changes.

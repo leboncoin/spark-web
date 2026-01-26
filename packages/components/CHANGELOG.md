@@ -1,3 +1,21 @@
+# 14.0.0 (2026-01-26)
+
+### 🚀 Features
+
+- ⚠️  **components:** migrating to base ui ([a1901e569](https://github.com/leboncoin/spark-web/commit/a1901e569))
+
+### 🩹 Fixes
+
+- improve beta publishing management ([6f05cf68d](https://github.com/leboncoin/spark-web/commit/6f05cf68d))
+
+### ⚠️  Breaking Changes
+
+- **components:** changed props, check migration guide
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 13.2.0 (2026-01-16)
 
 ### 🚀 Features
