@@ -87,7 +87,6 @@ const preview = {
       // Optional flag to prevent the automatic check
       manual: true,
     },
-    viewport: { value: 'ipad', isRotated: false },
     colorScheme: 'light',
     highContrast: 'false',
   },

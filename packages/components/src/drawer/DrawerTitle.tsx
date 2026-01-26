@@ -1,18 +1,19 @@
+import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import { cx } from 'class-variance-authority'
-import { Dialog as RadixDrawer } from 'radix-ui'
-import { Ref } from 'react'
+import { ComponentProps, Ref } from 'react'
 
-export type DrawerTitleProps = RadixDrawer.DialogTitleProps & {
+export interface DrawerTitleProps extends Omit<ComponentProps<typeof BaseDialog.Title>, 'render'> {
   ref?: Ref<HTMLHeadingElement>
 }
 
-export const DrawerTitle = ({ className, ref, ...others }: DrawerTitleProps) => (
-  <RadixDrawer.Title
-    data-spark-component="drawer-title"
-    ref={ref}
-    className={cx('text-headline-2 text-on-surface', className)}
-    {...others}
-  />
-)
+export const DrawerTitle = ({ className, ...props }: DrawerTitleProps) => {
+  return (
+    <BaseDialog.Title
+      data-spark-component="drawer-title"
+      className={cx('text-headline-2 text-on-surface', className)}
+      {...props}
+    />
+  )
+}
 
 DrawerTitle.displayName = 'Drawer.Title'

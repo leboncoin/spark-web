@@ -1,20 +1,20 @@
-import { Dialog as RadixDialog } from 'radix-ui'
-import { type ReactElement, ReactNode, Ref } from 'react'
+import { Dialog as BaseDialog } from '@base-ui/react/dialog'
+import { ComponentProps, Ref } from 'react'
 
-export interface TriggerProps {
-  /**
-   * Children of the component.
-   */
-  children?: ReactNode
+import { useRenderSlot } from '../drawer/useRenderSlot'
+
+export interface TriggerProps extends Omit<ComponentProps<typeof BaseDialog.Trigger>, 'render'> {
   /**
    * Change the component to the HTML tag or custom component of the only child.
    */
-  asChild?: RadixDialog.DialogTriggerProps['asChild']
+  asChild?: boolean
   ref?: Ref<HTMLButtonElement>
 }
 
-export const Trigger = (props: TriggerProps): ReactElement => (
-  <RadixDialog.Trigger data-spark-component="dialog-trigger" {...props} />
-)
+export const Trigger = ({ asChild = false, ...props }: TriggerProps) => {
+  const renderSlot = useRenderSlot(asChild, 'button')
+
+  return <BaseDialog.Trigger data-spark-component="dialog-trigger" render={renderSlot} {...props} />
+}
 
 Trigger.displayName = 'Dialog.Trigger'

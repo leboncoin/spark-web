@@ -3,7 +3,17 @@ import { cva, VariantProps } from 'class-variance-authority'
 export const drawerContentStyles = cva(
   [
     'fixed z-modal flex flex-col bg-surface shadow-md',
-    'data-[state=open]:animation-duration-400 data-[state=closed]:animation-duration-200',
+    // Base UI uses data-open and data-closed for transitions
+    'data-open:animation-duration-400 data-closed:animation-duration-200',
+    // Nested dialog effect
+    'data-nested-dialog-open:after:pointer-events-none',
+    'after:bg-transparent',
+    'after:transition-all',
+    'after:duration-200',
+    'data-nested-dialog-open:after:inset-0',
+    'data-nested-dialog-open:after:absolute',
+    'data-nested-dialog-open:after:rounded-[inherit]',
+    'data-nested-dialog-open:after:bg-overlay/dim-3',
   ],
   {
     variants: {
@@ -17,25 +27,25 @@ export const drawerContentStyles = cva(
       side: {
         right: [
           'inset-y-0 right-0',
-          'data-[state=open]:animate-slide-in-right ',
-          'data-[state=closed]:animate-slide-out-right',
+          'data-open:animate-slide-in-right ',
+          'data-closed:animate-slide-out-right',
         ],
         left: [
           'inset-y-0 left-0',
-          'data-[state=open]:animate-slide-in-left',
-          'data-[state=closed]:animate-slide-out-left',
+          'data-open:animate-slide-in-left',
+          'data-closed:animate-slide-out-left',
         ],
         top: [
           'top-0 left-0',
           'w-screen',
-          'data-[state=open]:animate-slide-in-top',
-          'data-[state=closed]:animate-slide-out-top',
+          'data-open:animate-slide-in-top',
+          'data-closed:animate-slide-out-top',
         ],
         bottom: [
           'bottom-0 left-0',
           'w-screen',
-          'data-[state=open]:animate-slide-in-bottom',
-          'data-[state=closed]:animate-slide-out-bottom',
+          'data-open:animate-slide-in-bottom',
+          'data-closed:animate-slide-out-bottom',
         ],
       },
     },

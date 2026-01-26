@@ -38,17 +38,6 @@ export const Dialog: typeof Root & {
 })
 
 Dialog.displayName = 'Dialog'
-Dialog.Trigger.displayName = 'Dialog.Trigger'
-Trigger.displayName = 'Dialog.Trigger'
-Portal.displayName = 'Dialog.Portal'
-Overlay.displayName = 'Dialog.Overlay'
-Content.displayName = 'Dialog.Content'
-Header.displayName = 'Dialog.Header'
-Body.displayName = 'Dialog.Body'
-Footer.displayName = 'Dialog.Footer'
-CloseButton.displayName = 'Dialog.CloseButton'
-Title.displayName = 'Dialog.Title'
-Description.displayName = 'Dialog.Description'
 
 export { type DialogProps } from './Dialog'
 export { type ContentProps as DialogContentProps } from './DialogContent'
