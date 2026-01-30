@@ -70,7 +70,7 @@ export const Progress = ({
       <BaseProgress.Root
         data-spark-component="progress"
         ref={ref}
-        className={cx('gap-sm focus-visible:u-outline grid grid-cols-2', className)}
+        className={cx('gap-sm focus-visible:u-outline grid grid-cols-[1fr_auto]', className)}
         value={valueProp ?? null}
         max={max}
         min={min}
