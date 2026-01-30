@@ -10,7 +10,6 @@ export const dialogContentStyles = cva(
     'data-starting-style:scale-90 data-starting-style:opacity-0',
     'data-ending-style:scale-90 data-ending-style:opacity-0',
     // Nested dialog effect
-    'data-nested-dialog-open:scale-90',
     'data-nested-dialog-open:after:pointer-events-none',
     'after:bg-transparent',
     'after:transition-all',
@@ -24,12 +23,12 @@ export const dialogContentStyles = cva(
     variants: {
       size: {
         fullscreen: 'fixed size-full top-0 left-0',
-        sm: 'max-w-sz-480',
-        md: 'max-w-sz-672',
-        lg: 'max-w-sz-864',
+        sm: 'max-w-[min(480px,calc(100vw-2rem))] data-nested-dialog-open:scale-90',
+        md: 'max-w-[min(672px,calc(100vw-2rem))] data-nested-dialog-open:scale-90',
+        lg: 'max-w-[min(864px,calc(100vw-2rem))] data-nested-dialog-open:scale-90',
       },
       isNarrow: {
-        true: [],
+        true: ['max-w-[calc(100vw-2rem)]'],
         false: [],
       },
     },
