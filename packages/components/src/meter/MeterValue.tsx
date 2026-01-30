@@ -1,14 +1,15 @@
 import { Meter as BaseMeter } from '@base-ui/react/meter'
 import { cx } from 'class-variance-authority'
-import { ComponentProps, PropsWithChildren } from 'react'
+import { ComponentProps, ReactNode } from 'react'
 
-export type MeterValueProps = Omit<ComponentProps<typeof BaseMeter.Value>, 'render'>
+export type MeterValueProps = Omit<
+  ComponentProps<typeof BaseMeter.Value>,
+  'render' | 'children'
+> & {
+  children?: ((formattedValue: string, value: number) => ReactNode) | null | undefined
+}
 
-export const MeterValue = ({
-  className,
-  children,
-  ...others
-}: PropsWithChildren<MeterValueProps>) => {
+export const MeterValue = ({ className, children, ...others }: MeterValueProps) => {
   return (
     <BaseMeter.Value
       data-spark-component="meter-value"

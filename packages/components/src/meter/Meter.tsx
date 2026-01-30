@@ -48,7 +48,10 @@ export const Meter = ({
       <BaseMeter.Root
         data-spark-component="meter"
         ref={ref}
-        className={cx('gap-y-sm focus-visible:u-outline box-border grid grid-cols-2', className)}
+        className={cx(
+          'gap-y-sm gap-x-md focus-visible:u-outline box-border grid grid-cols-[1fr_auto]',
+          className
+        )}
         value={value}
         max={max}
         min={min}

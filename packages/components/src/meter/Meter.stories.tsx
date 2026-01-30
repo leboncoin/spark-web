@@ -51,7 +51,7 @@ export const CustomValue: StoryFn = () => {
   return (
     <Meter value={1} max={4}>
       <Meter.Label>Step</Meter.Label>
-      <Meter.Value>{((_: string, value: number) => `${value}/4`) as any}</Meter.Value>
+      <Meter.Value>{(_: string, value: number) => `${value}/4`}</Meter.Value>
       <Meter.Track />
     </Meter>
   )
