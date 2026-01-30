@@ -1,0 +1,114 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { Callout } from '@docs/helpers/Callout'
+import { TextLink } from '@spark-ui/components/text-link'
+
+import { Meter } from '.'
+
+import * as stories from './Meter.stories'
+
+<Meta of={stories} />
+
+# Meter
+
+A meter displays a numeric value within a known range.
+
+<Callout kind="warning">
+  <p>
+    Do not use this component as a progress indicator. Use <TextLink href="/?path=/docs/components-progress--docs">Progress</TextLink> instead for task completion.
+  </p>
+  <p>This component represents a static value within a range, not a changing progress.</p>
+</Callout>
+
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { Meter } from '@spark-ui/components/meter'
+
+export default () => (
+  <Meter value={24}>
+    <Meter.Track />
+    <Meter.Label>Storage Used</Meter.Label>
+    <Meter.Value />
+  </Meter>
+);
+```
+
+## API Reference
+
+### Meter
+
+Contains all of the meter parts. It also makes meter accessible to assistive technologies.
+
+<ArgTypes of={Meter} />
+
+
+
+### _.Track
+
+Used to show the meter track. The indicator is automatically included within the track.
+
+<ArgTypes of={Meter.Track} />
+
+### _.Label
+
+Used to display a label for the meter.
+
+<ArgTypes of={Meter.Label} />
+
+
+### _.Value
+
+Used to display the current value of the meter.
+
+<ArgTypes of={Meter.Value} />
+
+
+## Examples
+
+### Intent
+
+Use `intent` prop to set the color intent of the meter.
+
+<Canvas of={stories.Intent} />
+
+### Shape
+
+Use `shape` prop to set the shape of the meter track and indicator.
+
+<Canvas of={stories.Shape} />
+
+## Advanced Examples
+
+### Custom value format
+
+You can customize how the value is displayed using the `Meter.Value` children function.
+
+
+<Canvas of={stories.CustomValue} />
+
+
+## Accessibility
+
+<A11yReport of="meter" />
+
+Adheres to the [meter WAI-ARIA role](https://www.w3.org/TR/wai-aria-1.1/#meter).
+
+### Guidelines
+
+- Usage of `aria-label` or `Meter.Label` is **mandatory**. It serves as the accessible name for the meter.
+
+- The author **MUST** supply values for `aria-valuenow`, `aria-valuemin`, and `aria-valuemax`.
+
+- Authors **SHOULD** update these values when the meter value changes.
+
+- The meter role is used to represent a scalar measurement within a known range, or a fractional value.

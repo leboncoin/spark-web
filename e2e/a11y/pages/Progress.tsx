@@ -9,7 +9,7 @@ export const A11yProgress = () => (
 
     <div>
       <Progress value={50}>
-        <Progress.Bar />
+        <Progress.Track />
 
         <div className="flex justify-between">
           <Progress.Label>Loading</Progress.Label>

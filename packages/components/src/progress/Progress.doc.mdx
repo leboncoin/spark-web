@@ -39,7 +39,7 @@ export default () => <Progress />;
 // Or
 export default () => (
   <Progress>
-    <Progress.Bar />
+    <Progress.Track />
     <Progress.Label />
   </Progress>
 );
@@ -55,23 +55,17 @@ Contains all of the progress parts. It also makes progress accessible to assisti
 
 
 
-### _.Bar
+### _.Track
 
-Used to show the progress bar.
+Used to show the progress track.
 
-<ArgTypes of={Progress.Bar} />
+<ArgTypes of={Progress.Track} />
 
 ### _.Label
 
 Used to display a label for the progress.
 
 <ArgTypes of={Progress.Label} />
-
-### _.Indicator
-
-Used to show the progress. Automatically added by the progress bar.
-
-<ArgTypes of={Progress.Indicator} />
 
 
 ## Examples
@@ -88,23 +82,13 @@ Use `shape` prop to set the shape of the progress.
 
 <Canvas of={stories.Shape} />
 
-### Label
+### Indeterminate
 
-Use `Progress.Label` component to display a label for the progress. If this component is used there is not need of passing the `aria-label` prop.
+Use `value={null}` to represent an indeterminate operation.
 
-<Canvas of={stories.Label} />
+<Canvas of={stories.Indeterminate} />
 
-### Value
-
-Use the `value` prop to represent the current percentage of progress. The minimum and maximum values default to `0` and `100`, respectively.
-
-<Canvas of={stories.Value} />
-
-### Max
-
-Use the `max` prop to set a different scale for the progress.
-
-<Canvas of={stories.Max} />
+## Advanced Examples
 
 ### Value label
 
@@ -112,19 +96,6 @@ Use the `getValueLabel` prop to define an accessible label text representing the
 
 <Canvas of={stories.ValueLabel} />
 
-### Indeterminate
-
-Use `isIndeterminate` prop to represent an interdeterminate operation.
-
-<Canvas of={stories.Indeterminate} />
-
-## Advanced Examples
-
-### Visible value
-
-Displaying the progress value as text is possible by composing the different components.
-
-<Canvas of={stories.VisibleValue} />
 
 ## Accessibility
 
