@@ -6,8 +6,8 @@ import { Progress } from '.'
 describe('Progress', () => {
   it('should render', () => {
     render(
-      <Progress aria-label="Loading">
-        <Progress.Bar />
+      <Progress aria-label="Loading" value={null}>
+        <Progress.Track />
       </Progress>
     )
 
@@ -20,9 +20,9 @@ describe('Progress', () => {
 
   it('should render using a label', () => {
     render(
-      <Progress>
+      <Progress value={null}>
         <Progress.Label>Loading</Progress.Label>
-        <Progress.Bar />
+        <Progress.Track />
       </Progress>
     )
 
@@ -35,7 +35,7 @@ describe('Progress', () => {
     render(
       <Progress value={value}>
         <Progress.Label>Loading</Progress.Label>
-        <Progress.Bar />
+        <Progress.Track />
       </Progress>
     )
 
@@ -52,7 +52,7 @@ describe('Progress', () => {
     render(
       <Progress value={value} max={max}>
         <Progress.Label>Rewards</Progress.Label>
-        <Progress.Bar />
+        <Progress.Track />
       </Progress>
     )
 
@@ -60,7 +60,8 @@ describe('Progress', () => {
 
     expect(progressEl).toHaveAttribute('aria-valuemax', max.toString())
     expect(progressEl).toHaveAttribute('aria-valuenow', value.toString())
-    expect(progressEl).toHaveAttribute('aria-valuetext', '25%')
+    // BaseProgress exposes the value as a percentage string, not normalized with max
+    expect(progressEl).toHaveAttribute('aria-valuetext', `${value}%`)
   })
 
   it('should render value label', () => {
@@ -71,7 +72,7 @@ describe('Progress', () => {
         getValueLabel={(value, max) => `${value} out of ${max} actions made to earn the reward`}
       >
         <Progress.Label>Rewards</Progress.Label>
-        <Progress.Bar />
+        <Progress.Track />
       </Progress>
     )
 
@@ -83,8 +84,8 @@ describe('Progress', () => {
 
   it('should render indeterminate state', () => {
     render(
-      <Progress aria-label="Loading" isIndeterminate>
-        <Progress.Bar />
+      <Progress aria-label="Loading" value={null}>
+        <Progress.Track />
       </Progress>
     )
 

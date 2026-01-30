@@ -3,6 +3,7 @@ import { Card } from '@docs/helpers/Card'
 
 import { Divider } from '@spark-ui/components/divider'
 import { LinkBox } from '@spark-ui/components/link-box'
+import { Skeleton } from '@spark-ui/components/skeleton'
 import { TextLink } from '@spark-ui/components/text-link'
 import { Tag } from '@spark-ui/components/tag'
 import { Button } from '@spark-ui/components/button'
@@ -11,11 +12,11 @@ import { Button } from '@spark-ui/components/button'
 
 # Components list
 
+
 export const components = [
   {
     name: 'Accordion',
     href: '/?path=/docs/components-accordion--docs',
-    related: ['Collapsible'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/accordion.png',
     }
@@ -23,7 +24,6 @@ export const components = [
   {
     name: 'AlertDialog',
     href: '/?path=/docs/components-alertdialog--docs',
-    related: ['Dialog', 'Drawer'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/alert-dialog.png',
     }
@@ -32,13 +32,12 @@ export const components = [
     name: 'Avatar',
     href: '/?path=/docs/components-avatar--docs',
     thumbnails: {
-      light: '/assets/components-thumbnails/light/empty.png',
+      light: '/assets/components-thumbnails/light/avatar.png',
     }
   },
   {
     name: 'Badge',
     href: '/?path=/docs/components-badge--docs',
-    related: ['Chip', 'Tag'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/badge.png',
     }
@@ -53,15 +52,20 @@ export const components = [
   {
     name: 'Button',
     href: '/?path=/docs/components-button--docs',
-    related: ['Chip', 'IconButton'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/button.png',
     }
   },
   {
+    name: 'Card',
+    href: '/?path=/docs/components-card--docs',
+    thumbnails: {
+      light: '/assets/components-thumbnails/light/card.png',
+    }
+  },
+  {
     name: 'Carousel',
     href: '/?path=/docs/components-carousel--docs',
-    related: ['ScrollingList'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/carousel.png',
     }
@@ -69,7 +73,6 @@ export const components = [
   {
     name: 'Checkbox',
     href: '/?path=/docs/components-checkbox--docs',
-    related: ['RadioGroup', 'Switch'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/checkbox.png',
     }
@@ -77,15 +80,20 @@ export const components = [
   {
     name: 'Chip',
     href: '/?path=/docs/components-chip--docs',
-    related: ['Badge', 'Button', 'Tag'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/chip.png',
     }
   },
   {
+    name: 'CircularMeter',
+    href: '/?path=/docs/components-circularmeter--docs',
+    thumbnails: {
+      light: '/assets/components-thumbnails/light/empty.png',
+    }
+  },
+  {
     name: 'Collapsible',
     href: '/?path=/docs/components-collapsible--docs',
-    related: ['Accordion'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/empty.png',
     }
@@ -93,7 +101,6 @@ export const components = [
   {
     name: 'Combobox',
     href: '/?path=/docs/components-combobox--docs',
-    related: ['Dropdown', 'Input', 'Select'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/combobox.png',
     }
@@ -101,7 +108,6 @@ export const components = [
   {
     name: 'Dialog',
     href: '/?path=/docs/components-dialog--docs',
-    related: ['AlertDialog', 'Drawer'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/dialog.png',
     }
@@ -116,7 +122,6 @@ export const components = [
   {
     name: 'Drawer',
     href: '/?path=/docs/components-drawer--docs',
-    related: ['Dialog', 'Drawer'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/drawer.png',
     }
@@ -124,9 +129,15 @@ export const components = [
   {
     name: 'Dropdown',
     href: '/?path=/docs/components-dropdown--docs',
-    related: ['Combobox', 'Select'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/dropdown.png',
+    }
+  },
+  {
+    name: 'FileUpload',
+    href: '/?path=/docs/components-fileupload--docs',
+    thumbnails: {
+      light: '/assets/components-thumbnails/light/file-upload.png',
     }
   },
   {
@@ -136,11 +147,10 @@ export const components = [
     thumbnails: {
       light: '/assets/components-thumbnails/light/form-field.png',
     }
-    },
+  },
   {
     name: 'IconButton',
     href: '/?path=/docs/components-iconbutton--docs',
-    related: ['Button', 'Icon'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/icon-button.png',
     }
@@ -148,7 +158,6 @@ export const components = [
   {
     name: 'Icon',
     href: '/?path=/docs/components-icon--docs',
-    related: ['IconButton'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/icon.png',
     }
@@ -156,9 +165,15 @@ export const components = [
   {
     name: 'Input',
     href: '/?path=/docs/components-input--docs',
-    related: ['Combobox', 'FormField', 'Textarea'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/input.png',
+    }
+  },
+  {
+    name: 'InputOTP',
+    href: '/?path=/docs/components-inputotp--docs',
+    thumbnails: {
+      light: '/assets/components-thumbnails/light/empty.png',
     }
   },
   {
@@ -171,15 +186,20 @@ export const components = [
   {
     name: 'Label',
     href: '/?path=/docs/components-label--docs',
-    related: ['FormField', 'Input', 'Textarea'],
     thumbnails: {
-      light: '/assets/components-thumbnails/light/empty.png',
+      light: '/assets/components-thumbnails/light/label.png',
     }
   },
   {
     name: 'LinkBox',
     href: '/?path=/docs/components-linkbox--docs',
-    related: ['TextLink'],
+    thumbnails: {
+      light: '/assets/components-thumbnails/light/empty.png',
+    }
+  },
+  {
+    name: 'Meter',
+    href: '/?path=/docs/components-meter--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/empty.png',
     }
@@ -194,7 +214,6 @@ export const components = [
   {
     name: 'Popover',
     href: '/?path=/docs/components-popover--docs',
-    related: ['Snackbar'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/popover.png',
     }
@@ -209,7 +228,6 @@ export const components = [
   {
     name: 'ProgressTracker',
     href: '/?path=/docs/components-progress-tracker--docs',
-    related: ['Progress'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/progress-tracker.png',
     }
@@ -217,7 +235,6 @@ export const components = [
   {
     name: 'Progress',
     href: '/?path=/docs/components-progress--docs',
-    related: ['ProgressTracker'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/progress-bar.png',
     }
@@ -225,7 +242,6 @@ export const components = [
   {
     name: 'RadioGroup',
     href: '/?path=/docs/components-radiogroup--docs',
-    related: ['Checkbox'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/radio-button.png',
     }
@@ -240,15 +256,20 @@ export const components = [
   {
     name: 'ScrollingList',
     href: '/?path=/docs/components-scrollinglist--docs',
-    related: ['Carousel'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/empty.png',
     }
   },
   {
+    name: 'SegmentedGauge',
+    href: '/?path=/docs/components-segmentedgauge--docs',
+    thumbnails: {
+      light: '/assets/components-thumbnails/light/gauge.png',
+    }
+  },
+  {
     name: 'Select',
     href: '/?path=/docs/components-select--docs',
-    related: ['Combobox', 'Dropdown'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/select.png',
     }
@@ -256,7 +277,6 @@ export const components = [
   {
     name: 'Skeleton',
     href: '/?path=/docs/components-skeleton--docs',
-    related: ['Spinner'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/skeleton.png',
     }
@@ -264,7 +284,6 @@ export const components = [
   {
     name: 'Slider',
     href: '/?path=/docs/components-slider--docs',
-    related: ['Stepper'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/slider.png',
     }
@@ -277,17 +296,8 @@ export const components = [
     }
   },
   {
-    name: 'Snackbar',
-    href: '/?path=/docs/components-snackbar--docs',
-    related: ['Popover'],
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/snackbar.png',
-    }
-  },
-  {
     name: 'Spinner',
     href: '/?path=/docs/components-spinner--docs',
-    related: ['Skeleton'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/spinner.png',
     }
@@ -295,7 +305,6 @@ export const components = [
   {
     name: 'Stepper',
     href: '/?path=/docs/components-stepper--docs',
-    related: ['Slider'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/stepper.png',
     }
@@ -303,7 +312,6 @@ export const components = [
   {
     name: 'Switch',
     href: '/?path=/docs/components-switch--docs',
-    related: ['Checkbox'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/switch.png',
     }
@@ -318,7 +326,6 @@ export const components = [
   {
     name: 'Tag',
     href: '/?path=/docs/components-tag--docs',
-    related: ['Badge', 'Chip'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/tag.png',
     }
@@ -326,7 +333,6 @@ export const components = [
   {
     name: 'TextLink',
     href: '/?path=/docs/components-textlink--docs',
-    related: ['LinkBox'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/textlink.png',
     }
@@ -334,9 +340,15 @@ export const components = [
   {
     name: 'Textarea',
     href: '/?path=/docs/components-textarea--docs',
-    related: ['FormField', 'Input'],
     thumbnails: {
       light: '/assets/components-thumbnails/light/textarea.png',
+    }
+  },
+  {
+    name: 'Toast',
+    href: '/?path=/docs/components-toast--docs',
+    thumbnails: {
+      light: '/assets/components-thumbnails/light/toast.png',
     }
   },
   {
@@ -348,38 +360,30 @@ export const components = [
   },
 ]
 
-Spark offers {components.length} components and the list will grow, here is the list:
+
+## Components
 
 <div className="sb-unstyled my-xl gap-lg flex-wrap flex">
   {components.map((component) => (
-    <div className='flex flex-col gap-sm max-w-sz-240'>
-      <LinkBox asChild>
-        <article className="flex gap-md flex-col">
-          <LinkBox.Link href={component.href} asChild className="text-headline-2">
-              <TextLink underline={false} intent="basic">
-                  {component.name}
-              </TextLink>
-          </LinkBox.Link>  
-          <img src={component.thumbnails?.light} className="w-full h-auto object-contain" />
-        </article>
-      </LinkBox>
-      <div>
-        {component.related && (
-          <div className="flex gap-md text-caption">
-            <span>Related:</span>
-            {component.related.map((related) => {
-              const relatedComponent = components.find((c) => c.name === related)
-              return (
-                <LinkBox.Raised>
-                  <TextLink intent="info" href={relatedComponent.href}>
-                    {relatedComponent.name}
-                  </TextLink>
-                </LinkBox.Raised>
-              )
-            })}
+    <div className='flex flex-col gap-sm w-sz-184 shrink-0 min-h-[100px]'>
+        <a href={component.href} className="flex gap-md flex-col group">
+          <TextLink underline={false} intent="basic" className="text-headline-2">
+              {component.name}
+          </TextLink>
+          
+          <div className="group-hover:scale-110 group-hover:shadow-sm transition-transform duration-150 w-[184px] h-[100px] bg-neutral-container rounded-lg flex items-center justify-center">
+            <img 
+              src={component.thumbnails?.light} 
+              alt={`${component.name} component thumbnail`}
+              className="w-full h-full object-contain" 
+              loading="lazy"
+              width="184"
+              height="100"
+            />
           </div>
-        )}
-      </div>
+        </a>
+      
+      
     </div>
   ))}
 </div>

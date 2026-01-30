@@ -1,11 +1,11 @@
 import { createContext, useContext } from 'react'
 
-import { ProgressIndicatorStylesProps } from './ProgressIndicator.styles'
+import { ProgressIndicatorStylesProps } from './ProgressIndicator'
 
 export interface ProgressContextValue {
-  value: number
+  value: number | null
   max: number
-  isIndeterminate: boolean
+  min: number
   shape: 'square' | 'rounded'
   intent: ProgressIndicatorStylesProps['intent']
   onLabelId: (id?: string) => void

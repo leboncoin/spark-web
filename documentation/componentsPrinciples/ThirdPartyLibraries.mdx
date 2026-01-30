@@ -126,7 +126,7 @@ export const componentDependencies = [
   },
   { 
     name: 'dialog', 
-    uses: ['radixUI'],
+    uses: ['baseUI'],
     libraries: {
       baseUI: true,
       radixUI: true,
@@ -146,7 +146,7 @@ export const componentDependencies = [
   },
   { 
     name: 'drawer', 
-    uses: ['radixUI'],
+    uses: ['baseUI'],
     libraries: {
       baseUI: 'Dialog',
       radixUI: 'Dialog',
@@ -235,6 +235,26 @@ export const componentDependencies = [
     }
   },
   { 
+    name: 'meter', 
+    uses: ['baseUI'],
+    libraries: {
+      baseUI: true,
+      radixUI: false,
+      reactAria: false,
+      zagJS: false
+    }
+  },
+  { 
+    name: 'circular-meter', 
+    uses: ['baseUI'],
+    libraries: {
+      baseUI: true,
+      radixUI: false,
+      reactAria: false,
+      zagJS: false
+    }
+  },
+  { 
     name: 'pagination', 
     uses: ['zagJS'],
     libraries: {
@@ -266,7 +286,7 @@ export const componentDependencies = [
   },
   { 
     name: 'progress', 
-    uses: ['radixUI'],
+    uses: ['baseUI'],
     libraries: {
       baseUI: true,
       radixUI: true,

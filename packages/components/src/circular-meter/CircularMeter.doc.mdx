@@ -1,0 +1,153 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { Callout } from '@docs/helpers/Callout'
+import { TextLink } from '@spark-ui/components/text-link'
+
+import { CircularMeter } from '.'
+
+import * as stories from './CircularMeter.stories'
+
+<Meta of={stories} />
+
+# CircularMeter
+
+A graphical display of a numeric value within a range.
+
+<Callout kind="info">
+  <p>
+    This component is based on the <TextLink href="/?path=/docs/components-meter--docs">Meter</TextLink> component and uses Base UI Meter internally.
+  </p>
+  <p>Use this component when you need a circular visualization of a static value within a range.</p>
+</Callout>
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { CircularMeter } from '@spark-ui/components/circular-meter'
+
+export default () => (
+  <CircularMeter value={24}>
+    <CircularMeter.Track />
+    <CircularMeter.Content>
+      <CircularMeter.Label>Storage Used</CircularMeter.Label>
+      <CircularMeter.Value />
+    </CircularMeter.Content>
+  </CircularMeter>
+);
+```
+
+## API Reference
+
+### CircularMeter
+
+Contains all of the circular meter parts. It also makes meter accessible to assistive technologies.
+
+<ArgTypes of={CircularMeter} />
+
+### _.Track
+
+Used to show the circular meter track (SVG circle). The indicator is automatically included within the track.
+
+<ArgTypes of={CircularMeter.Track} />
+
+### _.Content
+
+Used to group elements that should be displayed outside of the track. This component must be used outside of the Track component. It provides default vertical layout styling but can be customized with the `orientation` prop or `className`.
+
+<ArgTypes of={CircularMeter.Content} />
+
+### _.Label
+
+Used to display a label for the meter.
+
+<ArgTypes of={CircularMeter.Label} />
+
+### _.Value
+
+Used to display the current value of the meter.
+
+<ArgTypes of={CircularMeter.Value} />
+
+## Examples
+
+### Intent
+
+Use `intent` prop to set the color intent of the meter.
+
+<Canvas of={stories.Intent} />
+
+### Size
+
+Use the `size` prop to choose among predefined sizes.
+
+- For `sm`, it is recommended to render the value and label outside of the track.
+- For `md`, it is recommended to render the label outside of the track.
+- For `lg` and `xl`, it is recommended to render the label and the value inside of the track.
+
+<Canvas of={stories.Size} />
+
+### Orientation
+
+Use the `orientation` prop to control the layout direction of the circular meter and its content.
+
+- `vertical` (default): Elements are stacked vertically
+- `horizontal`: Elements are arranged horizontally
+
+<Canvas of={stories.Orientation} />
+
+## Advanced Examples
+
+### Custom value format
+
+You can customize how the value is displayed using the `CircularMeter.Value` children function.
+
+<Canvas of={stories.CustomValue} />
+
+### Custom layout
+
+You can customize the markup to display both the value and the label as you see fit.
+
+<Callout kind="warning" title="Accessible labelling nuances">
+  <ul className="list-disc flex flex-col gap-md">
+    <li>
+      <code>CircularMeter.Label</code> is the primary way to provide the visible and accessible label (accessible
+      name) of the meter.
+    </li>
+    <li>
+      If the visible text is not a good label by itself (for example, <code>"of missed calls"</code> instead of
+      <code>"missed calls"</code>), you can still use <code>CircularMeter.Label</code> for visual layout but provide a
+      more explicit accessible name via <code>aria-label</code> on <code>CircularMeter.Label</code>.
+    </li>
+    <li>
+      You can also omit <code>CircularMeter.Label</code> entirely and pass an <code>aria-label</code> directly to
+      <code>CircularMeter</code>, then render fully custom surrounding text. In this case, make sure the
+      <code>aria-label</code> still clearly describes what the meter represents.
+    </li>
+  </ul>
+</Callout>
+
+<Canvas of={stories.CustomLayout} />
+
+## Accessibility
+
+<A11yReport of="circular-meter" />
+
+Adheres to the [meter WAI-ARIA role](https://www.w3.org/TR/wai-aria-1.1/#meter).
+
+### Guidelines
+
+- Usage of `aria-label` or `CircularMeter.Label` is **mandatory**. It serves as the accessible name for the meter.
+
+- The author **MUST** supply values for `aria-valuenow`, `aria-valuemin`, and `aria-valuemax`.
+
+- Authors **SHOULD** update these values when the meter value changes.
+
+- The meter role is used to represent a scalar measurement within a known range, or a fractional value.

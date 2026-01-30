@@ -9,6 +9,7 @@ import { A11yButton } from '../pages/Button'
 import { A11yCard } from '../pages/Card'
 import { A11yCheckbox } from '../pages/Checkbox'
 import { A11yChip } from '../pages/Chip'
+import { A11yCircularMeter } from '../pages/CircularMeter'
 import { A11yCollapsible } from '../pages/Collapsible'
 import { A11yCombobox } from '../pages/Combobox'
 import { A11yDialog } from '../pages/Dialog'
@@ -23,6 +24,7 @@ import { A11yInput } from '../pages/Input'
 import { A11yKbd } from '../pages/Kbd'
 import { A11yLabel } from '../pages/Label'
 import { A11yLinkBox } from '../pages/LinkBox'
+import { A11yMeter } from '../pages/Meter'
 import { A11yPagination } from '../pages/Pagination'
 import { A11yPopover } from '../pages/Popover'
 import { A11yProgress } from '../pages/Progress'
@@ -59,6 +61,7 @@ export const a11yElements: Record<A11yComponentsKey, ComponentType> = {
   card: A11yCard,
   checkbox: A11yCheckbox,
   chip: A11yChip,
+  'circular-meter': A11yCircularMeter,
   collapsible: A11yCollapsible,
   combobox: A11yCombobox,
   dialog: A11yDialog,
@@ -73,6 +76,7 @@ export const a11yElements: Record<A11yComponentsKey, ComponentType> = {
   kbd: A11yKbd,
   label: A11yLabel,
   'link-box': A11yLinkBox,
+  meter: A11yMeter,
   pagination: A11yPagination,
   popover: A11yPopover,
   progress: A11yProgress,

@@ -1,24 +1,24 @@
 import { Progress as Root } from './Progress'
-import { ProgressBar } from './ProgressBar'
-import { ProgressIndicator } from './ProgressIndicator'
 import { ProgressLabel } from './ProgressLabel'
+import { ProgressTrack } from './ProgressTrack'
+import { ProgressValue } from './ProgressValue'
 
 export const Progress: typeof Root & {
   Label: typeof ProgressLabel
-  Bar: typeof ProgressBar
-  Indicator: typeof ProgressIndicator
+  Track: typeof ProgressTrack
+  Value: typeof ProgressValue
 } = Object.assign(Root, {
   Label: ProgressLabel,
-  Bar: ProgressBar,
-  Indicator: ProgressIndicator,
+  Track: ProgressTrack,
+  Value: ProgressValue,
 })
 
 Progress.displayName = 'Progress'
-ProgressBar.displayName = 'Progress.Bar'
-ProgressIndicator.displayName = 'Progress.Indicator'
 ProgressLabel.displayName = 'Progress.Label'
+ProgressTrack.displayName = 'Progress.Track'
+ProgressValue.displayName = 'Progress.Value'
 
 export { type ProgressProps } from './Progress'
-export { type ProgressBarProps } from './ProgressBar'
 export { type ProgressLabelProps } from './ProgressLabel'
-export { type ProgressIndicatorProps } from './ProgressIndicator'
+export { type ProgressTrackProps } from './ProgressTrack'
+export { type ProgressValueProps } from './ProgressValue'

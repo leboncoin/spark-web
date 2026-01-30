@@ -1,21 +1,21 @@
-import { Progress as BaseProgress } from '@base-ui/react/progress'
+import { Meter as BaseMeter } from '@base-ui/react/meter'
 import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
 import { ComponentProps, useCallback, useId } from 'react'
 
-import { ID_PREFIX, useProgress } from './ProgressContext'
+import { ID_PREFIX, useMeter } from './MeterContext'
 
-export type ProgressLabelProps = Omit<ComponentProps<typeof BaseProgress.Label>, 'render'>
+export type MeterLabelProps = Omit<ComponentProps<typeof BaseMeter.Label>, 'render'>
 
-export const ProgressLabel = ({
+export const MeterLabel = ({
   id: idProp,
   children,
   ref: forwardedRef,
   ...others
-}: ProgressLabelProps) => {
+}: MeterLabelProps) => {
   const internalID = `${ID_PREFIX}-label-${useId()}`
   const id = idProp || internalID
 
-  const { onLabelId } = useProgress()
+  const { onLabelId } = useMeter()
   const rootRef = useCallback(
     (el: HTMLSpanElement) => {
       onLabelId(el ? id : undefined)
@@ -25,16 +25,16 @@ export const ProgressLabel = ({
   const ref = useMergeRefs(forwardedRef, rootRef)
 
   return (
-    <BaseProgress.Label
-      data-spark-component="progress-label"
+    <BaseMeter.Label
+      data-spark-component="meter-label"
       id={id}
       className="default:text-body-1 text-on-surface default:font-bold"
       ref={ref}
       {...others}
     >
       {children}
-    </BaseProgress.Label>
+    </BaseMeter.Label>
   )
 }
 
-ProgressLabel.displayName = 'Progress.Label'
+MeterLabel.displayName = 'Meter.Label'
