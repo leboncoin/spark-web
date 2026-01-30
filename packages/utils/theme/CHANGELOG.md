@@ -1,3 +1,13 @@
+## 14.1.0 (2026-01-30)
+
+### 🚀 Features
+
+- **components:** circular meter and meter components ([fa5810cb8](https://github.com/leboncoin/spark-web/commit/fa5810cb8))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 # 14.0.0 (2026-01-26)
 
 ### 🩹 Fixes
