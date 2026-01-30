@@ -1,3 +1,13 @@
+## 14.1.1 (2026-01-30)
+
+### 🩹 Fixes
+
+- **components:** disable scale animation on nested fullscreen dialogs ([314a7c2ab](https://github.com/leboncoin/spark-web/commit/314a7c2ab))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 14.1.0 (2026-01-30)
 
 ### 🚀 Features
