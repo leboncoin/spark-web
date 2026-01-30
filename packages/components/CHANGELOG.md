@@ -1,3 +1,13 @@
+## 14.1.2 (2026-01-30)
+
+### 🩹 Fixes
+
+- **components:** allow label to grow horizontally ([d5c0216d5](https://github.com/leboncoin/spark-web/commit/d5c0216d5))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 14.1.1 (2026-01-30)
 
 ### 🩹 Fixes

@@ -1,3 +1,7 @@
+## 14.1.2 (2026-01-30)
+
+This was a version bump only for @spark-ui/hooks to align it with other projects, there were no code changes.
+
 ## 14.1.1 (2026-01-30)
 
 This was a version bump only for @spark-ui/hooks to align it with other projects, there were no code changes.
