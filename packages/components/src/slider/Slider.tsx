@@ -83,8 +83,6 @@ export const Slider = ({
   const readOnly = field.readOnly ?? readOnlyProp
   const name = field.name ?? nameProp
 
-  console.log('✅ field ', field.disabled)
-
   return (
     <SliderContext.Provider
       value={{
