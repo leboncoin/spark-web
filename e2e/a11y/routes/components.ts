@@ -47,6 +47,7 @@ export const a11yComponents = {
   tag: 'tag',
   textarea: 'textarea',
   'text-link': 'text-link',
+  toast: 'toast',
   'visually-hidden': 'visually-hidden',
 }
 

@@ -42,6 +42,7 @@ import { A11yTabs } from '../pages/Tabs'
 import { A11yTag } from '../pages/Tag'
 import { A11yTextarea } from '../pages/Textarea'
 import { A11yTextLink } from '../pages/TextLink'
+import { A11yToast } from '../pages/Toast'
 import { A11yVisuallyHidden } from '../pages/VisuallyHidden'
 import { type A11yComponentsKey } from './components'
 
@@ -94,5 +95,6 @@ export const a11yElements: Record<A11yComponentsKey, ComponentType> = {
   tag: A11yTag,
   textarea: A11yTextarea,
   'text-link': A11yTextLink,
+  toast: A11yToast,
   'visually-hidden': A11yVisuallyHidden,
 }

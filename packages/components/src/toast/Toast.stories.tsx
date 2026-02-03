@@ -1,5 +1,5 @@
 import { Button } from '@spark-ui/components/button'
-import { AlertOutline } from '@spark-ui/icons/AlertOutline'
+import { Check } from '@spark-ui/icons/Check'
 import { Meta, StoryFn } from '@storybook/react-vite'
 
 import { ToastProvider, useToastManager } from '.'
@@ -30,7 +30,7 @@ export const Default: StoryFn = () => {
       timeout: 5000,
       data: {
         isClosable: true,
-        icon: <AlertOutline />,
+        intent: 'info',
         action: {
           close: true,
           label: 'Cancel',
@@ -46,30 +46,16 @@ export const Default: StoryFn = () => {
 export const DesignAndIntents: StoryFn = () => {
   const toastManager = useToastManager()
 
-  const intents = [
-    'success',
-    'alert',
-    'error',
-    'info',
-    'neutral',
-    'main',
-    'basic',
-    'support',
-    'accent',
-    'surface',
-    'surfaceInverse',
-  ]
-  const designs = ['filled', 'tinted']
+  const intents = ['info', 'success', 'alert', 'error']
 
-  const openToast = (intent: string, design: string) => {
+  const openToast = (intent: string) => {
     toastManager.add({
-      title: `Toast ${intent} ${design}`,
+      title: `Toast ${intent}`,
       description: 'Some content',
       timeout: 5000,
       data: {
         isClosable: true,
         intent: intent as any,
-        design: design as any,
         action: {
           close: true,
           label: 'Cancel',
@@ -81,22 +67,15 @@ export const DesignAndIntents: StoryFn = () => {
 
   return (
     <div className="gap-md flex flex-wrap">
-      {intents.map(intent =>
-        designs.map(design => {
-          const buttonIntent = intent === 'error' ? 'danger' : intent
+      {intents.map(intent => {
+        const buttonIntent = intent === 'error' ? 'danger' : intent
 
-          return (
-            <Button
-              key={`${intent}-${design}`}
-              intent={buttonIntent as any}
-              design={design as any}
-              onClick={() => openToast(intent, design)}
-            >
-              {intent} + {design}
-            </Button>
-          )
-        })
-      )}
+        return (
+          <Button key={intent} intent={buttonIntent as any} onClick={() => openToast(intent)}>
+            {intent}
+          </Button>
+        )
+      })}
     </div>
   )
 }
@@ -154,19 +133,17 @@ export const WithPromise: StoryFn = () => {
         }, 2000)
       }),
       {
-        loading: { title: 'Loading data...', data: { design: 'tinted' } },
+        loading: { title: 'Loading data...' },
         success: data => ({
           title: `Success: ${data}`,
           data: {
             intent: 'success',
-            design: 'tinted',
           },
         }),
         error: (err: Error) => ({
           title: `Error: ${err.message}`,
           data: {
             intent: 'error',
-            design: 'tinted',
           },
         }),
       }
@@ -187,7 +164,7 @@ export const Compact: StoryFn = () => {
       data: {
         isClosable: true,
         compact: true,
-        icon: <AlertOutline />,
+        intent: 'success',
         action: {
           close: true,
           label: 'Undo',
@@ -204,7 +181,7 @@ export const Compact: StoryFn = () => {
       timeout: 0,
       data: {
         isClosable: true,
-        icon: <AlertOutline />,
+        intent: 'success',
         action: {
           close: true,
           label: 'Undo',
@@ -242,10 +219,45 @@ export const WithJSX: StoryFn = () => {
       data: {
         isClosable: true,
         intent: 'success',
-        design: 'tinted',
       },
     })
   }
 
   return <Button onClick={openToastWithJSX}>Open toast with JSX</Button>
+}
+
+export const CustomIcon: StoryFn = () => {
+  const toastManager = useToastManager()
+
+  const openToastWithDefaultIcon = () => {
+    toastManager.add({
+      title: 'Default icon',
+      description: 'This toast uses the default icon for the success intent (ValidFill).',
+      timeout: 5000,
+      data: {
+        isClosable: true,
+        intent: 'success',
+      },
+    })
+  }
+
+  const openToastWithCustomIcon = () => {
+    toastManager.add({
+      title: 'Custom icon',
+      description: 'This toast overrides the default icon with a custom one (Check).',
+      timeout: 5000,
+      data: {
+        isClosable: true,
+        intent: 'success',
+        icon: <Check />,
+      },
+    })
+  }
+
+  return (
+    <div className="gap-md flex flex-wrap">
+      <Button onClick={openToastWithDefaultIcon}>Default Icon</Button>
+      <Button onClick={openToastWithCustomIcon}>Custom Icon</Button>
+    </div>
+  )
 }

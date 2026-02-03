@@ -2,7 +2,7 @@ import { cva, VariantProps } from 'class-variance-authority'
 
 export const toastStyles = cva(
   [
-    'gap-lg p-md flex w-max !w-[min(400px,calc(100vw-2rem))] flex-col rounded-lg',
+    'gap-lg p-md flex w-max !w-[min(400px,calc(100vw-2rem))] flex-col rounded-lg border-md',
     'absolute right-0 bottom-0 left-auto mr-0',
     'bg-clip-padding shadow-md select-none',
     'focus-visible:ring-focus focus-visible:ring-2 focus-visible:outline-none',
@@ -51,114 +51,114 @@ export const toastStyles = cva(
       {
         design: 'filled',
         intent: 'success',
-        class: ['bg-success text-on-success'],
+        class: ['bg-success text-on-success border-success'],
       },
       {
         design: 'filled',
         intent: 'alert',
-        class: ['bg-alert text-on-alert'],
+        class: ['bg-alert text-on-alert border-alert'],
       },
       {
         design: 'filled',
         intent: 'error',
-        class: ['bg-error text-on-error'],
+        class: ['bg-error text-on-error border-error'],
       },
       {
         design: 'filled',
         intent: 'info',
-        class: ['bg-info text-on-info'],
+        class: ['bg-info text-on-info border-info'],
       },
       {
         design: 'filled',
         intent: 'neutral',
-        class: ['bg-neutral text-on-neutral'],
+        class: ['bg-neutral text-on-neutral border-neutral'],
       },
       {
         design: 'filled',
         intent: 'main',
-        class: ['bg-main text-on-main'],
+        class: ['bg-main text-on-main border-main'],
       },
       {
         design: 'filled',
         intent: 'basic',
-        class: ['bg-basic text-on-basic'],
+        class: ['bg-basic text-on-basic border-basic'],
       },
       {
         design: 'filled',
         intent: 'support',
-        class: ['bg-support text-on-support'],
+        class: ['bg-support text-on-support border-support'],
       },
       {
         design: 'filled',
         intent: 'accent',
-        class: ['bg-accent text-on-accent'],
+        class: ['bg-accent text-on-accent border-accent'],
       },
       {
         design: 'filled',
         intent: 'surface',
-        class: ['bg-surface text-on-surface'],
+        class: ['bg-surface text-on-surface border-surface'],
       },
       {
         design: 'filled',
         intent: 'surfaceInverse',
-        class: ['bg-surface-inverse text-on-surface-inverse'],
+        class: ['bg-surface-inverse text-on-surface-inverse border-surface-inverse'],
       },
 
       // Tinted variants
       {
         design: 'tinted',
         intent: 'success',
-        class: ['bg-success-container text-on-success-container'],
+        class: ['bg-success-container text-on-success-container border-success'],
       },
       {
         design: 'tinted',
         intent: 'alert',
-        class: ['bg-alert-container text-on-alert-container'],
+        class: ['bg-alert-container text-on-alert-container border-alert'],
       },
       {
         design: 'tinted',
         intent: 'error',
-        class: ['bg-error-container text-on-error-container'],
+        class: ['bg-error-container text-on-error-container border-error'],
       },
       {
         design: 'tinted',
         intent: 'info',
-        class: ['bg-info-container text-on-info-container'],
+        class: ['bg-info-container text-on-info-container border-info'],
       },
       {
         design: 'tinted',
         intent: 'neutral',
-        class: ['bg-neutral-container text-on-neutral-container'],
+        class: ['bg-neutral-container text-on-neutral-container border-neutral'],
       },
       {
         design: 'tinted',
         intent: 'main',
-        class: ['bg-main-container text-on-main-container'],
+        class: ['bg-main-container text-on-main-container border-main'],
       },
       {
         design: 'tinted',
         intent: 'basic',
-        class: ['bg-basic-container text-on-basic-container'],
+        class: ['bg-basic-container text-on-basic-container border-basic'],
       },
       {
         design: 'tinted',
         intent: 'support',
-        class: ['bg-support-container text-on-support-container'],
+        class: ['bg-support-container text-on-support-container border-support'],
       },
       {
         design: 'tinted',
         intent: 'accent',
-        class: ['bg-accent-container text-on-accent-container'],
+        class: ['bg-accent-container text-on-accent-container border-accent'],
       },
       {
         design: 'tinted',
         intent: 'surface',
-        class: ['bg-surface text-on-surface'],
+        class: ['bg-surface text-on-surface border-surface'],
       },
       {
         design: 'tinted',
         intent: 'surfaceInverse',
-        class: ['bg-surface-inverse text-on-surface-inverse'],
+        class: ['bg-surface-inverse text-on-surface-inverse border-surface-inverse'],
       },
     ],
     defaultVariants: {

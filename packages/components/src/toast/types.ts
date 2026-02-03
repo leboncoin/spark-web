@@ -3,22 +3,25 @@ import { ButtonProps } from '@spark-ui/components/button'
 import * as React from 'react'
 
 export type ToastIntent =
-  | 'main'
-  | 'support'
-  | 'accent'
-  | 'basic'
+  | /** @deprecated Use 'info', 'success', 'alert', or 'error' instead */ 'main'
+  | /** @deprecated Use 'info', 'success', 'alert', or 'error' instead */ 'support'
+  | /** @deprecated Use 'info', 'success', 'alert', or 'error' instead */ 'accent'
+  | /** @deprecated Use 'info', 'success', 'alert', or 'error' instead */ 'basic'
   | 'success'
   | 'alert'
   | 'error'
   | 'info'
-  | 'neutral'
-  | 'surface'
-  | 'surfaceInverse'
+  | /** @deprecated Use 'info', 'success', 'alert', or 'error' instead */ 'neutral'
+  | /** @deprecated Use 'info', 'success', 'alert', or 'error' instead */ 'surface'
+  | /** @deprecated Use 'info', 'success', 'alert', or 'error' instead */ 'surfaceInverse'
 
 export type ToastDesign = 'tinted' | 'filled'
 
 export interface ToastData {
   icon?: React.ReactNode
+  /**
+   * @deprecated The design prop is deprecated. All toasts now use the 'tinted' design.
+   */
   design?: ToastDesign
   intent?: ToastIntent
   isClosable?: boolean
