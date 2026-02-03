@@ -21,7 +21,7 @@
     "test:coverage:open": "npx open-cli ./dist/coverage/index.html",
     "test:e2e": "npx playwright install && npx playwright test --grep-invert 'should not have any accessibility issues'",
     "test:e2e:visual": "npx playwright install && npx playwright test --ui",
-    "test:a11y": "npx playwright install && npx playwright test -g 'should not have any accessibility issues'",
+    "test:a11y": "npx playwright install && node e2e/a11y/run-a11y-tests.cjs",
     "typecheck": "tsc --noEmit",
     "commit": "git-cz",
     "lint": "eslint --config eslint.config.js packages/**/*.{ts,tsx,js,mjs} documentation/**/*.{ts,tsx} --cache",

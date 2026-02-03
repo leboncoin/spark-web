@@ -1,0 +1,13 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# No console.log
+
+Chaque fois qu'un fichier est édité par cursor, rajoute un petit commentaire en haut du fichier, s'il n'y est pas déjà:
+
+```mdx
+// @cursor/ai-edited
+```
+

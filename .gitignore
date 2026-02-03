@@ -31,7 +31,6 @@ coverage
 *.sln
 *.sw?
 .nx
-.cursor
 
 # Testing reports
 !/public/a11y/*.json
