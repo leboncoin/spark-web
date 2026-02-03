@@ -162,6 +162,19 @@ These are the options for the `add`, `update`, and `promise` methods.
       <td><code>`{ label: string; onClick: () => void }`</code></td>
       <td>The action button configuration.</td>
     </tr>
+    <tr>
+      <td><code>data.icon</code></td>
+      <td><code>React.ReactNode</code></td>
+      <td>
+        Optional custom icon to override the default icon. If not provided, a default icon is shown based on the intent:
+        <ul>
+          <li><code>info</code>: <code>InfoFill</code></li>
+          <li><code>success</code>: <code>ValidFill</code></li>
+          <li><code>alert</code>: <code>WarningFill</code></li>
+          <li><code>error</code>: <code>AlertFill</code></li>
+        </ul>
+      </td>
+    </tr>
   </tbody>
 </table>
 
@@ -201,6 +214,18 @@ This example showcases all available design variants (filled and tinted) combine
 When `data.compact` is set to `true`, the toast uses a compact layout where the action button and close button are displayed inline to the right of the toast content, rather than stacked vertically. This is useful for toasts with shorter content where you want to maximize horizontal space efficiency.
 
 <Canvas of={stories.Compact} />
+
+### Custom Icons
+
+By default, each intent has an associated icon:
+- `info`: `InfoFill`
+- `success`: `ValidFill`
+- `alert`: `WarningFill`
+- `error`: `AlertFill`
+
+You can override the default icon by providing a custom icon in the `data.icon` property. This is useful when you want to use a different icon that better represents your specific use case.
+
+<Canvas of={stories.CustomIcon} />
 
 
 

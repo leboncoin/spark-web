@@ -2,7 +2,11 @@ import { Toast as BaseToast } from '@base-ui/react/toast'
 import { Button, ButtonProps } from '@spark-ui/components/button'
 import { Icon } from '@spark-ui/components/icon'
 import { IconButton } from '@spark-ui/components/icon-button'
+import { AlertFill } from '@spark-ui/icons/AlertFill'
 import { Close } from '@spark-ui/icons/Close'
+import { InfoFill } from '@spark-ui/icons/InfoFill'
+import { ValidFill } from '@spark-ui/icons/ValidFill'
+import { WarningFill } from '@spark-ui/icons/WarningFill'
 import { cx } from 'class-variance-authority'
 
 import { toastStyles } from './Toast.styles'
@@ -42,7 +46,6 @@ const getActionProps = (
 }
 
 const getToastRootProps = (toast: ToastObject, design: ToastDesign, intent: ToastIntent) => ({
-  key: toast.id,
   swipeDirection: ['down', 'right'] as ['down', 'right'],
   toast,
   className: cx(toastStyles({ design, intent })),
@@ -53,20 +56,48 @@ const getToastRootProps = (toast: ToastObject, design: ToastDesign, intent: Toas
   },
 })
 
+function getDefaultIcon(intent: ToastIntent): React.ReactNode {
+  switch (intent) {
+    case 'info':
+      return <InfoFill />
+    case 'success':
+      return <ValidFill />
+    case 'alert':
+      return <WarningFill />
+    case 'error':
+      return <AlertFill />
+    case 'main':
+    case 'support':
+    case 'accent':
+    case 'basic':
+    case 'neutral':
+    case 'surface':
+    case 'surfaceInverse':
+    default:
+      return <InfoFill />
+  }
+}
+
 export function Toast({ toast }: { toast: ToastObject }) {
   const {
     icon: ToastIcon,
-    intent = 'neutral',
-    design = 'filled',
+    intent = 'info',
+    design: _design, // deprecated prop, ignored
     action,
     isClosable,
     closeLabel = 'Close',
     compact = false,
   } = toast.data ?? {}
 
+  // Always use 'tinted' design regardless of prop value
+  const design = 'tinted' as const
+
   const ActionButton = action?.close ? BaseToast.Close : BaseToast.Action
   const actionProps = getActionProps(action, { toastDesign: design, toastIntent: intent })
   const rootProps = getToastRootProps(toast, design, intent)
+
+  // Use provided icon or default icon based on intent
+  const icon = ToastIcon ?? getDefaultIcon(intent)
 
   const getCloseButton = (className?: string) => {
     if (!isClosable) return null
@@ -127,11 +158,11 @@ export function Toast({ toast }: { toast: ToastObject }) {
   }
 
   return (
-    <BaseToast.Root {...rootProps}>
+    <BaseToast.Root key={toast.id} {...rootProps}>
       <div className={cx('flex', compact ? 'gap-lg items-center' : 'gap-md flex-col')}>
         <div className="gap-lg p-md flex grow items-center">
           {/* Icon */}
-          {ToastIcon && <Icon size="md">{ToastIcon}</Icon>}
+          <Icon size="md">{icon}</Icon>
           {/* Title and description */}
           <div
             className={cx(
