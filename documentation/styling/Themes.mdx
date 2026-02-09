@@ -50,7 +50,7 @@ For most cases, you will only need to override the color-related tokens (`--colo
 ```css
 @import "tailwindcss";
 
-@import "./node_modules/@spark-ui/theme-utils/dist/style.css"; /* spark default theme */
+@import '@spark-ui/theme-utils/base'; /* spark default theme */
 
 [data-theme='pro-user-light'] {
   --color-main: #yourColor;
@@ -79,7 +79,7 @@ It will look something like this:
 ```css
 @import 'tailwindcss';
 
-@import './node_modules/@spark-ui/theme-utils/dist/style.css'; /* spark default theme */
+@import '@spark-ui/theme-utils/base'; /* spark default theme */
 
 @theme {
   --spacing-scale: 10; /* for a 10px base font size */

@@ -1,64 +1,41 @@
-import { Slider as RadixSlider } from 'radix-ui'
-import { type FocusEvent, type KeyboardEvent, type PointerEvent, Ref, useRef } from 'react'
+import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
+import { Slider as BaseSlider } from '@base-ui/react/slider'
+import { ComponentProps, type PropsWithChildren, useRef } from 'react'
 
 import { useSliderContext } from './SliderContext'
+import { SliderThumbContext } from './SliderThumbContext'
 import { thumbVariants } from './SliderThumb.styles'
 
-export interface SliderThumbProps extends RadixSlider.SliderThumbProps {
-  /**
-   * Change the default rendered element for the one passed as a child, merging their props and behavior.
-   * @default false
-   */
-  asChild?: boolean
-  ref?: Ref<HTMLSpanElement>
-}
+export type SliderThumbProps = Omit<
+  ComponentProps<typeof BaseSlider.Thumb>,
+  'render' | 'index'
+> &
+  PropsWithChildren
 
 export const SliderThumb = ({
-  asChild = false,
   className,
-  onPointerDown,
-  onKeyDown,
-  onBlur,
   ref: forwardedRef,
+  children,
   ...rest
 }: SliderThumbProps) => {
-  const { intent, fieldLabelId, fieldId } = useSliderContext()
+  const { intent, fieldLabelId, fieldId, thumbRef: contextThumbRef } = useSliderContext()
 
-  const innerRef = useRef(null)
-  const ref = forwardedRef || innerRef
-
-  const setInteractionType = (e: KeyboardEvent | FocusEvent | PointerEvent) => {
-    /**
-     * Radix Slider implementation uses `.focus()` and thus prevent us to handle
-     * distinctively focus/focus-visible styles. So we use a `data-interaction` attribute to stay
-     * aware of the type of event, and adapt styles if needed.
-     */
-    if (typeof ref === 'function' || !ref.current) return
-    ref.current.dataset.interaction = e.type
-  }
+  const innerRef = useRef<HTMLDivElement>(null)
+  const ref = useMergeRefs(contextThumbRef, forwardedRef ?? innerRef)
 
   return (
-    <RadixSlider.Thumb
-      data-spark-component="slider-thumb"
-      ref={ref}
-      asChild={asChild}
-      id={fieldId}
-      onPointerDown={(e: PointerEvent<HTMLSpanElement>) => {
-        setInteractionType(e)
-        onPointerDown?.(e)
-      }}
-      onKeyDown={(e: KeyboardEvent<HTMLSpanElement>) => {
-        setInteractionType(e)
-        onKeyDown?.(e)
-      }}
-      onBlur={(e: FocusEvent<HTMLSpanElement>) => {
-        setInteractionType(e)
-        onBlur?.(e)
-      }}
-      className={thumbVariants({ intent, className })}
-      aria-labelledby={fieldLabelId}
-      {...rest}
-    />
+    <SliderThumbContext.Provider value={{ isInsideThumb: true }}>
+      <BaseSlider.Thumb
+        data-spark-component="slider-thumb"
+        ref={ref}
+        id={fieldId}
+        className={thumbVariants({ intent, className })}
+        aria-labelledby={fieldLabelId}
+        {...rest}
+      >
+        {children}
+      </BaseSlider.Thumb>
+    </SliderThumbContext.Provider>
   )
 }
 

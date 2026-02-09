@@ -481,18 +481,22 @@ export const SlidesPerPage: StoryFn = _args => {
           <legend>Slides per page: {slidesPerPage}</legend>
 
           <Slider
-            value={[slidesPerPage]}
+            value={slidesPerPage}
             name="items-per-page"
             min={1}
             max={5}
-            onValueChange={([value]) => {
+            onValueChange={value => {
               if (value) {
                 setSlidesPerPage(value)
               }
             }}
           >
-            <Slider.Track />
-            <Slider.Thumb aria-label="Slides per page" />
+            <Slider.Control>
+              <Slider.Track>
+                <Slider.Indicator />
+                <Slider.Thumb aria-label="Slides per page" />
+              </Slider.Track>
+            </Slider.Control>
           </Slider>
         </fieldset>
       </div>

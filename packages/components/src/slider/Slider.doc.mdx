@@ -1,6 +1,7 @@
 import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
 import { Kbd } from '@spark-ui/components/kbd'
+import { Callout } from '@docs/helpers/Callout'
 
 import { Slider } from '.'
 
@@ -27,34 +28,77 @@ import { Slider } from '@spark-ui/components/slider'
 
 export default () => (
   <Slider>
-    <Slider.Track /> 
-    <Slider.thumb /> 
+    <Slider.Label>Volume</Slider.Label>
+    <Slider.Value />
+
+    <Slider.Control>
+      <Slider.Track>
+        <Slider.Indicator />
+        <Slider.Thumb />
+      </Slider.Track>
+    </Slider.Control>
+
+    <Slider.MinValue />
+    <Slider.MaxValue />
   </Slider>
-);
+)
 ```
 
 ## API Reference
 
 ### Slider
 
-Contains all the slider component parts. It will render an input for each thumb when used within a form to ensure events propagate correctly.
+Contains all the slider component parts. It renders a hidden input when used within a form so that the value is submitted with the form.
 
 <ArgTypes of={Slider} />
 
+### \_.Label
 
+The label for the slider. Use it to provide an accessible name for the control.
 
-### _.Thumb
+<ArgTypes of={Slider.Label} />
 
-A draggable thumb. You can render multiple thumbs.
+### \_.Control
 
-<ArgTypes of={Slider.Thumb} />
+The control wrapper that contains the track and its children.
 
-### _.Track
+<ArgTypes of={Slider.Control} />
+
+### \_.Track
 
 The track shows the range available for user selection.
 
 <ArgTypes of={Slider.Track} />
 
+### \_.Indicator
+
+The indicator shows the selected range within the track.
+
+<ArgTypes of={Slider.Indicator} />
+
+### \_.Thumb
+
+A draggable thumb. You can render `Slider.Value` as a child of the thumb so the value is displayed in a popover above the thumb (position absolute).
+
+<ArgTypes of={Slider.Thumb} />
+
+### \_.Value
+
+An optional component to display the current value of the slider. When rendered **inside** a `Slider.Thumb`, the value is positioned absolutely above the thumb (like a popover). The optional render prop receives `(formattedValue, value)` when you need to format the display.
+
+<ArgTypes of={Slider.Value} />
+
+### \_.MinValue
+
+An optional component to display the minimum value of the slider range. Positioned below the control on the left side.
+
+<ArgTypes of={Slider.MinValue} />
+
+### \_.MaxValue
+
+An optional component to display the maximum value of the slider range. Positioned below the control on the right side.
+
+<ArgTypes of={Slider.MaxValue} />
 
 ## Examples
 
@@ -63,16 +107,11 @@ The track shows the range available for user selection.
 Use `value` to control the value with your own state.
 
 Use either `onValueChange` or `onValueCommit` to update this state when internal changes happen:
+
 - `onValueChange` Event handler called when the value changes.
 - `onValueCommit`: Event handler called when the value changes at the end of an interaction. Useful when you only need to capture a final value e.g. to update a backend service.
 
 <Canvas of={stories.Controlled} />
-
-### Range
-
-Add multiple thumbs and values to create a range slider.
-
-<Canvas of={stories.Range} />
 
 ### Intent
 
@@ -80,11 +119,11 @@ Use `intent` prop to set the color of track and thumb.
 
 <Canvas of={stories.Intent} />
 
-### Shape
+### Value in Thumb
 
-Use `shape` prop to set the shape of track and range.
+Render `Slider.Value` as a child of `Slider.Thumb` to show the value in a popover above the thumb.
 
-<Canvas of={stories.Shape} />
+<Canvas of={stories.ThumbWithValue} />
 
 ### Disabled
 
@@ -111,37 +150,24 @@ Here's an example to illustrate this:
 
 <Canvas of={stories.RestrictedValues} />
 
-### Custom thumb with value display
-
-You can customize the thumb to display the current value by adding custom content inside the thumb.
-
-<Canvas of={stories.ThumbWithValue} />
-
 ## Form field
 
-### Label
+Slider is fully compatible with `FormField` (label, helper messages, validation, etc.).
 
-Use `FormField.Label` to add a label to the slider.
+<Callout kind="warning" marginY="large">
+  <p>
+    Slider comes with its own label component, favor that one over `FormField.Label` to add a label
+    to the slider.
+  </p>
+</Callout>
 
-<Canvas of={stories.FormFieldLabel} />
-
-### Helper message
-
-Use `FormField.HelperMessage` to add a helper message to the slider.
-
-<Canvas of={stories.FormFieldHelperMessage} />
-
-### Validation
-
-set the `state` prop of the `FormField` to `error` to indicate that the input is invalid. Optionally use the `FormField.ErrorMessage` to describe why the input is invalid.
-
-<Canvas of={stories.FormFieldValidation} />
+<Canvas of={stories.FormFieldExample} />
 
 ## Accessibility
 
 <A11yReport of="slider" />
 
-Adheres to the [Slider WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/slider-multithumb/).
+Adheres to the [Slider (Single Thumb) WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/slider/).
 
 Implementations should define an `aria-label` attribute on each `Slider.Thumb` to preserve accessibility.
 
