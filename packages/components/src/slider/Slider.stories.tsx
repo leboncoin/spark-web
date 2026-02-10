@@ -22,65 +22,49 @@ export default meta
 
 export const Default: StoryFn = _args => (
   <form>
-    <Slider defaultValue={[50]} name="default-slider">
-      <Slider.Track />
-      <Slider.Thumb aria-label="Power" />
+    <Slider defaultValue={50} name="default-slider">
+      <Slider.Label>Volume</Slider.Label>
+      <Slider.Value>{(_, value) => `${value ?? 0}%`}</Slider.Value>
+      <Slider.Control>
+        <Slider.Track>
+          <Slider.Indicator />
+          <Slider.Thumb aria-label="Power" getAriaValueText={value => `${value}%`} />
+        </Slider.Track>
+      </Slider.Control>
+      <Slider.MinValue>{value => `${value}%`}</Slider.MinValue>
+      <Slider.MaxValue>{value => `${value}%`}</Slider.MaxValue>
     </Slider>
   </form>
 )
 
-export const Controlled: StoryFn = _args => {
-  const [value, setValue] = useState([0, 100])
+export const Controlled: StoryFn = () => {
+  const [value, setValue] = useState(50)
 
   return (
-    <form>
-      <label htmlFor="controlled-slider">
-        Volume between {value[0]} and {value[1]}
-      </label>
-
-      <Slider
-        min={0}
-        max={100}
-        value={value}
-        onValueChange={setValue}
-        onValueCommit={() => {
-          console.log(value)
-        }}
-        id="controlled-slider"
-        name="controlled-slider"
-      >
-        <Slider.Track />
-        <Slider.Thumb aria-label="Power" />
-        <Slider.Thumb aria-label="Power" />
-      </Slider>
-    </form>
+    <Slider
+      min={0}
+      max={100}
+      value={value}
+      onValueChange={setValue}
+      onValueCommit={() => {
+        console.log(value)
+      }}
+      id="controlled-slider"
+      name="controlled-slider"
+    >
+      <Slider.Label>Volume</Slider.Label>
+      <Slider.Value>{(_, value) => `${value}%`}</Slider.Value>
+      <Slider.Control>
+        <Slider.Track>
+          <Slider.Indicator />
+          <Slider.Thumb aria-label="Power" getAriaValueText={value => `${value}%`} />
+        </Slider.Track>
+      </Slider.Control>
+    </Slider>
   )
 }
 
-export const Range: StoryFn = _args => (
-  <div>
-    <Slider defaultValue={[25, 75]}>
-      <Slider.Track />
-
-      <Slider.Thumb aria-label="Power min" />
-      <Slider.Thumb aria-label="Power max" />
-    </Slider>
-  </div>
-)
-
-const intents: SliderProps['intent'][] = [
-  'main',
-  'support',
-  'accent',
-  'basic',
-  'success',
-  'alert',
-  'error',
-  'info',
-  'neutral',
-]
-
-const shapes: SliderProps['shape'][] = ['square', 'rounded']
+const intents: SliderProps['intent'][] = ['basic', 'main', 'accent']
 
 export const Intent: StoryFn = _args => (
   <div className="gap-xl grid grid-cols-2 sm:grid-cols-5">
@@ -88,24 +72,16 @@ export const Intent: StoryFn = _args => (
       <div key={intent} className="grow">
         <Tag className="mb-md flex">{`${intent}${intent === 'basic' ? ' (default)' : ''}`}</Tag>
 
-        <Slider defaultValue={[75]} intent={intent}>
-          <Slider.Track />
-          <Slider.Thumb aria-label={`Power ${intent}`} />
-        </Slider>
-      </div>
-    ))}
-  </div>
-)
-
-export const Shape: StoryFn = _args => (
-  <div className="gap-xl grid grid-cols-2">
-    {shapes.map(shape => (
-      <div key={shape} className="grow">
-        <Tag className="mb-md flex">{`${shape}${shape === 'square' ? ' (default)' : ''}`}</Tag>
-
-        <Slider defaultValue={[75]} shape={shape}>
-          <Slider.Track />
-          <Slider.Thumb aria-label={`Power ${shape}`} />
+        <Slider defaultValue={75} intent={intent}>
+          <Slider.Control>
+            <Slider.Track>
+              <Slider.Indicator />
+              <Slider.Thumb
+                aria-label={`Power ${intent}`}
+                getAriaValueText={value => `${value}%`}
+              />
+            </Slider.Track>
+          </Slider.Control>
         </Slider>
       </div>
     ))}
@@ -114,9 +90,15 @@ export const Shape: StoryFn = _args => (
 
 export const Disabled: StoryFn = _args => (
   <div>
-    <Slider defaultValue={[50]} disabled>
-      <Slider.Track />
-      <Slider.Thumb aria-label="Power" />
+    <Slider defaultValue={50} disabled>
+      <Slider.Label>Volume</Slider.Label>
+      <Slider.Value>{(_, value) => `${value}%`}</Slider.Value>
+      <Slider.Control>
+        <Slider.Track>
+          <Slider.Indicator />
+          <Slider.Thumb aria-label="Power" getAriaValueText={value => `${value}%`} />
+        </Slider.Track>
+      </Slider.Control>
     </Slider>
   </div>
 )
@@ -124,71 +106,55 @@ export const Disabled: StoryFn = _args => (
 export const RestrictedValues: StoryFn = () => {
   const values = [10, 25, 50, 100]
 
-  const [value, setValue] = useState([0])
-  const remappedValue = values[value.at(0) ?? 0]
+  const [value, setValue] = useState(0)
+  const remappedValue = values[value] ?? values[0]
 
   return (
-    <div>
-      <Slider onValueChange={setValue} value={value} max={values.length - 1}>
-        <Slider.Track />
-        <Slider.Thumb aria-valuetext={String(remappedValue)} aria-label="Power" />
-      </Slider>
-      <div className="mt-md gap-y-md flex flex-col">
-        <p className="font-semi-bold">
-          slider value: <span className="font-regular">{value}</span>
-        </p>
-
-        <p className="font-semi-bold">
-          remapped value: <span className="font-regular">{remappedValue}</span>
-        </p>
-      </div>
-    </div>
+    <Slider onValueChange={setValue} value={value} max={values.length - 1}>
+      <Slider.Value>{(_, value) => `${value} (remapped: ${remappedValue})`}</Slider.Value>
+      <Slider.Control>
+        <Slider.Track>
+          <Slider.Indicator />
+          <Slider.Thumb aria-label="Power" getAriaValueText={() => String(remappedValue)} />
+        </Slider.Track>
+      </Slider.Control>
+    </Slider>
   )
 }
 
 export const ThumbWithValue: StoryFn = () => {
-  const [value, setValue] = useState([50])
-
   return (
-    <Slider className="mt-md" onValueChange={setValue} value={value} name="default-slider">
-      <Slider.Track />
-      <Slider.Thumb className="relative" aria-label="Power">
-        <span className="absolute -top-full left-1/2 -translate-x-1/2">{value}</span>
-      </Slider.Thumb>
-    </Slider>
+    <form>
+      <Slider className="mt-md" defaultValue={0} name="default-slider">
+        <Slider.Label>Volume</Slider.Label>
+        <Slider.Control>
+          <Slider.Track>
+            <Slider.Indicator />
+            <Slider.Thumb aria-label="Power" getAriaValueText={v => `${v}%`}>
+              <Slider.Value>{(_, value) => `${value}% long suffix`}</Slider.Value>
+            </Slider.Thumb>
+          </Slider.Track>
+        </Slider.Control>
+        <Slider.MinValue>{value => `${value}%`}</Slider.MinValue>
+        <Slider.MaxValue>{value => `${value}%`}</Slider.MaxValue>
+      </Slider>
+    </form>
   )
 }
 
-export const FormFieldLabel: StoryFn = _args => (
-  <form action="">
-    <FormField name="volume">
-      <FormField.Label>Volume</FormField.Label>
-      <Slider defaultValue={[50]}>
-        <Slider.Track />
-        <Slider.Thumb />
-      </Slider>
-    </FormField>
-  </form>
-)
-
-export const FormFieldHelperMessage: StoryFn = _args => (
+export const FormFieldExample: StoryFn = _args => (
   <FormField name="volume">
     <FormField.Label>Volume</FormField.Label>
-    <Slider defaultValue={[50]}>
-      <Slider.Track />
-      <Slider.Thumb />
+    <Slider defaultValue={50}>
+      <Slider.Control>
+        <Slider.Track>
+          <Slider.Indicator />
+          <Slider.Thumb getAriaValueText={value => `${value}%`}>
+            <Slider.Value>{(_, value) => `${value}%`}</Slider.Value>
+          </Slider.Thumb>
+        </Slider.Track>
+      </Slider.Control>
     </Slider>
-    <FormField.HelperMessage>set up the volume</FormField.HelperMessage>
-  </FormField>
-)
-
-export const FormFieldValidation: StoryFn = _args => (
-  <FormField name="volume" state="error">
-    <FormField.Label>Volume</FormField.Label>
-    <Slider defaultValue={[50]}>
-      <Slider.Track />
-      <Slider.Thumb />
-    </Slider>
-    <FormField.ErrorMessage>oops</FormField.ErrorMessage>
+    <FormField.HelperMessage>Set up the volume</FormField.HelperMessage>
   </FormField>
 )

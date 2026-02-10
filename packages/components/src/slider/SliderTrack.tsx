@@ -1,33 +1,18 @@
-import { Slider as RadixSlider } from 'radix-ui'
-import { Ref } from 'react'
+import { Slider as BaseSlider } from '@base-ui/react/slider'
+import { ComponentProps } from 'react'
 
-import { useSliderContext } from './SliderContext'
-import { rangeVariants, trackVariants } from './SliderTrack.styles'
+import { trackVariants } from './SliderTrack.styles'
 
-export interface SliderTrackProps
-  extends RadixSlider.SliderTrackProps,
-    RadixSlider.SliderRangeProps {
-  /**
-   * Change the default rendered element for the one passed as a child, merging their props and behavior.
-   * @default false
-   */
-  asChild?: boolean
-  ref?: Ref<HTMLDivElement>
-}
+export type SliderTrackProps = Omit<ComponentProps<typeof BaseSlider.Track>, 'render'>
 
-export const SliderTrack = ({ asChild = false, className, ref, ...rest }: SliderTrackProps) => {
-  const { intent, shape } = useSliderContext()
-
+export const SliderTrack = ({ className, ref, ...rest }: SliderTrackProps) => {
   return (
-    <RadixSlider.Track
+    <BaseSlider.Track
       data-spark-component="slider-track"
       ref={ref}
-      asChild={asChild}
-      className={trackVariants({ shape })}
+      className={trackVariants({ className })}
       {...rest}
-    >
-      <RadixSlider.Range className={rangeVariants({ intent, shape, className })} />
-    </RadixSlider.Track>
+    />
   )
 }
 
