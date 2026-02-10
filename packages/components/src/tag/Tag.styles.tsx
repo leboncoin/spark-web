@@ -28,7 +28,11 @@ export const tagStyles = cva(
       }),
       shape: makeVariants<'shape', ['square', 'rounded', 'pill']>({
         square: [],
+<<<<<<< HEAD
         rounded: ['rounded-tag'],
+=======
+        rounded: ['rounded-sm'],
+>>>>>>> 165d36d86 (style(components): make buttons pill shaped and tags rounded)
         pill: ['rounded-full'],
       }),
       /**

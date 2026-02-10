@@ -15,7 +15,7 @@ export const IconButton = ({
   design = 'filled',
   disabled = false,
   intent = 'main',
-  shape = 'rounded',
+  shape = 'pill',
   size = 'md',
   className,
   ref,
