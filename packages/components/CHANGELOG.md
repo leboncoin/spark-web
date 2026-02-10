@@ -1,3 +1,17 @@
+# 15.0.0 (2026-02-10)
+
+### 🚀 Features
+
+- ⚠️  **components:** extended slider anatomy ([3de0077f7](https://github.com/leboncoin/spark-web/commit/3de0077f7))
+
+### ⚠️  Breaking Changes
+
+- **components:** migrating slider from radix to base ui
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 14.1.2 (2026-01-30)
 
 ### 🩹 Fixes
