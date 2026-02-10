@@ -24,7 +24,7 @@ npm install @spark-ui/components
 ```tsx
 import { IconButton } from '@spark-ui/components/icon-button'
 
-export default () => <IconButton />;
+export default () => <IconButton />
 ```
 
 ## API Reference
@@ -40,6 +40,7 @@ A button that renders an icon.
 ### Design and Intent
 
 See all possible combinations of designs and intents in the table below.
+
 - Use `design` prop to set the different look and feels of a button.
 - Use `intent` prop to set the color intent of a button.
 
@@ -58,12 +59,6 @@ Use the isLoading prop to render the button in loading state. This will prepend 
 a11y tip: use loadingLabel to set an accessible aria-label for when the button is in loading state.
 
 <Canvas of={stories.Loading} />
-
-### Shapes
-
-Use `shape` prop to set the shape of a button.
-
-<Canvas of={stories.Shapes} />
 
 ### Sizes
 
