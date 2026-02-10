@@ -28,7 +28,7 @@ export const tagStyles = cva(
       }),
       shape: makeVariants<'shape', ['square', 'rounded', 'pill']>({
         square: [],
-        rounded: ['rounded-md'],
+        rounded: ['rounded-sm'],
         pill: ['rounded-full'],
       }),
       /**

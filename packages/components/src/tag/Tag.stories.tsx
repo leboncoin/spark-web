@@ -96,17 +96,6 @@ export const Sizes: StoryFn = _args => (
   </div>
 )
 
-export const Shapes: StoryFn = _args => (
-  <div className="gap-md flex flex-row items-center">
-    <Tag shape="square">Square tag</Tag>
-    <Tag shape="rounded">Rounded tag</Tag>
-    <Tag shape="pill">Pill tag</Tag>
-    <Tag shape="rounded" className="rounded-bl-none">
-      Custom shape
-    </Tag>
-  </div>
-)
-
 export const AllCombinations: StoryFn = _args => {
   const designs: TagProps['design'][] = ['filled', 'outlined', 'tinted']
   const intents: TagProps['intent'][] = [
@@ -121,7 +110,7 @@ export const AllCombinations: StoryFn = _args => {
     'neutral',
     'surface',
   ]
-  const shapes: TagProps['shape'][] = ['square', 'rounded', 'pill']
+  const shapes: TagProps['shape'][] = ['rounded']
 
   return (
     <div className="overflow-x-auto">
@@ -168,7 +157,6 @@ export const AllCombinations: StoryFn = _args => {
                         key="custom"
                         design={design}
                         intent={intent as any}
-                        shape="rounded"
                         className="rounded-bl-none"
                       >
                         custom

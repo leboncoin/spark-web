@@ -55,7 +55,7 @@ export const Button = ({
   isLoading = false,
   loadingLabel,
   loadingText,
-  shape = 'rounded',
+  shape = 'pill',
   size = 'md',
   asChild,
   className,

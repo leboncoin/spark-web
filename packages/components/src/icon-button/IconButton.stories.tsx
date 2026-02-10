@@ -38,7 +38,6 @@ const intents: IconButtonProps['intent'][] = [
   'surface',
 ]
 const designs: IconButtonProps['design'][] = ['filled', 'outlined', 'tinted', 'contrast', 'ghost']
-const shapes: IconButtonProps['shape'][] = ['rounded', 'square', 'pill']
 
 const icon = (
   <Icon>
@@ -57,21 +56,6 @@ export const Sizes: StoryFn = _args => (
         <div key={size} className="text-center">
           <Tag className="mb-md mx-auto flex">{size}</Tag>
           <IconButton size={size} aria-label={`${size} button`}>
-            {icon}
-          </IconButton>
-        </div>
-      )
-    })}
-  </div>
-)
-
-export const Shapes: StoryFn = _args => (
-  <div className="gap-lg flex">
-    {shapes.map(shape => {
-      return (
-        <div key={shape} className="text-center">
-          <Tag className="mb-md mx-auto flex">{shape}</Tag>
-          <IconButton shape={shape} aria-label={`${shape} button`}>
             {icon}
           </IconButton>
         </div>

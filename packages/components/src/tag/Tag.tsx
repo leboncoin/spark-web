@@ -32,7 +32,7 @@ export const Tag = ({
   design = 'filled',
   intent = 'basic',
   size = 'md',
-  shape = 'pill',
+  shape = 'rounded',
   asChild,
   className,
   ref,
