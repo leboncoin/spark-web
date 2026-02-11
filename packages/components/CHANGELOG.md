@@ -1,3 +1,13 @@
+## 15.1.0 (2026-02-11)
+
+### 🚀 Features
+
+- **components:** expose createHandle on Dialog ([dbd2d69e0](https://github.com/leboncoin/spark-web/commit/dbd2d69e0))
+
+### ❤️ Thank You
+
+- acd02
+
 # 15.0.0 (2026-02-10)
 
 ### 🚀 Features
