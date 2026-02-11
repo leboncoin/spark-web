@@ -20,6 +20,7 @@ export default defineConfig({
   },
   // @ts-ignore
   test: {
+    cache: false,
     globals: true,
     environment: 'jsdom',
     setupFiles: 'vitest.setup.ts',

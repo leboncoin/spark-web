@@ -42,7 +42,11 @@ describe('Progress', () => {
     const progressEl = screen.getByRole('progressbar', { name: 'Loading' })
 
     expect(progressEl).toHaveAttribute('aria-valuenow', value.toString())
-    expect(progressEl).toHaveAttribute('aria-valuetext', `${value}%`)
+    // Base UI uses Intl.NumberFormat(style: 'percent') which may use a non-breaking space (e.g. fr locale)
+    const expectedValueText = new Intl.NumberFormat(undefined, {
+      style: 'percent',
+    }).format(value / 100)
+    expect(progressEl).toHaveAttribute('aria-valuetext', expectedValueText)
   })
 
   it('should render expected progress when value and max props are set', () => {
@@ -60,8 +64,11 @@ describe('Progress', () => {
 
     expect(progressEl).toHaveAttribute('aria-valuemax', max.toString())
     expect(progressEl).toHaveAttribute('aria-valuenow', value.toString())
-    // BaseProgress exposes the value as a percentage string, not normalized with max
-    expect(progressEl).toHaveAttribute('aria-valuetext', `${value}%`)
+    // Base UI uses Intl.NumberFormat(style: 'percent') which may use a non-breaking space (e.g. fr locale)
+    const expectedValueText = new Intl.NumberFormat(undefined, {
+      style: 'percent',
+    }).format(value / 100)
+    expect(progressEl).toHaveAttribute('aria-valuetext', expectedValueText)
   })
 
   it('should render value label', () => {
