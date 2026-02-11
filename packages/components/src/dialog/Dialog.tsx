@@ -45,4 +45,5 @@ export const Dialog = ({ withFade = false, onOpenChange, ...props }: DialogProps
   )
 }
 
+Dialog.createHandle = BaseDialog.createHandle
 Dialog.displayName = 'Dialog.Root'
