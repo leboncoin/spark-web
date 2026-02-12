@@ -1,9 +1,6 @@
-import { Stepper as Root } from './Stepper'
-import {
-  StepperDecrementButton as DecrementButton,
-  StepperIncrementButton as IncrementButton,
-} from './StepperButton'
-import { StepperInput as Input } from './StepperInput'
+import { Decrement as DecrementButton, Increment as IncrementButton } from './Buttons'
+import { Input } from './Input'
+import { Root } from './Root'
 
 export const Stepper: typeof Root & {
   IncrementButton: typeof IncrementButton
