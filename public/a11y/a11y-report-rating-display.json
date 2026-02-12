@@ -1,0 +1,102 @@
+{
+  "@spark-ui/components/rating-display": {
+    "timestamp": "2026-02-12T17:05:48.727Z",
+    "url": "http://localhost:3002/a11y/rating-display",
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "impact": "serious",
+        "tags": [
+          "cat.aria",
+          "wcag2a",
+          "wcag412",
+          "EN-301-549",
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-7.1.1"
+        ],
+        "description": "Ensure ARIA attributes are not prohibited for an element's role",
+        "help": "Elements must only use permitted ARIA attributes",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-prohibited-attr?application=playwright",
+        "nodes": [
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": {
+                  "role": null,
+                  "nodeName": "div",
+                  "messageKey": "noRoleSingular",
+                  "prohibited": [
+                    "aria-label"
+                  ]
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "aria-label attribute is not well supported on a div with no valid role attribute."
+              }
+            ],
+            "impact": "serious",
+            "html": "<div class=\"gap-x-sm relative inline-flex items-center\" data-spark-component=\"rating-display\" aria-label=\"Rating: 3.5 out of 5, based on 128 reviews\">",
+            "target": [
+              ".inline-flex.items-center[data-spark-component=\"rating-display\"]:nth-child(1)"
+            ]
+          },
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": {
+                  "role": null,
+                  "nodeName": "div",
+                  "messageKey": "noRoleSingular",
+                  "prohibited": [
+                    "aria-label"
+                  ]
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "aria-label attribute is not well supported on a div with no valid role attribute."
+              }
+            ],
+            "impact": "serious",
+            "html": "<div class=\"gap-x-sm relative inline-flex items-center\" data-spark-component=\"rating-display\" aria-label=\"Rating: 4 out of 5\">",
+            "target": [
+              "div[aria-label=\"Rating: 4 out of 5\"]"
+            ]
+          },
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": {
+                  "role": null,
+                  "nodeName": "div",
+                  "messageKey": "noRoleSingular",
+                  "prohibited": [
+                    "aria-label"
+                  ]
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "aria-label attribute is not well supported on a div with no valid role attribute."
+              }
+            ],
+            "impact": "serious",
+            "html": "<div class=\"gap-x-sm relative inline-flex items-center\" data-spark-component=\"rating-display\" aria-label=\"Rating: 2.3 out of 5\">",
+            "target": [
+              "div[aria-label=\"Rating: 2.3 out of 5\"]"
+            ]
+          }
+        ]
+      }
+    ],
+    "violations": []
+  }
+}

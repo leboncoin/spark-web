@@ -8,11 +8,16 @@ const docgenConfig: ParserOptions = {
 
   propFilter: prop => {
     const prohibitedPropsRegexesNew = [/\/node_modules\/@types\/react\/.*.d.ts/]
+    const allowedReactProps = new Set(['children', 'className'])
 
     if (prop.declarations && prop.declarations?.length > 0) {
       const isProhibitedProps = prop.declarations.some(declaration =>
         prohibitedPropsRegexesNew.some(regex => regex.test(declaration.fileName))
       )
+
+      if (isProhibitedProps && allowedReactProps.has(prop.name)) {
+        return true
+      }
 
       return !isProhibitedProps
     }

@@ -36,11 +36,11 @@ export default () => <Rating />
 
 ## Examples
 
-### Readonly
+### Controlled
 
-Use `readOnly` prop to indicate that rating control is not interactive. In this case only (non interactive) the rating control will handle 0.5 step (half stars).
+Use `value` with `onValueChange` to control the component from your state.
 
-<Canvas of={stories.Readonly} />
+<Canvas of={stories.Controlled} />
 
 ### Disabled
 
@@ -48,24 +48,51 @@ Use `disabled` prop to indicate that rating control is disabled.
 
 <Canvas of={stories.Disabled} />
 
-For size variants (sm, md, lg), use the **RatingDisplay** component (`@spark-ui/components/rating-display`).
+### Readonly
 
-## Advanced Examples
+Use `readOnly` prop to indicate that rating control is not interactive.
 
-### Rounded values
+<Canvas of={stories.Readonly} />
 
-The **Rating** component includes a simple rounding mechanism to guarantee a nice display.
+## Form field
 
-- On **input mode** it will use a step of **1** (for accessibility concerns)
-- On **read-only mode** it will use a **0.5** step. In this last case the 0.5 step should be considered as a "visible" one, as we round using a 0.25 step behind the scene. This allows us to define more precisely if a value should be rounded down or up.
+When using the `Rating` component you might want to use it in combination with `FormField` to add a proper label, error message, etc.
 
-<Canvas of={stories.Rounded} />
+### Label
 
-If for any reason you need some specific rounding mechanisms, feel free to define yours and provide your rounded value.
+Use `FormField.Label` to add a label to the input.
+
+<Canvas of={stories.FieldLabel} />
+
+#### Hidden label
+
+In certain cases, a visible label may not be necessary. To achieve this behavior, use the `VisuallyHidden` component.
+
+<Canvas of={stories.FieldHiddenLabel} />
+
+### Required
+
+Use the `isRequired` prop of the `FormField` to indicate that the input is required.
+
+<Canvas of={stories.FieldRequired} />
+
+### Helper message
+
+Use the `FormField.HelperMessage` component to provide a description to the input.
+
+<Canvas of={stories.FieldHelperMessage} />
+
+### Validation
+
+Set the `state` prop of the `FormField` to `error` to indicate that the input is invalid. Optionally use the `FormField.ErrorMessage` to describe why the input is invalid.
+
+<Canvas of={stories.FieldInvalid} />
 
 ## Accessibility
 
 <A11yReport of="rating" />
+
+This component should always have a label, directly declared through `aria-label` or inherited from the `FormField` wrapper.
 
 Follows WCAG 2.0 standards for keyboard accessibility guidelines.
 

@@ -1,18 +1,11 @@
 import { type StarValue } from './types'
 
-function getNearestHalfDecimal(num: number): number {
-  return Math.round(num / 0.5) * 0.5
-}
-
 function getStarValue({ value, index }: { value?: number; index: number }): StarValue {
   if (value === undefined) return 0
 
   const starPosition = index + 1
-  const formattedValue = getNearestHalfDecimal(value)
 
-  if (Math.ceil(formattedValue) < starPosition) return 0
-
-  return formattedValue >= starPosition ? 1 : 0.5
+  return value >= starPosition ? 1 : 0
 }
 
 function splitAt<T>(arr: T[], index: number): [T[], T[]] {
@@ -22,4 +15,4 @@ function splitAt<T>(arr: T[], index: number): [T[], T[]] {
   return [prev, next]
 }
 
-export { getNearestHalfDecimal, getStarValue, splitAt }
+export { getStarValue, splitAt }

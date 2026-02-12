@@ -39,6 +39,18 @@ export default () => (
 
 <ArgTypes of={RatingDisplay} />
 
+### RatingDisplay.Stars
+
+<ArgTypes of={RatingDisplay.Stars} />
+
+### RatingDisplay.Value
+
+<ArgTypes of={RatingDisplay.Value} />
+
+### RatingDisplay.Count
+
+<ArgTypes of={RatingDisplay.Count} />
+
 ## Examples
 
 ### Sizes
@@ -52,6 +64,22 @@ Use `size` prop to set the size of the stars (sm, md, lg).
 The component uses a 0.5 step for display (half stars).
 
 <Canvas of={stories.Rounded} />
+
+### Custom star fill mode
+
+Use `getFillMode` on `RatingDisplay.Stars` to override how each star is filled (`0`, `0.5`, `1`).
+
+#### Rounded to integer (no half stars)
+
+Always rounds the input rating to a whole number, then renders only full or empty stars.
+
+<Canvas of={stories.RoundedToInteger} />
+
+#### Rounded to 0.5 (always up)
+
+Always rounds up to the nearest half, which differs from the default nearest-half algorithm.
+
+<Canvas of={stories.RoundedHalfUp} />
 
 ### Custom formatting
 
@@ -86,6 +114,6 @@ Use `variant="single-star"` on `RatingDisplay.Stars` to display one star with th
 
 ## Accessibility
 
-<A11yReport of="rating" />
+<A11yReport of="rating-display" />
 
 RatingDisplay has no built-in ARIA label. Add `aria-label` from usage (for example in each story/page) when you need a dedicated spoken description, and make count values explicit (for example: "based on 128 reviews").

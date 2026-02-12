@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import { RatingDisplay } from './RatingDisplay'
+import { RatingDisplay } from '.'
+import type { StarValue } from './types'
 
 const getStars = (container: HTMLElement) =>
   Array.from(container.querySelectorAll('[data-part="star"]'))
@@ -73,6 +74,46 @@ describe('RatingDisplay', () => {
       </RatingDisplay>
     )
     expect(screen.getByLabelText('Score: 3 out of 5')).toBeInTheDocument()
+  })
+
+  it('should support a custom fill mode that rounds to full stars only', () => {
+    const getFillMode = ({ value, index }: { value?: number; index: number }): StarValue => {
+      if (value === undefined) return 0
+
+      return Math.round(value) > index ? 1 : 0
+    }
+
+    const { container } = render(
+      <RatingDisplay value={3.75} aria-label="Score: 3.75 out of 5">
+        <RatingDisplay.Stars getFillMode={getFillMode} />
+      </RatingDisplay>
+    )
+
+    const fills = Array.from(
+      container.querySelectorAll('[data-part="star"] > div')
+    ) as HTMLDivElement[]
+    expect(fills.map(fill => fill.style.width)).toEqual(['100%', '100%', '100%', '100%', '0%'])
+  })
+
+  it('should apply getFillMode when variant is single-star', () => {
+    const getFillMode = vi.fn(({ value }: { value?: number; index: number }) =>
+      value === undefined ? 0 : 1
+    )
+
+    const { container } = render(
+      <RatingDisplay value={2} aria-label="Score: 2 out of 5">
+        <RatingDisplay.Stars variant="single-star" getFillMode={getFillMode} />
+      </RatingDisplay>
+    )
+
+    const fills = Array.from(
+      container.querySelectorAll('[data-part="star"] > div')
+    ) as HTMLDivElement[]
+
+    expect(getFillMode).toHaveBeenCalledOnce()
+    expect(getFillMode).toHaveBeenCalledWith({ index: 0, value: 2 })
+    expect(fills).toHaveLength(1)
+    expect(fills[0]).toHaveStyle({ width: '100%' })
   })
 
   it('should display value 0 when value is undefined', () => {
