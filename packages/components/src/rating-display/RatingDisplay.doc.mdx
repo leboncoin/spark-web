@@ -1,0 +1,91 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+
+import { RatingDisplay } from '.'
+
+import * as stories from './RatingDisplay.stories'
+
+<Meta of={stories} />
+
+# RatingDisplay
+
+RatingDisplay is a **presentation-only** component that displays a star rating (0 to 5) as a succession of SVGs. It is non-interactive: no keyboard or mouse handling. For an interactive rating control, use **Rating** (`@spark-ui/components/rating`).
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { RatingDisplay } from '@spark-ui/components/rating-display'
+
+export default () => (
+  <RatingDisplay value={3.5} count={128} aria-label="Rating: 3.5 out of 5, based on 128 reviews">
+    <RatingDisplay.Stars />
+    <RatingDisplay.Value />
+    <RatingDisplay.Count />
+  </RatingDisplay>
+)
+```
+
+## API Reference
+
+### RatingDisplay
+
+<ArgTypes of={RatingDisplay} />
+
+## Examples
+
+### Sizes
+
+Use `size` prop to set the size of the stars (sm, md, lg).
+
+<Canvas of={stories.Size} />
+
+### Rounded values
+
+The component uses a 0.5 step for display (half stars).
+
+<Canvas of={stories.Rounded} />
+
+### Custom formatting
+
+Use formatter functions when you need custom text rendering for the right-side value and count.
+
+```tsx
+<RatingDisplay value={4.74} count={128}>
+  <RatingDisplay.Stars />
+  <RatingDisplay.Value>{(formattedValue, _rawValue) => `${formattedValue}/5`}</RatingDisplay.Value>
+  <RatingDisplay.Count>{count => `${count} reviews`}</RatingDisplay.Count>
+</RatingDisplay>
+```
+
+<Canvas of={stories.CustomFormatting} />
+
+### Single star
+
+Use `variant="single-star"` on `RatingDisplay.Stars` to display one star with threshold-based fill:
+
+- empty if `value < 1`
+- half if `value < 4`
+- full if `value >= 4`
+
+```tsx
+<RatingDisplay value={2.3} aria-label="Rating: 2.3 out of 5">
+  <RatingDisplay.Stars variant="single-star" />
+  <RatingDisplay.Value />
+</RatingDisplay>
+```
+
+<Canvas of={stories.SingleStar} />
+
+## Accessibility
+
+<A11yReport of="rating" />
+
+RatingDisplay has no built-in ARIA label. Add `aria-label` from usage (for example in each story/page) when you need a dedicated spoken description, and make count values explicit (for example: "based on 128 reviews").

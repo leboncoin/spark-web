@@ -1,7 +1,7 @@
 import { Tag } from '@spark-ui/components/tag'
 import { Meta, StoryFn } from '@storybook/react-vite'
 
-import { Rating, type RatingProps } from '.'
+import { Rating } from '.'
 
 const meta: Meta<typeof Rating> = {
   title: 'Components/Rating',
@@ -18,9 +18,7 @@ const meta: Meta<typeof Rating> = {
 
 export default meta
 
-const sizes: RatingProps['size'][] = ['sm', 'md', 'lg']
-
-export const Default: StoryFn = _args => <Rating size="lg" aria-label="Rating control" />
+export const Default: StoryFn = _args => <Rating aria-label="Rating control" />
 
 export const Readonly: StoryFn = _args => (
   <Rating defaultValue={3.5} aria-label="Rating control with readOnly" readOnly />
@@ -28,17 +26,6 @@ export const Readonly: StoryFn = _args => (
 
 export const Disabled: StoryFn = _args => (
   <Rating defaultValue={3} aria-label="Rating control disabled" disabled />
-)
-
-export const Size: StoryFn = _args => (
-  <div className="gap-xl flex flex-row flex-wrap">
-    {sizes.map(size => (
-      <div key={size} className="">
-        <Tag className="mb-md flex">{`${size}${size === 'md' ? ' (default)' : ''}`}</Tag>
-        <Rating defaultValue={3} size={size} aria-label={`Rating control ${size}`} />
-      </div>
-    ))}
-  </div>
 )
 
 export const Rounded: StoryFn = _args => (

@@ -1,16 +1,62 @@
 import { useCombinedState } from '@spark-ui/hooks/use-combined-state'
 import { cx } from 'class-variance-authority'
 import {
-  type ChangeEvent,
   type ComponentPropsWithRef,
+  type KeyboardEvent,
   type MouseEvent,
   type PropsWithChildren,
+  type RefObject,
   useCallback,
   useRef,
+  useState,
 } from 'react'
 
-import { RatingStar, type RatingStarProps } from './RatingStar'
-import { getNearestHalfDecimal, getStarValue, splitAt } from './utils'
+import { RatingStar } from './RatingStar'
+import { getStarValue, splitAt } from './utils'
+
+const STAR_LABELS = ['one star', 'two stars', 'three stars', 'four stars', 'five stars'] as const
+
+const getRatingInteger = (value: number | undefined): number => {
+  if (value === undefined || value < 1) {
+    return 0
+  }
+
+  return Math.min(5, Math.max(1, Math.round(value)))
+}
+
+function createStarKeyDownHandler(
+  index: number,
+  starRefList: RefObject<(HTMLDivElement | null)[]>,
+  setRatingValue: (value: number) => void,
+  isInteractive: boolean
+) {
+  return (event: KeyboardEvent<HTMLDivElement>) => {
+    if (!isInteractive) return
+
+    switch (event.key) {
+      case 'ArrowRight':
+      case 'ArrowDown':
+        event.preventDefault()
+        const nextIndex = Math.min(4, index + 1)
+        setRatingValue(nextIndex + 1)
+        starRefList.current[nextIndex]?.focus()
+        break
+      case 'ArrowLeft':
+      case 'ArrowUp':
+        event.preventDefault()
+        const prevIndex = Math.max(0, index - 1)
+        setRatingValue(prevIndex + 1)
+        starRefList.current[prevIndex]?.focus()
+        break
+      case ' ':
+        event.preventDefault()
+        setRatingValue(index + 1)
+        break
+      default:
+        break
+    }
+  }
+}
 
 export interface RatingProps extends PropsWithChildren<ComponentPropsWithRef<'div'>> {
   /**
@@ -41,22 +87,17 @@ export interface RatingProps extends PropsWithChildren<ComponentPropsWithRef<'di
    */
   disabled?: boolean
   /**
-   * Sets the size of the stars.
-   * @default 'md'
-   */
-  size?: RatingStarProps['size']
-  /**
-   * Name of the underlying input.
+   * Name of the underlying hidden input (for form submission).
    * @default undefined
    */
   name?: string
   /**
-   * id of the underlying input.
+   * id of the underlying hidden input.
    * @default undefined
    */
   id?: string
   /**
-   * aria-label of the underlying input.
+   * aria-label of the radiogroup.
    * @default undefined
    */
   'aria-label': string
@@ -66,7 +107,6 @@ export const Rating = ({
   defaultValue,
   value: propValue,
   onValueChange,
-  size = 'md',
   disabled,
   readOnly,
   name,
@@ -75,99 +115,93 @@ export const Rating = ({
   ref,
   ...rest
 }: RatingProps) => {
-  const inputRef = useRef<HTMLInputElement>(null)
-  const starRefList = useRef<HTMLDivElement[]>([])
+  const starRefList = useRef<(HTMLDivElement | null)[]>([])
+  const [hoveredStarIndex, setHoveredStarIndex] = useState<number | null>(null)
 
   const [value, setRatingValue] = useCombinedState(propValue, defaultValue, onValueChange)
 
-  const valueRef = useRef(value)
+  const ratingValue = getRatingInteger(value ?? 0)
   const isInteractive = !(disabled || readOnly)
 
+  // When hovering, show filled up to hovered star and outlined for the rest
+  const displayValue = hoveredStarIndex !== null ? hoveredStarIndex + 1 : ratingValue
+
+  // Roving tabindex: checked radio or first has tabindex 0 (APG)
+  const getTabIndex = useCallback(
+    (index: number): number => {
+      if (ratingValue >= 1) {
+        return ratingValue - 1 === index ? 0 : -1
+      }
+
+      return index === 0 ? 0 : -1
+    },
+    [ratingValue]
+  )
+
   function onStarClick(index: number) {
-    if (!inputRef.current) return
-
-    setRatingValue(index + 1)
-    valueRef.current = index + 1
-
-    inputRef.current.focus()
-    inputRef.current.setAttribute('data-clicked', '')
+    if (!isInteractive) return
+    const newValue = index + 1
+    setRatingValue(newValue)
+    starRefList.current[index]?.focus()
   }
 
-  function onInputChange(event: ChangeEvent<HTMLInputElement>) {
-    // 1. Avoiding unnecessary calls to onValueChange prop if value doesn't change
-    // 2. Preventing value to be resetted to 0
-    if (valueRef.current === Number(event.target.value) || Number(event.target.value) === 0) {
-      return
-    }
-    valueRef.current = Number(event.target.value)
-
-    setRatingValue(Number(event.target.value))
-  }
+  const onStarKeyDown = useCallback(
+    (index: number) => createStarKeyDownHandler(index, starRefList, setRatingValue, isInteractive),
+    [isInteractive, setRatingValue]
+  )
 
   function onStarMouseEnter({ currentTarget }: MouseEvent<HTMLDivElement>) {
     const currentStarIndex = starRefList.current.findIndex(star => star === currentTarget)
 
+    setHoveredStarIndex(currentStarIndex >= 0 ? currentStarIndex : null)
+
     const [previousStars, followingStars] = splitAt(starRefList.current, currentStarIndex + 1)
 
-    previousStars.forEach(star => star.setAttribute('data-hovered', ''))
-    followingStars.forEach(star => star.removeAttribute('data-hovered'))
+    previousStars.forEach(star => star?.setAttribute('data-hovered', ''))
+    followingStars.forEach(star => star?.removeAttribute('data-hovered'))
   }
 
-  const handleStarRef = useCallback((elm: HTMLDivElement | null) => {
-    if (!elm) return
-    starRefList.current.push(elm)
-  }, [])
-
-  function resetDataPartInputAttr() {
-    inputRef.current?.removeAttribute('data-clicked')
-  }
+  const handleStarRef = useCallback(
+    (index: number) => (elm: HTMLDivElement | null) => {
+      starRefList.current[index] = elm
+    },
+    []
+  )
 
   function resetDataPartStarAttr() {
-    starRefList.current.forEach(star => star.removeAttribute('data-hovered'))
+    setHoveredStarIndex(null)
+    starRefList.current.forEach(star => star?.removeAttribute('data-hovered'))
   }
 
   return (
     <div
-      className="relative inline-flex"
       ref={ref}
+      id={id}
+      role="radiogroup"
+      aria-label={ariaLabel}
+      className="relative inline-flex"
       data-spark-component="rating"
       {...rest}
       onMouseLeave={resetDataPartStarAttr}
     >
-      <input
-        name={name}
-        id={id}
-        aria-label={ariaLabel}
-        ref={inputRef}
-        data-part="input"
-        className="peer absolute inset-0 opacity-0"
-        type="range"
-        min="0"
-        max="5"
-        step={readOnly ? 0.5 : 1}
-        disabled={disabled}
-        readOnly={readOnly}
-        value={getNearestHalfDecimal(value ?? 0)}
-        onChange={event => isInteractive && onInputChange(event)}
-        onBlur={resetDataPartInputAttr}
-      />
-      <div
-        className={cx(
-          size === 'lg' ? 'gap-x-md' : 'gap-x-sm',
-          'flex',
-          'peer-focus-visible:u-outline peer-[[data-part=input][data-clicked]]:shadow-none'
-        )}
-      >
+      {name !== undefined && (
+        <input type="hidden" name={name} value={ratingValue} aria-hidden data-part="input" />
+      )}
+      <div className={cx('gap-x-md', 'flex')}>
         {Array.from({ length: 5 }).map((_, index) => (
           <RatingStar
+            ref={handleStarRef(index)}
+            key={index}
             disabled={disabled}
             readOnly={readOnly}
-            size={size}
-            onClick={() => isInteractive && onStarClick(index)}
+            size="lg"
+            value={getStarValue({ index, value: displayValue })}
+            checked={ratingValue === index + 1}
+            ariaLabel={STAR_LABELS[index]}
+            tabIndex={isInteractive ? getTabIndex(index) : -1}
+            onClick={() => onStarClick(index)}
+            onKeyDown={onStarKeyDown(index)}
             onMouseEnter={event => isInteractive && onStarMouseEnter(event)}
-            ref={handleStarRef}
-            key={index}
-            value={getStarValue({ index, value })}
           />
         ))}
       </div>

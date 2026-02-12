@@ -25,7 +25,7 @@ npm install @spark-ui/components
 ```tsx
 import { Rating } from '@spark-ui/components/rating'
 
-export default () => <Rating />;
+export default () => <Rating />
 ```
 
 ## API Reference
@@ -48,11 +48,7 @@ Use `disabled` prop to indicate that rating control is disabled.
 
 <Canvas of={stories.Disabled} />
 
-### Sizes
-
-Use `size` prop to set the size of the rating control stars.
-
-<Canvas of={stories.Size} />
+For size variants (sm, md, lg), use the **RatingDisplay** component (`@spark-ui/components/rating-display`).
 
 ## Advanced Examples
 
