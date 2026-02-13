@@ -1,3 +1,4 @@
+import path from 'node:path'
 import { mergeConfig } from 'vite'
 import type { StorybookConfig } from '@storybook/react-vite'
 import { type ParserOptions } from 'react-docgen-typescript'
@@ -43,10 +44,15 @@ const config: StorybookConfig = {
     '../documentation/**/*.mdx',
     '../packages/**/*.doc.mdx',
     '../packages/**/*.stories.tsx',
-    '!..packages/icons/**/*.doc.mdx',
-    '!..packages/icons/**/*.stories.tsx',
+    '!../packages/icons/**/*.doc.mdx',
+    '!../packages/icons/**/*.stories.tsx',
   ],
-  addons: ['@storybook/addon-a11y', '@storybook/addon-designs', '@storybook/addon-docs'],
+  addons: [
+    '@storybook/addon-a11y',
+    '@storybook/addon-designs',
+    '@storybook/addon-docs',
+    '@storybook/addon-vitest'
+  ],
   core: {
     disableTelemetry: true,
   },
@@ -72,7 +78,7 @@ const config: StorybookConfig = {
         ...config.resolve,
         alias: {
           ...config.resolve?.alias,
-          '@spark-ui/components': '/packages/components/src',
+          '@spark-ui/components': path.resolve(process.cwd(), 'packages/components/src'),
         },
       },
     })

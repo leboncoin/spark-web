@@ -95,6 +95,7 @@ const preview = {
     viewport: {
       options: INITIAL_VIEWPORTS,
     },
+
     docs: {
       container: ExampleContainer,
       codePanel: true,
@@ -102,6 +103,7 @@ const preview = {
         headingSelector: 'h2, h3',
       },
     },
+
     options: {
       storySort: {
         order: [
@@ -150,6 +152,7 @@ const preview = {
         ],
       },
     },
+
     controls: {
       matchers: {
         color: /(background|color)$/i,
