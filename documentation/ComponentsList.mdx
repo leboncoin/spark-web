@@ -1,7 +1,9 @@
 import { Meta } from '@storybook/addon-docs/blocks'
+import { useState } from 'react'
 import { Card } from '@docs/helpers/Card'
 
 import { Divider } from '@spark-ui/components/divider'
+import { Input } from '@spark-ui/components/input'
 import { LinkBox } from '@spark-ui/components/link-box'
 import { Skeleton } from '@spark-ui/components/skeleton'
 import { TextLink } from '@spark-ui/components/text-link'
@@ -12,133 +14,132 @@ import { Button } from '@spark-ui/components/button'
 
 # Components list
 
-
 export const components = [
   {
     name: 'Accordion',
     href: '/?path=/docs/components-accordion--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/accordion.png',
-    }
+    },
   },
   {
     name: 'AlertDialog',
     href: '/?path=/docs/components-alertdialog--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/alert-dialog.png',
-    }
+    },
   },
   {
     name: 'Avatar',
     href: '/?path=/docs/components-avatar--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/avatar.png',
-    }
+    },
   },
   {
     name: 'Badge',
     href: '/?path=/docs/components-badge--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/badge.png',
-    }
+    },
   },
   {
     name: 'Breadcrumb',
     href: '/?path=/docs/components-breadcrumb--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/breadcrumb.png',
-    }
+    },
   },
   {
     name: 'Button',
     href: '/?path=/docs/components-button--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/button.png',
-    }
+    },
   },
   {
     name: 'Card',
     href: '/?path=/docs/components-card--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/card.png',
-    }
+    },
   },
   {
     name: 'Carousel',
     href: '/?path=/docs/components-carousel--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/carousel.png',
-    }
+    },
   },
   {
     name: 'Checkbox',
     href: '/?path=/docs/components-checkbox--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/checkbox.png',
-    }
+    },
   },
   {
     name: 'Chip',
     href: '/?path=/docs/components-chip--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/chip.png',
-    }
+    },
   },
   {
     name: 'CircularMeter',
     href: '/?path=/docs/components-circularmeter--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/empty.png',
-    }
+    },
   },
   {
     name: 'Collapsible',
     href: '/?path=/docs/components-collapsible--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/empty.png',
-    }
+    },
   },
   {
     name: 'Combobox',
     href: '/?path=/docs/components-combobox--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/combobox.png',
-    }
+    },
   },
   {
     name: 'Dialog',
     href: '/?path=/docs/components-dialog--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/dialog.png',
-    }
+    },
   },
   {
     name: 'Divider',
     href: '/?path=/docs/components-divider--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/divider.png',
-    }
+    },
   },
   {
     name: 'Drawer',
     href: '/?path=/docs/components-drawer--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/drawer.png',
-    }
+    },
   },
   {
     name: 'Dropdown',
     href: '/?path=/docs/components-dropdown--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/dropdown.png',
-    }
+    },
   },
   {
     name: 'FileUpload',
     href: '/?path=/docs/components-fileupload--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/file-upload.png',
-    }
+    },
   },
   {
     name: 'FormField',
@@ -146,244 +147,273 @@ export const components = [
     href: '/?path=/docs/components-formfield--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/form-field.png',
-    }
+    },
   },
   {
     name: 'IconButton',
     href: '/?path=/docs/components-iconbutton--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/icon-button.png',
-    }
+    },
   },
   {
     name: 'Icon',
     href: '/?path=/docs/components-icon--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/icon.png',
-    }
+    },
   },
   {
     name: 'Input',
     href: '/?path=/docs/components-input--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/input.png',
-    }
+    },
   },
   {
     name: 'InputOTP',
     href: '/?path=/docs/components-inputotp--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/empty.png',
-    }
+    },
   },
   {
     name: 'Kbd',
     href: '/?path=/docs/components-kbd--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/empty.png',
-    }
+    },
   },
   {
     name: 'Label',
     href: '/?path=/docs/components-label--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/label.png',
-    }
+    },
   },
   {
     name: 'LinkBox',
     href: '/?path=/docs/components-linkbox--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/empty.png',
-    }
+    },
   },
   {
     name: 'Meter',
     href: '/?path=/docs/components-meter--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/empty.png',
-    }
+    },
   },
   {
     name: 'Pagination',
     href: '/?path=/docs/components-pagination--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/pagination.png',
-    }
+    },
   },
   {
     name: 'Popover',
     href: '/?path=/docs/components-popover--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/popover.png',
-    }
+    },
   },
   {
     name: 'Portal',
     href: '/?path=/docs/components-portal--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/empty.png',
-    }
+    },
   },
   {
     name: 'ProgressTracker',
     href: '/?path=/docs/components-progress-tracker--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/progress-tracker.png',
-    }
+    },
   },
   {
     name: 'Progress',
     href: '/?path=/docs/components-progress--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/progress-bar.png',
-    }
+    },
   },
   {
     name: 'RadioGroup',
     href: '/?path=/docs/components-radiogroup--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/radio-button.png',
-    }
+    },
   },
   {
     name: 'Rating',
     href: '/?path=/docs/components-rating--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/ratings.png',
-    }
+    },
   },
   {
     name: 'ScrollingList',
     href: '/?path=/docs/components-scrollinglist--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/empty.png',
-    }
+    },
   },
   {
     name: 'SegmentedGauge',
     href: '/?path=/docs/components-segmentedgauge--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/gauge.png',
-    }
+    },
   },
   {
     name: 'Select',
     href: '/?path=/docs/components-select--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/select.png',
-    }
+    },
   },
   {
     name: 'Skeleton',
     href: '/?path=/docs/components-skeleton--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/skeleton.png',
-    }
+    },
   },
   {
     name: 'Slider',
     href: '/?path=/docs/components-slider--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/slider.png',
-    }
+    },
   },
   {
     name: 'Slot',
     href: '/?path=/docs/components-slot--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/empty.png',
-    }
+    },
   },
   {
     name: 'Spinner',
     href: '/?path=/docs/components-spinner--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/spinner.png',
-    }
+    },
   },
   {
     name: 'Stepper',
     href: '/?path=/docs/components-stepper--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/stepper.png',
-    }
+    },
   },
   {
     name: 'Switch',
     href: '/?path=/docs/components-switch--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/switch.png',
-    }
+    },
   },
   {
     name: 'Tabs',
     href: '/?path=/docs/components-tabs--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/tab.png',
-    }
+    },
   },
   {
     name: 'Tag',
     href: '/?path=/docs/components-tag--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/tag.png',
-    }
+    },
   },
   {
     name: 'TextLink',
     href: '/?path=/docs/components-textlink--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/textlink.png',
-    }
+    },
   },
   {
     name: 'Textarea',
     href: '/?path=/docs/components-textarea--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/textarea.png',
-    }
+    },
   },
   {
     name: 'Toast',
     href: '/?path=/docs/components-toast--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/toast.png',
-    }
+    },
   },
   {
     name: 'VisuallyHidden',
     href: '/?path=/docs/components-visuallyhidden--docs',
     thumbnails: {
       light: '/assets/components-thumbnails/light/empty.png',
-    }
+    },
   },
 ]
 
+export const FilterableComponentsList = () => {
+  const [filter, setFilter] = useState('')
+  const filtered = !filter.trim()
+    ? components
+    : components.filter((c) => {
+        const lower = filter.toLowerCase().trim()
+        return (
+          c.name.toLowerCase().includes(lower) ||
+          (c.description && c.description.toLowerCase().includes(lower))
+        )
+      })
+  return (
+    <>
+      <div className="sb-unstyled mb-xl max-w-sz-320">
+        <Input
+          placeholder="Button, Input, etc."
+          value={filter}
+          onValueChange={setFilter}
+          aria-label="Filter components by name"
+        />
+      </div>
+      <div className="sb-unstyled my-xl gap-lg flex-wrap flex">
+        {filtered.length === 0 ? (
+          <p className="text-body-1 text-neutral-outline">
+            No components match &quot;{filter}&quot;. Try a different search.
+          </p>
+        ) : (
+          filtered.map((component) => (
+            <div key={component.name} className="flex flex-col gap-sm w-sz-184 shrink-0 min-h-[100px]">
+              <a href={component.href} className="flex gap-md flex-col group">
+                <TextLink underline={false} intent="basic" className="text-headline-2">
+                  {component.name}
+                </TextLink>
+
+                <div className="group-hover:scale-110 group-hover:shadow-sm transition-transform duration-150 w-[184px] h-[100px] bg-neutral-container rounded-lg flex items-center justify-center">
+                  <img
+                    src={component.thumbnails?.light}
+                    alt={`${component.name} component thumbnail`}
+                    className="w-full h-full object-contain"
+                    loading="lazy"
+                    width="184"
+                    height="100"
+                  />
+                </div>
+              </a>
+            </div>
+          ))
+        )}
+      </div>
+    </>
+  )
+}
 
 ## Components
 
-<div className="sb-unstyled my-xl gap-lg flex-wrap flex">
-  {components.map((component) => (
-    <div className='flex flex-col gap-sm w-sz-184 shrink-0 min-h-[100px]'>
-        <a href={component.href} className="flex gap-md flex-col group">
-          <TextLink underline={false} intent="basic" className="text-headline-2">
-              {component.name}
-          </TextLink>
-          
-          <div className="group-hover:scale-110 group-hover:shadow-sm transition-transform duration-150 w-[184px] h-[100px] bg-neutral-container rounded-lg flex items-center justify-center">
-            <img 
-              src={component.thumbnails?.light} 
-              alt={`${component.name} component thumbnail`}
-              className="w-full h-full object-contain" 
-              loading="lazy"
-              width="184"
-              height="100"
-            />
-          </div>
-        </a>
-      
-      
-    </div>
-  ))}
-</div>
+<FilterableComponentsList />
