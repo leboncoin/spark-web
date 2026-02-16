@@ -46,7 +46,12 @@ const config: StorybookConfig = {
     '!..packages/icons/**/*.doc.mdx',
     '!..packages/icons/**/*.stories.tsx',
   ],
-  addons: ['@storybook/addon-a11y', '@storybook/addon-designs', '@storybook/addon-docs'],
+  addons: [
+    '@vueless/storybook-dark-mode',
+    '@storybook/addon-a11y',
+    '@storybook/addon-designs',
+    '@storybook/addon-docs',
+  ],
   core: {
     disableTelemetry: true,
   },
@@ -57,6 +62,7 @@ const config: StorybookConfig = {
     actions: false,
     controls: false,
     viewport: true,
+    backgrounds: false,
   },
   staticDirs: ['../public'],
   typescript: {

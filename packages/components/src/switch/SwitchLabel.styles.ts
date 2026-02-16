@@ -1,6 +1,6 @@
 import { cva, VariantProps } from 'class-variance-authority'
 
-export const labelStyles = cva('', {
+export const labelStyles = cva('default:text-on-surface', {
   variants: {
     disabled: {
       true: ['text-neutral/dim-2', 'cursor-not-allowed'],

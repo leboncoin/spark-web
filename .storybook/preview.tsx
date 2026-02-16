@@ -1,20 +1,46 @@
 import { DocsContainer, DocsContainerProps } from '@storybook/addon-docs/blocks'
+import { useDarkMode } from '@vueless/storybook-dark-mode'
 import { Icon } from '@spark-ui/components/icon'
-import { ShareExpand } from '@spark-ui/icons/ShareExpand'
 import { WarningOutline } from '@spark-ui/icons/WarningOutline'
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useLayoutEffect, useState } from 'react'
 import { INITIAL_VIEWPORTS } from 'storybook/viewport'
+import themes from './themes'
 
 import '../src/tailwind.css'
-import './sb-theming.css'
+import { cx } from 'class-variance-authority'
 
-import { ThemeProvider } from './ThemeProvider'
+/**
+ * Wraps stories and syncs Spark theme (data-theme) with Storybook dark mode.
+ * - Reads dark/light from the addon's class on <html> (classTarget: 'html') so it works in story view.
+ * - Sets data-theme on <html> so Spark CSS variables apply to the whole iframe document.
+ */
+function ThemeWrapper({ children, viewMode }: { children: ReactNode; viewMode: string }) {
+  const isDarkMode = useDarkMode()
+  const theme = isDarkMode ? 'dark' : 'light'
+
+  useLayoutEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+    return () => document.documentElement.removeAttribute('data-theme')
+  }, [theme])
+
+  return (
+    <div
+      data-theme={theme}
+      className={cx('bg-background text-on-background w-min-content relative overflow-x-auto', {
+        'p-lg': viewMode === 'docs',
+      })}
+    >
+      {children}
+    </div>
+  )
+}
 
 interface Props extends DocsContainerProps {
   children: ReactNode
 }
 
 const ExampleContainer = ({ children, ...props }: Props) => {
+  const isDarkMode = useDarkMode()
   const [shouldDisplayExperimentalBanner, setShouldDisplayExperimentalBanner] = useState(false)
   const [shouldDisplaydeprecatedBanner, setShouldDisplayDeprecatedBanner] = useState(false)
 
@@ -26,7 +52,11 @@ const ExampleContainer = ({ children, ...props }: Props) => {
   }, [props.context?.channel])
 
   return (
-    <DocsContainer {...props}>
+    <DocsContainer
+      {...props}
+      theme={isDarkMode ? themes.dark : themes.light}
+      data-theme={isDarkMode ? 'dark' : 'light'}
+    >
       <div id="spark-doc-container">
         {shouldDisplayExperimentalBanner && (
           <p className="gap-md py-sm px-lg z-sticky bg-alert-container text-on-alert-container border-l-alert sticky top-0 flex items-center border-l-[4px] font-bold">
@@ -53,45 +83,21 @@ const ExampleContainer = ({ children, ...props }: Props) => {
 }
 
 const preview = {
-  globalTypes: {
-    colorScheme: {
-      name: 'Color scheme',
-      description: 'Set the color scheme',
-      defaultValue: 'light',
-      toolbar: {
-        dynamicTitle: false,
-        items: [
-          { value: 'system', right: '⚙️', title: 'System color scheme' },
-          { value: 'light', right: '⚪️', title: 'Light (forced)' },
-          { value: 'dark', right: '⚫️', title: 'Dark (forced)' },
-        ],
-      },
-    },
-    highContrast: {
-      name: 'a11y - High contrast',
-      description: 'Toggle high contrast',
-      defaultValue: 'false',
-      toolbar: {
-        dynamicTitle: true,
-        items: [
-          { value: 'system', right: '⚙️', title: 'System contrast' },
-          { value: 'false', title: 'Regular contrast (forced)' },
-          { value: 'true', title: 'High contrast (forced)' },
-        ],
-      },
-    },
-  },
-
+  globalTypes: {},
   initialGlobals: {
     a11y: {
       // Optional flag to prevent the automatic check
       manual: true,
     },
-    colorScheme: 'light',
-    highContrast: 'false',
   },
 
   parameters: {
+    darkMode: {
+      classTarget: 'html',
+      stylePreview: true,
+      dark: themes.dark,
+      light: themes.light,
+    },
     viewport: {
       options: INITIAL_VIEWPORTS,
     },
@@ -100,6 +106,11 @@ const preview = {
       codePanel: true,
       toc: {
         headingSelector: 'h2, h3',
+      },
+      canvas: {
+        withToolbar: true,
+        sourceState: 'hidden',
+        layout: 'fullscreen',
       },
     },
     options: {
@@ -159,40 +170,12 @@ const preview = {
   },
 
   decorators: [
-    (
-      storyFn: () => ReactNode,
-      { globals }: { globals: { colorScheme: string; highContrast: string } }
-    ) => {
-      const { colorScheme, highContrast } = globals
-      return (
-        <ThemeProvider colorScheme={colorScheme} highContrast={highContrast}>
-          {storyFn()}
-        </ThemeProvider>
-      )
-    },
-    (storyFn: () => ReactNode, { id, viewMode }: { id: string; viewMode: string }) => {
+    (storyFn: () => ReactNode, { id, viewMode, ...rest }: { id: string; viewMode: string }) => {
       const params = new URLSearchParams(window.top?.location.search)
       params.set('id', id)
       params.delete('path')
 
-      return (
-        <div className="relative w-full">
-          {viewMode === 'docs' && (
-            <div className="-right-lg -top-xl absolute">
-              <a
-                href={`/iframe.html?${params.toString()}`}
-                target="_blank"
-                className="text-basic hover:text-basic-hovered focus:text-basic-hovered enabled:active:text-basic-hovered"
-              >
-                <Icon size="sm" label="expand">
-                  <ShareExpand />
-                </Icon>
-              </a>
-            </div>
-          )}
-          {storyFn()}
-        </div>
-      )
+      return <ThemeWrapper viewMode={viewMode}>{storyFn()}</ThemeWrapper>
     },
   ],
 }
