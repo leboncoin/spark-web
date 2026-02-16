@@ -1,80 +1,371 @@
 import { Meta } from '@storybook/addon-docs/blocks'
 import { Card } from '@docs/helpers/Card'
+import { Callout } from '@docs/helpers/Callout'
+
+import { Accordion } from '@spark-ui/components/accordion'
+import { Button } from '@spark-ui/components/button'
+import { Card as SparkCard } from '@spark-ui/components/card'
+import { Divider } from '@spark-ui/components/divider'
+import { ScrollingList } from '@spark-ui/components/scrolling-list'
+import { Tag } from '@spark-ui/components/tag'
+import { TextLink } from '@spark-ui/components/text-link'
 
 <Meta title="Introduction" />
 
-<div className="flex flex-col gap-xl pb-3xl">
-<p className="text-center text-on-background sb-unstyled text-display-1-expanded">
-  Create <span className="text-main">accessible</span> React apps
-  <span className="text-support">with ease</span>.
-</p>
-<p className="text-center text-on-neutral-container sb-unstyled text-headline-1">
-  **Spark UI** is a React based design system focused on modularity and accessibility.
-</p>
+{/* Hero */}
 
-</div>
+<section className="sb-unstyled gap-xl py-3xl flex flex-col items-center text-center">
+  <p className="text-display-1-expanded text-on-background">
+    Create <span className="text-main">accessible</span> React apps
+    <span className="text-support"> with ease</span>.
+  </p>
+  <p className="text-headline-1 text-on-neutral-container">
+    **Spark UI** is a React design system built for **modularity**, **accessibility** and **semantic
+    theming**. Ship consistent, inclusive interfaces without reinventing the wheel.
+  </p>
+  <div className="gap-md pt-md flex flex-wrap justify-center">
+    <Button asChild>
+      <a
+        href="#setup"
+        onClick={e => {
+          e.preventDefault()
+          document.getElementById('setup')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }}
+      >
+        Get started
+      </a>
+    </Button>
+    <Button design="outlined" intent="neutral" asChild>
+      <a href="/?path=/docs/components-list--docs">Browse components</a>
+    </Button>
+  </div>
+</section>
 
-# Getting started
+## Why Spark?
 
-## What is Spark ?
+<section className="sb-unstyled">
+  <div className="gap-lg grid md:grid-cols-3">
+    <SparkCard design="filled" intent="surface" className="p-lg">
+      <h3 className="text-headline-2 text-on-surface mb-sm">Accessible by default</h3>
+      <p className="text-body-2 text-on-surface">
+        Components follow **WCAG 2.1 Level AA** and WAI-ARIA patterns. Screen readers and keyboard
+        navigation are built in—so you can focus on product, not compliance.
+      </p>
+      <div className="mt-md">
+        <Tag design="tinted" intent="success" size="sm">
+          WCAG 2.1 AA
+        </Tag>
+      </div>
+    </SparkCard>
+    <SparkCard design="filled" intent="surface" className="p-lg">
+      <h3 className="text-headline-2 text-on-surface mb-sm">Modular & composable</h3>
+      <p className="text-body-2 text-on-surface">
+        Use only what you need. Compound components, polymorphism and composition let you assemble
+        UIs your way while keeping a consistent look and behavior.
+      </p>
+      <div className="mt-md">
+        <Tag design="tinted" intent="main" size="sm">
+          Compound pattern
+        </Tag>
+      </div>
+    </SparkCard>
+    <SparkCard design="filled" intent="surface" className="p-lg">
+      <h3 className="text-headline-2 text-on-surface mb-sm">Tailwind-powered theming</h3>
+      <p className="text-body-2 text-on-surface">
+        A **semantic theme** on top of Tailwind CSS v4: design tokens (colors, spacing, typography)
+        that map to your brand. Theme once, style everywhere.
+      </p>
+      <div className="mt-md">
+        <Tag design="tinted" intent="support" size="sm">
+          Tailwind v4
+        </Tag>
+      </div>
+    </SparkCard>
+  </div>
+</section>
 
-**Spark offers you two things:**
+## Setup
 
-- A full set of **React components**, with an emphasis on modularity and accessibility
-- A semantic theming/styling system based on **TailwindCSS**, which allows you to theme your apps and style your own components
+<section id="setup" className="sb-unstyled scroll-mt-2xl">
+  <p className="text-body-1 text-on-neutral-container mb-lg">
+    Spark UI is built on **Tailwind CSS v4**. [Install Tailwind CSS](https://tailwindcss.com/docs/installation) first, then add Spark.
+  </p>
 
-## Using Spark
+<h3 className="text-headline-2 text-on-background mt-xl mb-md">Prerequisites</h3>
+<ul className="text-body-2 text-on-neutral-container pl-xl space-y-sm list-disc">
+  <li>[Tailwind CSS v4](https://tailwindcss.com/docs/installation) installed in your project</li>
+  <li>
+    Optional: [Tailwind CSS
+    IntelliSense](https://tailwindcss.com/docs/editor-setup#intelli-sense-for-vs-code) for VS Code
+    (or [JetBrains](https://www.jetbrains.com/help/webstorm/tailwind-css.html))
+  </li>
+  <li>**React 19** or higher</li>
+</ul>
 
-New to Spark or looking for information ? The following sections should help you find what you need
+<h3 className="text-headline-2 text-on-background mt-xl mb-md">Install</h3>
+<pre className="sb-unstyled bg-neutral-container text-on-neutral-container p-lg overflow-x-auto rounded-lg">
+  {`npm i @spark-ui/theme-utils @spark-ui/components`}
+</pre>
 
-<div className="sb-unstyled my-xl gap-lg flex flex-row flex-wrap">
-  <Card href="/?path=/docs/setup--docs" description="Enable Spark on your project">
-    Setup
-  </Card>
-  <Card
-    href="/?path=/docs/components-list--docs"
-    description="Apply styles to your components and markup"
-  >
-    Components list
-  </Card>
-  <Card
-    href="/?path=/docs/accessibility--docs"
-    description="How to handle theme customization"
-  >
-    Accessibility
-  </Card>
-  <Card
-    href="/?path=/docs/f-a-q--docs"
-    description="Answers to some commonly asked questions."
-  >
-    F.A.Q
-  </Card>
-</div>
+  <h3 className="text-headline-2 text-on-background mt-xl mb-md">Configure Tailwind</h3>
+  <p className="text-body-2 text-on-neutral-container mb-md">
+    In your Tailwind CSS entry file (e.g. main CSS):
+  </p>
+  <pre className="sb-unstyled bg-neutral-container text-on-neutral-container p-lg rounded-lg overflow-x-auto text-body-2">
+{`@import 'tailwindcss';
 
-## Styling
+@import '@spark-ui/theme-utils/base';
+@source './node_modules/@spark-ui';`}
 
-All you need to know about styling Spark components, managing themes and more.
+  </pre>
+</section>
 
-<div className="sb-unstyled my-xl gap-lg flex flex-row flex-wrap">
-  <Card href="/?path=/docs/styling-overview--docs">Overview</Card>
-  <Card href="/?path=/docs/styling-design-tokens--docs">Design tokens</Card>
-  <Card href="/?path=/docs/styling-themes--docs">Themes</Card>
-  <Card href="/?path=/docs/styling-themes-contrast-check--docs">Contrast checker</Card>
-</div>
+## Explore
 
-## Components principles
+<section id="components" className="sb-unstyled scroll-mt-2xl">
+  <ScrollingList withFade gap={8}>
+    <ScrollingList.SkipButton>Skip explore list</ScrollingList.SkipButton>
+    <ScrollingList.Items aria-label="Explore documentation">
+      <ScrollingList.Item>
+        <Card
+          className="h-full"
+          href="/?path=/docs/styling-overview--docs"
+          description="How Spark handles tokens, themes and Tailwind CSS"
+        >
+          Styling overview
+        </Card>
+      </ScrollingList.Item>
+      <ScrollingList.Item>
+        <Card
+          className="h-full"
+          href="/?path=/docs/components-list--docs"
+          description="Forms, navigation, feedback and more — with stories and accessibility docs"
+        >
+          Components
+        </Card>
+      </ScrollingList.Item>
+      <ScrollingList.Item>
+        <Card
+          className="h-full"
+          href="/?path=/docs/styling-design-tokens--docs"
+          description="Colors, spacing, typography — the building blocks of the theme"
+        >
+          Design tokens
+        </Card>
+      </ScrollingList.Item>
+      <ScrollingList.Item>
+        <Card
+          className="h-full"
+          href="/?path=/docs/styling-themes--docs"
+          description="Define and apply semantic themes to match your brand"
+        >
+          Themes
+        </Card>
+      </ScrollingList.Item>
+      <ScrollingList.Item>
+        <Card
+          className="h-full"
+          href="/?path=/docs/components-principles-compound-pattern--docs"
+          description="Assemble flexible UIs from smaller, composable subcomponents"
+        >
+          Compound pattern
+        </Card>
+      </ScrollingList.Item>
+      <ScrollingList.Item>
+        <Card
+          className="h-full"
+          href="/?path=/docs/components-principles-composition--docs"
+          description="Combine and extend Spark components to fit your use cases"
+        >
+          Composition
+        </Card>
+      </ScrollingList.Item>
+      <ScrollingList.Item>
+        <Card
+          className="h-full"
+          href="/?path=/docs/components-principles-polymorphism--docs"
+          description="Render components as different DOM elements (e.g. asChild)"
+        >
+          Polymorphism
+        </Card>
+      </ScrollingList.Item>
+    </ScrollingList.Items>
+    <ScrollingList.Controls>
+      <ScrollingList.PrevButton aria-label="Previous" />
+      <ScrollingList.NextButton aria-label="Next" />
+    </ScrollingList.Controls>
+  </ScrollingList>
+</section>
 
-Spark components all share the same principles, here is a quick overview of the most important ones.
+## Accessibility
 
-<div className="sb-unstyled my-xl gap-lg flex flex-row flex-wrap">
-  <Card href="/?path=/docs/components-principles-compound-pattern--docs">Compound pattern</Card>
-  <Card href="/?path=/docs/components-principles-composition--docs">Composition</Card>
-  <Card href="/?path=/docs/components-principles-polymorphism--docs">Polymorphism</Card>
-  <Card href="/?path=/docs/components-principles-third-party-libraries--docs">Third-party libraries</Card>
-  <Card href="/?path=/docs/components-principles-identifying-spark-components--docs">Identifying Spark components</Card>
-</div>
+<section id="accessibility" className="sb-unstyled scroll-mt-2xl">
+  <p className="text-body-1 text-on-neutral-container mb-md">
+    Accessibility is **the ability for applications to be used by everyone**, including people with
+    vision, auditory, motor or cognitive impairments.
+  </p>
+  <p className="text-body-2 text-on-neutral-container mb-lg">
+    Spark UI addresses key aspects: screen reader support, keyboard navigation, semantics and
+    [WAI-ARIA](https://www.w3.org/TR/wai-aria-1.2) patterns. Our components align with **[WCAG 2.1
+    Level AA](https://www.w3.org/TR/WCAG21)** and the [ARIA Authoring Practices
+    Guide](https://www.w3.org/WAI/ARIA/apg/).
+  </p>
+  <p className="text-body-2 text-on-neutral-container mb-lg">
+    We test with Testing Library, Playwright, Axe, VoiceOver and TalkBack—locally and in CI. Beyond
+    helping users with disabilities, good a11y often improves the experience for everyone (e.g.
+    keyboard-only use).
+  </p>
+  <Callout kind="warning" marginY="medium">
+    Accessibility can be broken during implementation. Preserve focus management, labels and
+    semantics when integrating Spark into your app.
+  </Callout>
+  <p className="text-body-2 text-on-neutral-container mt-md">
+    Useful resources: [Testing Library](https://testing-library.com/),
+    [Playwright](https://playwright.dev/), [Axe](https://www.deque.com/axe/).
+  </p>
+</section>
 
 ## Resources
 
-- [Spark - Issues](https://github.com/leboncoin/spark-web/issues)
-- [Spark - Discussions](https://github.com/leboncoin/spark-web/discussions)
+<section className="sb-unstyled">
+  <ul className="text-body-2 text-on-neutral-container p-none m-none gap-md flex list-none flex-wrap">
+    <li>
+      <TextLink
+        href="https://github.com/leboncoin/spark-web/issues"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Issues
+      </TextLink>
+    </li>
+    <li>
+      <TextLink
+        href="https://github.com/leboncoin/spark-web/discussions"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Discussions
+      </TextLink>
+    </li>
+  </ul>
+</section>
+
+{/* FAQ */}
+
+## Frequently asked questions
+
+<section id="faq" className="sb-unstyled scroll-mt-2xl">
+  <Accordion className="mt-xl" multiple>
+    <Accordion.Item value="opacity">
+      <Accordion.ItemHeader asChild>
+        <h4>
+          <Accordion.ItemTrigger>
+            How do I change an element's opacity using the color opacity modifier?
+          </Accordion.ItemTrigger>
+        </h4>
+      </Accordion.ItemHeader>
+      <Accordion.ItemContent>
+        <p>
+          Use the `/` modifier with an opacity token, e.g. `bg-primary/dim-1`. See{' '}
+          <a
+            href="https://tailwindcss.com/docs/background-color#changing-the-opacity"
+            className="text-main underline"
+          >
+            Tailwind: changing the opacity
+          </a>
+          .
+        </p>
+      </Accordion.ItemContent>
+    </Accordion.Item>
+    <Accordion.Item value="font-weights">
+      <Accordion.ItemHeader asChild>
+        <h4>
+          <Accordion.ItemTrigger>How do I deal with font weights?</Accordion.ItemTrigger>
+        </h4>
+      </Accordion.ItemHeader>
+      <Accordion.ItemContent>
+        <p>
+          Combine typography classes with font-weight utilities: `text-body-1 font-bold`. Spark
+          themes expose font-weight tokens—check the theme docs for available values.
+        </p>
+      </Accordion.ItemContent>
+    </Accordion.Item>
+    <Accordion.Item value="complex-selectors">
+      <Accordion.ItemHeader asChild>
+        <h4>
+          <Accordion.ItemTrigger>
+            How do I handle complex CSS selectors or rarely-used properties with Tailwind?
+          </Accordion.ItemTrigger>
+        </h4>
+      </Accordion.ItemHeader>
+      <Accordion.ItemContent>
+        <p>
+          Use Tailwind's{' '}
+          <a
+            href="https://tailwindcss.com/docs/adding-custom-styles#arbitrary-properties"
+            className="text-main underline"
+          >
+            arbitrary properties/variants
+          </a>{' '}
+          for a few rules, or a separate CSS file when it keeps code clearer.
+        </p>
+      </Accordion.ItemContent>
+    </Accordion.Item>
+    <Accordion.Item value="many-classes">
+      <Accordion.ItemHeader asChild>
+        <h4>
+          <Accordion.ItemTrigger>
+            How do I organize elements with many Tailwind classes?
+          </Accordion.ItemTrigger>
+        </h4>
+      </Accordion.ItemHeader>
+      <Accordion.ItemContent>
+        <p>
+          Group classes by category (layout, spacing, typography, etc.) and use a helper like{' '}
+          <a href="https://github.com/lukeed/clsx" className="text-main underline">
+            clsx
+          </a>{' '}
+          or{' '}
+          <a href="https://cva.style/docs/api-reference#cx" className="text-main underline">
+            cx from CVA
+          </a>{' '}
+          to keep JSX readable.
+        </p>
+      </Accordion.ItemContent>
+    </Accordion.Item>
+    <Accordion.Item value="complex-styling">
+      <Accordion.ItemHeader asChild>
+        <h4>
+          <Accordion.ItemTrigger>How do I handle complex styling scenarios?</Accordion.ItemTrigger>
+        </h4>
+      </Accordion.ItemHeader>
+      <Accordion.ItemContent>
+        <p>
+          We recommend{' '}
+          <a href="https://cva.style/docs" className="text-main underline">
+            CVA (Class Variance Authority)
+          </a>
+          . Spark components use it internally to map props to class variants—you can do the same
+          for your own components.
+        </p>
+      </Accordion.ItemContent>
+    </Accordion.Item>
+    <Accordion.Item value="browser-support">
+      <Accordion.ItemHeader asChild>
+        <h4>
+          <Accordion.ItemTrigger>What is Spark's browser support?</Accordion.ItemTrigger>
+        </h4>
+      </Accordion.ItemHeader>
+      <Accordion.ItemContent>
+        <p>
+          Spark targets the latest stable versions of Chrome, Firefox, Edge and Safari. IE
+          (including IE 11) is not supported. See our <code>package.json</code> and{' '}
+          <a href="https://browsersl.ist/" className="text-main underline">
+            Browserslist
+          </a>{' '}
+          for the exact list.
+        </p>
+      </Accordion.ItemContent>
+    </Accordion.Item>
+  </Accordion>
+</section>
