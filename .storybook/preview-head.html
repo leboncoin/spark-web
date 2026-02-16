@@ -7,110 +7,12 @@
 
   /* Enabled dark mode preview in story views */
   html {
-    background-color: var(--color-background);
-    color: var(--color-on-background);
     font-family: var(--font-sans) !important;
-  }
-
-  html[data-theme="light"],
-  html[data-theme="light-more-contrast"] {
-    --color-code-block: #f5f5f6;
-    --canvas-stripe: #f7f7f7;
-  }
-
-  html[data-theme="dark"],
-  html[data-theme="dark-more-contrast"] {
-    --color-code-block: #f6f8f9;
-    --canvas-stripe: #1e1e1e;
-  }
-
-  .sbdocs-wrapper {
-    background: var(--color-background) !important;
-    color: var(--color-on-background) !important;
-  }
-
-  .sbdocs-wrapper :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) {
-    color: var(--color-on-background) !important;
-  }
-
-  .sbdocs-wrapper :where(li:not(.sb-anchor, .sb-unstyled, .sb-unstyled li)) {
-    color: var(--color-on-background) !important;
-  }
-
-  .sbdocs-wrapper #spark-doc-container>h2,
-  .sbdocs-wrapper #spark-doc-container>h3,
-  .sbdocs-wrapper #spark-doc-container>h4,
-  .sbdocs-wrapper #spark-doc-container>h5 {
-    color: var(--color-support) !important;
-  }
-
-  .docs-story {
-    /* striped background inside canvas to showcase opacity */
-    background: repeating-linear-gradient(45deg,
-        var(--color-surface),
-        var(--color-surface) 5px,
-        var(--canvas-stripe) 5px,
-        var(--canvas-stripe) 10px) !important;
-  }
-
-
-
-  .docblock-source {
-    border: 1px solid var(--color-outline) !important;
-    box-shadow: none !important;
-    background-color: #ebebed7f !important;
-  }
-
-  .sbdocs-wrapper .docblock-source pre {
-    background-color: var(--color-code-block) !important;
-  }
-
-
-
-  #spark-doc-container>h1 {
-    color: var(--color-main) !important;
-    font-weight: 700 !important;
-  }
-
-  #spark-doc-container>h2,
-  #spark-doc-container>h3,
-  #spark-doc-container>h4,
-  #spark-doc-container>h5 {
-    color: var(--color-support) !important;
-    font-weight: 700 !important;
-  }
-
-  /* === Table of contents === */
-  .toc-wrapper .toc-link {
-    color: var(--color-on-background) !important;
-  }
-
-  .toc-wrapper .is-active-link {
-    color: var(--color-main) !important;
-  }
-
-  .toc-wrapper .toc-list {
-    border-color: color-mix(in srgb, var(--color-outline) var(--opacity-dim-3), transparent) !important;
-  }
-
-  .toc-wrapper .is-active-li::before {
-    border-color: var(--color-main) !important;
-  }
-
-  /* === ArgTypes TABLE === */
-  table.docblock-argstable thead th {
-    color: var(--color-on-background) !important;
-  }
-
-  table.docblock-argstable tbody td {
     background-color: var(--color-background) !important;
     color: var(--color-on-background) !important;
-    border-inline-start-color: var(--color-neutral-container) !important;
-    border-inline-end-color: var(--color-neutral-container) !important;
-    border-block-start-color: var(--color-neutral-container) !important;
-    border-block-end-color: var(--color-neutral-container) !important;
-    border-top-color: var(--color-neutral-container) !important;
+  }
+
+  #spark-doc-container a:not(.sb-anchor, .sb-unstyled, .sb-unstyled a) {
+    margin-left: -24px !important;
   }
 </style>
-
-<link href="/normalize.css" rel="stylesheet" />
