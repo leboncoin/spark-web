@@ -41,8 +41,16 @@ interface Props extends DocsContainerProps {
 
 const ExampleContainer = ({ children, ...props }: Props) => {
   const isDarkMode = useDarkMode()
+  const theme = isDarkMode ? 'dark' : 'light'
   const [shouldDisplayExperimentalBanner, setShouldDisplayExperimentalBanner] = useState(false)
   const [shouldDisplaydeprecatedBanner, setShouldDisplayDeprecatedBanner] = useState(false)
+
+  // Set data-theme on the iframe's <html> for docs (including pure MDX pages like Introduction).
+  // The story decorator only runs when a story is rendered, so pure MDX docs need it here.
+  useLayoutEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+    return () => document.documentElement.removeAttribute('data-theme')
+  }, [theme])
 
   useEffect(() => {
     const primaryStoryTitle = props.context.componentStories()[0]?.title
@@ -52,11 +60,7 @@ const ExampleContainer = ({ children, ...props }: Props) => {
   }, [props.context?.channel])
 
   return (
-    <DocsContainer
-      {...props}
-      theme={isDarkMode ? themes.dark : themes.light}
-      data-theme={isDarkMode ? 'dark' : 'light'}
-    >
+    <DocsContainer {...props} theme={isDarkMode ? themes.dark : themes.light} data-theme={theme}>
       <div id="spark-doc-container">
         {shouldDisplayExperimentalBanner && (
           <p className="gap-md py-sm px-lg z-sticky bg-alert-container text-on-alert-container border-l-alert sticky top-0 flex items-center border-l-[4px] font-bold">
@@ -117,9 +121,7 @@ const preview = {
       storySort: {
         order: [
           'Introduction',
-          'Setup',
           'Components list',
-          'Accessibility',
           'Styling',
           [
             'Overview',
@@ -156,7 +158,6 @@ const preview = {
             'Code of Conduct',
             'Multiple Github Accounts',
           ],
-          'F.A.Q',
           '*',
         ],
       },
