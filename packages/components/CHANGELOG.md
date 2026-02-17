@@ -1,3 +1,17 @@
+## 16.0.1 (2026-02-17)
+
+### 🩹 Fixes
+
+- consider custom commit types for nx versionning ([cbf115339](https://github.com/leboncoin/spark-web/commit/cbf115339))
+
+### 🎨 Styles
+
+- **components:** fixed font size per size ([d99209c96](https://github.com/leboncoin/spark-web/commit/d99209c96))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 # 16.0.0 (2026-02-17)
 
 ### 🚀 Features
