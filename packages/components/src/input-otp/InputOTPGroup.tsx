@@ -4,7 +4,7 @@ export interface InputOTPGroupProps extends ComponentPropsWithoutRef<'div'> {}
 
 export const InputOTPGroup = ({ children, className, ...props }: InputOTPGroupProps) => {
   return (
-    <div className={`inline-flex [&>*:not(:first-child)]:-ml-px ${className || ''}`} {...props}>
+    <div className={`gap-md flex ${className}`} {...props}>
       {children}
     </div>
   )

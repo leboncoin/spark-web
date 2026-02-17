@@ -115,6 +115,11 @@ export interface InputOTPProps
    */
   disabled?: boolean
   /**
+   * Whether the input is read-only (value visible but not editable)
+   * @default false
+   */
+  readOnly?: boolean
+  /**
    * Whether to auto-focus the input
    * @default false
    */
@@ -170,13 +175,14 @@ export const InputOTP = ({
   onValueChange,
   isValid = true,
   disabled: disabledProp = false,
+  readOnly: readOnlyProp = false,
   autoFocus = false,
   autoComplete = 'off',
   forceUppercase = false,
   filterKeys = ['-', '.'],
   pattern,
   inputMode,
-  placeholder = '',
+  placeholder = '-',
   name: nameProp,
   className,
   children,
@@ -208,6 +214,7 @@ export const InputOTP = ({
     containerRef,
     name,
     disabled,
+    readOnly,
     isInvalid,
     isRequired,
     description,
@@ -215,6 +222,7 @@ export const InputOTP = ({
     contextValue,
     handleChange,
     handleKeyDown,
+    handleCopy,
     handlePaste,
     handleFocus,
     handleBlur,
@@ -228,6 +236,7 @@ export const InputOTP = ({
     onValueChange,
     isValid,
     disabledProp,
+    readOnlyProp,
     autoFocus,
     forceUppercase,
     filterKeys,
@@ -264,8 +273,11 @@ export const InputOTP = ({
         {...accessibleNameProps}
         {...(description ? { 'aria-describedby': description } : {})}
         className={cx(
-          'gap-md relative inline-flex items-center',
-          disabled ? 'cursor-not-allowed' : 'cursor-text',
+          'group gap-md relative inline-flex w-fit items-center default:cursor-text',
+          {
+            'cursor-not-allowed': disabled,
+            'cursor-default': readOnly,
+          },
           className
         )}
         onClick={handleClick}
@@ -293,6 +305,7 @@ export const InputOTP = ({
           autoFocus={autoFocus}
           autoComplete={autoComplete}
           disabled={disabled}
+          readOnly={readOnly}
           pattern={pattern}
           inputMode={inputMode as React.InputHTMLAttributes<HTMLInputElement>['inputMode']}
           {...accessibleNameProps}
@@ -300,10 +313,11 @@ export const InputOTP = ({
           aria-invalid={isInvalid}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
+          onCopy={handleCopy}
           onPaste={handlePaste}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          className="bg-success z-raised absolute inset-0 m-0 p-0 opacity-0 disabled:cursor-not-allowed"
+          className="bg-success z-raised absolute inset-0 m-0 p-0 opacity-0 read-only:cursor-default disabled:cursor-not-allowed"
           tabIndex={0}
         />
         {/* Children render slots with auto-assigned indexes */}

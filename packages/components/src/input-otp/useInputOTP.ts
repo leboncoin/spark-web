@@ -28,6 +28,7 @@ export interface UseInputOTPProps {
   onValueChange?: (value: string) => void
   isValid: boolean
   disabledProp: boolean
+  readOnlyProp: boolean
   autoFocus: boolean
   forceUppercase: boolean
   filterKeys: string[]
@@ -42,6 +43,7 @@ export interface UseInputOTPReturn {
   containerRef: React.RefObject<HTMLDivElement | null>
   name: string | undefined
   disabled: boolean
+  readOnly: boolean
   isInvalid: boolean
   isRequired: boolean
   description: string | undefined
@@ -57,6 +59,7 @@ export interface UseInputOTPReturn {
   contextValue: InputOTPContextValue
   handleChange: ChangeEventHandler<HTMLInputElement>
   handleKeyDown: KeyboardEventHandler<HTMLInputElement>
+  handleCopy: ClipboardEventHandler<HTMLInputElement>
   handlePaste: ClipboardEventHandler<HTMLInputElement>
   handleFocus: () => void
   handleBlur: () => void
@@ -72,6 +75,7 @@ export const useInputOTP = ({
   onValueChange,
   isValid,
   disabledProp,
+  readOnlyProp,
   autoFocus,
   forceUppercase,
   filterKeys,
@@ -91,6 +95,7 @@ export const useInputOTP = ({
   const id = field.id ?? uuid
   const name = nameProp ?? field.name
   const disabled = field.disabled ?? disabledProp
+  const readOnly = field.readOnly ?? readOnlyProp
   const isInvalid = field.isInvalid ?? !isValid
   const isRequired = field.isRequired ?? false
   const labelId = field.labelId
@@ -140,9 +145,9 @@ export const useInputOTP = ({
       Array.from({ length: maxLength }, (_, i) => ({
         char: currentValue[i] || '',
         isActive: i === activeIndex && isFocused,
-        hasFakeCaret: i === activeIndex && !currentValue[i] && !disabled && isFocused,
+        hasFakeCaret: i === activeIndex && !currentValue[i] && !disabled && !readOnly && isFocused,
       })),
-    [maxLength, currentValue, activeIndex, isFocused, disabled]
+    [maxLength, currentValue, activeIndex, isFocused, disabled, readOnly]
   )
 
   // Sync controlled value with input ref
@@ -201,7 +206,7 @@ export const useInputOTP = ({
   }
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = e => {
-    if (disabled) return
+    if (disabled || readOnly) return
 
     const inputValue = e.target.value
     const processedValue = processInputValue(inputValue)
@@ -228,10 +233,14 @@ export const useInputOTP = ({
   }
 
   const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = e => {
-    if (disabled) return
+    if (disabled || readOnly) return
+
+    // Allow copy/cut/paste/selectAll shortcuts even when key is in filterKeys
+    const isShortcut =
+      (e.ctrlKey || e.metaKey) && ['a', 'c', 'v', 'x'].includes(e.key.toLowerCase())
 
     // Filter keys
-    if (filterKeys.length > 0 && filterKeys.includes(e.key)) {
+    if (filterKeys.length > 0 && filterKeys.includes(e.key) && !isShortcut) {
       e.preventDefault()
 
       return
@@ -287,8 +296,17 @@ export const useInputOTP = ({
     }
   }
 
-  const handlePaste: ClipboardEventHandler<HTMLInputElement> = e => {
+  const handleCopy: ClipboardEventHandler<HTMLInputElement> = e => {
     if (disabled) return
+
+    e.preventDefault()
+    if (currentValue.length > 0) {
+      e.clipboardData.setData('text/plain', currentValue)
+    }
+  }
+
+  const handlePaste: ClipboardEventHandler<HTMLInputElement> = e => {
+    if (disabled || readOnly) return
 
     e.preventDefault()
 
@@ -343,6 +361,7 @@ export const useInputOTP = ({
     activeIndex,
     intent,
     disabled,
+    readOnly,
     placeholder,
     type,
   }
@@ -353,6 +372,7 @@ export const useInputOTP = ({
     containerRef,
     name,
     disabled,
+    readOnly,
     isInvalid,
     isRequired,
     description,
@@ -364,6 +384,7 @@ export const useInputOTP = ({
     contextValue,
     handleChange,
     handleKeyDown,
+    handleCopy,
     handlePaste,
     handleFocus,
     handleBlur,

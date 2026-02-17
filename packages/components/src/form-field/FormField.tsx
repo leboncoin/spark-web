@@ -49,7 +49,7 @@ export const FormField = ({
       <Component
         ref={ref}
         data-spark-component="form-field"
-        className={cx(className, 'gap-sm flex flex-col')}
+        className={cx(className, 'gap-md flex flex-col')}
         {...others}
       />
     </FormFieldProvider>

@@ -11,6 +11,7 @@ export interface InputOTPContextValue {
   activeIndex: number
   intent: 'neutral' | 'success' | 'alert' | 'error'
   disabled: boolean
+  readOnly: boolean
   placeholder?: string
   type: 'text' | 'number' | 'password' | 'tel'
 }
