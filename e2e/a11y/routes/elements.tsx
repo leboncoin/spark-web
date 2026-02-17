@@ -31,6 +31,7 @@ import { A11yProgress } from '../pages/Progress'
 import { A11yProgressTracker } from '../pages/ProgressTracker'
 import { A11yRadioGroup } from '../pages/RadioGroup'
 import { A11yRating } from '../pages/Rating'
+import { A11yRatingDisplay } from '../pages/RatingDisplay'
 import { A11ySelect } from '../pages/Select'
 import { A11ySkeleton } from '../pages/Skeleton'
 import { A11ySlider } from '../pages/Slider'
@@ -84,6 +85,7 @@ export const a11yElements: Record<A11yComponentsKey, ComponentType> = {
   'progress-tracker': A11yProgressTracker,
   'radio-group': A11yRadioGroup,
   rating: A11yRating,
+  'rating-display': A11yRatingDisplay,
   select: A11ySelect,
   skeleton: A11ySkeleton,
   slider: A11ySlider,

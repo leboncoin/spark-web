@@ -36,6 +36,7 @@ export const a11yComponents = {
   'progress-tracker': 'progress-tracker',
   'radio-group': 'radio-group',
   rating: 'rating',
+  'rating-display': 'rating-display',
   select: 'select',
   skeleton: 'skeleton',
   slider: 'slider',
