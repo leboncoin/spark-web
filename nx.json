@@ -21,6 +21,27 @@
       "packages/utils/theme",
       "packages/utils/cli"
     ],
+    "conventionalCommits": {
+      "types": {
+        "feat": {
+          "semverBump": "minor"
+        },
+        "fix": {
+          "semverBump": "patch"
+        },
+        "docs": false,
+        "style": {
+          "semverBump": "patch"
+        },
+        "refactor": {
+          "semverBump": "patch"
+        },
+        "perf": {
+          "semverBump": "patch"
+        },
+        "test": false
+      }
+    },
     "version": {
       "conventionalCommits": true,
       "preVersionCommand": "npm run build"
