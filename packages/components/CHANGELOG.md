@@ -1,3 +1,13 @@
+# 16.0.0 (2026-02-17)
+
+### 🚀 Features
+
+- **components:** rating display component ([bea80d78b](https://github.com/leboncoin/spark-web/commit/bea80d78b))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 15.1.0 (2026-02-11)
 
 ### 🚀 Features
