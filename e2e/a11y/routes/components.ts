@@ -26,6 +26,7 @@ export const a11yComponents = {
   icon: 'icon',
   'icon-button': 'icon-button',
   input: 'input',
+  'input-otp': 'input-otp',
   kbd: 'kbd',
   label: 'label',
   'link-box': 'link-box',

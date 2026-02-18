@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { InputOTP } from '.'
 
 const meta: Meta<typeof InputOTP> = {
-  title: 'Experimental/InputOTP',
+  title: 'Components/InputOTP',
   component: InputOTP,
   tags: ['data-entry'],
 }
@@ -106,6 +106,17 @@ export const InvalidState: StoryFn = _args => (
 
 export const Disabled: StoryFn = _args => (
   <InputOTP disabled defaultValue="1234" aria-label="Disabled code">
+    <InputOTP.Group>
+      <InputOTP.Slot />
+      <InputOTP.Slot />
+      <InputOTP.Slot />
+      <InputOTP.Slot />
+    </InputOTP.Group>
+  </InputOTP>
+)
+
+export const ReadOnly: StoryFn = _args => (
+  <InputOTP readOnly defaultValue="1234" aria-label="Read-only code">
     <InputOTP.Group>
       <InputOTP.Slot />
       <InputOTP.Slot />
@@ -240,8 +251,10 @@ export const FieldHelperMessage: StoryFn = _args => {
 }
 
 export const FieldInvalid: StoryFn = _args => {
-  const [value, setValue] = useState('')
-  const [state, setState] = useState<undefined | 'error' | 'success'>(undefined)
+  const [value, setValue] = useState('1234')
+  const [state, setState] = useState<undefined | 'error' | 'success'>(
+    value === '1234' ? 'success' : undefined
+  )
 
   const handleChange = (newValue: string) => {
     setValue(newValue)

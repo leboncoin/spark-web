@@ -21,6 +21,7 @@ import { A11yFormField } from '../pages/FormField'
 import { A11yIcon } from '../pages/Icon'
 import { A11yIconButton } from '../pages/IconButton'
 import { A11yInput } from '../pages/Input'
+import { A11yInputOTP } from '../pages/InputOTP'
 import { A11yKbd } from '../pages/Kbd'
 import { A11yLabel } from '../pages/Label'
 import { A11yLinkBox } from '../pages/LinkBox'
@@ -75,6 +76,7 @@ export const a11yElements: Record<A11yComponentsKey, ComponentType> = {
   icon: A11yIcon,
   'icon-button': A11yIconButton,
   input: A11yInput,
+  'input-otp': A11yInputOTP,
   kbd: A11yKbd,
   label: A11yLabel,
   'link-box': A11yLinkBox,

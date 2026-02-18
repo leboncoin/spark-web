@@ -26,6 +26,8 @@ export const InputOTPSlot = ({ index: indexProp, className, ...props }: InputOTP
   const isEmpty = !char
   const isPlaceholder = isEmpty && !hasFakeCaret && context.placeholder
 
+  const isFocusTarget = index === context.activeIndex
+
   return (
     <div
       className={inputOTPSlotStyles({
@@ -34,6 +36,9 @@ export const InputOTPSlot = ({ index: indexProp, className, ...props }: InputOTP
       })}
       data-active={isActive}
       data-disabled={context.disabled}
+      data-readonly={context.readOnly}
+      data-filled={!isEmpty}
+      data-focus-target={isFocusTarget}
       data-valid={context.intent !== 'error'}
       {...props}
     >
@@ -47,7 +52,7 @@ export const InputOTPSlot = ({ index: indexProp, className, ...props }: InputOTP
           className="pointer-events-none absolute inset-0 flex items-center justify-center"
           aria-hidden="true"
         >
-          <span className="bg-on-surface animate-standalone-caret-blink h-sz-24 w-px" />
+          <span className="bg-on-surface animate-standalone-caret-blink h-sz-24 w-sz-2" />
         </span>
       )}
     </div>
