@@ -112,6 +112,14 @@ Use `variant="single-star"` on `RatingDisplay.Stars` to display one star with th
 
 <Canvas of={stories.SingleStar} />
 
+## Advanced Examples
+
+### As a link
+
+Use `asChild` so that the root element is the single child (e.g. a link) instead of a `div`. The rating props are merged onto that child.
+
+<Canvas of={stories.AsLink} />
+
 ## Accessibility
 
 <A11yReport of="rating-display" />

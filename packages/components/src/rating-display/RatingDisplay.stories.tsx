@@ -166,3 +166,18 @@ export const SingleStar: StoryFn = _args => (
     ))}
   </div>
 )
+
+export const AsLink: StoryFn = _args => (
+  <RatingDisplay
+    asChild
+    value={3.5}
+    count={128}
+    aria-label="Rating: 3.5 out of 5, based on 128 reviews"
+  >
+    <a href="/?path=/docs/components-ratingdisplay--docs#as-a-link" target="_blank">
+      <RatingDisplay.Stars />
+      <RatingDisplay.Value />
+      <RatingDisplay.Count />
+    </a>
+  </RatingDisplay>
+)
