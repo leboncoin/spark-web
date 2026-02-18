@@ -1,3 +1,13 @@
+## 16.0.2 (2026-02-18)
+
+### 🎨 Styles
+
+- **components:** input OTP final design and stable version ([583e02353](https://github.com/leboncoin/spark-web/commit/583e02353))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 16.0.1 (2026-02-17)
 
 ### 🩹 Fixes
