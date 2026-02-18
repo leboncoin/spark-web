@@ -1,3 +1,13 @@
+## 16.0.3 (2026-02-18)
+
+### 🩹 Fixes
+
+- **components:** enabling polymorphic behavior on RatingDisplay ([603a6fa7b](https://github.com/leboncoin/spark-web/commit/603a6fa7b))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 16.0.2 (2026-02-18)
 
 ### 🎨 Styles

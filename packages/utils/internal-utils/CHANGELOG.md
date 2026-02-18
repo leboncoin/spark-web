@@ -1,3 +1,7 @@
+## 16.0.3 (2026-02-18)
+
+This was a version bump only for @spark-ui/internal-utils to align it with other projects, there were no code changes.
+
 ## 16.0.2 (2026-02-18)
 
 ### 🎨 Styles
