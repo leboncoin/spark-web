@@ -1,4 +1,4 @@
-import { useMemo, useState, RefObject } from 'react'
+import { RefObject, useMemo, useState } from 'react'
 
 import { useResizeObserver } from './useResizeObserver'
 import { getSnapPositions } from './utils'

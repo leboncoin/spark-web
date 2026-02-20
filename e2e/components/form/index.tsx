@@ -25,8 +25,8 @@ const SparkForm = () => {
 
 export const DialogForm = () => (
   <Dialog defaultOpen>
-    <Dialog.Trigger asChild>
-      <Button>Open dialog form</Button>
+    <Dialog.Trigger render={<Button />}>
+      Open dialog form
     </Dialog.Trigger>
 
     <Dialog.Portal>
@@ -47,8 +47,8 @@ export const DialogForm = () => (
 
 export const DrawerForm = () => (
   <Drawer defaultOpen>
-    <Drawer.Trigger asChild>
-      <Button>Open drawer form</Button>
+    <Drawer.Trigger render={<Button />}>
+      Open drawer form
     </Drawer.Trigger>
 
     <Drawer.Portal>

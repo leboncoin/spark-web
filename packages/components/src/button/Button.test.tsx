@@ -22,13 +22,8 @@ describe('Button', () => {
     expect(document.querySelector('[data-spark-component="spinner"]')).not.toBeInTheDocument()
   })
 
-  it('should render as link', () => {
-    const props = {
-      asChild: true,
-      children: <a href="/">Link</a>,
-    }
-
-    render(<Button {...props} />)
+  it('should render as link when using render prop', () => {
+    render(<Button render={<a href="/" />}>Link</Button>)
 
     expect(screen.getByRole('link', { name: 'Link' })).toHaveAttribute('href', '/')
   })

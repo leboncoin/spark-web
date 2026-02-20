@@ -4,7 +4,7 @@
  * Wrapper script to run a11y tests with optional component filtering.
  * Extracts component names from command line arguments and passes them
  * as A11Y_COMPONENTS environment variable.
- * 
+ *
  * Usage via npm:
  *   npm run test:a11y -- tabs
  *   npm run test:a11y -- tabs button card
@@ -36,13 +36,13 @@ let skipNext = false
 
 for (let i = 0; i < args.length; i++) {
   const arg = args[i]
-  
+
   // Skip if this is a flag value
   if (skipNext) {
     skipNext = false
     continue
   }
-  
+
   // Check if it's a Playwright flag with value
   const isFlagWithValue = playwrightFlagsWithValues.some(flag => {
     if (arg.startsWith(flag + '=') || arg.startsWith(flag + ':')) {
@@ -54,16 +54,16 @@ for (let i = 0; i < args.length; i++) {
     }
     return false
   })
-  
+
   if (isFlagWithValue) {
     continue
   }
-  
+
   // Check if it's a boolean flag (starts with -- or -)
   if (arg.startsWith('--') || (arg.startsWith('-') && arg.length > 1 && !/^\d/.test(arg))) {
     continue
   }
-  
+
   // If it's not a flag, it's likely a component name
   components.push(arg)
 }

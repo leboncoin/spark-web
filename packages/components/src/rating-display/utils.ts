@@ -28,6 +28,7 @@ function getSingleStarValue(value?: number): StarValue {
   if (value === undefined) return 0
   if (value < 1) return 0
   if (value < 4) return 0.5
+
   return 1
 }
 

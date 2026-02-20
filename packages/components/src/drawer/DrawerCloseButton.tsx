@@ -22,12 +22,10 @@ export const DrawerCloseButton = ({
     data-spark-component="drawer-close-button"
     ref={ref}
     className={cx(['absolute', 'top-sm', 'right-xl'], className)}
-    asChild
+    render={<IconButton intent={intent} size={size} design={design} aria-label={ariaLabel} />}
     {...rest}
   >
-    <IconButton intent={intent} size={size} design={design} aria-label={ariaLabel}>
-      <Icon>{children}</Icon>
-    </IconButton>
+    <Icon>{children}</Icon>
   </DrawerClose>
 )
 

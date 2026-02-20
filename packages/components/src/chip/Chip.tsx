@@ -1,4 +1,6 @@
-import { ComponentPropsWithoutRef, MouseEvent, Ref } from 'react'
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
+import React, { ComponentPropsWithoutRef, isValidElement, MouseEvent, Ref } from 'react'
 
 import { chipStyles, type ChipStylesProps } from './Chip.styles'
 import { ChipContext } from './useChipContext'
@@ -6,7 +8,10 @@ import { useChipElement } from './useChipElement'
 
 type ChipPrimitiveProps = Omit<ComponentPropsWithoutRef<'button'>, 'onClick' | 'disabled' | 'type'>
 
-export interface ChipProps extends ChipPrimitiveProps, Omit<ChipStylesProps, 'hasClearButton'> {
+export interface ChipProps
+  extends Omit<useRender.ComponentProps<'button'>, 'ref' | 'onClick'>,
+    ChipPrimitiveProps,
+    Omit<ChipStylesProps, 'hasClearButton' | 'disabled'> {
   /**
    * Configures a toggleButton aria-pressed initial value
    */
@@ -15,10 +20,6 @@ export interface ChipProps extends ChipPrimitiveProps, Omit<ChipStylesProps, 'ha
    * Configures a toggleButton aria-pressed value
    */
   pressed?: boolean
-  /**
-   * Change the component to the HTML tag or custom component of the only child.
-   */
-  asChild?: boolean
   /**
    * Event handler fired each clicking event
    */
@@ -40,7 +41,7 @@ export const Chip = ({
   intent = 'basic',
   defaultPressed,
   pressed,
-  asChild,
+  render,
   className,
   onClick,
   onClear,
@@ -48,11 +49,12 @@ export const Chip = ({
   ...otherProps
 }: ChipProps) => {
   const {
-    Element: ChipElement,
+    defaultTagName,
     chipProps: { children: formattedChildren, ...chipProps },
     compoundElements,
   } = useChipElement({
-    asChild,
+    render:
+      typeof render === 'object' && render !== null && isValidElement(render) ? render : undefined,
     pressed,
     defaultPressed,
     onClick,
@@ -65,25 +67,32 @@ export const Chip = ({
 
   const { clearButton } = compoundElements
 
+  const defaultProps: Record<string, unknown> = {
+    'data-spark-component': 'chip',
+    className: chipStyles({
+      className,
+      design,
+      disabled,
+      intent,
+      hasClearButton: !!clearButton,
+    }),
+    ...chipProps,
+    children: formattedChildren,
+  }
+
+  const element = useRender({
+    defaultTagName: defaultTagName === 'button' ? 'button' : 'div',
+    render,
+    ref: forwardedRef,
+    props:
+      defaultTagName === 'button'
+        ? mergeProps<'button'>(defaultProps, otherProps)
+        : mergeProps<'div'>(defaultProps, otherProps as React.ComponentProps<'div'>),
+  })
+
   return (
     <ChipContext.Provider value={{ disabled, design, intent, onClear }}>
-      <ChipElement
-        ref={forwardedRef}
-        className={chipStyles({
-          className,
-          design,
-          disabled,
-          intent,
-          hasClearButton: !!clearButton,
-        })}
-        {...{
-          ...chipProps,
-          ...otherProps,
-        }}
-        data-spark-component="chip"
-      >
-        {formattedChildren}
-      </ChipElement>
+      {element as unknown as React.ReactElement}
     </ChipContext.Provider>
   )
 }

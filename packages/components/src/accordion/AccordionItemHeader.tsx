@@ -1,30 +1,30 @@
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { cx } from 'class-variance-authority'
-import { type ComponentProps, Ref } from 'react'
+import { Ref } from 'react'
 
-import { Slot } from '../slot'
-
-export interface AccordionItemHeaderProps extends ComponentProps<'h3'> {
-  asChild?: boolean
+export interface AccordionItemHeaderProps extends useRender.ComponentProps<'h3'> {
   ref?: Ref<HTMLHeadingElement>
 }
 
 export const ItemHeader = ({
-  asChild = false,
   children,
   className,
   ref,
+  render,
+  ...others
 }: AccordionItemHeaderProps) => {
-  const Component = asChild ? Slot : 'h3'
+  const defaultProps: useRender.ElementProps<'h3'> & Record<string, unknown> = {
+    'data-spark-component': 'accordion-item-header',
+    className: cx('rounded-[inherit]', className),
+  }
 
-  return (
-    <Component
-      ref={ref}
-      data-spark-component="accordion-item-header"
-      className={cx('rounded-[inherit]', className)}
-    >
-      {children}
-    </Component>
-  )
+  return useRender({
+    defaultTagName: 'h3',
+    render,
+    ref,
+    props: mergeProps<'h3'>(defaultProps, { ...others, children }),
+  })
 }
 
 ItemHeader.displayName = 'Accordion.ItemHeader'

@@ -25,15 +25,11 @@ const intents: DividerProps['intent'][] = ['outline', 'current']
 
 export const Default: StoryFn = _args => <Divider />
 
-export const asChild: StoryFn = _args => (
+export const Polymorphic: StoryFn = _args => (
   <>
-    <Divider asChild>
-      <h1 />
-    </Divider>
-    <Divider asChild>
-      <h1>
-        <Divider.Content>content</Divider.Content>
-      </h1>
+    <Divider render={<h1 />} />
+    <Divider render={<h1 />}>
+      <Divider.Content>content</Divider.Content>
     </Divider>
   </>
 )
@@ -46,9 +42,7 @@ export const Content: StoryFn = _args => (
 export const Decorative: StoryFn = _args => (
   <>
     <Divider isDecorative />
-    <Divider isDecorative asChild>
-      <h1 />
-    </Divider>
+    <Divider isDecorative render={<h1 />} />
     <Divider isDecorative>
       <Divider.Content>Divider</Divider.Content>
     </Divider>

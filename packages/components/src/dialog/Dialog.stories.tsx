@@ -38,9 +38,7 @@ export default meta
 export const Default: StoryFn = () => {
   return (
     <Dialog>
-      <Dialog.Trigger asChild>
-        <Button>Edit profile</Button>
-      </Dialog.Trigger>
+      <Dialog.Trigger render={<Button />}>Edit profile</Dialog.Trigger>
 
       <Dialog.Portal>
         <Dialog.Overlay />
@@ -67,9 +65,7 @@ export const Default: StoryFn = () => {
           </Dialog.Body>
 
           <Dialog.Footer className="gap-md flex justify-end">
-            <Dialog.Close asChild>
-              <Button>Close</Button>
-            </Dialog.Close>
+            <Dialog.Close render={<Button />}>Close</Dialog.Close>
           </Dialog.Footer>
 
           <Dialog.CloseButton aria-label="Close edit profile" />
@@ -84,9 +80,7 @@ export const Controlled: StoryFn = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <Dialog.Trigger asChild>
-        <Button>Edit profile</Button>
-      </Dialog.Trigger>
+      <Dialog.Trigger render={<Button />}>Edit profile</Dialog.Trigger>
 
       <Dialog.Portal>
         <Dialog.Overlay />
@@ -114,9 +108,7 @@ export const Controlled: StoryFn = () => {
           </Dialog.Body>
 
           <Dialog.Footer className="gap-md flex justify-end">
-            <Dialog.Close asChild>
-              <Button>Close</Button>
-            </Dialog.Close>
+            <Dialog.Close render={<Button />}>Close</Dialog.Close>
           </Dialog.Footer>
 
           <Dialog.CloseButton aria-label="Close edit profile" />
@@ -129,9 +121,7 @@ export const Controlled: StoryFn = () => {
 export const Fade: StoryFn = () => {
   return (
     <Dialog withFade>
-      <Dialog.Trigger asChild>
-        <Button>Edit profile</Button>
-      </Dialog.Trigger>
+      <Dialog.Trigger render={<Button />}>Edit profile</Dialog.Trigger>
 
       <Dialog.Portal>
         <Dialog.Overlay />
@@ -159,9 +149,7 @@ export const Fade: StoryFn = () => {
           </Dialog.Body>
 
           <Dialog.Footer className="gap-md flex justify-end">
-            <Dialog.Close asChild>
-              <Button>Close</Button>
-            </Dialog.Close>
+            <Dialog.Close render={<Button />}>Close</Dialog.Close>
           </Dialog.Footer>
 
           <Dialog.CloseButton aria-label="Close edit profile" />
@@ -181,9 +169,7 @@ export const Sizes = () => {
   return (
     <Dialog>
       <div className="gap-md flex">
-        <Dialog.Trigger asChild>
-          <Button>Open</Button>
-        </Dialog.Trigger>
+        <Dialog.Trigger render={<Button />}>Open</Dialog.Trigger>
       </div>
 
       <Dialog.Portal>
@@ -206,9 +192,7 @@ export const Sizes = () => {
           </Dialog.Body>
 
           <Dialog.Footer className="gap-md flex justify-end">
-            <Dialog.Close asChild>
-              <Button>Close</Button>
-            </Dialog.Close>
+            <Dialog.Close render={<Button />}>Close</Dialog.Close>
           </Dialog.Footer>
 
           <Dialog.CloseButton aria-label="Close edit size" />
@@ -223,9 +207,7 @@ export const Inset = () => {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger asChild>
-        <Button>Open dialog</Button>
-      </Dialog.Trigger>
+      <Dialog.Trigger render={<Button />}>Open dialog</Dialog.Trigger>
 
       <Dialog.Portal>
         <Dialog.Overlay />
@@ -267,9 +249,7 @@ export const Form = () => {
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <Dialog.Trigger asChild>
-        <Button>Create account</Button>
-      </Dialog.Trigger>
+      <Dialog.Trigger render={<Button />}>Create account</Dialog.Trigger>
 
       <Dialog.Portal>
         <Dialog.Overlay />
@@ -304,9 +284,7 @@ export const ForwardFocus = () => {
 
   return (
     <Dialog>
-      <Dialog.Trigger asChild>
-        <Button>Forward focus</Button>
-      </Dialog.Trigger>
+      <Dialog.Trigger render={<Button />}>Forward focus</Dialog.Trigger>
 
       <Dialog.Portal>
         <Dialog.Overlay />
@@ -341,9 +319,7 @@ export const NestedDialogs = () => {
   return (
     <>
       <Dialog open={open} onOpenChange={setOpen}>
-        <Dialog.Trigger asChild>
-          <Button>Account settings</Button>
-        </Dialog.Trigger>
+        <Dialog.Trigger render={<Button />}>Account settings</Dialog.Trigger>
 
         <Dialog.Portal>
           <Dialog.Overlay />
@@ -359,8 +335,8 @@ export const NestedDialogs = () => {
 
             <Dialog.Footer className="gap-lg flex justify-end">
               <AlertDialog>
-                <AlertDialog.Trigger asChild>
-                  <Button intent="danger">Delete account</Button>
+                <AlertDialog.Trigger render={<Button intent="danger" />}>
+                  Delete account
                 </AlertDialog.Trigger>
 
                 <AlertDialog.Portal>
@@ -383,25 +359,21 @@ export const NestedDialogs = () => {
                     </AlertDialog.Body>
 
                     <AlertDialog.Footer className="gap-lg flex justify-end">
-                      <AlertDialog.Cancel asChild>
-                        <Button intent="neutral" design="ghost">
-                          Cancel
-                        </Button>
+                      <AlertDialog.Cancel render={<Button intent="neutral" design="ghost" />}>
+                        Cancel
                       </AlertDialog.Cancel>
 
-                      <AlertDialog.Action asChild>
-                        <Button intent="danger" onClick={closeParentDialog}>
-                          Confirm deletion
-                        </Button>
+                      <AlertDialog.Action
+                        render={<Button intent="danger" onClick={closeParentDialog} />}
+                      >
+                        Confirm deletion
                       </AlertDialog.Action>
                     </AlertDialog.Footer>
                   </AlertDialog.Content>
                 </AlertDialog.Portal>
               </AlertDialog>
-              <Dialog.Close asChild>
-                <Button intent="basic" design="outlined">
-                  Close
-                </Button>
+              <Dialog.Close render={<Button intent="basic" design="outlined" />}>
+                Close
               </Dialog.Close>
             </Dialog.Footer>
 
@@ -439,9 +411,7 @@ export const SparkLayers = () => {
         This element should remain below the overlay
       </div>
       <Dialog>
-        <Dialog.Trigger asChild>
-          <Button>Open dialog</Button>
-        </Dialog.Trigger>
+        <Dialog.Trigger render={<Button />}>Open dialog</Dialog.Trigger>
 
         <Dialog.Portal>
           <Dialog.Overlay />
@@ -457,10 +427,8 @@ export const SparkLayers = () => {
 
             <Dialog.Footer className="gap-lg flex justify-end">
               <Drawer>
-                <Drawer.Trigger asChild>
-                  <Button intent="accent" design="tinted">
-                    Customize
-                  </Button>
+                <Drawer.Trigger render={<Button intent="accent" design="tinted" />}>
+                  Customize
                 </Drawer.Trigger>
 
                 <Drawer.Portal>
@@ -480,8 +448,8 @@ export const SparkLayers = () => {
                             Danger zone - click on the button below to delete your notifications.
                           </p>
                           <AlertDialog>
-                            <AlertDialog.Trigger asChild>
-                              <Button intent="danger">Delete</Button>
+                            <AlertDialog.Trigger render={<Button intent="danger" />}>
+                              Delete
                             </AlertDialog.Trigger>
 
                             <AlertDialog.Portal>
@@ -499,14 +467,14 @@ export const SparkLayers = () => {
                                 </AlertDialog.Body>
 
                                 <AlertDialog.Footer className="gap-lg flex justify-end">
-                                  <AlertDialog.Cancel asChild>
-                                    <Button intent="neutral" design="ghost">
-                                      Cancel
-                                    </Button>
+                                  <AlertDialog.Cancel
+                                    render={<Button intent="neutral" design="ghost" />}
+                                  >
+                                    Cancel
                                   </AlertDialog.Cancel>
 
-                                  <AlertDialog.Action asChild>
-                                    <Button intent="danger">Delete</Button>
+                                  <AlertDialog.Action render={<Button intent="danger" />}>
+                                    Delete
                                   </AlertDialog.Action>
                                 </AlertDialog.Footer>
                               </AlertDialog.Content>
@@ -517,20 +485,16 @@ export const SparkLayers = () => {
                     </Drawer.Body>
 
                     <Drawer.Footer className="gap-md flex justify-end">
-                      <Drawer.Close asChild>
-                        <Button intent="basic" design="outlined">
-                          Close
-                        </Button>
+                      <Drawer.Close render={<Button intent="basic" design="outlined" />}>
+                        Close
                       </Drawer.Close>
                     </Drawer.Footer>
                     <Drawer.CloseButton aria-label="Close nested Drawer" />
                   </Drawer.Content>
                 </Drawer.Portal>
               </Drawer>
-              <Dialog.Close asChild>
-                <Button intent="basic" design="outlined">
-                  Close
-                </Button>
+              <Dialog.Close render={<Button intent="basic" design="outlined" />}>
+                Close
               </Dialog.Close>
             </Dialog.Footer>
 

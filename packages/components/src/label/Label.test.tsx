@@ -62,4 +62,20 @@ describe('Label', () => {
     expect(requiredEl).toHaveAttribute('role', 'presentation')
     expect(requiredEl).toHaveAttribute('aria-hidden', 'true')
   })
+
+  describe('render prop (polymorphism)', () => {
+    it('should render as custom element when using render prop', () => {
+      render(
+        <>
+          <Label render={<h2 />}>Section title</Label>
+          <input id="section" type="text" aria-labelledby="section" />
+        </>
+      )
+
+      const heading = screen.getByRole('heading', { level: 2, name: 'Section title' })
+      expect(heading).toBeInTheDocument()
+      expect(heading.tagName).toBe('H2')
+      expect(heading).toHaveAttribute('data-spark-component', 'label')
+    })
+  })
 })

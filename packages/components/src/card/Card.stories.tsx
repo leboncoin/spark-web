@@ -144,24 +144,22 @@ export const DesignAndIntentTable: StoryFn = _args => {
                     intent={intent}
                     design={design}
                     className={cx('w-sz-208', withShadows && 'shadow-md')}
-                    asChild
+                    render={<button type="button" className="text-left" disabled={disabled} />}
                   >
-                    <button type="button" className="text-left" disabled={disabled}>
-                      {withBackdrop && <Card.Backdrop intent={intent} />}
-                      <Card.Content className="gap-md flex flex-col items-start">
-                        <div className="h-sz-80 relative w-full">
-                          <img
-                            src={pandaImg}
-                            alt="Panda"
-                            className="relative size-full rounded-lg object-cover"
-                          />
-                        </div>
-                        <div>
-                          <p className="text-headline-2">All about pandas</p>
-                          <p>Read about Panda and Red Panda</p>
-                        </div>
-                      </Card.Content>
-                    </button>
+                    {withBackdrop && <Card.Backdrop intent={intent} />}
+                    <Card.Content className="gap-md flex flex-col items-start">
+                      <div className="h-sz-80 relative w-full">
+                        <img
+                          src={pandaImg}
+                          alt="Panda"
+                          className="relative size-full rounded-lg object-cover"
+                        />
+                      </div>
+                      <div>
+                        <p className="text-headline-2">All about pandas</p>
+                        <p>Read about Panda and Red Panda</p>
+                      </div>
+                    </Card.Content>
                   </Card>
                 </td>
               ))}
@@ -196,24 +194,22 @@ export const InsetContent: StoryFn = _args => (
 
 export const Link: StoryFn = _args => (
   <div className="gap-md flex flex-wrap">
-    <Card asChild className="min-w-sz-160 shadow-md">
-      <a href="/">
-        <Card.Content className="gap-md flex flex-col items-start">
-          <div className="h-sz-144 relative w-full">
-            <img
-              src={pandaImg}
-              alt="Panda"
-              className="h-sz-144 relative w-full rounded-lg object-cover"
-            />
-          </div>
+    <Card render={<a href="/" />} className="min-w-sz-160 shadow-md">
+      <Card.Content className="gap-md flex flex-col items-start">
+        <div className="h-sz-144 relative w-full">
+          <img
+            src={pandaImg}
+            alt="Panda"
+            className="h-sz-144 relative w-full rounded-lg object-cover"
+          />
+        </div>
 
-          <LinkBox.Link href="/">
-            <p className="text-headline-2">All about pandas</p>
-          </LinkBox.Link>
+        <LinkBox.Link href="/">
+          <p className="text-headline-2">All about pandas</p>
+        </LinkBox.Link>
 
-          <p>Read about Panda and Red Panda</p>
-        </Card.Content>
-      </a>
+        <p>Read about Panda and Red Panda</p>
+      </Card.Content>
     </Card>
   </div>
 )

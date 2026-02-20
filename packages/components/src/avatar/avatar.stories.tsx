@@ -82,10 +82,11 @@ export const Actions: StoryFn = () => {
             <Avatar.Placeholder />
             <Avatar.Image src={avatarImg} />
           </Avatar.User>
-          <Avatar.Action ariaLabel="Edit account" asChild>
-            <Button size="sm" intent="info" design="outlined" className="bg-surface!">
-              Edit
-            </Button>
+          <Avatar.Action
+            ariaLabel="Edit account"
+            render={<Button size="sm" intent="info" design="outlined" className="bg-surface!" />}
+          >
+            Edit
           </Avatar.Action>
         </Avatar>
       </div>
@@ -99,15 +100,17 @@ export const AsLink: StoryFn = () => {
       <div className="gap-md flex flex-col">
         <Tag className="flex">Link</Tag>
         <Avatar size="xl" username="John Doe">
-          <Avatar.User asChild>
-            <a
-              href="/iframe.html?id=components-avatar--as-link&viewMode=story"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Avatar.Placeholder />
-              <Avatar.Image src={avatarImg} />
-            </a>
+          <Avatar.User
+            render={
+              <a
+                href="/iframe.html?id=components-avatar--as-link&viewMode=story"
+                target="_blank"
+                rel="noopener noreferrer"
+              />
+            }
+          >
+            <Avatar.Placeholder />
+            <Avatar.Image src={avatarImg} />
           </Avatar.User>
         </Avatar>
       </div>
@@ -115,11 +118,9 @@ export const AsLink: StoryFn = () => {
       <div className="gap-md flex flex-col">
         <Tag className="flex">Button</Tag>
         <Avatar size="xl" username="John Doe">
-          <Avatar.User asChild>
-            <button type="button" onClick={() => alert('clicked')}>
-              <Avatar.Placeholder />
-              <Avatar.Image src={avatarImg} />
-            </button>
+          <Avatar.User render={<button type="button" onClick={() => alert('clicked')} />}>
+            <Avatar.Placeholder />
+            <Avatar.Image src={avatarImg} />
           </Avatar.User>
         </Avatar>
       </div>
@@ -239,10 +240,11 @@ export const CustomAction: StoryFn = () => {
           <Avatar.Placeholder />
           <Avatar.Image src={avatarImg} />
         </Avatar.User>
-        <Avatar.Action ariaLabel="Edit account" asChild>
-          <Button size="sm" intent="info" design="outlined" className="bg-surface!">
-            Edit
-          </Button>
+        <Avatar.Action
+          ariaLabel="Edit account"
+          render={<Button size="sm" intent="info" design="outlined" className="bg-surface!" />}
+        >
+          Edit
         </Avatar.Action>
       </Avatar>
     </div>

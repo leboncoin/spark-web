@@ -2,14 +2,7 @@ import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { useCombinedState } from '@spark-ui/hooks/use-combined-state'
 import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
 import { cx } from 'class-variance-authority'
-import {
-  ChangeEvent,
-  ComponentPropsWithoutRef,
-  Fragment,
-  Ref,
-  SyntheticEvent,
-  useEffect,
-} from 'react'
+import React, { ChangeEvent, ComponentPropsWithoutRef, Ref, SyntheticEvent, useEffect } from 'react'
 
 import { Popover } from '../popover'
 import { VisuallyHidden } from '../visually-hidden'
@@ -58,14 +51,6 @@ export const Input = ({
       ctx.setInputValue(ctx.selectedItem.text)
     }
   }, [])
-
-  const PopoverTrigger = ctx.hasPopover ? Popover.Trigger : Fragment
-  const popoverTriggerProps = ctx.hasPopover
-    ? {
-        asChild: true,
-        type: undefined,
-      }
-    : {}
 
   const multiselectInputProps = ctx.getDropdownProps()
   const inputRef = useMergeRefs(forwardedRef, ctx.innerInputRef, multiselectInputProps.ref)
@@ -121,7 +106,31 @@ export const Input = ({
           <label {...ctx.getLabelProps()}>{ariaLabel}</label>
         </VisuallyHidden>
       )}
-      <PopoverTrigger {...popoverTriggerProps}>
+      {ctx.hasPopover ? (
+        <Popover.Trigger
+          render={<input type="text" />}
+          data-spark-component="combobox-input"
+          {...(hasPlaceholder && { placeholder })}
+          className={cx(
+            'max-w-full shrink-0 grow basis-[80px]',
+            'h-sz-28 bg-surface px-sm text-body-1 text-ellipsis outline-hidden',
+            'disabled:text-on-surface/dim-3 disabled:cursor-not-allowed disabled:bg-transparent',
+            'read-only:text-on-surface read-only:cursor-default read-only:bg-transparent',
+            className
+          )}
+          {...({
+            ...props,
+            ...downshiftInputProps,
+            ...mergedEventProps,
+            value: ctx.inputValue,
+            'aria-label': ariaLabel,
+            disabled: ctx.disabled,
+            readOnly: ctx.readOnly,
+            'aria-invalid': isInvalid,
+            'aria-describedby': description,
+          } as React.ComponentProps<typeof Popover.Trigger>)}
+        />
+      ) : (
         <input
           data-spark-component="combobox-input"
           type="text"
@@ -140,11 +149,10 @@ export const Input = ({
           aria-label={ariaLabel}
           disabled={ctx.disabled}
           readOnly={ctx.readOnly}
-          // FormField
           aria-invalid={isInvalid}
           aria-describedby={description}
         />
-      </PopoverTrigger>
+      )}
     </>
   )
 }

@@ -59,8 +59,12 @@ export const PrevTrigger = ({ children, className, href, ref, ...props }: PrevTr
   return (
     <li>
       {href ? (
-        <IconButton ref={ref} {...mergedProps} asChild>
-          <a href={shouldDisableLink ? undefined : href}>{content}</a>
+        <IconButton
+          ref={ref}
+          {...mergedProps}
+          render={<a href={shouldDisableLink ? undefined : href} />}
+        >
+          {content}
         </IconButton>
       ) : (
         <IconButton ref={ref} {...mergedProps}>

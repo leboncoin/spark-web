@@ -148,8 +148,8 @@ export const Loading: StoryFn = () => {
 
 export const Link: StoryFn = _args => (
   <div className="gap-md flex">
-    <IconButton aria-label="Link" asChild>
-      <a href="/">{icon}</a>
+    <IconButton aria-label="Link" render={<a href="/" />}>
+      {icon}
     </IconButton>
   </div>
 )

@@ -4,7 +4,7 @@ import { ComponentProps, Ref, useRef } from 'react'
 import { AlertDialogProvider } from './AlertDialogContext'
 
 export interface AlertDialogProps
-  extends Omit<ComponentProps<typeof BaseAlertDialog.Root>, 'onOpenChange' | 'render'> {
+  extends Omit<ComponentProps<typeof BaseAlertDialog.Root>, 'onOpenChange'> {
   /**
    * Specifies if the dialog is open or not.
    */
@@ -21,10 +21,6 @@ export interface AlertDialogProps
    * Specifies if the dialog should have a fade animation on its body (in case it is scrollable).
    */
   withFade?: boolean
-  /**
-   * Change the default rendered element for the one passed as a child, merging their props and behavior.
-   */
-  asChild?: boolean
   ref?: Ref<HTMLDivElement>
 }
 

@@ -8,7 +8,6 @@ function deepFind(
   children: ReactNode | ReactNode[],
   deepFindFn: (child: ReactNode, index?: number, children?: ReactNode[]) => boolean
 ): ReactNode | undefined {
-  // eslint-disable-next-line @typescript-eslint/init-declarations
   let found
 
   Children.toArray(children).find((child: ReactNode, index: number, findChildren: ReactNode[]) => {

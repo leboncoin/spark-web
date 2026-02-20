@@ -2,24 +2,11 @@ import { Accordion as BaseAccordion } from '@base-ui/react/accordion'
 import { cx } from 'class-variance-authority'
 import { type ComponentProps, Ref } from 'react'
 
-import { useRenderSlot } from './useRenderSlot'
-
-type ExtentedZagInterface = Omit<ComponentProps<typeof BaseAccordion.Panel>, 'render'>
-
-export interface AccordionItemContentProps extends ExtentedZagInterface {
-  asChild?: boolean
+export interface AccordionItemContentProps extends ComponentProps<typeof BaseAccordion.Panel> {
   ref?: Ref<HTMLDivElement>
 }
 
-export const ItemContent = ({
-  asChild = false,
-  className,
-  children,
-  ref,
-  ...props
-}: AccordionItemContentProps) => {
-  const renderSlot = useRenderSlot(asChild, 'div')
-
+export const ItemContent = ({ className, children, ref, ...props }: AccordionItemContentProps) => {
   return (
     <BaseAccordion.Panel
       ref={ref}
@@ -30,7 +17,6 @@ export const ItemContent = ({
         'text-body-1 text-on-surface',
         className
       )}
-      render={renderSlot}
       {...props}
     >
       {children}

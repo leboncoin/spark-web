@@ -27,11 +27,11 @@ describe('Toast', () => {
       render(
         <ToastProvider>
           <ToastTrigger
-            asChild
+            render={<button type="button" />}
             title="Success"
             description="You are now subscribed to our newsletter"
           >
-            <button type="button">Show me a toast</button>
+            Show me a toast
           </ToastTrigger>
         </ToastProvider>
       )

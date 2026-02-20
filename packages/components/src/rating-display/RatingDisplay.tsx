@@ -1,15 +1,13 @@
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { type ComponentPropsWithRef, type PropsWithChildren } from 'react'
 
-import { Slot } from '../slot'
 import { RatingDisplayProvider } from './RatingDisplayContext'
 import type { RatingDisplayStarProps } from './RatingDisplayStar'
 
-export interface RatingDisplayProps extends PropsWithChildren<ComponentPropsWithRef<'div'>> {
-  /**
-   * When true, merges props onto the single child element instead of rendering a div.
-   * Use to render the root as a link or another custom element.
-   */
-  asChild?: boolean
+export interface RatingDisplayProps
+  extends useRender.ComponentProps<'div'>,
+    PropsWithChildren<ComponentPropsWithRef<'div'>> {
   /**
    * The rating value to display, on a scale from 0 to 5.
    */
@@ -35,24 +33,28 @@ export const RatingDisplay = ({
   value = 0,
   size = 'md',
   count,
-  asChild = false,
+  render,
   ref,
   children,
   ...rest
 }: RatingDisplayProps) => {
   const ratingValue = value ?? 0
-  const Component = asChild ? Slot : 'div'
+
+  const defaultProps: useRender.ElementProps<'div'> & Record<string, unknown> = {
+    className: 'gap-x-sm relative inline-flex items-center',
+    'data-spark-component': 'rating-display',
+  }
+
+  const element = useRender({
+    defaultTagName: 'div',
+    render,
+    ref,
+    props: mergeProps<'div'>(defaultProps, { ...rest, children }),
+  })
 
   return (
     <RatingDisplayProvider value={ratingValue} size={size} count={count}>
-      <Component
-        ref={ref}
-        className="gap-x-sm relative inline-flex items-center"
-        data-spark-component="rating-display"
-        {...rest}
-      >
-        {children}
-      </Component>
+      {element}
     </RatingDisplayProvider>
   )
 }

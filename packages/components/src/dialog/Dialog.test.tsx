@@ -46,9 +46,7 @@ describe('Dialog', () => {
 
     render(
       <Dialog>
-        <Dialog.Trigger asChild>
-          <button>Edit profile</button>
-        </Dialog.Trigger>
+        <Dialog.Trigger render={<button />}>Edit profile</Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay />
           <Dialog.Content>
@@ -214,5 +212,31 @@ describe('Dialog', () => {
     )
 
     expect(screen.getByText(/Edit profile/i)).toHaveClass('group-has-data-[part=close]:pr-3xl')
+  })
+
+  it('should support render prop for polymorphism', async () => {
+    render(
+      <Dialog>
+        <Dialog.Trigger render={<a href="/custom" />}>Edit profile</Dialog.Trigger>
+        <Dialog.Portal>
+          <Dialog.Overlay />
+          <Dialog.Content>
+            <Dialog.Header>
+              <Dialog.Title>Edit profile</Dialog.Title>
+            </Dialog.Header>
+            <Dialog.Body>
+              <Dialog.Description>Dialog contents</Dialog.Description>
+            </Dialog.Body>
+            <Dialog.Footer>
+              <Button>Close</Button>
+            </Dialog.Footer>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog>
+    )
+
+    const trigger = screen.getByText('Edit profile')
+    expect(trigger.tagName).toBe('A')
+    expect(trigger).toHaveAttribute('href', '/custom')
   })
 })

@@ -25,7 +25,6 @@ export const Popover = ({
     <SparkPopover.Content
       ref={forwardedRef}
       inset
-      asChild
       matchTriggerWidth={matchTriggerWidth}
       elevation={elevation}
       className={cx('relative', className)}

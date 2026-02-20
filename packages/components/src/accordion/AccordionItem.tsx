@@ -3,31 +3,18 @@ import { cx } from 'class-variance-authority'
 import { type ComponentProps, Ref } from 'react'
 
 import { useAccordionContext } from './Accordion'
-import { useRenderSlot } from './useRenderSlot'
 
-type ExtentedZagInterface = Omit<ComponentProps<typeof BaseAccordion.Item>, 'render'>
-
-export interface AccordionItemProps extends ExtentedZagInterface {
-  asChild?: boolean
+export interface AccordionItemProps extends ComponentProps<typeof BaseAccordion.Item> {
   ref?: Ref<HTMLDivElement>
 }
 
-export const Item = ({
-  asChild = false,
-  className,
-  children,
-  ref,
-  ...props
-}: AccordionItemProps) => {
+export const Item = ({ className, children, ref, ...props }: AccordionItemProps) => {
   const accordion = useAccordionContext()
-
-  const renderSlot = useRenderSlot(asChild, 'div')
 
   return (
     <BaseAccordion.Item
       ref={ref}
       data-spark-component="accordion-item"
-      render={renderSlot}
       className={cx(
         'relative first:rounded-t-lg last:rounded-b-lg',
         'not-last:border-b-0',

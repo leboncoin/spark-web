@@ -1,7 +1,7 @@
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { cva, VariantProps } from 'class-variance-authority'
 import { type ComponentPropsWithRef } from 'react'
-
-import { Slot } from '../slot'
 
 const textLinkStyles = cva(['inline-flex items-center focus-visible:u-outline'], {
   variants: {
@@ -39,34 +39,28 @@ const textLinkStyles = cva(['inline-flex items-center focus-visible:u-outline'],
 
 export type StylesProps = VariantProps<typeof textLinkStyles>
 
-export type TextLinkProps = ComponentPropsWithRef<'a'> &
-  StylesProps & {
-    /**
-     * Change the component to the HTML tag or custom component of the only child.
-     */
-    asChild?: boolean
-  }
+export type TextLinkProps = useRender.ComponentProps<'a'> & ComponentPropsWithRef<'a'> & StylesProps
 
 export const TextLink = ({
-  asChild = false,
   bold = false,
   children,
   className,
   intent = 'current',
   underline = true,
+  render,
   ref,
   ...props
 }: TextLinkProps) => {
-  const Component = asChild ? Slot : 'a'
+  const defaultProps: Record<string, unknown> = {
+    'data-spark-component': 'text-link',
+    className: textLinkStyles({ className, bold, intent, underline }),
+    children,
+  }
 
-  return (
-    <Component
-      data-spark-component="text-link"
-      ref={ref}
-      className={textLinkStyles({ className, bold, intent, underline })}
-      {...props}
-    >
-      {children}
-    </Component>
-  )
+  return useRender({
+    defaultTagName: 'a',
+    render,
+    ref,
+    props: mergeProps<'a'>(defaultProps, props),
+  })
 }

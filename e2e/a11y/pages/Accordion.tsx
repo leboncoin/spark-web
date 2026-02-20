@@ -5,10 +5,8 @@ export const A11yAccordion = () => (
   <section>
     <Accordion defaultValue={['watercraft']} aria-label="Playwright Accordion">
       <Accordion.Item value="watercraft">
-        <Accordion.ItemHeader asChild>
-          <h4>
-            <Accordion.ItemTrigger>Watercraft</Accordion.ItemTrigger>
-          </h4>
+        <Accordion.ItemHeader render={<h4 />}>
+          <Accordion.ItemTrigger>Watercraft</Accordion.ItemTrigger>
         </Accordion.ItemHeader>
         <Accordion.ItemContent>
           <p>
@@ -19,10 +17,8 @@ export const A11yAccordion = () => (
       </Accordion.Item>
 
       <Accordion.Item value="automobiles">
-        <Accordion.ItemHeader asChild>
-          <h4>
-            <Accordion.ItemTrigger>Automobiles</Accordion.ItemTrigger>
-          </h4>
+        <Accordion.ItemHeader render={<h4 />}>
+          <Accordion.ItemTrigger>Automobiles</Accordion.ItemTrigger>
         </Accordion.ItemHeader>
         <Accordion.ItemContent>
           <p>
@@ -33,10 +29,8 @@ export const A11yAccordion = () => (
       </Accordion.Item>
 
       <Accordion.Item value="aircrafts">
-        <Accordion.ItemHeader asChild>
-          <h4>
-            <Accordion.ItemTrigger>Aircrafts</Accordion.ItemTrigger>
-          </h4>
+        <Accordion.ItemHeader render={<h4 />}>
+          <Accordion.ItemTrigger>Aircrafts</Accordion.ItemTrigger>
         </Accordion.ItemHeader>
         <Accordion.ItemContent>
           <p>

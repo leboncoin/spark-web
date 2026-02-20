@@ -1,4 +1,6 @@
 /* eslint-disable max-lines-per-function */
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { ArrowVerticalLeft } from '@spark-ui/icons/ArrowVerticalLeft'
 import { ArrowVerticalRight } from '@spark-ui/icons/ArrowVerticalRight'
 import { Tabs as RadixTabs } from 'radix-ui'
@@ -10,12 +12,9 @@ import { useTabsContext } from './TabsContext'
 import { listStyles, navigationArrowStyles, wrapperStyles } from './TabsList.styles'
 import { useResizeObserver } from './useResizeObserver'
 
-export interface TabsListProps extends Omit<RadixTabs.TabsListProps, 'children'> {
-  /**
-   * Change the component to the HTML tag or custom component of the only child. This will merge the original component props with the props of the supplied element/component and change the underlying DOM node.
-   * @default false
-   */
-  asChild?: boolean
+export interface TabsListProps
+  extends Omit<RadixTabs.TabsListProps, 'children' | 'asChild'>,
+    useRender.ComponentProps<'div'> {
   /**
    * When true, keyboard navigation will loop from last tab to first, and vice versa.
    * @default false
@@ -28,13 +27,9 @@ export interface TabsListProps extends Omit<RadixTabs.TabsListProps, 'children'>
 type ArrowState = 'visible' | 'hidden' | 'disabled'
 
 export const TabsList = ({
-  /**
-   * Default Radix Primitive values
-   * see https://www.radix-ui.com/docs/primitives/components/tabs#list
-   */
-  asChild = false,
   loop = false,
   children,
+  render,
   className,
   ref,
   ...rest
@@ -128,6 +123,25 @@ export const TabsList = ({
     })
   }
 
+  const defaultListProps = {
+    'data-spark-component': 'tabs-list',
+    className: listStyles(),
+    loop,
+    ...rest,
+    children,
+  }
+  const listElement = useRender({
+    defaultTagName: 'div',
+    render: render ?? undefined,
+    ref: listRef,
+    props: mergeProps<'div'>(defaultListProps, {}),
+  })
+  const listContent = (
+    <RadixTabs.List asChild loop={loop}>
+      {listElement}
+    </RadixTabs.List>
+  )
+
   return (
     <div className={wrapperStyles({ className })} ref={wrapperRef}>
       {arrows.prev !== 'hidden' && (
@@ -146,16 +160,7 @@ export const TabsList = ({
         </Button>
       )}
 
-      <RadixTabs.List
-        data-spark-component="tabs-list"
-        ref={listRef}
-        className={listStyles()}
-        asChild={asChild}
-        loop={loop}
-        {...rest}
-      >
-        {children}
-      </RadixTabs.List>
+      {listContent}
 
       {arrows.next !== 'hidden' && (
         <Button

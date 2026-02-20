@@ -24,22 +24,25 @@ const IncrementButton = ({
   const { buttonProps } = useButton({ ...incrementButtonProps, ...rest }, ref)
 
   return (
-    <InputGroup.TrailingAddon asChild data-spark-component="stepper-increment-button">
-      <IconButton
-        ref={ref}
-        design={design}
-        intent={intent}
-        className={className}
-        aria-label={buttonProps['aria-label'] as string}
-        {...buttonProps}
-        disabled={rest.disabled || buttonProps.disabled}
-      >
-        {children || (
-          <Icon>
-            <Plus />
-          </Icon>
-        )}
-      </IconButton>
+    <InputGroup.TrailingAddon
+      render={
+        <IconButton
+          ref={ref}
+          design={design}
+          intent={intent}
+          className={className}
+          aria-label={buttonProps['aria-label'] as string}
+          {...buttonProps}
+          disabled={rest.disabled || buttonProps.disabled}
+        />
+      }
+      data-spark-component="stepper-increment-button"
+    >
+      {children || (
+        <Icon>
+          <Plus />
+        </Icon>
+      )}
     </InputGroup.TrailingAddon>
   )
 }
@@ -59,22 +62,25 @@ const DecrementButton = ({
   const { buttonProps } = useButton({ ...decrementButtonProps, ...rest }, ref)
 
   return (
-    <InputGroup.LeadingAddon asChild data-spark-component="stepper-decrement-button">
-      <IconButton
-        ref={ref}
-        design={design}
-        intent={intent}
-        className={className}
-        aria-label={buttonProps['aria-label'] as string}
-        {...buttonProps}
-        disabled={rest.disabled || buttonProps.disabled}
-      >
-        {children || (
-          <Icon>
-            <Minus />
-          </Icon>
-        )}
-      </IconButton>
+    <InputGroup.LeadingAddon
+      render={
+        <IconButton
+          ref={ref}
+          design={design}
+          intent={intent}
+          className={className}
+          aria-label={buttonProps['aria-label'] as string}
+          {...buttonProps}
+          disabled={rest.disabled || buttonProps.disabled}
+        />
+      }
+      data-spark-component="stepper-decrement-button"
+    >
+      {children || (
+        <Icon>
+          <Minus />
+        </Icon>
+      )}
     </InputGroup.LeadingAddon>
   )
 }

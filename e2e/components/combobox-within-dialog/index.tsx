@@ -15,8 +15,8 @@ export const ComboboxWithinDialog = () => {
   return (
     <div className="gap-y-3xl p-lg grid h-full place-items-center">
       <Dialog open={open} onOpenChange={handleOpenChange}>
-        <Dialog.Trigger asChild>
-          <Button>Create account</Button>
+        <Dialog.Trigger render={<Button />}>
+          Create account
         </Dialog.Trigger>
 
         <Dialog.Portal>

@@ -1,7 +1,7 @@
 import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
 import { ArrowHorizontalDown } from '@spark-ui/icons/ArrowHorizontalDown'
 import { cx } from 'class-variance-authority'
-import { Fragment, ReactNode, Ref } from 'react'
+import { ReactNode, Ref } from 'react'
 
 import { Icon } from '../icon'
 import { Popover } from '../popover'
@@ -33,10 +33,6 @@ export const Trigger = ({
     setLastInteractionType,
   } = useDropdownContext()
 
-  const [WrapperComponent, wrapperProps] = hasPopover
-    ? [Popover.Trigger, { asChild: true }]
-    : [Fragment, {}]
-
   const { ref: downshiftRef, ...downshiftTriggerProps } = getToggleButtonProps({
     ...getDropdownProps(),
     onKeyDown: () => {
@@ -48,6 +44,20 @@ export const Trigger = ({
 
   const ref = useMergeRefs(forwardedRef, downshiftRef)
 
+  const triggerContent = (
+    <>
+      <span className="gap-md flex items-center justify-start">{children}</span>
+      <Icon
+        className={cx('ml-md shrink-0 rotate-0 transition duration-100 ease-in', {
+          'rotate-180': isExpanded,
+        })}
+        size="sm"
+      >
+        <ArrowHorizontalDown />
+      </Icon>
+    </>
+  )
+
   return (
     <>
       {ariaLabel && (
@@ -55,7 +65,18 @@ export const Trigger = ({
           <label {...getLabelProps()}>{ariaLabel}</label>
         </VisuallyHidden>
       )}
-      <WrapperComponent {...wrapperProps}>
+      {hasPopover ? (
+        <Popover.Trigger
+          render={<button type="button" />}
+          ref={ref}
+          disabled={disabled || readOnly}
+          className={styles({ className, state, disabled, readOnly })}
+          {...downshiftTriggerProps}
+          data-spark-component="dropdown-trigger"
+        >
+          {triggerContent}
+        </Popover.Trigger>
+      ) : (
         <button
           type="button"
           ref={ref}
@@ -64,18 +85,9 @@ export const Trigger = ({
           {...downshiftTriggerProps}
           data-spark-component="dropdown-trigger"
         >
-          <span className="gap-md flex items-center justify-start">{children}</span>
-
-          <Icon
-            className={cx('ml-md shrink-0 rotate-0 transition duration-100 ease-in', {
-              'rotate-180': isExpanded,
-            })}
-            size="sm"
-          >
-            <ArrowHorizontalDown />
-          </Icon>
+          {triggerContent}
         </button>
-      </WrapperComponent>
+      )}
     </>
   )
 }

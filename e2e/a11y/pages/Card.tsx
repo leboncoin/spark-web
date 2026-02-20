@@ -13,22 +13,18 @@ export const A11yCard = () => (
       </Card.Content>
     </Card>
     {/* Card as a button */}
-    <Card asChild>
-      <button type="button">
-        <Card.Backdrop />
-        <Card.Content>
-          <p>All about pandas</p>
-        </Card.Content>
-      </button>
+    <Card render={<button type="button" />}>
+      <Card.Backdrop />
+      <Card.Content>
+        <p>All about pandas</p>
+      </Card.Content>
     </Card>
     {/* Card as a link */}
-    <Card asChild>
-      <a href="/">
-        <Card.Backdrop />
-        <Card.Content>
-          <p>All about pandas</p>
-        </Card.Content>
-      </a>
+    <Card render={<a href="/" />}>
+      <Card.Backdrop />
+      <Card.Content>
+        <p>All about pandas</p>
+      </Card.Content>
     </Card>
     {/* Card as a LinkBox */}
     <LinkBox>

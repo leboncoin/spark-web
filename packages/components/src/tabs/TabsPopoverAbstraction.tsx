@@ -35,7 +35,7 @@ const useTabsPopoverContext = () => {
 }
 
 // Trigger component that uses context
-interface TabsPopoverTriggerProps extends Omit<PopoverTriggerProps, 'asChild' | 'children'> {
+interface TabsPopoverTriggerProps extends Omit<PopoverTriggerProps, 'children'> {
   'aria-label': string
   children?: ReactNode
 }
@@ -46,17 +46,20 @@ const TabsPopoverTrigger = forwardRef<HTMLButtonElement, TabsPopoverTriggerProps
     const mergedRef = useMergeRefs(forwardedRef, popoverTriggerRef)
 
     return (
-      <SparkPopover.Trigger asChild {...triggerProps}>
-        <IconButton
-          ref={mergedRef}
-          size="sm"
-          intent="surfaceInverse"
-          design="ghost"
-          aria-label={ariaLabel}
-          tabIndex={-1}
-        >
-          <Icon>{iconChildren || <MoreMenuHorizontal />}</Icon>
-        </IconButton>
+      <SparkPopover.Trigger
+        render={
+          <IconButton
+            ref={mergedRef}
+            size="sm"
+            intent="surfaceInverse"
+            design="ghost"
+            aria-label={ariaLabel}
+            tabIndex={-1}
+          />
+        }
+        {...triggerProps}
+      >
+        <Icon>{iconChildren || <MoreMenuHorizontal />}</Icon>
       </SparkPopover.Trigger>
     )
   }

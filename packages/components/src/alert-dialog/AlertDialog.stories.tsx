@@ -23,9 +23,7 @@ export default meta
 export const Usage: StoryFn = _args => {
   return (
     <AlertDialog>
-      <AlertDialog.Trigger asChild>
-        <Button intent="danger">Delete</Button>
-      </AlertDialog.Trigger>
+      <AlertDialog.Trigger render={<Button intent="danger" />}>Delete</AlertDialog.Trigger>
 
       <AlertDialog.Portal>
         <AlertDialog.Overlay />
@@ -42,15 +40,11 @@ export const Usage: StoryFn = _args => {
           </AlertDialog.Body>
 
           <AlertDialog.Footer className="gap-lg flex justify-end">
-            <AlertDialog.Cancel asChild>
-              <Button intent="neutral" design="ghost">
-                Cancel
-              </Button>
+            <AlertDialog.Cancel render={<Button intent="neutral" design="ghost" />}>
+              Cancel
             </AlertDialog.Cancel>
 
-            <AlertDialog.Action asChild>
-              <Button intent="danger">Delete</Button>
-            </AlertDialog.Action>
+            <AlertDialog.Action render={<Button intent="danger" />}>Delete</AlertDialog.Action>
           </AlertDialog.Footer>
         </AlertDialog.Content>
       </AlertDialog.Portal>
@@ -64,9 +58,7 @@ export const Controlled: StoryFn = () => {
   return (
     <>
       <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-        <AlertDialog.Trigger asChild>
-          <Button intent="danger">Delete</Button>
-        </AlertDialog.Trigger>
+        <AlertDialog.Trigger render={<Button intent="danger" />}>Delete</AlertDialog.Trigger>
 
         <AlertDialog.Portal>
           <AlertDialog.Overlay />
@@ -81,15 +73,11 @@ export const Controlled: StoryFn = () => {
             </AlertDialog.Body>
 
             <AlertDialog.Footer className="gap-lg flex justify-end">
-              <AlertDialog.Cancel asChild>
-                <Button intent="neutral" design="ghost">
-                  Cancel
-                </Button>
+              <AlertDialog.Cancel render={<Button intent="neutral" design="ghost" />}>
+                Cancel
               </AlertDialog.Cancel>
 
-              <AlertDialog.Action asChild>
-                <Button intent="danger">Delete</Button>
-              </AlertDialog.Action>
+              <AlertDialog.Action render={<Button intent="danger" />}>Delete</AlertDialog.Action>
             </AlertDialog.Footer>
           </AlertDialog.Content>
         </AlertDialog.Portal>
@@ -101,9 +89,7 @@ export const Controlled: StoryFn = () => {
 export const Fade: StoryFn = () => {
   return (
     <AlertDialog withFade>
-      <AlertDialog.Trigger asChild>
-        <Button intent="danger">Delete</Button>
-      </AlertDialog.Trigger>
+      <AlertDialog.Trigger render={<Button intent="danger" />}>Delete</AlertDialog.Trigger>
 
       <AlertDialog.Portal>
         <AlertDialog.Overlay />
@@ -131,15 +117,11 @@ export const Fade: StoryFn = () => {
           </AlertDialog.Body>
 
           <AlertDialog.Footer className="gap-lg flex justify-end">
-            <AlertDialog.Cancel asChild>
-              <Button intent="neutral" design="ghost">
-                Cancel
-              </Button>
+            <AlertDialog.Cancel render={<Button intent="neutral" design="ghost" />}>
+              Cancel
             </AlertDialog.Cancel>
 
-            <AlertDialog.Action asChild>
-              <Button intent="danger">Delete</Button>
-            </AlertDialog.Action>
+            <AlertDialog.Action render={<Button intent="danger" />}>Delete</AlertDialog.Action>
           </AlertDialog.Footer>
         </AlertDialog.Content>
       </AlertDialog.Portal>
@@ -152,9 +134,7 @@ export const Inset: StoryFn = () => {
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
-      <AlertDialog.Trigger asChild>
-        <Button intent="danger">Delete</Button>
-      </AlertDialog.Trigger>
+      <AlertDialog.Trigger render={<Button intent="danger" />}>Delete</AlertDialog.Trigger>
 
       <AlertDialog.Portal>
         <AlertDialog.Overlay />
@@ -170,15 +150,11 @@ export const Inset: StoryFn = () => {
           </AlertDialog.Body>
 
           <AlertDialog.Footer className="gap-lg flex justify-end">
-            <AlertDialog.Cancel asChild>
-              <Button intent="neutral" design="ghost">
-                Cancel
-              </Button>
+            <AlertDialog.Cancel render={<Button intent="neutral" design="ghost" />}>
+              Cancel
             </AlertDialog.Cancel>
 
-            <AlertDialog.Action asChild>
-              <Button intent="danger">Delete</Button>
-            </AlertDialog.Action>
+            <AlertDialog.Action render={<Button intent="danger" />}>Delete</AlertDialog.Action>
           </AlertDialog.Footer>
         </AlertDialog.Content>
       </AlertDialog.Portal>
@@ -191,9 +167,7 @@ export const ForwardFocus: StoryFn = () => {
 
   return (
     <AlertDialog>
-      <AlertDialog.Trigger asChild>
-        <Button>Forward focus</Button>
-      </AlertDialog.Trigger>
+      <AlertDialog.Trigger render={<Button />}>Forward focus</AlertDialog.Trigger>
 
       <AlertDialog.Portal>
         <AlertDialog.Overlay />
@@ -210,15 +184,11 @@ export const ForwardFocus: StoryFn = () => {
           </AlertDialog.Body>
 
           <AlertDialog.Footer className="gap-lg flex justify-end">
-            <AlertDialog.Cancel asChild>
-              <Button intent="neutral" design="ghost">
-                Cancel
-              </Button>
+            <AlertDialog.Cancel render={<Button intent="neutral" design="ghost" />}>
+              Cancel
             </AlertDialog.Cancel>
 
-            <AlertDialog.Action asChild>
-              <Button intent="danger">Delete</Button>
-            </AlertDialog.Action>
+            <AlertDialog.Action render={<Button intent="danger" />}>Delete</AlertDialog.Action>
           </AlertDialog.Footer>
         </AlertDialog.Content>
       </AlertDialog.Portal>

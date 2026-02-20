@@ -1,17 +1,14 @@
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { cx } from 'class-variance-authority'
-import { ComponentPropsWithoutRef, Ref, useId } from 'react'
+import { Ref, useId } from 'react'
 
-import { Slot } from '../slot'
 import { FormFieldContextState, ID_PREFIX } from './FormFieldContext'
 import { FormFieldProvider } from './FormFieldProvider'
 
 export interface FormFieldProps
-  extends ComponentPropsWithoutRef<'div'>,
+  extends useRender.ComponentProps<'div'>,
     Pick<FormFieldContextState, 'name' | 'state' | 'isRequired'> {
-  /**
-   * Change the component to the HTML tag or custom component of the only child. This will merge the original component props with the props of the supplied element/component and change the underlying DOM node.
-   */
-  asChild?: boolean
   /**
    * When `true`, prevents the user from interacting.
    */
@@ -30,12 +27,23 @@ export const FormField = ({
   name,
   state,
   isRequired = false,
-  asChild = false,
+  render,
   ref,
   ...others
 }: FormFieldProps) => {
   const id = `${ID_PREFIX}-${useId()}`
-  const Component = asChild ? Slot : 'div'
+
+  const defaultProps: useRender.ElementProps<'div'> & Record<string, unknown> = {
+    'data-spark-component': 'form-field',
+    className: cx(className, 'gap-md flex flex-col'),
+  }
+
+  const element = useRender({
+    defaultTagName: 'div',
+    render,
+    ref,
+    props: mergeProps<'div'>(defaultProps, others),
+  })
 
   return (
     <FormFieldProvider
@@ -46,12 +54,7 @@ export const FormField = ({
       readOnly={readOnly}
       state={state}
     >
-      <Component
-        ref={ref}
-        data-spark-component="form-field"
-        className={cx(className, 'gap-md flex flex-col')}
-        {...others}
-      />
+      {element}
     </FormFieldProvider>
   )
 }

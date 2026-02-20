@@ -265,9 +265,7 @@ describe('Drawer', () => {
   it('should handle the inset prop', () => {
     render(
       <Drawer defaultOpen>
-        <Drawer.Trigger asChild>
-          <button>Edit profile</button>
-        </Drawer.Trigger>
+        <Drawer.Trigger render={<button />}>Edit profile</Drawer.Trigger>
 
         <Drawer.Portal>
           <Drawer.Overlay />

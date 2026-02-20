@@ -1,4 +1,4 @@
-import { type FC, isValidElement, type ReactElement, type ReactNode, Children } from 'react'
+import { Children, type FC, isValidElement, type ReactElement, type ReactNode } from 'react'
 
 import { type ItemProps } from '../ComboboxItem'
 import { type ItemTextProps } from '../ComboboxItemText'

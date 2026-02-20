@@ -25,7 +25,7 @@ export const Item = ({ children, ref: forwardedRef, ...props }: ItemProps) => {
   )
 }
 
-const styles = cva('px-lg py-md text-body-1', {
+const styles = cva('px-lg py-md text-body-1 text-left', {
   variants: {
     selected: {
       true: 'font-bold',

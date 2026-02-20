@@ -4,29 +4,16 @@ import { cx } from 'class-variance-authority'
 import { type ComponentProps, Ref } from 'react'
 
 import { Icon } from '../icon'
-import { useRenderSlot } from './useRenderSlot'
 
-type ExtentedZagInterface = Omit<ComponentProps<typeof BaseAccordion.Trigger>, 'render'>
-
-export interface AccordionItemTriggerProps extends ExtentedZagInterface {
-  asChild?: boolean
+export interface AccordionItemTriggerProps extends ComponentProps<typeof BaseAccordion.Trigger> {
   ref?: Ref<HTMLButtonElement>
 }
 
-export const ItemTrigger = ({
-  asChild = false,
-  children,
-  className,
-  ref,
-  ...props
-}: AccordionItemTriggerProps) => {
-  const renderSlot = useRenderSlot(asChild, 'button')
-
+export const ItemTrigger = ({ children, className, ref, ...props }: AccordionItemTriggerProps) => {
   return (
     <BaseAccordion.Trigger
       ref={ref}
       data-spark-component="accordion-item-trigger"
-      render={renderSlot}
       className={cx(
         'group',
         'gap-lg min-h-sz-48 relative flex items-center justify-between',

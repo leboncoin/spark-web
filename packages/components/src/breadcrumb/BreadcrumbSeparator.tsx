@@ -1,41 +1,37 @@
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { ArrowVerticalRight } from '@spark-ui/icons/ArrowVerticalRight'
 import { cx } from 'class-variance-authority'
-import { ComponentPropsWithoutRef, Ref } from 'react'
+import React, { Ref } from 'react'
 
 import { Icon } from '../icon'
-import { Slot } from '../slot'
 
-export interface SeparatorProps extends ComponentPropsWithoutRef<'li'> {
-  asChild?: boolean
+export interface SeparatorProps extends useRender.ComponentProps<'li'> {
   className?: string
   ref?: Ref<HTMLLIElement>
 }
 
-export const Separator = ({
-  asChild = false,
-  className,
-  children,
-  ref,
-  ...rest
-}: SeparatorProps) => {
-  const Component = asChild ? Slot : 'li'
-
-  return (
-    <Component
-      role="presentation"
-      aria-hidden
-      data-spark-component="breadcrumb-separator"
-      ref={ref}
-      className={cx('gap-sm inline-flex items-center', className)}
-      {...rest}
-    >
-      {children ?? (
+export const Separator = ({ className, children, ref, render, ...rest }: SeparatorProps) => {
+  const defaultProps: Record<string, unknown> = {
+    role: 'presentation',
+    'aria-hidden': true,
+    'data-spark-component': 'breadcrumb-separator',
+    className: cx('gap-sm inline-flex items-center', className),
+    children:
+      children ??
+      ((
         <Icon>
           <ArrowVerticalRight />
         </Icon>
-      )}
-    </Component>
-  )
+      ) as React.ReactNode),
+  }
+
+  return useRender({
+    defaultTagName: 'li',
+    render,
+    ref,
+    props: mergeProps<'li'>(defaultProps, rest),
+  })
 }
 
 Separator.displayName = 'Breadcrumb.Separator'

@@ -1,17 +1,14 @@
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { cx } from 'class-variance-authority'
-import { ComponentPropsWithoutRef, type DOMAttributes, Ref, useMemo } from 'react'
+import { type DOMAttributes, Ref, useMemo } from 'react'
 
-import { Slot, wrapPolymorphicSlot } from '../slot'
 import { Spinner, type SpinnerProps } from '../spinner'
 import { buttonStyles, type ButtonStylesProps } from './Button.styles'
 
 export interface ButtonProps
-  extends Omit<ComponentPropsWithoutRef<'button'>, 'disabled'>,
-    ButtonStylesProps {
-  /**
-   * Change the component to the HTML tag or custom component of the only child.
-   */
-  asChild?: boolean
+  extends useRender.ComponentProps<'button'>,
+    Omit<ButtonStylesProps, 'disabled'> {
   /**
    * Display a spinner to indicate to the user that the button is loading something after they interacted with it.
    */
@@ -57,14 +54,12 @@ export const Button = ({
   loadingText,
   shape = 'rounded',
   size = 'md',
-  asChild,
+  render,
   className,
   underline = false,
   ref,
   ...others
 }: ButtonProps) => {
-  const Component = asChild ? Slot : 'button'
-
   const shouldNotInteract = !!disabled || isLoading
 
   const disabledEventHandlers = useMemo(() => {
@@ -83,45 +78,65 @@ export const Button = ({
     ...(loadingLabel && { 'aria-label': loadingLabel }),
   }
 
-  return (
-    <Component
-      data-spark-component="button"
-      {...(Component === 'button' && { type: 'button' })}
-      ref={ref}
-      className={buttonStyles({
-        className,
-        design,
-        disabled: shouldNotInteract,
-        intent,
-        shape,
-        size,
-        underline,
-      })}
-      disabled={!!disabled}
-      aria-busy={isLoading}
-      aria-live={isLoading ? 'assertive' : 'off'}
-      {...others}
-      {...disabledEventHandlers}
-    >
-      {wrapPolymorphicSlot(asChild, children, slotted =>
-        isLoading ? (
-          <>
-            <Spinner {...spinnerProps} />
-            {loadingText && loadingText}
+  const resolvedChildren = isLoading ? (
+    <>
+      <Spinner {...spinnerProps} />
+      {loadingText && loadingText}
 
-            <div
-              aria-hidden
-              className={cx('gap-md', loadingText ? 'hidden' : 'inline-flex opacity-0')}
-            >
-              {slotted}
-            </div>
-          </>
-        ) : (
-          slotted
-        )
-      )}
-    </Component>
+      <div aria-hidden className={cx('gap-md', loadingText ? 'hidden' : 'inline-flex opacity-0')}>
+        {children}
+      </div>
+    </>
+  ) : (
+    children
   )
+
+  const defaultProps: Record<string, unknown> = {
+    'data-spark-component': 'button',
+    type: 'button',
+    children: resolvedChildren,
+    className: buttonStyles({
+      className,
+      design,
+      disabled: shouldNotInteract,
+      intent,
+      shape,
+      size,
+      underline,
+    }),
+    disabled: !!disabled,
+    'aria-busy': isLoading,
+    'aria-live': isLoading ? 'assertive' : 'off',
+    ...disabledEventHandlers,
+  }
+
+  const propsToMerge = shouldNotInteract
+    ? (() => {
+        const {
+          onClick: _onClick,
+          onKeyDown: _onKeyDown,
+          onKeyPress: _onKeyPress,
+          onKeyUp: _onKeyUp,
+          onMouseDown: _onMouseDown,
+          onMouseEnter: _onMouseEnter,
+          onMouseLeave: _onMouseLeave,
+          onMouseOut: _onMouseOut,
+          onMouseOver: _onMouseOver,
+          onMouseUp: _onMouseUp,
+          onSubmit: _onSubmit,
+          ...rest
+        } = others
+
+        return rest
+      })()
+    : others
+
+  return useRender({
+    defaultTagName: 'button',
+    render,
+    ref,
+    props: mergeProps<'button'>(defaultProps, propsToMerge),
+  })
 }
 
 Button.displayName = 'Button'

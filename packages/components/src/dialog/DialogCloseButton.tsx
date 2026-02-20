@@ -24,12 +24,10 @@ const Root = ({
       data-part="close"
       ref={ref}
       className={cx(['absolute', 'top-md', 'right-xl'], className)}
-      asChild
+      render={<IconButton intent={intent} size={size} design={design} aria-label={ariaLabel} />}
       {...rest}
     >
-      <IconButton intent={intent} size={size} design={design} aria-label={ariaLabel}>
-        <Icon>{children}</Icon>
-      </IconButton>
+      <Icon>{children}</Icon>
     </Close>
   )
 }

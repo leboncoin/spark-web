@@ -7,7 +7,7 @@ import { ProgressIndicatorStylesProps } from './ProgressIndicator'
 import { ProgressTrack } from './ProgressTrack'
 
 export interface ProgressProps
-  extends Omit<ComponentProps<typeof BaseProgress.Root>, 'render'>,
+  extends ComponentProps<typeof BaseProgress.Root>,
     Pick<ProgressIndicatorStylesProps, 'intent'> {
   shape?: 'square' | 'rounded'
   /**
@@ -19,10 +19,6 @@ export interface ProgressProps
    * @deprecated Use `getAriaValueText` instead. This prop is kept for backward compatibility.
    */
   getValueLabel?: (value: number, max: number) => string
-  /**
-   * Change the default rendered element for the one passed as a child, merging their props and behavior.
-   */
-  asChild?: boolean
   ref?: Ref<HTMLDivElement>
 }
 

@@ -21,12 +21,8 @@ describe('VisuallyHidden', () => {
     expect(screen.getByRole('button', { name: 'Checkmark', hidden: true })).toBeInTheDocument()
   })
 
-  it('should render as alternative html tag using asChild prop', () => {
-    render(
-      <VisuallyHidden asChild>
-        <h3>Hidden heading</h3>
-      </VisuallyHidden>
-    )
+  it('should render as alternative html tag using render prop', () => {
+    render(<VisuallyHidden render={<h3 />}>Hidden heading</VisuallyHidden>)
 
     // Then
     expect(

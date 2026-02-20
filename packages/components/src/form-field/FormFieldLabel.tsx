@@ -19,14 +19,14 @@ export const FormFieldLabel = ({
   className,
   children,
   requiredIndicator = <FormFieldRequiredIndicator />,
-  asChild,
+  render,
   ref,
   ...others
 }: FormFieldLabelProps) => {
   const control = useFormField()
 
   const { disabled, labelId, isRequired } = control
-  const htmlFor = asChild ? undefined : htmlForProp || control.id
+  const htmlFor = render ? undefined : htmlForProp || control.id
 
   return (
     <Label
@@ -35,7 +35,7 @@ export const FormFieldLabel = ({
       data-spark-component="form-field-label"
       htmlFor={htmlFor}
       className={cx(className, disabled ? 'text-on-surface/dim-3 pointer-events-none' : undefined)}
-      asChild={asChild}
+      render={render}
       {...others}
     >
       <>

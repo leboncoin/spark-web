@@ -22,13 +22,15 @@ export const Default: StoryFn = () => {
     <Collapsible open={open} onOpenChange={setOpen}>
       <div className="mb-lg gap-md flex items-center">
         <p className="font-bold">Terms and conditions</p>
-        <Collapsible.Trigger asChild>
-          <IconButton
-            size="sm"
-            aria-label={open ? 'Collapse terms and conditions' : 'Expand terms and conditions'}
-          >
-            <Icon>{open ? <Close /> : <MapExpand />}</Icon>
-          </IconButton>
+        <Collapsible.Trigger
+          render={
+            <IconButton
+              size="sm"
+              aria-label={open ? 'Collapse terms and conditions' : 'Expand terms and conditions'}
+            />
+          }
+        >
+          <Icon>{open ? <Close /> : <MapExpand />}</Icon>
         </Collapsible.Trigger>
       </div>
 

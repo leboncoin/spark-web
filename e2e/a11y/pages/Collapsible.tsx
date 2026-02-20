@@ -1,8 +1,8 @@
-import { Close } from '@spark-ui/icons/Close'
-import { MapExpand } from '@spark-ui/icons/MapExpand'
 import { Collapsible } from '@spark-ui/components/collapsible'
 import { Icon } from '@spark-ui/components/icon'
 import { IconButton } from '@spark-ui/components/icon-button'
+import { Close } from '@spark-ui/icons/Close'
+import { MapExpand } from '@spark-ui/icons/MapExpand'
 import React from 'react'
 
 export const A11yCollapsible = () => (
@@ -11,12 +11,14 @@ export const A11yCollapsible = () => (
       <Collapsible defaultOpen>
         <div className="mb-lg gap-md flex items-center">
           <p className="font-bold">Terms and conditions</p>
-          <Collapsible.Trigger asChild>
-            <IconButton size="sm" aria-label="Collapse terms and conditions">
-              <Icon>
-                <Close />
-              </Icon>
-            </IconButton>
+          <Collapsible.Trigger
+            render={
+              <IconButton size="sm" aria-label="Collapse terms and conditions" />
+            }
+          >
+            <Icon>
+              <Close />
+            </Icon>
           </Collapsible.Trigger>
         </div>
 
@@ -37,12 +39,14 @@ export const A11yCollapsible = () => (
       <Collapsible>
         <div className="mb-lg gap-md flex items-center">
           <p className="font-bold">Terms and conditions</p>
-          <Collapsible.Trigger asChild>
-            <IconButton size="sm" aria-label="Expand terms and conditions">
-              <Icon>
-                <MapExpand />
-              </Icon>
-            </IconButton>
+          <Collapsible.Trigger
+            render={
+              <IconButton size="sm" aria-label="Expand terms and conditions" />
+            }
+          >
+            <Icon>
+              <MapExpand />
+            </Icon>
           </Collapsible.Trigger>
         </div>
 

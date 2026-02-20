@@ -24,7 +24,7 @@ export const SliderLabel = ({
   className,
   children,
   requiredIndicator = <FormFieldRequiredIndicator />,
-  asChild,
+  render,
   ref,
   ...others
 }: SliderLabelProps) => {
@@ -37,7 +37,7 @@ export const SliderLabel = ({
   const labelId = idProp || fieldLabelId || field.labelId || generatedId
 
   // Use FormField id for htmlFor if present, otherwise use fieldId from context, or the prop
-  const htmlFor = asChild ? undefined : htmlForProp || fieldId || field.id
+  const htmlFor = render ? undefined : htmlForProp || fieldId || field.id
 
   // Get disabled and required state from FormField if present
   const disabled = field.disabled
@@ -60,7 +60,7 @@ export const SliderLabel = ({
       data-spark-component="slider-label"
       htmlFor={htmlFor}
       className={cx(disabled ? 'text-on-surface/dim-3 pointer-events-none' : undefined, className)}
-      asChild={asChild}
+      render={render}
       {...others}
     >
       <>

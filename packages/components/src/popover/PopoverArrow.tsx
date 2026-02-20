@@ -1,28 +1,20 @@
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { cva } from 'class-variance-authority'
 import { Popover as RadixPopover } from 'radix-ui'
 import { Ref } from 'react'
 
 import { usePopover } from './PopoverContext'
 
-export type ArrowProps = RadixPopover.PopoverArrowProps & {
-  ref?: Ref<SVGSVGElement>
-}
+export type ArrowProps = Omit<RadixPopover.PopoverArrowProps, 'asChild' | 'children'> &
+  useRender.ComponentProps<'svg'> & {
+    ref?: Ref<SVGSVGElement>
+  }
 
-export const Arrow = ({
-  asChild = false,
-  width = 16,
-  height = 8,
-  className,
-  ref,
-  ...rest
-}: ArrowProps) => {
+export const Arrow = ({ render, width = 16, height = 8, className, ref, ...rest }: ArrowProps) => {
   const { intent } = usePopover()
 
-  /**
-   * This is necessary to override a Radix UI behaviour.
-   * Radix hides the arrow when the Popover is too misaligned from its trigger element.
-   */
-  const styles = cva('visible', {
+  const arrowStyles = cva('visible', {
     variants: {
       intent: {
         surface: 'fill-surface',
@@ -42,12 +34,35 @@ export const Arrow = ({
     },
   })
 
+  const defaultProps = {
+    'data-spark-component': 'popover-arrow',
+    className: arrowStyles({ intent, className }),
+    width,
+    height,
+    ...rest,
+  }
+
+  const element = useRender({
+    defaultTagName: 'svg',
+    render: (render ?? (() => null)) as useRender.RenderProp,
+    ref,
+    props: mergeProps<'svg'>(defaultProps, {}),
+  })
+
+  if (render) {
+    return (
+      <RadixPopover.Arrow asChild width={width} height={height} {...rest}>
+        {element}
+      </RadixPopover.Arrow>
+    )
+  }
+
   return (
     <RadixPopover.Arrow
       data-spark-component="popover-arrow"
       ref={ref}
-      className={styles({ intent, className })}
-      asChild={asChild}
+      className={arrowStyles({ intent, className })}
+      asChild={false}
       width={width}
       height={height}
       {...rest}

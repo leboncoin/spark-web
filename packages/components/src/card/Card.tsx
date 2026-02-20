@@ -1,15 +1,15 @@
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { ComponentProps } from 'react'
 
-import { Slot } from '../slot'
 import { cardStyles, type CardStylesProps } from './Card.styles'
 import { CardContext } from './context'
 import { hasBackdrop, isInteractive } from './utils'
 
-export interface CardProps extends ComponentProps<'div'>, CardStylesProps {
-  /**
-   * Change the component to the HTML tag or custom component of the only child.
-   */
-  asChild?: boolean
+export interface CardProps
+  extends useRender.ComponentProps<'div'>,
+    ComponentProps<'div'>,
+    CardStylesProps {
   /**
    * Whether the card should have an inset padding.
    */
@@ -21,14 +21,36 @@ export const Card = ({
   design = 'filled',
   intent = 'surface',
   inset = false,
-  asChild,
+  render,
   className,
   ref,
   ...props
 }: CardProps) => {
-  const Component = asChild ? Slot : 'div'
   const backdropDetected = hasBackdrop(children)
-  const interactiveDetected = isInteractive(children, asChild, props)
+  const interactiveDetected = isInteractive(
+    children,
+    typeof render === 'function' ? undefined : render,
+    props
+  )
+
+  const defaultProps: Record<string, unknown> = {
+    'data-spark-component': 'card',
+    'data-interactive': interactiveDetected,
+    className: cardStyles({
+      className,
+      design,
+      intent,
+      hasBackdrop: backdropDetected,
+    }),
+    children,
+  }
+
+  const element = useRender({
+    defaultTagName: 'div',
+    render,
+    ref,
+    props: mergeProps<'div'>(defaultProps, props),
+  })
 
   return (
     <CardContext.Provider
@@ -40,20 +62,7 @@ export const Card = ({
         isInteractive: interactiveDetected,
       }}
     >
-      <Component
-        data-spark-component="card"
-        data-interactive={interactiveDetected}
-        ref={ref}
-        className={cardStyles({
-          className,
-          design,
-          intent,
-          hasBackdrop: backdropDetected,
-        })}
-        {...props}
-      >
-        {children}
-      </Component>
+      {element}
     </CardContext.Provider>
   )
 }

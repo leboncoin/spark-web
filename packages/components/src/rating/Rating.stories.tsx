@@ -41,9 +41,7 @@ export const WithFormField: StoryFn = _args => {
 
   return (
     <FormField name="condition" state={!value ? 'error' : undefined} isRequired>
-      <FormField.Label asChild>
-        <p>Apparel condition</p>
-      </FormField.Label>
+      <FormField.Label render={<p />}>Apparel condition</FormField.Label>
 
       <Rating value={value} onValueChange={setValue} />
 

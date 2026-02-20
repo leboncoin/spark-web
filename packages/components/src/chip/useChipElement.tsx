@@ -2,28 +2,16 @@ import { useCombinedState } from '@spark-ui/hooks/use-combined-state'
 import { emulateTab } from 'emulate-tab'
 import {
   Children,
-  ElementType,
   FC,
-  ForwardRefExoticComponent,
-  HTMLAttributes,
   isValidElement,
   KeyboardEvent,
   MouseEvent,
   ReactElement,
   ReactNode,
-  RefAttributes,
 } from 'react'
 
-import { Slot } from '../slot'
-
 interface ReturnedValue {
-  Element:
-    | ForwardRefExoticComponent<
-        HTMLAttributes<HTMLElement> & {
-          children?: ReactNode
-        } & RefAttributes<HTMLElement>
-      >
-    | ElementType
+  defaultTagName: 'button' | 'div'
   chipProps:
     | {
         type: 'button'
@@ -65,7 +53,7 @@ const findElement =
 
 export const useChipElement = ({
   onClick,
-  asChild,
+  render: _render,
   pressed,
   defaultPressed,
   disabled,
@@ -79,7 +67,7 @@ export const useChipElement = ({
     args: { pressed: boolean; value?: string | number | readonly string[] }
   ) => void
   onKeyDown?: (event: KeyboardEvent<HTMLButtonElement>) => void
-  asChild?: boolean
+  render?: React.ReactElement
   pressed?: boolean
   defaultPressed?: boolean
   value?: string | number | readonly string[]
@@ -128,7 +116,7 @@ export const useChipElement = ({
 
   if (isButton) {
     return {
-      Element: asChild ? Slot : 'button',
+      defaultTagName: 'button',
       chipProps: {
         type: 'button',
         ...(isPressed !== undefined && {
@@ -153,7 +141,7 @@ export const useChipElement = ({
   }
 
   return {
-    Element: asChild ? Slot : 'div',
+    defaultTagName: 'div',
     chipProps: {
       'aria-disabled': disabled,
       children: formattedChildren,

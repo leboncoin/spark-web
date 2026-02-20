@@ -34,9 +34,7 @@ describe('Collapsible', () => {
 
     render(
       <Collapsible disabled>
-        <Collapsible.Trigger asChild>
-          <button>Expand</button>
-        </Collapsible.Trigger>
+        <Collapsible.Trigger render={<button />}>Expand</Collapsible.Trigger>
 
         <Collapsible.Content>
           <p>Collapsible content</p>
@@ -70,9 +68,7 @@ describe('Collapsible', () => {
               onChange(openState)
             }}
           >
-            <Collapsible.Trigger asChild>
-              <button>Expand</button>
-            </Collapsible.Trigger>
+            <Collapsible.Trigger render={<button />}>Expand</Collapsible.Trigger>
 
             <Collapsible.Content>
               <p>Collapsible content</p>
@@ -100,9 +96,7 @@ describe('Collapsible', () => {
 
       render(
         <Collapsible open>
-          <Collapsible.Trigger asChild>
-            <button>Expand</button>
-          </Collapsible.Trigger>
+          <Collapsible.Trigger render={<button />}>Expand</Collapsible.Trigger>
 
           <Collapsible.Content>
             <p>Collapsible content</p>
@@ -124,9 +118,7 @@ describe('Collapsible', () => {
 
       render(
         <Collapsible open={false}>
-          <Collapsible.Trigger asChild>
-            <button>Expand</button>
-          </Collapsible.Trigger>
+          <Collapsible.Trigger render={<button />}>Expand</Collapsible.Trigger>
 
           <Collapsible.Content>
             <p>Collapsible content</p>

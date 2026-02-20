@@ -34,14 +34,12 @@ describe('Avatar', () => {
   })
 
   describe('Polymorphism', () => {
-    it('should render as a link when Avatar.User has asChild prop with an anchor', () => {
+    it('should render as a link when Avatar.User has render prop with an anchor', () => {
       render(
         <Avatar username="John Doe">
-          <Avatar.User asChild>
-            <a href="#">
-              <Avatar.Placeholder />
-              <Avatar.Image src="avatar.png" />
-            </a>
+          <Avatar.User render={<a href="#" />}>
+            <Avatar.Placeholder />
+            <Avatar.Image src="avatar.png" />
           </Avatar.User>
         </Avatar>
       )
@@ -51,15 +49,13 @@ describe('Avatar', () => {
       expect(link).toHaveAttribute('href', '#')
     })
 
-    it('should render as a button when Avatar.User has asChild prop with a button', async () => {
+    it('should render as a button when Avatar.User has render prop with a button', async () => {
       const onClick = vi.fn()
       render(
         <Avatar username="John Doe">
-          <Avatar.User asChild>
-            <button type="button" onClick={onClick}>
-              <Avatar.Placeholder />
-              <Avatar.Image src="avatar.png" />
-            </button>
+          <Avatar.User render={<button type="button" onClick={onClick} />}>
+            <Avatar.Placeholder />
+            <Avatar.Image src="avatar.png" />
           </Avatar.User>
         </Avatar>
       )
@@ -130,17 +126,18 @@ describe('Avatar', () => {
       expect(screen.getByRole('button', { name: 'Edit account' })).toBeInTheDocument()
     })
 
-    it('should render with custom action button using asChild', () => {
+    it('should render with custom action button using render', () => {
       render(
         <Avatar username="John Doe">
           <Avatar.User>
             <Avatar.Placeholder />
             <Avatar.Image src="avatar.png" />
           </Avatar.User>
-          <Avatar.Action ariaLabel="Edit account" asChild>
-            <Button size="sm" intent="info" design="outlined">
-              Edit
-            </Button>
+          <Avatar.Action
+            ariaLabel="Edit account"
+            render={<Button size="sm" intent="info" design="outlined" />}
+          >
+            Edit
           </Avatar.Action>
         </Avatar>
       )

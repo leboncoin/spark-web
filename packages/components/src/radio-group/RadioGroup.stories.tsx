@@ -193,9 +193,7 @@ export const WithFormField: StoryFn = _args => {
 
   return (
     <FormField name="condition" state={!value ? 'error' : undefined} isRequired>
-      <FormField.Label asChild>
-        <p>Apparel condition</p>
-      </FormField.Label>
+      <FormField.Label render={<p />}>Apparel condition</FormField.Label>
 
       <RadioGroup value={value} onValueChange={handleValueChange}>
         <RadioGroup.Radio value="1">New</RadioGroup.Radio>

@@ -1,26 +1,52 @@
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { cx } from 'class-variance-authority'
-import { HTMLAttributes, ReactNode, Ref } from 'react'
+import { HTMLAttributes, Ref } from 'react'
 
-export interface DividerContentProps extends HTMLAttributes<HTMLSpanElement> {
-  /**
-   * Change the component to the HTML tag or custom component of the only child.
-   */
-  asChild?: boolean
-  children?: ReactNode
+export interface DividerContentProps
+  extends HTMLAttributes<HTMLSpanElement>,
+    useRender.ComponentProps<'span'> {
   ref?: Ref<HTMLSpanElement>
 }
 
-export const DividerContent = ({ children, ref, className, ...props }: DividerContentProps) => {
-  return children ? (
+const contentClassName = 'group-data-[writing-mode=vertical-lr]:[writing-mode:vertical-lr]'
+
+export const DividerContent = ({
+  children,
+  render,
+  ref,
+  className,
+  ...props
+}: DividerContentProps) => {
+  const defaultProps = {
+    'data-spark-component': 'divider-content',
+    className: cx(contentClassName, className),
+    children,
+  }
+
+  const element = useRender({
+    defaultTagName: 'span',
+    render: (render ?? (() => null)) as useRender.RenderProp,
+    ref,
+    props: mergeProps<'span'>(defaultProps, props),
+  })
+
+  if (!children && !render) return null
+
+  if (render) {
+    return element
+  }
+
+  return (
     <span
       data-spark-component="divider-content"
       ref={ref}
+      className={cx(contentClassName, className)}
       {...props}
-      className={cx('group-data-[writing-mode=vertical-lr]:[writing-mode:vertical-lr]', className)}
     >
       {children}
     </span>
-  ) : null
+  )
 }
 
 DividerContent.displayName = 'Divider.Content'

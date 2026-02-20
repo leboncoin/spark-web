@@ -1,7 +1,7 @@
 import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
 import { cx } from 'class-variance-authority'
-import { Fragment, ReactNode, Ref, useEffect, useRef } from 'react'
+import { ReactNode, Ref, useEffect, useRef } from 'react'
 
 import { Popover } from '../popover'
 import { useComboboxContext } from './ComboboxContext'
@@ -26,10 +26,6 @@ export const Trigger = ({ className, children, ref: forwardedRef }: TriggerProps
   const clearButton = findElement(children, 'Combobox.ClearButton')
   const disclosure = findElement(children, 'Combobox.Disclosure')
 
-  const [PopoverAnchor, popoverAnchorProps] = ctx.hasPopover
-    ? [Popover.Anchor, { asChild: true, type: undefined }]
-    : [Fragment, {}]
-
   const ref = useMergeRefs(forwardedRef, ctx.triggerAreaRef)
   const scrollableAreaRef = useRef<HTMLDivElement>(null)
 
@@ -38,17 +34,9 @@ export const Trigger = ({ className, children, ref: forwardedRef }: TriggerProps
 
   const hasClearButton = !!clearButton && !disabled && !readOnly
 
-  /**
-   * In case wrap behaviour is disabled, we sometimes need to scroll to the right-side of the trigger:
-   * - when a selected item chip is added.
-   * - when the component width changes (window resizing, etc.)
-   *
-   * The goal is that the typing area remains visible at all times.
-   */
   const scrollToRight = () => {
     if (scrollableAreaRef.current && !ctx.wrap) {
       const { scrollWidth, clientWidth } = scrollableAreaRef.current
-      // Scroll to the rightmost position
       scrollableAreaRef.current.scrollLeft = scrollWidth - clientWidth
     }
   }
@@ -62,55 +50,56 @@ export const Trigger = ({ className, children, ref: forwardedRef }: TriggerProps
 
   useEffect(() => {
     const resizeObserver = new ResizeObserver(scrollToRight)
-
     if (scrollableAreaRef.current) {
       resizeObserver.observe(scrollableAreaRef.current)
     }
 
-    return () => {
-      resizeObserver.disconnect()
-    }
+    return () => resizeObserver.disconnect()
   }, [])
 
-  return (
+  const divProps = {
+    ref,
+    className: styles({
+      className,
+      state: ctx.state,
+      disabled,
+      readOnly,
+      allowWrap: ctx.wrap,
+    }),
+    onClick: () => {
+      if (!ctx.isOpen && !disabled && !readOnly) {
+        ctx.openMenu()
+        if (ctx.innerInputRef.current) {
+          ctx.innerInputRef.current.focus()
+        }
+      }
+    },
+  }
+
+  const content = (
     <>
-      <PopoverAnchor {...popoverAnchorProps}>
-        <div
-          ref={ref}
-          className={styles({
-            className,
-            state: ctx.state,
-            disabled,
-            readOnly,
-            allowWrap: ctx.wrap,
-          })}
-          onClick={() => {
-            if (!ctx.isOpen && !disabled && !readOnly) {
-              ctx.openMenu()
-              if (ctx.innerInputRef.current) {
-                ctx.innerInputRef.current.focus()
-              }
-            }
-          }}
-        >
-          {leadingIcon}
-          <div
-            ref={scrollableAreaRef}
-            className={cx(
-              'min-w-none gap-sm py-md inline-flex grow items-start',
-              ctx.wrap ? 'flex-wrap' : 'u-no-scrollbar overflow-x-auto p-[2px]'
-            )}
-          >
-            {selectedItems}
-            {input}
-          </div>
-
-          {hasClearButton && clearButton}
-
-          {disclosure}
-        </div>
-      </PopoverAnchor>
+      {leadingIcon}
+      <div
+        ref={scrollableAreaRef}
+        className={cx(
+          'min-w-none gap-sm py-md inline-flex grow items-start',
+          ctx.wrap ? 'flex-wrap' : 'u-no-scrollbar overflow-x-auto p-[2px]'
+        )}
+      >
+        {selectedItems}
+        {input}
+      </div>
+      {hasClearButton && clearButton}
+      {disclosure}
     </>
+  )
+
+  return ctx.hasPopover ? (
+    <Popover.Anchor render={<div />} {...divProps}>
+      {content}
+    </Popover.Anchor>
+  ) : (
+    <div {...divProps}>{content}</div>
   )
 }
 

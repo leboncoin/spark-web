@@ -1,5 +1,6 @@
+import { mergeProps } from '@base-ui/react/merge-props'
 import { Toast as BaseToast } from '@base-ui/react/toast'
-import { Slot } from '@spark-ui/components/slot'
+import { useRender } from '@base-ui/react/use-render'
 import { cx } from 'class-variance-authority'
 import * as React from 'react'
 
@@ -37,11 +38,11 @@ export function ToastProvider({ children, limit = 3, ...props }: ToastProviderPr
 }
 
 interface ToastTriggerProps
-  extends Omit<React.ComponentPropsWithRef<'button'>, 'title'>,
+  extends Omit<useRender.ComponentProps<'button'>, 'title'>,
+    Omit<React.ComponentPropsWithRef<'button'>, 'title' | 'children'>,
     Pick<ToastObject, 'priority'>,
     Pick<ToastData, 'design' | 'intent' | 'icon' | 'isClosable' | 'action' | 'compact'> {
   children: React.ReactNode
-  asChild?: boolean
   title: string | React.ReactNode
   description?: string | React.ReactNode
   timeout?: number
@@ -50,7 +51,7 @@ interface ToastTriggerProps
 export function ToastTrigger({
   children,
   onClick,
-  asChild = false,
+  render,
   title,
   description,
   timeout = 5000,
@@ -61,10 +62,9 @@ export function ToastTrigger({
   action,
   compact,
   priority = 'low',
+  ...others
 }: ToastTriggerProps) {
   const toastManager = useToastManager()
-
-  const Component = asChild ? Slot : 'button'
 
   function createToast(e: React.MouseEvent<HTMLButtonElement>) {
     onClick?.(e)
@@ -84,11 +84,17 @@ export function ToastTrigger({
     })
   }
 
-  return (
-    <Component {...(!asChild && { type: 'button' })} onClick={createToast}>
-      {children}
-    </Component>
-  )
+  const defaultProps: useRender.ElementProps<'button'> = {
+    type: 'button',
+    children,
+    onClick: createToast,
+  }
+
+  return useRender({
+    defaultTagName: 'button',
+    render,
+    props: mergeProps<'button'>(defaultProps, others),
+  })
 }
 
 export type ToastManager = ReturnType<typeof BaseToast.createToastManager>

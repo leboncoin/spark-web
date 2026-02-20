@@ -46,7 +46,9 @@ export const ProgressIndicator = ({
   const percentage = value !== null ? ((value - min) / (max - min)) * 100 : 0
   const isIndeterminate = value === null
 
-  const handleTransitionEnd = (event: Parameters<NonNullable<ProgressIndicatorProps['onTransitionEnd']>>[0]) => {
+  const handleTransitionEnd = (
+    event: Parameters<NonNullable<ProgressIndicatorProps['onTransitionEnd']>>[0]
+  ) => {
     // Call the original onTransitionEnd if provided
     onTransitionEnd?.(event)
 

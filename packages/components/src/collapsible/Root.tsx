@@ -1,20 +1,11 @@
 import { Collapsible } from '@base-ui/react/collapsible'
 import { type ComponentProps } from 'react'
 
-import { useRenderSlot } from './useRenderSlot'
+export interface RootProps extends ComponentProps<typeof Collapsible.Root> {}
 
-export interface RootProps extends ComponentProps<typeof Collapsible.Root> {
-  /**
-   * Change the default rendered element for the one passed as a child, merging their props and behavior.
-   */
-  asChild?: boolean
-}
-
-export const Root = ({ asChild = false, children, ...props }: RootProps) => {
-  const renderSlot = useRenderSlot(asChild, 'div')
-
+export const Root = ({ children, ...props }: RootProps) => {
   return (
-    <Collapsible.Root data-spark-component="collapsible" render={renderSlot} {...props}>
+    <Collapsible.Root data-spark-component="collapsible" {...props}>
       {children}
     </Collapsible.Root>
   )

@@ -50,6 +50,7 @@ const filterComponents = (): A11yComponentsKey[] => {
 
   if (filtered.length === 0) {
     console.warn('⚠️  No valid components found. Running all tests.')
+
     return allComponents
   }
 

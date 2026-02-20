@@ -1,5 +1,5 @@
-import { BookmarkFill } from '@spark-ui/icons/BookmarkFill'
 import { Dropdown } from '@spark-ui/components/dropdown'
+import { BookmarkFill } from '@spark-ui/icons/BookmarkFill'
 import React from 'react'
 
 export const A11yDropdown = () => (

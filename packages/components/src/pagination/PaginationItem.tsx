@@ -37,8 +37,8 @@ export const Item = ({ children, value, className, href, ref, ...props }: ItemPr
   return (
     <li>
       {href ? (
-        <Button ref={ref} {...mergedProps} asChild>
-          <a href={href}>{children || value}</a>
+        <Button ref={ref} {...mergedProps} render={<a href={href} />}>
+          {children || value}
         </Button>
       ) : (
         <Button ref={ref} {...mergedProps}>

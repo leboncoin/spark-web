@@ -1,11 +1,14 @@
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { Popover as RadixPopover } from 'radix-ui'
 import { Ref } from 'react'
 
 import { styles, type StylesProps } from './PopoverContent.styles'
 import { usePopover } from './PopoverContext'
 
-export type ContentProps = RadixPopover.PopoverContentProps &
-  StylesProps & {
+export type ContentProps = Omit<RadixPopover.PopoverContentProps, 'asChild' | 'children'> &
+  StylesProps &
+  useRender.ComponentProps<'div'> & {
     ref?: Ref<HTMLDivElement>
   }
 
@@ -13,11 +16,11 @@ export const Content = ({
   // Spark props
   className,
   children,
+  render,
   matchTriggerWidth = false,
   // Radix props
   align = 'center',
-  arrowPadding = 16, // In order not to overlap the arrow on the rounded corners of the popover.
-  asChild = false,
+  arrowPadding = 16,
   avoidCollisions = true,
   'aria-labelledby': ariaLabelledBy,
   collisionBoundary,
@@ -33,6 +36,49 @@ export const Content = ({
 }: ContentProps) => {
   const { headerId, intent } = usePopover()
 
+  const radixProps = {
+    align,
+    arrowPadding,
+    avoidCollisions,
+    collisionBoundary,
+    collisionPadding,
+    hideWhenDetached,
+    side,
+    sideOffset,
+    sticky,
+  }
+
+  const defaultProps = {
+    'aria-labelledby': headerId || ariaLabelledBy,
+    'data-spark-component': 'popover-content',
+    className: styles({
+      enforceBoundaries: !!collisionBoundary,
+      matchTriggerWidth,
+      inset,
+      elevation,
+      intent,
+      className,
+    }),
+    ...radixProps,
+    ...rest,
+    children,
+  }
+
+  const element = useRender({
+    defaultTagName: 'div',
+    render: (render ?? (() => null)) as useRender.RenderProp,
+    ref,
+    props: mergeProps<'div'>(defaultProps, {}),
+  })
+
+  if (render) {
+    return (
+      <RadixPopover.Content asChild {...radixProps} ref={ref}>
+        {element}
+      </RadixPopover.Content>
+    )
+  }
+
   return (
     <RadixPopover.Content
       aria-labelledby={headerId || ariaLabelledBy}
@@ -46,18 +92,8 @@ export const Content = ({
       })}
       data-spark-component="popover-content"
       ref={ref}
-      {...{
-        align,
-        arrowPadding,
-        asChild,
-        avoidCollisions,
-        collisionBoundary,
-        collisionPadding,
-        hideWhenDetached,
-        side,
-        sideOffset,
-        sticky,
-      }}
+      asChild={false}
+      {...radixProps}
       {...rest}
     >
       {children}

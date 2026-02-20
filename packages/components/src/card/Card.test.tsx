@@ -13,12 +13,8 @@ describe('Card', () => {
     expect(document.querySelector('[data-spark-component="card"]')).toBeInTheDocument()
   })
 
-  it('should render as link', () => {
-    render(
-      <Card asChild>
-        <a href="/">Link</a>
-      </Card>
-    )
+  it('should render as link when using render prop', () => {
+    render(<Card render={<a href="/" />}>Link</Card>)
 
     expect(screen.getByRole('link', { name: 'Link' })).toHaveAttribute('href', '/')
   })

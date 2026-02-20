@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 import { type RefObject, useEffect, useRef, useState } from 'react'
 
 interface SwipeArgs<T> {

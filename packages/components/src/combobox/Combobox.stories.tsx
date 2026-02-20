@@ -36,7 +36,7 @@ export default meta
 export const Default: StoryFn = _args => {
   return (
     <div className="pb-[300px]">
-      <Combobox>
+      <Combobox defaultOpen>
         <Combobox.Trigger>
           <Combobox.LeadingIcon>
             <PenOutline />

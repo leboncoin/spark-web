@@ -1,6 +1,6 @@
-import { LikeOutline } from '@spark-ui/icons/LikeOutline'
 import { Icon } from '@spark-ui/components/icon'
 import { IconButton } from '@spark-ui/components/icon-button'
+import { LikeOutline } from '@spark-ui/icons/LikeOutline'
 import React from 'react'
 
 export const A11yIconButton = () => (

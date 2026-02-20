@@ -6,16 +6,12 @@ import { MeterContext } from './MeterContext'
 import { MeterIndicatorStylesProps } from './MeterTrack.styles'
 
 export interface MeterProps
-  extends Omit<ComponentProps<typeof BaseMeter.Root>, 'render'>,
+  extends ComponentProps<typeof BaseMeter.Root>,
     Pick<MeterIndicatorStylesProps, 'intent'> {
   /**
    * Shape of the meter track and indicator.
    */
   shape?: 'square' | 'rounded'
-  /**
-   * Change the default rendered element for the one passed as a child, merging their props and behavior.
-   */
-  asChild?: boolean
   ref?: Ref<HTMLDivElement>
 }
 

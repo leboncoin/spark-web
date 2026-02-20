@@ -192,4 +192,22 @@ describe('RadioGroup', () => {
       ).toBeInTheDocument()
     })
   })
+
+  describe('render prop (polymorphism)', () => {
+    it('should render RadioGroup root as custom element when using render prop', () => {
+      render(
+        <RadioGroup defaultValue="1" render={<section data-testid="custom-group" />}>
+          <RadioGroup.Radio value="1">One</RadioGroup.Radio>
+          <RadioGroup.Radio value="2">Two</RadioGroup.Radio>
+        </RadioGroup>
+      )
+
+      const group = screen.getByTestId('custom-group')
+      expect(group).toBeInTheDocument()
+      expect(group.tagName).toBe('SECTION')
+      expect(group).toHaveAttribute('data-spark-component', 'radio-group')
+      expect(group).toHaveAttribute('role', 'radiogroup')
+      expect(screen.getByRole('radio', { name: 'One' })).toBeInTheDocument()
+    })
+  })
 })

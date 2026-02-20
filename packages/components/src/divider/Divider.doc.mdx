@@ -61,12 +61,11 @@ to place an item on top of the divider by using its `Divider.Content` component 
 
 <Canvas of={stories.Content} />
 
-### asChild
+### Polymorphic (render as another element)
 
-The `Divider` component is a `separator` rolled `div` unless you include an `asChild` boolean flag, and pass the element you prefer it becomes as an immediate child.
-It can also work combined with `Divider.Content` inside of it.
+The `Divider` component renders as a `separator`-based `div` by default. To render as another element, use the `render` prop (e.g. `render={<span />}` or `render={<hr />}`). You can combine it with `Divider.Content` as children.
 
-<Canvas of={stories.asChild} />
+<Canvas of={stories.Polymorphic} />
 
 ### Decorative
 

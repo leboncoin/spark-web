@@ -7,8 +7,8 @@ import React from 'react'
 export const A11yDialog = () => (
   <section>
     <Dialog defaultOpen>
-      <Dialog.Trigger asChild>
-        <Button>Create account</Button>
+      <Dialog.Trigger render={<Button />}>
+        Create account
       </Dialog.Trigger>
 
       <Dialog.Portal>

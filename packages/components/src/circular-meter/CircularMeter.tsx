@@ -19,7 +19,7 @@ const CIRCULAR_METER_SIZE_CONFIG: Record<
 }
 
 export interface CircularMeterProps
-  extends Omit<ComponentProps<typeof BaseMeter.Root>, 'render'>,
+  extends ComponentProps<typeof BaseMeter.Root>,
     Pick<MeterIndicatorStylesProps, 'intent'>,
     CircularMeterStylesProps {
   /**
@@ -33,10 +33,6 @@ export interface CircularMeterProps
    * Defaults to `md`.
    */
   size?: CircularMeterSize
-  /**
-   * Change the default rendered element for the one passed as a child, merging their props and behavior.
-   */
-  asChild?: boolean
   ref?: Ref<HTMLDivElement>
   /**
    * Orientation of the circular meter.

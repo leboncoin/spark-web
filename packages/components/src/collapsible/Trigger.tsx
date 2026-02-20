@@ -1,20 +1,11 @@
 import { Collapsible } from '@base-ui/react/collapsible'
 import { type ComponentProps } from 'react'
 
-import { useRenderSlot } from './useRenderSlot'
+export interface TriggerProps extends ComponentProps<typeof Collapsible.Trigger> {}
 
-export interface TriggerProps extends ComponentProps<'button'> {
-  /**
-   * Change the default rendered element for the one passed as a child, merging their props and behavior.
-   */
-  asChild?: boolean
-}
-
-export const Trigger = ({ asChild = false, children, ...props }: TriggerProps) => {
-  const renderSlot = useRenderSlot(asChild, 'button')
-
+export const Trigger = ({ children, ...props }: TriggerProps) => {
   return (
-    <Collapsible.Trigger data-spark-component="collapsible-trigger" render={renderSlot} {...props}>
+    <Collapsible.Trigger data-spark-component="collapsible-trigger" {...props}>
       {children}
     </Collapsible.Trigger>
   )

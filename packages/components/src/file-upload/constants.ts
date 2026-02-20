@@ -27,4 +27,3 @@ export const FILE_UPLOAD_ERRORS = {
    */
   FILE_EXISTS: 'FILE_EXISTS',
 } as const
-

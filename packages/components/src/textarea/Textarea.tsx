@@ -28,11 +28,12 @@ const Root = ({
       )}
       data-spark-component="textarea"
       disabled={disabled}
-      asChild
+      render={<textarea />}
+      ref={ref as Ref<HTMLInputElement>}
+      rows={rows}
       onValueChange={onValueChange}
-    >
-      <textarea ref={ref} rows={rows} {...others} />
-    </Input>
+      {...(others as InputProps)}
+    />
   )
 }
 

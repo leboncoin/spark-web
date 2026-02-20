@@ -111,12 +111,10 @@ export const CustomTrigger: StoryFn = () => {
         </FileUpload.Context>
       </FileUpload>
       <FileUpload>
-        <IconButton aria-label="Upload" asChild>
-          <FileUpload.Trigger unstyled>
-            <Icon>
-              <Export />
-            </Icon>
-          </FileUpload.Trigger>
+        <IconButton aria-label="Upload" render={<FileUpload.Trigger unstyled />}>
+          <Icon>
+            <Export />
+          </Icon>
         </IconButton>
 
         <FileUpload.Context>
@@ -232,9 +230,7 @@ export const WithCustomFileRender: StoryFn = () => {
   return (
     <FileUpload defaultValue={defaultFiles}>
       <FileUpload.Dropzone>
-        <Button asChild>
-          <FileUpload.Trigger>Upload Files</FileUpload.Trigger>
-        </Button>
+        <Button render={<FileUpload.Trigger />}>Upload Files</Button>
       </FileUpload.Dropzone>
 
       <FileUpload.Context>
@@ -290,9 +286,7 @@ export const WithDefaultFiles: StoryFn = () => {
   return (
     <FileUpload defaultValue={defaultFiles}>
       <FileUpload.Dropzone>
-        <Button asChild>
-          <FileUpload.Trigger>Upload Files</FileUpload.Trigger>
-        </Button>
+        <Button render={<FileUpload.Trigger />}>Upload Files</Button>
       </FileUpload.Dropzone>
 
       <FileUpload.Context>
@@ -370,9 +364,7 @@ export const Controlled: StoryFn = () => {
         maxFileSize={1024 * 1024} // 1MB
       >
         <FileUpload.Dropzone>
-          <Button asChild>
-            <FileUpload.Trigger>Upload Files</FileUpload.Trigger>
-          </Button>
+          <Button render={<FileUpload.Trigger />}>Upload Files</Button>
         </FileUpload.Dropzone>
 
         <FileUpload.Context>
@@ -726,9 +718,7 @@ export const Sortable: StoryFn = () => {
       accept="image/*"
     >
       <FileUpload.Dropzone>
-        <Button asChild>
-          <FileUpload.Trigger>Upload Files</FileUpload.Trigger>
-        </Button>
+        <Button render={<FileUpload.Trigger />}>Upload Files</Button>
       </FileUpload.Dropzone>
 
       <FileUpload.Context>

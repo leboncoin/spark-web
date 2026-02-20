@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { mockResizeObserver } from 'jsdom-testing-mocks'
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
@@ -394,6 +394,92 @@ describe('Tabs', () => {
         .getByText('Overridden props')
         .closest('[data-spark-component="popover-content"]')
       expect(overriddenMenuContent).toHaveClass('custom-class')
+    })
+  })
+
+  describe('render prop (polymorphism)', () => {
+    it('should render Tabs root as custom element when using render prop', () => {
+      render(
+        <Tabs defaultValue="tab1" render={<nav data-testid="custom-tabs-root" />}>
+          <Tabs.List>
+            <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
+            <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
+          </Tabs.List>
+          <Tabs.Content value="tab1">Content 1</Tabs.Content>
+          <Tabs.Content value="tab2">Content 2</Tabs.Content>
+        </Tabs>
+      )
+
+      const root = screen.getByTestId('custom-tabs-root')
+      expect(root).toBeInTheDocument()
+      expect(root.tagName).toBe('NAV')
+      expect(root).toHaveAttribute('data-spark-component', 'tabs')
+      expect(within(root).getByText('Tab 1')).toBeInTheDocument()
+      expect(within(root).getByRole('tablist')).toBeInTheDocument()
+    })
+
+    it('should render Tabs.Trigger as custom element when using render prop', async () => {
+      const user = userEvent.setup()
+
+      render(
+        <Tabs defaultValue="tab1">
+          <Tabs.List>
+            <Tabs.Trigger value="tab1" render={<h2 />}>
+              Tab 1
+            </Tabs.Trigger>
+            <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
+          </Tabs.List>
+          <Tabs.Content value="tab1">Content 1</Tabs.Content>
+          <Tabs.Content value="tab2">Content 2</Tabs.Content>
+        </Tabs>
+      )
+
+      // Radix merges role="tab" onto the custom element
+      const trigger = screen.getByRole('tab', { name: 'Tab 1' })
+      expect(trigger.tagName).toBe('H2')
+      expect(trigger).toHaveAttribute('data-spark-component', 'tabs-trigger')
+
+      await user.click(trigger)
+      expect(screen.getByText('Content 1')).toBeInTheDocument()
+    })
+
+    it('should render Tabs.List as custom element when using render prop', () => {
+      render(
+        <Tabs defaultValue="tab1">
+          <Tabs.List render={<div data-testid="custom-tabs-list" role="tablist" />}>
+            <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
+            <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
+          </Tabs.List>
+          <Tabs.Content value="tab1">Content 1</Tabs.Content>
+          <Tabs.Content value="tab2">Content 2</Tabs.Content>
+        </Tabs>
+      )
+
+      const list = screen.getByTestId('custom-tabs-list')
+      expect(list).toBeInTheDocument()
+      expect(list).toHaveAttribute('role', 'tablist')
+      expect(list).toHaveAttribute('data-spark-component', 'tabs-list')
+      expect(within(list).getByText('Tab 1')).toBeInTheDocument()
+    })
+
+    it('should render Tabs.Content as custom element when using render prop', () => {
+      render(
+        <Tabs defaultValue="tab1">
+          <Tabs.List>
+            <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
+            <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
+          </Tabs.List>
+          <Tabs.Content value="tab1" render={<article data-testid="custom-tab-panel" />}>
+            Content 1
+          </Tabs.Content>
+          <Tabs.Content value="tab2">Content 2</Tabs.Content>
+        </Tabs>
+      )
+
+      const panel = screen.getByTestId('custom-tab-panel')
+      expect(panel).toBeInTheDocument()
+      expect(panel.tagName).toBe('ARTICLE')
+      expect(panel).toHaveTextContent('Content 1')
     })
   })
 })

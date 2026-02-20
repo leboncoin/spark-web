@@ -6,8 +6,8 @@ export const A11yPopover = () => (
   <section>
     <div className="h-sz-240 border-md border-neutral bg-neutral-container p-lg flex items-center justify-center rounded-sm border-dashed">
       <Popover defaultOpen>
-        <Popover.Trigger asChild>
-          <Button>Trigger popover</Button>
+        <Popover.Trigger render={<Button />}>
+          Trigger popover
         </Popover.Trigger>
         <Popover.Portal>
           <Popover.Content>
@@ -22,8 +22,8 @@ export const A11yPopover = () => (
 
     <div className="h-sz-240 border-md border-neutral bg-neutral-container p-lg flex items-center justify-center rounded-sm border-dashed">
       <Popover defaultOpen>
-        <Popover.Trigger asChild>
-          <Button>Trigger popover</Button>
+        <Popover.Trigger render={<Button />}>
+          Trigger popover
         </Popover.Trigger>
         <Popover.Portal>
           <Popover.Content side="left">

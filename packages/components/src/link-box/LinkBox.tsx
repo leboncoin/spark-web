@@ -1,23 +1,20 @@
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { cx } from 'class-variance-authority'
-import { ComponentPropsWithRef } from 'react'
+export interface LinkBoxProps extends useRender.ComponentProps<'div'> {}
 
-import { Slot } from '../slot'
+export const LinkBox = ({ className, render, ref, ...props }: LinkBoxProps) => {
+  const defaultProps: Record<string, unknown> = {
+    'data-spark-component': 'link-box',
+    className: cx('default:relative', className),
+  }
 
-export interface LinkBoxProps extends ComponentPropsWithRef<'div'> {
-  asChild?: boolean
-}
-
-export const LinkBox = ({ className, asChild, ref, ...props }: LinkBoxProps) => {
-  const Component = asChild ? Slot : 'div'
-
-  return (
-    <Component
-      ref={ref}
-      data-spark-component="link-box"
-      className={cx('default:relative', className)}
-      {...props}
-    />
-  )
+  return useRender({
+    defaultTagName: 'div',
+    render,
+    ref,
+    props: mergeProps<'div'>(defaultProps, props),
+  })
 }
 
 LinkBox.displayName = 'LinkBox'

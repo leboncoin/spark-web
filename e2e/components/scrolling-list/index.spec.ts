@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { expect, type Locator, test } from '@playwright/test'
 
 import { BASE_URL } from '../../constant'

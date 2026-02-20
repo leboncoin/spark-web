@@ -185,10 +185,8 @@ export const Controlled: StoryFn = _args => {
                   <p className="bg-overlay/dim-1 p-md text-body-1 text-on-overlay absolute top-0 w-full font-bold">
                     {product.name}
                   </p>
-                  <Button asChild>
-                    <a href="#" className="bottom-lg right-lg absolute">
-                      See article
-                    </a>
+                  <Button render={<a href="#" className="bottom-lg right-lg absolute" />}>
+                    See article
                   </Button>
                 </Carousel.Slide>
               )
@@ -633,10 +631,8 @@ export const CustomPageIndicators: StoryFn = () => {
                   <p className="bg-overlay/dim-1 p-md text-body-1 text-on-overlay absolute top-0 w-full font-bold">
                     {product.name}
                   </p>
-                  <Button asChild>
-                    <a href="#" className="bottom-lg right-lg absolute">
-                      See article
-                    </a>
+                  <Button render={<a href="#" className="bottom-lg right-lg absolute" />}>
+                    See article
                   </Button>
                 </Carousel.Slide>
               )

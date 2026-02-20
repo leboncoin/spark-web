@@ -1,4 +1,4 @@
-import { Children, isValidElement, ReactNode } from 'react'
+import { Children, isValidElement, type ReactElement, ReactNode } from 'react'
 
 const MOUSE_EVENTS = [
   'onClick',
@@ -52,8 +52,8 @@ export const hasBackdrop = (children: ReactNode): boolean => {
 }
 
 export const isInteractive = (
-  children: ReactNode,
-  asChild: boolean | undefined,
+  _children: ReactNode,
+  render: ReactElement | undefined,
   props: Record<string, any>
 ): boolean => {
   const hasMouseEventHandlers = MOUSE_EVENTS.some(event => event in props)
@@ -62,26 +62,20 @@ export const isInteractive = (
     return true
   }
 
-  if (!asChild) {
-    return false
-  }
-
-  const child = Children.only(children)
-
-  if (!isValidElement(child)) {
+  if (!render || !isValidElement(render)) {
     return false
   }
 
   const interactiveElements = ['a', 'button']
   const isInteractiveElement =
-    typeof child.type === 'string' && interactiveElements.includes(child.type)
+    typeof render.type === 'string' && interactiveElements.includes(render.type)
 
   if (isInteractiveElement) {
     return true
   }
 
-  const childProps = child.props as Record<string, any>
-  const hasChildEventHandlers = MOUSE_EVENTS.some(event => event in childProps)
+  const renderProps = (render.props || {}) as Record<string, any>
+  const hasRenderEventHandlers = MOUSE_EVENTS.some(event => event in renderProps)
 
-  return hasChildEventHandlers
+  return hasRenderEventHandlers
 }

@@ -21,10 +21,6 @@ export type {
 }
 
 export interface FileUploadProps {
-  /**
-   * Change the default rendered element for the one passed as a child, merging their props and behavior.
-   */
-  asChild?: boolean
   ref?: Ref<HTMLDivElement>
   children: ReactNode
   className?: string
@@ -125,7 +121,6 @@ export const FileUploadContext = createContext<{
 const ID_PREFIX = ':file-upload'
 
 export const FileUpload = ({
-  asChild: _asChild = false,
   children,
   defaultValue = [],
   value: controlledValue,

@@ -18,7 +18,7 @@ Important, as per ARIA specifications:
 
 > **Each accordion header button is wrapped in an element with role [heading](https://w3c.github.io/aria/#heading) that has a value set for [aria-level](https://w3c.github.io/aria/#aria-level) that is appropriate for the information architecture of the page.**
 
-For this, you must wrap each `Accordion.ItemTrigger` with an `Accordion.ItemHeader` (`h3` by default, use `asChild` property of `ItemHeader` to set the heading level that matches your page structure).
+For this, you must wrap each `Accordion.ItemTrigger` with an `Accordion.ItemHeader` (`h3` by default, use the `render` prop of `ItemHeader` to set the heading level, e.g. `render={<h4 />}`).
 For example, in the context of this storybook page, we use `h4` because the accordion is preceded by an `h3` already.
 
 <Canvas of={stories.Default} />

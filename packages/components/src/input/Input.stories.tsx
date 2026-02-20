@@ -73,24 +73,24 @@ export const Disabled: StoryFn = _args => {
       <div>
         <Tag className="mb-md flex">Addons - solid</Tag>
         <InputGroup className="max-w-sz-320" disabled={isDisabled}>
-          <InputGroup.LeadingAddon asChild>
-            <IconButton intent="main" design="filled" aria-label="Search">
-              <Icon>
-                <EyeOutline />
-              </Icon>
-            </IconButton>
+          <InputGroup.LeadingAddon
+            render={<IconButton intent="main" design="filled" aria-label="Search" />}
+          >
+            <Icon>
+              <EyeOutline />
+            </Icon>
           </InputGroup.LeadingAddon>
           <InputGroup.ClearButton aria-label="clear" />
           <InputGroup.LeadingIcon>
             <PenOutline />
           </InputGroup.LeadingIcon>
           <Input aria-label="Website" defaultValue="Hello world" />
-          <InputGroup.TrailingAddon asChild>
-            <IconButton intent="neutral" design="ghost" aria-label="Search">
-              <Icon>
-                <EyeOutline />
-              </Icon>
-            </IconButton>
+          <InputGroup.TrailingAddon
+            render={<IconButton intent="neutral" design="ghost" aria-label="Search" />}
+          >
+            <Icon>
+              <EyeOutline />
+            </Icon>
           </InputGroup.TrailingAddon>
         </InputGroup>
       </div>
@@ -160,12 +160,12 @@ export const ReadOnly: StoryFn = _args => {
         <Tag className="mb-md flex">Addons - solid</Tag>
 
         <InputGroup className="max-w-sz-320" readOnly={isReadOnly}>
-          <InputGroup.LeadingAddon asChild>
-            <IconButton intent="main" design="filled" aria-label="Search">
-              <Icon>
-                <EyeOutline />
-              </Icon>
-            </IconButton>
+          <InputGroup.LeadingAddon
+            render={<IconButton intent="main" design="filled" aria-label="Search" />}
+          >
+            <Icon>
+              <EyeOutline />
+            </Icon>
           </InputGroup.LeadingAddon>
 
           <InputGroup.ClearButton aria-label="clear" />
@@ -176,12 +176,12 @@ export const ReadOnly: StoryFn = _args => {
 
           <Input aria-label="Website" defaultValue="Hello world" />
 
-          <InputGroup.TrailingAddon asChild>
-            <IconButton intent="neutral" design="ghost" aria-label="Search">
-              <Icon>
-                <EyeOutline />
-              </Icon>
-            </IconButton>
+          <InputGroup.TrailingAddon
+            render={<IconButton intent="neutral" design="ghost" aria-label="Search" />}
+          >
+            <Icon>
+              <EyeOutline />
+            </Icon>
           </InputGroup.TrailingAddon>
         </InputGroup>
       </div>
@@ -240,18 +240,16 @@ export const Addons: StoryFn = _args => {
       <div className="gap-sm flex flex-col">
         <Tag className="flex">Solid</Tag>
         <InputGroup className="max-w-sz-320">
-          <InputGroup.LeadingAddon asChild>
-            <Button design="ghost" intent="neutral">
-              Click
-            </Button>
+          <InputGroup.LeadingAddon render={<Button design="ghost" intent="neutral" />}>
+            Click
           </InputGroup.LeadingAddon>
           <Input aria-label="Website" />
-          <InputGroup.TrailingAddon asChild>
-            <IconButton intent="neutral" design="ghost" aria-label="Search">
-              <Icon>
-                <Search />
-              </Icon>
-            </IconButton>
+          <InputGroup.TrailingAddon
+            render={<IconButton intent="neutral" design="ghost" aria-label="Search" />}
+          >
+            <Icon>
+              <Search />
+            </Icon>
           </InputGroup.TrailingAddon>
         </InputGroup>
       </div>
@@ -314,15 +312,17 @@ export const PasswordExample: StoryFn = () => {
     <InputGroup className="max-w-sz-320">
       <Input type={isVisible ? 'text' : 'password'} aria-label="Password" />
 
-      <InputGroup.TrailingAddon asChild>
-        <IconButton
-          intent="neutral"
-          design="ghost"
-          aria-label={isVisible ? 'Hide password' : 'Show password'}
-          onClick={handleToggle}
-        >
-          <Icon>{isVisible ? <EyeOffOutline /> : <EyeOutline />}</Icon>
-        </IconButton>
+      <InputGroup.TrailingAddon
+        render={
+          <IconButton
+            intent="neutral"
+            design="ghost"
+            aria-label={isVisible ? 'Hide password' : 'Show password'}
+            onClick={handleToggle}
+          />
+        }
+      >
+        <Icon>{isVisible ? <EyeOffOutline /> : <EyeOutline />}</Icon>
       </InputGroup.TrailingAddon>
     </InputGroup>
   )
@@ -339,8 +339,8 @@ export const SearchExample: StoryFn = _args => {
 
       <InputGroup.ClearButton aria-label="Clear value" />
 
-      <InputGroup.TrailingAddon asChild>
-        <Button design="contrast">Search</Button>
+      <InputGroup.TrailingAddon render={<Button design="contrast" />}>
+        Search
       </InputGroup.TrailingAddon>
     </InputGroup>
   )

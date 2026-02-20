@@ -1,3 +1,5 @@
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { RadioGroup as RadixRadioGroup } from 'radix-ui'
 import { HTMLAttributes, Ref } from 'react'
@@ -9,11 +11,8 @@ import { RadioInputVariantsProps } from './RadioInput.styles'
 export interface RadioGroupProps
   extends RadioGroupVariantsProps,
     Pick<RadioInputVariantsProps, 'intent'>,
-    Omit<HTMLAttributes<HTMLDivElement>, 'value' | 'defaultValue' | 'dir' | 'onChange'> {
-  /**
-   * Change the component to the HTML tag or custom component of the only child.
-   */
-  asChild?: boolean
+    Omit<HTMLAttributes<HTMLDivElement>, 'value' | 'defaultValue' | 'dir' | 'onChange'>,
+    useRender.ComponentProps<'div'> {
   /**
    * The value of the radio item that should be checked when initially rendered. Use when you do not need to control the state of the radio items.
    */
@@ -66,28 +65,61 @@ export const RadioGroup = ({
   required: requiredProp,
   reverse = false,
   ref,
+  render,
+  children,
   ...others
 }: RadioGroupProps) => {
   const { labelId, isInvalid, isRequired, description, name } = useFormFieldControl()
   const required = requiredProp !== undefined ? requiredProp : isRequired
+
+  const radixProps = {
+    name,
+    disabled,
+    orientation,
+    loop,
+    required,
+    'aria-labelledby': labelId,
+    'aria-invalid': isInvalid,
+    'aria-required': required,
+    'aria-describedby': description,
+    ...others,
+  }
+
+  const defaultProps = {
+    'data-spark-component': 'radio-group',
+    className: radioGroupStyles({ orientation, className }),
+    ...radixProps,
+    children,
+  }
+
+  const element = useRender({
+    defaultTagName: 'div',
+    render: (render ?? (() => null)) as useRender.RenderProp,
+    ref,
+    props: mergeProps<'div'>(defaultProps, {}),
+  })
+
+  if (render) {
+    return (
+      <RadioGroupProvider reverse={reverse} intent={intent} disabled={disabled}>
+        <RadixRadioGroup.RadioGroup asChild {...radixProps}>
+          {element}
+        </RadixRadioGroup.RadioGroup>
+      </RadioGroupProvider>
+    )
+  }
 
   return (
     <RadioGroupProvider reverse={reverse} intent={intent} disabled={disabled}>
       <RadixRadioGroup.RadioGroup
         data-spark-component="radio-group"
         className={radioGroupStyles({ orientation, className })}
-        name={name}
         ref={ref}
-        disabled={disabled}
-        orientation={orientation}
-        loop={loop}
-        required={required}
-        aria-labelledby={labelId}
-        aria-invalid={isInvalid}
-        aria-required={required}
-        aria-describedby={description}
-        {...others}
-      />
+        asChild={false}
+        {...radixProps}
+      >
+        {children}
+      </RadixRadioGroup.RadioGroup>
     </RadioGroupProvider>
   )
 }

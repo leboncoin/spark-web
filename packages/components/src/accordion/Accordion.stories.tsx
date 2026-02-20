@@ -24,10 +24,8 @@ export const Default: StoryFn = () => {
   return (
     <Accordion defaultValue={['watercraft']}>
       <Accordion.Item value="watercraft">
-        <Accordion.ItemHeader asChild>
-          <h4>
-            <Accordion.ItemTrigger>Watercraft</Accordion.ItemTrigger>
-          </h4>
+        <Accordion.ItemHeader render={<h4 />}>
+          <Accordion.ItemTrigger>Watercraft</Accordion.ItemTrigger>
         </Accordion.ItemHeader>
         <Accordion.ItemContent>
           <p>
@@ -38,10 +36,8 @@ export const Default: StoryFn = () => {
       </Accordion.Item>
 
       <Accordion.Item value="automobiles">
-        <Accordion.ItemHeader asChild>
-          <h4>
-            <Accordion.ItemTrigger>Automobiles</Accordion.ItemTrigger>
-          </h4>
+        <Accordion.ItemHeader render={<h4 />}>
+          <Accordion.ItemTrigger>Automobiles</Accordion.ItemTrigger>
         </Accordion.ItemHeader>
         <Accordion.ItemContent>
           <p>
@@ -52,10 +48,8 @@ export const Default: StoryFn = () => {
       </Accordion.Item>
 
       <Accordion.Item value="aircrafts">
-        <Accordion.ItemHeader asChild>
-          <h4>
-            <Accordion.ItemTrigger>Aircrafts</Accordion.ItemTrigger>
-          </h4>
+        <Accordion.ItemHeader render={<h4 />}>
+          <Accordion.ItemTrigger>Aircrafts</Accordion.ItemTrigger>
         </Accordion.ItemHeader>
         <Accordion.ItemContent>
           <p>

@@ -1,16 +1,13 @@
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { ButtonHTMLAttributes, type PropsWithChildren, Ref } from 'react'
 
-import { Slot } from '../slot'
 import { tagStyles, type TagStylesProps } from './Tag.styles'
 
 interface BaseTagProps
-  extends PropsWithChildren<ButtonHTMLAttributes<HTMLSpanElement>>,
-    TagStylesProps {
-  /**
-   * Change the component to the HTML tag or custom component of the only child.
-   */
-  asChild?: boolean
-}
+  extends useRender.ComponentProps<'span'>,
+    PropsWithChildren<ButtonHTMLAttributes<HTMLSpanElement>>,
+    TagStylesProps {}
 
 interface FilteredDesignIntent<
   Design extends TagProps['design'],
@@ -33,25 +30,26 @@ export const Tag = ({
   intent = 'basic',
   size = 'md',
   shape = 'pill',
-  asChild,
+  render,
   className,
   ref,
   ...others
 }: TagProps) => {
-  const Component = asChild ? Slot : 'span'
+  const defaultProps: useRender.ElementProps<'span'> & Record<string, unknown> = {
+    'data-spark-component': 'tag',
+    className: tagStyles({
+      className,
+      design,
+      intent,
+      size,
+      shape,
+    }),
+  }
 
-  return (
-    <Component
-      data-spark-component="tag"
-      ref={ref}
-      className={tagStyles({
-        className,
-        design,
-        intent,
-        size,
-        shape,
-      })}
-      {...others}
-    />
-  )
+  return useRender({
+    defaultTagName: 'span',
+    render,
+    ref,
+    props: mergeProps<'span'>(defaultProps, others),
+  })
 }

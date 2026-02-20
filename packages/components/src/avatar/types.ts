@@ -1,3 +1,4 @@
+import { useRender } from '@base-ui/react/use-render'
 import * as React from 'react'
 
 import { AvatarAction } from './AvatarAction'
@@ -13,12 +14,11 @@ export interface AvatarContextValue {
   pixelSize: number
 }
 
-export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface AvatarProps extends useRender.ComponentProps<'div'> {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
   isOnline?: boolean
   onlineText?: string
   username: string
-  asChild?: boolean
   shape?: 'circle' | 'square'
 }
 

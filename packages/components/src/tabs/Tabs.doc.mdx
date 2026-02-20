@@ -129,7 +129,7 @@ Adheres to the [Tabs WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/pa
 ### Tips
 
 - If the whole tabs area has a title, link it to the `Tabs.List` element using `aria-labelledby` prop.
-- It is advised to use `asChild` on each `Tabs.Trigger` and use the appropriate heading tag according to your page structure.
+- It is advised to use the `render` prop on each `Tabs.Trigger` with the appropriate heading tag (e.g. `render={<h2 />}`) according to your page structure.
 
 ### Keyboard Interactions
 

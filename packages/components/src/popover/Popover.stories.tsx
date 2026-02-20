@@ -45,9 +45,7 @@ export const Default: StoryFn = _args => {
   return (
     <ShowcaseContainer>
       <Popover>
-        <Popover.Trigger asChild>
-          <Button>Trigger popover</Button>
-        </Popover.Trigger>
+        <Popover.Trigger render={<Button />}>Trigger popover</Popover.Trigger>
         <Popover.Portal>
           <Popover.Content>
             <Popover.Header>Title</Popover.Header>
@@ -65,9 +63,7 @@ export const Inset: StoryFn = _args => {
   return (
     <ShowcaseContainer>
       <Popover>
-        <Popover.Trigger asChild>
-          <Button>Trigger popover</Button>
-        </Popover.Trigger>
+        <Popover.Trigger render={<Button />}>Trigger popover</Popover.Trigger>
         <Popover.Portal>
           <Popover.Content inset>
             <img src="https://placehold.co/300x200/white/grey" alt="" />
@@ -99,9 +95,7 @@ export const Intents: StoryFn = _args => {
       {intents.map(intent => {
         return (
           <Popover key={intent} intent={intent}>
-            <Popover.Trigger asChild>
-              <Button intent={intent}>{intent}</Button>
-            </Popover.Trigger>
+            <Popover.Trigger render={<Button intent={intent} />}>{intent}</Popover.Trigger>
             <Popover.Portal>
               <Popover.Content>
                 <Popover.Header>{intent}</Popover.Header>
@@ -121,9 +115,7 @@ export const Uncontrolled: StoryFn = () => {
   return (
     <ShowcaseContainer>
       <Popover defaultOpen>
-        <Popover.Trigger asChild>
-          <Button>Open popover</Button>
-        </Popover.Trigger>
+        <Popover.Trigger render={<Button />}>Open popover</Popover.Trigger>
         <Popover.Portal>
           <Popover.Content onInteractOutside={e => e.preventDefault()}>
             <Popover.Header>Title</Popover.Header>
@@ -147,9 +139,7 @@ export const Controlled: StoryFn = () => {
       </div>
       <ShowcaseContainer>
         <Popover open={open}>
-          <Popover.Anchor asChild>
-            <p>Popover is attached to this text (anchor)</p>
-          </Popover.Anchor>
+          <Popover.Anchor render={<p />}>Popover is attached to this text (anchor)</Popover.Anchor>
           <Popover.Portal>
             <Popover.Content onInteractOutside={() => setOpen(false)}>
               <Popover.Header>Title</Popover.Header>
@@ -167,13 +157,9 @@ export const Anchored: StoryFn = _args => {
   return (
     <ShowcaseContainer className="justify-between!">
       <Popover>
-        <Popover.Trigger asChild>
-          <Button>Trigger</Button>
-        </Popover.Trigger>
+        <Popover.Trigger render={<Button />}>Trigger</Popover.Trigger>
 
-        <Popover.Anchor asChild>
-          <Button intent="support">Anchor element</Button>
-        </Popover.Anchor>
+        <Popover.Anchor render={<Button intent="support" />}>Anchor element</Popover.Anchor>
 
         <Popover.Portal>
           <Popover.Content>
@@ -191,9 +177,7 @@ export const MatchTriggerWidth: StoryFn = _args => {
   return (
     <ShowcaseContainer>
       <Popover open>
-        <Popover.Trigger asChild>
-          <Button>Check the width of this popover</Button>
-        </Popover.Trigger>
+        <Popover.Trigger render={<Button />}>Check the width of this popover</Popover.Trigger>
         <Popover.Portal>
           <Popover.Content matchTriggerWidth aria-label="Match Trigger Width Example">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -212,9 +196,7 @@ export const Boundaries: StoryFn = () => {
   return (
     <ShowcaseContainer ref={setBoundaryContainer} className="h-sz-240! w-sz-256!">
       <Popover>
-        <Popover.Trigger asChild>
-          <Button>Trigger popover</Button>
-        </Popover.Trigger>
+        <Popover.Trigger render={<Button />}>Trigger popover</Popover.Trigger>
         <Popover.Portal>
           <Popover.Content collisionBoundary={[boundaryContainer]}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -265,9 +247,7 @@ export const Positionning: StoryFn = _args => {
 
       <ShowcaseContainer>
         <Popover open>
-          <Popover.Trigger asChild>
-            <Button>Trigger popover</Button>
-          </Popover.Trigger>
+          <Popover.Trigger render={<Button />}>Trigger popover</Popover.Trigger>
           <Popover.Portal>
             <Popover.Content side={currentSide} align={currentAlign}>
               <p>Are you sure you want to have that cookie now ?</p>

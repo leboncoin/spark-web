@@ -3,8 +3,7 @@ import { ComponentProps, type ReactElement } from 'react'
 
 import { DrawerProvider } from './DrawerContext'
 
-export interface DrawerProps
-  extends Omit<ComponentProps<typeof BaseDialog.Root>, 'onOpenChange' | 'render'> {
+export interface DrawerProps extends Omit<ComponentProps<typeof BaseDialog.Root>, 'onOpenChange'> {
   /**
    * Specifies if the dialog is open or not.
    */
@@ -25,10 +24,6 @@ export interface DrawerProps
    * Specifies if the drawer should have a fade animation on its body (in case it is scrollable).
    */
   withFade?: boolean
-  /**
-   * Change the default rendered element for the one passed as a child, merging their props and behavior.
-   */
-  asChild?: boolean
 }
 
 export const Drawer = ({ onOpenChange, withFade = false, ...props }: DrawerProps): ReactElement => {

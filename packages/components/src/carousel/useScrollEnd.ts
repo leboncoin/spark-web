@@ -1,4 +1,4 @@
-import { useEffect, useRef, RefObject } from 'react'
+import { RefObject, useEffect, useRef } from 'react'
 
 export function useScrollEnd(scrollRef: RefObject<HTMLDivElement | null>, callback: () => void) {
   const scrollLeft = useRef(0)

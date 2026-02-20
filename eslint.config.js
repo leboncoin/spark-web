@@ -20,7 +20,15 @@ const commonRules = {
 
 export default [
   {
-    ignores: ['.storybook/', 'bin/', '**/dist/', 'vite.config.ts', '*.cjs', 'node_modules/'],
+    ignores: [
+    '.storybook/',
+    'bin/',
+    '**/dist/',
+    'vite.config.ts',
+    '*.cjs',
+    'node_modules/',
+    'src/vite-env.d.ts',
+  ],
   },
   {
     files: ['**/*.ts', '**/*.tsx', 'documentation/**/*.ts', 'documentation/**/*.tsx'],

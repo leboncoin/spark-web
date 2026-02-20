@@ -1,5 +1,5 @@
 import { cx } from 'class-variance-authority'
-import { ComponentProps, Ref, useEffect } from 'react'
+import { Children, ComponentProps, isValidElement, type ReactNode, Ref, useEffect } from 'react'
 
 import { Popover as SparkPopover } from '../popover'
 import { useComboboxContext } from './ComboboxContext'
@@ -24,25 +24,24 @@ export const Popover = ({
     return () => ctx.setHasPopover(false)
   }, [])
 
+  const singleChild =
+    Children.count(children) === 1 && isValidElement(children) ? Children.only(children) : null
+
   return (
     <SparkPopover.Content
       ref={forwardedRef}
       inset
-      asChild
+      render={singleChild ?? undefined}
       matchTriggerWidth={matchTriggerWidth}
       className={cx('z-dropdown! relative', className)}
       sideOffset={sideOffset}
       onOpenAutoFocus={e => {
-        /**
-         * With a combobox pattern, the focus should remain on the trigger at all times.
-         * Passing the focus to the combobox popover would break keyboard navigation.
-         */
         e.preventDefault()
       }}
       {...props}
       data-spark-component="combobox-popover"
     >
-      {children}
+      {singleChild ? (singleChild.props as { children?: ReactNode }).children : children}
     </SparkPopover.Content>
   )
 }

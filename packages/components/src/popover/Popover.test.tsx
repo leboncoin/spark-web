@@ -11,9 +11,7 @@ const ControlledImplementation = ({ defaultOpen = true } = {}) => {
 
   return (
     <Popover open={open}>
-      <Popover.Trigger asChild>
-        <button type="button">Click me</button>
-      </Popover.Trigger>
+      <Popover.Trigger render={<button type="button" />}>Click me</Popover.Trigger>
       <Popover.Content>Popover content</Popover.Content>
     </Popover>
   )
@@ -31,9 +29,7 @@ describe('Popover', () => {
       // Given a basic popover (closed by default)
       render(
         <Popover>
-          <Popover.Trigger asChild>
-            <button type="button">Click me</button>
-          </Popover.Trigger>
+          <Popover.Trigger render={<button type="button" />}>Click me</Popover.Trigger>
           <Popover.Anchor>
             <button type="button">Popover anchor</button>
           </Popover.Anchor>
@@ -66,9 +62,7 @@ describe('Popover', () => {
       // Given a popover closed by default but using "forceMount" prop
       render(
         <Popover>
-          <Popover.Trigger asChild>
-            <button type="button">Click me</button>
-          </Popover.Trigger>
+          <Popover.Trigger render={<button type="button" />}>Click me</Popover.Trigger>
           <Popover.Content forceMount>Popover content</Popover.Content>
         </Popover>
       )
@@ -97,9 +91,7 @@ describe('Popover', () => {
       // When an opened popover is rendered
       render(
         <Popover defaultOpen>
-          <Popover.Trigger asChild>
-            <button type="button">Click me</button>
-          </Popover.Trigger>
+          <Popover.Trigger render={<button type="button" />}>Click me</Popover.Trigger>
           <Popover.Content onOpenAutoFocus={onOpenAutoFocus}>
             Popover content
             <input type="text" placeholder="First focusable element" />
@@ -121,9 +113,7 @@ describe('Popover', () => {
       // When an opened popover is rendered
       render(
         <Popover defaultOpen>
-          <Popover.Trigger asChild>
-            <button type="button">Click me</button>
-          </Popover.Trigger>
+          <Popover.Trigger render={<button type="button" />}>Click me</Popover.Trigger>
           <Popover.Content onOpenAutoFocus={focusEvent}>
             Popover content
             <input type="text" placeholder="First focusable element" />
@@ -145,9 +135,7 @@ describe('Popover', () => {
       // Given a popover opened by default
       render(
         <Popover defaultOpen>
-          <Popover.Trigger asChild>
-            <button type="button">Click me</button>
-          </Popover.Trigger>
+          <Popover.Trigger render={<button type="button" />}>Click me</Popover.Trigger>
           <Popover.Content onPointerDownOutside={onPointerDownOutside}>
             Popover content
           </Popover.Content>
@@ -172,9 +160,7 @@ describe('Popover', () => {
       // Given a popover opened by default
       render(
         <Popover defaultOpen>
-          <Popover.Trigger asChild>
-            <button type="button">Click me</button>
-          </Popover.Trigger>
+          <Popover.Trigger render={<button type="button" />}>Click me</Popover.Trigger>
           <Popover.Content onEscapeKeyDown={onEscapeKeyDown}>Popover content</Popover.Content>
         </Popover>
       )
@@ -196,9 +182,7 @@ describe('Popover', () => {
       // Given a popover opened by default
       render(
         <Popover defaultOpen>
-          <Popover.Trigger asChild>
-            <button type="button">Click me</button>
-          </Popover.Trigger>
+          <Popover.Trigger render={<button type="button" />}>Click me</Popover.Trigger>
           <Popover.Content>
             Popover content
             <Popover.CloseButton aria-label="Close the popover" />
@@ -222,9 +206,7 @@ describe('Popover', () => {
       // Given a popover opened by default
       render(
         <Popover defaultOpen>
-          <Popover.Trigger asChild>
-            <button type="button">Click me</button>
-          </Popover.Trigger>
+          <Popover.Trigger render={<button type="button" />}>Click me</Popover.Trigger>
           <Popover.Content>Popover content</Popover.Content>
         </Popover>
       )
@@ -278,9 +260,7 @@ describe('Popover', () => {
       // Given a popover opened by default
       render(
         <Popover>
-          <Popover.Trigger asChild>
-            <button type="button">Click me</button>
-          </Popover.Trigger>
+          <Popover.Trigger render={<button type="button" />}>Click me</Popover.Trigger>
           <Popover.Content onCloseAutoFocus={onCloseAutoFocus}>
             Popover content
             <input type="text" placeholder="First focusable element" />
@@ -307,9 +287,7 @@ describe('Popover', () => {
       // Given a popover opened by default
       render(
         <Popover>
-          <Popover.Trigger asChild>
-            <button type="button">Click me</button>
-          </Popover.Trigger>
+          <Popover.Trigger render={<button type="button" />}>Click me</Popover.Trigger>
           <Popover.Content onCloseAutoFocus={onCloseAutoFocus}>
             Popover content
             <input type="text" placeholder="First focusable element" />
@@ -335,9 +313,7 @@ describe('Popover', () => {
     render(
       <div data-testid="popover-container">
         <Popover open>
-          <Popover.Trigger asChild>
-            <button type="button">Click me</button>
-          </Popover.Trigger>
+          <Popover.Trigger render={<button type="button" />}>Click me</Popover.Trigger>
           <Popover.Portal>
             <Popover.Content>Popover content</Popover.Content>
           </Popover.Portal>
@@ -356,9 +332,7 @@ describe('Popover', () => {
   it('should handle the inset prop', async () => {
     render(
       <Popover open>
-        <Popover.Trigger asChild>
-          <button type="button">Click me</button>
-        </Popover.Trigger>
+        <Popover.Trigger render={<button type="button" />}>Click me</Popover.Trigger>
         <Popover.Portal>
           <Popover.Content inset>Popover content</Popover.Content>
         </Popover.Portal>
@@ -366,5 +340,38 @@ describe('Popover', () => {
     )
 
     expect(screen.getByText(/Popover content/i)).not.toHaveClass('p-lg')
+  })
+
+  describe('render prop (polymorphism)', () => {
+    it('should render Trigger as custom element (e.g. link) and open popover on click', async () => {
+      const user = userEvent.setup()
+
+      render(
+        <Popover>
+          <Popover.Trigger render={<a href="/" />}>Open as link</Popover.Trigger>
+          <Popover.Content>Popover content</Popover.Content>
+        </Popover>
+      )
+
+      const trigger = screen.getByRole('link', { name: 'Open as link' })
+      expect(trigger).toHaveAttribute('href', '/')
+      expect(trigger).toHaveAttribute('data-spark-component', 'popover-trigger')
+
+      await user.click(trigger)
+      expect(screen.getByText('Popover content')).toBeInTheDocument()
+    })
+
+    it('should render Anchor as custom element', () => {
+      render(
+        <Popover open>
+          <Popover.Anchor render={<span data-testid="custom-anchor" />}>Anchor text</Popover.Anchor>
+          <Popover.Content>Content</Popover.Content>
+        </Popover>
+      )
+
+      const anchor = screen.getByTestId('custom-anchor')
+      expect(anchor).toBeInTheDocument()
+      expect(anchor).toHaveTextContent('Anchor text')
+    })
   })
 })

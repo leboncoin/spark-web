@@ -96,8 +96,8 @@ It gives you more control over the content inside the card and its layout.
 
 ### Link
 
-Use `asChild` so that the card takes the html tag and props of its direct child element.
-In this example, if you need your card to be a link.
+Use the `render` prop so that the card renders as the element you pass (e.g. `render={<a href="..." />}`).
+In this example, the card is rendered as a link.
 
 This polymorphic behaviour can be used with any type of HTML element, but the following might be more common: `div, article, section, aside, button, a, form, li, nav`
 

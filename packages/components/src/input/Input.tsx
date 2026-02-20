@@ -1,21 +1,23 @@
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { ChangeEventHandler, ComponentPropsWithoutRef, KeyboardEventHandler, Ref } from 'react'
 
-import { Slot } from '../slot'
 import { inputStyles } from './Input.styles'
 import { useInputGroup } from './InputGroupContext'
 
 type InputPrimitiveProps = ComponentPropsWithoutRef<'input'>
 
-export interface InputProps extends InputPrimitiveProps {
-  asChild?: boolean
+export interface InputProps extends useRender.ComponentProps<'input'>, InputPrimitiveProps {
   onValueChange?: (value: string) => void
   ref?: Ref<HTMLInputElement>
+  /** When using render={<textarea />}, sets the rows attribute */
+  rows?: number
 }
 
 const Root = ({
   className,
-  asChild = false,
+  render,
   onValueChange,
   onChange,
   onKeyDown,
@@ -36,7 +38,6 @@ const Root = ({
     hasClearButton,
     onClear,
   } = group
-  const Component = asChild ? Slot : 'input'
   const state = field.state || group.state
   const disabled = field.disabled || group.disabled || disabledProp
   const readOnly = field.readOnly || group.readOnly || readOnlyProp
@@ -61,32 +62,35 @@ const Root = ({
     }
   }
 
-  return (
-    <Component
-      data-spark-component="input"
-      ref={ref}
-      id={id}
-      name={name}
-      className={inputStyles({
-        asChild,
-        className,
-        intent: state,
-        hasLeadingAddon: !!hasLeadingAddon,
-        hasTrailingAddon: !!hasTrailingAddon,
-        hasLeadingIcon: !!hasLeadingIcon,
-        hasTrailingIcon: !!hasTrailingIcon,
-        hasClearButton: !!hasClearButton,
-      })}
-      disabled={disabled}
-      readOnly={readOnly}
-      required={isRequired}
-      aria-describedby={description}
-      aria-invalid={isInvalid}
-      onChange={handleChange}
-      onKeyDown={handleKeyDown}
-      {...others}
-    />
-  )
+  const defaultProps: Record<string, unknown> = {
+    'data-spark-component': 'input',
+    id,
+    name,
+    className: inputStyles({
+      asChild: !!render,
+      className,
+      intent: state,
+      hasLeadingAddon: !!hasLeadingAddon,
+      hasTrailingAddon: !!hasTrailingAddon,
+      hasLeadingIcon: !!hasLeadingIcon,
+      hasTrailingIcon: !!hasTrailingIcon,
+      hasClearButton: !!hasClearButton,
+    }),
+    disabled,
+    readOnly,
+    required: isRequired,
+    'aria-describedby': description,
+    'aria-invalid': isInvalid,
+    onChange: handleChange,
+    onKeyDown: handleKeyDown,
+  }
+
+  return useRender({
+    defaultTagName: 'input',
+    render,
+    ref,
+    props: mergeProps<'input'>(defaultProps, others),
+  })
 }
 
 export const Input = Object.assign(Root, {

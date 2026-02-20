@@ -27,9 +27,7 @@ export const Usage: StoryFn = () => {
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
-      <Drawer.Trigger asChild>
-        <Button>Terms & conditions</Button>
-      </Drawer.Trigger>
+      <Drawer.Trigger render={<Button />}>Terms & conditions</Drawer.Trigger>
 
       <Drawer.Portal>
         <Drawer.Overlay />
@@ -79,9 +77,7 @@ export const Fade: StoryFn = () => {
 
   return (
     <Drawer withFade open={open} onOpenChange={setOpen}>
-      <Drawer.Trigger asChild>
-        <Button>Terms & conditions</Button>
-      </Drawer.Trigger>
+      <Drawer.Trigger render={<Button />}>Terms & conditions</Drawer.Trigger>
 
       <Drawer.Portal>
         <Drawer.Overlay />
@@ -146,9 +142,7 @@ export const Sizes = () => {
       </RadioGroup>
 
       <Drawer open={open} onOpenChange={setOpen}>
-        <Drawer.Trigger asChild>
-          <Button>Open drawer</Button>
-        </Drawer.Trigger>
+        <Drawer.Trigger render={<Button />}>Open drawer</Drawer.Trigger>
 
         <Drawer.Portal>
           <Drawer.Overlay />
@@ -199,9 +193,7 @@ export const Inset: StoryFn = () => {
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
-      <Drawer.Trigger asChild>
-        <Button>Open drawer</Button>
-      </Drawer.Trigger>
+      <Drawer.Trigger render={<Button />}>Open drawer</Drawer.Trigger>
 
       <Drawer.Portal>
         <Drawer.Overlay />
@@ -248,9 +240,7 @@ export const Side = () => {
       </RadioGroup>
 
       <Drawer open={open} onOpenChange={setOpen}>
-        <Drawer.Trigger asChild>
-          <Button>Open drawer</Button>
-        </Drawer.Trigger>
+        <Drawer.Trigger render={<Button />}>Open drawer</Drawer.Trigger>
 
         <Drawer.Portal>
           <Drawer.Overlay />
@@ -301,9 +291,7 @@ export const NestedDialog: StoryFn = () => {
 
   return (
     <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
-      <Drawer.Trigger asChild>
-        <Button>Account settings</Button>
-      </Drawer.Trigger>
+      <Drawer.Trigger render={<Button />}>Account settings</Drawer.Trigger>
 
       <Drawer.Portal>
         <Drawer.Overlay />
@@ -319,8 +307,8 @@ export const NestedDialog: StoryFn = () => {
 
           <Drawer.Footer className="gap-lg flex justify-end">
             <AlertDialog>
-              <AlertDialog.Trigger asChild>
-                <Button intent="danger">Delete account</Button>
+              <AlertDialog.Trigger render={<Button intent="danger" />}>
+                Delete account
               </AlertDialog.Trigger>
 
               <AlertDialog.Portal>
@@ -343,26 +331,20 @@ export const NestedDialog: StoryFn = () => {
                   </AlertDialog.Body>
 
                   <AlertDialog.Footer className="gap-lg flex justify-end">
-                    <AlertDialog.Cancel asChild>
-                      <Button intent="neutral" design="ghost">
-                        Cancel
-                      </Button>
+                    <AlertDialog.Cancel render={<Button intent="neutral" design="ghost" />}>
+                      Cancel
                     </AlertDialog.Cancel>
 
-                    <AlertDialog.Action asChild>
-                      <Button intent="danger" onClick={closeParentDrawer}>
-                        Confirm deletion
-                      </Button>
+                    <AlertDialog.Action
+                      render={<Button intent="danger" onClick={closeParentDrawer} />}
+                    >
+                      Confirm deletion
                     </AlertDialog.Action>
                   </AlertDialog.Footer>
                 </AlertDialog.Content>
               </AlertDialog.Portal>
             </AlertDialog>
-            <Drawer.Close asChild>
-              <Button intent="basic" design="outlined">
-                Close
-              </Button>
-            </Drawer.Close>
+            <Drawer.Close render={<Button intent="basic" design="outlined" />}>Close</Drawer.Close>
           </Drawer.Footer>
 
           <Drawer.CloseButton aria-label="Close drawer with nested dialog" />

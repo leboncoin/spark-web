@@ -5,8 +5,8 @@ import React from 'react'
 export const A11yDrawer = () => (
   <section>
     <Drawer defaultOpen>
-      <Drawer.Trigger asChild>
-        <Button>Terms & conditions</Button>
+      <Drawer.Trigger render={<Button />}>
+        Terms & conditions
       </Drawer.Trigger>
 
       <Drawer.Portal>

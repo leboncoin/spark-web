@@ -187,9 +187,7 @@ export const LoadingWithText: StoryFn = () => {
 
 export const Link: StoryFn = _args => (
   <div className="gap-md flex flex-wrap">
-    <Button asChild>
-      <a href="/">Button as a link</a>
-    </Button>
+    <Button render={<a href="/" />}>Button as a link</Button>
   </div>
 )
 

@@ -85,7 +85,7 @@ Contains all the parts of a file upload.
 
 ### _.Trigger
 
-Triggers the file selection dialog when clicked. Can be styled as a button or rendered as any component using the `asChild` prop.
+Triggers the file selection dialog when clicked. Can be styled as a button or rendered as any component using the `render` prop.
 
 <ArgTypes of={FileUpload.Trigger} />
 
@@ -280,7 +280,7 @@ Use the `uploadProgress` prop on `FileUpload.AcceptedFile` to display a progress
 
 ### Custom Trigger
 
-Use `unstyled` on the `FileUpload.Trigger` and wrap it with a Spark UI component compatible with the `asChild` prop to render the button as a different component.
+Use `unstyled` on the `FileUpload.Trigger` and the `render` prop (or a Spark UI component that supports `render`) to render the trigger as a different component.
 
 <Callout kind="warning" marginY="large">
   <p>

@@ -1,3 +1,5 @@
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { Tabs as RadixTabs } from 'radix-ui'
 import { type PropsWithChildren, Ref } from 'react'
 
@@ -5,16 +7,14 @@ import { contentStyles } from './TabsContent.styles'
 import { useTabsContext } from './TabsContext'
 
 export interface TabsContentProps
-  extends PropsWithChildren<Omit<RadixTabs.TabsContentProps, 'forceMount'>> {
+  extends PropsWithChildren<
+      Omit<RadixTabs.TabsContentProps, 'forceMount' | 'asChild' | 'children'>
+    >,
+    useRender.ComponentProps<'div'> {
   /**
    * A unique value that associates the content with a trigger.
    */
   value: string
-  /**
-   * Change the component to the HTML tag or custom component of the only child. This will merge the original component props with the props of the supplied element/component and change the underlying DOM node.
-   * @default false
-   */
-  asChild?: boolean
   /**
    * Used to force mounting when more control is needed. Useful when controlling animation with React animation libraries.
    */
@@ -23,25 +23,47 @@ export interface TabsContentProps
 }
 
 export const TabsContent = ({
-  /**
-   * Default Radix Primitive values
-   * see https://www.radix-ui.com/docs/primitives/components/tabs#content
-   */
   children,
-  asChild = false,
+  render,
+  value,
   className,
   ref,
   ...rest
 }: TabsContentProps) => {
   const { forceMount } = useTabsContext()
+  const forceMountProp = forceMount || rest.forceMount
+
+  const defaultProps = {
+    'data-spark-component': 'tabs-content',
+    className: contentStyles({ className, forceMount: forceMountProp }),
+    forceMount: forceMountProp,
+    ...rest,
+    children,
+  }
+
+  const element = useRender({
+    defaultTagName: 'div',
+    render: (render ?? (() => null)) as useRender.RenderProp,
+    ref,
+    props: mergeProps<'div'>(defaultProps, {}),
+  })
+
+  if (render) {
+    return (
+      <RadixTabs.Content asChild value={value} forceMount={forceMountProp}>
+        {element}
+      </RadixTabs.Content>
+    )
+  }
 
   return (
     <RadixTabs.Content
       data-spark-component="tabs-content"
       ref={ref}
-      forceMount={forceMount || rest.forceMount}
-      className={contentStyles({ className, forceMount })}
-      asChild={asChild}
+      forceMount={forceMountProp}
+      className={contentStyles({ className, forceMount: forceMountProp })}
+      asChild={false}
+      value={value}
       {...rest}
     >
       {children}

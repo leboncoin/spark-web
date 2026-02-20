@@ -5,8 +5,8 @@ import React from 'react'
 export const A11yAlertDialog = () => (
   <section>
     <AlertDialog defaultOpen>
-      <AlertDialog.Trigger asChild>
-        <Button intent="danger">Delete</Button>
+      <AlertDialog.Trigger render={<Button intent="danger" />}>
+        Delete
       </AlertDialog.Trigger>
 
       <AlertDialog.Portal>
@@ -24,14 +24,12 @@ export const A11yAlertDialog = () => (
           </AlertDialog.Body>
 
           <AlertDialog.Footer className="gap-md flex justify-end">
-            <AlertDialog.Cancel asChild>
-              <Button intent="neutral" design="ghost">
-                Cancel
-              </Button>
+            <AlertDialog.Cancel render={<Button intent="neutral" design="ghost" />}>
+              Cancel
             </AlertDialog.Cancel>
 
-            <AlertDialog.Action asChild>
-              <Button intent="danger">Delete</Button>
+            <AlertDialog.Action render={<Button intent="danger" />}>
+              Delete
             </AlertDialog.Action>
           </AlertDialog.Footer>
         </AlertDialog.Content>

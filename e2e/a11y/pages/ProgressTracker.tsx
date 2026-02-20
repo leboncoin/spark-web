@@ -1,6 +1,6 @@
-import { BookmarkFill } from '@spark-ui/icons/BookmarkFill'
 import { Icon } from '@spark-ui/components/icon'
 import { ProgressTracker } from '@spark-ui/components/progress-tracker'
+import { BookmarkFill } from '@spark-ui/icons/BookmarkFill'
 import React from 'react'
 
 export const A11yProgressTracker = () => (

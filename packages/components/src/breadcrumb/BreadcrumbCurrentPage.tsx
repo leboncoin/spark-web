@@ -1,38 +1,32 @@
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { cx } from 'class-variance-authority'
-import { ComponentPropsWithoutRef, Ref } from 'react'
+import { Ref } from 'react'
 
-import { Slot } from '../slot'
-import { TextLink } from '../text-link'
-
-export interface CurrentPageProps extends ComponentPropsWithoutRef<typeof TextLink> {
-  asChild?: boolean
+export interface CurrentPageProps extends useRender.ComponentProps<'span'> {
   className?: string
-  ref?: Ref<HTMLAnchorElement>
+  ref?: Ref<HTMLSpanElement>
 }
 
-export const CurrentPage = ({
-  asChild = false,
-  className,
-  children,
-  ...rest
-}: CurrentPageProps) => {
-  const Component = asChild ? Slot : 'span'
+export const CurrentPage = ({ className, children, ref, render, ...rest }: CurrentPageProps) => {
+  const defaultProps: Record<string, unknown> = {
+    'data-spark-component': 'breadcrumb-current-page',
+    role: 'link',
+    'aria-disabled': true,
+    'aria-current': 'page',
+    className: cx(
+      'inline! overflow-hidden font-bold text-ellipsis whitespace-nowrap text-current',
+      className
+    ),
+    children,
+  }
 
-  return (
-    <Component
-      data-spark-component="breadcrumb-current-page"
-      role="link"
-      aria-disabled
-      aria-current="page"
-      className={cx(
-        'inline! overflow-hidden font-bold text-ellipsis whitespace-nowrap text-current',
-        className
-      )}
-      {...rest}
-    >
-      {children}
-    </Component>
-  )
+  return useRender({
+    defaultTagName: 'span',
+    render,
+    ref,
+    props: mergeProps<'span'>(defaultProps, rest),
+  })
 }
 
 CurrentPage.displayName = 'Breadcrumb.CurrentPage'

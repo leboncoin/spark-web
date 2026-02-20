@@ -6,12 +6,10 @@ import { LinkBox } from '.'
 describe('LinkOverlay', () => {
   it('should render', async () => {
     render(
-      <LinkBox asChild>
-        <article>
-          <h2>
-            <LinkBox.Link href="#">Title</LinkBox.Link>
-          </h2>
-        </article>
+      <LinkBox render={<article />}>
+        <h2>
+          <LinkBox.Link href="#">Title</LinkBox.Link>
+        </h2>
       </LinkBox>
     )
 

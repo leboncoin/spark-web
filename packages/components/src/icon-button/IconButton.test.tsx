@@ -34,8 +34,8 @@ describe('IconButton', () => {
     const label = 'Link'
     const props = {
       'aria-label': label,
-      asChild: true,
-      children: <a href="/">{icon}</a>,
+      render: <a href="/" />,
+      children: icon,
     }
 
     // When

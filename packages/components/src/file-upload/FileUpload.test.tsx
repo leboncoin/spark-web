@@ -903,13 +903,11 @@ describe('FileUpload', () => {
       expect(inputClick).toHaveBeenCalled()
     })
 
-    it('should render trigger with asChild prop', () => {
-      // GIVEN a FileUpload component with trigger using asChild
+    it('should render trigger with render prop', () => {
+      // GIVEN a FileUpload component with trigger using render
       render(
         <FileUpload>
-          <FileUpload.Trigger asChild>
-            <button type="button">Custom Trigger</button>
-          </FileUpload.Trigger>
+          <FileUpload.Trigger render={<button type="button">Custom Trigger</button>} />
         </FileUpload>
       )
 

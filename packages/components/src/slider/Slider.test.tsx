@@ -306,6 +306,5 @@ describe('Slider', () => {
 
       expect(slider).toHaveAttribute('aria-valuetext', '30%')
     })
-
   })
 })

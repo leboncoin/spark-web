@@ -1,7 +1,8 @@
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { cx } from 'class-variance-authority'
 import * as React from 'react'
 
-import { Slot } from '../slot'
 import { AvatarContext } from './context'
 import type { AvatarProps } from './types'
 
@@ -22,14 +23,13 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
       isOnline = false,
       onlineText,
       username,
-      asChild,
+      render,
       children,
       shape = 'circle',
       ...props
     },
     ref
   ) => {
-    const Comp = asChild ? Slot : 'div'
     const contextValue = React.useMemo(
       () => ({
         size,
@@ -42,22 +42,24 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
       [size, isOnline, username, shape, onlineText]
     )
 
-    return (
-      <AvatarContext.Provider value={contextValue}>
-        <Comp
-          ref={ref}
-          style={{
-            width: sizeMap[size],
-            height: sizeMap[size],
-          }}
-          data-spark-component="avatar"
-          className={cx('relative inline-flex items-center justify-center', className)}
-          {...props}
-        >
-          {children}
-        </Comp>
-      </AvatarContext.Provider>
-    )
+    const defaultProps: Record<string, unknown> = {
+      'data-spark-component': 'avatar',
+      style: {
+        width: sizeMap[size],
+        height: sizeMap[size],
+      },
+      className: cx('relative inline-flex items-center justify-center', className),
+      children,
+    }
+
+    const element = useRender({
+      defaultTagName: 'div',
+      render,
+      ref,
+      props: mergeProps<'div'>(defaultProps, props),
+    })
+
+    return <AvatarContext.Provider value={contextValue}>{element}</AvatarContext.Provider>
   }
 )
 
