@@ -1,6 +1,7 @@
 import { mergeConfig } from 'vite'
 import type { StorybookConfig } from '@storybook/react-vite'
 import { type ParserOptions } from 'react-docgen-typescript'
+import remarkGfm from 'remark-gfm'
 
 const docgenConfig: ParserOptions = {
   shouldExtractLiteralValuesFromEnum: true,
@@ -55,7 +56,16 @@ const config: StorybookConfig = {
     '@vueless/storybook-dark-mode',
     '@storybook/addon-a11y',
     '@storybook/addon-designs',
-    '@storybook/addon-docs',
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
   ],
   core: {
     disableTelemetry: true,
