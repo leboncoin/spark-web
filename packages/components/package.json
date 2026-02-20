@@ -62,6 +62,7 @@
     "class-variance-authority": "0.7.1",
     "downshift": "9.0.10",
     "emulate-tab": "^1.2.1",
+    "motion": "^12.34.3",
     "radix-ui": "1.4.3",
     "react-snap-carousel": "^0.5.1"
   },
