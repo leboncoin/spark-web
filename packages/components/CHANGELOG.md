@@ -1,3 +1,13 @@
+## 16.1.0 (2026-02-23)
+
+### 🚀 Features
+
+- **components:** allow asChild prop on Pagination items ([827345f58](https://github.com/leboncoin/spark-web/commit/827345f58))
+
+### ❤️ Thank You
+
+- Marius Guillaume
+
 ## 16.0.3 (2026-02-18)
 
 ### 🩹 Fixes
