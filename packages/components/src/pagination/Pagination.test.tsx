@@ -171,6 +171,53 @@ describe('Pagination', () => {
     expect(screen.getByRole('link', { name: 'Next page' })).toHaveAttribute('data-disabled')
   })
 
+  it('Should render pagination items as children', async () => {
+    const Child = (props: object) => <div data-child {...props} />
+
+    render(
+      <Pagination type="button" aria-label="Pagination" count={100} pageSize={3} noEllipsis>
+        <Pagination.FirstPageTrigger aria-label="First page" asChild>
+          <Child>First</Child>
+        </Pagination.FirstPageTrigger>
+        <Pagination.PrevTrigger aria-label="Previous page" asChild>
+          <Child>Previous</Child>
+        </Pagination.PrevTrigger>
+        <Pagination.Pages>
+          {({ pages }) =>
+            pages.map((page, index) =>
+              page.type === 'page' ? (
+                <Pagination.Item
+                  key={index}
+                  value={page.value}
+                  aria-label={`Page ${page.value}`}
+                  asChild
+                >
+                  <Child>{page.value}</Child>
+                </Pagination.Item>
+              ) : (
+                <Pagination.Ellipsis key={index} index={index} />
+              )
+            )
+          }
+        </Pagination.Pages>
+        <Pagination.NextTrigger aria-label="Next page" asChild>
+          <Child>Next</Child>
+        </Pagination.NextTrigger>
+        <Pagination.LastPageTrigger aria-label="Last page" asChild>
+          <Child>Last</Child>
+        </Pagination.LastPageTrigger>
+      </Pagination>
+    )
+
+    expect(screen.getByText('First')).toHaveAttribute('data-child')
+    expect(screen.getByText('Previous')).toHaveAttribute('data-child')
+    expect(screen.getByText('1')).toHaveAttribute('data-child')
+    expect(screen.getByText('2')).toHaveAttribute('data-child')
+    expect(screen.getByText('3')).toHaveAttribute('data-child')
+    expect(screen.getByText('Next')).toHaveAttribute('data-child')
+    expect(screen.getByText('Last')).toHaveAttribute('data-child')
+  })
+
   it('should properly handle disabled links', async () => {
     const user = userEvent.setup()
 
