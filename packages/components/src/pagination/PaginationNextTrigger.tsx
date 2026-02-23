@@ -6,14 +6,21 @@ import { Icon } from '../icon'
 import { IconButton } from '../icon-button'
 import { usePagination } from './PaginationContext'
 
-interface AnchorProps extends ComponentPropsWithoutRef<'a'> {
+type AnchorProps = ComponentPropsWithoutRef<'a'> & {
   href: string
+  asChild?: never
 }
 
-interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
-  href?: undefined
+type ButtonProps = ComponentPropsWithoutRef<'button'> & {
+  /**
+   * Change the component to the HTML tag or custom component of the only child.
+   * Unavailable for anchor items (with `href` prop) since the component will already be rendered as an anchor element.
+   */
+  asChild?: boolean
+  href?: never
 }
-export type NextTriggerProps = Omit<AnchorProps | ButtonProps, 'aria-label'> & {
+
+export type NextTriggerProps = (AnchorProps | ButtonProps) & {
   'aria-label': string
   ref?: Ref<HTMLButtonElement>
 }
