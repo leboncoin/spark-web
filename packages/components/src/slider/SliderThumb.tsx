@@ -1,15 +1,12 @@
-import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
 import { Slider as BaseSlider } from '@base-ui/react/slider'
+import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
 import { ComponentProps, type PropsWithChildren, useRef } from 'react'
 
 import { useSliderContext } from './SliderContext'
-import { SliderThumbContext } from './SliderThumbContext'
 import { thumbVariants } from './SliderThumb.styles'
+import { SliderThumbContext } from './SliderThumbContext'
 
-export type SliderThumbProps = Omit<
-  ComponentProps<typeof BaseSlider.Thumb>,
-  'render' | 'index'
-> &
+export type SliderThumbProps = Omit<ComponentProps<typeof BaseSlider.Thumb>, 'render' | 'index'> &
   PropsWithChildren
 
 export const SliderThumb = ({

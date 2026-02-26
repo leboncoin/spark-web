@@ -1,0 +1,139 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { Table } from '.'
+import * as stories from './Table.stories'
+
+<Meta of={stories} />
+
+# Table
+
+A table displays data in rows and columns and enables users to navigate its contents via keyboard. It is built on [React Aria Table](https://react-aria.adobe.com/Table) and supports sorting, empty state, and dynamic collections.
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Import
+
+```tsx
+import { Table } from '@spark-ui/components/table'
+```
+
+## Anatomy
+
+```tsx
+<Table aria-label="Description of the table">
+  <Table.Header>
+    <Table.Column isRowHeader>Column 1</Table.Column>
+    <Table.Column>Column 2</Table.Column>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row id="row-1">
+      <Table.Cell>Cell 1</Table.Cell>
+      <Table.Cell>Cell 2</Table.Cell>
+    </Table.Row>
+  </Table.Body>
+  {/* When using items + renderEmptyState, wrap empty content in Table.Empty */}
+  {/* <Table.Body items={[]} renderEmptyState={() => <Table.Empty>No results.</Table.Empty>}> */}
+</Table>
+```
+
+## API Reference
+
+### Table
+
+Root table container. Requires `aria-label` or `aria-labelledby` for accessibility.
+
+<ArgTypes of={Table} />
+
+### Table.Header
+
+Defines the table header row and columns.
+
+<ArgTypes of={Table.Header} />
+
+### Table.Column
+
+Defines a column header. Use `isRowHeader` for the first column when it labels each row. Use `allowsSorting` and pass `sortDescriptor` / `onSortChange` on the table for sortable columns.
+
+<ArgTypes of={Table.Column} />
+
+### Table.Body
+
+Contains the table rows. Prefer rendering rows with a simple `.map()` over your data array so that parent state updates flow correctly. For empty state, either render a single row with `Table.Empty` when the list is empty, or use `items` with `renderEmptyState`. For large tables where row content only depends on specific values, see **Row cache (items + dependencies)** below.
+
+<ArgTypes of={Table.Body} />
+
+### Table.Empty
+
+Wrapper for empty-state content. Renders a `div` with `p-lg` padding. Use inside `renderEmptyState` on `Table.Body`.
+
+<ArgTypes of={Table.Empty} />
+
+### Table.Row
+
+A table row. Requires a unique `id` for selection and keyboard navigation.
+
+<ArgTypes of={Table.Row} />
+
+### Table.Cell
+
+A table cell.
+
+<ArgTypes of={Table.Cell} />
+
+## Examples
+
+### Sortable columns
+
+Set `allowsSorting` on columns and control `sortDescriptor` / `onSortChange` on the table to enable sorting.
+
+<Canvas of={stories.Sortable} />
+
+### Empty state
+
+When the list is empty, render a single row with a cell that spans all columns and wrap the message in `Table.Empty` for consistent padding. Alternatively, use `items={[]}` with `renderEmptyState` on `Table.Body`.
+
+<Canvas of={stories.EmptyState} />
+
+### With selection
+
+Use `selectionMode="multiple"` (or `"single"`) with `selectedKeys` and `onSelectionChange`. The table renders a Spark Checkbox for each row and a "select all" checkbox in the header when `selectionMode="multiple"`.
+
+#### Multiple selection
+
+<Canvas of={stories.WithSelectionMultiple} />
+
+#### Single selection
+
+<Canvas of={stories.WithSelectionSingle} />
+
+### Disable resizable columns
+
+Column resizing is enabled by default. Set `allowsResizing={false}` on `Table` to disable it entirely, or `allowsResizing={false}` on individual `Table.Column` to hide the resizer for that column. Pass `onResizeStart`, `onResize`, or `onResizeEnd` on `Table` to react to resize events.
+
+<Canvas of={stories.WithResizingDisabled} />
+
+### Custom interactive elements
+
+You can pass **children** to `Table.Column` to add actions next to the column label (e.g. a Popover trigger for info). Use **children** in `Table.Cell` to render interactive components such as Switch, buttons, or links. Keyboard events on these elements are handled so that Space/Enter activate the control without selecting the row.
+
+<Canvas of={stories.CustomInteractiveElements} />
+
+### Row cache (items + dependencies)
+
+For large tables or when the parent re-renders often for unrelated state (e.g. a "last clicked" label, a search input), using `items` plus `dependencies` lets React Aria cache each row: the render function runs only when `dependencies` change. List in `dependencies` any value your row render function closes over (e.g. the data array, or external state like toggles). When those do not change, row content is not re-rendered. Use this when you need to limit re-renders for performance.
+
+<Canvas of={stories.WithItemsAndDependencies} />
+
+## Accessibility
+
+- The table uses semantic `<table>`, `<thead>`, `<tbody>`, `<tr>`, `<th>`, and `<td>` elements. For interactive navigation, React Aria uses `role="grid"` on the table element.
+- Always provide an `aria-label` (or `aria-labelledby`) on the table.
+- Use `isRowHeader` on the first column when it describes each row.
+- Keyboard: Arrow keys navigate between cells; Enter activates row action when using `onRowAction`.
+- See [React Aria Table](https://react-aria.adobe.com/Table) for full keyboard and screen reader behavior.

@@ -1,0 +1,28 @@
+import React from 'react'
+
+import { IconProps } from '../Types'
+
+export const ArrowDown = ({
+  title,
+  fill = 'currentColor',
+  stroke = 'none',
+  ref,
+  ...props
+}: IconProps) => (
+  <svg
+    ref={ref}
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    data-title="ArrowDown"
+    {...{ ...(title && { 'data-title': title }), fill, stroke, ...props }}
+    dangerouslySetInnerHTML={{
+      __html:
+        (title === undefined ? '' : `<title>${title}</title>`) +
+        '<path fill-rule="evenodd" clip-rule="evenodd" d="M17.7236 15.4613C17.3442 15.0629 16.7162 15.05 16.3209 15.4325L12.992 18.6538L12.9921 3C12.9921 2.44771 12.5479 2 12 2C11.4521 2 11.0079 2.44771 11.0079 3L11.0079 18.6538L7.67908 15.4325C7.28383 15.05 6.65583 15.0629 6.2764 15.4613C5.89696 15.8597 5.90978 16.4928 6.30502 16.8752L11.313 21.7214C11.6969 22.0929 12.3031 22.0929 12.687 21.7214L17.695 16.8752C18.0902 16.4928 18.103 15.8597 17.7236 15.4613Z"/>',
+    }}
+  />
+)
+
+ArrowDown.displayName = 'ArrowDown'
+
+export const tags = ['ArrowDown', '']
