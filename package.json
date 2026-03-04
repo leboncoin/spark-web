@@ -113,7 +113,7 @@
     "resize-observer-polyfill": "^1.5.1",
     "rollup": "4.59.0",
     "scroll-into-view-if-needed": "^3.1.0",
-    "storybook": "^10.0.0",
+    "storybook": "^10.2.15",
     "tailwindcss": "4.1.16",
     "ts-node": "10.9.2",
     "tsup": "^8.5.0",
