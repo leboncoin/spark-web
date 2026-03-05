@@ -5,14 +5,13 @@ import { PenOutline } from '@spark-ui/icons/PenOutline'
 import { TrashOutline } from '@spark-ui/icons/TrashOutline'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useMemo, useRef, useState } from 'react'
-import type { SortDescriptor } from 'react-aria-components'
 
 import { Button } from '../button'
 import { Icon } from '../icon'
 import { IconButton } from '../icon-button'
 import { Popover } from '../popover'
 import { Switch } from '../switch'
-import { Table } from '.'
+import { Table, useTableSort } from '.'
 
 const meta: Meta<typeof Table> = {
   title: 'Components/Table',
@@ -44,19 +43,8 @@ export const Default: StoryFn = () => {
   ]
 
   const [selected, setSelected] = useState<Set<string> | 'all'>(new Set())
-  const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
-    column: 'name',
-    direction: 'ascending',
-  })
-
-  const sortedRows = [...defaultRows].sort((a, b) => {
-    const col = sortDescriptor.column as keyof (typeof defaultRows)[0]
-    const aVal = a[col]
-    const bVal = b[col]
-    let cmp = String(aVal).localeCompare(String(bVal))
-    if (sortDescriptor.direction === 'descending') cmp = -cmp
-
-    return cmp
+  const { sortDescriptor, onSortChange, sortedItems } = useTableSort(defaultRows, {
+    initialSort: { column: 'name', direction: 'ascending' },
   })
 
   return (
@@ -67,7 +55,7 @@ export const Default: StoryFn = () => {
       maxHeight={500}
       onSelectionChange={keys => setSelected(keys as Set<string> | 'all')}
       sortDescriptor={sortDescriptor}
-      onSortChange={setSortDescriptor}
+      onSortChange={onSortChange}
     >
       <Table.Header>
         <Table.Column id="name" label="Name" isRowHeader allowsSorting>
@@ -94,7 +82,7 @@ export const Default: StoryFn = () => {
         <Table.Column id="actions" label="Actions" />
       </Table.Header>
       <Table.Body>
-        {sortedRows.map(item => (
+        {sortedItems.map(item => (
           <Table.Row key={item.id} id={item.id}>
             <Table.Cell>{item.name}</Table.Cell>
             <Table.Cell>{item.type}</Table.Cell>
@@ -136,39 +124,97 @@ export const Sortable: StoryFn = () => {
     { id: '4', name: 'Pikachu', type: 'Electric', level: 100 },
   ]
 
-  const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
-    column: 'name',
-    direction: 'ascending',
+  const { sortDescriptor, onSortChange, setSortDescriptor, sortedItems } = useTableSort(rows, {
+    initialSort: { column: 'name', direction: 'ascending' },
   })
 
-  const sortedRows = [...rows].sort((a, b) => {
-    const col = sortDescriptor.column as keyof (typeof rows)[0]
-    const aVal = a[col]
-    const bVal = b[col]
-    let cmp = aVal < bVal ? -1 : 1
-    if (sortDescriptor.direction === 'descending') cmp = -cmp
+  return (
+    <div className="gap-md flex flex-col">
+      <Button
+        className="self-start"
+        onClick={() => setSortDescriptor({ column: 'name', direction: 'ascending' })}
+        disabled={sortDescriptor.column === 'name' && sortDescriptor.direction === 'ascending'}
+      >
+        Reset sort
+      </Button>
+      <Table
+        aria-label="Sortable table"
+        className="max-w-sz-640"
+        sortDescriptor={sortDescriptor}
+        onSortChange={onSortChange}
+      >
+        <Table.Header>
+          <Table.Column id="name" label="Name" isRowHeader allowsSorting />
+          <Table.Column id="type" label="Type" allowsSorting />
+          <Table.Column id="level" label="Level" allowsSorting />
+        </Table.Header>
+        <Table.Body>
+          {sortedItems.map(item => (
+            <Table.Row key={item.id} id={item.id}>
+              <Table.Cell>{item.name}</Table.Cell>
+              <Table.Cell>{item.type}</Table.Cell>
+              <Table.Cell>{item.level}</Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+    </div>
+  )
+}
 
-    return cmp
+/** Parse "DD/MM/YYYY" to timestamp for chronological comparison. */
+function parseDateDDMMYYYY(value: unknown): number {
+  const str = String(value)
+  const parts = str.split('/').map(Number)
+  const [day = 0, month = 0, year = 0] = parts
+
+  return new Date(year, month - 1, day).getTime()
+}
+
+export const SortableWithCustomComparator: StoryFn = () => {
+  const rows = [
+    { id: '2', name: 'Report Romeo', date: '11/05/2024' },
+    { id: '4', name: 'Report Julie', date: '15/09/2024' },
+    { id: '1', name: 'Report Kevin', date: '08/01/2025' },
+    { id: '3', name: 'Report Alan', date: '10/05/2026' },
+  ]
+
+  const { sortDescriptor, onSortChange, sortedItems } = useTableSort(rows, {
+    initialSort: { column: 'date', direction: 'ascending' },
+    compare: (a, b, column, direction) => {
+      if (column === 'date') {
+        const aTime = parseDateDDMMYYYY(a.date)
+        const bTime = parseDateDDMMYYYY(b.date)
+        let comparisonResult = 0
+
+        if (aTime < bTime) comparisonResult = -1
+        else if (aTime > bTime) comparisonResult = 1
+
+        return direction === 'descending' ? -comparisonResult : comparisonResult
+      }
+
+      const comparisonResult = String(a[column]).localeCompare(String(b[column]))
+
+      return direction === 'descending' ? -comparisonResult : comparisonResult
+    },
   })
 
   return (
     <Table
-      aria-label="Sortable table"
+      aria-label="Table with date column (custom comparator)"
       className="max-w-sz-640"
       sortDescriptor={sortDescriptor}
-      onSortChange={setSortDescriptor}
+      onSortChange={onSortChange}
     >
       <Table.Header>
         <Table.Column id="name" label="Name" isRowHeader allowsSorting />
-        <Table.Column id="type" label="Type" allowsSorting />
-        <Table.Column id="level" label="Level" allowsSorting />
+        <Table.Column id="date" label="Date" allowsSorting />
       </Table.Header>
       <Table.Body>
-        {sortedRows.map(item => (
+        {sortedItems.map(item => (
           <Table.Row key={item.id} id={item.id}>
             <Table.Cell>{item.name}</Table.Cell>
-            <Table.Cell>{item.type}</Table.Cell>
-            <Table.Cell>{item.level}</Table.Cell>
+            <Table.Cell>{item.date}</Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>

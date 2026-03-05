@@ -28,6 +28,9 @@ Cell.displayName = 'Table.Cell'
 
 export { TableWithSubcomponents as Table }
 
+export { useTableSort } from './useTableSort'
+export type { SortDescriptor } from 'react-aria-components'
+export type { UseTableSortOptions } from './useTableSort'
 export { type TableProps } from './Table'
 export { type TableHeaderProps } from './TableHeader'
 export { type ColumnProps } from './TableColumn'
