@@ -29,7 +29,7 @@ export function Column({
   label,
   children,
   allowsResizing = true,
-  minWidth = 180,
+  minWidth = undefined,
   ...props
 }: ColumnProps) {
   const { isResizable } = useTableResizableContext()
