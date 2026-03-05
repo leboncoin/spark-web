@@ -1,10 +1,9 @@
-import { Cell } from './TableCell'
-import { Column } from './TableColumn'
-import { Row } from './TableRow'
 import { Table } from './Table'
 import { TableBody } from './TableBody'
-import { TableEmpty } from './TableEmpty'
+import { Cell } from './TableCell'
+import { Column } from './TableColumn'
 import { TableHeader } from './TableHeader'
+import { Row } from './TableRow'
 
 export const TableWithSubcomponents: typeof Table & {
   Header: typeof TableHeader
@@ -12,14 +11,12 @@ export const TableWithSubcomponents: typeof Table & {
   Body: typeof TableBody
   Row: typeof Row
   Cell: typeof Cell
-  Empty: typeof TableEmpty
 } = Object.assign(Table, {
   Header: TableHeader,
   Column,
   Body: TableBody,
   Row,
   Cell,
-  Empty: TableEmpty,
 })
 
 TableWithSubcomponents.displayName = 'Table'
@@ -37,4 +34,3 @@ export { type ColumnProps } from './TableColumn'
 export { type TableBodyProps } from './TableBody'
 export { type RowProps } from './TableRow'
 export { type CellProps } from './TableCell'
-export { type TableEmptyProps } from './TableEmpty'

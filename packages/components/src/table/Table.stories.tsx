@@ -177,30 +177,32 @@ export const Sortable: StoryFn = () => {
 }
 
 export const EmptyState: StoryFn = () => {
-  const emptyStateRows: { id: string; name: string; type: string; dateModified: string }[] = []
+  interface RowData {
+    id: string
+    name: string
+    type: string
+    dateModified: string
+  }
+  const emptyItems = useMemo(() => [] as RowData[], [])
 
   return (
-    <Table aria-label="Search results" className="max-w-sz-640">
+    <Table aria-label="Search results (items + renderEmptyState)" className="max-w-sz-640">
       <Table.Header>
         <Table.Column id="name" label="Name" isRowHeader />
         <Table.Column id="type" label="Type" />
         <Table.Column id="dateModified" label="Date Modified" />
       </Table.Header>
-      <Table.Body>
-        {emptyStateRows.length === 0 ? (
-          <Table.Row id="empty">
-            <Table.Cell colSpan={3}>
-              <Table.Empty>No results found.</Table.Empty>
-            </Table.Cell>
+      <Table.Body
+        items={emptyItems}
+        dependencies={[emptyItems]}
+        renderEmptyState={() => 'No results found.'}
+      >
+        {item => (
+          <Table.Row id={item.id}>
+            <Table.Cell>{item.name}</Table.Cell>
+            <Table.Cell>{item.type}</Table.Cell>
+            <Table.Cell>{item.dateModified}</Table.Cell>
           </Table.Row>
-        ) : (
-          emptyStateRows.map(item => (
-            <Table.Row key={item.id} id={item.id}>
-              <Table.Cell>{item.name}</Table.Cell>
-              <Table.Cell>{item.type}</Table.Cell>
-              <Table.Cell>{item.dateModified}</Table.Cell>
-            </Table.Row>
-          ))
         )}
       </Table.Body>
     </Table>
@@ -239,6 +241,72 @@ export const WithSelectionMultiple: StoryFn = () => {
         ))}
       </Table.Body>
     </Table>
+  )
+}
+
+export const WithSelectionMultipleWithLinks: StoryFn = () => {
+  const selectionRows = [
+    {
+      id: 'a',
+      name: 'Spark UI documentation',
+      type: 'External link',
+      date: '1/1/2024',
+      href: '/?path=/docs/introduction--docs',
+    },
+    {
+      id: 'b',
+      name: 'Spark UI GitHub',
+      type: 'External link',
+      date: '2/2/2024',
+      href: 'http://localhost:6006/?path=/docs/introduction--docs',
+    },
+    {
+      id: 'c',
+      name: 'Spark UI playground',
+      type: 'External link',
+      date: '3/3/2024',
+      href: 'http://localhost:6006/?path=/docs/introduction--docs',
+    },
+  ]
+
+  const [selected, setSelected] = useState<Set<string> | 'all'>(new Set())
+
+  return (
+    <>
+      <Table
+        aria-label="Selectable rows (multiple) with links"
+        className="max-w-sz-800 mb-lg"
+        selectionMode="multiple"
+        selectedKeys={selected}
+        onSelectionChange={keys => setSelected(keys as Set<string> | 'all')}
+        selectionBehavior="toggle"
+      >
+        <Table.Header>
+          <Table.Column id="name" label="Name" isRowHeader />
+          <Table.Column id="type" label="Type" />
+          <Table.Column id="date" label="Date" />
+          <Table.Column id="enabled" label="Enabled" />
+        </Table.Header>
+        <Table.Body>
+          {selectionRows.map(row => (
+            <Table.Row
+              key={row.id}
+              id={row.id}
+              href={row.href}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <Table.Cell>{row.name}</Table.Cell>
+              <Table.Cell>{row.type}</Table.Cell>
+              <Table.Cell>{row.date}</Table.Cell>
+              <Table.Cell>
+                <Switch>Enabled</Switch>
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+    </>
   )
 }
 
