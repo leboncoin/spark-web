@@ -68,7 +68,7 @@ describe('Table rendering and structure', () => {
         <Table.Header>
           <Table.Column label="Col" />
         </Table.Header>
-        <Table.Body items={[]} renderEmptyState={() => <Table.Empty>No results found.</Table.Empty>}>
+        <Table.Body items={[]} renderEmptyState={() => 'No results found.'}>
           {() => null}
         </Table.Body>
       </Table>

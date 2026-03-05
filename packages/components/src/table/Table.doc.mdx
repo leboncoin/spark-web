@@ -1,5 +1,6 @@
 import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
+import { Callout } from '@docs/helpers/Callout'
 import { Table } from '.'
 import * as stories from './Table.stories'
 
@@ -37,8 +38,8 @@ import { Table } from '@spark-ui/components/table'
       <Table.Cell>Cell 2</Table.Cell>
     </Table.Row>
   </Table.Body>
-  {/* When using items + renderEmptyState, wrap empty content in Table.Empty */}
-  {/* <Table.Body items={[]} renderEmptyState={() => <Table.Empty>No results.</Table.Empty>}> */}
+  {/* When using items + renderEmptyState, provide the empty content; it will be wrapped for consistent padding */}
+  {/* <Table.Body items={[]} renderEmptyState={() => 'No results.'}> */}
 </Table>
 ```
 
@@ -64,15 +65,9 @@ Defines a column header. Use `isRowHeader` for the first column when it labels e
 
 ### Table.Body
 
-Contains the table rows. Prefer rendering rows with a simple `.map()` over your data array so that parent state updates flow correctly. For empty state, either render a single row with `Table.Empty` when the list is empty, or use `items` with `renderEmptyState`. For large tables where row content only depends on specific values, see **Row cache (items + dependencies)** below.
+Contains the table rows. Prefer rendering rows with a simple `.map()` over your data array so that parent state updates flow correctly. For empty state, either render a single row with your own JSX when the list is empty, or use `items` with `renderEmptyState` (the content you return is automatically wrapped for consistent padding). For large tables where row content only depends on specific values, see **Row cache (items + dependencies)** below.
 
 <ArgTypes of={Table.Body} />
-
-### Table.Empty
-
-Wrapper for empty-state content. Renders a `div` with `p-lg` padding. Use inside `renderEmptyState` on `Table.Body`.
-
-<ArgTypes of={Table.Empty} />
 
 ### Table.Row
 
@@ -96,7 +91,7 @@ Set `allowsSorting` on columns and control `sortDescriptor` / `onSortChange` on 
 
 ### Empty state
 
-When the list is empty, render a single row with a cell that spans all columns and wrap the message in `Table.Empty` for consistent padding. Alternatively, use `items={[]}` with `renderEmptyState` on `Table.Body`.
+When the list is empty, you must use `items={[]}` with `renderEmptyState` on `Table.Body`.
 
 <Canvas of={stories.EmptyState} />
 
@@ -107,6 +102,24 @@ Use `selectionMode="multiple"` (or `"single"`) with `selectedKeys` and `onSelect
 #### Multiple selection
 
 <Canvas of={stories.WithSelectionMultiple} />
+
+### Row as link
+
+Pass `href` (and optionally `target`, `rel`, or `routerOptions`) to `Table.Row` to turn each row into a link while keeping checkbox selection. Use `target="_blank"` with `rel="noreferrer noopener"` to open links in a new tab safely.
+
+Additionally, you can pass `onAction` to `Table.Row` to handle the action when the row is clicked.
+
+<Callout kind="warning" marginY="large">
+  <p>
+    <strong>Accessibility:</strong> When row selection and row links are used together, React Aria
+    disables link behavior as soon as at least one row is selected. This avoids conflicting
+    interactions (click to select vs. click to navigate) and keeps a single, predictable primary
+    action—selection takes precedence so users can use checkboxes without accidentally following a
+    link.
+  </p>
+</Callout>
+
+<Canvas of={stories.WithSelectionMultipleWithLinks} />
 
 #### Single selection
 

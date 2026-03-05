@@ -11,11 +11,25 @@ export interface TableBodyProps<T extends object = object>
   className?: string
 }
 
-export function TableBody<T extends object>({ className, ...props }: TableBodyProps<T>) {
+export function TableBody<T extends object>({
+  className,
+  renderEmptyState,
+  ...props
+}: TableBodyProps<T>) {
+  const wrappedRenderEmptyState: AriaTableBodyProps<T>['renderEmptyState'] =
+    renderEmptyState != null
+      ? renderProps => (
+          <div data-spark-component="table-empty" className="p-lg">
+            {renderEmptyState(renderProps)}
+          </div>
+        )
+      : undefined
+
   return (
     <AriaTableBody
       data-spark-component="table-body"
       className={cx(tableBodyStyles(), className)}
+      renderEmptyState={wrappedRenderEmptyState}
       {...props}
     />
   )
