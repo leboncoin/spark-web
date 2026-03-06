@@ -29,8 +29,10 @@ Cell.displayName = 'Table.Cell'
 export { TableWithSubcomponents as Table }
 
 export { useTableSort } from './useTableSort'
+export { useTablePagination } from './useTablePagination'
 export type { SortDescriptor } from 'react-aria-components'
 export type { UseTableSortOptions } from './useTableSort'
+export type { UseTablePaginationOptions, UseTablePaginationResult } from './useTablePagination'
 export { type TableProps } from './Table'
 export { type TableHeaderProps } from './TableHeader'
 export { type ColumnProps } from './TableColumn'

@@ -9,7 +9,7 @@ import {
 } from 'react-aria-components'
 
 import { columnStyles } from './Table.styles'
-import { TableSelectionCheckbox } from './TableSelectionCheckbox'
+import { TableHeaderSelectionCheckbox } from './TableHeaderSelectionCheckbox'
 
 export interface TableHeaderProps<T extends object = object>
   extends Omit<AriaTableHeaderProps<T>, 'className'> {
@@ -46,7 +46,7 @@ export function TableHeader<T extends object>({
       )}
       {selectionBehavior === 'toggle' && (
         <AriaColumn width={56} minWidth={56} className={cx(columnStyles())}>
-          {selectionMode === 'multiple' && <TableSelectionCheckbox />}
+          {selectionMode === 'multiple' && <TableHeaderSelectionCheckbox />}
         </AriaColumn>
       )}
       {columns != null ? (
