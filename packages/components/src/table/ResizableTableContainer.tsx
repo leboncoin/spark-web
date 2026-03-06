@@ -46,15 +46,14 @@ export function ResizableTableContainer({
 
   return (
     <TableResizableContext.Provider value={{ isResizable: true }}>
-      <div ref={containerRef}>
-        <AriaResizableTableContainer
-          data-spark-component="resizable-table-container"
-          className={cx('relative w-full overflow-auto', className)}
-          {...props}
-        >
-          {children}
-        </AriaResizableTableContainer>
-      </div>
+      <AriaResizableTableContainer
+        ref={containerRef}
+        data-spark-component="resizable-table-container"
+        className={cx('relative w-full overflow-auto', className)}
+        {...props}
+      >
+        {children}
+      </AriaResizableTableContainer>
     </TableResizableContext.Provider>
   )
 }
