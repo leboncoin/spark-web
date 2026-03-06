@@ -93,6 +93,7 @@ export const Slider = ({
 
   const registerValueInThumb = useCallback(() => {
     setValueInThumbCount(c => c + 1)
+
     return () => setValueInThumbCount(c => c - 1)
   }, [])
 
@@ -123,13 +124,11 @@ export const Slider = ({
         aria-invalid={field.isInvalid}
         aria-disabled={disabled || readOnly ? true : undefined}
         value={valueProp !== undefined ? [valueProp] : undefined}
-        defaultValue={
-          defaultValueProp !== undefined ? [defaultValueProp] : undefined
-        }
+        defaultValue={defaultValueProp !== undefined ? [defaultValueProp] : undefined}
         onValueChange={
           onValueChange
             ? (value: number | readonly number[]) => {
-                const v = Array.isArray(value) ? value[0] ?? 0 : value
+                const v = Array.isArray(value) ? (value[0] ?? 0) : value
                 onValueChange(v)
               }
             : undefined
@@ -137,7 +136,7 @@ export const Slider = ({
         onValueCommitted={
           onValueCommit
             ? (value: number | readonly number[]) => {
-                const v = Array.isArray(value) ? value[0] ?? 0 : value
+                const v = Array.isArray(value) ? (value[0] ?? 0) : value
                 onValueCommit(v)
               }
             : undefined

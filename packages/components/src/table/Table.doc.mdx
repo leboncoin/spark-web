@@ -1,0 +1,258 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { Callout } from '@docs/helpers/Callout'
+import { Table } from '.'
+import { Kbd } from '../kbd'
+import { Tabs } from '../tabs'
+import * as stories from './Table.stories'
+
+<Meta of={stories} />
+
+# Table
+
+A table displays data in rows and columns and enables users to navigate its contents via keyboard. It is built on [React Aria Table](https://react-aria.adobe.com/Table) and supports sorting, empty state, and dynamic collections.
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Import
+
+```tsx
+import { Table, useTableSort, type SortDescriptor } from '@spark-ui/components/table'
+```
+
+## Anatomy
+
+```tsx
+<Table aria-label="Description of the table">
+  <Table.Header>
+    <Table.Column isRowHeader>Column 1</Table.Column>
+    <Table.Column>Column 2</Table.Column>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row id="row-1">
+      <Table.Cell>Cell 1</Table.Cell>
+      <Table.Cell>Cell 2</Table.Cell>
+    </Table.Row>
+  </Table.Body>
+  {/* When using items + renderEmptyState, provide the empty content; it will be wrapped for consistent padding */}
+  {/* <Table.Body items={[]} renderEmptyState={() => 'No results.'}> */}
+</Table>
+```
+
+## API Reference
+
+### Table
+
+Root table container. Requires `aria-label` or `aria-labelledby` for accessibility.
+
+<ArgTypes of={Table} />
+
+### Table.Header
+
+Defines the table header row and columns.
+
+<ArgTypes of={Table.Header} />
+
+### Table.Column
+
+Defines a column header. Use `isRowHeader` for the first column when it labels each row. Use `allowsSorting` and pass `sortDescriptor` / `onSortChange` on the table for sortable columns.
+
+<ArgTypes of={Table.Column} />
+
+### Table.Body
+
+Contains the table rows. Prefer rendering rows with a simple `.map()` over your data array so that parent state updates flow correctly. For empty state, either render a single row with your own JSX when the list is empty, or use `items` with `renderEmptyState` (the content you return is automatically wrapped for consistent padding). For large tables where row content only depends on specific values, see **Row cache (items + dependencies)** below.
+
+<ArgTypes of={Table.Body} />
+
+### Table.Row
+
+A table row. Requires a unique `id` for selection and keyboard navigation.
+
+<ArgTypes of={Table.Row} />
+
+### Table.Cell
+
+A table cell.
+
+<ArgTypes of={Table.Cell} />
+
+## Examples
+
+### Sorting
+
+Set `allowsSorting` on columns and control `sortDescriptor` / `onSortChange` on the table to enable sorting. Use the `useTableSort` hook to manage sort state and get a sorted list: it handles the descriptor state and a default comparator (numeric for numbers, `localeCompare` for strings).
+
+<Canvas of={stories.Sortable} />
+
+For columns that are not plain strings or numbers (e.g. date strings like `11/05/2024`), the default comparator can order incorrectly because it uses string comparison. Pass a custom `compare` to `useTableSort` to sort chronologically or by any other logic. In the example below, dates in `DD/MM/YYYY` format are parsed and compared as timestamps so that 11/05/2024 appears before 08/01/2025 when sorted ascending.
+
+<Canvas of={stories.SortableWithCustomComparator} />
+
+### Empty state
+
+When the list is empty, you must use `items={[]}` with `renderEmptyState` on `Table.Body`.
+
+<Canvas of={stories.EmptyState} />
+
+### Selection
+
+Use `selectionMode="multiple"` (or `"single"`) with `selectedKeys` and `onSelectionChange`. The table renders a Spark Checkbox for each row and a "select all" checkbox in the header when `selectionMode="multiple"`.
+
+#### Multiple selection
+
+<Canvas of={stories.WithSelectionMultiple} />
+
+#### Single selection
+
+<Canvas of={stories.WithSelectionSingle} />
+
+### Links
+
+Pass `href` (and optionally `target`, `rel`, or `routerOptions`) to `Table.Row` to turn each row into a link while keeping checkbox selection. Use `target="_blank"` with `rel="noreferrer noopener"` to open links in a new tab safely.
+
+Additionally, you can pass `onAction` to `Table.Row` to handle the action when the row is clicked.
+
+<Callout kind="warning" marginY="large">
+  <p>
+    <strong>Accessibility:</strong> When row selection and row links are used together, React Aria
+    disables link behavior as soon as at least one row is selected. This avoids conflicting
+    interactions (click to select vs. click to navigate) and keeps a single, predictable primary
+    action—selection takes precedence so users can use checkboxes without accidentally following a
+    link.
+  </p>
+</Callout>
+
+<Canvas of={stories.WithSelectionMultipleWithLinks} />
+
+### Disable column resizing
+
+Column resizing is enabled by default. Set `allowsResizing={false}` on `Table` to disable it entirely, or `allowsResizing={false}` on individual `Table.Column` to hide the resizer for that column. Pass `onResizeStart`, `onResize`, or `onResizeEnd` on `Table` to react to resize events.
+
+<Canvas of={stories.WithResizingDisabled} />
+
+### Custom interactive elements
+
+You can pass **children** to `Table.Column` to add actions next to the column label (e.g. a Popover trigger for info). Use **children** in `Table.Cell` to render interactive components such as Switch, buttons, or links. Keyboard events on these elements are handled so that Space/Enter activate the control without selecting the row.
+
+<Canvas of={stories.CustomInteractiveElements} />
+
+### Row cache (items + dependencies)
+
+For large tables or when the parent re-renders often for unrelated state (e.g. a "last clicked" label, a search input), using `items` plus `dependencies` lets React Aria cache each row: the render function runs only when `dependencies` change. List in `dependencies` any value your row render function closes over (e.g. the data array, or external state like toggles). When those do not change, row content is not re-rendered. Use this when you need to limit re-renders for performance.
+
+<Canvas of={stories.WithItemsAndDependencies} />
+
+### Pagination
+
+Combine the Table with Spark's [Pagination](/docs/components-pagination--docs) to display large datasets page by page. Hold the full dataset in state, use a controlled `page` and `onPageChange` on the Pagination, and slice the data to the current page before passing it to the table. The example below shows 134 items with 10 items per page (`pageSize={10}`).
+
+<Canvas of={stories.PaginationStory} />
+
+## Accessibility
+
+- The table uses semantic `<table>`, `<thead>`, `<tbody>`, `<tr>`, `<th>`, and `<td>` elements. For interactive navigation, React Aria uses `role="grid"` on the table element.
+- Always provide an `aria-label` (or `aria-labelledby`) on the table.
+- Use `isRowHeader` on the first column when it describes each row.
+- Keyboard: Arrow keys navigate between cells; Enter activates row action when using `onRowAction`.
+- See [React Aria Table](https://react-aria.adobe.com/Table) for full keyboard and screen reader behavior.
+
+### Keyboard navigation
+
+The Table uses the [WAI-ARIA Grid pattern](https://www.w3.org/WAI/ARIA/apg/patterns/grid/) (via React Aria). Only one focusable element of the grid is in the page tab sequence; once focus is inside the table, all navigation is done with the keys below.
+
+<Tabs defaultValue="header" aria-label="Keyboard navigation sections">
+  <Tabs.List>
+    <Tabs.Trigger value="header">Header</Tabs.Trigger>
+    <Tabs.Trigger value="body">Body</Tabs.Trigger>
+    <Tabs.Trigger value="selection">Selection</Tabs.Trigger>
+    <Tabs.Trigger value="row-as-link">Row as link</Tabs.Trigger>
+    <Tabs.Trigger value="resizing">Resizing</Tabs.Trigger>
+  </Tabs.List>
+
+  <Tabs.Content value="header">
+
+| Key                    | Action                                                                 | Condition                                                                                                                                       |
+| ---------------------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| <Kbd>Right Arrow</Kbd> | Move focus to the next column header, or to the **column resizer**     | When the table has resizing enabled, focus may land on the resizer handle (between the current and next column) before the next header.         |
+| <Kbd>Left Arrow</Kbd>  | Move focus to the previous column header, or to the **column resizer** | When the table has resizing enabled, focus may land on the resizer handle (between the previous and current column) before the previous header. |
+| <Kbd>Down Arrow</Kbd>  | Move focus from header to the first cell of the column (body)          | —                                                                                                                                               |
+| <Kbd>Enter</Kbd>       | Sort by this column (ascending → descending → none)                    | Only when the column has `allowsSorting` and the header (or its sort icon) has focus                                                            |
+
+**Custom focusable elements in header cells** (e.g. a Popover trigger next to the label): use <Kbd>Tab</Kbd> or arrow keys to reach them. <Kbd>Space</Kbd> / <Kbd>Enter</Kbd> activate the control without triggering sort; focus stays on the element.
+
+  </Tabs.Content>
+
+  <Tabs.Content value="body">
+
+| Key                                  | Action                                          | Condition                                                                                                                                                                                                           |
+| ------------------------------------ | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <Kbd>Right Arrow</Kbd>               | Move focus one cell to the right                | If on the right-most cell, focus moves to the **row** (row-level focus). If the cell has focusable content (link, button, etc.), focus goes to the first focusable, then the next in tab order, then the next cell. |
+| <Kbd>Left Arrow</Kbd>                | Move focus one cell to the left                 | If on the left-most cell, focus moves to the **row**. If the cell has focusable content, focus moves to the previous focusable in the cell, then the previous cell.                                                 |
+| <Kbd>Down Arrow</Kbd>                | Move focus one cell down                        | If focus is on the **row** itself, moves to the next row.                                                                                                                                                           |
+| <Kbd>Up Arrow</Kbd>                  | Move focus one cell up                          | If focus is on the **row** itself, moves to the previous row. If there is no previous row, focus moves to the **column header** (first cell of the header row).                                                     |
+| <Kbd>Home</Kbd>                      | Move focus to the first cell of the current row | —                                                                                                                                                                                                                   |
+| <Kbd>End</Kbd>                       | Move focus to the last cell of the current row  | —                                                                                                                                                                                                                   |
+| <Kbd>Control</Kbd> + <Kbd>Home</Kbd> | Move focus to the first cell of the first row   | —                                                                                                                                                                                                                   |
+| <Kbd>Control</Kbd> + <Kbd>End</Kbd>  | Move focus to the last cell of the last row     | —                                                                                                                                                                                                                   |
+
+**Custom focusable elements inside cells**
+
+Cells can contain interactive elements (buttons, links, Switch, Checkbox, inputs, etc.). They are reachable by arrow keys (focus moves into the cell, then to the first/next focusable) or by <Kbd>Tab</Kbd> when the grid allows it.
+
+| Key              | Action                                                  | Condition                                                                                                                                                                                                                                                   |
+| ---------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <Kbd>Space</Kbd> | Activate the control (e.g. toggle Switch, click button) | **Only when focus is on an interactive element** (button, `[role="button"]`, `[role="switch"]`, checkbox, option, input, select, textarea, or link). The key is handled in capture phase: the control is activated (click) and **the row is not selected**. |
+| <Kbd>Enter</Kbd> | Same as Space for buttons/links etc.                    | Same as above. **Exception:** the **column resizer** uses Enter to toggle keyboard resize mode; Enter is not converted to click there.                                                                                                                      |
+
+If focus is on a **non-interactive** cell (plain text), <Kbd>Space</Kbd> and <Kbd>Enter</Kbd> are handled by the grid (selection or row action; see Selection tab).
+
+  </Tabs.Content>
+
+  <Tabs.Content value="selection">
+
+| Key                                      | Action                                                    | Condition                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ---------------------------------------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <Kbd>Space</Kbd>                         | **Toggle** selection of the focused row                   | When the table has `selectionMode="single"` or `"multiple"` and focus is on a **cell or row** (not on an interactive element inside a cell). Selects the row if it is not selected, deselects it if it is.                                                                                                                                                                                                                 |
+| <Kbd>Shift</Kbd> + <Kbd>Space</Kbd>      | **Extend selection** to the focused row (range selection) | When `selectionMode="multiple"`, focus is on a **cell or row** (not on an interactive element), and at least one row is already selected. Selects all rows from the “anchor” (e.g. the row you first selected with <Kbd>Space</Kbd>) through the currently focused row. Example: select row 1 with <Kbd>Space</Kbd>, move to row 4 with <Kbd>Down Arrow</Kbd>, then <Kbd>Shift</Kbd>+<Kbd>Space</Kbd> selects rows 1 to 4. |
+| <Kbd>Enter</Kbd>                         | Toggle selection (single) or activate row action          | With `selectionMode="single"`, Enter can confirm selection. With `onAction` on the row, Enter triggers the action when focus is on the row/cell (see row as link below).                                                                                                                                                                                                                                                   |
+| <Kbd>Control</Kbd> + <Kbd>A</Kbd>        | Select all rows                                           | When `selectionMode="multiple"`.                                                                                                                                                                                                                                                                                                                                                                                           |
+| <Kbd>Escape</Kbd>                        | Clear selection (deselect all rows)                       | When at least one row is selected.                                                                                                                                                                                                                                                                                                                                                                                         |
+| <Kbd>Shift</Kbd> + <Kbd>Down Arrow</Kbd> | Extend selection to the row below                         | When `selectionMode="multiple"` and at least one row is selected; adds the next row to the selection.                                                                                                                                                                                                                                                                                                                      |
+| <Kbd>Shift</Kbd> + <Kbd>Up Arrow</Kbd>   | Extend selection to the row above                         | When `selectionMode="multiple"` and at least one row is selected; adds the previous row to the selection.                                                                                                                                                                                                                                                                                                                  |
+
+**When focus is on an interactive element** inside a cell (button, link, Switch, checkbox, input, etc.), neither <Kbd>Space</Kbd> nor <Kbd>Shift</Kbd>+<Kbd>Space</Kbd> changes row selection: the table’s capture-phase handler consumes Space/Enter and activates that control instead. To select the row from the keyboard, focus must be on the cell or row itself (e.g. arrow to the cell, then Space or Shift+Space).
+
+  </Tabs.Content>
+
+  <Tabs.Content value="row-as-link">
+
+| Key              | Action                        | Condition                                                                                                                                                                                                                                                                       |
+| ---------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <Kbd>Enter</Kbd> | Trigger the link / `onAction` | **Only when no row is selected.** If at least one row is selected (any row in the table), React Aria disables link behavior: Enter does **not** trigger the link, so selection remains the primary action and users can use checkboxes without accidentally following the link. |
+| <Kbd>Space</Kbd> | Toggle selection of the row   | When selection is enabled. Space always toggles selection and does **not** trigger the link.                                                                                                                                                                                    |
+
+When a row has `href` (and optionally `onAction`), it behaves as a link. Keyboard behavior depends on selection state.
+So: **no selection** → Enter activates the link/action. **With selection** → Enter does not activate the link; use Space to (un)select, then Enter again only after no rows are selected if you want to follow the link.
+
+  </Tabs.Content>
+
+  <Tabs.Content value="resizing">
+
+| Key                     | Action                           | Condition                                                                                                                                                                                                     |
+| ----------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <Kbd>Tab</Kbd> / arrows | Move focus to the resizer handle | From the **header row**, <Kbd>Left Arrow</Kbd> / <Kbd>Right Arrow</Kbd> move focus to the resizer (between column headers) when resizing is enabled. From the body or via Tab, the resizer is also focusable. |
+| <Kbd>Enter</Kbd>        | Toggle “keyboard resize” mode    | When focus is on the resizer. In this mode, the resizer has focus and uses Arrow keys to change width; Enter is **not** converted to a click (unlike other focusable elements in the table).                  |
+| <Kbd>Left Arrow</Kbd>   | Decrease column width            | When the resizer has focus and keyboard resize mode is active.                                                                                                                                                |
+| <Kbd>Right Arrow</Kbd>  | Increase column width            | When the resizer has focus and keyboard resize mode is active.                                                                                                                                                |
+
+Set `allowsResizing={false}` on `Table` to disable resizing, or on a specific `Table.Column` to hide that column’s resizer.
+
+  </Tabs.Content>
+</Tabs>
