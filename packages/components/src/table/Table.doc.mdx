@@ -85,13 +85,11 @@ A table cell.
 
 ## Examples
 
-### Sortable columns
+### Sorting
 
 Set `allowsSorting` on columns and control `sortDescriptor` / `onSortChange` on the table to enable sorting. Use the `useTableSort` hook to manage sort state and get a sorted list: it handles the descriptor state and a default comparator (numeric for numbers, `localeCompare` for strings).
 
 <Canvas of={stories.Sortable} />
-
-### Custom comparator (e.g. dates)
 
 For columns that are not plain strings or numbers (e.g. date strings like `11/05/2024`), the default comparator can order incorrectly because it uses string comparison. Pass a custom `compare` to `useTableSort` to sort chronologically or by any other logic. In the example below, dates in `DD/MM/YYYY` format are parsed and compared as timestamps so that 11/05/2024 appears before 08/01/2025 when sorted ascending.
 
@@ -103,7 +101,7 @@ When the list is empty, you must use `items={[]}` with `renderEmptyState` on `Ta
 
 <Canvas of={stories.EmptyState} />
 
-### With selection
+### Selection
 
 Use `selectionMode="multiple"` (or `"single"`) with `selectedKeys` and `onSelectionChange`. The table renders a Spark Checkbox for each row and a "select all" checkbox in the header when `selectionMode="multiple"`.
 
@@ -111,7 +109,11 @@ Use `selectionMode="multiple"` (or `"single"`) with `selectedKeys` and `onSelect
 
 <Canvas of={stories.WithSelectionMultiple} />
 
-### Row as link
+#### Single selection
+
+<Canvas of={stories.WithSelectionSingle} />
+
+### Links
 
 Pass `href` (and optionally `target`, `rel`, or `routerOptions`) to `Table.Row` to turn each row into a link while keeping checkbox selection. Use `target="_blank"` with `rel="noreferrer noopener"` to open links in a new tab safely.
 
@@ -129,11 +131,7 @@ Additionally, you can pass `onAction` to `Table.Row` to handle the action when t
 
 <Canvas of={stories.WithSelectionMultipleWithLinks} />
 
-#### Single selection
-
-<Canvas of={stories.WithSelectionSingle} />
-
-### Disable resizable columns
+### Disable column resizing
 
 Column resizing is enabled by default. Set `allowsResizing={false}` on `Table` to disable it entirely, or `allowsResizing={false}` on individual `Table.Column` to hide the resizer for that column. Pass `onResizeStart`, `onResize`, or `onResizeEnd` on `Table` to react to resize events.
 
@@ -150,6 +148,12 @@ You can pass **children** to `Table.Column` to add actions next to the column la
 For large tables or when the parent re-renders often for unrelated state (e.g. a "last clicked" label, a search input), using `items` plus `dependencies` lets React Aria cache each row: the render function runs only when `dependencies` change. List in `dependencies` any value your row render function closes over (e.g. the data array, or external state like toggles). When those do not change, row content is not re-rendered. Use this when you need to limit re-renders for performance.
 
 <Canvas of={stories.WithItemsAndDependencies} />
+
+### Pagination
+
+Combine the Table with Spark's [Pagination](/docs/components-pagination--docs) to display large datasets page by page. Hold the full dataset in state, use a controlled `page` and `onPageChange` on the Pagination, and slice the data to the current page before passing it to the table. The example below shows 134 items with 10 items per page (`pageSize={10}`).
+
+<Canvas of={stories.PaginationStory} />
 
 ## Accessibility
 

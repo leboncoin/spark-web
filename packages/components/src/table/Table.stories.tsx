@@ -9,6 +9,7 @@ import { useMemo, useRef, useState } from 'react'
 import { Button } from '../button'
 import { Icon } from '../icon'
 import { IconButton } from '../icon-button'
+import { Pagination } from '../pagination'
 import { Popover } from '../popover'
 import { Switch } from '../switch'
 import { Table, useTableSort } from '.'
@@ -482,6 +483,89 @@ function NameCellWithRenderCount({ name }: { id: string; name: string }) {
       {name}{' '}
       <span className="text-body-2 text-on-surface/dim-3">(renders: {countRef.current})</span>
     </>
+  )
+}
+
+export const PaginationStory: StoryFn = () => {
+  const totalItems = 134
+  const pageSize = 5
+  const allItems = useMemo(
+    () =>
+      Array.from({ length: totalItems }, (_, i) => ({
+        id: `row-${i + 1}`,
+        name: `Item ${i + 1}`,
+        type: ['File folder', 'Text Document', 'System file', 'Configuration'][i % 4],
+        dateModified: new Date(2020 + (i % 5), i % 12, (i % 28) + 1).toLocaleDateString('en-US', {
+          month: 'numeric',
+          day: 'numeric',
+          year: 'numeric',
+        }),
+      })),
+    [totalItems]
+  )
+  const [currentPage, setCurrentPage] = useState(1)
+  const [selected, setSelected] = useState<Set<string> | 'all'>(new Set())
+  const pageStart = (currentPage - 1) * pageSize
+  const pageEnd = pageStart + pageSize
+  const pageItems = allItems.slice(pageStart, pageEnd)
+
+  return (
+    <div className="gap-lg max-w-sz-640 flex flex-col items-center">
+      <Table
+        aria-label="Paginated table (134 items)"
+        selectionMode="multiple"
+        selectedKeys={selected}
+        onSelectionChange={keys => setSelected(keys as Set<string> | 'all')}
+      >
+        <Table.Header>
+          <Table.Column id="name" label="Name" isRowHeader />
+          <Table.Column id="type" label="Type" />
+          <Table.Column id="dateModified" label="Date Modified" />
+        </Table.Header>
+        <Table.Body>
+          {pageItems.map(item => (
+            <Table.Row key={item.id} id={item.id}>
+              <Table.Cell>{item.name}</Table.Cell>
+              <Table.Cell>{item.type}</Table.Cell>
+              <Table.Cell>{item.dateModified}</Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+      <Pagination
+        type="button"
+        aria-label="Table pagination"
+        count={totalItems}
+        pageSize={pageSize}
+        page={currentPage}
+        visiblePageItems={7}
+        onPageChange={details => setCurrentPage(details.page)}
+      >
+        <Pagination.PrevTrigger aria-label="Previous page" />
+        <Pagination.Pages>
+          {({ pages, totalPages }) =>
+            pages.map((page, index) =>
+              page.type === 'page' ? (
+                <Pagination.Item
+                  key={page.value}
+                  value={page.value}
+                  aria-label={
+                    page.value === totalPages
+                      ? `Last page, page ${page.value}`
+                      : `Page ${page.value}`
+                  }
+                >
+                  {page.value}
+                </Pagination.Item>
+              ) : (
+                <Pagination.Ellipsis key={`${index}-ellipsis`} index={index} />
+              )
+            )
+          }
+        </Pagination.Pages>
+        <Pagination.NextTrigger aria-label="Next page" />
+      </Pagination>
+    </div>
   )
 }
 

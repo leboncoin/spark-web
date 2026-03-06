@@ -26,7 +26,7 @@ function ThemeWrapper({ children, viewMode }: { children: ReactNode; viewMode: s
   return (
     <div
       data-theme={theme}
-      className={cx('bg-background text-on-background w-min-content relative overflow-x-auto', {
+      className={cx('bg-background text-on-background w-min-content relative', {
         'p-lg': viewMode === 'docs',
       })}
     >
