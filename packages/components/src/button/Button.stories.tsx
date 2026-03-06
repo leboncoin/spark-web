@@ -41,7 +41,6 @@ const intents: ButtonProps['intent'][] = [
   'surfaceInverse',
 ]
 const designs: ButtonProps['design'][] = ['filled', 'outlined', 'tinted', 'contrast', 'ghost']
-const shapes: ButtonProps['shape'][] = ['rounded', 'square', 'pill']
 
 export const Default: StoryObj = {
   render: _args => {
@@ -55,18 +54,6 @@ export const Sizes: StoryFn = _args => (
       return (
         <Button key={size} size={size}>
           Button {size}
-        </Button>
-      )
-    })}
-  </div>
-)
-
-export const Shapes: StoryFn = _args => (
-  <div className="gap-lg flex flex-wrap items-center">
-    {shapes.map(shape => {
-      return (
-        <Button key={shape} shape={shape}>
-          {shape} button
         </Button>
       )
     })}
