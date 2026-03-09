@@ -24,6 +24,8 @@ export interface UseTablePaginationResult<T> {
   totalItems: number
   /** Total number of pages (at least 1). */
   totalPages: number
+  /** All item keys across all pages. */
+  allKeys: Set<Key>
   /**
    * Selection state across all pages.
    * Pass to Table's `selectedKeys`.
@@ -39,6 +41,8 @@ export interface UseTablePaginationResult<T> {
    * `onPageChange={({ page }) => ...}`.
    */
   onPageChange: (details: { page: number }) => void
+  /** Clear selection across all pages. */
+  clearSelection: () => void
 }
 
 /**
@@ -93,11 +97,17 @@ export function useTablePagination<T>(
     setPage(current => {
       if (current < 1) return 1
       if (current > totalPages) return totalPages
+
       return current
     })
   }, [totalPages])
 
-  const effectivePage = page < 1 ? 1 : page > totalPages ? totalPages : page
+  let effectivePage = page
+  if (effectivePage < 1) {
+    effectivePage = 1
+  } else if (effectivePage > totalPages) {
+    effectivePage = totalPages
+  }
 
   const pageItems = useMemo(() => {
     const start = (effectivePage - 1) * pageSize
@@ -105,6 +115,24 @@ export function useTablePagination<T>(
 
     return items.slice(start, end)
   }, [items, effectivePage, pageSize])
+
+  const allKeys = useMemo(() => {
+    const resolveId =
+      getId ??
+      ((item: T) => {
+        const candidate = (item as unknown as { id?: Key }).id
+
+        if (candidate == null) {
+          throw new Error(
+            'useTablePagination: item.id is undefined. Provide a `getId` option to extract a stable key.'
+          )
+        }
+
+        return candidate
+      })
+
+    return new Set<Key>(items.map(item => resolveId(item)))
+  }, [getId, items])
 
   const pageIds = useMemo(() => {
     const resolveId =
@@ -127,8 +155,7 @@ export function useTablePagination<T>(
   const handleSelectionChange = (keys: Selection) => {
     // React Aria uses "all" to represent "select all" in the current context.
     // For the table header checkbox, interpret "all" as "all items on the current page".
-    const newPageSelection =
-      keys === 'all' ? new Set<Key>(pageIds) : new Set(keys as Set<Key>)
+    const newPageSelection = keys === 'all' ? new Set<Key>(pageIds) : new Set(keys as Set<Key>)
 
     setSelectedKeys(prev => {
       const next = new Set<Key>(newPageSelection)
@@ -148,15 +175,20 @@ export function useTablePagination<T>(
     setPage(details.page)
   }
 
+  const clearSelection = () => {
+    setSelectedKeys(() => new Set())
+  }
+
   return {
     page: effectivePage,
     setPage,
     pageItems,
     totalItems,
     totalPages,
+    allKeys,
     selectedKeys,
     onSelectionChange: handleSelectionChange,
     onPageChange: handlePageChange,
+    clearSelection,
   }
 }
-

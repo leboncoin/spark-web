@@ -1,10 +1,22 @@
 import { cx } from 'class-variance-authority'
+import type { ReactNode } from 'react'
 import { useLayoutEffect, useRef } from 'react'
 import { Table as AriaTable, type TableProps as AriaTableProps } from 'react-aria-components'
 
 import type { ResizableTableContainerProps } from './ResizableTableContainer'
 import { ResizableTableContainer } from './ResizableTableContainer'
 import { isColumnResizerElement, isInteractiveElement } from './table-utils'
+
+export interface TableRootWrapperProps {
+  children: ReactNode
+  className?: string
+}
+
+export function TableRootWrapper({ children, className }: TableRootWrapperProps) {
+  return <div className={cx('gap-md flex flex-col items-center', className)}>{children}</div>
+}
+
+TableRootWrapper.displayName = 'Table'
 
 export interface TableProps
   extends Omit<AriaTableProps, 'className'>,
@@ -67,13 +79,13 @@ export const TableRoot = ({ className, onKeyDownCapture, ...props }: TableProps)
   )
 }
 
-TableRoot.displayName = 'Table'
+TableRoot.displayName = 'Table.Grid.Inner'
 
 function toMaxHeightStyle(value: number | string): React.CSSProperties['maxHeight'] {
   return typeof value === 'number' ? `${value}px` : value
 }
 
-export function Table({
+export function TableGrid({
   allowsResizing = true,
   onResizeStart,
   onResize,
@@ -106,4 +118,4 @@ export function Table({
   )
 }
 
-Table.displayName = 'Table'
+TableGrid.displayName = 'Table.Grid'

@@ -7,21 +7,23 @@ import { Table } from '..'
 describe('Table keyboard navigation', () => {
   it('should have grid role for keyboard navigation', () => {
     render(
-      <Table aria-label="Grid">
-        <Table.Header>
-          <Table.Column id="name" label="Name" isRowHeader />
-          <Table.Column id="value" label="Value" />
-        </Table.Header>
-        <Table.Body>
-          <Table.Row id="r1">
-            <Table.Cell>Alpha</Table.Cell>
-            <Table.Cell>1</Table.Cell>
-          </Table.Row>
-          <Table.Row id="r2">
-            <Table.Cell>Beta</Table.Cell>
-            <Table.Cell>2</Table.Cell>
-          </Table.Row>
-        </Table.Body>
+      <Table>
+        <Table.Grid aria-label="Grid">
+          <Table.Header>
+            <Table.Column id="name" label="Name" isRowHeader />
+            <Table.Column id="value" label="Value" />
+          </Table.Header>
+          <Table.Body>
+            <Table.Row id="r1">
+              <Table.Cell>Alpha</Table.Cell>
+              <Table.Cell>1</Table.Cell>
+            </Table.Row>
+            <Table.Row id="r2">
+              <Table.Cell>Beta</Table.Cell>
+              <Table.Cell>2</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 
@@ -39,21 +41,23 @@ describe('Table keyboard navigation', () => {
   it('should move focus between cells with arrow keys', async () => {
     const user = userEvent.setup()
     render(
-      <Table aria-label="Navigate">
-        <Table.Header>
-          <Table.Column id="name" label="Name" isRowHeader />
-          <Table.Column id="value" label="Value" />
-        </Table.Header>
-        <Table.Body>
-          <Table.Row id="r1">
-            <Table.Cell>Alpha</Table.Cell>
-            <Table.Cell>1</Table.Cell>
-          </Table.Row>
-          <Table.Row id="r2">
-            <Table.Cell>Beta</Table.Cell>
-            <Table.Cell>2</Table.Cell>
-          </Table.Row>
-        </Table.Body>
+      <Table>
+        <Table.Grid aria-label="Navigate">
+          <Table.Header>
+            <Table.Column id="name" label="Name" isRowHeader />
+            <Table.Column id="value" label="Value" />
+          </Table.Header>
+          <Table.Body>
+            <Table.Row id="r1">
+              <Table.Cell>Alpha</Table.Cell>
+              <Table.Cell>1</Table.Cell>
+            </Table.Row>
+            <Table.Row id="r2">
+              <Table.Cell>Beta</Table.Cell>
+              <Table.Cell>2</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 
@@ -77,26 +81,28 @@ describe('Table keyboard navigation', () => {
     const onButtonClick = vi.fn()
 
     render(
-      <Table
-        aria-label="With button"
-        selectionMode="multiple"
-        selectedKeys={new Set()}
-        onSelectionChange={onSelectionChange}
-      >
-        <Table.Header>
-          <Table.Column id="name" label="Name" isRowHeader />
-          <Table.Column id="action" label="Action" />
-        </Table.Header>
-        <Table.Body>
-          <Table.Row id="r1">
-            <Table.Cell>Row 1</Table.Cell>
-            <Table.Cell>
-              <button type="button" onClick={onButtonClick}>
-                Action
-              </button>
-            </Table.Cell>
-          </Table.Row>
-        </Table.Body>
+      <Table>
+        <Table.Grid
+          aria-label="With button"
+          selectionMode="multiple"
+          selectedKeys={new Set()}
+          onSelectionChange={onSelectionChange}
+        >
+          <Table.Header>
+            <Table.Column id="name" label="Name" isRowHeader />
+            <Table.Column id="action" label="Action" />
+          </Table.Header>
+          <Table.Body>
+            <Table.Row id="r1">
+              <Table.Cell>Row 1</Table.Cell>
+              <Table.Cell>
+                <button type="button" onClick={onButtonClick}>
+                  Action
+                </button>
+              </Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 
@@ -114,26 +120,28 @@ describe('Table keyboard navigation', () => {
     const onButtonClick = vi.fn()
 
     render(
-      <Table
-        aria-label="With button enter"
-        selectionMode="multiple"
-        selectedKeys={new Set()}
-        onSelectionChange={onSelectionChange}
-      >
-        <Table.Header>
-          <Table.Column id="name" label="Name" isRowHeader />
-          <Table.Column id="action" label="Action" />
-        </Table.Header>
-        <Table.Body>
-          <Table.Row id="r1">
-            <Table.Cell>Row 1</Table.Cell>
-            <Table.Cell>
-              <button type="button" onClick={onButtonClick}>
-                Do it
-              </button>
-            </Table.Cell>
-          </Table.Row>
-        </Table.Body>
+      <Table>
+        <Table.Grid
+          aria-label="With button enter"
+          selectionMode="multiple"
+          selectedKeys={new Set()}
+          onSelectionChange={onSelectionChange}
+        >
+          <Table.Header>
+            <Table.Column id="name" label="Name" isRowHeader />
+            <Table.Column id="action" label="Action" />
+          </Table.Header>
+          <Table.Body>
+            <Table.Row id="r1">
+              <Table.Cell>Row 1</Table.Cell>
+              <Table.Cell>
+                <button type="button" onClick={onButtonClick}>
+                  Do it
+                </button>
+              </Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 
@@ -150,22 +158,24 @@ describe('Table keyboard navigation', () => {
     const onSelectionChange = vi.fn()
 
     render(
-      <Table
-        aria-label="Select with space"
-        selectionMode="multiple"
-        selectedKeys={new Set()}
-        onSelectionChange={onSelectionChange}
-      >
-        <Table.Header>
-          <Table.Column id="name" label="Name" isRowHeader />
-          <Table.Column id="value" label="Value" />
-        </Table.Header>
-        <Table.Body>
-          <Table.Row id="r1">
-            <Table.Cell>Alpha</Table.Cell>
-            <Table.Cell>1</Table.Cell>
-          </Table.Row>
-        </Table.Body>
+      <Table>
+        <Table.Grid
+          aria-label="Select with space"
+          selectionMode="multiple"
+          selectedKeys={new Set()}
+          onSelectionChange={onSelectionChange}
+        >
+          <Table.Header>
+            <Table.Column id="name" label="Name" isRowHeader />
+            <Table.Column id="value" label="Value" />
+          </Table.Header>
+          <Table.Body>
+            <Table.Row id="r1">
+              <Table.Cell>Alpha</Table.Cell>
+              <Table.Cell>1</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 

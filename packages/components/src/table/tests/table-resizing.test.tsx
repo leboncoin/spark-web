@@ -6,17 +6,19 @@ import { Table } from '..'
 describe('Table column resizing', () => {
   it('should render resizable container with data-spark-component when allowsResizing is true', () => {
     render(
-      <Table aria-label="Resizable">
-        <Table.Header>
-          <Table.Column label="Name" isRowHeader allowsResizing />
-          <Table.Column label="Type" allowsResizing />
-        </Table.Header>
-        <Table.Body>
-          <Table.Row id="r1">
-            <Table.Cell>A</Table.Cell>
-            <Table.Cell>B</Table.Cell>
-          </Table.Row>
-        </Table.Body>
+      <Table>
+        <Table.Grid aria-label="Resizable">
+          <Table.Header>
+            <Table.Column label="Name" isRowHeader allowsResizing />
+            <Table.Column label="Type" allowsResizing />
+          </Table.Header>
+          <Table.Body>
+            <Table.Row id="r1">
+              <Table.Cell>A</Table.Cell>
+              <Table.Cell>B</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 
@@ -28,17 +30,19 @@ describe('Table column resizing', () => {
 
   it('should render column resizer when allowsResizing is true (default)', () => {
     render(
-      <Table aria-label="Resizable">
-        <Table.Header>
-          <Table.Column label="Name" allowsResizing />
-          <Table.Column label="Type" allowsResizing />
-        </Table.Header>
-        <Table.Body>
-          <Table.Row id="r1">
-            <Table.Cell>A</Table.Cell>
-            <Table.Cell>B</Table.Cell>
-          </Table.Row>
-        </Table.Body>
+      <Table>
+        <Table.Grid aria-label="Resizable">
+          <Table.Header>
+            <Table.Column label="Name" allowsResizing />
+            <Table.Column label="Type" allowsResizing />
+          </Table.Header>
+          <Table.Body>
+            <Table.Row id="r1">
+              <Table.Cell>A</Table.Cell>
+              <Table.Cell>B</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 
@@ -48,17 +52,19 @@ describe('Table column resizing', () => {
 
   it('should not render column resizer when column has allowsResizing false', () => {
     const { container } = render(
-      <Table aria-label="Mixed resizing">
-        <Table.Header>
-          <Table.Column label="Name" allowsResizing />
-          <Table.Column label="Actions" allowsResizing={false} />
-        </Table.Header>
-        <Table.Body>
-          <Table.Row id="r1">
-            <Table.Cell>A</Table.Cell>
-            <Table.Cell>—</Table.Cell>
-          </Table.Row>
-        </Table.Body>
+      <Table>
+        <Table.Grid aria-label="Mixed resizing">
+          <Table.Header>
+            <Table.Column label="Name" allowsResizing />
+            <Table.Column label="Actions" allowsResizing={false} />
+          </Table.Header>
+          <Table.Body>
+            <Table.Row id="r1">
+              <Table.Cell>A</Table.Cell>
+              <Table.Cell>—</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 
@@ -68,17 +74,19 @@ describe('Table column resizing', () => {
 
   it('should not render resizable container when allowsResizing is false', () => {
     render(
-      <Table aria-label="Not resizable" allowsResizing={false}>
-        <Table.Header>
-          <Table.Column label="Name" allowsResizing />
-          <Table.Column label="Type" />
-        </Table.Header>
-        <Table.Body>
-          <Table.Row id="r1">
-            <Table.Cell>A</Table.Cell>
-            <Table.Cell>B</Table.Cell>
-          </Table.Row>
-        </Table.Body>
+      <Table>
+        <Table.Grid aria-label="Not resizable" allowsResizing={false}>
+          <Table.Header>
+            <Table.Column label="Name" allowsResizing />
+            <Table.Column label="Type" />
+          </Table.Header>
+          <Table.Body>
+            <Table.Row id="r1">
+              <Table.Cell>A</Table.Cell>
+              <Table.Cell>B</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 
@@ -88,17 +96,19 @@ describe('Table column resizing', () => {
     expect(container).not.toBeInTheDocument()
   })
 
-  it('should accept className on Table (applied to resizable container when allowsResizing)', () => {
+  it('should accept className on Table.Grid (applied to resizable container when allowsResizing)', () => {
     const { container } = render(
-      <Table aria-label="Resizable" className="max-w-sz-640">
-        <Table.Header>
-          <Table.Column label="Col" />
-        </Table.Header>
-        <Table.Body>
-          <Table.Row id="r1">
-            <Table.Cell>X</Table.Cell>
-          </Table.Row>
-        </Table.Body>
+      <Table>
+        <Table.Grid aria-label="Resizable" className="max-w-sz-640">
+          <Table.Header>
+            <Table.Column label="Col" />
+          </Table.Header>
+          <Table.Body>
+            <Table.Row id="r1">
+              <Table.Cell>X</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 

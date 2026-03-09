@@ -24,6 +24,12 @@ export interface ButtonProps
    * **Please note that using this can result in layout shifting when the Button goes from loading state to normal state.**
    */
   loadingText?: string
+  /**
+   * When true, the button is non-interactive and has disabled styling but stays focusable (uses
+   * `aria-disabled` instead of native `disabled`). Use for cases where the user should be able to
+   * focus the control to discover why it is disabled (e.g. form submit, bulk bar actions).
+   */
+  ariaDisabled?: boolean
   ref?: Ref<HTMLButtonElement>
 }
 
@@ -50,6 +56,7 @@ export const Button = ({
   children,
   design = 'filled',
   disabled = false,
+  ariaDisabled = false,
   intent = 'main',
   isLoading = false,
   loadingLabel,
@@ -64,7 +71,8 @@ export const Button = ({
 }: ButtonProps) => {
   const Component = asChild ? Slot : 'button'
 
-  const shouldNotInteract = !!disabled || isLoading
+  const shouldNotInteract = !!disabled || !!ariaDisabled || isLoading
+  const useNativeDisabled = !!disabled && !ariaDisabled
 
   const disabledEventHandlers = useMemo(() => {
     const result: Partial<Record<DOMAttributesEventHandler, () => void>> = {}
@@ -96,7 +104,8 @@ export const Button = ({
         size,
         underline,
       })}
-      disabled={!!disabled}
+      disabled={useNativeDisabled}
+      aria-disabled={shouldNotInteract ? true : undefined}
       aria-busy={isLoading}
       aria-live={isLoading ? 'assertive' : 'off'}
       {...others}

@@ -25,37 +25,39 @@ function SelectableLinkTable({
     selectedKeys === 'all' || (selectedKeys instanceof Set && selectedKeys.has(id))
 
   return (
-    <Table
-      aria-label="Selectable link rows"
-      selectionMode="multiple"
-      selectedKeys={selectedKeys}
-      onSelectionChange={keys => {
-        setSelectedKeys(keys as SelectionKeys)
-        onSelectionChange?.(keys as SelectionKeys)
-      }}
-    >
-      <Table.Header>
-        <Table.Column id="name" label="Name" isRowHeader />
-        <Table.Column id="type" label="Type" />
-      </Table.Header>
-      <Table.Body>
-        {rows.map(row => (
-          <Table.Row
-            key={row.id}
-            id={row.id}
-            // href used for styling/semantics, onAction represents "link triggered"
-            href={row.href}
-            onAction={() => {
-              if (!isSelected(row.id)) {
-                onRowAction(row.id)
-              }
-            }}
-          >
-            <Table.Cell>{row.name}</Table.Cell>
-            <Table.Cell>{row.type}</Table.Cell>
-          </Table.Row>
-        ))}
-      </Table.Body>
+    <Table>
+      <Table.Grid
+        aria-label="Selectable link rows"
+        selectionMode="multiple"
+        selectedKeys={selectedKeys}
+        onSelectionChange={keys => {
+          setSelectedKeys(keys as SelectionKeys)
+          onSelectionChange?.(keys as SelectionKeys)
+        }}
+      >
+        <Table.Header>
+          <Table.Column id="name" label="Name" isRowHeader />
+          <Table.Column id="type" label="Type" />
+        </Table.Header>
+        <Table.Body>
+          {rows.map(row => (
+            <Table.Row
+              key={row.id}
+              id={row.id}
+              // href used for styling/semantics, onAction represents "link triggered"
+              href={row.href}
+              onAction={() => {
+                if (!isSelected(row.id)) {
+                  onRowAction(row.id)
+                }
+              }}
+            >
+              <Table.Cell>{row.name}</Table.Cell>
+              <Table.Cell>{row.type}</Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table.Grid>
     </Table>
   )
 }
@@ -77,19 +79,21 @@ function StaticLinkTable({ onRowAction }: { onRowAction: (id: string) => void })
   ]
 
   return (
-    <Table aria-label="Static link rows">
-      <Table.Header>
-        <Table.Column id="name" label="Name" isRowHeader />
-        <Table.Column id="description" label="Description" />
-      </Table.Header>
-      <Table.Body>
-        {rows.map(row => (
-          <Table.Row key={row.id} id={row.id} href={row.href} onAction={() => onRowAction(row.id)}>
-            <Table.Cell>{row.name}</Table.Cell>
-            <Table.Cell>{row.description}</Table.Cell>
-          </Table.Row>
-        ))}
-      </Table.Body>
+    <Table>
+      <Table.Grid aria-label="Static link rows">
+        <Table.Header>
+          <Table.Column id="name" label="Name" isRowHeader />
+          <Table.Column id="description" label="Description" />
+        </Table.Header>
+        <Table.Body>
+          {rows.map(row => (
+            <Table.Row key={row.id} id={row.id} href={row.href} onAction={() => onRowAction(row.id)}>
+              <Table.Cell>{row.name}</Table.Cell>
+              <Table.Cell>{row.description}</Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table.Grid>
     </Table>
   )
 }

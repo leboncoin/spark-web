@@ -29,7 +29,7 @@ export function Column({
   label,
   children,
   allowsResizing = true,
-  minWidth = undefined,
+  minWidth = 120,
   ...props
 }: ColumnProps) {
   const { isResizable } = useTableResizableContext()
@@ -82,7 +82,7 @@ export function Column({
               </div>
 
               {allowsSorting && (
-                <span className="size-sz-32 ml-auto inline-flex shrink-0 items-center justify-center rounded-full">
+                <span className="size-sz-32 ml-auto inline-flex shrink-0 cursor-pointer items-center justify-center rounded-full">
                   <Icon size="sm" className={cx(sortDirection === 'descending' && 'rotate-180')}>
                     {sortDirection ? <ArrowUp /> : <Sort />}
                   </Icon>

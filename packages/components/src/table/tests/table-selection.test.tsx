@@ -16,24 +16,26 @@ describe('Table row selection', () => {
     const onSelectionChange = vi.fn()
 
     render(
-      <Table
-        aria-label="Selectable"
-        selectionMode="single"
-        selectedKeys={new Set()}
-        onSelectionChange={onSelectionChange}
-      >
-        <Table.Header>
-          <Table.Column id="name" label="Name" isRowHeader />
-          <Table.Column id="type" label="Type" />
-        </Table.Header>
-        <Table.Body items={rows}>
-          {item => (
-            <Table.Row id={item.id}>
-              <Table.Cell>{item.name}</Table.Cell>
-              <Table.Cell>{item.type}</Table.Cell>
-            </Table.Row>
-          )}
-        </Table.Body>
+      <Table>
+        <Table.Grid
+          aria-label="Selectable"
+          selectionMode="single"
+          selectedKeys={new Set()}
+          onSelectionChange={onSelectionChange}
+        >
+          <Table.Header>
+            <Table.Column id="name" label="Name" isRowHeader />
+            <Table.Column id="type" label="Type" />
+          </Table.Header>
+          <Table.Body items={rows}>
+            {item => (
+              <Table.Row id={item.id}>
+                <Table.Cell>{item.name}</Table.Cell>
+                <Table.Cell>{item.type}</Table.Cell>
+              </Table.Row>
+            )}
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 
@@ -51,24 +53,26 @@ describe('Table row selection', () => {
     const onSelectionChange = vi.fn()
 
     render(
-      <Table
-        aria-label="Multi select"
-        selectionMode="multiple"
-        selectedKeys={new Set()}
-        onSelectionChange={onSelectionChange}
-      >
-        <Table.Header>
-          <Table.Column id="name" label="Name" isRowHeader />
-          <Table.Column id="type" label="Type" />
-        </Table.Header>
-        <Table.Body items={rows}>
-          {item => (
-            <Table.Row id={item.id}>
-              <Table.Cell>{item.name}</Table.Cell>
-              <Table.Cell>{item.type}</Table.Cell>
-            </Table.Row>
-          )}
-        </Table.Body>
+      <Table>
+        <Table.Grid
+          aria-label="Multi select"
+          selectionMode="multiple"
+          selectedKeys={new Set()}
+          onSelectionChange={onSelectionChange}
+        >
+          <Table.Header>
+            <Table.Column id="name" label="Name" isRowHeader />
+            <Table.Column id="type" label="Type" />
+          </Table.Header>
+          <Table.Body items={rows}>
+            {item => (
+              <Table.Row id={item.id}>
+                <Table.Cell>{item.name}</Table.Cell>
+                <Table.Cell>{item.type}</Table.Cell>
+              </Table.Row>
+            )}
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 
@@ -84,24 +88,26 @@ describe('Table row selection', () => {
 
   it('should show selection checkbox column when selectionMode is multiple', () => {
     render(
-      <Table
-        aria-label="With checkboxes"
-        selectionMode="multiple"
-        selectedKeys={new Set()}
-        onSelectionChange={() => {}}
-      >
-        <Table.Header>
-          <Table.Column id="name" label="Name" isRowHeader />
-          <Table.Column id="type" label="Type" />
-        </Table.Header>
-        <Table.Body items={rows}>
-          {item => (
-            <Table.Row id={item.id}>
-              <Table.Cell>{item.name}</Table.Cell>
-              <Table.Cell>{item.type}</Table.Cell>
-            </Table.Row>
-          )}
-        </Table.Body>
+      <Table>
+        <Table.Grid
+          aria-label="With checkboxes"
+          selectionMode="multiple"
+          selectedKeys={new Set()}
+          onSelectionChange={() => {}}
+        >
+          <Table.Header>
+            <Table.Column id="name" label="Name" isRowHeader />
+            <Table.Column id="type" label="Type" />
+          </Table.Header>
+          <Table.Body items={rows}>
+            {item => (
+              <Table.Row id={item.id}>
+                <Table.Cell>{item.name}</Table.Cell>
+                <Table.Cell>{item.type}</Table.Cell>
+              </Table.Row>
+            )}
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 
@@ -111,24 +117,26 @@ describe('Table row selection', () => {
 
   it('should reflect selectedKeys on rows (data-selected)', () => {
     render(
-      <Table
-        aria-label="Selected state"
-        selectionMode="multiple"
-        selectedKeys={new Set(['a', 'c'])}
-        onSelectionChange={() => {}}
-      >
-        <Table.Header>
-          <Table.Column id="name" label="Name" isRowHeader />
-          <Table.Column id="type" label="Type" />
-        </Table.Header>
-        <Table.Body items={rows}>
-          {item => (
-            <Table.Row id={item.id}>
-              <Table.Cell>{item.name}</Table.Cell>
-              <Table.Cell>{item.type}</Table.Cell>
-            </Table.Row>
-          )}
-        </Table.Body>
+      <Table>
+        <Table.Grid
+          aria-label="Selected state"
+          selectionMode="multiple"
+          selectedKeys={new Set(['a', 'c'])}
+          onSelectionChange={() => {}}
+        >
+          <Table.Header>
+            <Table.Column id="name" label="Name" isRowHeader />
+            <Table.Column id="type" label="Type" />
+          </Table.Header>
+          <Table.Body items={rows}>
+            {item => (
+              <Table.Row id={item.id}>
+                <Table.Cell>{item.name}</Table.Cell>
+                <Table.Cell>{item.type}</Table.Cell>
+              </Table.Row>
+            )}
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 
@@ -147,24 +155,26 @@ describe('Table row selection', () => {
     const onSelectionChange = vi.fn()
 
     render(
-      <Table
-        aria-label="Checkbox toggle"
-        selectionMode="multiple"
-        selectedKeys={new Set()}
-        onSelectionChange={onSelectionChange}
-      >
-        <Table.Header>
-          <Table.Column id="name" label="Name" isRowHeader />
-          <Table.Column id="type" label="Type" />
-        </Table.Header>
-        <Table.Body items={rows}>
-          {item => (
-            <Table.Row id={item.id}>
-              <Table.Cell>{item.name}</Table.Cell>
-              <Table.Cell>{item.type}</Table.Cell>
-            </Table.Row>
-          )}
-        </Table.Body>
+      <Table>
+        <Table.Grid
+          aria-label="Checkbox toggle"
+          selectionMode="multiple"
+          selectedKeys={new Set()}
+          onSelectionChange={onSelectionChange}
+        >
+          <Table.Header>
+            <Table.Column id="name" label="Name" isRowHeader />
+            <Table.Column id="type" label="Type" />
+          </Table.Header>
+          <Table.Body items={rows}>
+            {item => (
+              <Table.Row id={item.id}>
+                <Table.Cell>{item.name}</Table.Cell>
+                <Table.Cell>{item.type}</Table.Cell>
+              </Table.Row>
+            )}
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 
