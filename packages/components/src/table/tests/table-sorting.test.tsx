@@ -16,23 +16,25 @@ describe('Table column sorting', () => {
     const onSortChange = vi.fn()
 
     render(
-      <Table
-        aria-label="Sortable"
-        sortDescriptor={{ column: 'name', direction: 'ascending' }}
-        onSortChange={onSortChange}
-      >
-        <Table.Header>
-          <Table.Column id="name" label="Name" isRowHeader allowsSorting />
-          <Table.Column id="value" label="Value" allowsSorting />
-        </Table.Header>
-        <Table.Body items={sortableRows}>
-          {item => (
-            <Table.Row id={item.id}>
-              <Table.Cell>{item.name}</Table.Cell>
-              <Table.Cell>{item.value}</Table.Cell>
-            </Table.Row>
-          )}
-        </Table.Body>
+      <Table>
+        <Table.Grid
+          aria-label="Sortable"
+          sortDescriptor={{ column: 'name', direction: 'ascending' }}
+          onSortChange={onSortChange}
+        >
+          <Table.Header>
+            <Table.Column id="name" label="Name" isRowHeader allowsSorting />
+            <Table.Column id="value" label="Value" allowsSorting />
+          </Table.Header>
+          <Table.Body items={sortableRows}>
+            {item => (
+              <Table.Row id={item.id}>
+                <Table.Cell>{item.name}</Table.Cell>
+                <Table.Cell>{item.value}</Table.Cell>
+              </Table.Row>
+            )}
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 
@@ -57,19 +59,25 @@ describe('Table column sorting', () => {
       })
 
       return (
-        <Table aria-label="Sortable" sortDescriptor={sortDescriptor} onSortChange={onSortChange}>
-          <Table.Header>
-            <Table.Column id="name" label="Name" isRowHeader allowsSorting />
-            <Table.Column id="value" label="Value" allowsSorting />
-          </Table.Header>
-          <Table.Body items={sortedItems}>
-            {item => (
-              <Table.Row id={item.id}>
-                <Table.Cell>{item.name}</Table.Cell>
-                <Table.Cell>{item.value}</Table.Cell>
-              </Table.Row>
-            )}
-          </Table.Body>
+        <Table>
+          <Table.Grid
+            aria-label="Sortable"
+            sortDescriptor={sortDescriptor}
+            onSortChange={onSortChange}
+          >
+            <Table.Header>
+              <Table.Column id="name" label="Name" isRowHeader allowsSorting />
+              <Table.Column id="value" label="Value" allowsSorting />
+            </Table.Header>
+            <Table.Body items={sortedItems}>
+              {item => (
+                <Table.Row id={item.id}>
+                  <Table.Cell>{item.name}</Table.Cell>
+                  <Table.Cell>{item.value}</Table.Cell>
+                </Table.Row>
+              )}
+            </Table.Body>
+          </Table.Grid>
         </Table>
       )
     }
@@ -102,19 +110,25 @@ describe('Table column sorting', () => {
       })
 
       return (
-        <Table aria-label="Sortable" sortDescriptor={sortDescriptor} onSortChange={onSortChange}>
-          <Table.Header>
-            <Table.Column id="name" label="Name" isRowHeader allowsSorting />
-            <Table.Column id="value" label="Value" allowsSorting />
-          </Table.Header>
-          <Table.Body items={sortedItems}>
-            {item => (
-              <Table.Row id={item.id}>
-                <Table.Cell>{item.name}</Table.Cell>
-                <Table.Cell>{item.value}</Table.Cell>
-              </Table.Row>
-            )}
-          </Table.Body>
+        <Table>
+          <Table.Grid
+            aria-label="Sortable"
+            sortDescriptor={sortDescriptor}
+            onSortChange={onSortChange}
+          >
+            <Table.Header>
+              <Table.Column id="name" label="Name" isRowHeader allowsSorting />
+              <Table.Column id="value" label="Value" allowsSorting />
+            </Table.Header>
+            <Table.Body items={sortedItems}>
+              {item => (
+                <Table.Row id={item.id}>
+                  <Table.Cell>{item.name}</Table.Cell>
+                  <Table.Cell>{item.value}</Table.Cell>
+                </Table.Row>
+              )}
+            </Table.Body>
+          </Table.Grid>
         </Table>
       )
     }
@@ -170,19 +184,25 @@ describe('Table column sorting', () => {
       })
 
       return (
-        <Table aria-label="Date table" sortDescriptor={sortDescriptor} onSortChange={onSortChange}>
-          <Table.Header>
-            <Table.Column id="name" label="Name" isRowHeader allowsSorting />
-            <Table.Column id="date" label="Date" allowsSorting />
-          </Table.Header>
-          <Table.Body items={sortedItems}>
-            {item => (
-              <Table.Row id={item.id}>
-                <Table.Cell>{item.name}</Table.Cell>
-                <Table.Cell>{item.date}</Table.Cell>
-              </Table.Row>
-            )}
-          </Table.Body>
+        <Table>
+          <Table.Grid
+            aria-label="Date table"
+            sortDescriptor={sortDescriptor}
+            onSortChange={onSortChange}
+          >
+            <Table.Header>
+              <Table.Column id="name" label="Name" isRowHeader allowsSorting />
+              <Table.Column id="date" label="Date" allowsSorting />
+            </Table.Header>
+            <Table.Body items={sortedItems}>
+              {item => (
+                <Table.Row id={item.id}>
+                  <Table.Cell>{item.name}</Table.Cell>
+                  <Table.Cell>{item.date}</Table.Cell>
+                </Table.Row>
+              )}
+            </Table.Body>
+          </Table.Grid>
         </Table>
       )
     }
@@ -217,19 +237,25 @@ describe('Table column sorting', () => {
           >
             Reset sort
           </button>
-          <Table aria-label="Sortable" sortDescriptor={sortDescriptor} onSortChange={onSortChange}>
-            <Table.Header>
-              <Table.Column id="name" label="Name" isRowHeader allowsSorting />
-              <Table.Column id="value" label="Value" allowsSorting />
-            </Table.Header>
-            <Table.Body items={sortedItems}>
-              {item => (
-                <Table.Row id={item.id}>
-                  <Table.Cell>{item.name}</Table.Cell>
-                  <Table.Cell>{item.value}</Table.Cell>
-                </Table.Row>
-              )}
-            </Table.Body>
+          <Table>
+            <Table.Grid
+              aria-label="Sortable"
+              sortDescriptor={sortDescriptor}
+              onSortChange={onSortChange}
+            >
+              <Table.Header>
+                <Table.Column id="name" label="Name" isRowHeader allowsSorting />
+                <Table.Column id="value" label="Value" allowsSorting />
+              </Table.Header>
+              <Table.Body items={sortedItems}>
+                {item => (
+                  <Table.Row id={item.id}>
+                    <Table.Cell>{item.name}</Table.Cell>
+                    <Table.Cell>{item.value}</Table.Cell>
+                  </Table.Row>
+                )}
+              </Table.Body>
+            </Table.Grid>
           </Table>
         </div>
       )
@@ -260,19 +286,21 @@ describe('Table column sorting', () => {
 
   it('should not show sort control on column without allowsSorting', () => {
     render(
-      <Table aria-label="Mixed">
-        <Table.Header>
-          <Table.Column id="name" label="Name" isRowHeader allowsSorting />
-          <Table.Column id="value" label="Value" />
-        </Table.Header>
-        <Table.Body items={sortableRows}>
-          {item => (
-            <Table.Row id={item.id}>
-              <Table.Cell>{item.name}</Table.Cell>
-              <Table.Cell>{item.value}</Table.Cell>
-            </Table.Row>
-          )}
-        </Table.Body>
+      <Table>
+        <Table.Grid aria-label="Mixed">
+          <Table.Header>
+            <Table.Column id="name" label="Name" isRowHeader allowsSorting />
+            <Table.Column id="value" label="Value" />
+          </Table.Header>
+          <Table.Body items={sortableRows}>
+            {item => (
+              <Table.Row id={item.id}>
+                <Table.Cell>{item.name}</Table.Cell>
+                <Table.Cell>{item.value}</Table.Cell>
+              </Table.Row>
+            )}
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 

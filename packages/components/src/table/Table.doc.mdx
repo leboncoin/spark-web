@@ -33,20 +33,26 @@ import {
 
 ## Anatomy
 
+`Table` is the root container (a flex column with gap). It can wrap `Table.BulkBar`, `Table.Grid` (the data grid), and `Pagination`. `Table.Grid` is the scrollable table and requires `aria-label` or `aria-labelledby`.
+
 ```tsx
-<Table aria-label="Description of the table">
-  <Table.Header>
-    <Table.Column isRowHeader>Column 1</Table.Column>
-    <Table.Column>Column 2</Table.Column>
-  </Table.Header>
-  <Table.Body>
-    <Table.Row id="row-1">
-      <Table.Cell>Cell 1</Table.Cell>
-      <Table.Cell>Cell 2</Table.Cell>
-    </Table.Row>
-  </Table.Body>
-  {/* When using items + renderEmptyState, provide the empty content; it will be wrapped for consistent padding */}
-  {/* <Table.Body items={[]} renderEmptyState={() => 'No results.'}> */}
+<Table>
+  {/* Optional: Table.BulkBar when using selection + pagination */}
+  <Table.Grid aria-label="Description of the table">
+    <Table.Header>
+      <Table.Column isRowHeader>Column 1</Table.Column>
+      <Table.Column>Column 2</Table.Column>
+    </Table.Header>
+    <Table.Body>
+      <Table.Row id="row-1">
+        <Table.Cell>Cell 1</Table.Cell>
+        <Table.Cell>Cell 2</Table.Cell>
+      </Table.Row>
+    </Table.Body>
+    {/* When using items + renderEmptyState, provide the empty content; it will be wrapped for consistent padding */}
+    {/* <Table.Body items={[]} renderEmptyState={() => 'No results.'}> */}
+  </Table.Grid>
+  {/* Optional: Pagination */}
 </Table>
 ```
 
@@ -54,9 +60,15 @@ import {
 
 ### Table
 
-Root table container. Requires `aria-label` or `aria-labelledby` for accessibility.
+Root wrapper. Renders a flex column container (`gap-md flex flex-col`) for `Table.BulkBar`, `Table.Grid`, and optional siblings like `Pagination`. Accepts `className` and `children`.
 
 <ArgTypes of={Table} />
+
+### Table.Grid
+
+The data grid (scroll container + semantic table). Requires `aria-label` or `aria-labelledby` for accessibility. Supports sorting, selection, resizing, and `maxHeight` for the scroll area.
+
+<ArgTypes of={Table.Grid} />
 
 ### Table.Header
 
@@ -66,7 +78,7 @@ Defines the table header row and columns.
 
 ### Table.Column
 
-Defines a column header. Use `isRowHeader` for the first column when it labels each row. Use `allowsSorting` and pass `sortDescriptor` / `onSortChange` on the table for sortable columns.
+Defines a column header. Use `isRowHeader` for the first column when it labels each row. Use `allowsSorting` and pass `sortDescriptor` / `onSortChange` on `Table.Grid` for sortable columns.
 
 <ArgTypes of={Table.Column} />
 
@@ -88,11 +100,35 @@ A table cell.
 
 <ArgTypes of={Table.Cell} />
 
+### Table.BulkBar
+
+Toolbar shown when using selection (e.g. with pagination). Renders a bar with selected count, clear/select-all actions, and custom actions. Must wrap `Table.BulkBarSelectedCount`, and optionally `Table.BulkBarClearButton`, `Table.BulkBarSelectAllButton`, and other controls. Pass `selectedCount`, `totalCount`, `onClearSelection`, `onSelectAll`, and `hasMultiplePages` (when paginated).
+
+<ArgTypes of={Table.BulkBar} />
+
+### Table.BulkBarSelectedCount
+
+Displays the number of selected items. Use as a child of `Table.BulkBar`; provide the wording via `children` (e.g. "3 elements selected").
+
+<ArgTypes of={Table.BulkBarSelectedCount} />
+
+### Table.BulkBarClearButton
+
+Button to clear the current selection. Renders only when `hasMultiplePages` is true. Use as a child of `Table.BulkBar`; provide the label via `children` (e.g. "Clear all").
+
+<ArgTypes of={Table.BulkBarClearButton} />
+
+### Table.BulkBarSelectAllButton
+
+Button to select all items across pages. Renders only when `hasMultiplePages` is true and not all items are selected. Use as a child of `Table.BulkBar`; provide the label via `children` (e.g. "Select all 42 items").
+
+<ArgTypes of={Table.BulkBarSelectAllButton} />
+
 ## Examples
 
 ### Sorting
 
-Set `allowsSorting` on columns and control `sortDescriptor` / `onSortChange` on the table to enable sorting. Use the `useTableSort` hook to manage sort state and get a sorted list: it handles the descriptor state and a default comparator (numeric for numbers, `localeCompare` for strings).
+Set `allowsSorting` on columns and control `sortDescriptor` / `onSortChange` on `Table.Grid` to enable sorting. Use the `useTableSort` hook to manage sort state and get a sorted list: it handles the descriptor state and a default comparator (numeric for numbers, `localeCompare` for strings).
 
 <Canvas of={stories.Sortable} />
 
@@ -138,7 +174,7 @@ Additionally, you can pass `onAction` to `Table.Row` to handle the action when t
 
 ### Disable column resizing
 
-Column resizing is enabled by default. Set `allowsResizing={false}` on `Table` to disable it entirely, or `allowsResizing={false}` on individual `Table.Column` to hide the resizer for that column. Pass `onResizeStart`, `onResize`, or `onResizeEnd` on `Table` to react to resize events.
+Column resizing is enabled by default. Set `allowsResizing={false}` on `Table.Grid` to disable it entirely, or `allowsResizing={false}` on individual `Table.Column` to hide the resizer for that column. Pass `onResizeStart`, `onResize`, or `onResizeEnd` on `Table.Grid` to react to resize events.
 
 <Canvas of={stories.WithResizingDisabled} />
 
@@ -156,14 +192,16 @@ For large tables or when the parent re-renders often for unrelated state (e.g. a
 
 ### Pagination
 
-Combine the Table with Spark's [Pagination](/docs/components-pagination--docs) to display large datasets page by page. Hold the full dataset in state, and use the `useTablePagination` hook to derive the current page, paginated items, and a selection model that persists across pages. Wire `selectedKeys` / `onSelectionChange` to the table and `page` / `onPageChange` to the Pagination to implement this pattern with minimal boilerplate. The example below shows 134 items with 10 items per page (`pageSize={10}`).
+Combine the Table with Spark's [Pagination](/docs/components-pagination--docs) to display large datasets page by page. Hold the full dataset in state, and use the `useTablePagination` hook to derive the current page, paginated items, and a selection model that persists across pages. Wire `selectedKeys` / `onSelectionChange` to `Table.Grid` and `page` / `onPageChange` to the Pagination to implement this pattern with minimal boilerplate. The example below shows 134 items with 10 items per page (`pageSize={10}`).
+
+When using `Table.BulkBar` with pagination, pass `hasMultiplePages={totalItems > pageSize}`. The bulk bar is always visible; only the clear and select-all buttons are conditional (clear when at least one row is selected and multiple pages; select-all when multiple pages and not all items selected). Provide all wording via `children` on `Table.BulkBarSelectedCount`, `Table.BulkBarClearButton`, and `Table.BulkBarSelectAllButton`—the components do not render any hardcoded copy.
 
 <Canvas of={stories.PaginationStory} />
 
 ## Accessibility
 
 - The table uses semantic `<table>`, `<thead>`, `<tbody>`, `<tr>`, `<th>`, and `<td>` elements. For interactive navigation, React Aria uses `role="grid"` on the table element.
-- Always provide an `aria-label` (or `aria-labelledby`) on the table.
+- Always provide an `aria-label` (or `aria-labelledby`) on `Table.Grid`.
 - Use `isRowHeader` on the first column when it describes each row.
 - Keyboard: Arrow keys navigate between cells; Enter activates row action when using `onRowAction`.
 - See [React Aria Table](https://react-aria.adobe.com/Table) for full keyboard and screen reader behavior.
@@ -257,7 +295,7 @@ So: **no selection** → Enter activates the link/action. **With selection** →
 | <Kbd>Left Arrow</Kbd>   | Decrease column width            | When the resizer has focus and keyboard resize mode is active.                                                                                                                                                |
 | <Kbd>Right Arrow</Kbd>  | Increase column width            | When the resizer has focus and keyboard resize mode is active.                                                                                                                                                |
 
-Set `allowsResizing={false}` on `Table` to disable resizing, or on a specific `Table.Column` to hide that column’s resizer.
+Set `allowsResizing={false}` on `Table.Grid` to disable resizing, or on a specific `Table.Column` to hide that column’s resizer.
 
   </Tabs.Content>
 </Tabs>

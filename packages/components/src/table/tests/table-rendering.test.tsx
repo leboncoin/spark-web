@@ -6,24 +6,26 @@ import { Table } from '..'
 describe('Table rendering and structure', () => {
   it('should render a table with correct structure and accessibility', () => {
     render(
-      <Table aria-label="Files">
-        <Table.Header>
-          <Table.Column isRowHeader label="Name" />
-          <Table.Column label="Type" />
-          <Table.Column label="Date Modified" />
-        </Table.Header>
-        <Table.Body>
-          <Table.Row id="row-1">
-            <Table.Cell>Games</Table.Cell>
-            <Table.Cell>File folder</Table.Cell>
-            <Table.Cell>6/7/2020</Table.Cell>
-          </Table.Row>
-          <Table.Row id="row-2">
-            <Table.Cell>Program Files</Table.Cell>
-            <Table.Cell>File folder</Table.Cell>
-            <Table.Cell>4/7/2021</Table.Cell>
-          </Table.Row>
-        </Table.Body>
+      <Table>
+        <Table.Grid aria-label="Files">
+          <Table.Header>
+            <Table.Column isRowHeader label="Name" />
+            <Table.Column label="Type" />
+            <Table.Column label="Date Modified" />
+          </Table.Header>
+          <Table.Body>
+            <Table.Row id="row-1">
+              <Table.Cell>Games</Table.Cell>
+              <Table.Cell>File folder</Table.Cell>
+              <Table.Cell>6/7/2020</Table.Cell>
+            </Table.Row>
+            <Table.Row id="row-2">
+              <Table.Cell>Program Files</Table.Cell>
+              <Table.Cell>File folder</Table.Cell>
+              <Table.Cell>4/7/2021</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 
@@ -42,15 +44,17 @@ describe('Table rendering and structure', () => {
 
   it('should have data-spark-component attributes', () => {
     render(
-      <Table aria-label="Test">
-        <Table.Header>
-          <Table.Column label="Col" />
-        </Table.Header>
-        <Table.Body>
-          <Table.Row id="r1">
-            <Table.Cell>Cell</Table.Cell>
-          </Table.Row>
-        </Table.Body>
+      <Table>
+        <Table.Grid aria-label="Test">
+          <Table.Header>
+            <Table.Column label="Col" />
+          </Table.Header>
+          <Table.Body>
+            <Table.Row id="r1">
+              <Table.Cell>Cell</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 
@@ -64,13 +68,15 @@ describe('Table rendering and structure', () => {
 
   it('should render empty state when Table.Body has no rows', () => {
     render(
-      <Table aria-label="Empty">
-        <Table.Header>
-          <Table.Column label="Col" />
-        </Table.Header>
-        <Table.Body items={[]} renderEmptyState={() => 'No results found.'}>
-          {() => null}
-        </Table.Body>
+      <Table>
+        <Table.Grid aria-label="Empty">
+          <Table.Header>
+            <Table.Column label="Col" />
+          </Table.Header>
+          <Table.Body items={[]} renderEmptyState={() => 'No results found.'}>
+            {() => null}
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 
@@ -85,19 +91,21 @@ describe('Table rendering and structure', () => {
     ]
 
     render(
-      <Table aria-label="Dynamic">
-        <Table.Header>
-          <Table.Column isRowHeader label="Name" />
-          <Table.Column label="Value" />
-        </Table.Header>
-        <Table.Body items={rows}>
-          {item => (
-            <Table.Row id={item.id}>
-              <Table.Cell>{item.name}</Table.Cell>
-              <Table.Cell>{item.value}</Table.Cell>
-            </Table.Row>
-          )}
-        </Table.Body>
+      <Table>
+        <Table.Grid aria-label="Dynamic">
+          <Table.Header>
+            <Table.Column isRowHeader label="Name" />
+            <Table.Column label="Value" />
+          </Table.Header>
+          <Table.Body items={rows}>
+            {item => (
+              <Table.Row id={item.id}>
+                <Table.Cell>{item.name}</Table.Cell>
+                <Table.Cell>{item.value}</Table.Cell>
+              </Table.Row>
+            )}
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 
@@ -107,17 +115,23 @@ describe('Table rendering and structure', () => {
     expect(screen.getByText('B')).toBeInTheDocument()
   })
 
-  it('should accept className on root Table', () => {
+  it('should accept className on Table.Grid', () => {
     render(
-      <Table aria-label="Styled" className="custom-table" allowsResizing={false}>
-        <Table.Header>
-          <Table.Column label="Col" />
-        </Table.Header>
-        <Table.Body>
-          <Table.Row id="r1">
-            <Table.Cell>Cell</Table.Cell>
-          </Table.Row>
-        </Table.Body>
+      <Table>
+        <Table.Grid
+          aria-label="Styled"
+          className="custom-table"
+          allowsResizing={false}
+        >
+          <Table.Header>
+            <Table.Column label="Col" />
+          </Table.Header>
+          <Table.Body>
+            <Table.Row id="r1">
+              <Table.Cell>Cell</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Grid>
       </Table>
     )
 

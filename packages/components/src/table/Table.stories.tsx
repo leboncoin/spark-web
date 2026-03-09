@@ -1,10 +1,12 @@
 /* eslint-disable max-lines */
+import { BookmarkOutline, CopyOutline } from '@spark-ui/icons'
 import { EyeOutline } from '@spark-ui/icons/EyeOutline'
 import { InfoOutline } from '@spark-ui/icons/InfoOutline'
 import { PenOutline } from '@spark-ui/icons/PenOutline'
 import { TrashOutline } from '@spark-ui/icons/TrashOutline'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useMemo, useRef, useState } from 'react'
+import type { SortDescriptor } from 'react-aria-components'
 
 import { Button } from '../button'
 import { Icon } from '../icon'
@@ -12,7 +14,10 @@ import { IconButton } from '../icon-button'
 import { Pagination } from '../pagination'
 import { Popover } from '../popover'
 import { Switch } from '../switch'
+import { Tag } from '../tag'
+import { TextLink } from '../text-link'
 import { Table, useTablePagination, useTableSort } from '.'
+import pokedexData from './pokedex.json'
 
 const meta: Meta<typeof Table> = {
   title: 'Components/Table',
@@ -49,70 +54,72 @@ export const Default: StoryFn = () => {
   })
 
   return (
-    <Table
-      aria-label="Files"
-      selectionMode="multiple"
-      selectedKeys={selected}
-      maxHeight={500}
-      onSelectionChange={keys => setSelected(keys as Set<string> | 'all')}
-      sortDescriptor={sortDescriptor}
-      onSortChange={onSortChange}
-    >
-      <Table.Header>
-        <Table.Column id="name" label="Name" isRowHeader allowsSorting>
-          <Popover>
-            <Popover.Trigger asChild>
-              <IconButton aria-label="Edit" intent="neutral" design="ghost" size="sm">
-                <Icon>
-                  <InfoOutline />
-                </Icon>
-              </IconButton>
-            </Popover.Trigger>
-            <Popover.Portal>
-              <Popover.Content>
-                <Popover.Header>Title</Popover.Header>
-                <p>Are you sure you want to have that cookie now ?</p>
-                <Popover.Arrow />
-                <Popover.CloseButton aria-label="Close the popover" />
-              </Popover.Content>
-            </Popover.Portal>
-          </Popover>
-        </Table.Column>
-        <Table.Column id="type" label="Type" allowsSorting />
-        <Table.Column id="dateModified" label="Date Modified" allowsSorting />
-        <Table.Column id="actions" label="Actions" />
-      </Table.Header>
-      <Table.Body>
-        {sortedItems.map(item => (
-          <Table.Row key={item.id} id={item.id}>
-            <Table.Cell>{item.name}</Table.Cell>
-            <Table.Cell>{item.type}</Table.Cell>
-            <Table.Cell>{item.dateModified}</Table.Cell>
-            <Table.Cell>
-              <div className="gap-md flex flex-wrap">
-                <Switch>Agree</Switch>
-                <div className="gap-md flex">
-                  <IconButton aria-label="Edit" intent="support" design="outlined" size="sm">
-                    <Icon>
-                      <PenOutline />
-                    </Icon>
-                  </IconButton>
-                  <IconButton aria-label="Delete" intent="support" design="outlined" size="sm">
-                    <Icon>
-                      <TrashOutline />
-                    </Icon>
-                  </IconButton>
-                  <IconButton aria-label="View" intent="support" design="outlined" size="sm">
-                    <Icon>
-                      <EyeOutline />
-                    </Icon>
-                  </IconButton>
+    <Table>
+      <Table.Grid
+        aria-label="Files"
+        selectionMode="multiple"
+        selectedKeys={selected}
+        maxHeight={500}
+        onSelectionChange={keys => setSelected(keys as Set<string> | 'all')}
+        sortDescriptor={sortDescriptor}
+        onSortChange={onSortChange}
+      >
+        <Table.Header>
+          <Table.Column id="name" label="Name" isRowHeader allowsSorting>
+            <Popover>
+              <Popover.Trigger asChild>
+                <IconButton aria-label="Edit" intent="neutral" design="ghost" size="sm">
+                  <Icon>
+                    <InfoOutline />
+                  </Icon>
+                </IconButton>
+              </Popover.Trigger>
+              <Popover.Portal>
+                <Popover.Content>
+                  <Popover.Header>Title</Popover.Header>
+                  <p>Are you sure you want to have that cookie now ?</p>
+                  <Popover.Arrow />
+                  <Popover.CloseButton aria-label="Close the popover" />
+                </Popover.Content>
+              </Popover.Portal>
+            </Popover>
+          </Table.Column>
+          <Table.Column id="type" label="Type" allowsSorting />
+          <Table.Column id="dateModified" label="Date Modified" allowsSorting />
+          <Table.Column id="actions" label="Actions" />
+        </Table.Header>
+        <Table.Body>
+          {sortedItems.map(item => (
+            <Table.Row key={item.id} id={item.id}>
+              <Table.Cell>{item.name}</Table.Cell>
+              <Table.Cell>{item.type}</Table.Cell>
+              <Table.Cell>{item.dateModified}</Table.Cell>
+              <Table.Cell>
+                <div className="gap-md flex flex-wrap">
+                  <Switch>Agree</Switch>
+                  <div className="gap-md flex">
+                    <IconButton aria-label="Edit" intent="support" design="outlined" size="sm">
+                      <Icon>
+                        <PenOutline />
+                      </Icon>
+                    </IconButton>
+                    <IconButton aria-label="Delete" intent="support" design="outlined" size="sm">
+                      <Icon>
+                        <TrashOutline />
+                      </Icon>
+                    </IconButton>
+                    <IconButton aria-label="View" intent="support" design="outlined" size="sm">
+                      <Icon>
+                        <EyeOutline />
+                      </Icon>
+                    </IconButton>
+                  </div>
                 </div>
-              </div>
-            </Table.Cell>
-          </Table.Row>
-        ))}
-      </Table.Body>
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table.Grid>
     </Table>
   )
 }
@@ -130,7 +137,7 @@ export const Sortable: StoryFn = () => {
   })
 
   return (
-    <div className="gap-md flex flex-col">
+    <Table>
       <Button
         className="self-start"
         onClick={() => setSortDescriptor({ column: 'name', direction: 'ascending' })}
@@ -138,7 +145,7 @@ export const Sortable: StoryFn = () => {
       >
         Reset sort
       </Button>
-      <Table
+      <Table.Grid
         aria-label="Sortable table"
         className="max-w-sz-640"
         sortDescriptor={sortDescriptor}
@@ -158,8 +165,8 @@ export const Sortable: StoryFn = () => {
             </Table.Row>
           ))}
         </Table.Body>
-      </Table>
-    </div>
+      </Table.Grid>
+    </Table>
   )
 }
 
@@ -201,24 +208,26 @@ export const SortableWithCustomComparator: StoryFn = () => {
   })
 
   return (
-    <Table
-      aria-label="Table with date column (custom comparator)"
-      className="max-w-sz-640"
-      sortDescriptor={sortDescriptor}
-      onSortChange={onSortChange}
-    >
-      <Table.Header>
-        <Table.Column id="name" label="Name" isRowHeader allowsSorting />
-        <Table.Column id="date" label="Date" allowsSorting />
-      </Table.Header>
-      <Table.Body>
-        {sortedItems.map(item => (
-          <Table.Row key={item.id} id={item.id}>
-            <Table.Cell>{item.name}</Table.Cell>
-            <Table.Cell>{item.date}</Table.Cell>
-          </Table.Row>
-        ))}
-      </Table.Body>
+    <Table>
+      <Table.Grid
+        aria-label="Table with date column (custom comparator)"
+        className="max-w-sz-640"
+        sortDescriptor={sortDescriptor}
+        onSortChange={onSortChange}
+      >
+        <Table.Header>
+          <Table.Column id="name" label="Name" isRowHeader allowsSorting />
+          <Table.Column id="date" label="Date" allowsSorting />
+        </Table.Header>
+        <Table.Body>
+          {sortedItems.map(item => (
+            <Table.Row key={item.id} id={item.id}>
+              <Table.Cell>{item.name}</Table.Cell>
+              <Table.Cell>{item.date}</Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table.Grid>
     </Table>
   )
 }
@@ -233,25 +242,27 @@ export const EmptyState: StoryFn = () => {
   const emptyItems = useMemo(() => [] as RowData[], [])
 
   return (
-    <Table aria-label="Search results (items + renderEmptyState)" className="max-w-sz-640">
-      <Table.Header>
-        <Table.Column id="name" label="Name" isRowHeader />
-        <Table.Column id="type" label="Type" />
-        <Table.Column id="dateModified" label="Date Modified" />
-      </Table.Header>
-      <Table.Body
-        items={emptyItems}
-        dependencies={[emptyItems]}
-        renderEmptyState={() => 'No results found.'}
-      >
-        {item => (
-          <Table.Row id={item.id}>
-            <Table.Cell>{item.name}</Table.Cell>
-            <Table.Cell>{item.type}</Table.Cell>
-            <Table.Cell>{item.dateModified}</Table.Cell>
-          </Table.Row>
-        )}
-      </Table.Body>
+    <Table>
+      <Table.Grid aria-label="Search results (items + renderEmptyState)" className="max-w-sz-640">
+        <Table.Header>
+          <Table.Column id="name" label="Name" isRowHeader />
+          <Table.Column id="type" label="Type" />
+          <Table.Column id="dateModified" label="Date Modified" />
+        </Table.Header>
+        <Table.Body
+          items={emptyItems}
+          dependencies={[emptyItems]}
+          renderEmptyState={() => 'No results found.'}
+        >
+          {item => (
+            <Table.Row id={item.id}>
+              <Table.Cell>{item.name}</Table.Cell>
+              <Table.Cell>{item.type}</Table.Cell>
+              <Table.Cell>{item.dateModified}</Table.Cell>
+            </Table.Row>
+          )}
+        </Table.Body>
+      </Table.Grid>
     </Table>
   )
 }
@@ -266,27 +277,29 @@ export const WithSelectionMultiple: StoryFn = () => {
   const [selected, setSelected] = useState<Set<string> | 'all'>(new Set())
 
   return (
-    <Table
-      aria-label="Selectable rows (multiple)"
-      className="max-w-sz-640"
-      selectionMode="multiple"
-      selectedKeys={selected}
-      onSelectionChange={keys => setSelected(keys as Set<string> | 'all')}
-    >
-      <Table.Header>
-        <Table.Column id="name" label="Name" isRowHeader />
-        <Table.Column id="type" label="Type" />
-        <Table.Column id="date" label="Date" />
-      </Table.Header>
-      <Table.Body>
-        {selectionRows.map(row => (
-          <Table.Row key={row.id} id={row.id}>
-            <Table.Cell>{row.name}</Table.Cell>
-            <Table.Cell>{row.type}</Table.Cell>
-            <Table.Cell>{row.date}</Table.Cell>
-          </Table.Row>
-        ))}
-      </Table.Body>
+    <Table>
+      <Table.Grid
+        aria-label="Selectable rows (multiple)"
+        className="max-w-sz-640"
+        selectionMode="multiple"
+        selectedKeys={selected}
+        onSelectionChange={keys => setSelected(keys as Set<string> | 'all')}
+      >
+        <Table.Header>
+          <Table.Column id="name" label="Name" isRowHeader />
+          <Table.Column id="type" label="Type" />
+          <Table.Column id="date" label="Date" />
+        </Table.Header>
+        <Table.Body>
+          {selectionRows.map(row => (
+            <Table.Row key={row.id} id={row.id}>
+              <Table.Cell>{row.name}</Table.Cell>
+              <Table.Cell>{row.type}</Table.Cell>
+              <Table.Cell>{row.date}</Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table.Grid>
     </Table>
   )
 }
@@ -320,38 +333,44 @@ export const WithSelectionMultipleWithLinks: StoryFn = () => {
 
   return (
     <>
-      <Table
-        aria-label="Selectable rows (multiple) with links"
-        className="max-w-sz-800 mb-lg"
-        selectionMode="multiple"
-        selectedKeys={selected}
-        onSelectionChange={keys => setSelected(keys as Set<string> | 'all')}
-        selectionBehavior="toggle"
-      >
-        <Table.Header>
-          <Table.Column id="name" label="Name" isRowHeader />
-          <Table.Column id="type" label="Type" />
-          <Table.Column id="date" label="Date" />
-          <Table.Column id="enabled" label="Enabled" />
-        </Table.Header>
-        <Table.Body>
-          {selectionRows.map(row => (
-            <Table.Row
-              key={row.id}
-              id={row.id}
-              href={row.href}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              <Table.Cell>{row.name}</Table.Cell>
-              <Table.Cell>{row.type}</Table.Cell>
-              <Table.Cell>{row.date}</Table.Cell>
-              <Table.Cell>
-                <Switch>Enabled</Switch>
-              </Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
+      <Table className="mb-lg">
+        <Table.Grid
+          aria-label="Selectable rows (multiple) with links"
+          className="max-w-sz-800"
+          selectionMode="multiple"
+          selectedKeys={selected}
+          onSelectionChange={keys => setSelected(keys as Set<string> | 'all')}
+          selectionBehavior="toggle"
+        >
+          <Table.Header>
+            <Table.Column id="name" label="Name" isRowHeader />
+            <Table.Column id="type" label="Type" />
+            <Table.Column id="date" label="Date" />
+            <Table.Column id="enabled" label="Enabled" />
+          </Table.Header>
+          <Table.Body>
+            {selectionRows.map(row => (
+              <Table.Row
+                key={row.id}
+                id={row.id}
+                href={row.href}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <Table.Cell>
+                  <TextLink href={row.href} target="_blank" rel="noreferrer noopener">
+                    {row.name}
+                  </TextLink>
+                </Table.Cell>
+                <Table.Cell>{row.type}</Table.Cell>
+                <Table.Cell>{row.date}</Table.Cell>
+                <Table.Cell>
+                  <Switch>Enabled</Switch>
+                </Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table.Grid>
       </Table>
     </>
   )
@@ -367,12 +386,39 @@ export const WithSelectionSingle: StoryFn = () => {
   const [selected, setSelected] = useState<Set<string>>(new Set())
 
   return (
-    <Table
-      aria-label="Selectable rows (single)"
+    <Table>
+      <Table.Grid
+        aria-label="Selectable rows (single)"
+        className="max-w-sz-640"
+        selectionMode="single"
+        selectedKeys={selected}
+        onSelectionChange={keys => setSelected(keys as Set<string>)}
+      >
+        <Table.Header>
+          <Table.Column id="name" label="Name" isRowHeader />
+          <Table.Column id="type" label="Type" />
+          <Table.Column id="date" label="Date" />
+        </Table.Header>
+        <Table.Body>
+          {selectionRows.map(row => (
+            <Table.Row key={row.id} id={row.id}>
+              <Table.Cell>{row.name}</Table.Cell>
+              <Table.Cell>{row.type}</Table.Cell>
+              <Table.Cell>{row.date}</Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table.Grid>
+    </Table>
+  )
+}
+
+export const WithResizingDisabled: StoryFn = () => (
+  <Table>
+    <Table.Grid
+      aria-label="Simple table without column resize"
+      allowsResizing={false}
       className="max-w-sz-640"
-      selectionMode="single"
-      selectedKeys={selected}
-      onSelectionChange={keys => setSelected(keys as Set<string>)}
     >
       <Table.Header>
         <Table.Column id="name" label="Name" isRowHeader />
@@ -380,41 +426,18 @@ export const WithSelectionSingle: StoryFn = () => {
         <Table.Column id="date" label="Date" />
       </Table.Header>
       <Table.Body>
-        {selectionRows.map(row => (
-          <Table.Row key={row.id} id={row.id}>
-            <Table.Cell>{row.name}</Table.Cell>
-            <Table.Cell>{row.type}</Table.Cell>
-            <Table.Cell>{row.date}</Table.Cell>
-          </Table.Row>
-        ))}
+        <Table.Row id="row-1">
+          <Table.Cell>Alpha</Table.Cell>
+          <Table.Cell>Type A</Table.Cell>
+          <Table.Cell>1/1/2024</Table.Cell>
+        </Table.Row>
+        <Table.Row id="row-2">
+          <Table.Cell>Beta</Table.Cell>
+          <Table.Cell>Type B</Table.Cell>
+          <Table.Cell>2/2/2024</Table.Cell>
+        </Table.Row>
       </Table.Body>
-    </Table>
-  )
-}
-
-export const WithResizingDisabled: StoryFn = () => (
-  <Table
-    aria-label="Simple table without column resize"
-    allowsResizing={false}
-    className="max-w-sz-640"
-  >
-    <Table.Header>
-      <Table.Column id="name" label="Name" isRowHeader />
-      <Table.Column id="type" label="Type" />
-      <Table.Column id="date" label="Date" />
-    </Table.Header>
-    <Table.Body>
-      <Table.Row id="row-1">
-        <Table.Cell>Alpha</Table.Cell>
-        <Table.Cell>Type A</Table.Cell>
-        <Table.Cell>1/1/2024</Table.Cell>
-      </Table.Row>
-      <Table.Row id="row-2">
-        <Table.Cell>Beta</Table.Cell>
-        <Table.Cell>Type B</Table.Cell>
-        <Table.Cell>2/2/2024</Table.Cell>
-      </Table.Row>
-    </Table.Body>
+    </Table.Grid>
   </Table>
 )
 
@@ -432,44 +455,48 @@ export const CustomInteractiveElements: StoryFn = () => {
   })
 
   return (
-    <Table aria-label="Table with custom interactive elements" className="max-w-sz-640">
-      <Table.Header>
-        <Table.Column id="name" label="Name" isRowHeader />
-        <Table.Column id="enabled" label="Enabled">
-          <Popover>
-            <Popover.Trigger asChild>
-              <IconButton aria-label="Info" intent="neutral" design="ghost" size="sm">
-                <Icon>
-                  <InfoOutline />
-                </Icon>
-              </IconButton>
-            </Popover.Trigger>
-            <Popover.Portal>
-              <Popover.Content>
-                <Popover.Header>Column info</Popover.Header>
-                <p>Use Switch or other interactive components inside Table.Cell.</p>
-                <Popover.Arrow />
-                <Popover.CloseButton aria-label="Close" />
-              </Popover.Content>
-            </Popover.Portal>
-          </Popover>
-        </Table.Column>
-      </Table.Header>
-      <Table.Body>
-        {customInteractiveRows.map(item => (
-          <Table.Row key={item.id} id={item.id}>
-            <Table.Cell>{item.name}</Table.Cell>
-            <Table.Cell>
-              <Switch
-                checked={toggles[item.id] ?? item.enabled}
-                onCheckedChange={checked => setToggles(prev => ({ ...prev, [item.id]: !!checked }))}
-              >
-                {(toggles[item.id] ?? item.enabled) ? 'On' : 'Off'}
-              </Switch>
-            </Table.Cell>
-          </Table.Row>
-        ))}
-      </Table.Body>
+    <Table>
+      <Table.Grid aria-label="Table with custom interactive elements" className="max-w-sz-640">
+        <Table.Header>
+          <Table.Column id="name" label="Name" isRowHeader />
+          <Table.Column id="enabled" label="Enabled">
+            <Popover>
+              <Popover.Trigger asChild>
+                <IconButton aria-label="Info" intent="neutral" design="ghost" size="sm">
+                  <Icon>
+                    <InfoOutline />
+                  </Icon>
+                </IconButton>
+              </Popover.Trigger>
+              <Popover.Portal>
+                <Popover.Content>
+                  <Popover.Header>Column info</Popover.Header>
+                  <p>Use Switch or other interactive components inside Table.Cell.</p>
+                  <Popover.Arrow />
+                  <Popover.CloseButton aria-label="Close" />
+                </Popover.Content>
+              </Popover.Portal>
+            </Popover>
+          </Table.Column>
+        </Table.Header>
+        <Table.Body>
+          {customInteractiveRows.map(item => (
+            <Table.Row key={item.id} id={item.id}>
+              <Table.Cell>{item.name}</Table.Cell>
+              <Table.Cell>
+                <Switch
+                  checked={toggles[item.id] ?? item.enabled}
+                  onCheckedChange={checked =>
+                    setToggles(prev => ({ ...prev, [item.id]: !!checked }))
+                  }
+                >
+                  {(toggles[item.id] ?? item.enabled) ? 'On' : 'Off'}
+                </Switch>
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table.Grid>
     </Table>
   )
 }
@@ -486,60 +513,137 @@ function NameCellWithRenderCount({ name }: { id: string; name: string }) {
   )
 }
 
+interface PokemonRow {
+  id: string
+  num: string
+  name: string
+  type: string[]
+  img: string
+}
+
+const POKEMON_ROWS: PokemonRow[] = pokedexData.pokemon.slice(0, 151).map(p => ({
+  id: String(p.id),
+  num: p.num,
+  name: p.name,
+  type: p.type ?? [],
+  img: p.img ?? '',
+}))
+
 export const PaginationStory: StoryFn = () => {
-  const totalItems = 134
-  const pageSize = 5
-  const allItems = useMemo(
-    () =>
-      Array.from({ length: totalItems }, (_, i) => ({
-        id: `row-${i + 1}`,
-        name: `Item ${i + 1}`,
-        type: ['File folder', 'Text Document', 'System file', 'Configuration'][i % 4],
-        dateModified: new Date(2020 + (i % 5), i % 12, (i % 28) + 1).toLocaleDateString('en-US', {
-          month: 'numeric',
-          day: 'numeric',
-          year: 'numeric',
-        }),
-      })),
-    [totalItems]
-  )
+  const pageSize = 6
+  const allItems = useMemo(() => POKEMON_ROWS, [])
+
+  const { sortDescriptor, onSortChange, sortedItems } = useTableSort(allItems, {
+    initialSort: { column: 'num', direction: 'ascending' },
+  })
 
   const {
     page,
     pageItems,
-    totalItems: totalItemsFromHook,
+    totalItems,
+    allKeys,
     selectedKeys,
     onSelectionChange,
     onPageChange,
-  } = useTablePagination(allItems, { pageSize })
+    clearSelection,
+    setPage,
+  } = useTablePagination(sortedItems, { pageSize })
+
+  const handleSortChange = (descriptor: SortDescriptor) => {
+    setPage(1)
+    onSortChange(descriptor)
+  }
+
+  const selectedCount = selectedKeys.size
 
   return (
-    <div className="gap-lg max-w-sz-640 flex flex-col items-center">
-      <Table
-        aria-label="Paginated table (134 items)"
+    <Table className="max-w-sz-800">
+      <Table.BulkBar
+        selectedCount={selectedCount}
+        totalCount={totalItems}
+        onClearSelection={clearSelection}
+        onSelectAll={() => onSelectionChange(allKeys)}
+        hasMultiplePages={totalItems > pageSize}
+      >
+        <div className="flex flex-col justify-between">
+          <Table.BulkBarSelectedCount>
+            {`${selectedCount} ${selectedCount <= 1 ? 'element' : 'elements'} selected`}
+          </Table.BulkBarSelectedCount>
+          <div className="gap-x-lg flex flex-wrap">
+            <Table.BulkBarClearButton>Clear all</Table.BulkBarClearButton>
+            <Table.BulkBarSelectAllButton>
+              Select all {totalItems} items
+            </Table.BulkBarSelectAllButton>
+          </div>
+        </div>
+        <div className="gap-md flex">
+          <IconButton aria-label="Delete selection" design="outlined" intent="neutral">
+            <Icon>
+              <TrashOutline />
+            </Icon>
+          </IconButton>
+          <IconButton aria-label="Delete selection" design="outlined" intent="neutral">
+            <Icon>
+              <CopyOutline />
+            </Icon>
+          </IconButton>
+          <IconButton aria-label="Delete selection" design="outlined" intent="neutral">
+            <Icon>
+              <PenOutline />
+            </Icon>
+          </IconButton>
+          <IconButton aria-label="Delete selection" design="outlined" intent="neutral">
+            <Icon>
+              <BookmarkOutline />
+            </Icon>
+          </IconButton>
+        </div>
+      </Table.BulkBar>
+      <Table.Grid
+        aria-label="Pokédex (151 Pokémon)"
         selectionMode="multiple"
         selectedKeys={selectedKeys}
         onSelectionChange={onSelectionChange}
+        sortDescriptor={sortDescriptor}
+        onSortChange={handleSortChange}
       >
         <Table.Header>
-          <Table.Column id="name" label="Name" isRowHeader />
-          <Table.Column id="type" label="Type" />
-          <Table.Column id="dateModified" label="Date Modified" />
+          <Table.Column id="num" label="#" allowsSorting />
+          <Table.Column id="name" label="Name" isRowHeader allowsSorting />
+          <Table.Column id="type" label="Type(s)" />
+          <Table.Column id="img" label="Image" />
         </Table.Header>
         <Table.Body>
           {pageItems.map(item => (
             <Table.Row key={item.id} id={item.id}>
+              <Table.Cell>#{item.num}</Table.Cell>
               <Table.Cell>{item.name}</Table.Cell>
-              <Table.Cell>{item.type}</Table.Cell>
-              <Table.Cell>{item.dateModified}</Table.Cell>
+              <Table.Cell>
+                <div className="gap-sm flex flex-wrap">
+                  {item.type.map(t => (
+                    <Tag key={t} design="tinted" intent="neutral" size="md">
+                      {t}
+                    </Tag>
+                  ))}
+                </div>
+              </Table.Cell>
+              <Table.Cell>
+                <img
+                  src={item.img}
+                  alt=""
+                  width={48}
+                  height={48}
+                  className="size-sz-48 object-contain"
+                />
+              </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
-      </Table>
+      </Table.Grid>
       <Pagination
         type="button"
         aria-label="Table pagination"
-        count={totalItemsFromHook}
+        count={totalItems}
         pageSize={pageSize}
         page={page}
         visiblePageItems={7}
@@ -569,7 +673,7 @@ export const PaginationStory: StoryFn = () => {
         </Pagination.Pages>
         <Pagination.NextTrigger aria-label="Next page" />
       </Pagination>
-    </div>
+    </Table>
   )
 }
 
@@ -601,42 +705,46 @@ export const WithItemsAndDependencies: StoryFn = () => {
           <p className="text-body-2 text-on-surface font-semibold">
             With <code>items</code> + <code>dependencies</code>
           </p>
-          <Table aria-label="Table with items and dependencies" className="max-w-sz-640">
-            <Table.Header>
-              <Table.Column id="name" label="Name" isRowHeader />
-              <Table.Column id="value" label="Value" />
-            </Table.Header>
-            <Table.Body items={memoizationDemoRows} dependencies={[memoizationDemoRows]}>
-              {item => (
-                <Table.Row id={item.id}>
-                  <Table.Cell>
-                    <NameCellWithRenderCount id={item.id} name={item.name} />
-                  </Table.Cell>
-                  <Table.Cell>{item.value}</Table.Cell>
-                </Table.Row>
-              )}
-            </Table.Body>
+          <Table>
+            <Table.Grid aria-label="Table with items and dependencies" className="max-w-sz-640">
+              <Table.Header>
+                <Table.Column id="name" label="Name" isRowHeader />
+                <Table.Column id="value" label="Value" />
+              </Table.Header>
+              <Table.Body items={memoizationDemoRows} dependencies={[memoizationDemoRows]}>
+                {item => (
+                  <Table.Row id={item.id}>
+                    <Table.Cell>
+                      <NameCellWithRenderCount id={item.id} name={item.name} />
+                    </Table.Cell>
+                    <Table.Cell>{item.value}</Table.Cell>
+                  </Table.Row>
+                )}
+              </Table.Body>
+            </Table.Grid>
           </Table>
         </div>
         <div className="gap-sm min-w-sz-320 flex flex-1 flex-col">
           <p className="text-body-2 text-on-surface font-semibold">
             With <code>.map()</code>
           </p>
-          <Table aria-label="Table with map" className="max-w-sz-640">
-            <Table.Header>
-              <Table.Column id="name" label="Name" isRowHeader />
-              <Table.Column id="value" label="Value" />
-            </Table.Header>
-            <Table.Body>
-              {memoizationDemoRows.map(item => (
-                <Table.Row key={item.id} id={item.id}>
-                  <Table.Cell>
-                    <NameCellWithRenderCount id={item.id} name={item.name} />
-                  </Table.Cell>
-                  <Table.Cell>{item.value}</Table.Cell>
-                </Table.Row>
-              ))}
-            </Table.Body>
+          <Table>
+            <Table.Grid aria-label="Table with map" className="max-w-sz-640">
+              <Table.Header>
+                <Table.Column id="name" label="Name" isRowHeader />
+                <Table.Column id="value" label="Value" />
+              </Table.Header>
+              <Table.Body>
+                {memoizationDemoRows.map(item => (
+                  <Table.Row key={item.id} id={item.id}>
+                    <Table.Cell>
+                      <NameCellWithRenderCount id={item.id} name={item.name} />
+                    </Table.Cell>
+                    <Table.Cell>{item.value}</Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table.Grid>
           </Table>
         </div>
       </div>

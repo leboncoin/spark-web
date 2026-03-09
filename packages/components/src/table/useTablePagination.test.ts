@@ -76,6 +76,14 @@ describe('useTablePagination', () => {
     expect(result.current.selectedKeys.has('c')).toBe(true)
   })
 
+  it('should expose allKeys for all items', () => {
+    const { result } = renderHook(() => useTablePagination(itemsWithId, { pageSize: 2 }))
+
+    expect(result.current.allKeys.size).toBe(6)
+    expect(result.current.allKeys.has('a')).toBe(true)
+    expect(result.current.allKeys.has('f')).toBe(true)
+  })
+
   it('should select all items on current page when keys is "all"', () => {
     const { result } = renderHook(() => useTablePagination(itemsWithId, { pageSize: 2 }))
 
@@ -155,6 +163,28 @@ describe('useTablePagination', () => {
     expect(result.current.totalPages).toBe(1)
     expect(result.current.page).toBe(1)
     expect(result.current.pageItems).toHaveLength(0)
+  })
+
+  it('should clear selection across all pages with clearSelection', () => {
+    const { result } = renderHook(() => useTablePagination(itemsWithId, { pageSize: 2 }))
+
+    act(() => {
+      result.current.onSelectionChange(new Set(['a', 'b']))
+    })
+    act(() => {
+      result.current.setPage(2)
+    })
+    act(() => {
+      result.current.onSelectionChange(new Set(['c']))
+    })
+
+    expect(result.current.selectedKeys.size).toBe(3)
+
+    act(() => {
+      result.current.clearSelection()
+    })
+
+    expect(result.current.selectedKeys.size).toBe(0)
   })
 
   it('should clamp page when initialPage exceeds totalPages', () => {
