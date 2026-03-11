@@ -16,13 +16,8 @@ describe('Table row selection', () => {
     const onSelectionChange = vi.fn()
 
     render(
-      <Table>
-        <Table.Grid
-          aria-label="Selectable"
-          selectionMode="single"
-          selectedKeys={new Set()}
-          onSelectionChange={onSelectionChange}
-        >
+      <Table selectionMode="single" selectedKeys={new Set()} onSelectionChange={onSelectionChange}>
+        <Table.Grid aria-label="Selectable">
           <Table.Header>
             <Table.Column id="name" label="Name" isRowHeader />
             <Table.Column id="type" label="Type" />
@@ -53,13 +48,12 @@ describe('Table row selection', () => {
     const onSelectionChange = vi.fn()
 
     render(
-      <Table>
-        <Table.Grid
-          aria-label="Multi select"
-          selectionMode="multiple"
-          selectedKeys={new Set()}
-          onSelectionChange={onSelectionChange}
-        >
+      <Table
+        selectionMode="multiple"
+        selectedKeys={new Set()}
+        onSelectionChange={onSelectionChange}
+      >
+        <Table.Grid aria-label="Multi select">
           <Table.Header>
             <Table.Column id="name" label="Name" isRowHeader />
             <Table.Column id="type" label="Type" />
@@ -88,13 +82,8 @@ describe('Table row selection', () => {
 
   it('should show selection checkbox column when selectionMode is multiple', () => {
     render(
-      <Table>
-        <Table.Grid
-          aria-label="With checkboxes"
-          selectionMode="multiple"
-          selectedKeys={new Set()}
-          onSelectionChange={() => {}}
-        >
+      <Table selectionMode="multiple" selectedKeys={new Set()} onSelectionChange={() => {}}>
+        <Table.Grid aria-label="With checkboxes">
           <Table.Header>
             <Table.Column id="name" label="Name" isRowHeader />
             <Table.Column id="type" label="Type" />
@@ -117,13 +106,12 @@ describe('Table row selection', () => {
 
   it('should reflect selectedKeys on rows (data-selected)', () => {
     render(
-      <Table>
-        <Table.Grid
-          aria-label="Selected state"
-          selectionMode="multiple"
-          selectedKeys={new Set(['a', 'c'])}
-          onSelectionChange={() => {}}
-        >
+      <Table
+        selectionMode="multiple"
+        selectedKeys={new Set(['a', 'c'])}
+        onSelectionChange={() => {}}
+      >
+        <Table.Grid aria-label="Selected state">
           <Table.Header>
             <Table.Column id="name" label="Name" isRowHeader />
             <Table.Column id="type" label="Type" />
@@ -155,13 +143,12 @@ describe('Table row selection', () => {
     const onSelectionChange = vi.fn()
 
     render(
-      <Table>
-        <Table.Grid
-          aria-label="Checkbox toggle"
-          selectionMode="multiple"
-          selectedKeys={new Set()}
-          onSelectionChange={onSelectionChange}
-        >
+      <Table
+        selectionMode="multiple"
+        selectedKeys={new Set()}
+        onSelectionChange={onSelectionChange}
+      >
+        <Table.Grid aria-label="Checkbox toggle">
           <Table.Header>
             <Table.Column id="name" label="Name" isRowHeader />
             <Table.Column id="type" label="Type" />
@@ -179,9 +166,9 @@ describe('Table row selection', () => {
     )
 
     const checkboxes = screen.getAllByRole('checkbox')
-    const firstRowCheckbox = checkboxes.find(
-      cb => cb.getAttribute('aria-label')?.includes('Select') || true
-    ) ?? checkboxes[1]
+    const firstRowCheckbox =
+      checkboxes.find(cb => cb.getAttribute('aria-label')?.includes('Select') || true) ??
+      checkboxes[1]
 
     await user.click(firstRowCheckbox)
     expect(onSelectionChange).toHaveBeenCalled()

@@ -28,12 +28,12 @@ export interface UseTablePaginationResult<T> {
   allKeys: Set<Key>
   /**
    * Selection state across all pages.
-   * Pass to Table's `selectedKeys`.
+   * Pass to Table (root) as `selectedKeys`.
    */
   selectedKeys: Set<Key>
   /**
    * Selection change handler that keeps selection across pages.
-   * Pass directly to Table's `onSelectionChange`.
+   * Pass to Table (root) as `onSelectionChange`.
    */
   onSelectionChange: (keys: Selection) => void
   /**
@@ -51,33 +51,28 @@ export interface UseTablePaginationResult<T> {
  * selection across pages so that rows selected on previous pages remain selected.
  *
  * @example
- * const { page, pageItems, totalItems, selectedKeys, onSelectionChange, onPageChange } =
+ * const { page, pageItems, totalItems, allKeys, selectedKeys, onSelectionChange, onPageChange } =
  *   useTablePagination(allItems, { pageSize: 10 })
  *
  * return (
- *   <>
- *     <Table
- *       selectionMode="multiple"
- *       selectedKeys={selectedKeys}
- *       onSelectionChange={onSelectionChange}
- *     >
+ *   <Table
+ *     selectionMode="multiple"
+ *     selectedKeys={selectedKeys}
+ *     onSelectionChange={onSelectionChange}
+ *     totalCount={totalItems}
+ *     hasMultiplePages={totalItems > 10}
+ *     onSelectAll={() => onSelectionChange(allKeys)}
+ *   >
+ *     <Table.BulkBar>...</Table.BulkBar>
+ *     <Table.Grid aria-label="Items">
  *       <Table.Body>
  *         {pageItems.map(item => (
- *           <Table.Row key={item.id} id={item.id}>
- *             ...
- *           </Table.Row>
+ *           <Table.Row key={item.id} id={item.id}>...</Table.Row>
  *         ))}
  *       </Table.Body>
- *     </Table>
- *     <Pagination
- *       page={page}
- *       pageSize={10}
- *       count={totalItems}
- *       onPageChange={onPageChange}
- *     >
- *       ...
- *     </Pagination>
- *   </>
+ *     </Table.Grid>
+ *     <Pagination page={page} pageSize={10} count={totalItems} onPageChange={onPageChange} />
+ *   </Table>
  * )
  */
 export function useTablePagination<T>(

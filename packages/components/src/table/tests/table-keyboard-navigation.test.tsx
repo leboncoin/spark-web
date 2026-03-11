@@ -34,7 +34,9 @@ describe('Table keyboard navigation', () => {
     const cells = screen.getAllByRole('gridcell')
     expect(cells.length).toBeGreaterThanOrEqual(2)
 
-    const dataRows = screen.getAllByRole('row').filter(r => r.getAttribute('data-spark-component') === 'table-row')
+    const dataRows = screen
+      .getAllByRole('row')
+      .filter(r => r.getAttribute('data-spark-component') === 'table-row')
     expect(dataRows.length).toBe(2)
   })
 
@@ -81,13 +83,12 @@ describe('Table keyboard navigation', () => {
     const onButtonClick = vi.fn()
 
     render(
-      <Table>
-        <Table.Grid
-          aria-label="With button"
-          selectionMode="multiple"
-          selectedKeys={new Set()}
-          onSelectionChange={onSelectionChange}
-        >
+      <Table
+        selectionMode="multiple"
+        selectedKeys={new Set()}
+        onSelectionChange={onSelectionChange}
+      >
+        <Table.Grid aria-label="With button">
           <Table.Header>
             <Table.Column id="name" label="Name" isRowHeader />
             <Table.Column id="action" label="Action" />
@@ -120,13 +121,12 @@ describe('Table keyboard navigation', () => {
     const onButtonClick = vi.fn()
 
     render(
-      <Table>
-        <Table.Grid
-          aria-label="With button enter"
-          selectionMode="multiple"
-          selectedKeys={new Set()}
-          onSelectionChange={onSelectionChange}
-        >
+      <Table
+        selectionMode="multiple"
+        selectedKeys={new Set()}
+        onSelectionChange={onSelectionChange}
+      >
+        <Table.Grid aria-label="With button enter">
           <Table.Header>
             <Table.Column id="name" label="Name" isRowHeader />
             <Table.Column id="action" label="Action" />
@@ -158,13 +158,12 @@ describe('Table keyboard navigation', () => {
     const onSelectionChange = vi.fn()
 
     render(
-      <Table>
-        <Table.Grid
-          aria-label="Select with space"
-          selectionMode="multiple"
-          selectedKeys={new Set()}
-          onSelectionChange={onSelectionChange}
-        >
+      <Table
+        selectionMode="multiple"
+        selectedKeys={new Set()}
+        onSelectionChange={onSelectionChange}
+      >
+        <Table.Grid aria-label="Select with space">
           <Table.Header>
             <Table.Column id="name" label="Name" isRowHeader />
             <Table.Column id="value" label="Value" />
@@ -180,7 +179,9 @@ describe('Table keyboard navigation', () => {
     )
 
     // Cell with "Alpha" may be rowheader or gridcell depending on column
-    const cell = screen.getByText('Alpha').closest('[role="gridcell"], [role="rowheader"]') as HTMLElement
+    const cell = screen
+      .getByText('Alpha')
+      .closest('[role="gridcell"], [role="rowheader"]') as HTMLElement
     expect(cell).toBeInTheDocument()
     cell?.focus()
     await user.keyboard(' ')

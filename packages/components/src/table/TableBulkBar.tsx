@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 import { createContext, useContext } from 'react'
 
 import { Button, type ButtonProps } from '../button'
+import { useTableContext } from './TableContext'
 
 interface TableBulkBarContextValue {
   selectedCount: number
@@ -25,20 +26,15 @@ function useTableBulkBarContext() {
   return ctx
 }
 
-export interface TableBulkBarProps extends TableBulkBarContextValue {
+export interface TableBulkBarProps {
   children: ReactNode
   className?: string
 }
 
-function TableBulkBarRoot({
-  selectedCount,
-  totalCount,
-  onClearSelection,
-  onSelectAll,
-  hasMultiplePages,
-  children,
-  className,
-}: TableBulkBarProps) {
+function TableBulkBarRoot({ children, className }: TableBulkBarProps) {
+  const { selectedCount, totalCount, onClearSelection, onSelectAll, hasMultiplePages } =
+    useTableContext()
+
   const contextValue: TableBulkBarContextValue = {
     selectedCount,
     totalCount,

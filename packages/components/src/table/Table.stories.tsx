@@ -54,16 +54,15 @@ export const Default: StoryFn = () => {
   })
 
   return (
-    <Table>
-      <Table.Grid
-        aria-label="Files"
-        selectionMode="multiple"
-        selectedKeys={selected}
-        maxHeight={500}
-        onSelectionChange={keys => setSelected(keys as Set<string> | 'all')}
-        sortDescriptor={sortDescriptor}
-        onSortChange={onSortChange}
-      >
+    <Table
+      selectionMode="multiple"
+      selectedKeys={selected}
+      maxHeight={500}
+      onSelectionChange={keys => setSelected(keys as Set<string> | 'all')}
+      sortDescriptor={sortDescriptor}
+      onSortChange={onSortChange}
+    >
+      <Table.Grid aria-label="Files">
         <Table.Header>
           <Table.Column id="name" label="Name" isRowHeader allowsSorting>
             <Popover>
@@ -137,7 +136,7 @@ export const Sortable: StoryFn = () => {
   })
 
   return (
-    <Table>
+    <Table sortDescriptor={sortDescriptor} onSortChange={onSortChange}>
       <Button
         className="self-start"
         onClick={() => setSortDescriptor({ column: 'name', direction: 'ascending' })}
@@ -145,12 +144,7 @@ export const Sortable: StoryFn = () => {
       >
         Reset sort
       </Button>
-      <Table.Grid
-        aria-label="Sortable table"
-        className="max-w-sz-640"
-        sortDescriptor={sortDescriptor}
-        onSortChange={onSortChange}
-      >
+      <Table.Grid aria-label="Sortable table" className="max-w-sz-640">
         <Table.Header>
           <Table.Column id="name" label="Name" isRowHeader allowsSorting />
           <Table.Column id="type" label="Type" allowsSorting />
@@ -208,13 +202,8 @@ export const SortableWithCustomComparator: StoryFn = () => {
   })
 
   return (
-    <Table>
-      <Table.Grid
-        aria-label="Table with date column (custom comparator)"
-        className="max-w-sz-640"
-        sortDescriptor={sortDescriptor}
-        onSortChange={onSortChange}
-      >
+    <Table sortDescriptor={sortDescriptor} onSortChange={onSortChange}>
+      <Table.Grid aria-label="Table with date column (custom comparator)" className="max-w-sz-640">
         <Table.Header>
           <Table.Column id="name" label="Name" isRowHeader allowsSorting />
           <Table.Column id="date" label="Date" allowsSorting />
@@ -277,14 +266,12 @@ export const WithSelectionMultiple: StoryFn = () => {
   const [selected, setSelected] = useState<Set<string> | 'all'>(new Set())
 
   return (
-    <Table>
-      <Table.Grid
-        aria-label="Selectable rows (multiple)"
-        className="max-w-sz-640"
-        selectionMode="multiple"
-        selectedKeys={selected}
-        onSelectionChange={keys => setSelected(keys as Set<string> | 'all')}
-      >
+    <Table
+      selectionMode="multiple"
+      selectedKeys={selected}
+      onSelectionChange={keys => setSelected(keys as Set<string> | 'all')}
+    >
+      <Table.Grid aria-label="Selectable rows (multiple)" className="max-w-sz-640">
         <Table.Header>
           <Table.Column id="name" label="Name" isRowHeader />
           <Table.Column id="type" label="Type" />
@@ -333,15 +320,14 @@ export const WithSelectionMultipleWithLinks: StoryFn = () => {
 
   return (
     <>
-      <Table className="mb-lg">
-        <Table.Grid
-          aria-label="Selectable rows (multiple) with links"
-          className="max-w-sz-800"
-          selectionMode="multiple"
-          selectedKeys={selected}
-          onSelectionChange={keys => setSelected(keys as Set<string> | 'all')}
-          selectionBehavior="toggle"
-        >
+      <Table
+        className="mb-lg"
+        selectionMode="multiple"
+        selectedKeys={selected}
+        onSelectionChange={keys => setSelected(keys as Set<string> | 'all')}
+        selectionBehavior="toggle"
+      >
+        <Table.Grid aria-label="Selectable rows (multiple) with links" className="max-w-sz-800">
           <Table.Header>
             <Table.Column id="name" label="Name" isRowHeader />
             <Table.Column id="type" label="Type" />
@@ -386,14 +372,12 @@ export const WithSelectionSingle: StoryFn = () => {
   const [selected, setSelected] = useState<Set<string>>(new Set())
 
   return (
-    <Table>
-      <Table.Grid
-        aria-label="Selectable rows (single)"
-        className="max-w-sz-640"
-        selectionMode="single"
-        selectedKeys={selected}
-        onSelectionChange={keys => setSelected(keys as Set<string>)}
-      >
+    <Table
+      selectionMode="single"
+      selectedKeys={selected}
+      onSelectionChange={keys => setSelected(keys as Set<string>)}
+    >
+      <Table.Grid aria-label="Selectable rows (single)" className="max-w-sz-640">
         <Table.Header>
           <Table.Column id="name" label="Name" isRowHeader />
           <Table.Column id="type" label="Type" />
@@ -414,12 +398,8 @@ export const WithSelectionSingle: StoryFn = () => {
 }
 
 export const WithResizingDisabled: StoryFn = () => (
-  <Table>
-    <Table.Grid
-      aria-label="Simple table without column resize"
-      allowsResizing={false}
-      className="max-w-sz-640"
-    >
+  <Table allowsResizing={false}>
+    <Table.Grid aria-label="Simple table without column resize" className="max-w-sz-640">
       <Table.Header>
         <Table.Column id="name" label="Name" isRowHeader />
         <Table.Column id="type" label="Type" />
@@ -545,7 +525,6 @@ export const PaginationStory: StoryFn = () => {
     selectedKeys,
     onSelectionChange,
     onPageChange,
-    clearSelection,
     setPage,
   } = useTablePagination(sortedItems, { pageSize })
 
@@ -554,21 +533,21 @@ export const PaginationStory: StoryFn = () => {
     onSortChange(descriptor)
   }
 
-  const selectedCount = selectedKeys.size
-
   return (
-    <Table className="max-w-sz-800">
-      <Table.BulkBar
-        selectedCount={selectedCount}
-        totalCount={totalItems}
-        onClearSelection={clearSelection}
-        onSelectAll={() => onSelectionChange(allKeys)}
-        hasMultiplePages={totalItems > pageSize}
-      >
+    <Table
+      className="max-w-sz-800"
+      selectionMode="multiple"
+      selectedKeys={selectedKeys}
+      onSelectionChange={onSelectionChange}
+      totalCount={totalItems}
+      hasMultiplePages={totalItems > pageSize}
+      onSelectAll={() => onSelectionChange(allKeys)}
+      sortDescriptor={sortDescriptor}
+      onSortChange={handleSortChange}
+    >
+      <Table.BulkBar>
         <div className="flex flex-col justify-between">
-          <Table.BulkBarSelectedCount>
-            {`${selectedCount} ${selectedCount <= 1 ? 'element' : 'elements'} selected`}
-          </Table.BulkBarSelectedCount>
+          <Table.BulkBarSelectedCount>{`${selectedKeys.size} selected`}</Table.BulkBarSelectedCount>
           <div className="gap-x-lg flex flex-wrap">
             <Table.BulkBarClearButton>Clear all</Table.BulkBarClearButton>
             <Table.BulkBarSelectAllButton>
@@ -599,14 +578,7 @@ export const PaginationStory: StoryFn = () => {
           </IconButton>
         </div>
       </Table.BulkBar>
-      <Table.Grid
-        aria-label="Pokédex (151 Pokémon)"
-        selectionMode="multiple"
-        selectedKeys={selectedKeys}
-        onSelectionChange={onSelectionChange}
-        sortDescriptor={sortDescriptor}
-        onSortChange={handleSortChange}
-      >
+      <Table.Grid aria-label="Pokédex (151 Pokémon)">
         <Table.Header>
           <Table.Column id="num" label="#" allowsSorting />
           <Table.Column id="name" label="Name" isRowHeader allowsSorting />
@@ -648,6 +620,7 @@ export const PaginationStory: StoryFn = () => {
         page={page}
         visiblePageItems={7}
         onPageChange={onPageChange}
+        className="self-center"
       >
         <Pagination.PrevTrigger aria-label="Previous page" />
         <Pagination.Pages>

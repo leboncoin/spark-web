@@ -16,12 +16,11 @@ describe('Table column sorting', () => {
     const onSortChange = vi.fn()
 
     render(
-      <Table>
-        <Table.Grid
-          aria-label="Sortable"
-          sortDescriptor={{ column: 'name', direction: 'ascending' }}
-          onSortChange={onSortChange}
-        >
+      <Table
+        sortDescriptor={{ column: 'name', direction: 'ascending' }}
+        onSortChange={onSortChange}
+      >
+        <Table.Grid aria-label="Sortable">
           <Table.Header>
             <Table.Column id="name" label="Name" isRowHeader allowsSorting />
             <Table.Column id="value" label="Value" allowsSorting />
@@ -59,12 +58,8 @@ describe('Table column sorting', () => {
       })
 
       return (
-        <Table>
-          <Table.Grid
-            aria-label="Sortable"
-            sortDescriptor={sortDescriptor}
-            onSortChange={onSortChange}
-          >
+        <Table sortDescriptor={sortDescriptor} onSortChange={onSortChange}>
+          <Table.Grid aria-label="Sortable">
             <Table.Header>
               <Table.Column id="name" label="Name" isRowHeader allowsSorting />
               <Table.Column id="value" label="Value" allowsSorting />
@@ -110,12 +105,8 @@ describe('Table column sorting', () => {
       })
 
       return (
-        <Table>
-          <Table.Grid
-            aria-label="Sortable"
-            sortDescriptor={sortDescriptor}
-            onSortChange={onSortChange}
-          >
+        <Table sortDescriptor={sortDescriptor} onSortChange={onSortChange}>
+          <Table.Grid aria-label="Sortable">
             <Table.Header>
               <Table.Column id="name" label="Name" isRowHeader allowsSorting />
               <Table.Column id="value" label="Value" allowsSorting />
@@ -184,12 +175,8 @@ describe('Table column sorting', () => {
       })
 
       return (
-        <Table>
-          <Table.Grid
-            aria-label="Date table"
-            sortDescriptor={sortDescriptor}
-            onSortChange={onSortChange}
-          >
+        <Table sortDescriptor={sortDescriptor} onSortChange={onSortChange}>
+          <Table.Grid aria-label="Date table">
             <Table.Header>
               <Table.Column id="name" label="Name" isRowHeader allowsSorting />
               <Table.Column id="date" label="Date" allowsSorting />
@@ -237,12 +224,8 @@ describe('Table column sorting', () => {
           >
             Reset sort
           </button>
-          <Table>
-            <Table.Grid
-              aria-label="Sortable"
-              sortDescriptor={sortDescriptor}
-              onSortChange={onSortChange}
-            >
+          <Table sortDescriptor={sortDescriptor} onSortChange={onSortChange}>
+            <Table.Grid aria-label="Sortable">
               <Table.Header>
                 <Table.Column id="name" label="Name" isRowHeader allowsSorting />
                 <Table.Column id="value" label="Value" allowsSorting />

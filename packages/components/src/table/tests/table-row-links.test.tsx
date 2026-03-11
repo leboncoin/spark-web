@@ -25,16 +25,15 @@ function SelectableLinkTable({
     selectedKeys === 'all' || (selectedKeys instanceof Set && selectedKeys.has(id))
 
   return (
-    <Table>
-      <Table.Grid
-        aria-label="Selectable link rows"
-        selectionMode="multiple"
-        selectedKeys={selectedKeys}
-        onSelectionChange={keys => {
-          setSelectedKeys(keys as SelectionKeys)
-          onSelectionChange?.(keys as SelectionKeys)
-        }}
-      >
+    <Table
+      selectionMode="multiple"
+      selectedKeys={selectedKeys}
+      onSelectionChange={keys => {
+        setSelectedKeys(keys as SelectionKeys)
+        onSelectionChange?.(keys as SelectionKeys)
+      }}
+    >
+      <Table.Grid aria-label="Selectable link rows">
         <Table.Header>
           <Table.Column id="name" label="Name" isRowHeader />
           <Table.Column id="type" label="Type" />
@@ -87,7 +86,12 @@ function StaticLinkTable({ onRowAction }: { onRowAction: (id: string) => void })
         </Table.Header>
         <Table.Body>
           {rows.map(row => (
-            <Table.Row key={row.id} id={row.id} href={row.href} onAction={() => onRowAction(row.id)}>
+            <Table.Row
+              key={row.id}
+              id={row.id}
+              href={row.href}
+              onAction={() => onRowAction(row.id)}
+            >
               <Table.Cell>{row.name}</Table.Cell>
               <Table.Cell>{row.description}</Table.Cell>
             </Table.Row>

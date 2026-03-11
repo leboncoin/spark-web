@@ -6,17 +6,7 @@ import { Table as AriaTable, type TableProps as AriaTableProps } from 'react-ari
 import type { ResizableTableContainerProps } from './ResizableTableContainer'
 import { ResizableTableContainer } from './ResizableTableContainer'
 import { isColumnResizerElement, isInteractiveElement } from './table-utils'
-
-export interface TableRootWrapperProps {
-  children: ReactNode
-  className?: string
-}
-
-export function TableRootWrapper({ children, className }: TableRootWrapperProps) {
-  return <div className={cx('gap-md flex flex-col items-center', className)}>{children}</div>
-}
-
-TableRootWrapper.displayName = 'Table'
+import { TableContext, type TableContextValue, useTableContext } from './TableContext'
 
 export interface TableProps
   extends Omit<AriaTableProps, 'className'>,
@@ -27,7 +17,75 @@ export interface TableProps
   allowsResizing?: boolean
   /** Max height of the scroll container (number in px or CSS value). Applied so vertical and horizontal scrollbars share the same container. */
   maxHeight?: number | string
+  /** For BulkBar: total number of items (e.g. for "Select all X items"). */
+  totalCount?: number
+  /** When true, BulkBar shows "Clear all" and "Select all" buttons. */
+  hasMultiplePages?: boolean
+  /** Called when user clicks "Select all" in BulkBar. */
+  onSelectAll?: () => void
 }
+
+export interface TableRootWrapperProps extends TableProps {
+  children: ReactNode
+}
+
+export function TableRootWrapper({
+  children,
+  className,
+  selectedKeys,
+  onSelectionChange,
+  totalCount,
+  hasMultiplePages,
+  onSelectAll,
+  allowsResizing = true,
+  maxHeight,
+  onResizeStart,
+  onResize,
+  onResizeEnd,
+  onKeyDownCapture,
+  sortDescriptor,
+  onSortChange,
+  ...restProps
+}: TableRootWrapperProps) {
+  let selectedCount = 0
+
+  if (selectedKeys === 'all') {
+    selectedCount = totalCount ?? 0
+  } else if (selectedKeys instanceof Set) {
+    selectedCount = selectedKeys.size
+  } else if (selectedKeys) {
+    selectedCount = new Set(selectedKeys).size
+  }
+  const onClearSelection = () => onSelectionChange?.(new Set())
+
+  const contextValue = {
+    ...restProps,
+    selectedKeys,
+    onSelectionChange,
+    totalCount,
+    hasMultiplePages,
+    onSelectAll,
+    selectedCount,
+    onClearSelection,
+    allowsResizing,
+    maxHeight,
+    onResizeStart,
+    onResize,
+    onResizeEnd,
+    onKeyDownCapture,
+    sortDescriptor,
+    onSortChange,
+    className,
+  }
+
+  return (
+    <TableContext.Provider value={contextValue as TableContextValue}>
+      <div className={cx('gap-md flex flex-col', className)}>{children}</div>
+    </TableContext.Provider>
+  )
+}
+
+TableRootWrapper.displayName = 'Table'
 
 export const TableRoot = ({ className, onKeyDownCapture, ...props }: TableProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -85,17 +143,47 @@ function toMaxHeightStyle(value: number | string): React.CSSProperties['maxHeigh
   return typeof value === 'number' ? `${value}px` : value
 }
 
+export interface TableGridProps {
+  /** Required for accessibility. */
+  'aria-label'?: string
+  'aria-labelledby'?: string
+  className?: string
+  children?: ReactNode
+}
+
 export function TableGrid({
-  allowsResizing = true,
-  onResizeStart,
-  onResize,
-  onResizeEnd,
-  className,
-  maxHeight,
-  ...tableProps
-}: TableProps) {
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
+  className: gridClassName,
+  children,
+}: TableGridProps) {
+  const ctx = useTableContext()
+  const {
+    allowsResizing = true,
+    maxHeight,
+    onResizeStart,
+    onResize,
+    onResizeEnd,
+    onKeyDownCapture,
+    sortDescriptor,
+    onSortChange,
+    className: contextClassName,
+    ...ariaTableProps
+  } = ctx
+
   const scrollContainerStyle =
     maxHeight != null ? { maxHeight: toMaxHeightStyle(maxHeight) } : undefined
+  const className = gridClassName ?? contextClassName
+
+  const tableRootProps = {
+    ...ariaTableProps,
+    ...(ariaLabel != null && { 'aria-label': ariaLabel }),
+    ...(ariaLabelledBy != null && { 'aria-labelledby': ariaLabelledBy }),
+    sortDescriptor,
+    onSortChange,
+    onKeyDownCapture,
+    className,
+  }
 
   if (allowsResizing) {
     return (
@@ -106,14 +194,14 @@ export function TableGrid({
         onResize={onResize}
         onResizeEnd={onResizeEnd}
       >
-        <TableRoot {...tableProps} />
+        <TableRoot {...tableRootProps}>{children}</TableRoot>
       </ResizableTableContainer>
     )
   }
 
   return (
     <div className="relative w-full overflow-auto" style={scrollContainerStyle}>
-      <TableRoot className={className} {...tableProps} />
+      <TableRoot {...tableRootProps}>{children}</TableRoot>
     </div>
   )
 }
