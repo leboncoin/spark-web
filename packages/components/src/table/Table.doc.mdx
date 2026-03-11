@@ -60,13 +60,13 @@ import {
 
 ### Table
 
-Root wrapper. Renders a flex column container (`gap-md flex flex-col`) for `Table.BulkBar`, `Table.Grid`, and optional siblings like `Pagination`. Accepts `className` and `children`.
+Root wrapper. Renders a flex column container (`gap-md flex flex-col`) for `Table.BulkBar`, `Table.Grid`, and optional siblings like `Pagination`. Pass selection props (`selectionMode`, `selectedKeys`, `onSelectionChange`), sort (`sortDescriptor`, `onSortChange`), layout (`allowsResizing`, `maxHeight`, resize callbacks), and BulkBar options (`totalCount`, `hasMultiplePages`, `onSelectAll`) on the root so they are provided via context to `Table.Grid` and `Table.BulkBar`. Accepts `className` and `children`.
 
 <ArgTypes of={Table} />
 
 ### Table.Grid
 
-The data grid (scroll container + semantic table). Requires `aria-label` or `aria-labelledby` for accessibility. Supports sorting, selection, resizing, and `maxHeight` for the scroll area.
+The data grid (scroll container + semantic table). Requires `aria-label` or `aria-labelledby` for accessibility. Consumes selection, sort, and layout from Table context. Accepts optional `className` for the scroll wrapper.
 
 <ArgTypes of={Table.Grid} />
 
@@ -78,7 +78,7 @@ Defines the table header row and columns.
 
 ### Table.Column
 
-Defines a column header. Use `isRowHeader` for the first column when it labels each row. Use `allowsSorting` and pass `sortDescriptor` / `onSortChange` on `Table.Grid` for sortable columns.
+Defines a column header. Use `isRowHeader` for the first column when it labels each row. Use `allowsSorting` and pass `sortDescriptor` / `onSortChange` on `Table` (root) for sortable columns.
 
 <ArgTypes of={Table.Column} />
 
@@ -102,7 +102,7 @@ A table cell.
 
 ### Table.BulkBar
 
-Toolbar shown when using selection (e.g. with pagination). Renders a bar with selected count, clear/select-all actions, and custom actions. Must wrap `Table.BulkBarSelectedCount`, and optionally `Table.BulkBarClearButton`, `Table.BulkBarSelectAllButton`, and other controls. Pass `selectedCount`, `totalCount`, `onClearSelection`, `onSelectAll`, and `hasMultiplePages` (when paginated).
+Toolbar shown when using selection (e.g. with pagination). Renders a bar with selected count, clear/select-all actions, and custom actions. Must wrap `Table.BulkBarSelectedCount`, and optionally `Table.BulkBarClearButton`, `Table.BulkBarSelectAllButton`, and other controls. Selection state and BulkBar options are read from Table context (pass `totalCount`, `hasMultiplePages`, `onSelectAll` on `Table` when using pagination).
 
 <ArgTypes of={Table.BulkBar} />
 
@@ -128,7 +128,7 @@ Button to select all items across pages. Renders only when `hasMultiplePages` is
 
 ### Sorting
 
-Set `allowsSorting` on columns and control `sortDescriptor` / `onSortChange` on `Table.Grid` to enable sorting. Use the `useTableSort` hook to manage sort state and get a sorted list: it handles the descriptor state and a default comparator (numeric for numbers, `localeCompare` for strings).
+Set `allowsSorting` on columns and pass `sortDescriptor` / `onSortChange` on `Table` (root) to enable sorting. Use the `useTableSort` hook to manage sort state and get a sorted list: it handles the descriptor state and a default comparator (numeric for numbers, `localeCompare` for strings).
 
 <Canvas of={stories.Sortable} />
 
@@ -174,7 +174,7 @@ Additionally, you can pass `onAction` to `Table.Row` to handle the action when t
 
 ### Disable column resizing
 
-Column resizing is enabled by default. Set `allowsResizing={false}` on `Table.Grid` to disable it entirely, or `allowsResizing={false}` on individual `Table.Column` to hide the resizer for that column. Pass `onResizeStart`, `onResize`, or `onResizeEnd` on `Table.Grid` to react to resize events.
+Column resizing is enabled by default. Set `allowsResizing={false}` on `Table` (root) to disable it entirely, or `allowsResizing={false}` on individual `Table.Column` to hide the resizer for that column. Pass `onResizeStart`, `onResize`, or `onResizeEnd` on `Table` to react to resize events.
 
 <Canvas of={stories.WithResizingDisabled} />
 
@@ -192,9 +192,9 @@ For large tables or when the parent re-renders often for unrelated state (e.g. a
 
 ### Pagination
 
-Combine the Table with Spark's [Pagination](/docs/components-pagination--docs) to display large datasets page by page. Hold the full dataset in state, and use the `useTablePagination` hook to derive the current page, paginated items, and a selection model that persists across pages. Wire `selectedKeys` / `onSelectionChange` to `Table.Grid` and `page` / `onPageChange` to the Pagination to implement this pattern with minimal boilerplate. The example below shows 134 items with 10 items per page (`pageSize={10}`).
+Combine the Table with Spark's [Pagination](/docs/components-pagination--docs) to display large datasets page by page. Hold the full dataset in state, and use the `useTablePagination` hook to derive the current page, paginated items, and a selection model that persists across pages. Pass `selectedKeys`, `onSelectionChange`, `totalCount`, `hasMultiplePages`, and `onSelectAll` on `Table` (root); wire `page` / `onPageChange` to the Pagination. The bulk bar reads selection state from context. The example below shows 134 items with 10 items per page (`pageSize={10}`).
 
-When using `Table.BulkBar` with pagination, pass `hasMultiplePages={totalItems > pageSize}`. The bulk bar is always visible; only the clear and select-all buttons are conditional (clear when at least one row is selected and multiple pages; select-all when multiple pages and not all items selected). Provide all wording via `children` on `Table.BulkBarSelectedCount`, `Table.BulkBarClearButton`, and `Table.BulkBarSelectAllButton`—the components do not render any hardcoded copy.
+When using `Table.BulkBar` with pagination, pass `hasMultiplePages={totalItems > pageSize}` and `onSelectAll={() => onSelectionChange(allKeys)}` on `Table`. The bulk bar is always visible; only the clear and select-all buttons are conditional. Provide all wording via `children` on `Table.BulkBarSelectedCount`, `Table.BulkBarClearButton`, and `Table.BulkBarSelectAllButton`—the components do not render any hardcoded copy.
 
 <Canvas of={stories.PaginationStory} />
 
@@ -295,7 +295,7 @@ So: **no selection** → Enter activates the link/action. **With selection** →
 | <Kbd>Left Arrow</Kbd>   | Decrease column width            | When the resizer has focus and keyboard resize mode is active.                                                                                                                                                |
 | <Kbd>Right Arrow</Kbd>  | Increase column width            | When the resizer has focus and keyboard resize mode is active.                                                                                                                                                |
 
-Set `allowsResizing={false}` on `Table.Grid` to disable resizing, or on a specific `Table.Column` to hide that column’s resizer.
+Set `allowsResizing={false}` on `Table` (root) to disable resizing, or on a specific `Table.Column` to hide that column’s resizer.
 
   </Tabs.Content>
 </Tabs>

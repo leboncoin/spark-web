@@ -74,8 +74,8 @@ describe('Table column resizing', () => {
 
   it('should not render resizable container when allowsResizing is false', () => {
     render(
-      <Table>
-        <Table.Grid aria-label="Not resizable" allowsResizing={false}>
+      <Table allowsResizing={false}>
+        <Table.Grid aria-label="Not resizable">
           <Table.Header>
             <Table.Column label="Name" allowsResizing />
             <Table.Column label="Type" />
@@ -90,9 +90,7 @@ describe('Table column resizing', () => {
       </Table>
     )
 
-    const container = document.querySelector(
-      '[data-spark-component="resizable-table-container"]'
-    )
+    const container = document.querySelector('[data-spark-component="resizable-table-container"]')
     expect(container).not.toBeInTheDocument()
   })
 

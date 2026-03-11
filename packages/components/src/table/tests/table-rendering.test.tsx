@@ -121,7 +121,6 @@ describe('Table rendering and structure', () => {
         <Table.Grid
           aria-label="Styled"
           className="custom-table"
-          allowsResizing={false}
         >
           <Table.Header>
             <Table.Column label="Col" />
