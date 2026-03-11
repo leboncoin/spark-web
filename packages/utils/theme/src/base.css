@@ -138,10 +138,10 @@
   --radius-full: 9999px;
 
   /* Component tokens */
-  --radius-button: var(--radius-lg);
-  --radius-chip: var(--radius-md);
-  --radius-input: var(--radius-lg);
-  --radius-tag: var(--radius-md);
+  --radius-button: var(--radius-full);
+  --radius-chip: var(--radius-xl);
+  --radius-input: var(--radius-xl);
+  --radius-tag: var(--radius-sm);
 
   --shadow-xs: 0 1px 2px 0 var(--color-shadow);
   --shadow-sm: 0 4px 8px 0 var(--color-shadow);
