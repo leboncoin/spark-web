@@ -202,7 +202,7 @@ export const CustomImplementation: StoryFn = () => {
         )}
       >
         <Checkbox aria-labelledby={id} id={value} checked={checked} {...others} />
-        <div className="grow">{children}</div>
+        <span className="grow">{children}</span>
       </Label>
     )
   }
@@ -217,11 +217,11 @@ export const CustomImplementation: StoryFn = () => {
         {values.map(value => {
           return (
             <CustomCheckbox key={value} value={value} checked={checked.includes(value)}>
-              <div className="flex grow justify-between">
+              <span className="flex grow justify-between">
                 <span className="font-bold">{value}</span>
                 <span>this is a custom</span>
-              </div>
-              <div className="w-full text-right italic">implementation of a checkbox</div>
+              </span>
+              <span className="block w-full text-right italic">implementation of a checkbox</span>
             </CustomCheckbox>
           )
         })}
