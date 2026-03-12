@@ -150,7 +150,7 @@ export const CustomImplementation: StoryFn = () => {
         )}
       >
         <RadioGroup.Radio aria-labelledby={id} id={value} {...others} />
-        <div className="grow">{children}</div>
+        <span className="grow">{children}</span>
       </Label>
     )
   }
@@ -169,11 +169,11 @@ export const CustomImplementation: StoryFn = () => {
         {radios.map(radio => {
           return (
             <CustomRadio selectedValue={value} key={radio} value={radio}>
-              <div className="flex grow justify-between">
+              <span className="flex grow justify-between">
                 <span className="font-bold">{radio}</span>
                 <span>this is a custom</span>
-              </div>
-              <div className="w-full text-right italic">implementation of a radio</div>
+              </span>
+              <span className="block w-full text-right italic">implementation of a radio</span>
             </CustomRadio>
           )
         })}
