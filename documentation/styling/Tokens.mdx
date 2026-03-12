@@ -11,8 +11,14 @@ import { Label } from '@spark-ui/components/label'
 import { RadioGroup } from '@spark-ui/components/radio-group'
 import { VisuallyHidden } from '@spark-ui/components/visually-hidden'
 import { cx } from 'class-variance-authority'
-import Xarrow, { Xwrapper } from "react-xarrows";
-import { getCssVariable, getComputedCssVariable, BackgroundColorPreview, TextColorPreview, OutlineColorPreview } from '@docs/helpers/TokenPreview'
+import Xarrow, { Xwrapper } from 'react-xarrows'
+import {
+  getCssVariable,
+  getComputedCssVariable,
+  BackgroundColorPreview,
+  TextColorPreview,
+  OutlineColorPreview,
+} from '@docs/helpers/TokenPreview'
 
 <Meta title="Styling/Design Tokens" />
 
@@ -44,7 +50,8 @@ export const CustomRadio = ({
         {children}
       </Label>
     )
-  }
+
+}
 
 export const ColorCard = () => {
     const [currentIntent, setCurrentIntent] = useState('main')
@@ -62,7 +69,7 @@ export const ColorCard = () => {
         { name: 'Support', intentProp: 'support', styles: { card: 'bg-support-container text-on-support-container', button: 'bg-support text-on-support'}, description: 'Use Support colors to complement the main actions or primary elements to provide a sense of hierarchy and visual consistency in the UI. They are typically darker tones that complement the primary color scheme without overpowering it. They help distinguish secondary elements from primary ones, making it easy for users to navigate the interface.' },
         { name: 'Accent', intentProp: 'accent', styles: { card: 'bg-accent-container text-on-accent-container', button: 'bg-accent text-on-accent'}, description: 'Use accent color to highlight important elements in the interface. Draw attention to specific elements and create visual interest while guiding users\' focus.' },
         { name: 'Basic', intentProp: 'basic', styles: { card: 'bg-basic-container text-on-basic-container', button: 'bg-basic text-on-basic'}, description: 'Use Basic colors on fundamental components of the UI that do not require a specific intent, such as form elements like Switch, RadioButton, CheckBox, and ProgressBar. Using Basic color in form components enables a smooth transition between brands.' },
-        { name: 'Success', intentProp: 'success', styles: { card: 'bg-success-container text-on-success-container', button: 'bg-success text-on-success'}, description: 'Convey to the user a successful action, like after a form has been successfully submitted.' },    
+        { name: 'Success', intentProp: 'success', styles: { card: 'bg-success-container text-on-success-container', button: 'bg-success text-on-success'}, description: 'Convey to the user a successful action, like after a form has been successfully submitted.' },
         { name: 'Alert', intentProp: 'alert', styles: { card: 'bg-alert-container text-on-alert-container', button: 'bg-alert text-on-alert'}, description: 'Convey to the user a warning, for example over a sensitive action.' },
         { name: 'Error', intentProp: 'danger', styles: { card: 'bg-error-container text-on-error-container', button: 'bg-error text-on-error'}, description: 'Convey to the user an error, for example when a form field is invalid.' },
         { name: 'Info', intentProp: 'info', styles: { card: 'bg-info-container text-on-info-container', button: 'bg-info text-on-info'}, description: 'Convet to the user additional information, for example in a tooltip.' },
@@ -90,7 +97,7 @@ export const ColorCard = () => {
             <div className='sb-unstyled relative flex justify-center items-center min-h-sz-400 bg-neutral-container'>
                 <Xwrapper>
                     <div id='card-target' className={cx('shadow-md flex overflow-hidden items-stretch rounded-lg ', currentConfig.styles.card)}>
-                        
+
                         <div className='flex flex-col gap-sm p-lg'>
                             <p id="card-text-target" className='text-headline-1'>This is a title</p>
                             <p className='text-body-2'>Lorem ipsum dolor sit amet</p>
@@ -107,13 +114,13 @@ export const ColorCard = () => {
                                 <Icon><BookmarkOutline /></Icon>
                             </IconButton>
 
-                            
+
                             <div id="card-outline-target" className='absolute left-0 top-0 h-full' />
-                            
+
                         </div>
                     </div>
-                    
-                    <div className='flex flex-col gap-sm absolute left-lg top-lg'>  
+
+                    <div className='flex flex-col gap-sm absolute left-lg top-lg'>
                         <Tag id="card-bg-tip" intent='info' design='tinted'>
                             {currentConfig.name} container
                         </Tag>
@@ -153,11 +160,12 @@ export const ColorCard = () => {
                     <Xarrow start="card-surface-target" end="card-surface-tip" {...arrowProps} startAnchor="top"/>
                     <Xarrow start="card-outline-target" end="card-outline-tip" {...arrowProps} startAnchor="bottom"/>
 
-                    
+
                 </Xwrapper>
             </div>
         </div>
     )
+
 }
 
 ## Colors
@@ -168,10 +176,9 @@ Spark opt-outs of the default TailwindCSS color palette and offers 9 color famil
 
 <ColorCard />
 
-
 ### Colors syntax
 
-Each color family offers various tokens with their own semantic usage. 
+Each color family offers various tokens with their own semantic usage.
 
 #### Base token
 
@@ -191,10 +198,11 @@ Toned down versions of the main color tokens. They must re-use the same color hu
 
 #### Contrasting color token
 
-Colors to use on top of a `*` or `*-container` background. Usually for text or icons. Their purpose is to contrast with the background color. 
-- Never use as a background. 
+Colors to use on top of a `*` or `*-container` background. Usually for text or icons. Their purpose is to contrast with the background color.
+
+- Never use as a background.
 - Never use on a background of a different color family.
-- They don't exist in an `*-hovered` state, as Spark chose to animate the background color instead.   
+- They don't exist in an `*-hovered` state, as Spark chose to animate the background color instead.
 
 ```jsx
 <div className="bg-main text-on-main" />
@@ -206,11 +214,12 @@ Colors to use on top of a `*` or `*-container` background. Usually for text or i
 Hovered state of a `*` or `*-container` element. We advise to use the same color hue and saturation as the base colorand simply apply a delta on the lightness.
 
 ```jsx
-<button type="button" className="bg-main hover:bg-main-hovered">Click me</button>
-
+<button type="button" className="bg-main hover:bg-main-hovered">
+  Click me
+</button>
 ```
 
-#### Outline token  
+#### Outline token
 
 Colors to use for generic outlines/dividers. **Never use on text or background**.
 
@@ -220,7 +229,7 @@ Colors to use for generic outlines/dividers. **Never use on text or background**
 
 #### Outline high token
 
-Colors to use for high contrast outlines/dividers. **Never use on text or background**.   
+Colors to use for high contrast outlines/dividers. **Never use on text or background**.
 
 ```jsx
 <hr className="border-sm border-outline-high" />
@@ -238,7 +247,6 @@ Colors to use for overlays (ex: modals, tooltips, dropdowns). Combine it with `d
 
 <BackgroundColorPreview />
 
-
 ### Text
 
 <TextColorPreview />
@@ -255,49 +263,69 @@ Use utilities like `shadow-xs` and `shadow-sm` to apply a box shadow to an eleme
 
 You can also have both an inset and a regular shadow at once.
 
-<div className='sb-unstyled'>
-    <div className='flex gap-lg flex-wrap'>
-        <div className='flex flex-col gap-md items-center'>
-            <Tag intent="info" design='tinted' className='self-center'>shadow-xs</Tag>
-            <div className="size-sz-64 shadow-xs" />
-        </div>
-        <div className='flex flex-col gap-md items-center'>
-            <Tag intent="info" design='tinted' className='self-center'>shadow-sm</Tag>
-            <div className="size-sz-64 shadow-sm" />
-        </div>
-        <div className='flex flex-col gap-md items-center'>
-            <Tag intent="info" design='tinted' className='self-center'>shadow-md</Tag>
-            <div className="size-sz-64 shadow-md" />
-        </div>
-        <div className='flex flex-col gap-md items-center'>
-            <Tag intent="info" design='tinted' className='self-center'>shadow-lg</Tag>
-            <div className="size-sz-64 shadow-lg" />
-        </div>
-        <div className='flex flex-col gap-md items-center'>
-            <Tag intent="info" design='tinted' className='self-center'>shadow-xl</Tag>
-            <div className="size-sz-64 shadow-xl" />
-        </div>
-        <div className='flex flex-col gap-md items-center'>
-            <Tag intent="info" design='tinted' className='self-center'>inset-shadow-xs</Tag>
-            <div className="size-sz-64 inset-shadow-xs" />
-        </div>
-        <div className='flex flex-col gap-md items-center'>
-            <Tag intent="info" design='tinted' className='self-center'>inset-shadow-sm</Tag>
-            <div className="size-sz-64 inset-shadow-sm" />
-        </div>
-        <div className='flex flex-col gap-md items-center'>
-            <Tag intent="info" design='tinted' className='self-center'>inset-shadow-md</Tag>
-            <div className="size-sz-64 inset-shadow-md" />
-        </div>
-        <div className='flex flex-col gap-md items-center'>
-            <Tag intent="info" design='tinted' className='self-center'>inset-shadow-lg</Tag>
-            <div className="size-sz-64 inset-shadow-lg" />
-        </div>
-        <div className='flex flex-col gap-md items-center'>
-            <Tag intent="info" design='tinted' className='self-center'>inset-shadow-xl</Tag>
-            <div className="size-sz-64 inset-shadow-xl" />
-        </div>
+<div className="sb-unstyled">
+  <div className="gap-lg flex flex-wrap">
+    <div className="gap-md flex flex-col items-center">
+      <Tag intent="info" design="tinted" className="self-center">
+        shadow-xs
+      </Tag>
+      <div className="size-sz-64 shadow-xs" />
     </div>
+    <div className="gap-md flex flex-col items-center">
+      <Tag intent="info" design="tinted" className="self-center">
+        shadow-sm
+      </Tag>
+      <div className="size-sz-64 shadow-sm" />
+    </div>
+    <div className="gap-md flex flex-col items-center">
+      <Tag intent="info" design="tinted" className="self-center">
+        shadow-md
+      </Tag>
+      <div className="size-sz-64 shadow-md" />
+    </div>
+    <div className="gap-md flex flex-col items-center">
+      <Tag intent="info" design="tinted" className="self-center">
+        shadow-lg
+      </Tag>
+      <div className="size-sz-64 shadow-lg" />
+    </div>
+    <div className="gap-md flex flex-col items-center">
+      <Tag intent="info" design="tinted" className="self-center">
+        shadow-xl
+      </Tag>
+      <div className="size-sz-64 shadow-xl" />
+    </div>
+    <div className="gap-md flex flex-col items-center">
+      <Tag intent="info" design="tinted" className="self-center">
+        inset-shadow-xs
+      </Tag>
+      <div className="size-sz-64 inset-shadow-xs" />
+    </div>
+    <div className="gap-md flex flex-col items-center">
+      <Tag intent="info" design="tinted" className="self-center">
+        inset-shadow-sm
+      </Tag>
+      <div className="size-sz-64 inset-shadow-sm" />
+    </div>
+    <div className="gap-md flex flex-col items-center">
+      <Tag intent="info" design="tinted" className="self-center">
+        inset-shadow-md
+      </Tag>
+      <div className="size-sz-64 inset-shadow-md" />
+    </div>
+    <div className="gap-md flex flex-col items-center">
+      <Tag intent="info" design="tinted" className="self-center">
+        inset-shadow-lg
+      </Tag>
+      <div className="size-sz-64 inset-shadow-lg" />
+    </div>
+    <div className="gap-md flex flex-col items-center">
+      <Tag intent="info" design="tinted" className="self-center">
+        inset-shadow-xl
+      </Tag>
+      <div className="size-sz-64 inset-shadow-xl" />
+    </div>
+  </div>
 </div>
 
 ### Ring shadows
@@ -306,263 +334,306 @@ Use utilities like `ring-2` and `ring-4` to apply a solid box-shadow to an eleme
 
 You can combine a ring with a shadow to create a more complex effect. You can also have both an inset and a regular ring at once.
 
-<div className='sb-unstyled'>
-    <div className='flex gap-lg flex-wrap'>
-    <div className='flex flex-col gap-md items-center'>
-            <Tag intent="info" design='tinted' className='self-center'>ring-1</Tag>
-            <div className="size-sz-64 ring-1" />
-        </div>
-        <div className='flex flex-col gap-md items-center'>
-            <Tag intent="info" design='tinted' className='self-center'>ring-2</Tag>
-            <div className="size-sz-64 ring-2" />
-        </div>
-        <div className='flex flex-col gap-md items-center'>
-            <Tag intent="info" design='tinted' className='self-center'>ring-4</Tag>
-            <div className="size-sz-64 ring-4" />
-        </div>
-        <div className='flex flex-col gap-md items-center'>
-            <Tag intent="info" design='tinted' className='self-center'>ring-8</Tag>
-            <div className="size-sz-64 ring-8" />
-        </div>
-        
+<div className="sb-unstyled">
+  <div className="gap-lg flex flex-wrap">
+    <div className="gap-md flex flex-col items-center">
+      <Tag intent="info" design="tinted" className="self-center">
+        ring-1
+      </Tag>
+      <div className="size-sz-64 ring-1" />
     </div>
+    <div className="gap-md flex flex-col items-center">
+      <Tag intent="info" design="tinted" className="self-center">
+        ring-2
+      </Tag>
+      <div className="size-sz-64 ring-2" />
+    </div>
+    <div className="gap-md flex flex-col items-center">
+      <Tag intent="info" design="tinted" className="self-center">
+        ring-4
+      </Tag>
+      <div className="size-sz-64 ring-4" />
+    </div>
+    <div className="gap-md flex flex-col items-center">
+      <Tag intent="info" design="tinted" className="self-center">
+        ring-8
+      </Tag>
+      <div className="size-sz-64 ring-8" />
+    </div>
+  </div>
 </div>
 
 ### Colored shadows
 
-Use utilities like `shadow-main` (or any other Spark color) to change the color of a box shadow. 
+Use utilities like `shadow-main` (or any other Spark color) to change the color of a box shadow.
 
 Use utilities like `ring-main` (or any other Spark color) to change the color of a ring.
 
-<div className='sb-unstyled'>
-    <div className='flex gap-lg flex-wrap'>
-        <div className='flex flex-col gap-md items-center'>
-            <Tag intent="info" design='tinted' className='self-center'>shadow-md +shadow-main</Tag>
-            <div className="size-sz-64 shadow-md shadow-main" />
-        </div>
-        <div className='flex flex-col gap-md items-center'>
-            <Tag intent="info" design='tinted' className='self-center'>inset-shadow-md + inset-shadow-main</Tag>
-            <div className="size-sz-64 inset-shadow-md inset-shadow-main" />
-        </div>
-        <div className='flex flex-col gap-md items-center'>
-            <Tag intent="info" design='tinted' className='self-center'>ring-2 + ring-main</Tag>
-            <div className="size-sz-64 ring-2 ring-main" />
-        </div>
-        <div className='flex flex-col gap-md items-center'>
-            <Tag intent="info" design='tinted' className='self-center'>inset-ring-2 + inset-ring-main</Tag>
-            <div className="size-sz-64 inset-ring-2 inset-ring-main" />
-        </div>
+<div className="sb-unstyled">
+  <div className="gap-lg flex flex-wrap">
+    <div className="gap-md flex flex-col items-center">
+      <Tag intent="info" design="tinted" className="self-center">
+        shadow-md +shadow-main
+      </Tag>
+      <div className="size-sz-64 shadow-main shadow-md" />
     </div>
+    <div className="gap-md flex flex-col items-center">
+      <Tag intent="info" design="tinted" className="self-center">
+        inset-shadow-md + inset-shadow-main
+      </Tag>
+      <div className="size-sz-64 inset-shadow-md inset-shadow-main" />
+    </div>
+    <div className="gap-md flex flex-col items-center">
+      <Tag intent="info" design="tinted" className="self-center">
+        ring-2 + ring-main
+      </Tag>
+      <div className="size-sz-64 ring-main ring-2" />
+    </div>
+    <div className="gap-md flex flex-col items-center">
+      <Tag intent="info" design="tinted" className="self-center">
+        inset-ring-2 + inset-ring-main
+      </Tag>
+      <div className="size-sz-64 inset-ring-main inset-ring-2" />
+    </div>
+  </div>
 </div>
 
-
-
-
-## Spacing 
+## Spacing
 
 export const spacing = [
-    {computed: 'p-sm', className: 'size-sm'},
-    {computed: 'p-md', className: 'size-md'},
-    {computed: 'p-lg', className: 'size-lg'},
-    {computed: 'p-xl', className: 'size-xl'},
-    {computed: 'p-2xl', className: 'size-2xl'},
-    {computed: 'p-3xl', className: 'size-3xl'},
+  { computed: 'p-sm', className: 'size-sm' },
+  { computed: 'p-md', className: 'size-md' },
+  { computed: 'p-lg', className: 'size-lg' },
+  { computed: 'p-xl', className: 'size-xl' },
+  { computed: 'p-2xl', className: 'size-2xl' },
+  { computed: 'p-3xl', className: 'size-3xl' },
 ]
 
-<div className='sb-unstyled flex flex-col gap-xl'>
-    {spacing.map(({ computed, className }) => {
-        return (
-            <div className="gap-lg flex items-center">
-                <div className={`${className} bg-basic`} />
-                <div className="flex flex-col">
-                    <p className="text-body-1">{computed}</p>
-                    <p className="text-body-2 opacity-dim-1">{getComputedCssVariable('padding', computed)}</p>
-                </div>
-            </div>
-        )
-    })}
+<div className="sb-unstyled gap-xl flex flex-col">
+  {spacing.map(({ computed, className }) => {
+    return (
+      <div className="gap-lg flex items-center">
+        <div className={`${className} bg-basic`} />
+        <div className="flex flex-col">
+          <p className="text-body-1">{computed}</p>
+          <p className="text-body-2 opacity-dim-1">{getComputedCssVariable('padding', computed)}</p>
+        </div>
+      </div>
+    )
+  })}
 </div>
 
 ## Font Sizes
 
 export const fontSizes = [
-    'text-display-1-expanded',
-    'text-display-1',
-    'text-display-2-expanded',
-    'text-display-2',
-    'text-display-3-expanded',
-    'text-display-3',
-    'text-headline-1-expanded',
-    'text-headline-1',
-    'text-headline-2-expanded',
-    'text-headline-2',
-    'text-subhead-expanded',
-    'text-subhead',  
-    'text-body-1',
-    'text-body-2',
-    'text-caption',
-    'text-small',
+  'text-display-1',
+  'text-display-2',
+  'text-display-3',
+  'text-headline-1',
+  'text-headline-2',
+  'text-subhead',
+  'text-body-1',
+  'text-body-2',
+  'text-caption',
+  'text-small',
 ]
 
-
-<div className='sb-unstyled'>
-    <div className='gap-lg grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] flex-wrap'>
-        {fontSizes.map((fontSize) => {
-            return (
-                <div>
-                    <p className={`${fontSize} bg-basic-container text-on-basic-container px-lg`}>Hello world.</p>
-                    <p>{fontSize}</p>
-                    <p className='text-body-2 opacity-dim-1'>font-size: {getComputedCssVariable('font-size', fontSize)}, line-height: {getComputedCssVariable('line-height', fontSize)}, font-weight: {getComputedCssVariable('font-weight', fontSize)}</p>
-                </div>
-            )
-        })}       
-    </div>
+<div className="sb-unstyled">
+  <div className="gap-lg grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] flex-wrap">
+    {fontSizes.map(fontSize => {
+      return (
+        <div>
+          <p className={`${fontSize} bg-basic-container text-on-basic-container px-lg`}>
+            Hello world.
+          </p>
+          <p>{fontSize}</p>
+          <p className="text-body-2 opacity-dim-1">
+            font-size: {getComputedCssVariable('font-size', fontSize)}, line-height:{' '}
+            {getComputedCssVariable('line-height', fontSize)}, font-weight:{' '}
+            {getComputedCssVariable('font-weight', fontSize)}
+          </p>
+        </div>
+      )
+    })}
+  </div>
 </div>
 
 ## Screen Sizes
 
 ## Shadows
 
-<div className='sb-unstyled'>
-    <div className='gap-lg flex flex-col'>
-        <div className='flex gap-lg'>
-            <p className="rounded-lg shadow-xs size-sz-44" />
-            <div className='flex flex-col'>
-                <p>shadow-xs</p>
-                <p className='text-body-2 opacity-dim-1'>{getCssVariable('--shadow-xs')}</p>
-            </div>
-        </div>
-        <div className='flex gap-lg'>
-            <p className="rounded-lg shadow-sm size-sz-44" />
-            <div className='flex flex-col'>
-                <p>shadow-sm</p>
-                <p className='text-body-2 opacity-dim-1'>{getCssVariable('--shadow-sm')}</p>
-            </div>
-        </div>
-        <div className='flex gap-lg'>
-            <p className="rounded-lg shadow-md size-sz-44" />
-            <div className='flex flex-col'>
-                <p>shadow-md</p>
-                <p className='text-body-2 opacity-dim-1'>{getCssVariable('--shadow-md')}</p>
-            </div>
-        </div>
-        <div className='flex gap-lg'>
-            <p className="rounded-lg shadow-lg size-sz-44" />    
-            <div className='flex flex-col'>
-                <p>shadow-lg</p>
-                <p className='text-body-2 opacity-dim-1'>{getCssVariable('--shadow-lg')}</p>
-            </div>
-        </div>  
-        <div className='flex gap-lg'>
-            <p className="rounded-lg shadow-xl size-sz-44" />    
-            <div className='flex flex-col'>
-                <p>shadow-xl</p>
-                <p className='text-body-2 opacity-dim-1'>{getCssVariable('--shadow-xl')}</p>
-            </div>
-        </div>  
+<div className="sb-unstyled">
+  <div className="gap-lg flex flex-col">
+    <div className="gap-lg flex">
+      <p className="size-sz-44 rounded-lg shadow-xs" />
+      <div className="flex flex-col">
+        <p>shadow-xs</p>
+        <p className="text-body-2 opacity-dim-1">{getCssVariable('--shadow-xs')}</p>
+      </div>
     </div>
+    <div className="gap-lg flex">
+      <p className="size-sz-44 rounded-lg shadow-sm" />
+      <div className="flex flex-col">
+        <p>shadow-sm</p>
+        <p className="text-body-2 opacity-dim-1">{getCssVariable('--shadow-sm')}</p>
+      </div>
+    </div>
+    <div className="gap-lg flex">
+      <p className="size-sz-44 rounded-lg shadow-md" />
+      <div className="flex flex-col">
+        <p>shadow-md</p>
+        <p className="text-body-2 opacity-dim-1">{getCssVariable('--shadow-md')}</p>
+      </div>
+    </div>
+    <div className="gap-lg flex">
+      <p className="size-sz-44 rounded-lg shadow-lg" />
+      <div className="flex flex-col">
+        <p>shadow-lg</p>
+        <p className="text-body-2 opacity-dim-1">{getCssVariable('--shadow-lg')}</p>
+      </div>
+    </div>
+    <div className="gap-lg flex">
+      <p className="size-sz-44 rounded-lg shadow-xl" />
+      <div className="flex flex-col">
+        <p>shadow-xl</p>
+        <p className="text-body-2 opacity-dim-1">{getCssVariable('--shadow-xl')}</p>
+      </div>
+    </div>
+  </div>
 </div>
 
 ## Opacity
 
-<div className='sb-unstyled'>
-  <div className='w-full rounded-lg p-xl bg-surface-inverse' style={{
-    background: 'repeating-linear-gradient(45deg, var(--color-surface-inverse), var(--color-surface-inverse) 5px, #1e1e1e 5px, #1e1e1e 10px) !important'
-  }}>
-    <div className='grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] flex-wrap gap-y-xl'>
-        <div className='flex flex-col gap-md text-on-main'>
-            <div className='bg-surface p-xl border-sm border-outline' />
-            <Tag intent="info" design='tinted' className='self-center'>none</Tag>
+<div className="sb-unstyled">
+  <div
+    className="p-xl bg-surface-inverse w-full rounded-lg"
+    style={{
+      background:
+        'repeating-linear-gradient(45deg, var(--color-surface-inverse), var(--color-surface-inverse) 5px, #1e1e1e 5px, #1e1e1e 10px) !important',
+    }}
+  >
+    <div className="gap-y-xl grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] flex-wrap">
+      <div className="gap-md text-on-main flex flex-col">
+        <div className="bg-surface p-xl border-sm border-outline" />
+        <Tag intent="info" design="tinted" className="self-center">
+          none
+        </Tag>
+      </div>
+      <div className="gap-md text-on-main flex flex-col">
+        <div className="bg-surface/dim-1 p-xl border-sm border-outline -ml-px" />
+        <Tag intent="info" design="tinted" className="self-center">
+          dim-1
+        </Tag>
+      </div>
+      <div className="gap-md text-on-main flex flex-col">
+        <div className="bg-surface/dim-2 p-xl border-sm border-outline -ml-px" />
+        <Tag intent="info" design="tinted" className="self-center">
+          dim-2
+        </Tag>
+      </div>
+      <div className="gap-md text-on-main flex flex-col">
+        <div className="bg-surface/dim-3 p-xl border-sm border-outline -ml-px" />
+        <Tag intent="info" design="tinted" className="self-center">
+          dim-3
+        </Tag>
+      </div>
+      <div className="gap-md text-on-main flex flex-col">
+        <div className="bg-surface/dim-4 p-xl border-sm border-outline -ml-px" />
+        <Tag intent="info" design="tinted" className="self-center">
+          dim-4
+        </Tag>
+      </div>
+      <div className="gap-md text-on-main flex flex-col">
+        <div className="bg-surface/dim-5 p-xl border-sm border-outline -ml-px" />
+        <Tag intent="info" design="tinted" className="self-center">
+          dim-5
+        </Tag>
+      </div>
+      <div className="gap-md text-on-main flex flex-col">
+        <div className="bg-surface/0 p-xl border-sm border-outline -ml-px" />
+        <div className="gap-md flex justify-center">
+          <Tag intent="info" design="tinted" className="self-center">
+            dim-full
+          </Tag>
+          <p>or</p>
+          <Tag intent="info" design="tinted" className="self-center">
+            0
+          </Tag>
         </div>
-        <div className='flex flex-col gap-md text-on-main'>
-            <div className='bg-surface/dim-1 p-xl border-sm border-outline -ml-px' />
-            <Tag intent="info" design='tinted' className='self-center'>dim-1</Tag>
-        </div>
-        <div className='flex flex-col gap-md text-on-main'>
-            <div className='bg-surface/dim-2 p-xl border-sm border-outline -ml-px' />
-            <Tag intent="info" design='tinted' className='self-center'>dim-2</Tag>
-        </div>
-        <div className='flex flex-col gap-md text-on-main'>
-            <div className='bg-surface/dim-3 p-xl border-sm border-outline -ml-px' />
-            <Tag intent="info" design='tinted' className='self-center'>dim-3</Tag>
-        </div>
-            <div className='flex flex-col gap-md text-on-main'>
-            <div className='bg-surface/dim-4 p-xl border-sm border-outline -ml-px' />
-            <Tag intent="info" design='tinted' className='self-center'>dim-4</Tag>
-        </div>
-        <div className='flex flex-col gap-md text-on-main'>
-            <div className='bg-surface/dim-5 p-xl border-sm border-outline -ml-px' />
-            <Tag intent="info" design='tinted' className='self-center'>dim-5</Tag>
-        </div>
-        <div className='flex flex-col gap-md text-on-main'>
-            <div className='bg-surface/0 p-xl border-sm border-outline -ml-px' />
-            <div className='flex gap-md justify-center'>
-                <Tag intent="info" design='tinted' className='self-center'>dim-full</Tag>
-                <p>or</p>
-                <Tag intent="info" design='tinted' className='self-center'>0</Tag>
-            </div>
-        </div>
+      </div>
     </div>
   </div>
 </div>
 
 ## Border Radius
 
-<div className='sb-unstyled'>
-    <div className='gap-lg grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] flex-wrap'>
-        <div className='flex flex-col gap-sm'>
-            <div className='bg-main size-sz-44 rounded-tl-0 p-xl' />
-            <p>rounded-0</p>
-            <p className="text-body-2 opacity-dim-1">{getComputedCssVariable('border-radius', 'rounded-0')}</p>
-        </div>
-        <div className='flex flex-col gap-sm'>
-            <div className='bg-main size-sz-44 rounded-tl-sm p-xl' />
-            <p>rounded-sm</p>
-            <p className="text-body-2 opacity-dim-1">{getComputedCssVariable('border-radius', 'rounded-sm')}</p>
-        </div>
-        <div className='flex flex-col gap-sm'>
-            <div className='bg-main size-sz-44 rounded-tl-md p-xl' />
-            <p>rounded-md</p>
-            <p className="text-body-2 opacity-dim-1">{getComputedCssVariable('border-radius', 'rounded-md')}</p>
-        </div>
-        <div className='flex flex-col gap-sm'>
-            <div className='bg-main size-sz-44 rounded-tl-lg p-xl' />
-            <p>rounded-lg</p>
-            <p className="text-body-2 opacity-dim-1">{getComputedCssVariable('border-radius', 'rounded-lg')}</p>
-        </div>
-        <div className='flex flex-col gap-sm'>  
-            <div className='bg-main size-sz-44 rounded-tl-xl p-xl' />
-            <p>rounded-xl</p>
-            <p className="text-body-2 opacity-dim-1">{getComputedCssVariable('border-radius', 'rounded-xl')}</p>
-        </div>
-        <div className='flex flex-col gap-sm'>
-            <div className='bg-main size-sz-44 rounded-tl-full p-xl' />
-            <p>rounded-full</p>
-            <p className="text-body-2 opacity-dim-1">{getComputedCssVariable('border-radius', 'rounded-full')}</p>
-        </div>
+<div className="sb-unstyled">
+  <div className="gap-lg grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] flex-wrap">
+    <div className="gap-sm flex flex-col">
+      <div className="bg-main size-sz-44 rounded-tl-0 p-xl" />
+      <p>rounded-0</p>
+      <p className="text-body-2 opacity-dim-1">
+        {getComputedCssVariable('border-radius', 'rounded-0')}
+      </p>
     </div>
+    <div className="gap-sm flex flex-col">
+      <div className="bg-main size-sz-44 p-xl rounded-tl-sm" />
+      <p>rounded-sm</p>
+      <p className="text-body-2 opacity-dim-1">
+        {getComputedCssVariable('border-radius', 'rounded-sm')}
+      </p>
+    </div>
+    <div className="gap-sm flex flex-col">
+      <div className="bg-main size-sz-44 p-xl rounded-tl-md" />
+      <p>rounded-md</p>
+      <p className="text-body-2 opacity-dim-1">
+        {getComputedCssVariable('border-radius', 'rounded-md')}
+      </p>
+    </div>
+    <div className="gap-sm flex flex-col">
+      <div className="bg-main size-sz-44 p-xl rounded-tl-lg" />
+      <p>rounded-lg</p>
+      <p className="text-body-2 opacity-dim-1">
+        {getComputedCssVariable('border-radius', 'rounded-lg')}
+      </p>
+    </div>
+    <div className="gap-sm flex flex-col">
+      <div className="bg-main size-sz-44 p-xl rounded-tl-xl" />
+      <p>rounded-xl</p>
+      <p className="text-body-2 opacity-dim-1">
+        {getComputedCssVariable('border-radius', 'rounded-xl')}
+      </p>
+    </div>
+    <div className="gap-sm flex flex-col">
+      <div className="bg-main size-sz-44 p-xl rounded-tl-full" />
+      <p>rounded-full</p>
+      <p className="text-body-2 opacity-dim-1">
+        {getComputedCssVariable('border-radius', 'rounded-full')}
+      </p>
+    </div>
+  </div>
 </div>
 
 ## Border Width
 
-<div className='sb-unstyled'>
-    <div className='gap-lg grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] flex-wrap'>
-        <div className='flex flex-col gap-sm'>
-            <div className='bg-main-container size-sz-44 border-0 border-outline-high p-xl' />
-            <p>border-width-0</p>
-            <p className="text-body-2 opacity-dim-1">{getCssVariable('--border-width-0')}</p>
-        </div>
-        <div className='flex flex-col gap-sm'>
-            <div className='bg-main-container size-sz-44 border-sm border-outline-high p-xl' />
-            <p>border-width-sm</p>
-            <p className="text-body-2 opacity-dim-1">{getCssVariable('--border-width-sm')}</p>
-        </div>
-        <div className='flex flex-col gap-sm'>
-            <div className='bg-main-container size-sz-44 border-md border-outline-high p-xl' />
-            <p>border-width-md</p>
-            <p className="text-body-2 opacity-dim-1">{getCssVariable('--border-width-md')}</p>
-        </div>
+<div className="sb-unstyled">
+  <div className="gap-lg grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] flex-wrap">
+    <div className="gap-sm flex flex-col">
+      <div className="bg-main-container size-sz-44 border-outline-high p-xl border-0" />
+      <p>border-width-0</p>
+      <p className="text-body-2 opacity-dim-1">{getCssVariable('--border-width-0')}</p>
     </div>
+    <div className="gap-sm flex flex-col">
+      <div className="bg-main-container size-sz-44 border-sm border-outline-high p-xl" />
+      <p>border-width-sm</p>
+      <p className="text-body-2 opacity-dim-1">{getCssVariable('--border-width-sm')}</p>
+    </div>
+    <div className="gap-sm flex flex-col">
+      <div className="bg-main-container size-sz-44 border-md border-outline-high p-xl" />
+      <p>border-width-md</p>
+      <p className="text-body-2 opacity-dim-1">{getCssVariable('--border-width-md')}</p>
+    </div>
+  </div>
 </div>
 
 ## Elevation
@@ -583,7 +654,5 @@ export const fontSizes = [
         <div className="bg-linear-to-b to-surface from-support-container size-sz-192 px-lg py-sm rounded-lg shadow-md z-toast absolute left-[192px] top-sz-256"><Tag design="outlined" intent="info">z-toast: <span>{getCssVariable('--z-index-toast')}</span></Tag></div>
         <div className="bg-linear-to-b to-surface from-main-container size-sz-192 px-lg py-sm rounded-lg shadow-md z-tooltip absolute left-[216px] top-sz-288"><Tag design="outlined" intent="info">z-tooltip: <span>{getCssVariable('--z-index-tooltip')}</span></Tag></div>
     </div>
+
 </div>
-
-
-
