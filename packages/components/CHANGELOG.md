@@ -1,3 +1,13 @@
+## 16.2.0 (2026-03-12)
+
+### 🚀 Features
+
+- **components:** improve a11y by converting divs to spans ([bda3d9360](https://github.com/leboncoin/spark-web/commit/bda3d9360))
+
+### ❤️ Thank You
+
+- acd02
+
 ## 16.1.0 (2026-02-23)
 
 ### 🚀 Features
