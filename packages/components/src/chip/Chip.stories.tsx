@@ -129,7 +129,7 @@ export const SingleSelectionFilter: StoryFn = () => {
 
           return (
             <Element key={element} className="flex">
-              <span className="text-headline-1-expanded">{element}</span>
+              <span className="text-headline-1">{element}</span>
             </Element>
           )
         })}
@@ -198,7 +198,7 @@ export const UnionFilter: StoryFn = () => {
 
           return (
             <Element key={element} className="flex">
-              <span className="text-headline-1-expanded">{element}</span>
+              <span className="text-headline-1">{element}</span>
             </Element>
           )
         })}
@@ -270,7 +270,7 @@ export const IntersectionFilter: StoryFn = () => {
 
           return (
             <Element key={element} className="flex">
-              <span className="text-headline-1-expanded">{element}</span>
+              <span className="text-headline-1">{element}</span>
             </Element>
           )
         })}

@@ -4,21 +4,9 @@
   font-weight: 700;
 }
 
-@utility text-display-1-expanded {
-  font-size: calc(3rem * var(--spacing-factor));
-  line-height: calc(4rem * var(--spacing-factor));
-  font-weight: 700;
-}
-
 @utility text-display-2 {
   font-size: calc(2rem * var(--spacing-factor));
   line-height: calc(2.75rem * var(--spacing-factor));
-  font-weight: 700;
-}
-
-@utility text-display-2-expanded {
-  font-size: calc(2.5rem * var(--spacing-factor));
-  line-height: calc(3.5rem * var(--spacing-factor));
   font-weight: 700;
 }
 
@@ -28,21 +16,9 @@
   font-weight: 700;
 }
 
-@utility text-display-3-expanded {
-  font-size: calc(2rem * var(--spacing-factor));
-  line-height: calc(2.75rem * var(--spacing-factor));
-  font-weight: 700;
-}
-
 @utility text-headline-1 {
   font-size: calc(1.25rem * var(--spacing-factor));
   line-height: calc(1.75rem * var(--spacing-factor));
-  font-weight: 700;
-}
-
-@utility text-headline-1-expanded {
-  font-size: calc(1.5rem * var(--spacing-factor));
-  line-height: calc(2rem * var(--spacing-factor));
   font-weight: 700;
 }
 
@@ -52,19 +28,7 @@
   font-weight: 700;
 }
 
-@utility text-headline-2-expanded {
-  font-size: calc(1.25rem * var(--spacing-factor));
-  line-height: calc(1.75rem * var(--spacing-factor));
-  font-weight: 700;
-}
-
 @utility text-subhead {
-  font-size: calc(1rem * var(--spacing-factor));
-  line-height: calc(1.5rem * var(--spacing-factor));
-  font-weight: 700;
-}
-
-@utility text-subhead-expanded {
   font-size: calc(1rem * var(--spacing-factor));
   line-height: calc(1.5rem * var(--spacing-factor));
   font-weight: 700;
