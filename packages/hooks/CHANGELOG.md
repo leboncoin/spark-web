@@ -1,3 +1,13 @@
+## 16.2.1 (2026-03-17)
+
+### 🩹 Fixes
+
+- **theme-utils:** removed expanded fonts utilities ([f438c62c1](https://github.com/leboncoin/spark-web/commit/f438c62c1))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 16.2.0 (2026-03-12)
 
 This was a version bump only for @spark-ui/hooks to align it with other projects, there were no code changes.
