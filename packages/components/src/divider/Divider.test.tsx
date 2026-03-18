@@ -55,4 +55,53 @@ describe('Divider', () => {
     expect(screen.getByRole('separator')).toBeVisible()
     expect(screen.getByRole('separator').innerHTML).toEqual('')
   })
+
+  it('should support asChild', () => {
+    // Given
+    const props = {
+      asChild: true,
+      children: <h1 />,
+    }
+
+    // When
+    render(<Divider {...props} />)
+
+    // Then
+    const separator = screen.getByRole('separator')
+    expect(separator.tagName).toBe('H1')
+  })
+
+  it('should support asChild with empty Content', () => {
+    // Given
+    const props = {
+      asChild: true,
+      children: (
+        <h1>
+          <Divider.Content />
+        </h1>
+      ),
+    }
+
+    // When
+    render(<Divider {...props} />)
+
+    // Then
+    const separator = screen.getByRole('separator')
+    expect(separator.innerHTML).toEqual('')
+  })
+
+  it('should support isDecorative with asChild', () => {
+    // Given
+    const props = {
+      asChild: true,
+      isDecorative: true,
+      children: <h1 />,
+    }
+
+    // When
+    render(<Divider {...props} />)
+
+    // Then
+    expect(screen.getByRole('none')).toBeVisible()
+  })
 })

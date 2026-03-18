@@ -1,7 +1,8 @@
+import { Separator as BaseSeparator } from '@base-ui/react/separator'
 import { cx } from 'class-variance-authority'
-import { Separator } from 'radix-ui'
 import { HTMLAttributes, ReactElement, ReactNode, Ref } from 'react'
 
+import { Slot } from '../slot'
 import { dividerStyles, type DividerStylesProps } from './Divider.styles'
 
 export interface DividerProps
@@ -41,26 +42,40 @@ export const Divider = ({
   alignment = 'center',
   intent = 'outline',
   ref,
+  role: roleProp,
   ...props
 }: DividerProps) => {
   const isEmpty = asChild ? !(children?.props as { children: ReactNode })?.children : !children
 
+  let roleProps: { role: string } | undefined
+  if (isDecorative) {
+    roleProps = { role: 'none' }
+  } else if (roleProp !== undefined) {
+    roleProps = { role: roleProp }
+  }
+
+  const renderSlot = asChild
+    ? // Base UI uses its `render` prop to swap the underlying element.
+      // We rely on Spark's `Slot` to mimic Radix's `asChild` behavior.
+      (slotProps: any) => <Slot {...slotProps} />
+    : undefined
+
   return (
-    <Separator.Root
+    <BaseSeparator
       data-spark-component="divider"
-      asChild={asChild}
       className={cx(
         dividerStyles({ isEmpty, orientation, alignment, intent, writingMode }),
         className
       )}
       orientation={orientation}
       ref={ref}
-      decorative={isDecorative}
       {...props}
+      render={renderSlot}
+      {...roleProps}
       data-writing-mode={writingMode}
     >
       {children}
-    </Separator.Root>
+    </BaseSeparator>
   )
 }
 
