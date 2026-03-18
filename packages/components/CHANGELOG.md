@@ -1,3 +1,13 @@
+## 16.2.2 (2026-03-18)
+
+### 💅 Refactors
+
+- **components:** divider migration to base ui ([3cc1e067f](https://github.com/leboncoin/spark-web/commit/3cc1e067f))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 16.2.1 (2026-03-17)
 
 ### 🩹 Fixes
