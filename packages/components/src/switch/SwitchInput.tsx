@@ -1,10 +1,11 @@
+import { Switch as BaseSwitch } from '@base-ui/react/switch'
 import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { useCombinedState } from '@spark-ui/hooks/use-combined-state'
 import { Check } from '@spark-ui/icons/Check'
 import { Close } from '@spark-ui/icons/Close'
-import { Switch as RadixSwitch } from 'radix-ui'
 import { type ComponentPropsWithRef, type ReactNode } from 'react'
 
+import { useRenderSlot } from '../drawer/useRenderSlot'
 import { Slot } from '../slot'
 import {
   styles,
@@ -16,7 +17,7 @@ import {
 
 export interface SwitchInputProps
   extends StylesProps,
-    Omit<ComponentPropsWithRef<'button'>, 'value'> {
+    Omit<ComponentPropsWithRef<typeof BaseSwitch.Root>, 'value' | 'render' | 'onCheckedChange'> {
   /**
    * The state of the switch when it is initially rendered. Use when you do not need to control its state.
    */
@@ -25,9 +26,6 @@ export interface SwitchInputProps
    * The controlled state of the switch. Must be used in conjunction with `onCheckedChange`.
    */
   checked?: boolean
-  /**
-   * When true, prevents the user from interacting with the switch.
-   */
   /**
    * Event handler called when the state of the switch changes.
    */
@@ -60,6 +58,10 @@ export interface SwitchInputProps
    * When true, the label will be placed on the left side of the Switch
    */
   reverse?: boolean
+  /**
+   * Change the default rendered element for the one passed as a child, merging their props and behavior.
+   */
+  asChild?: boolean
 }
 
 export const SwitchInput = ({
@@ -69,16 +71,18 @@ export const SwitchInput = ({
   intent: intentProp,
   uncheckedIcon = <Close />,
   size = 'md',
-  value = 'on',
   onCheckedChange,
   className,
   required,
   ref,
+  asChild = false,
   ...rest
 }: SwitchInputProps) => {
   const [isChecked, setIsChecked] = useCombinedState(checked, defaultChecked)
   const { name, description, state, isRequired, isInvalid } = useFormFieldControl()
   const intent = state ?? intentProp
+  const renderSlot = useRenderSlot(asChild, 'span')
+  const isRequiredComputed = Boolean(required || isRequired)
 
   const handleCheckedChange = (updatedValue: boolean): void => {
     setIsChecked(updatedValue)
@@ -86,31 +90,32 @@ export const SwitchInput = ({
   }
 
   return (
-    <RadixSwitch.Root
+    <BaseSwitch.Root
       data-spark-component="switch-input"
       ref={ref}
+      render={renderSlot}
       className={styles({ intent, size, className })}
-      value={value}
       checked={checked}
       defaultChecked={defaultChecked}
-      onCheckedChange={handleCheckedChange}
+      onCheckedChange={nextChecked => handleCheckedChange(nextChecked)}
       name={name}
-      required={required || isRequired}
+      required={isRequiredComputed}
+      aria-required={isRequiredComputed ? true : undefined}
       aria-invalid={isInvalid}
       aria-describedby={description}
       {...rest}
     >
       <span className={thumbWrapperStyles({ checked: isChecked })}>
-        <RadixSwitch.Thumb className={thumbStyles({ size, checked: isChecked })}>
+        <BaseSwitch.Thumb className={thumbStyles({ size, checked: isChecked })}>
           {isChecked && checkedIcon && (
             <Slot className={thumbCheckSVGStyles({ size })}>{checkedIcon}</Slot>
           )}
           {!isChecked && uncheckedIcon && (
             <Slot className={thumbCheckSVGStyles({ size })}>{uncheckedIcon}</Slot>
           )}
-        </RadixSwitch.Thumb>
+        </BaseSwitch.Thumb>
       </span>
-    </RadixSwitch.Root>
+    </BaseSwitch.Root>
   )
 }
 
