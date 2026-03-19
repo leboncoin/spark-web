@@ -1,3 +1,13 @@
+## 16.2.3 (2026-03-19)
+
+### 💅 Refactors
+
+- **components:** migrated Switch to Base UI ([f0a222551](https://github.com/leboncoin/spark-web/commit/f0a222551))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 16.2.2 (2026-03-18)
 
 ### 💅 Refactors
