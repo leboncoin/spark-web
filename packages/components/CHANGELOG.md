@@ -1,3 +1,17 @@
+# 17.0.0 (2026-03-20)
+
+### 💅 Refactors
+
+- ⚠️  **theme-utils:** removed basic color family ([56637ea96](https://github.com/leboncoin/spark-web/commit/56637ea96))
+
+### ⚠️  Breaking Changes
+
+- **theme-utils:** use support intent instead of basic
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 16.2.3 (2026-03-19)
 
 ### 💅 Refactors
