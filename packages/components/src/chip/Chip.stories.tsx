@@ -32,7 +32,6 @@ type ChipProps = ComponentProps<typeof Chip>
 const designs: ChipProps['design'][] = ['outlined', 'dashed', 'tinted']
 
 const intents: ChipProps['intent'][] = [
-  'basic',
   'main',
   'support',
   'accent',

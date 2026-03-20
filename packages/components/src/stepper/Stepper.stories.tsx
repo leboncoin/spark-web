@@ -75,13 +75,13 @@ export const ReadOnly: StoryFn = _args => (
 
 export const Custom: StoryFn = _args => (
   <Stepper aria-label="Composed stepper">
-    <Stepper.DecrementButton aria-label="Decrement" design="filled" intent="basic">
+    <Stepper.DecrementButton aria-label="Decrement" design="filled" intent="support">
       <Icon>
         <ArrowHorizontalDown />
       </Icon>
     </Stepper.DecrementButton>
     <Stepper.Input />
-    <Stepper.IncrementButton aria-label="Increment" design="filled" intent="basic">
+    <Stepper.IncrementButton aria-label="Increment" design="filled" intent="support">
       <Icon>
         <ArrowHorizontalUp />
       </Icon>

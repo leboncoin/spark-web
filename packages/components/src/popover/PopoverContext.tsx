@@ -7,7 +7,6 @@ export type PopoverIntent =
   | 'main'
   | 'support'
   | 'accent'
-  | 'basic'
   | 'success'
   | 'alert'
   | 'danger'

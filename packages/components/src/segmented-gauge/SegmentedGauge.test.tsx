@@ -281,7 +281,6 @@ describe('SegmentedGauge', () => {
       const intents = [
         { intent: 'main', expectedColor: 'var(--color-main)' },
         { intent: 'support', expectedColor: 'var(--color-support)' },
-        { intent: 'basic', expectedColor: 'var(--color-basic)' },
         { intent: 'accent', expectedColor: 'var(--color-accent)' },
         { intent: 'success', expectedColor: 'var(--color-success)' },
         { intent: 'alert', expectedColor: 'var(--color-alert)' },

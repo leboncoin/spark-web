@@ -32,7 +32,7 @@ export const Progress = ({
   max = 100,
   min = 0,
   shape = 'square',
-  intent = 'basic',
+  intent = 'support',
   onComplete,
   getValueLabel,
   getAriaValueText: getAriaValueTextProp,

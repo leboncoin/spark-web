@@ -27,18 +27,6 @@ export const tintedVariants = [
     ]),
   },
   {
-    intent: 'basic',
-    design: 'tinted',
-    class: tw([
-      'bg-basic-container',
-      'enabled:hover:bg-basic-container-hovered',
-      'enabled:active:bg-basic-container-hovered',
-      'focus-visible:bg-basic-container-hovered',
-      'aria-pressed:bg-basic aria-pressed:text-on-basic aria-pressed:enabled:hover:bg-basic/dim-1',
-      'text-on-basic-container',
-    ]),
-  },
-  {
     intent: 'accent',
     design: 'tinted',
     class: tw([

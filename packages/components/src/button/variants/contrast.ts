@@ -32,16 +32,6 @@ export const contrastVariants = [
     ]),
   },
   {
-    intent: 'basic',
-    design: 'contrast',
-    class: tw([
-      'text-on-basic-container bg-surface',
-      'hover:bg-basic-container-hovered',
-      'enabled:active:bg-basic-container-hovered',
-      'focus-visible:bg-basic-container-hovered',
-    ]),
-  },
-  {
     intent: 'success',
     design: 'contrast',
     class: tw([

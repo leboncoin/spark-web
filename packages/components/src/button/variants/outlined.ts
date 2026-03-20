@@ -32,16 +32,6 @@ export const outlinedVariants = [
     ]),
   },
   {
-    intent: 'basic',
-    design: 'outlined',
-    class: tw([
-      'hover:bg-basic/dim-5',
-      'enabled:active:bg-basic/dim-5',
-      'focus-visible:bg-basic/dim-5',
-      'text-basic',
-    ]),
-  },
-  {
     intent: 'success',
     design: 'outlined',
     class: tw([

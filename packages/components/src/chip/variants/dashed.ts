@@ -25,17 +25,6 @@ export const dashedVariants = [
     ]),
   },
   {
-    intent: 'basic',
-    design: 'dashed',
-    class: tw([
-      'enabled:hover:bg-basic/dim-5',
-      'enabled:active:bg-basic/dim-5',
-      'focus-visible:bg-basic/dim-5',
-      'aria-pressed:bg-basic-container aria-pressed:text-on-basic-container aria-pressed:enabled:hover:bg-basic-container/dim-1',
-      'text-basic',
-    ]),
-  },
-  {
     intent: 'accent',
     design: 'dashed',
     class: tw([

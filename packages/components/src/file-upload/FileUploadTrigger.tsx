@@ -20,7 +20,7 @@ export const Trigger = ({
   asChild = false,
   unstyled = false,
   design = 'filled',
-  intent = 'basic',
+  intent = 'support',
   size = 'md',
   shape = 'rounded',
   ref,

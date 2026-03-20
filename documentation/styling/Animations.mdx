@@ -18,8 +18,6 @@ import { cx } from 'class-variance-authority'
 
 # Animations
 
-
-
 ## Introduction
 
 Animations can be applied to any element using the `animate-` prefix.
@@ -29,103 +27,99 @@ By default, tailwind does not provide classes for animations, only for transitio
 Spark UI provides a set of predefined animations that can be used to create smooth and natural animations, as well as the possibility to customize the duration and easing function of the animations.
 
 <Callout kind="warning" marginY="large">
-    <p>Rely on css transitions for simple animations. CSS keyframes are meant for complex animations.</p>
-    <p>CSS transitions durations and easing functions are customizable by default.</p>
+  <p>
+    Rely on css transitions for simple animations. CSS keyframes are meant for complex animations.
+  </p>
+  <p>CSS transitions durations and easing functions are customizable by default.</p>
 </Callout>
-
 
 ## Utilities
 
 ### Animation duration
 
-Every Spark UI animation shared the same default duration of `250ms`. 
+Every Spark UI animation shared the same default duration of `250ms`.
 
 You can override this duration by using the `animation-duration-*` utility class.
 
-
 {(() => {
-  const [isDurationPlaying, setIsDurationPlaying] = useState(false);
-  
-  const toggleDurationPlayPause = () => {
-    setIsDurationPlaying(!isDurationPlaying);
-  };
+const [isDurationPlaying, setIsDurationPlaying] = useState(false);
 
-  const durationExamples = [
-    {
-      utility: '',
-      duration: 'Default duration (250ms)',
-      description: '(no class given)'
-    },
-    {
-      utility: 'animation-duration-2000',
-      duration: '2000ms',
-      description: 'animation-duration-2000'
-    },
-    {
-      utility: 'animation-duration-4000',
-      duration: '4000ms',
-      description: 'animation-duration-4000'
-    }
-  ];
+const toggleDurationPlayPause = () => {
+setIsDurationPlaying(!isDurationPlaying);
+};
 
-  return (
-    <table className="w-full [table-layout:auto]">
-      <colgroup>
-        <col style={{ width: 'auto' }} />
-        <col style={{ width: 'auto' }} />
-        <col style={{ width: '300px' }} />
-      </colgroup>
-      <thead>
-        <tr>
-          <th>Utility class</th>
-          <th>Applied duration</th>
-          <th style={{ minWidth: 300 }}>
-            <div className="flex items-center gap-lg">
-              <span>Example</span>
-              <Button 
-                size="sm" 
-                design="filled"
-                intent="basic"
-                onClick={toggleDurationPlayPause}
-                className="sb-unstyled"
-              >
-                <Icon className="size-4">
-                  {isDurationPlaying ? <PauseOutline /> : <PlayFill />}
-                </Icon>
-                {isDurationPlaying ? 'Pause' : 'Play'}
-              </Button>
-            </div>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {durationExamples.map((example, index) => (
-          <tr key={index}>
-            <td>
-              {example.description.startsWith('(') ? (
-                <em>{example.description}</em>
-              ) : (
-                <code>{example.description}</code>
-              )}
-            </td>
-            <td>{example.duration}</td>
-            <td>
-              <div className="bg-neutral-container rounded-full flex flex-col items-start bg-linear-to-r from-main-container to-support-container">
-                <div 
-                  className={`relative scale-200 translate-x-[6px] rounded-full bg-main size-sz-12 ${
-                    example.utility ? example.utility : ''
-                  } ${
-                    isDurationPlaying ? 'animate-standalone-demo-slide-right' : ''
-                  }`}
-                />
-              </div>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
-})()}
+const durationExamples = [
+{
+utility: '',
+duration: 'Default duration (250ms)',
+description: '(no class given)'
+},
+{
+utility: 'animation-duration-2000',
+duration: '2000ms',
+description: 'animation-duration-2000'
+},
+{
+utility: 'animation-duration-4000',
+duration: '4000ms',
+description: 'animation-duration-4000'
+}
+];
+
+return (
+
+<table className="w-full [table-layout:auto]">
+  <colgroup>
+    <col style={{ width: 'auto' }} />
+    <col style={{ width: 'auto' }} />
+    <col style={{ width: '300px' }} />
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Utility class</th>
+      <th>Applied duration</th>
+      <th style={{ minWidth: 300 }}>
+        <div className="gap-lg flex items-center">
+          <span>Example</span>
+          <Button
+            size="sm"
+            design="filled"
+            intent="support"
+            onClick={toggleDurationPlayPause}
+            className="sb-unstyled"
+          >
+            <Icon className="size-4">{isDurationPlaying ? <PauseOutline /> : <PlayFill />}</Icon>
+            {isDurationPlaying ? 'Pause' : 'Play'}
+          </Button>
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {durationExamples.map((example, index) => (
+      <tr key={index}>
+        <td>
+          {example.description.startsWith('(') ? (
+            <em>{example.description}</em>
+          ) : (
+            <code>{example.description}</code>
+          )}
+        </td>
+        <td>{example.duration}</td>
+        <td>
+          <div className="bg-neutral-container from-main-container to-support-container flex flex-col items-start rounded-full bg-linear-to-r">
+            <div
+              className={`bg-main size-sz-12 relative translate-x-[6px] scale-200 rounded-full ${
+                example.utility ? example.utility : ''
+              } ${isDurationPlaying ? 'animate-standalone-demo-slide-right' : ''}`}
+            />
+          </div>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+); })()}
 
 ### Easing Functions
 
@@ -134,69 +128,70 @@ Every Spark UI animation shared the same default easing curve named `ease-standa
 Spark UI provides a set of predefined easing functions that can be used to create smooth and natural animations. These easing functions are available as CSS custom properties and can be used with the `cubic-bezier()` function.
 
 {(() => {
-  const [isEasingPlaying, setIsEasingPlaying] = useState(false);
-  
-  const toggleEasingPlayPause = () => {
-    setIsEasingPlaying(!isEasingPlaying);
-  };
+const [isEasingPlaying, setIsEasingPlaying] = useState(false);
 
-  const easingFunctions = [
-    {
-      utility: 'animation-ease-standard',
-      name: 'standard',
-      bezier: 'cubic-bezier(0.2, 0, 0, 1)',
-    },
-    {
-      utility: 'animation-ease-decelerate',
-      name: 'decelerate',
-      bezier: 'cubic-bezier(0.05, 0.7, 0.1, 1)',
-    },
-    {
-      utility: 'animation-ease-accelerate',
-      name: 'accelerate',
-      bezier: 'cubic-bezier(0.3, 0, 0.8, 0.15)',
-    },
-    {
-      utility: 'animation-ease-linear',
-      name: 'linear',
-      bezier: 'cubic-bezier(0, 0, 1, 1)',
-    },
-  ];
+const toggleEasingPlayPause = () => {
+setIsEasingPlaying(!isEasingPlaying);
+};
 
-  const backEasingFunctions = [
-    {
-      utility: 'animation-ease-standard-back',
-      name: 'standard-back',
-      bezier: 'cubic-bezier(0.54, -0.52, 0.29, 1.54)',
-    },
-    {
-        utility: 'animation-ease-decelerate-back',
-        name: 'decelerate-back',
-        bezier: 'cubic-bezier(0.45, 1.45, 0.8, 1)',
-    },
-    {
-      utility: 'animation-ease-accelerate-back',
-      name: 'accelerate-back',
-      bezier: 'cubic-bezier(0.35, -0.47, 0.8, 0.15)',
-    },
-  ];
+const easingFunctions = [
+{
+utility: 'animation-ease-standard',
+name: 'standard',
+bezier: 'cubic-bezier(0.2, 0, 0, 1)',
+},
+{
+utility: 'animation-ease-decelerate',
+name: 'decelerate',
+bezier: 'cubic-bezier(0.05, 0.7, 0.1, 1)',
+},
+{
+utility: 'animation-ease-accelerate',
+name: 'accelerate',
+bezier: 'cubic-bezier(0.3, 0, 0.8, 0.15)',
+},
+{
+utility: 'animation-ease-linear',
+name: 'linear',
+bezier: 'cubic-bezier(0, 0, 1, 1)',
+},
+];
 
-  return (
-    <div className="grid grid-cols-1 gap-lg sm:grid-cols-2 md:grid-cols-3">
-        {easingFunctions.map((easing, index) => {
-          // Find corresponding back easing function
-          const backEasing = backEasingFunctions.find(back => 
-            back.name === `${easing.name}-back`
-          );
-          
+const backEasingFunctions = [
+{
+utility: 'animation-ease-standard-back',
+name: 'standard-back',
+bezier: 'cubic-bezier(0.54, -0.52, 0.29, 1.54)',
+},
+{
+utility: 'animation-ease-decelerate-back',
+name: 'decelerate-back',
+bezier: 'cubic-bezier(0.45, 1.45, 0.8, 1)',
+},
+{
+utility: 'animation-ease-accelerate-back',
+name: 'accelerate-back',
+bezier: 'cubic-bezier(0.35, -0.47, 0.8, 0.15)',
+},
+];
+
+return (
+
+<div className="grid grid-cols-1 gap-lg sm:grid-cols-2 md:grid-cols-3">
+{easingFunctions.map((easing, index) => {
+// Find corresponding back easing function
+const backEasing = backEasingFunctions.find(back =>
+back.name === `${easing.name}-back`
+);
+
           return (
             <>
-                    <Card design="tinted" intent="neutral">            
+                    <Card design="tinted" intent="neutral">
                         <Card.Content>
                             <div className="flex flex-col gap-sm sb-unstyled">
                                 <p>{easing.utility}</p>
                                 <p className='text-small'>{easing.bezier}</p>
-                            </div>  
+                            </div>
                             <EaseCurvePreview
                                 name={easing.name}
                                 bezier={easing.bezier}
@@ -205,17 +200,17 @@ Spark UI provides a set of predefined easing functions that can be used to creat
                                 width={200}
                                 height={200}
                             />
-                                
+
                         </Card.Content>
                     </Card>
-                
+
                     {backEasing ? (
                     <Card design="tinted" intent="neutral">
                         <Card.Content>
                             <div className="flex flex-col gap-sm sb-unstyled">
                                 <p>{backEasing.utility}</p>
                                 <p className='text-small'>{backEasing.bezier}</p>
-                            </div>  
+                            </div>
                             <EaseCurvePreview
                                 name={backEasing.name}
                                 bezier={backEasing.bezier}
@@ -227,14 +222,15 @@ Spark UI provides a set of predefined easing functions that can be used to creat
                         </Card.Content>
                     </Card>
                     ) : null}
-                
-                
+
+
             </>
           );
         })}
-      
+
     </div>
-  );
+
+);
 })()}
 
 ### Other utilities
@@ -251,36 +247,62 @@ For every other css animation properties, you can use the `animation-*` utility 
   </thead>
   <tbody>
     <tr>
-      <td><code>animation-delay</code></td>
-      <td><code>animation-delay-1000</code></td>
-      <td><code>0ms</code></td>
+      <td>
+        <code>animation-delay</code>
+      </td>
+      <td>
+        <code>animation-delay-1000</code>
+      </td>
+      <td>
+        <code>0ms</code>
+      </td>
     </tr>
     <tr>
-      <td><code>animation-iteration-count</code></td>
-      <td><code>animation-iteration-infinite</code>, <code>animation-iteration-3</code></td>
-      <td><code>1</code></td>
+      <td>
+        <code>animation-iteration-count</code>
+      </td>
+      <td>
+        <code>animation-iteration-infinite</code>, <code>animation-iteration-3</code>
+      </td>
+      <td>
+        <code>1</code>
+      </td>
     </tr>
     <tr>
-      <td><code>animation-direction</code></td>
-      <td><code>animation-direction-reverse</code></td>
-      <td><code>normal</code></td>
+      <td>
+        <code>animation-direction</code>
+      </td>
+      <td>
+        <code>animation-direction-reverse</code>
+      </td>
+      <td>
+        <code>normal</code>
+      </td>
     </tr>
     <tr>
-      <td><code>animation-fill-mode</code></td>
-      <td><code>animation-fill-mode-forwards</code></td>
-      <td><code>none</code></td>
+      <td>
+        <code>animation-fill-mode</code>
+      </td>
+      <td>
+        <code>animation-fill-mode-forwards</code>
+      </td>
+      <td>
+        <code>none</code>
+      </td>
     </tr>
     <tr>
-      <td><code>animation-play-state</code></td>
-      <td><code>animation-play-state-paused</code></td>
-      <td><code>running</code></td>
+      <td>
+        <code>animation-play-state</code>
+      </td>
+      <td>
+        <code>animation-play-state-paused</code>
+      </td>
+      <td>
+        <code>running</code>
+      </td>
     </tr>
   </tbody>
 </table>
-
-
-
-
 
 ### Combined utilities
 
@@ -289,7 +311,8 @@ You can combine the animation duration and easing function utilities to create m
 For example if you have a disclosure animation where the entering and exiting animations have different durations and easing functions, you can use the combined utilities to create the animation.
 
 ```tsx
-<div className={cx(
+<div
+  className={cx(
     // Entering animation
     'data-[state=open]:animate-slide-in-right',
     'data-[state=open]:animation-duration-400',
@@ -297,10 +320,10 @@ For example if you have a disclosure animation where the entering and exiting an
     // Exiting animation
     'data-[state=closed]:animate-slide-out-right',
     'data-[state=closed]:animation-duration-250',
-    'data-[state=closed]:animation-ease-accelerate',
-)} />
+    'data-[state=closed]:animation-ease-accelerate'
+  )}
+/>
 ```
-
 
 ## Catalog of animations
 
@@ -309,29 +332,29 @@ export const AnimationPreview = ({ animation, className, style }) => {
   const [isIdle, setIsIdle] = useState(true);
   const previousAnimationNameRef = useRef(animation);
 
-  useEffect(() => {
-    if (animationName) {
-      previousAnimationNameRef.current = animationName;
-    }
-  }, [animationName]);
+useEffect(() => {
+if (animationName) {
+previousAnimationNameRef.current = animationName;
+}
+}, [animationName]);
 
-  const displayAnimationName = animationName || previousAnimationNameRef.current;
+const displayAnimationName = animationName || previousAnimationNameRef.current;
 
-  const handleReplay = useCallback(() => {
-    const currentAnimation = animationName;
-    setIsIdle(false);
-    setAnimationName('')
-    setTimeout(() => {
-      setAnimationName(currentAnimation)
-    }, 0)
-  }, [animationName]);
+const handleReplay = useCallback(() => {
+const currentAnimation = animationName;
+setIsIdle(false);
+setAnimationName('')
+setTimeout(() => {
+setAnimationName(currentAnimation)
+}, 0)
+}, [animationName]);
 
     return (
         <div className='sb-unstyled relative overflow-hidden w-full flex flex-col gap-sm'>
-            <div className='relative w-full bg-neutral-container h-sz-96 border-sm border-basic'>
+            <div className='relative w-full bg-neutral-container h-sz-96 border-sm border-support'>
                 <div className={cx(
                     'flex items-center justify-center p-md text-caption',
-                    'bg-basic text-on-basic rounded-sm size-sz-24 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
+                    'bg-support text-on-support rounded-sm size-sz-24 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
                     'default:animation-duration-2000',
                     'default:animation-ease-standard',
                     'default:animation-iteration-1',
@@ -347,59 +370,59 @@ export const AnimationPreview = ({ animation, className, style }) => {
                 </IconButton>
             </div>
             <p className='text-caption w-full text-center'>{displayAnimationName} {className}</p>
-            
+
             <p className='text-caption w-full text-center'>{JSON.stringify(style)}</p>
         </div>
     )
+
 }
 
 ### SlideIn/Out
 
-- Recommended duration: 
+- Recommended duration:
   - `400ms` for slide in animations.
   - `250ms` for slide out animations.
-- Recommended easing: 
+- Recommended easing:
   - `ease-decelerate-back` for slide in animations.
   - `ease-standard` for slide out animations.
 
-<div className='grid grid-cols-2 sm:grid-cols-4 gap-lg'>
-    <AnimationPreview animation="animate-slide-in-left" />
-    <AnimationPreview animation="animate-slide-in-top" />
-    <AnimationPreview animation="animate-slide-in-right" />
-    <AnimationPreview animation="animate-slide-in-bottom" />
-    <AnimationPreview animation="animate-slide-out-left" />
-    <AnimationPreview animation="animate-slide-out-top" />
-    <AnimationPreview animation="animate-slide-out-right" />
-    <AnimationPreview animation="animate-slide-out-bottom" />
+<div className="gap-lg grid grid-cols-2 sm:grid-cols-4">
+  <AnimationPreview animation="animate-slide-in-left" />
+  <AnimationPreview animation="animate-slide-in-top" />
+  <AnimationPreview animation="animate-slide-in-right" />
+  <AnimationPreview animation="animate-slide-in-bottom" />
+  <AnimationPreview animation="animate-slide-out-left" />
+  <AnimationPreview animation="animate-slide-out-top" />
+  <AnimationPreview animation="animate-slide-out-right" />
+  <AnimationPreview animation="animate-slide-out-bottom" />
 </div>
 
 ### FadeIn/Out
 
-- Recommended duration: 
+- Recommended duration:
   - `250ms` for both in and out animations.
-- Recommended easing: 
+- Recommended easing:
   - `ease-standard` for both in and out animations.
 
-<div className='grid grid-cols-2 sm:grid-cols-4 gap-lg'>
-    <AnimationPreview animation='animate-fade-in' />
-    <AnimationPreview animation='animate-fade-out' />
+<div className="gap-lg grid grid-cols-2 sm:grid-cols-4">
+  <AnimationPreview animation="animate-fade-in" />
+  <AnimationPreview animation="animate-fade-out" />
 </div>
 
 ### ScaleIn/Out
 
-- Recommended duration: 
+- Recommended duration:
   - `150ms` for both in and out animations.
-- Recommended easing: 
+- Recommended easing:
   - `ease-standard` for both in and out animations.
 
-
-<div className='grid grid-cols-2 sm:grid-cols-4 gap-lg'>
-    <AnimationPreview animation='animate-scale-in' />
-    <AnimationPreview animation='animate-scale-out' />
-    <AnimationPreview animation='animate-scale-in-x' />
-    <AnimationPreview animation='animate-scale-out-x' />
-    <AnimationPreview animation='animate-scale-in-y' />
-    <AnimationPreview animation='animate-scale-out-y' />
+<div className="gap-lg grid grid-cols-2 sm:grid-cols-4">
+  <AnimationPreview animation="animate-scale-in" />
+  <AnimationPreview animation="animate-scale-out" />
+  <AnimationPreview animation="animate-scale-in-x" />
+  <AnimationPreview animation="animate-scale-out-x" />
+  <AnimationPreview animation="animate-scale-in-y" />
+  <AnimationPreview animation="animate-scale-out-y" />
 </div>
 
 ### Ping
@@ -410,8 +433,11 @@ export const AnimationPreview = ({ animation, className, style }) => {
 
 **Note** this animation is better applied on a pseudo element overlapping the element you wish to pulse.
 
-<div className='grid grid-cols-2 sm:grid-cols-4 gap-lg'>
-    <AnimationPreview animation='before:animate-ping' className='before:absolute before:size-full before:animation-duration-650 before:bg-[inherit] before:rounded-[inherit] before:z-hide' />
+<div className="gap-lg grid grid-cols-2 sm:grid-cols-4">
+  <AnimationPreview
+    animation="before:animate-ping"
+    className="before:animation-duration-650 before:z-hide before:absolute before:size-full before:rounded-[inherit] before:bg-[inherit]"
+  />
 </div>
 
 ### Rotate
@@ -420,9 +446,9 @@ export const AnimationPreview = ({ animation, className, style }) => {
 - Recommended easing: `ease-standard`.
 - To set the rotation angle, add the `animation-rotate-end-360` (set the angle you want to rotate to).
 
-<div className='grid grid-cols-2 sm:grid-cols-4 gap-lg'>
-    <AnimationPreview animation='animate-rotate' />
-    <AnimationPreview animation='animate-rotate' className='animation-rotate-end-360'/>
+<div className="gap-lg grid grid-cols-2 sm:grid-cols-4">
+  <AnimationPreview animation="animate-rotate" />
+  <AnimationPreview animation="animate-rotate" className="animation-rotate-end-360" />
 </div>
 
 ### Shake
@@ -431,16 +457,18 @@ export const AnimationPreview = ({ animation, className, style }) => {
 - Recommended easing: `ease-standard`.
 - To set the intensity of the shake, add the `animation-shake-intensity-50` utility class (unit is percentage).
 
-<div className='grid grid-cols-2 sm:grid-cols-4 gap-lg'>
-    <AnimationPreview animation='animate-shake-x' className='animation-duration-500' />
-    <AnimationPreview animation='animate-shake-x' className='animation-duration-500 animation-shake-intensity-50' />
-    <AnimationPreview animation='animate-shake-y' className='animation-duration-500' />
-    <AnimationPreview animation='animate-shake-y' className='animation-duration-500 animation-shake-intensity-50' />
+<div className="gap-lg grid grid-cols-2 sm:grid-cols-4">
+  <AnimationPreview animation="animate-shake-x" className="animation-duration-500" />
+  <AnimationPreview
+    animation="animate-shake-x"
+    className="animation-duration-500 animation-shake-intensity-50"
+  />
+  <AnimationPreview animation="animate-shake-y" className="animation-duration-500" />
+  <AnimationPreview
+    animation="animate-shake-y"
+    className="animation-duration-500 animation-shake-intensity-50"
+  />
 </div>
-
-
-
-
 
 ## Playground
 
@@ -494,27 +522,28 @@ export const Playground = () => {
         'animate-ping',
     ]
 
-  return (
-    <Card design="outlined">
-        <Card.Content inset className="grid grid-cols-2 gap-lg overflow-hidden sb-unstyled">
-            <div className='grid grid-cols-2 gap-md p-lg'>
-                <FormField>
-                    <FormField.Label>Name</FormField.Label>
-                    <Dropdown value={displayAnimationName} onValueChange={(value) => setAnimationName(value)} className="w-full">
-                        <Dropdown.Trigger>
-                            <Dropdown.Value placeholder="Pick a keyframe">
-                                {displayAnimationName.replace('animate-', '')}
-                            </Dropdown.Value>
-                        </Dropdown.Trigger>
-                        <Dropdown.Popover matchTriggerWidth={false}>
-                            <Dropdown.Items>
-                                {animations.map((animation) => (
-                                    <Dropdown.Item key={animation} value={`${animation}`}>{animation.replace('animate-', '')}</Dropdown.Item>
-                                ))}
-                            </Dropdown.Items>
-                        </Dropdown.Popover>
-                    </Dropdown>
-                </FormField>
+return (
+
+<Card design="outlined">
+<Card.Content inset className="grid grid-cols-2 gap-lg overflow-hidden sb-unstyled">
+<div className='grid grid-cols-2 gap-md p-lg'>
+<FormField>
+<FormField.Label>Name</FormField.Label>
+<Dropdown value={displayAnimationName} onValueChange={(value) => setAnimationName(value)} className="w-full">
+<Dropdown.Trigger>
+<Dropdown.Value placeholder="Pick a keyframe">
+{displayAnimationName.replace('animate-', '')}
+</Dropdown.Value>
+</Dropdown.Trigger>
+<Dropdown.Popover matchTriggerWidth={false}>
+<Dropdown.Items>
+{animations.map((animation) => (
+<Dropdown.Item key={animation} value={`${animation}`}>{animation.replace('animate-', '')}</Dropdown.Item>
+))}
+</Dropdown.Items>
+</Dropdown.Popover>
+</Dropdown>
+</FormField>
 
                 <FormField>
                     <FormField.Label>Duration</FormField.Label>
@@ -644,10 +673,10 @@ export const Playground = () => {
                     </Dropdown>
                 </FormField>
             </div>
-            
+
             <div className='relative overflow-hidden w-full bg-neutral-container h-full flex flex-col gap-sm'>
                 <div className={cx(
-                    'bg-basic rounded-lg shadow-sm size-sz-80 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
+                    'bg-support rounded-lg shadow-sm size-sz-80 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
                     animationName,
                     animationDuration,
                     animationEasing,
@@ -665,8 +694,9 @@ export const Playground = () => {
                 </Button>}
             </div>
         </Card.Content>
-    </Card>  
-    )   
+    </Card>
+    )
+
 }
 
 <Playground />

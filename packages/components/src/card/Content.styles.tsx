@@ -27,7 +27,6 @@ export const contentStyles = cva(
           'main',
           'support',
           'accent',
-          'basic',
           'success',
           'alert',
           'danger',
@@ -40,7 +39,6 @@ export const contentStyles = cva(
         main: [],
         support: [],
         accent: [],
-        basic: [],
         success: [],
         alert: [],
         danger: [],
@@ -74,14 +72,6 @@ export const contentStyles = cva(
         class: tw([
           'bg-accent text-on-accent group-focus:bg-accent-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-accent-hovered',
-        ]),
-      },
-      {
-        intent: 'basic',
-        design: 'filled',
-        class: tw([
-          'bg-basic text-on-basic group-focus:bg-basic-hovered',
-          'group-not-disabled:group-data-[interactive=true]:group-hover:bg-basic-hovered',
         ]),
       },
       {
@@ -159,13 +149,6 @@ export const contentStyles = cva(
         class: tw([
           'bg-accent-container text-on-accent-container group-focus:bg-accent-container-hovered',
           'group-not-disabled:group-data-[interactive=true]:group-hover:bg-accent-container-hovered',
-        ]),
-      },
-      {
-        intent: 'basic',
-        design: 'tinted',
-        class: tw([
-          'bg-basic-container text-on-basic-container group-focus:bg-basic-container-hovered',
         ]),
       },
       {

@@ -168,7 +168,7 @@ export const Controlled: StoryFn = () => {
       <div className="gap-md flex w-full flex-col">
         {currentPageItems.map(item => {
           return (
-            <div key={item.id} className="bg-basic-container p-lg">
+            <div key={item.id} className="bg-support-container p-lg">
               <p>{item.name}</p>
             </div>
           )

@@ -1,11 +1,5 @@
 [data-theme='light-more-contrast'] {
   --color-focus: #00f;
-  --color-basic: #484848;
-  --color-on-basic: #f9f9f9;
-  --color-basic-hovered: #5e5e5e;
-  --color-basic-container: #e6e6e6;
-  --color-on-basic-container: #1a1a1a;
-  --color-basic-container-hovered: #f1f1f1;
 
   --color-accent: #484848;
   --color-on-accent: #f9f9f9;

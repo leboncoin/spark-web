@@ -69,7 +69,6 @@ function getDefaultIcon(intent: ToastIntent): React.ReactNode {
     case 'main':
     case 'support':
     case 'accent':
-    case 'basic':
     case 'neutral':
     case 'surface':
     case 'surfaceInverse':

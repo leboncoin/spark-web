@@ -24,7 +24,6 @@ const intents: BadgeProps['intent'][] = [
   'main',
   'support',
   'accent',
-  'basic',
   'success',
   'alert',
   'danger',

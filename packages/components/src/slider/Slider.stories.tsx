@@ -64,13 +64,13 @@ export const Controlled: StoryFn = () => {
   )
 }
 
-const intents: SliderProps['intent'][] = ['basic', 'main', 'accent']
+const intents: SliderProps['intent'][] = ['support', 'main', 'accent']
 
 export const Intent: StoryFn = _args => (
   <div className="gap-xl grid grid-cols-2 sm:grid-cols-5">
     {intents.map(intent => (
       <div key={intent} className="grow">
-        <Tag className="mb-md flex">{`${intent}${intent === 'basic' ? ' (default)' : ''}`}</Tag>
+        <Tag className="mb-md flex">{`${intent}${intent === 'support' ? ' (default)' : ''}`}</Tag>
 
         <Slider defaultValue={75} intent={intent}>
           <Slider.Control>

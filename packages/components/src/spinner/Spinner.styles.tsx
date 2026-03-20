@@ -25,24 +25,12 @@ export const spinnerStyles = cva(
        */
       intent: makeVariants<
         'intent',
-        [
-          'current',
-          'main',
-          'support',
-          'accent',
-          'basic',
-          'success',
-          'alert',
-          'error',
-          'info',
-          'neutral',
-        ]
+        ['current', 'main', 'support', 'accent', 'success', 'alert', 'error', 'info', 'neutral']
       >({
         current: ['border-current'],
         main: ['border-main'],
         support: ['border-support'],
         accent: ['border-accent'],
-        basic: ['border-basic'],
         success: ['border-success'],
         alert: ['border-alert'],
         error: ['border-error'],

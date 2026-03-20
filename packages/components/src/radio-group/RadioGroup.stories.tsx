@@ -73,14 +73,14 @@ export const Controlled: StoryFn = () => {
   )
 }
 
-const intents: RadioGroupProps['intent'][] = ['basic', 'error']
+const intents: RadioGroupProps['intent'][] = ['support', 'error']
 
 export const Intent: StoryFn = _args => {
   return (
     <div className="gap-xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
       {intents.map(intent => (
         <div key={intent}>
-          <Tag className="mb-md flex">{`${intent}${intent === 'basic' ? ' (default)' : ''}`}</Tag>
+          <Tag className="mb-md flex">{`${intent}${intent === 'support' ? ' (default)' : ''}`}</Tag>
           <RadioGroup defaultValue="1" intent={intent}>
             <RadioGroup.Radio value="1">First</RadioGroup.Radio>
             <RadioGroup.Radio value="2">Second</RadioGroup.Radio>

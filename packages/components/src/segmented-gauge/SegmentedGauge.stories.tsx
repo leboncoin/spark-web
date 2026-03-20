@@ -75,19 +75,10 @@ export const SizeVariants: StoryFn = () => {
 export const IntentVariants: StoryFn = () => {
   const intents: {
     name: string
-    intent:
-      | 'main'
-      | 'support'
-      | 'basic'
-      | 'accent'
-      | 'success'
-      | 'alert'
-      | 'danger'
-      | 'info'
-      | 'neutral'
+    intent: 'main' | 'support' | 'accent' | 'success' | 'alert' | 'danger' | 'info' | 'neutral'
     ariaLabel: string
   }[] = [
-    { name: 'Basic (default)', intent: 'basic', ariaLabel: 'Basic gauge' },
+    { name: 'Support (default)', intent: 'support', ariaLabel: 'Support gauge' },
     { name: 'Success', intent: 'success', ariaLabel: 'Success gauge' },
     { name: 'Alert', intent: 'alert', ariaLabel: 'Alert gauge' },
     { name: 'Danger', intent: 'danger', ariaLabel: 'Danger gauge' },

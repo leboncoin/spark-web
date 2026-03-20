@@ -13,7 +13,6 @@ import * as stories from './Toast.stories'
 
 Generates toast notifications.
 
-
 <Canvas of={stories.Default} />
 
 ## Install
@@ -29,16 +28,14 @@ This component is highly programmatic, you can use the `useToastManager` hook to
 Be careful that the `ToastProvider` component must be used only once in your app, as it manages the toast list state.
 
 ```tsx
-import { ToastProvider, ToastTrigger, useToastManager } from "@spark-ui/components/toast"
+import { ToastProvider, ToastTrigger, useToastManager } from '@spark-ui/components/toast'
 
 export default () => (
   <ToastProvider>
     <ToastTrigger />
   </ToastProvider>
-);
+)
 ```
-
-
 
 ## API Reference
 
@@ -64,28 +61,51 @@ Manages toasts, called inside of a `ToastProvider`.
   </thead>
   <tbody>
     <tr>
-      <td><code>toasts</code></td>
-      <td><code>ToastObject[]</code></td>
+      <td>
+        <code>toasts</code>
+      </td>
+      <td>
+        <code>ToastObject[]</code>
+      </td>
       <td>The array of toast objects.</td>
     </tr>
     <tr>
-      <td><code>add</code></td>
-      <td><code>(options: AddOptions) => string</code></td>
+      <td>
+        <code>add</code>
+      </td>
+      <td>
+        <code>(options: AddOptions) => string</code>
+      </td>
       <td>Adds a new toast and returns its ID</td>
     </tr>
     <tr>
-      <td><code>update</code></td>
-      <td><code>(toastId: string, options: Partial&lt;AddOptions&gt;) => void</code></td>
+      <td>
+        <code>update</code>
+      </td>
+      <td>
+        <code>(toastId: string, options: Partial&lt;AddOptions&gt;) => void</code>
+      </td>
       <td>Updates an existing toast by ID</td>
     </tr>
     <tr>
-      <td><code>promise</code></td>
-      <td><code>&lt;Value&gt;(promise: Promise&lt;Value&gt;, options: PromiseOptions&lt;Value&gt;) => Promise&lt;Value&gt;</code></td>
+      <td>
+        <code>promise</code>
+      </td>
+      <td>
+        <code>
+          &lt;Value&gt;(promise: Promise&lt;Value&gt;, options: PromiseOptions&lt;Value&gt;) =>
+          Promise&lt;Value&gt;
+        </code>
+      </td>
       <td>Handles promise-based toast notifications with loading, success, and error states</td>
     </tr>
     <tr>
-      <td><code>closeAll</code></td>
-      <td><code>() => void</code></td>
+      <td>
+        <code>closeAll</code>
+      </td>
+      <td>
+        <code>() => void</code>
+      </td>
       <td>Closes all active toasts</td>
     </tr>
   </tbody>
@@ -144,7 +164,7 @@ These are the options for the `add`, `update`, and `promise` methods.
     </tr>
     <tr>
       <td><code>data.intent</code></td>
-      <td><code>'main' | 'support' | 'accent' | 'basic' | 'success' | 'alert' | 'error' | 'info' | 'neutral' | 'surface' | 'surfaceInverse'</code></td>
+      <td><code>'main' | 'support' | 'accent' | 'success' | 'alert' | 'error' | 'info' | 'neutral' | 'surface' | 'surfaceInverse'</code></td>
       <td>The intent of the toast.</td>
     </tr>
     <tr>
@@ -178,7 +198,6 @@ These are the options for the `add`, `update`, and `promise` methods.
   </tbody>
 </table>
 
-
 ## Examples
 
 ### add/update/close methods
@@ -188,20 +207,19 @@ Manages toasts, called inside of a Toast.Provider.
 The `useToastManager` hook is used to manage the toast list programmatically.
 
 The following example showcases a toast that programatically:
+
 - opens itself.
-- updates it's description a few times to display a countdown  
+- updates it's description a few times to display a countdown
 - closes itself when the countdown reaches 0.
 
 <Canvas of={stories.ToastManager} />
 
 ### promise method
 
-An asynchronous toast can be created with three possible states: `loading`, `success`, and `error`. 
+An asynchronous toast can be created with three possible states: `loading`, `success`, and `error`.
 The type string matches these states to change the styling. Each of the states also accepts the method options object for more granular control.
 
 <Canvas of={stories.WithPromise} />
-
-
 
 ### Design and Intents
 
@@ -218,6 +236,7 @@ When `data.compact` is set to `true`, the toast uses a compact layout where the 
 ### Custom Icons
 
 By default, each intent has an associated icon:
+
 - `info`: `InfoFill`
 - `success`: `ValidFill`
 - `alert`: `WarningFill`
@@ -227,11 +246,6 @@ You can override the default icon by providing a custom icon in the `data.icon` 
 
 <Canvas of={stories.CustomIcon} />
 
-
-
-
-
-
 ## Advanced Examples
 
 ### JSX Content
@@ -240,7 +254,9 @@ Both `title` and `description` props accept JSX content, allowing you to create 
 
 <Callout kind="warning">
   <p>
-    Only use non-interactive, text-based elements in <code>title</code> and <code>description</code> props. Avoid interactive elements like buttons, inputs, or clickable components as they may cause accessibility and usability issues.
+    Only use non-interactive, text-based elements in <code>title</code> and <code>description</code>{' '}
+    props. Avoid interactive elements like buttons, inputs, or clickable components as they may
+    cause accessibility and usability issues.
   </p>
 </Callout>
 

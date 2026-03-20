@@ -10,7 +10,6 @@ export const progressIndicatorStyles = cva(['h-full w-full', 'transition-width d
      * Color scheme of the progress component.
      */
     intent: {
-      basic: ['bg-basic'],
       main: ['bg-main'],
       support: ['bg-support'],
       accent: ['bg-accent'],
@@ -46,7 +45,9 @@ export const ProgressIndicator = ({
   const percentage = value !== null ? ((value - min) / (max - min)) * 100 : 0
   const isIndeterminate = value === null
 
-  const handleTransitionEnd = (event: Parameters<NonNullable<ProgressIndicatorProps['onTransitionEnd']>>[0]) => {
+  const handleTransitionEnd = (
+    event: Parameters<NonNullable<ProgressIndicatorProps['onTransitionEnd']>>[0]
+  ) => {
     // Call the original onTransitionEnd if provided
     onTransitionEnd?.(event)
 

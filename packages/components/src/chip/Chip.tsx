@@ -37,7 +37,7 @@ export const Chip = ({
   design = 'outlined',
   disabled,
   children,
-  intent = 'basic',
+  intent = 'support',
   defaultPressed,
   pressed,
   asChild,

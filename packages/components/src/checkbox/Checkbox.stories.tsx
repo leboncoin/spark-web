@@ -108,14 +108,14 @@ export const ControlledGroup: StoryFn = () => {
 
 export const Disabled: StoryFn = _args => <Checkbox disabled>Accept terms and conditions</Checkbox>
 
-const intents = ['basic', 'error'] as const
+const intents = ['support', 'error'] as const
 
 export const Intent: StoryFn = _args => (
   <div className="gap-xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
     {intents.map(intent => {
       return (
         <div key={intent}>
-          <Tag className="flex">{`${intent}${intent === 'basic' ? ' (default)' : ''}`}</Tag>
+          <Tag className="flex">{`${intent}${intent === 'support' ? ' (default)' : ''}`}</Tag>
 
           <CheckboxGroup defaultValue={['soccer']} intent={intent} orientation="vertical">
             <Checkbox value="soccer">Soccer</Checkbox>

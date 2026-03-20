@@ -27,7 +27,7 @@ export const stepIndicatorVariant = cva(
         ],
       },
       intent: {
-        basic: '',
+        support: '',
         neutral: '',
         success: '',
       },
@@ -43,20 +43,20 @@ export const stepIndicatorVariant = cva(
      * */
     /* @ts-ignore */
     compoundVariants: [
-      // Basic
+      // Support
       {
-        intent: 'basic',
+        intent: 'support',
         state: ['complete', 'incomplete'],
         class: [
-          'text-on-basic-container bg-basic-container',
-          'group-hover/btn:group-data-[interactive=true]/btn:bg-basic-container-hovered',
-          'group-hover/btn:group-data-[interactive=false]/btn:bg-basic-container',
+          'text-on-support-container bg-support-container',
+          'group-hover/btn:group-data-[interactive=true]/btn:bg-support-container-hovered',
+          'group-hover/btn:group-data-[interactive=false]/btn:bg-support-container',
         ],
       },
       {
-        intent: 'basic',
+        intent: 'support',
         state: 'active',
-        class: 'text-on-basic bg-basic',
+        class: 'text-on-support bg-support',
       },
       // Neutral
       {
@@ -92,7 +92,7 @@ export const stepIndicatorVariant = cva(
     defaultVariants: {
       size: 'lg',
       state: 'incomplete',
-      intent: 'basic',
+      intent: 'support',
     },
   }
 )

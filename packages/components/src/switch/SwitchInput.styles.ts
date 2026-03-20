@@ -28,12 +28,11 @@ export const styles = cva(
        */
       intent: makeVariants<
         'intent',
-        ['main', 'support', 'accent', 'basic', 'success', 'alert', 'error', 'info', 'neutral']
+        ['main', 'support', 'accent', 'success', 'alert', 'error', 'info', 'neutral']
       >({
         main: ['[&[data-checked]]:bg-main', 'hover:ring-main-container', 'text-main'],
         support: ['[&[data-checked]]:bg-support', 'hover:ring-support-container', 'text-support'],
         accent: ['[&[data-checked]]:bg-accent', 'hover:ring-accent-container', 'text-accent'],
-        basic: ['[&[data-checked]]:bg-basic', 'hover:ring-basic-container', 'text-basic'],
         success: ['[&[data-checked]]:bg-success', 'hover:ring-success-container', 'text-success'],
         alert: ['[&[data-checked]]:bg-alert', 'hover:ring-alert-container', 'text-alert'],
         error: ['[&[data-checked]]:bg-error', 'hover:ring-error-container', 'text-error'],
@@ -42,7 +41,7 @@ export const styles = cva(
       }),
     },
     defaultVariants: {
-      intent: 'basic',
+      intent: 'support',
       size: 'sm',
     },
   }

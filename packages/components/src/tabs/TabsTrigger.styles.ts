@@ -21,12 +21,11 @@ export const triggerVariants = cva(
     variants: {
       /**
        * Change the color scheme of the tabs
-       * @default basic
+       * @default support
        */
-      intent: makeVariants<'intent', ['main', 'support', 'basic']>({
+      intent: makeVariants<'intent', ['main', 'support']>({
         main: ['data-[state=active]:text-main data-[state=active]:after:bg-main'],
         support: ['data-[state=active]:text-support data-[state=active]:after:bg-support'],
-        basic: ['data-[state=active]:text-basic data-[state=active]:after:bg-basic'],
       }),
       /**
        * Change the size of the tabs
@@ -53,7 +52,7 @@ export const triggerVariants = cva(
       },
     ],
     defaultVariants: {
-      intent: 'basic',
+      intent: 'support',
       size: 'md',
       hasMenu: false,
       orientation: 'horizontal',

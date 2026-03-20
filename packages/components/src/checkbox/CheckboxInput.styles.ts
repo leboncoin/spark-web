@@ -16,7 +16,7 @@ export const checkboxInputStyles = cva(
        */
       intent: makeVariants<
         'intent',
-        ['main', 'support', 'accent', 'basic', 'success', 'alert', 'error', 'info', 'neutral']
+        ['main', 'support', 'accent', 'success', 'alert', 'error', 'info', 'neutral']
       >({
         main: [
           'text-on-main',
@@ -38,13 +38,6 @@ export const checkboxInputStyles = cva(
           'data-[state=unchecked]:border-outline',
           'data-[state=indeterminate]:border-accent data-[state=indeterminate]:bg-accent',
           'data-[state=checked]:border-accent data-[state=checked]:bg-accent',
-        ],
-        basic: [
-          'text-on-basic',
-          'hover:ring-basic-container',
-          'data-[state=unchecked]:border-outline',
-          'data-[state=indeterminate]:border-basic data-[state=indeterminate]:bg-basic',
-          'data-[state=checked]:border-basic data-[state=checked]:bg-basic',
         ],
         success: [
           'text-on-success',
@@ -84,7 +77,7 @@ export const checkboxInputStyles = cva(
       }),
     },
     defaultVariants: {
-      intent: 'basic',
+      intent: 'support',
     },
   }
 )

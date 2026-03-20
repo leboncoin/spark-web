@@ -34,22 +34,10 @@ export const chipStyles = cva(
        */
       intent: makeVariants<
         'intent',
-        [
-          'main',
-          'support',
-          'basic',
-          'accent',
-          'success',
-          'alert',
-          'danger',
-          'info',
-          'neutral',
-          'surface',
-        ]
+        ['main', 'support', 'accent', 'success', 'alert', 'danger', 'info', 'neutral', 'surface']
       >({
         main: [],
         support: [],
-        basic: [],
         accent: [],
         success: [],
         alert: [],
@@ -73,7 +61,7 @@ export const chipStyles = cva(
     compoundVariants: [...outlinedVariants, ...tintedVariants, ...dashedVariants],
     defaultVariants: {
       design: 'outlined',
-      intent: 'basic',
+      intent: 'support',
     },
   }
 )

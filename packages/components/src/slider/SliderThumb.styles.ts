@@ -20,7 +20,6 @@ export const thumbVariants = cva(
         main: ['after:bg-main', 'before:bg-main-container before:border-main'],
         support: ['after:bg-support', 'before:bg-support-container before:border-support'],
         accent: ['after:bg-accent', 'before:bg-accent-container before:border-accent'],
-        basic: ['after:bg-basic', 'before:bg-basic-container before:border-basic'],
         info: ['after:bg-info', 'before:bg-info-container before:border-info'],
         neutral: ['after:bg-neutral', 'before:bg-neutral-container before:border-neutral'],
         success: ['after:bg-success', 'before:bg-success-container before:border-success'],
@@ -29,7 +28,7 @@ export const thumbVariants = cva(
       },
     },
     defaultVariants: {
-      intent: 'basic',
+      intent: 'support',
     },
   }
 )
