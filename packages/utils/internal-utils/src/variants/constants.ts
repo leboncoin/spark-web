@@ -13,7 +13,6 @@ const intents = [
   'surface',
   'surfaceInverse',
   'accent',
-  'basic',
 ] as const
 
 const designs = ['filled', 'outlined', 'tinted', 'ghost', 'contrast', 'dashed'] as const

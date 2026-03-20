@@ -35,17 +35,6 @@ export const tintedVariants = [
     ]),
   },
   {
-    intent: 'basic',
-    design: 'tinted',
-    class: tw([
-      'bg-basic-container',
-      'text-on-basic-container',
-      'hover:bg-basic-container-hovered',
-      'enabled:active:bg-basic-container-hovered',
-      'focus-visible:bg-basic-container-hovered',
-    ]),
-  },
-  {
     intent: 'success',
     design: 'tinted',
     class: tw([

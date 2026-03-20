@@ -36,7 +36,6 @@ const intents: CardProps['intent'][] = [
   'main',
   'support',
   'accent',
-  'basic',
   'success',
   'alert',
   'danger',

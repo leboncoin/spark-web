@@ -25,17 +25,6 @@ export const outlinedVariants = [
     ]),
   },
   {
-    design: 'outlined',
-    intent: 'basic',
-    class: tw([
-      'enabled:hover:bg-basic/dim-5',
-      'enabled:active:bg-basic/dim-5',
-      'focus-visible:bg-basic/dim-5',
-      'aria-pressed:bg-basic-container aria-pressed:text-on-basic-container aria-pressed:enabled:hover:bg-basic-container/dim-1',
-      'text-basic',
-    ]),
-  },
-  {
     intent: 'accent',
     design: 'outlined',
     class: tw([

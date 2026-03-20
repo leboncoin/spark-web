@@ -22,7 +22,7 @@ const meta: Meta<typeof ProgressTracker> = {
 export default meta
 
 const sizes: ProgressTrackerProps['size'][] = ['sm', 'md', 'lg']
-const intents: ProgressTrackerProps['intent'][] = ['basic', 'neutral', 'success']
+const intents: ProgressTrackerProps['intent'][] = ['support', 'neutral', 'success']
 const orientations: ProgressTrackerProps['orientation'][] = ['horizontal', 'vertical']
 
 export const Default: StoryFn = _args => (
@@ -102,7 +102,7 @@ export const Intent: StoryFn = _args => (
   <div className="gap-2xl flex flex-wrap items-center">
     {intents.map(intent => (
       <div key={intent}>
-        <Tag className="mb-md flex">{`${intent}${intent === 'basic' ? ' (default)' : ''}`}</Tag>
+        <Tag className="mb-md flex">{`${intent}${intent === 'support' ? ' (default)' : ''}`}</Tag>
         <ProgressTracker
           aria-label={`Progress tracker "${intent}"`}
           stepIndex={1}

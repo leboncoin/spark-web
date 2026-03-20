@@ -31,11 +31,6 @@ export const filledVariants = [
   },
   {
     design: 'filled',
-    intent: 'basic',
-    class: ['bg-basic text-on-basic'],
-  },
-  {
-    design: 'filled',
     intent: 'support',
     class: ['bg-support text-on-support'],
   },
@@ -81,11 +76,6 @@ export const tintedVariants = [
     design: 'tinted',
     intent: 'main',
     class: ['bg-main-container text-on-main-container'],
-  },
-  {
-    design: 'tinted',
-    intent: 'basic',
-    class: ['bg-basic-container text-on-basic-container'],
   },
   {
     design: 'tinted',

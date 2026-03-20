@@ -17,11 +17,6 @@ export const tintedVariants = [
     class: tw(['bg-accent-container', 'text-on-accent-container']),
   },
   {
-    intent: 'basic',
-    design: 'tinted',
-    class: tw(['bg-basic-container', 'text-on-basic-container']),
-  },
-  {
     intent: 'success',
     design: 'tinted',
     class: tw(['bg-success-container', 'text-on-success-container']),

@@ -31,12 +31,12 @@ export const A11yDrawer = () => (
           </Drawer.Body>
 
           <Drawer.Footer className="gap-md flex justify-between">
-            <Button intent="basic" design="ghost">
+            <Button intent="support" design="ghost">
               Cancel
             </Button>
 
             <div className="gap-md flex">
-              <Button intent="basic" design="outlined">
+              <Button intent="support" design="outlined">
                 Disagree
               </Button>
               <Button>Submit</Button>

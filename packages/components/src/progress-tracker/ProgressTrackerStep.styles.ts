@@ -57,7 +57,7 @@ export const stepItemVariant = cva(
         ],
       },
       intent: {
-        basic: '',
+        support: '',
         neutral: '',
         success: '',
       },
@@ -74,7 +74,7 @@ export const stepItemVariant = cva(
       disabled: false,
       disabledAfter: false,
       size: 'lg',
-      intent: 'basic',
+      intent: 'support',
     },
   }
 )

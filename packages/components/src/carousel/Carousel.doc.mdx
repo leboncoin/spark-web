@@ -55,56 +55,53 @@ Presents a set of slides, by sequentially displaying a subset of one or more ite
 
 <ArgTypes of={Carousel} />
 
-
-### _.Viewport
+### \_.Viewport
 
 Container for both the carousel items and the carousel controls. The carousel slide picker should remain outside of it.
 
 <ArgTypes of={Carousel.Viewport} />
 
-
-### _.Slides
+### \_.Slides
 
 The scroll area of the carousel, contains all items to display in slides.
 
 <ArgTypes of={Carousel.Slides} />
 
-### _.Slide
+### \_.Slide
 
 A single content container within a set of content containers that hold the content to be presented by the carousel.
 
 <ArgTypes of={Carousel.Slide} />
 
-### _.Controls
+### \_.Controls
 
 Two interactive elements, styled as arrow buttons, that displays the next or previous slide in the rotation sequence.
 
 <ArgTypes of={Carousel.Controls} />
 
-### _.PrevButton
+### \_.PrevButton
 
 Button that scroll to previous set of slides.
 
 <ArgTypes of={Carousel.PrevButton} />
 
-### _.NextButton
+### \_.NextButton
 
 Button that scroll to next set of slides.
 
 <ArgTypes of={Carousel.NextButton} />
 
-### _.PagePicker
+### \_.PagePicker
 
 A group of elements, styled as small dots, that enable the user to pick a specific page in the rotation sequence to display. Behave like a radiogroup
 
 <ArgTypes of={Carousel.PagePicker} />
 
-### _.PageIndicator
+### \_.PageIndicator
 
 A button with "radio" role that takes you to a specific page in the carousel. You can customize it.
 
 <ArgTypes of={Carousel.PageIndicator} />
-
 
 ## Examples
 
@@ -132,12 +129,13 @@ To customize spacing between slides, set the `gap` property. Value in pixels (in
 
 To inset the page picker from the edges of the carousel, pass the `pagePickerInset` prop to `Carousel`.
 
-Each `Carousel.PageIndicator` can have an `intent` prop to customize its appearance, either `basic` or `surface`.
+Each `Carousel.PageIndicator` can have an `intent` prop to customize its appearance, either `support` or `surface`.
 
 <Callout kind="warning" marginY="large">
   <p>
-    <span className="font-bold">a11y</span>: When using images in carousel slides, ensure proper contrast between page indicators and background. Add a gradient overlay or shadow to maintain accessibility standards.
-    Check the code example to see how to do it.
+    <span className="font-bold">a11y</span>: When using images in carousel slides, ensure proper
+    contrast between page indicators and background. Add a gradient overlay or shadow to maintain
+    accessibility standards. Check the code example to see how to do it.
   </p>
 </Callout>
 
@@ -191,7 +189,6 @@ The `unstyled` prop of `Carousel.PageIndicator` allows you to use your own style
 
 <Canvas of={stories.CustomPageIndicators} />
 
-
 ### Maximum number of page indicators
 
 Set the `maxDots` prop of `Carousel` to customize the maximum number of page indicators. Default is `5` (must be an odd number).
@@ -212,8 +209,10 @@ This component adheres to the [`carousel` pattern](https://www.w3.org/WAI/ARIA/a
 
 ### Keyboard Interactions
 
-- <Kbd>Tab</Kbd> and <Kbd>Shift + Tab</Kbd>: Move focus through the interactive elements of the carousel as specified by the component tab sequence:
-- <Kbd>LeftArrow</Kbd> or <Kbd>RightArrow</Kbd>: Go to the previous/next page while focused on the carousel OR page picker.
+- <Kbd>Tab</Kbd> and <Kbd>Shift + Tab</Kbd>: Move focus through the interactive elements of the
+  carousel as specified by the component tab sequence:
+- <Kbd>LeftArrow</Kbd> or <Kbd>RightArrow</Kbd>: Go to the previous/next page while focused on the
+  carousel OR page picker.
 
 ### Keyboard Tab Sequence
 

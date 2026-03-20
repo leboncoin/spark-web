@@ -399,7 +399,7 @@ export const NestedDialogs = () => {
                 </AlertDialog.Portal>
               </AlertDialog>
               <Dialog.Close asChild>
-                <Button intent="basic" design="outlined">
+                <Button intent="support" design="outlined">
                   Close
                 </Button>
               </Dialog.Close>
@@ -518,7 +518,7 @@ export const SparkLayers = () => {
 
                     <Drawer.Footer className="gap-md flex justify-end">
                       <Drawer.Close asChild>
-                        <Button intent="basic" design="outlined">
+                        <Button intent="support" design="outlined">
                           Close
                         </Button>
                       </Drawer.Close>
@@ -528,7 +528,7 @@ export const SparkLayers = () => {
                 </Drawer.Portal>
               </Drawer>
               <Dialog.Close asChild>
-                <Button intent="basic" design="outlined">
+                <Button intent="support" design="outlined">
                   Close
                 </Button>
               </Dialog.Close>

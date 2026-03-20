@@ -7,16 +7,7 @@ export interface SegmentedGaugeContextValue {
   segments: number
   currentIndex: number
   size: 'sm' | 'md'
-  intent:
-    | 'main'
-    | 'support'
-    | 'basic'
-    | 'accent'
-    | 'success'
-    | 'alert'
-    | 'danger'
-    | 'info'
-    | 'neutral'
+  intent: 'main' | 'support' | 'accent' | 'success' | 'alert' | 'danger' | 'info' | 'neutral'
   customColor?: string
   labelId: string
   gaugeId: string

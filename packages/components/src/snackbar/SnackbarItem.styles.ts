@@ -70,7 +70,6 @@ export const snackbarItemVariant = cva(
         info: '',
         neutral: '',
         main: '',
-        basic: '',
         support: '',
         accent: '',
         inverse: '',

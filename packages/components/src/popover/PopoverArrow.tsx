@@ -29,7 +29,6 @@ export const Arrow = ({
         main: 'fill-main-container',
         support: 'fill-support-container',
         accent: 'fill-accent-container',
-        basic: 'fill-basic-container',
         success: 'fill-success-container',
         alert: 'fill-alert-container',
         danger: 'fill-error-container',

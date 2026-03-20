@@ -36,8 +36,6 @@ export const SegmentedGaugeSegment = ({
         return 'var(--color-main)'
       case 'support':
         return 'var(--color-support)'
-      case 'basic':
-        return 'var(--color-basic)'
       case 'accent':
         return 'var(--color-accent)'
       case 'success':

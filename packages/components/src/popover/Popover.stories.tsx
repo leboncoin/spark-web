@@ -86,7 +86,6 @@ export const Intents: StoryFn = _args => {
     'main',
     'support',
     'accent',
-    'basic',
     'success',
     'alert',
     'danger',

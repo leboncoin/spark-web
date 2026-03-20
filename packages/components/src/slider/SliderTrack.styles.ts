@@ -14,7 +14,6 @@ export const rangeVariants = cva(
         main: ['bg-main'],
         support: ['bg-support'],
         accent: ['bg-accent'],
-        basic: ['bg-basic'],
         info: ['bg-info'],
         neutral: ['bg-neutral'],
         success: ['bg-success'],
@@ -23,7 +22,7 @@ export const rangeVariants = cva(
       },
     },
     defaultVariants: {
-      intent: 'basic',
+      intent: 'support',
     },
   }
 )

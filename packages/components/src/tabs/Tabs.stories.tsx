@@ -167,7 +167,7 @@ export const Intent: StoryFn = _args => {
   return (
     <div className="gap-lg flex flex-col">
       <div>
-        <Tag className="mb-md flex">basic (default)</Tag>
+        <Tag className="mb-md flex">support (default)</Tag>
         <Tabs defaultValue="tab1">
           <Tabs.List>
             {tabs.map(({ value, children, disabled }) => (

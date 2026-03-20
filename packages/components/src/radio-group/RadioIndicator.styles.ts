@@ -19,12 +19,11 @@ export const radioIndicatorStyles = cva(
     variants: {
       intent: makeVariants<
         'intent',
-        ['main', 'support', 'accent', 'basic', 'success', 'alert', 'error', 'info', 'neutral']
+        ['main', 'support', 'accent', 'success', 'alert', 'error', 'info', 'neutral']
       >({
         main: ['after:bg-main'],
         support: ['after:bg-support'],
         accent: ['after:bg-accent'],
-        basic: ['after:bg-basic'],
         neutral: ['after:bg-neutral'],
         success: ['after:bg-success'],
         alert: ['after:bg-alert'],
@@ -33,7 +32,7 @@ export const radioIndicatorStyles = cva(
       }),
     },
     defaultVariants: {
-      intent: 'basic',
+      intent: 'support',
     },
   }
 )

@@ -20,7 +20,7 @@ export const radioInputVariants = cva(
        */
       intent: makeVariants<
         'intent',
-        ['main', 'support', 'accent', 'basic', 'success', 'alert', 'error', 'info', 'neutral']
+        ['main', 'support', 'accent', 'success', 'alert', 'error', 'info', 'neutral']
       >({
         main: ['border-outline', 'data-[state=checked]:border-main', 'hover:ring-main-container'],
         support: [
@@ -32,11 +32,6 @@ export const radioInputVariants = cva(
           'border-outline',
           'data-[state=checked]:border-accent',
           'hover:ring-accent-container',
-        ],
-        basic: [
-          'border-outline',
-          'data-[state=checked]:border-basic',
-          'hover:ring-basic-container',
         ],
         neutral: [
           'border-outline',
@@ -54,7 +49,7 @@ export const radioInputVariants = cva(
       }),
     },
     defaultVariants: {
-      intent: 'basic',
+      intent: 'support',
     },
   }
 )

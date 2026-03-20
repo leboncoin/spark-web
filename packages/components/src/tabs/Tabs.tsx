@@ -27,7 +27,7 @@ export interface TabsProps
 export type TabsRootProps = TabsProps
 
 export const Tabs = ({
-  intent = 'basic',
+  intent = 'support',
   size = 'md',
   /**
    * Default Radix Primitive values

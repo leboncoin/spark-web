@@ -391,7 +391,7 @@ export const FilterableComponentsList = () => {
           filtered.map((component) => (
             <div key={component.name} className="flex flex-col gap-sm w-sz-184 shrink-0 min-h-[100px]">
               <a href={component.href} className="flex gap-md flex-col group">
-                <TextLink underline={false} intent="basic" className="text-headline-2">
+                <TextLink underline={false} intent="support" className="text-headline-2">
                   {component.name}
                 </TextLink>
 
@@ -411,7 +411,8 @@ export const FilterableComponentsList = () => {
         )}
       </div>
     </>
-  )
+
+)
 }
 
 ## Components

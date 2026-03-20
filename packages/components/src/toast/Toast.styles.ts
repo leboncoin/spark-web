@@ -39,7 +39,6 @@ export const toastStyles = cva(
         info: '',
         neutral: '',
         main: '',
-        basic: '',
         support: '',
         accent: '',
         surface: '',
@@ -77,11 +76,6 @@ export const toastStyles = cva(
         design: 'filled',
         intent: 'main',
         class: ['bg-main text-on-main border-main'],
-      },
-      {
-        design: 'filled',
-        intent: 'basic',
-        class: ['bg-basic text-on-basic border-basic'],
       },
       {
         design: 'filled',
@@ -134,11 +128,6 @@ export const toastStyles = cva(
         design: 'tinted',
         intent: 'main',
         class: ['bg-main-container text-on-main-container border-main'],
-      },
-      {
-        design: 'tinted',
-        intent: 'basic',
-        class: ['bg-basic-container text-on-basic-container border-basic'],
       },
       {
         design: 'tinted',

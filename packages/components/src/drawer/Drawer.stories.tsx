@@ -55,12 +55,12 @@ export const Usage: StoryFn = () => {
           </Drawer.Body>
 
           <Drawer.Footer className="gap-md flex justify-between">
-            <Button intent="basic" design="ghost" onClick={() => setOpen(false)}>
+            <Button intent="support" design="ghost" onClick={() => setOpen(false)}>
               Cancel
             </Button>
 
             <div className="gap-md flex">
-              <Button intent="basic" design="outlined" onClick={() => setOpen(false)}>
+              <Button intent="support" design="outlined" onClick={() => setOpen(false)}>
                 Disagree
               </Button>
               <Button>Submit</Button>
@@ -107,12 +107,12 @@ export const Fade: StoryFn = () => {
           </Drawer.Body>
 
           <Drawer.Footer className="gap-md flex justify-between">
-            <Button intent="basic" design="ghost" onClick={() => setOpen(false)}>
+            <Button intent="support" design="ghost" onClick={() => setOpen(false)}>
               Cancel
             </Button>
 
             <div className="gap-md flex">
-              <Button intent="basic" design="outlined" onClick={() => setOpen(false)}>
+              <Button intent="support" design="outlined" onClick={() => setOpen(false)}>
                 Disagree
               </Button>
               <Button>Submit</Button>
@@ -359,7 +359,7 @@ export const NestedDialog: StoryFn = () => {
               </AlertDialog.Portal>
             </AlertDialog>
             <Drawer.Close asChild>
-              <Button intent="basic" design="outlined">
+              <Button intent="support" design="outlined">
                 Close
               </Button>
             </Drawer.Close>

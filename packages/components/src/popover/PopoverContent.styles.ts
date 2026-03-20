@@ -14,7 +14,6 @@ export const styles = cva(
         main: 'bg-main-container text-on-main-container',
         support: 'bg-support-container text-on-support-container',
         accent: 'bg-accent-container text-on-accent-container',
-        basic: 'bg-basic-container text-on-basic-container',
         success: 'bg-success-container text-on-success-container',
         alert: 'bg-alert-container text-on-alert-container',
         danger: 'bg-error-container text-on-error-container',

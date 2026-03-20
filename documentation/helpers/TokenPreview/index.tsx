@@ -51,14 +51,6 @@ export const BackgroundColorPreview = () => {
       token: '--color-accent-container',
       styles: 'bg-accent-container text-on-accent-container hover:bg-accent-container-hovered',
     },
-    'bg-basic': {
-      token: '--color-basic',
-      styles: 'bg-basic text-on-basic hover:bg-basic-hovered',
-    },
-    'bg-basic-container': {
-      token: '--color-basic-container',
-      styles: 'bg-basic-container text-on-basic-container hover:bg-basic-container-hovered',
-    },
   }
 
   const feedBackColors = {
@@ -210,14 +202,6 @@ export const TextColorPreview = () => {
       token: '--color-on-accent',
       styles: 'text-on-accent bg-accent',
     },
-    'text-basic': {
-      token: '--color-basic',
-      styles: 'text-basic',
-    },
-    'text-on-basic': {
-      token: '--color-on-basic',
-      styles: 'text-on-basic bg-basic',
-    },
     'text-success': {
       token: '--color-success',
       styles: 'text-success',
@@ -306,10 +290,6 @@ export const OutlineColorPreview = () => {
     'border-accent': {
       token: '--color-accent',
       styles: 'border-accent',
-    },
-    'border-basic': {
-      token: '--color-basic',
-      styles: 'border-basic',
     },
     'border-success': {
       token: '--color-success',

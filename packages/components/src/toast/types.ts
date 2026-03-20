@@ -6,7 +6,6 @@ export type ToastIntent =
   | /** @deprecated Use 'info', 'success', 'alert', or 'error' instead */ 'main'
   | /** @deprecated Use 'info', 'success', 'alert', or 'error' instead */ 'support'
   | /** @deprecated Use 'info', 'success', 'alert', or 'error' instead */ 'accent'
-  | /** @deprecated Use 'info', 'success', 'alert', or 'error' instead */ 'basic'
   | 'success'
   | 'alert'
   | 'error'

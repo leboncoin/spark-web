@@ -38,7 +38,7 @@ export const CustomRadio = ({
         htmlFor={value}
         className={cx(
           'py-sm px-lg rounded-md border-sm',
-          value === selectedValue ? 'bg-basic text-on-basic border-basic' : 'border-basic',
+          value === selectedValue ? 'bg-support text-on-support border-support' : 'border-support',
           'cursor-pointer',
           'focus-within:u-outline',
           '[&:has(:focus-visible)]:focus-within:ring-2'
@@ -68,7 +68,6 @@ export const ColorCard = () => {
         { name: 'Main', intentProp: 'main', styles: { card: 'bg-main-container text-on-main-container', button: 'bg-main text-on-main'}, description: 'Use Main color to emphasize the most relevant components and essential elements on the UI, like primary actions or brand panels. These colors play a crucial role in helping to strengthen the brand identity. By using the Main colors strategically, users can easily recognize and connect with the brand, which leads to building trust and familiarity with an interface that is cohesive and unique.' },
         { name: 'Support', intentProp: 'support', styles: { card: 'bg-support-container text-on-support-container', button: 'bg-support text-on-support'}, description: 'Use Support colors to complement the main actions or primary elements to provide a sense of hierarchy and visual consistency in the UI. They are typically darker tones that complement the primary color scheme without overpowering it. They help distinguish secondary elements from primary ones, making it easy for users to navigate the interface.' },
         { name: 'Accent', intentProp: 'accent', styles: { card: 'bg-accent-container text-on-accent-container', button: 'bg-accent text-on-accent'}, description: 'Use accent color to highlight important elements in the interface. Draw attention to specific elements and create visual interest while guiding users\' focus.' },
-        { name: 'Basic', intentProp: 'basic', styles: { card: 'bg-basic-container text-on-basic-container', button: 'bg-basic text-on-basic'}, description: 'Use Basic colors on fundamental components of the UI that do not require a specific intent, such as form elements like Switch, RadioButton, CheckBox, and ProgressBar. Using Basic color in form components enables a smooth transition between brands.' },
         { name: 'Success', intentProp: 'success', styles: { card: 'bg-success-container text-on-success-container', button: 'bg-success text-on-success'}, description: 'Convey to the user a successful action, like after a form has been successfully submitted.' },
         { name: 'Alert', intentProp: 'alert', styles: { card: 'bg-alert-container text-on-alert-container', button: 'bg-alert text-on-alert'}, description: 'Convey to the user a warning, for example over a sensitive action.' },
         { name: 'Error', intentProp: 'danger', styles: { card: 'bg-error-container text-on-error-container', button: 'bg-error text-on-error'}, description: 'Convey to the user an error, for example when a form field is invalid.' },
@@ -413,7 +412,7 @@ export const spacing = [
   {spacing.map(({ computed, className }) => {
     return (
       <div className="gap-lg flex items-center">
-        <div className={`${className} bg-basic`} />
+        <div className={`${className} bg-support`} />
         <div className="flex flex-col">
           <p className="text-body-1">{computed}</p>
           <p className="text-body-2 opacity-dim-1">{getComputedCssVariable('padding', computed)}</p>
@@ -443,7 +442,7 @@ export const fontSizes = [
     {fontSizes.map(fontSize => {
       return (
         <div>
-          <p className={`${fontSize} bg-basic-container text-on-basic-container px-lg`}>
+          <p className={`${fontSize} bg-support-container text-on-support-container px-lg`}>
             Hello world.
           </p>
           <p>{fontSize}</p>

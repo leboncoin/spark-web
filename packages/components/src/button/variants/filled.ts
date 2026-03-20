@@ -37,18 +37,6 @@ export const filledVariants = [
       'focus-visible:bg-accent-hovered',
     ]),
   },
-  // Basic
-  {
-    intent: 'basic',
-    design: 'filled',
-    class: tw([
-      'bg-basic',
-      'text-on-basic',
-      'hover:bg-basic-hovered',
-      'enabled:active:bg-basic-hovered',
-      'focus-visible:bg-basic-hovered',
-    ]),
-  },
   // Success
   {
     intent: 'success',

@@ -12,26 +12,18 @@ import { useEffect, useRef } from 'react'
 Each Spark component has a `data-spark-component` attribute, including the sub-components of a compound component.
 
 ```html
-<button data-spark-component="button">
-  Click me
-</button>
+<button data-spark-component="button">Click me</button>
 ```
 
-
-
-
-
-This bookmark will highlight all spark components on the current page, using this attribute. 
+This bookmark will highlight all spark components on the current page, using this attribute.
 
 <Callout kind="warning" marginY="large">
-  <p>
-    iframes: the script is unable to detect components in iframes for now.
-  </p>
+  <p>iframes: the script is unable to detect components in iframes for now.</p>
 </Callout>
 
 **Simply drag and drop this button into your browser's bookmarks bar**, then go to any website using Spark and click on the bookmark:
 
-<div className="sb-unstyled bg-basic-container text-on-basic-container p-xl w-full">
+<div className="sb-unstyled bg-support-container text-on-support-container p-xl w-full">
 <Button intent="info" asChild>
   <a 
     ref={(el) => {
@@ -131,8 +123,8 @@ This bookmark will highlight all spark components on the current page, using thi
             e.textContent=\`
               .spark-overlay {
                 position: absolute;
-                background: var(--color-basic, #094171);
-                color: var(--color-on-basic, #ffffff);
+                background: var(--color-support, #094171);
+                color: var(--color-on-support, #ffffff);
                 padding: 4px 8px;
                 font-size: 12px;
                 font-weight: 700;
@@ -198,11 +190,14 @@ This bookmark will highlight all spark components on the current page, using thi
     }}
     onClick={(e) => e.preventDefault()}
     draggable="true"
-  >
+
+>
+
     Highlight Spark components
     <Icon>
         <BookmarkOutline />
-    </Icon> 
+    </Icon>
+
   </a>
 </Button>
 </div>

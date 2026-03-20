@@ -17,11 +17,6 @@ export const filledVariants = [
     class: tw(['bg-accent', 'text-on-accent']),
   },
   {
-    intent: 'basic',
-    design: 'filled',
-    class: tw(['bg-basic', 'text-on-basic']),
-  },
-  {
     intent: 'success',
     design: 'filled',
     class: tw(['bg-success', 'text-on-success']),

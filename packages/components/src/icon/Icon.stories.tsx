@@ -59,7 +59,6 @@ const intents: ComponentProps<typeof Icon>['intent'][] = [
   'main',
   'support',
   'accent',
-  'basic',
   'success',
   'alert',
   'error',

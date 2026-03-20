@@ -17,11 +17,6 @@ export const outlinedVariants = [
     class: tw(['text-accent']),
   },
   {
-    intent: 'basic',
-    design: 'outlined',
-    class: tw(['text-basic']),
-  },
-  {
     intent: 'success',
     design: 'outlined',
     class: tw(['text-success']),

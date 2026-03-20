@@ -49,16 +49,7 @@ export interface SegmentedGaugeProps {
   /**
    * Intent of the gauge - predefined color intent
    */
-  intent?:
-    | 'main'
-    | 'support'
-    | 'basic'
-    | 'accent'
-    | 'success'
-    | 'alert'
-    | 'danger'
-    | 'info'
-    | 'neutral'
+  intent?: 'main' | 'support' | 'accent' | 'success' | 'alert' | 'danger' | 'info' | 'neutral'
   /**
    * Custom color for the gauge (hex, CSS variable, etc.)
    */

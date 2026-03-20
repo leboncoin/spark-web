@@ -36,7 +36,7 @@ export const ProgressTracker = ({
   stepIndex = 0,
   onStepClick,
   readOnly = false,
-  intent = 'basic',
+  intent = 'support',
   size = 'lg',
   orientation = 'horizontal',
   children,

@@ -11,18 +11,7 @@ export const styles = cva(
        */
       intent: makeVariants<
         'intent',
-        [
-          'main',
-          'support',
-          'accent',
-          'success',
-          'alert',
-          'danger',
-          'info',
-          'neutral',
-          'surface',
-          'basic',
-        ]
+        ['main', 'support', 'accent', 'success', 'alert', 'danger', 'info', 'neutral', 'surface']
       >({
         main: ['bg-main', 'text-on-main', 'border-surface'],
         support: ['bg-support', 'text-on-support', 'border-surface'],
@@ -33,7 +22,6 @@ export const styles = cva(
         info: ['bg-info', 'text-on-info', 'border-surface'],
         neutral: ['bg-neutral', 'text-on-neutral', 'border-surface'],
         surface: ['bg-surface', 'text-on-surface', 'border-surface'],
-        basic: ['bg-basic', 'text-on-basic', 'border-surface'],
       }),
       /**
        * Size of the component.

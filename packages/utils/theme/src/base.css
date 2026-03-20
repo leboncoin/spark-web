@@ -36,12 +36,6 @@
   --font-weight-bold: 700;
 
   --color-focus: #00f;
-  --color-basic: #094171;
-  --color-on-basic: #ffffff;
-  --color-basic-hovered: #0c5291;
-  --color-basic-container: #e6f2fd;
-  --color-on-basic-container: #152233;
-  --color-basic-container-hovered: #f4f9fe;
   --color-accent: #8526d9;
   --color-on-accent: #ffffff;
   --color-accent-hovered: #9f47eb;
@@ -223,4 +217,3 @@
   --z-index-toast: 1700;
   --z-index-tooltip: 1800;
 }
-

@@ -28,7 +28,6 @@ const intents: ExcludeNull<AddSnackbarArgs>['intent'][] = [
   'info',
   'neutral',
   'main',
-  'basic',
   'support',
   'accent',
   'inverse',

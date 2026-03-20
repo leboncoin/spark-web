@@ -60,7 +60,7 @@ export interface RadioGroupProps
 export const RadioGroup = ({
   orientation = 'vertical',
   loop = true,
-  intent = 'basic',
+  intent = 'support',
   disabled,
   className,
   required: requiredProp,

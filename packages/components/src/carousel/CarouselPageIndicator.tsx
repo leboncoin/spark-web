@@ -9,7 +9,7 @@ interface Props {
   index: number
   className?: string
   unstyled?: boolean
-  intent?: 'basic' | 'surface'
+  intent?: 'support' | 'surface'
 }
 
 export const CarouselPageIndicator = ({
@@ -18,7 +18,7 @@ export const CarouselPageIndicator = ({
   index,
   'aria-label': ariaLabel,
   className,
-  intent = 'basic',
+  intent = 'support',
 }: Props) => {
   const ctx = useCarouselContext()
 
@@ -50,7 +50,7 @@ export const CarouselPageIndicator = ({
             'data-[state=hidden]:m-0 data-[state=hidden]:size-0',
             intent === 'surface'
               ? 'data-[state=active]:bg-surface bg-surface/dim-2'
-              : 'data-[state=active]:bg-basic bg-on-surface/dim-2'
+              : 'data-[state=active]:bg-support bg-on-surface/dim-2'
           )]: !unstyled,
           // [dotsStyles]: !unstyled,
         },

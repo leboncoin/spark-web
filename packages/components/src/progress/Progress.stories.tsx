@@ -82,7 +82,6 @@ const intents: ProgressProps['intent'][] = [
   'main',
   'support',
   'accent',
-  'basic',
   'success',
   'alert',
   'danger',
