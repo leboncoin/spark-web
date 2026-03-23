@@ -1,16 +1,18 @@
 /* eslint-disable max-lines-per-function */
+import { Tabs as BaseTabs } from '@base-ui/react/tabs'
 import { ArrowVerticalLeft } from '@spark-ui/icons/ArrowVerticalLeft'
 import { ArrowVerticalRight } from '@spark-ui/icons/ArrowVerticalRight'
-import { Tabs as RadixTabs } from 'radix-ui'
-import { type ReactElement, Ref, useEffect, useRef, useState } from 'react'
+import { type ComponentProps, type ReactElement, Ref, useEffect, useRef, useState } from 'react'
 
 import { Button } from '../button'
 import { Icon } from '../icon'
 import { useTabsContext } from './TabsContext'
 import { listStyles, navigationArrowStyles, wrapperStyles } from './TabsList.styles'
+import { useRenderSlot } from './useRenderSlot'
 import { useResizeObserver } from './useResizeObserver'
 
-export interface TabsListProps extends Omit<RadixTabs.TabsListProps, 'children'> {
+export interface TabsListProps
+  extends Omit<ComponentProps<typeof BaseTabs.List>, 'render' | 'loopFocus'> {
   /**
    * Change the component to the HTML tag or custom component of the only child. This will merge the original component props with the props of the supplied element/component and change the underlying DOM node.
    * @default false
@@ -29,8 +31,8 @@ type ArrowState = 'visible' | 'hidden' | 'disabled'
 
 export const TabsList = ({
   /**
-   * Default Radix Primitive values
-   * see https://www.radix-ui.com/docs/primitives/components/tabs#list
+   * Default Base UI Primitive values
+   * see https://base-ui.com/react/components/tabs
    */
   asChild = false,
   loop = false,
@@ -43,6 +45,7 @@ export const TabsList = ({
   const innerRef = useRef(null)
   const listRef = ref || innerRef
   const { orientation } = useTabsContext()
+  const renderSlot = useRenderSlot(asChild)
 
   const { width } = useResizeObserver(wrapperRef)
 
@@ -146,16 +149,17 @@ export const TabsList = ({
         </Button>
       )}
 
-      <RadixTabs.List
+      <BaseTabs.List
         data-spark-component="tabs-list"
         ref={listRef}
         className={listStyles()}
-        asChild={asChild}
-        loop={loop}
+        render={renderSlot}
+        loopFocus={loop}
+        activateOnFocus
         {...rest}
       >
         {children}
-      </RadixTabs.List>
+      </BaseTabs.List>
 
       {arrows.next !== 'hidden' && (
         <Button

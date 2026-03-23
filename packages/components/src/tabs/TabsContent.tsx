@@ -1,11 +1,12 @@
-import { Tabs as RadixTabs } from 'radix-ui'
-import { type PropsWithChildren, Ref } from 'react'
+import { Tabs as BaseTabs } from '@base-ui/react/tabs'
+import { type ComponentProps, type PropsWithChildren, Ref } from 'react'
 
 import { contentStyles } from './TabsContent.styles'
 import { useTabsContext } from './TabsContext'
+import { useRenderSlot } from './useRenderSlot'
 
 export interface TabsContentProps
-  extends PropsWithChildren<Omit<RadixTabs.TabsContentProps, 'forceMount'>> {
+  extends PropsWithChildren<Omit<ComponentProps<typeof BaseTabs.Panel>, 'keepMounted' | 'render'>> {
   /**
    * A unique value that associates the content with a trigger.
    */
@@ -24,28 +25,31 @@ export interface TabsContentProps
 
 export const TabsContent = ({
   /**
-   * Default Radix Primitive values
-   * see https://www.radix-ui.com/docs/primitives/components/tabs#content
+   * Default Base UI Primitive values
+   * see https://base-ui.com/react/components/tabs
    */
   children,
   asChild = false,
   className,
   ref,
+  forceMount,
   ...rest
 }: TabsContentProps) => {
-  const { forceMount } = useTabsContext()
+  const { forceMount: contextForceMount } = useTabsContext()
+  const renderSlot = useRenderSlot(asChild)
+  const keepMounted = contextForceMount || forceMount
 
   return (
-    <RadixTabs.Content
+    <BaseTabs.Panel
       data-spark-component="tabs-content"
       ref={ref}
-      forceMount={forceMount || rest.forceMount}
-      className={contentStyles({ className, forceMount })}
-      asChild={asChild}
+      keepMounted={keepMounted}
+      className={contentStyles({ className, forceMount: keepMounted })}
+      render={renderSlot}
       {...rest}
     >
       {children}
-    </RadixTabs.Content>
+    </BaseTabs.Panel>
   )
 }
 

@@ -1,12 +1,13 @@
-import { Tabs as RadixTabs } from 'radix-ui'
-import { type PropsWithChildren, Ref } from 'react'
+import { Tabs as BaseTabs } from '@base-ui/react/tabs'
+import { type ComponentProps, type PropsWithChildren, Ref } from 'react'
 
 import { TabsContext } from './TabsContext'
 import { rootStyles } from './TabsRoot.styles'
 import type { TabsTriggerVariantsProps } from './TabsTrigger.styles'
+import { useRenderSlot } from './useRenderSlot'
 
 export interface TabsProps
-  extends Omit<RadixTabs.TabsProps, 'activationMode'>,
+  extends Omit<ComponentProps<typeof BaseTabs.Root>, 'render'>,
     PropsWithChildren<Omit<TabsTriggerVariantsProps, 'orientation'>> {
   /**
    * Change the component to the HTML tag or custom component of the only child. This will merge the original component props with the props of the supplied element/component and change the underlying DOM node.
@@ -30,8 +31,8 @@ export const Tabs = ({
   intent = 'support',
   size = 'md',
   /**
-   * Default Radix Primitive values
-   * see https://www.radix-ui.com/docs/primitives/components/tabs#root
+   * Default Base UI Primitive values
+   * see https://base-ui.com/react/components/tabs
    */
   asChild = false,
   forceMount = false,
@@ -41,6 +42,8 @@ export const Tabs = ({
   ref,
   ...rest
 }: TabsProps) => {
+  const renderSlot = useRenderSlot(asChild)
+
   return (
     <TabsContext.Provider
       value={{
@@ -50,17 +53,16 @@ export const Tabs = ({
         forceMount,
       }}
     >
-      <RadixTabs.Root
+      <BaseTabs.Root
         ref={ref}
-        asChild={asChild}
         orientation={orientation}
         className={rootStyles({ className })}
         data-spark-component="tabs"
-        activationMode="automatic"
+        render={renderSlot}
         {...rest}
       >
         {children}
-      </RadixTabs.Root>
+      </BaseTabs.Root>
     </TabsContext.Provider>
   )
 }

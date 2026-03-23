@@ -82,7 +82,7 @@ describe('Tabs', () => {
     await user.click(screen.getByText('Today'))
 
     expect(rootProps.onValueChange).toHaveBeenCalledTimes(1)
-    expect(rootProps.onValueChange).toHaveBeenCalledWith('tab2')
+    expect(rootProps.onValueChange).toHaveBeenCalledWith('tab2', expect.any(Object))
   })
 
   it('should scroll into focused tab item', async () => {
@@ -250,7 +250,7 @@ describe('Tabs', () => {
 
         expect(screen.getByText(/Make things happen!/)).toBeInTheDocument()
 
-        expect(screen.getAllByRole('tabpanel').at(-1)).toHaveClass('data-[state=inactive]:hidden')
+        expect(screen.getAllByRole('tabpanel').at(-1)).toHaveClass('data-[hidden]:hidden')
       })
     })
   })
