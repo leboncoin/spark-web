@@ -1,12 +1,15 @@
+import { Tabs as BaseTabs } from '@base-ui/react/tabs'
 import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
-import { Tabs as RadixTabs } from 'radix-ui'
-import { type FocusEvent, type KeyboardEvent, type ReactNode, Ref, useRef } from 'react'
+import { type ComponentProps, type FocusEvent, type ReactNode, Ref, useRef } from 'react'
+
+type TabKeyDownEvent = Parameters<NonNullable<ComponentProps<typeof BaseTabs.Tab>['onKeyDown']>>[0]
 
 import { useTabsContext } from './TabsContext'
 import { type ConfiguredPopoverComponent, Popover } from './TabsPopoverAbstraction'
 import { triggerVariants } from './TabsTrigger.styles'
+import { useRenderSlot } from './useRenderSlot'
 
-export interface TabsTriggerProps extends RadixTabs.TabsTriggerProps {
+export interface TabsTriggerProps extends Omit<ComponentProps<typeof BaseTabs.Tab>, 'render'> {
   /**
    * A unique value that associates the trigger with a content.
    */
@@ -41,8 +44,8 @@ export interface TabsTriggerProps extends RadixTabs.TabsTriggerProps {
 
 export const TabsTrigger = ({
   /**
-   * Default Radix Primitive values
-   * see https://www.radix-ui.com/docs/primitives/components/tabs#trigger
+   * Default Base UI Primitive values
+   * see https://base-ui.com/react/components/tabs
    */
   asChild = false,
   value,
@@ -57,11 +60,12 @@ export const TabsTrigger = ({
   const { intent, size, orientation } = useTabsContext()
   const popoverTriggerRef = useRef<HTMLButtonElement>(null)
   const tabsTriggerRef = useRef<HTMLButtonElement>(null)
+  const renderSlot = useRenderSlot(asChild)
 
   // Combine internal ref with forwarded ref
   const mergedRef = useMergeRefs(ref, tabsTriggerRef)
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+  const handleKeyDown = (e: TabKeyDownEvent) => {
     // Handle Shift+F10 for popover
     if (e.key === 'F10' && e.shiftKey && renderMenu && popoverTriggerRef.current) {
       e.preventDefault()
@@ -76,7 +80,7 @@ export const TabsTrigger = ({
   const popoverSide = orientation === 'vertical' ? 'right' : 'bottom'
 
   const trigger = (
-    <RadixTabs.Trigger
+    <BaseTabs.Tab
       data-spark-component="tabs-trigger"
       ref={mergedRef}
       className={triggerVariants({
@@ -86,7 +90,7 @@ export const TabsTrigger = ({
         orientation: orientation ?? 'horizontal',
         className,
       })}
-      asChild={asChild}
+      render={renderSlot}
       disabled={disabled}
       value={value}
       onFocus={({ target }: FocusEvent<HTMLButtonElement>) =>
@@ -101,7 +105,7 @@ export const TabsTrigger = ({
       {...rest}
     >
       {children}
-    </RadixTabs.Trigger>
+    </BaseTabs.Tab>
   )
 
   if (!hasMenu) {

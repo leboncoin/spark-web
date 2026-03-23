@@ -8,8 +8,8 @@ export const triggerVariants = cva(
     'border-outline',
     'hover:not-disabled:bg-surface-hovered',
     'after:absolute',
-    'data-[state=active]:font-bold',
-    'data-[state=inactive]:not-disabled:cursor-pointer',
+    'data-[active]:font-bold',
+    'not-data-[active]:not-disabled:cursor-pointer',
     'data-[orientation=horizontal]:border-b-sm data-[orientation=horizontal]:after:inset-x-0 data-[orientation=horizontal]:after:bottom-[-1px] data-[orientation=horizontal]:after:h-sz-2',
     'data-[orientation=vertical]:border-r-sm data-[orientation=vertical]:after:inset-y-0 data-[orientation=vertical]:after:right-[-1px] data-[orientation=vertical]:after:w-sz-2',
     'focus-visible:border-none focus-visible:bg-surface-hovered focus-visible:u-outline-inset',
@@ -24,8 +24,8 @@ export const triggerVariants = cva(
        * @default support
        */
       intent: makeVariants<'intent', ['main', 'support']>({
-        main: ['data-[state=active]:text-main data-[state=active]:after:bg-main'],
-        support: ['data-[state=active]:text-support data-[state=active]:after:bg-support'],
+        main: ['data-[active]:text-main data-[active]:after:bg-main'],
+        support: ['data-[active]:text-support data-[active]:after:bg-support'],
       }),
       /**
        * Change the size of the tabs
