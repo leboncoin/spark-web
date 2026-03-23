@@ -1,3 +1,13 @@
+## 17.0.1 (2026-03-23)
+
+### 💅 Refactors
+
+- **components:** migrated Tabs to Base UI ([fc2d5d32c](https://github.com/leboncoin/spark-web/commit/fc2d5d32c))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 # 17.0.0 (2026-03-20)
 
 ### 💅 Refactors
