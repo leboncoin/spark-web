@@ -1,0 +1,81 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
+import { SegmentedControl } from '.'
+
+import * as stories from './SegmentedControl.stories'
+
+<Meta of={stories} />
+
+# SegmentedControl
+
+A linear set of mutually exclusive options. Selecting one deselects all others. An optional sliding indicator visually tracks the active selection.
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { SegmentedControl } from '@spark-ui/components/segmented-control'
+
+export default () => (
+  <SegmentedControl defaultValue="a">
+    <SegmentedControl.Indicator />
+    <SegmentedControl.Item value="a">Option A</SegmentedControl.Item>
+    <SegmentedControl.Item value="b">Option B</SegmentedControl.Item>
+    <SegmentedControl.Item value="c">Option C</SegmentedControl.Item>
+  </SegmentedControl>
+)
+```
+
+## API Reference
+
+### SegmentedControl
+
+The root container. Wraps Base UI's `ToggleGroup` with `multiple={false}`.
+
+<ArgTypes of={SegmentedControl} />
+
+### \_.Item
+
+A single selectable option. Wraps Base UI's `Toggle`.
+
+<ArgTypes of={SegmentedControl.Item} />
+
+### \_.Indicator
+
+An animated rectangle that slides to the active item. Rendered absolutely inside the root container.
+
+<ArgTypes of={SegmentedControl.Indicator} />
+
+## Examples
+
+### Size
+
+Three sizes are available: `sm`, `md` (default), and `lg`.
+
+<Canvas of={stories.Size} />
+
+### With icons
+
+Items support any content including icons. Use `aria-label` on icon-only items.
+
+<Canvas of={stories.WithIcons} />
+
+### Disabled
+
+Individual items can be disabled with the `disabled` prop.
+
+<Canvas of={stories.Disabled} />
+
+## Accessibility
+
+- The root element renders as a `group` via Base UI `ToggleGroup`.
+- Each item renders as a `button` with `aria-pressed` managed by Base UI.
+- Keyboard navigation: **Arrow keys** move focus between items, **Space / Enter** toggles selection.
+- Icon-only items must have an accessible label via `aria-label`.
+- The `SegmentedControl.Indicator` is `aria-hidden` and purely decorative.
