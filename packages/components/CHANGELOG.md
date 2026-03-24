@@ -1,3 +1,13 @@
+## 17.2.0 (2026-03-24)
+
+### 🚀 Features
+
+- **components:** align "Slider.Value" children type with its runtime behaviour ([5cf6f1032](https://github.com/leboncoin/spark-web/commit/5cf6f1032))
+
+### ❤️ Thank You
+
+- acd02
+
 ## 17.1.1 (2026-03-24)
 
 ### 💅 Refactors
