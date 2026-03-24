@@ -1,3 +1,13 @@
+## 17.1.1 (2026-03-24)
+
+### 💅 Refactors
+
+- **components:** turned segmented control into a radiogroup ([d8d81c0a7](https://github.com/leboncoin/spark-web/commit/d8d81c0a7))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.1.0 (2026-03-24)
 
 ### 🚀 Features
