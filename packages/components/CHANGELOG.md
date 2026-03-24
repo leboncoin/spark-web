@@ -1,3 +1,13 @@
+## 17.1.0 (2026-03-24)
+
+### 🚀 Features
+
+- **components:** segmented control component ([fd2d72c9f](https://github.com/leboncoin/spark-web/commit/fd2d72c9f))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.0.1 (2026-03-23)
 
 ### 💅 Refactors
