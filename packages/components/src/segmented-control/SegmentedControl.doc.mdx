@@ -1,4 +1,5 @@
 import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
+import { Callout } from '@docs/helpers/Callout'
 import { SegmentedControl } from '.'
 
 import * as stories from './SegmentedControl.stories'
@@ -8,6 +9,8 @@ import * as stories from './SegmentedControl.stories'
 # SegmentedControl
 
 A linear set of mutually exclusive options. Selecting one deselects all others. An optional sliding indicator visually tracks the active selection.
+
+It is primarily designed as a **navigation control** (e.g. switching calendar views), but can also be used as a form input when the number of options is small and the compact, horizontal layout is appropriate.
 
 <Canvas of={stories.Default} />
 
@@ -36,13 +39,13 @@ export default () => (
 
 ### SegmentedControl
 
-The root container. Wraps Base UI's `ToggleGroup` with `multiple={false}`.
+The root container. Renders as `role="radiogroup"`.
 
 <ArgTypes of={SegmentedControl} />
 
 ### \_.Item
 
-A single selectable option. Wraps Base UI's `Toggle`.
+A single selectable option. Renders as `role="radio"`.
 
 <ArgTypes of={SegmentedControl.Item} />
 
@@ -53,12 +56,6 @@ An animated rectangle that slides to the active item. Rendered absolutely inside
 <ArgTypes of={SegmentedControl.Indicator} />
 
 ## Examples
-
-### Size
-
-Three sizes are available: `sm`, `md` (default), and `lg`.
-
-<Canvas of={stories.Size} />
 
 ### With icons
 
@@ -72,10 +69,59 @@ Individual items can be disabled with the `disabled` prop.
 
 <Canvas of={stories.Disabled} />
 
+## Form field
+
+SegmentedControl integrates with `FormField` to receive an accessible label, helper text, and validation messages. This is the recommended approach when using it as a form input.
+
+<Callout kind="warning">
+  Use SegmentedControl as a form input only when all of the following apply:
+  <ul className="pl-3xl">
+    <li className="list-disc">
+      There are **2 to 4 short options** — for more options, prefer `RadioGroup`.
+    </li>
+    <li className="list-disc">
+      The horizontal, compact layout provides a clear benefit in context.
+    </li>
+    <li className="list-disc">Labels are concise (a single word or short phrase).</li>
+  </ul>
+</Callout>
+
+### Label
+
+<Canvas of={stories.FieldLabel} />
+
+### Helper message
+
+<Canvas of={stories.FieldHelperMessage} />
+
+### Required
+
+<Canvas of={stories.FieldRequired} />
+
+### Validation
+
+<Canvas of={stories.FieldInvalid} />
+
+## Advanced usage
+
+### Custom content
+
+Items accept any React content. This example uses a two-line layout with a bold price and a `Tag` for additional context.
+
+<Canvas of={stories.CustomContent} />
+
+### No indicator
+
+You can remove the indicator by not rendering the `SegmentedControl.Indicator` component and use `data-checked` to style the active item.
+
+<Canvas of={stories.NoIndicator} />
+
 ## Accessibility
 
-- The root element renders as a `group` via Base UI `ToggleGroup`.
-- Each item renders as a `button` with `aria-pressed` managed by Base UI.
-- Keyboard navigation: **Arrow keys** move focus between items, **Space / Enter** toggles selection.
+- The root element renders as `role="radiogroup"`.
+- Each item renders as `role="radio"` with `aria-checked` managed by Base UI.
+- Keyboard navigation: **Tab** moves focus into the group, **Arrow keys** move between items (roving tabindex — only one Tab stop for the entire group).
 - Icon-only items must have an accessible label via `aria-label`.
 - The `SegmentedControl.Indicator` is `aria-hidden` and purely decorative.
+- When used inside `FormField`, the group is automatically labelled via `aria-labelledby` and described via `aria-describedby`.
+- When not inside `FormField` (navigation use case), provide an accessible name via `aria-label` or `aria-labelledby` directly on `SegmentedControl`.

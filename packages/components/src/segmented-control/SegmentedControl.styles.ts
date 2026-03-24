@@ -1,51 +1,33 @@
 import { cva, VariantProps } from 'class-variance-authority'
 
 export const rootStyles = cva([
+  'default:self-start',
   'group inline-grid grid-flow-col auto-cols-fr',
   'relative items-stretch min-w-max',
-  'rounded-xl',
-  'bg-surface border-md border-outline',
-  'p-sz-2',
+  'rounded-xl p-sm',
+  'bg-surface border-sm border-outline',
 ])
 
-export const itemStyles = cva(
-  [
-    'relative z-raised min-h-sz-44 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-inset',
-    'flex flex-none items-center justify-center flex-col',
-    'px-lg',
-    'rounded-xl',
-    'cursor-pointer select-none',
-    'font-medium',
-    'transition-colors duration-150',
-    'outline-none',
-    'focus-visible:u-outline',
-    'disabled:cursor-not-allowed disabled:opacity-dim-3',
-    'not-disabled:hover:text-on-surface',
-    'aria-pressed:text-on-support-container',
-    'aria-pressed:font-bold',
-  ],
-  {
-    variants: {
-      /**
-       * Change the size of the segmented control
-       * @default md
-       */
-      size: {
-        sm: ['h-sz-32 min-w-sz-32 text-caption'],
-        md: ['h-sz-36 min-w-sz-36 text-body-2'],
-        lg: ['h-sz-40 min-w-sz-40 text-body-1'],
-      },
-    },
-    defaultVariants: {
-      size: 'md',
-    },
-  }
-)
+export const itemStyles = cva([
+  'relative z-raised min-h-sz-44 focus-visible:outline-none',
+  'flex flex-none items-center justify-center flex-col',
+  'default:px-lg default:py-md',
+  'rounded-[20px]',
+  'cursor-pointer select-none',
+  'font-medium',
+  'transition-colors duration-150',
+  'outline-none',
+  'focus-visible:u-outline',
+  'data-disabled:cursor-not-allowed data-disabled:opacity-dim-3',
+  'data-checked:text-on-support-container',
+  'data-checked:font-bold',
+])
 
 export const indicatorStyles = cva([
   'absolute z-base',
-  'rounded-xl',
+  'rounded-[20px]',
   'bg-support-container border-md border-support',
+  'group-has-focus-visible:border-focus',
   'transition-[left,top,width,height] duration-200 ease-in-out',
   'pointer-events-none',
 ])

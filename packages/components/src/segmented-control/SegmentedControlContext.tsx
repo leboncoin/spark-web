@@ -1,10 +1,7 @@
 import { createContext, RefObject, useContext } from 'react'
 
-import type { SegmentedControlStylesProps } from './SegmentedControl.styles'
-
-export interface SegmentedControlContextInterface
-  extends Required<Pick<SegmentedControlStylesProps, 'size'>> {
-  pressedValue: string | null
+export interface SegmentedControlContextInterface {
+  checkedValue: string | null
   containerRef: RefObject<HTMLDivElement | null>
 }
 
