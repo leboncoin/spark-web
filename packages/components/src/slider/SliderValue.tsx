@@ -8,7 +8,12 @@ import { useSliderContext } from './SliderContext'
 import { useSliderThumbContext } from './SliderThumbContext'
 import { useSliderValueBoundaries } from './useSliderValueBoundaries'
 
-export type SliderValueProps = Omit<ComponentProps<typeof BaseSlider.Value>, 'render'>
+export type SliderValueProps = Omit<
+  ComponentProps<typeof BaseSlider.Value>,
+  'render' | 'children'
+> & {
+  children?: ReactNode | ((formatted: string, value: number) => ReactNode)
+}
 
 /**
  * Normalizes Base UI's (formattedValues, values) to single (formatted, value) for the render prop.
@@ -43,10 +48,7 @@ export const SliderValue = ({ className, children, ref, ...rest }: SliderValuePr
       const value = values[0] ?? 0
       setCurrentValue(value)
       if (typeof children === 'function') {
-        return (children as unknown as (formatted: string, value: number) => ReactNode)(
-          formatted,
-          value
-        )
+        return children(formatted, value)
       }
 
       return formatted
