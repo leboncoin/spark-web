@@ -1,10 +1,10 @@
-import { Toggle } from '@base-ui/react/toggle'
+import { Radio } from '@base-ui/react/radio'
 import { type ComponentProps, Ref } from 'react'
 
 import { itemStyles } from './SegmentedControl.styles'
-import { useSegmentedControlContext } from './SegmentedControlContext'
 
-export interface SegmentedControlItemProps extends Omit<ComponentProps<typeof Toggle>, 'value'> {
+export interface SegmentedControlItemProps
+  extends Omit<ComponentProps<typeof Radio.Root>, 'value'> {
   /**
    * A unique value that identifies this item within the segmented control.
    */
@@ -14,7 +14,7 @@ export interface SegmentedControlItemProps extends Omit<ComponentProps<typeof To
    * @default false
    */
   disabled?: boolean
-  ref?: Ref<HTMLButtonElement>
+  ref?: Ref<HTMLElement>
 }
 
 export const SegmentedControlItem = ({
@@ -25,16 +25,14 @@ export const SegmentedControlItem = ({
   ref,
   ...rest
 }: SegmentedControlItemProps) => {
-  const { size } = useSegmentedControlContext()
-
   return (
-    <Toggle
+    <Radio.Root
       ref={ref}
       data-spark-component="segmented-control-item"
       data-value={value}
       value={value}
       disabled={disabled}
-      className={itemStyles({ size, className })}
+      className={itemStyles({ className })}
       {...rest}
     >
       {children}
@@ -44,7 +42,7 @@ export const SegmentedControlItem = ({
       >
         {children}
       </span>
-    </Toggle>
+    </Radio.Root>
   )
 }
 

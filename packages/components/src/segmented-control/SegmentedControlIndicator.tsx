@@ -19,7 +19,7 @@ export const SegmentedControlIndicator = ({
   ref,
   ...rest
 }: SegmentedControlIndicatorProps) => {
-  const { pressedValue, containerRef } = useSegmentedControlContext()
+  const { checkedValue, containerRef } = useSegmentedControlContext()
   const [rect, setRect] = useState<IndicatorRect | null>(null)
 
   useEffect(() => {
@@ -29,8 +29,8 @@ export const SegmentedControlIndicator = ({
       return
     }
 
-    const selectedItem = pressedValue
-      ? container.querySelector<HTMLElement>(`[data-value="${pressedValue}"]`)
+    const selectedItem = checkedValue
+      ? container.querySelector<HTMLElement>(`[data-value="${checkedValue}"]`)
       : null
 
     if (!selectedItem) {
@@ -42,15 +42,15 @@ export const SegmentedControlIndicator = ({
     const containerRect = container.getBoundingClientRect()
     const itemRect = selectedItem.getBoundingClientRect()
 
-    const borderWidth = 2
+    const rootBorderWidth = 1
 
     setRect({
-      left: itemRect.left - containerRect.left - borderWidth,
-      top: itemRect.top - containerRect.top - borderWidth,
+      left: itemRect.left - containerRect.left - rootBorderWidth,
+      top: itemRect.top - containerRect.top - rootBorderWidth,
       width: itemRect.width,
       height: itemRect.height,
     })
-  }, [pressedValue, containerRef])
+  }, [checkedValue, containerRef])
 
   if (!rect) return null
 

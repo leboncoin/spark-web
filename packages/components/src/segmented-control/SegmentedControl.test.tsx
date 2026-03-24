@@ -18,7 +18,7 @@ const renderSegmentedControl = ({
 }: {
   defaultValue?: string
   value?: string
-  onValueChange?: (value: string | null) => void
+  onValueChange?: (value: string) => void
   disabled?: boolean
 } = {}) => {
   return render(
@@ -35,12 +35,18 @@ const renderSegmentedControl = ({
 
 describe('SegmentedControl', () => {
   describe('rendering', () => {
-    it('renders all items', () => {
+    it('renders all items as radio buttons', () => {
       renderSegmentedControl()
 
-      expect(screen.getByRole('button', { name: 'Day' })).toBeInTheDocument()
-      expect(screen.getByRole('button', { name: 'Week' })).toBeInTheDocument()
-      expect(screen.getByRole('button', { name: 'Month' })).toBeInTheDocument()
+      expect(screen.getByRole('radio', { name: 'Day' })).toBeInTheDocument()
+      expect(screen.getByRole('radio', { name: 'Week' })).toBeInTheDocument()
+      expect(screen.getByRole('radio', { name: 'Month' })).toBeInTheDocument()
+    })
+
+    it('renders the root as a radiogroup', () => {
+      renderSegmentedControl()
+
+      expect(screen.getByRole('radiogroup')).toBeInTheDocument()
     })
 
     it('renders data-spark-component attributes', () => {
@@ -75,8 +81,8 @@ describe('SegmentedControl', () => {
     it('selects the defaultValue item on mount', () => {
       renderSegmentedControl({ defaultValue: 'week' })
 
-      expect(screen.getByRole('button', { name: 'Week' })).toHaveAttribute('aria-pressed', 'true')
-      expect(screen.getByRole('button', { name: 'Day' })).toHaveAttribute('aria-pressed', 'false')
+      expect(screen.getByRole('radio', { name: 'Week' })).toHaveAttribute('aria-checked', 'true')
+      expect(screen.getByRole('radio', { name: 'Day' })).toHaveAttribute('aria-checked', 'false')
     })
 
     it('changes selection when clicking another item', async () => {
@@ -84,20 +90,10 @@ describe('SegmentedControl', () => {
 
       renderSegmentedControl({ defaultValue: 'day' })
 
-      await user.click(screen.getByRole('button', { name: 'Week' }))
+      await user.click(screen.getByRole('radio', { name: 'Week' }))
 
-      expect(screen.getByRole('button', { name: 'Week' })).toHaveAttribute('aria-pressed', 'true')
-      expect(screen.getByRole('button', { name: 'Day' })).toHaveAttribute('aria-pressed', 'false')
-    })
-
-    it('deselects when clicking the already-selected item', async () => {
-      const user = userEvent.setup()
-
-      renderSegmentedControl({ defaultValue: 'day' })
-
-      await user.click(screen.getByRole('button', { name: 'Day' }))
-
-      expect(screen.getByRole('button', { name: 'Day' })).toHaveAttribute('aria-pressed', 'false')
+      expect(screen.getByRole('radio', { name: 'Week' })).toHaveAttribute('aria-checked', 'true')
+      expect(screen.getByRole('radio', { name: 'Day' })).toHaveAttribute('aria-checked', 'false')
     })
   })
 
@@ -105,7 +101,7 @@ describe('SegmentedControl', () => {
     it('reflects the controlled value', () => {
       renderSegmentedControl({ value: 'month' })
 
-      expect(screen.getByRole('button', { name: 'Month' })).toHaveAttribute('aria-pressed', 'true')
+      expect(screen.getByRole('radio', { name: 'Month' })).toHaveAttribute('aria-checked', 'true')
     })
 
     it('calls onValueChange when an item is clicked', async () => {
@@ -114,21 +110,10 @@ describe('SegmentedControl', () => {
 
       renderSegmentedControl({ value: 'day', onValueChange })
 
-      await user.click(screen.getByRole('button', { name: 'Week' }))
+      await user.click(screen.getByRole('radio', { name: 'Week' }))
 
       expect(onValueChange).toHaveBeenCalledTimes(1)
       expect(onValueChange).toHaveBeenCalledWith('week')
-    })
-
-    it('calls onValueChange with null when deselecting', async () => {
-      const user = userEvent.setup()
-      const onValueChange = vi.fn()
-
-      renderSegmentedControl({ value: 'day', onValueChange })
-
-      await user.click(screen.getByRole('button', { name: 'Day' }))
-
-      expect(onValueChange).toHaveBeenCalledWith(null)
     })
   })
 
@@ -139,15 +124,15 @@ describe('SegmentedControl', () => {
 
       renderSegmentedControl({ defaultValue: 'week', onValueChange, disabled: true })
 
-      await user.click(screen.getByRole('button', { name: 'Day' }))
+      await user.click(screen.getByRole('radio', { name: 'Day' }))
 
       expect(onValueChange).not.toHaveBeenCalled()
     })
 
-    it('marks the disabled item with a disabled attribute', () => {
+    it('marks the disabled item with data-disabled attribute', () => {
       renderSegmentedControl({ disabled: true })
 
-      expect(screen.getByRole('button', { name: 'Day' })).toBeDisabled()
+      expect(screen.getByRole('radio', { name: 'Day' })).toHaveAttribute('data-disabled')
     })
   })
 
@@ -157,10 +142,10 @@ describe('SegmentedControl', () => {
 
       renderSegmentedControl({ defaultValue: 'day' })
 
-      await user.click(screen.getByRole('button', { name: 'Day' }))
+      screen.getByRole('radio', { name: 'Day' }).focus()
       await user.keyboard('{ArrowRight}')
 
-      expect(screen.getByRole('button', { name: 'Week' })).toHaveFocus()
+      expect(screen.getByRole('radio', { name: 'Week' })).toHaveFocus()
     })
   })
 
@@ -175,11 +160,11 @@ describe('SegmentedControl', () => {
       expect(indicator).toHaveAttribute('aria-hidden')
     })
 
-    it('items have aria-pressed attribute', () => {
+    it('items have aria-checked attribute', () => {
       renderSegmentedControl({ defaultValue: 'day' })
 
       items.forEach(({ label }) => {
-        expect(screen.getByRole('button', { name: label })).toHaveAttribute('aria-pressed')
+        expect(screen.getByRole('radio', { name: label })).toHaveAttribute('aria-checked')
       })
     })
   })

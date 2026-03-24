@@ -1,4 +1,5 @@
-import { ToggleGroup } from '@base-ui/react/toggle-group'
+import { RadioGroup } from '@base-ui/react/radio-group'
+import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
 import { Children, type ComponentProps, isValidElement, Ref, useRef, useState } from 'react'
 
@@ -7,10 +8,7 @@ import { rootStyles } from './SegmentedControl.styles'
 import { SegmentedControlContext } from './SegmentedControlContext'
 
 export interface SegmentedControlProps
-  extends Omit<
-      ComponentProps<typeof ToggleGroup>,
-      'multiple' | 'value' | 'defaultValue' | 'onValueChange'
-    >,
+  extends Omit<ComponentProps<typeof RadioGroup>, 'value' | 'defaultValue' | 'onValueChange'>,
     SegmentedControlStylesProps {
   /**
    * The controlled selected value.
@@ -23,7 +21,7 @@ export interface SegmentedControlProps
   /**
    * Callback fired when the selected value changes.
    */
-  onValueChange?: (value: string | null) => void
+  onValueChange?: (value: string) => void
   ref?: Ref<HTMLDivElement>
 }
 
@@ -44,22 +42,24 @@ export const SegmentedControl = ({
   value,
   defaultValue,
   onValueChange,
-  size = 'md',
   className,
   children,
   ref,
   ...rest
 }: SegmentedControlProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
-  const [internalValue, setInternalValue] = useState<string | null>(
-    () => defaultValue ?? getFirstItemValue(children)
-  )
+  const mergedRef = useMergeRefs(containerRef, ref)
+
+  const firstValue = getFirstItemValue(children)
 
   const isControlled = value !== undefined
-  const pressedValue = isControlled ? (value ?? null) : internalValue
+  const [internalValue, setInternalValue] = useState<string | null>(
+    () => defaultValue ?? firstValue
+  )
+  const checkedValue = isControlled ? (value ?? null) : internalValue
 
-  const handleValueChange = (newValues: unknown[]) => {
-    const next = (newValues[0] as string) ?? null
+  const handleValueChange = (newValue: unknown) => {
+    const next = newValue as string
 
     if (!isControlled) {
       setInternalValue(next)
@@ -68,28 +68,31 @@ export const SegmentedControl = ({
     onValueChange?.(next)
   }
 
-  const mergedRef = useMergeRefs(containerRef, ref)
-  const groupValue = pressedValue != null ? [pressedValue] : []
+  const { labelId, description, isRequired, isInvalid, name } = useFormFieldControl()
 
   return (
     <SegmentedControlContext.Provider
       value={{
-        pressedValue,
+        checkedValue,
         containerRef,
-        size: size ?? 'md',
       }}
     >
-      <ToggleGroup
+      <RadioGroup
         ref={mergedRef}
-        multiple={false}
-        value={groupValue}
+        value={isControlled ? value : undefined}
+        defaultValue={!isControlled ? (defaultValue ?? firstValue ?? undefined) : undefined}
         onValueChange={handleValueChange}
         data-spark-component="segmented-control"
         className={rootStyles({ className })}
+        aria-labelledby={labelId}
+        aria-describedby={description}
+        aria-required={isRequired || undefined}
+        aria-invalid={isInvalid || undefined}
+        name={name}
         {...rest}
       >
         {children}
-      </ToggleGroup>
+      </RadioGroup>
     </SegmentedControlContext.Provider>
   )
 }

@@ -2,9 +2,12 @@ import { ConversationFill } from '@spark-ui/icons/ConversationFill'
 import { FireFill } from '@spark-ui/icons/FireFill'
 import { MailFill } from '@spark-ui/icons/MailFill'
 import type { Meta, StoryFn } from '@storybook/react-vite'
+import { cx } from 'class-variance-authority'
 import { useState } from 'react'
 
+import { FormField } from '../form-field'
 import { Icon } from '../icon'
+import { Tag } from '../tag'
 import { SegmentedControl } from '.'
 
 const meta: Meta<typeof SegmentedControl> = {
@@ -23,10 +26,10 @@ const meta: Meta<typeof SegmentedControl> = {
 export default meta
 
 export const Default: StoryFn = () => {
-  const [value, setValue] = useState<string | null>(null)
+  const [value, setValue] = useState<string | undefined>(undefined)
 
   return (
-    <SegmentedControl value={value ?? undefined} onValueChange={setValue}>
+    <SegmentedControl value={value} onValueChange={setValue}>
       <SegmentedControl.Indicator />
       <SegmentedControl.Item value="day">Day</SegmentedControl.Item>
       <SegmentedControl.Item value="week">Week</SegmentedControl.Item>
@@ -34,25 +37,6 @@ export const Default: StoryFn = () => {
     </SegmentedControl>
   )
 }
-
-export const Size: StoryFn = _args => (
-  <div className="gap-lg flex flex-col">
-    {(['sm', 'md', 'lg'] as const).map(size => (
-      <div key={size} className="gap-sm flex flex-col">
-        <p className="text-caption text-on-surface/dim-1">
-          {size}
-          {size === 'md' && ' (default)'}
-        </p>
-        <SegmentedControl defaultValue="week" size={size}>
-          <SegmentedControl.Indicator />
-          <SegmentedControl.Item value="day">Day</SegmentedControl.Item>
-          <SegmentedControl.Item value="week">Week</SegmentedControl.Item>
-          <SegmentedControl.Item value="month">Month</SegmentedControl.Item>
-        </SegmentedControl>
-      </div>
-    ))}
-  </div>
-)
 
 export const WithIcons: StoryFn = _args => (
   <SegmentedControl defaultValue="today">
@@ -85,3 +69,85 @@ export const Disabled: StoryFn = _args => (
     <SegmentedControl.Item value="month">Month</SegmentedControl.Item>
   </SegmentedControl>
 )
+
+export const CustomContent: StoryFn = _args => (
+  <SegmentedControl defaultValue="none">
+    <SegmentedControl.Indicator />
+    <SegmentedControl.Item value="none">Aucune</SegmentedControl.Item>
+    <SegmentedControl.Item value="premium" className="gap-xs flex flex-col items-center">
+      <strong>2$ per month</strong>
+      <Tag design="tinted" intent="neutral">
+        No commitment
+      </Tag>
+    </SegmentedControl.Item>
+  </SegmentedControl>
+)
+
+export const NoIndicator: StoryFn = _args => {
+  const checkedStyles = cx('data-checked:bg-surface-inverse data-checked:text-on-surface-inverse')
+
+  return (
+    <SegmentedControl defaultValue="none">
+      <SegmentedControl.Item value="none" className={checkedStyles}>
+        Aucune
+      </SegmentedControl.Item>
+      <SegmentedControl.Item value="premium" className={checkedStyles}>
+        2$ per month
+      </SegmentedControl.Item>
+    </SegmentedControl>
+  )
+}
+
+export const FieldLabel: StoryFn = _args => (
+  <FormField name="view">
+    <FormField.Label>Display</FormField.Label>
+    <SegmentedControl defaultValue="week">
+      <SegmentedControl.Indicator />
+      <SegmentedControl.Item value="day">Day</SegmentedControl.Item>
+      <SegmentedControl.Item value="week">Week</SegmentedControl.Item>
+      <SegmentedControl.Item value="month">Month</SegmentedControl.Item>
+    </SegmentedControl>
+  </FormField>
+)
+
+export const FieldHelperMessage: StoryFn = _args => (
+  <FormField name="view">
+    <FormField.Label>Display</FormField.Label>
+    <SegmentedControl defaultValue="week">
+      <SegmentedControl.Indicator />
+      <SegmentedControl.Item value="day">Day</SegmentedControl.Item>
+      <SegmentedControl.Item value="week">Week</SegmentedControl.Item>
+      <SegmentedControl.Item value="month">Month</SegmentedControl.Item>
+    </SegmentedControl>
+    <FormField.HelperMessage>Choose the granularity of the calendar view.</FormField.HelperMessage>
+  </FormField>
+)
+
+export const FieldRequired: StoryFn = _args => (
+  <FormField name="view" isRequired>
+    <FormField.Label>Display</FormField.Label>
+    <SegmentedControl defaultValue="week">
+      <SegmentedControl.Indicator />
+      <SegmentedControl.Item value="day">Day</SegmentedControl.Item>
+      <SegmentedControl.Item value="week">Week</SegmentedControl.Item>
+      <SegmentedControl.Item value="month">Month</SegmentedControl.Item>
+    </SegmentedControl>
+  </FormField>
+)
+
+export const FieldInvalid: StoryFn = () => {
+  const [value, setValue] = useState<string | undefined>(undefined)
+
+  return (
+    <FormField name="condition" state={!value ? 'error' : undefined} isRequired>
+      <FormField.Label>Apparel condition</FormField.Label>
+      <SegmentedControl value={value} onValueChange={setValue}>
+        <SegmentedControl.Indicator />
+        <SegmentedControl.Item value="new">New</SegmentedControl.Item>
+        <SegmentedControl.Item value="very-good">Very good</SegmentedControl.Item>
+        <SegmentedControl.Item value="good">Good</SegmentedControl.Item>
+      </SegmentedControl>
+      <FormField.ErrorMessage>The condition is required.</FormField.ErrorMessage>
+    </FormField>
+  )
+}
