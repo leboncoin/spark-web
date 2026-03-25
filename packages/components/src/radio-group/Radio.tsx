@@ -1,6 +1,7 @@
 import { cx } from 'class-variance-authority'
 import { Ref, useId } from 'react'
 
+import { Label } from '../label'
 import { useRadioGroup } from './RadioGroupContext'
 import { RadioInput, RadioInputProps } from './RadioInput'
 
@@ -24,7 +25,7 @@ export const Radio = ({
   const isDisabled = disabledProp || disabled
 
   const radioLabel = children && (
-    <span
+    <Label
       data-spark-component="radio-label"
       id={innerLabelId}
       className={cx(
@@ -33,7 +34,7 @@ export const Radio = ({
       )}
     >
       {children}
-    </span>
+    </Label>
   )
 
   const radioInput = (
@@ -58,7 +59,7 @@ export const Radio = ({
     </>
   )
 
-  return <label className={cx('gap-md text-body-1 flex items-start', className)}>{content}</label>
+  return <span className={cx('gap-md text-body-1 flex items-start', className)}>{content}</span>
 }
 
 Radio.displayName = 'RadioGroup.Radio'

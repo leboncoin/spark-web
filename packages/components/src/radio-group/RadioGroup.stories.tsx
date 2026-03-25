@@ -1,10 +1,12 @@
 import { Tag } from '@spark-ui/components/tag'
 import { Meta, StoryFn } from '@storybook/react-vite'
-import { useState } from 'react'
+import { cx } from 'class-variance-authority'
+import { useId, useState } from 'react'
 
 import { FormField } from '../form-field'
+import { Label } from '../label'
 import { VisuallyHidden } from '../visually-hidden'
-import { RadioGroup, RadioGroupProps } from '.'
+import { RadioGroup, RadioGroupProps, RadioProps } from '.'
 
 const meta: Meta<typeof RadioGroup> = {
   title: 'Components/RadioGroup',
@@ -128,6 +130,31 @@ export const DisabledItem: StoryFn = _args => (
 )
 
 export const CustomImplementation: StoryFn = () => {
+  const CustomRadio = ({
+    children,
+    selectedValue,
+    ...others
+  }: RadioProps & { selectedValue: string }) => {
+    const id = useId()
+    const { value } = others
+
+    return (
+      <Label
+        id={id}
+        htmlFor={value}
+        className={cx(
+          'max-w-sz-320 bg-surface text-on-surface p-lg rounded-lg',
+          'gap-lg flex flex-wrap items-center',
+          value === selectedValue ? 'ring-outline-high ring-2' : 'ring-outline ring-1',
+          'cursor-pointer'
+        )}
+      >
+        <RadioGroup.Radio aria-labelledby={id} id={value} {...others} />
+        <span className="grow">{children}</span>
+      </Label>
+    )
+  }
+
   const Example = () => {
     const [value, setValue] = useState<string>('')
 
@@ -138,29 +165,19 @@ export const CustomImplementation: StoryFn = () => {
     const radios = ['A', 'B', 'C']
 
     return (
-      <form>
-        <RadioGroup value={value} name="sport" onValueChange={onValueChange}>
-          {radios.map(radio => {
-            return (
-              <RadioGroup.Radio
-                hideInput
-                key={radio}
-                value={radio}
-                className="border-sm p-xl has-data-checked:bg-support-container has-data-checked:border-support"
-              >
-                <span className="flex grow justify-between">
-                  <span className="font-bold">
-                    {radio}
-                    {value === radio ? ' (selected)' : ''}
-                  </span>
-                  <span>this is a custom</span>
-                </span>
-                <span className="block w-full text-right italic">implementation of a radio</span>
-              </RadioGroup.Radio>
-            )
-          })}
-        </RadioGroup>
-      </form>
+      <RadioGroup value={value} name="sport" onValueChange={onValueChange}>
+        {radios.map(radio => {
+          return (
+            <CustomRadio selectedValue={value} key={radio} value={radio}>
+              <span className="flex grow justify-between">
+                <span className="font-bold">{radio}</span>
+                <span>this is a custom</span>
+              </span>
+              <span className="block w-full text-right italic">implementation of a radio</span>
+            </CustomRadio>
+          )
+        })}
+      </RadioGroup>
     )
   }
 
