@@ -52,11 +52,11 @@ describe('RadioGroup', () => {
     const element = screen.getByRole('radiogroup')
 
     expect(element).toBeInTheDocument()
-    expect(within(element).getByLabelText('1')).toBeChecked()
+    expect(within(element).getByRole('radio', { name: '1' })).toBeChecked()
 
-    await user.click(within(element).getByLabelText('2'))
+    await user.click(within(element).getByRole('radio', { name: '2' }))
 
-    expect(within(element).getByLabelText('2')).toBeChecked()
+    expect(within(element).getByRole('radio', { name: '2' })).toBeChecked()
   })
 
   it('should toggle checked state when a radio button is clicked in controlled mode', async () => {
@@ -74,9 +74,9 @@ describe('RadioGroup', () => {
     const element = screen.getByRole('radiogroup')
 
     expect(element).toBeInTheDocument()
-    expect(within(element).getByLabelText('1')).toBeChecked()
+    expect(within(element).getByRole('radio', { name: '1' })).toBeChecked()
 
-    await user.click(within(element).getByLabelText('2'))
+    await user.click(within(element).getByRole('radio', { name: '2' }))
 
     expect(props.onValueChange).toHaveBeenCalledTimes(1)
     expect(props.onValueChange).toHaveBeenCalledWith('2')
@@ -94,9 +94,9 @@ describe('RadioGroup', () => {
       </RadioGroup>
     )
 
-    expect(screen.getByLabelText('1')).toBeChecked()
+    expect(screen.getByRole('radio', { name: '1' })).toBeChecked()
 
-    await user.click(screen.getByLabelText('2'))
+    await user.click(screen.getByRole('radio', { name: '2' }))
 
     expect(props.onValueChange).not.toHaveBeenCalled()
   })
@@ -114,7 +114,10 @@ describe('RadioGroup', () => {
       </RadioGroup>
     )
 
-    expect(screen.getByLabelText('1')).toBeDisabled()
+    // Radio.Root renders as <span role="radio" aria-disabled>; jest-dom's
+    // toBeDisabled() only matches native form elements, so we assert the
+    // aria attribute directly.
+    expect(screen.getByRole('radio', { name: '1' })).toHaveAttribute('aria-disabled', 'true')
   })
 
   it('should handle the reverse prop', async () => {

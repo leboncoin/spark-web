@@ -9,7 +9,7 @@ export const radioInputVariants = cva(
     'outline-hidden',
     'hover:ring-4',
     'focus-visible:u-outline',
-    'disabled:cursor-not-allowed disabled:border-outline/dim-2 disabled:hover:ring-transparent',
+    'data-disabled:cursor-not-allowed data-disabled:border-outline/dim-2 data-disabled:hover:ring-transparent',
     'u-shadow-border-transition',
     'size-sz-24',
   ],
@@ -22,30 +22,14 @@ export const radioInputVariants = cva(
         'intent',
         ['main', 'support', 'accent', 'success', 'alert', 'error', 'info', 'neutral']
       >({
-        main: ['border-outline', 'data-[state=checked]:border-main', 'hover:ring-main-container'],
-        support: [
-          'border-outline',
-          'data-[state=checked]:border-support',
-          'hover:ring-support-container',
-        ],
-        accent: [
-          'border-outline',
-          'data-[state=checked]:border-accent',
-          'hover:ring-accent-container',
-        ],
-        neutral: [
-          'border-outline',
-          'data-[state=checked]:border-neutral',
-          'hover:ring-neutral-container',
-        ],
-        info: ['border-info', 'data-[state=checked]:border-info', 'hover:ring-info-container'],
-        success: [
-          'border-success',
-          'data-[state=checked]:border-success',
-          'hover:ring-success-container',
-        ],
-        alert: ['border-alert', 'data-[state=checked]:border-alert', 'hover:ring-alert-container'],
-        error: ['border-error', 'data-[state=checked]:border-error', 'hover:ring-error-container'],
+        main: ['border-outline', 'data-checked:border-main', 'hover:ring-main-container'],
+        support: ['border-outline', 'data-checked:border-support', 'hover:ring-support-container'],
+        accent: ['border-outline', 'data-checked:border-accent', 'hover:ring-accent-container'],
+        neutral: ['border-outline', 'data-checked:border-neutral', 'hover:ring-neutral-container'],
+        info: ['border-info', 'data-checked:border-info', 'hover:ring-info-container'],
+        success: ['border-success', 'data-checked:border-success', 'hover:ring-success-container'],
+        alert: ['border-alert', 'data-checked:border-alert', 'hover:ring-alert-container'],
+        error: ['border-error', 'data-checked:border-error', 'hover:ring-error-container'],
       }),
     },
     defaultVariants: {

@@ -1,4 +1,4 @@
-import { RadioGroup as RadixRadioGroup } from 'radix-ui'
+import { Radio } from '@base-ui/react/radio'
 import { Ref } from 'react'
 
 import { radioIndicatorStyles, RadioIndicatorStylesProps } from './RadioIndicator.styles'
@@ -6,20 +6,24 @@ import { radioIndicatorStyles, RadioIndicatorStylesProps } from './RadioIndicato
 export interface RadioIndicatorProps extends RadioIndicatorStylesProps {
   className?: string
   /**
-   * Change the component to the HTML tag or custom component of the only child.
+   * Whether to keep the indicator mounted in the DOM when the radio is unchecked.
+   * Useful when controlling animation with React animation libraries.
    */
-  asChild?: boolean
-  /**
-   * Used to force mounting when more control is needed. Useful when controlling animation with React animation libraries.
-   */
-  forceMount?: true | undefined
+  keepMounted?: boolean
   ref?: Ref<HTMLSpanElement>
 }
 
-export const RadioIndicator = ({ intent, className, ref, ...others }: RadioIndicatorProps) => {
+export const RadioIndicator = ({
+  intent,
+  className,
+  keepMounted,
+  ref,
+  ...others
+}: RadioIndicatorProps) => {
   return (
-    <RadixRadioGroup.Indicator
+    <Radio.Indicator
       ref={ref}
+      keepMounted={keepMounted}
       className={radioIndicatorStyles({ intent, className })}
       {...others}
     />

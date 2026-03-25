@@ -3,10 +3,9 @@ import { Ref, useId } from 'react'
 
 import { useRadioGroup } from './RadioGroupContext'
 import { RadioInput, RadioInputProps } from './RadioInput'
-import { RadioLabel } from './RadioLabel'
 
 export type RadioProps = RadioInputProps & {
-  ref?: Ref<HTMLButtonElement>
+  ref?: Ref<HTMLElement>
 }
 
 const ID_PREFIX = ':radio'
@@ -14,26 +13,32 @@ const ID_PREFIX = ':radio'
 export const Radio = ({
   className,
   children,
-  id,
   disabled: disabledProp,
   ref,
   ...others
 }: RadioProps) => {
-  const innerId = `${ID_PREFIX}-input-${useId()}`
   const innerLabelId = `${ID_PREFIX}-label-${useId()}`
 
   const { intent, disabled, reverse } = useRadioGroup()
 
+  const isDisabled = disabledProp || disabled
+
   const radioLabel = children && (
-    <RadioLabel disabled={disabledProp || disabled} htmlFor={id || innerId} id={innerLabelId}>
+    <span
+      data-spark-component="radio-label"
+      id={innerLabelId}
+      className={cx(
+        'grow',
+        isDisabled ? 'text-neutral/dim-2 cursor-not-allowed' : 'cursor-pointer'
+      )}
+    >
       {children}
-    </RadioLabel>
+    </span>
   )
 
   const radioInput = (
     <RadioInput
       ref={ref}
-      id={id || innerId}
       intent={intent}
       aria-labelledby={children ? innerLabelId : undefined}
       {...others}
@@ -53,7 +58,7 @@ export const Radio = ({
     </>
   )
 
-  return <span className={cx('gap-md text-body-1 flex items-start', className)}>{content}</span>
+  return <label className={cx('gap-md text-body-1 flex items-start', className)}>{content}</label>
 }
 
 Radio.displayName = 'RadioGroup.Radio'
