@@ -1,6 +1,9 @@
 import { Meta } from '@storybook/addon-docs/blocks'
 import { useState } from 'react'
 import { Card } from '@docs/helpers/Card'
+import { ComponentDecisionTree } from '@docs/helpers/ComponentDecisionTree'
+import { ComponentDecisionGuide } from '@docs/helpers/ComponentDecisionTree/ComponentDecisionGuide'
+import { decisionTree } from '@docs/helpers/ComponentDecisionTree/decisionTree'
 
 import { Divider } from '@spark-ui/components/divider'
 import { Input } from '@spark-ui/components/input'
@@ -418,3 +421,11 @@ export const FilterableComponentsList = () => {
 ## Components
 
 <FilterableComponentsList />
+
+## Decision tree
+
+Not sure which component to use? Answer a few questions — the graph on the right follows your navigation and zooms to the matching component.
+
+<div className="sb-unstyled">
+  <ComponentDecisionGuide tree={decisionTree} components={components} />
+</div>
