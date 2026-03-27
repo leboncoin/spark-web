@@ -1,4 +1,4 @@
-import { type ComponentProps, type CSSProperties, Ref, useEffect, useState } from 'react'
+import { type ComponentProps, type CSSProperties, Ref, useEffect, useMemo, useState } from 'react'
 
 import { indicatorStyles } from './SegmentedControl.styles'
 import { useSegmentedControlContext } from './SegmentedControlContext'
@@ -22,6 +22,11 @@ export const SegmentedControlIndicator = ({
   const { checkedValue, containerRef } = useSegmentedControlContext()
   const [rect, setRect] = useState<IndicatorRect | null>(null)
 
+  const selector = useMemo(
+    () => (checkedValue ? `[data-value="${CSS.escape(checkedValue)}"]` : null),
+    [checkedValue]
+  )
+
   useEffect(() => {
     const container = containerRef.current
 
@@ -29,28 +34,64 @@ export const SegmentedControlIndicator = ({
       return
     }
 
-    const selectedItem = checkedValue
-      ? container.querySelector<HTMLElement>(`[data-value="${checkedValue}"]`)
-      : null
+    const selectedItem = selector ? container.querySelector<HTMLElement>(selector) : null
 
-    if (!selectedItem) {
-      setRect(null)
+    const update = () => {
+      const currentContainer = containerRef.current
+      if (!currentContainer || !selector) {
+        setRect(null)
 
-      return
+        return
+      }
+
+      const currentSelected = currentContainer.querySelector<HTMLElement>(selector)
+      if (!currentSelected) {
+        setRect(null)
+
+        return
+      }
+
+      const containerRect = currentContainer.getBoundingClientRect()
+      const itemRect = currentSelected.getBoundingClientRect()
+
+      // Storybook canvas "zoom" can be implemented via `transform: scale()`.
+      // In that case, `getBoundingClientRect()` returns *scaled* values, but CSS positioning/sizing
+      // expects unscaled layout pixels. We infer the scale factor from offset sizes and normalize.
+      const scaleX =
+        currentSelected.offsetWidth > 0 ? itemRect.width / currentSelected.offsetWidth : 1
+      const scaleY =
+        currentSelected.offsetHeight > 0 ? itemRect.height / currentSelected.offsetHeight : 1
+
+      // `getBoundingClientRect()` is border-box; absolute positioning is relative to the padding box.
+      setRect({
+        left: (itemRect.left - containerRect.left) / scaleX - currentContainer.clientLeft,
+        top: (itemRect.top - containerRect.top) / scaleY - currentContainer.clientTop,
+        width: itemRect.width / scaleX,
+        height: itemRect.height / scaleY,
+      })
     }
 
-    const containerRect = container.getBoundingClientRect()
-    const itemRect = selectedItem.getBoundingClientRect()
+    update()
 
-    const rootBorderWidth = 1
+    const ro =
+      typeof ResizeObserver !== 'undefined'
+        ? new ResizeObserver(() => {
+            update()
+          })
+        : null
 
-    setRect({
-      left: itemRect.left - containerRect.left - rootBorderWidth,
-      top: itemRect.top - containerRect.top - rootBorderWidth,
-      width: itemRect.width,
-      height: itemRect.height,
-    })
-  }, [checkedValue, containerRef])
+    ro?.observe(container)
+    if (selectedItem) ro?.observe(selectedItem)
+
+    window.addEventListener('resize', update, { passive: true })
+    window.visualViewport?.addEventListener('resize', update, { passive: true })
+
+    return () => {
+      ro?.disconnect()
+      window.removeEventListener('resize', update)
+      window.visualViewport?.removeEventListener('resize', update)
+    }
+  }, [containerRef, selector])
 
   if (!rect) return null
 

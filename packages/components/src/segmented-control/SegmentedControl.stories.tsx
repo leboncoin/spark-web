@@ -41,20 +41,23 @@ export const Default: StoryFn = () => {
 export const WithIcons: StoryFn = _args => (
   <SegmentedControl defaultValue="today">
     <SegmentedControl.Indicator />
-    <SegmentedControl.Item value="inbox" aria-label="Inbox">
+    <SegmentedControl.Item value="inbox">
       <Icon size="sm">
         <MailFill />
       </Icon>
+      Inbox
     </SegmentedControl.Item>
-    <SegmentedControl.Item value="today" aria-label="Today">
+    <SegmentedControl.Item value="today">
       <Icon size="sm">
         <ConversationFill />
       </Icon>
+      Today
     </SegmentedControl.Item>
-    <SegmentedControl.Item value="upcoming" aria-label="Upcoming">
+    <SegmentedControl.Item value="upcoming">
       <Icon size="sm">
         <FireFill />
       </Icon>
+      Upcoming
     </SegmentedControl.Item>
   </SegmentedControl>
 )
@@ -134,20 +137,3 @@ export const FieldRequired: StoryFn = _args => (
     </SegmentedControl>
   </FormField>
 )
-
-export const FieldInvalid: StoryFn = () => {
-  const [value, setValue] = useState<string | undefined>(undefined)
-
-  return (
-    <FormField name="condition" state={!value ? 'error' : undefined} isRequired>
-      <FormField.Label>Apparel condition</FormField.Label>
-      <SegmentedControl value={value} onValueChange={setValue}>
-        <SegmentedControl.Indicator />
-        <SegmentedControl.Item value="new">New</SegmentedControl.Item>
-        <SegmentedControl.Item value="very-good">Very good</SegmentedControl.Item>
-        <SegmentedControl.Item value="good">Good</SegmentedControl.Item>
-      </SegmentedControl>
-      <FormField.ErrorMessage>The condition is required.</FormField.ErrorMessage>
-    </FormField>
-  )
-}
