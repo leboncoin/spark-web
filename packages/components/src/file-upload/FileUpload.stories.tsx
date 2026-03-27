@@ -9,8 +9,8 @@ import { Export } from '@spark-ui/icons/Export'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useEffect, useMemo, useRef, useState } from 'react'
 
-import { FormField } from '../form-field'
 import { FileUpload, type FileUploadFileError, type RejectedFile } from '.'
+import { FormField } from '../form-field'
 
 const meta: Meta<typeof FileUpload> = {
   title: 'Components/FileUpload',

@@ -4,8 +4,8 @@ import userEvent from '@testing-library/user-event'
 import { useState } from 'react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { FormField } from '../form-field'
 import { Select } from '.'
+import { FormField } from '../form-field'
 
 const getSelect = (accessibleName: string) => {
   return screen.getByRole('combobox', { name: accessibleName })

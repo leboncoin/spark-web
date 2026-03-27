@@ -2,8 +2,10 @@ import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import { cx } from 'class-variance-authority'
 import { ComponentProps, Ref } from 'react'
 
-export interface DrawerOverlayProps
-  extends Omit<ComponentProps<typeof BaseDialog.Backdrop>, 'render'> {
+export interface DrawerOverlayProps extends Omit<
+  ComponentProps<typeof BaseDialog.Backdrop>,
+  'render'
+> {
   ref?: Ref<HTMLDivElement>
 }
 

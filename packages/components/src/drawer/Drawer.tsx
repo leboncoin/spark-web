@@ -3,8 +3,10 @@ import { ComponentProps, type ReactElement } from 'react'
 
 import { DrawerProvider } from './DrawerContext'
 
-export interface DrawerProps
-  extends Omit<ComponentProps<typeof BaseDialog.Root>, 'onOpenChange' | 'render'> {
+export interface DrawerProps extends Omit<
+  ComponentProps<typeof BaseDialog.Root>,
+  'onOpenChange' | 'render'
+> {
   /**
    * Specifies if the dialog is open or not.
    */

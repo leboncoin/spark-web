@@ -8,7 +8,8 @@ import { rootStyles } from './SegmentedControl.styles'
 import { SegmentedControlContext } from './SegmentedControlContext'
 
 export interface SegmentedControlProps
-  extends Omit<ComponentProps<typeof RadioGroup>, 'value' | 'defaultValue' | 'onValueChange'>,
+  extends
+    Omit<ComponentProps<typeof RadioGroup>, 'value' | 'defaultValue' | 'onValueChange'>,
     SegmentedControlStylesProps {
   /**
    * The controlled selected value.

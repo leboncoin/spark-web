@@ -5,8 +5,7 @@ import { inputAddonStyles, type InputAddonStylesProps } from './InputAddon.style
 import { useInputGroup } from './InputGroupContext'
 
 export interface InputAddonProps
-  extends ComponentPropsWithoutRef<'div'>,
-    Omit<InputAddonStylesProps, 'intent' | 'disabled'> {
+  extends ComponentPropsWithoutRef<'div'>, Omit<InputAddonStylesProps, 'intent' | 'disabled'> {
   ref?: Ref<HTMLDivElement>
 }
 

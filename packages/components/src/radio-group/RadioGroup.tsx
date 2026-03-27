@@ -7,7 +7,8 @@ import { RadioGroupProvider } from './RadioGroupProvider'
 import { RadioInputVariantsProps } from './RadioInput.styles'
 
 export interface RadioGroupProps
-  extends RadioGroupVariantsProps,
+  extends
+    RadioGroupVariantsProps,
     Pick<RadioInputVariantsProps, 'intent'>,
     Omit<HTMLAttributes<HTMLDivElement>, 'value' | 'defaultValue' | 'dir' | 'onChange'> {
   /**

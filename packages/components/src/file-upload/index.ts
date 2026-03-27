@@ -1,3 +1,4 @@
+import { FILE_UPLOAD_ERRORS } from './constants'
 import {
   type FileAcceptDetails,
   type FileChangeDetails,
@@ -8,7 +9,6 @@ import {
 } from './FileUpload'
 import { AcceptedFile } from './FileUploadAcceptedFile'
 import { Context } from './FileUploadContext'
-import { FILE_UPLOAD_ERRORS } from './constants'
 import { Dropzone } from './FileUploadDropzone'
 import { ItemDeleteTrigger } from './FileUploadItemDeleteTrigger'
 import { PreviewImage } from './FileUploadPreviewImage'

@@ -1,7 +1,7 @@
 import path from 'node:path'
+import { fileURLToPath } from 'url'
 
 import fse from 'fs-extra'
-import { fileURLToPath } from 'url'
 import { afterAll, beforeEach, describe, expect, it } from 'vitest'
 
 import { TemplateGenerator } from '../src/generate/generators/TemplateGenerator.mjs'

@@ -14,6 +14,7 @@ export type CheckboxProps = CheckboxInputProps &
 
 const ID_PREFIX = ':checkbox'
 
+// oxlint-disable-next-line max-lines-per-function
 export const Checkbox = ({
   id: idProp,
   className,

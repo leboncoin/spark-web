@@ -24,6 +24,6 @@
 npm run build:watch          # Build packages in watch mode
 npm run storybook:start      # Start Storybook dev server
 npm run test:ui              # Run tests in watch mode
-npm run lint                 # ESLint check
+npm run lint                 # Oxlint check
 npm run test:a11y            # Run accessibility tests
 ```

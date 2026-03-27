@@ -3,8 +3,10 @@ import { ComponentProps, Ref } from 'react'
 
 import { useRenderSlot } from './useRenderSlot'
 
-export interface AlertDialogActionProps
-  extends Omit<ComponentProps<typeof BaseAlertDialog.Close>, 'render'> {
+export interface AlertDialogActionProps extends Omit<
+  ComponentProps<typeof BaseAlertDialog.Close>,
+  'render'
+> {
   /**
    * Change the default rendered element for the one passed as a child, merging their props and behavior.
    */

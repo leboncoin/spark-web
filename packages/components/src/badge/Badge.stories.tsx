@@ -1,8 +1,8 @@
 import { Tag } from '@spark-ui/components/tag'
 import { Meta, StoryFn } from '@storybook/react-vite'
 
-import { Button } from '../button'
 import { Badge, type BadgeProps } from '.'
+import { Button } from '../button'
 
 const meta: Meta<typeof Badge> = {
   title: 'Components/Badge',

@@ -37,11 +37,10 @@ export interface ToastData {
 
 export type ToastObject = BaseToast.Root.ToastObject<ToastData>
 
-export interface AddOptions
-  extends Omit<
-    ToastObject,
-    'id' | 'animation' | 'height' | 'ref' | 'limited' | 'title' | 'description'
-  > {
+export interface AddOptions extends Omit<
+  ToastObject,
+  'id' | 'animation' | 'height' | 'ref' | 'limited' | 'title' | 'description'
+> {
   id?: string
   title?: string | React.ReactNode
   description?: string | React.ReactNode

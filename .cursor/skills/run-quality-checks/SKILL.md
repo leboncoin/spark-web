@@ -20,7 +20,7 @@ Execute all code quality checks for the Spark UI project.
    ```bash
    npm run lint
    ```
-   Checks code style and quality with ESLint.
+   Checks code style and quality with Oxlint.
 
 2. **Type Checking**:
    ```bash
@@ -30,35 +30,41 @@ Execute all code quality checks for the Spark UI project.
 
 3. **Formatting**:
    ```bash
-   npm run prettier
+   npm run format
    ```
-   Checks and fixes code formatting.
+   Writes formatted source with Oxfmt.
 
-4. **All Formatting Checks**:
+4. **Formatting (check only)**:
+   ```bash
+   npm run format:check
+   ```
+   Verifies formatting without modifying files.
+
+5. **Lint and format**:
    ```bash
    npm run prettify
    ```
-   Runs both lint and prettier.
+   Runs lint, then applies Oxfmt.
 
-5. **Tests**:
+6. **Tests**:
    ```bash
    npm run test:run
    ```
    Runs all unit tests.
 
-6. **Test Coverage**:
+7. **Test Coverage**:
    ```bash
    npm run test:coverage
    ```
    Generates coverage report.
 
-7. **E2E Tests**:
+8. **E2E Tests**:
    ```bash
    npm run test:e2e
    ```
    Runs end-to-end tests with Playwright.
 
-8. **Accessibility Tests**:
+9. **Accessibility Tests**:
    ```bash
    npm run test:a11y
    ```
@@ -68,5 +74,5 @@ Execute all code quality checks for the Spark UI project.
 
 For a complete check before PR:
 ```bash
-npm run lint && npm run typecheck && npm run test:run && npm run test:a11y
+npm run lint && npm run format:check && npm run typecheck && npm run test:run && npm run test:a11y
 ```

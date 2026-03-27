@@ -3,8 +3,7 @@ import { HTMLAttributes, Ref } from 'react'
 import { styles, type StylesProps } from './BadgeItem.styles'
 
 export interface BadgeItemProps
-  extends Omit<HTMLAttributes<HTMLSpanElement>, 'aria-label'>,
-    StylesProps {
+  extends Omit<HTMLAttributes<HTMLSpanElement>, 'aria-label'>, StylesProps {
   /**
    * Numeric value used as indicator inside the component.
    */

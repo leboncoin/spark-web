@@ -6,7 +6,8 @@ import { MeterContext } from './MeterContext'
 import { MeterIndicatorStylesProps } from './MeterTrack.styles'
 
 export interface MeterProps
-  extends Omit<ComponentProps<typeof BaseMeter.Root>, 'render'>,
+  extends
+    Omit<ComponentProps<typeof BaseMeter.Root>, 'render'>,
     Pick<MeterIndicatorStylesProps, 'intent'> {
   /**
    * Shape of the meter track and indicator.

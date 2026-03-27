@@ -6,8 +6,7 @@ import { dialogContentStyles, type DialogContentStylesProps } from './DialogCont
 import { useDialog } from './DialogContext'
 
 export interface ContentProps
-  extends Omit<ComponentProps<typeof BaseDialog.Popup>, 'render'>,
-    DialogContentStylesProps {
+  extends Omit<ComponentProps<typeof BaseDialog.Popup>, 'render'>, DialogContentStylesProps {
   /**
    * When set to true, the content will adjust its width to fit the content rather than taking up the full available width.
    */

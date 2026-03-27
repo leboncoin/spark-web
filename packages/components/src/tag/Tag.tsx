@@ -4,8 +4,7 @@ import { Slot } from '../slot'
 import { tagStyles, type TagStylesProps } from './Tag.styles'
 
 interface BaseTagProps
-  extends PropsWithChildren<ButtonHTMLAttributes<HTMLSpanElement>>,
-    TagStylesProps {
+  extends PropsWithChildren<ButtonHTMLAttributes<HTMLSpanElement>>, TagStylesProps {
   /**
    * Change the component to the HTML tag or custom component of the only child.
    */

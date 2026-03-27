@@ -1,9 +1,9 @@
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useState } from 'react'
 
+import { Rating, type RatingProps } from '.'
 import { FormField } from '../form-field'
 import { VisuallyHidden } from '../visually-hidden'
-import { Rating, type RatingProps } from '.'
 
 const meta: Meta<typeof Rating> = {
   title: 'Components/Rating',

@@ -1,0 +1,93 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["oxc", "typescript", "import", "react"],
+  "settings": {
+    "react": {
+      "version": "19.2"
+    }
+  },
+  "ignorePatterns": [
+    ".storybook",
+    "bin",
+    "**/dist",
+    "vite.config.ts",
+    "**/*.cjs",
+    "node_modules"
+  ],
+  "env": {
+    "builtin": true,
+    "browser": true,
+    "es2024": true
+  },
+  "rules": {
+    "no-console": ["warn", { "allow": ["error"] }],
+    "no-debugger": "warn",
+    "no-nested-ternary": "error",
+    "no-unneeded-ternary": "error",
+    "no-var": "error",
+    "quotes": ["warn", "single", { "allowTemplateLiterals": false, "avoidEscape": true }],
+    "jsx-quotes": ["warn", "prefer-double"],
+    "typescript/consistent-type-definitions": ["warn", "interface"],
+    "typescript/array-type": ["error", { "default": "array", "readonly": "array" }],
+    "typescript/no-unused-vars": [
+      "error",
+      { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }
+    ],
+    "typescript/no-use-before-define": [
+      "error",
+      { "functions": false, "classes": true, "variables": false }
+    ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react/jsx-key": "off",
+    "react/display-name": "off",
+    "max-lines": ["warn", { "max": 300, "skipBlankLines": true, "skipComments": true }],
+    "max-lines-per-function": [
+      "warn",
+      { "max": 100, "skipBlankLines": true, "skipComments": true }
+    ],
+    "max-depth": ["error", 5],
+    "max-nested-callbacks": ["warn", 5],
+    "newline-before-return": "warn",
+    "no-unused-expressions": ["warn", { "allowShortCircuit": true }],
+    "space-before-function-paren": [
+      "warn",
+      { "anonymous": "always", "named": "never", "asyncArrow": "always" }
+    ],
+    "import/no-named-as-default": "off",
+    "import/no-named-as-default-member": "off",
+    "oxc/erasing-op": "off"
+  },
+  "overrides": [
+    {
+      "files": ["*.js", "*.mjs"],
+      "rules": {
+        "class-methods-use-this": "off",
+        "no-underscore-dangle": "off",
+        "typescript/no-unused-vars": "off",
+        "typescript/no-use-before-define": "off",
+        "typescript/consistent-type-definitions": "off",
+        "typescript/array-type": "off"
+      }
+    },
+    {
+      "files": ["**/*.test.ts", "**/*.test.tsx", "**/*.stories.tsx"],
+      "rules": {
+        "max-lines-per-function": [
+          "warn",
+          { "max": 500, "skipBlankLines": true, "skipComments": true }
+        ],
+        "max-nested-callbacks": ["warn", 8],
+        "no-console": "off"
+      }
+    },
+    {
+      "files": ["packages/icons/src/tags.ts", "packages/icons/src/index.ts"],
+      "rules": {
+        "max-lines": "off"
+      }
+    }
+  ]
+}

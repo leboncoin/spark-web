@@ -9,8 +9,7 @@ import {
 import type { StepIndicatorVariantProps } from './ProgressTrackerStepIndicator.styles'
 
 export interface ProgressTrackerProps
-  extends ComponentPropsWithRef<'div'>,
-    Pick<StepIndicatorVariantProps, 'size' | 'intent'> {
+  extends ComponentPropsWithRef<'div'>, Pick<StepIndicatorVariantProps, 'size' | 'intent'> {
   /**
    * The orientation of the progress tracker
    * @default 'horizontal"

@@ -1,9 +1,9 @@
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useState } from 'react'
 
+import { Pagination } from '.'
 import { FormField } from '../form-field'
 import { RadioGroup } from '../radio-group'
-import { Pagination } from '.'
 
 const meta: Meta<typeof Pagination> = {
   title: 'Components/Pagination',

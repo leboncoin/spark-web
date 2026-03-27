@@ -7,7 +7,8 @@ import { ProgressIndicatorStylesProps } from './ProgressIndicator'
 import { ProgressTrack } from './ProgressTrack'
 
 export interface ProgressProps
-  extends Omit<ComponentProps<typeof BaseProgress.Root>, 'render'>,
+  extends
+    Omit<ComponentProps<typeof BaseProgress.Root>, 'render'>,
     Pick<ProgressIndicatorStylesProps, 'intent'> {
   shape?: 'square' | 'rounded'
   /**

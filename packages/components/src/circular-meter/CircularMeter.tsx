@@ -19,7 +19,8 @@ const CIRCULAR_METER_SIZE_CONFIG: Record<
 }
 
 export interface CircularMeterProps
-  extends Omit<ComponentProps<typeof BaseMeter.Root>, 'render'>,
+  extends
+    Omit<ComponentProps<typeof BaseMeter.Root>, 'render'>,
     Pick<MeterIndicatorStylesProps, 'intent'>,
     CircularMeterStylesProps {
   /**

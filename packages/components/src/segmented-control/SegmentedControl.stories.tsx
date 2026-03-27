@@ -5,10 +5,10 @@ import type { Meta, StoryFn } from '@storybook/react-vite'
 import { cx } from 'class-variance-authority'
 import { useState } from 'react'
 
+import { SegmentedControl } from '.'
 import { FormField } from '../form-field'
 import { Icon } from '../icon'
 import { Tag } from '../tag'
-import { SegmentedControl } from '.'
 
 const meta: Meta<typeof SegmentedControl> = {
   title: 'Experimental/SegmentedControl',

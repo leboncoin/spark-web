@@ -1,9 +1,9 @@
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useState } from 'react'
 
+import { Accordion } from '.'
 import { Checkbox, CheckboxGroup } from '../checkbox'
 import { Tag } from '../tag'
-import { Accordion } from '.'
 
 const meta: Meta<typeof Accordion> = {
   title: 'Components/Accordion',

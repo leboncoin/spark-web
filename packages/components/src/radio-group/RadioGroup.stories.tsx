@@ -3,10 +3,10 @@ import { Meta, StoryFn } from '@storybook/react-vite'
 import { cx } from 'class-variance-authority'
 import { useId, useState } from 'react'
 
+import { RadioGroup, RadioGroupProps, RadioProps } from '.'
 import { FormField } from '../form-field'
 import { Label } from '../label'
 import { VisuallyHidden } from '../visually-hidden'
-import { RadioGroup, RadioGroupProps, RadioProps } from '.'
 
 const meta: Meta<typeof RadioGroup> = {
   title: 'Components/RadioGroup',

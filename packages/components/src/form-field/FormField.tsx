@@ -6,7 +6,8 @@ import { FormFieldContextState, ID_PREFIX } from './FormFieldContext'
 import { FormFieldProvider } from './FormFieldProvider'
 
 export interface FormFieldProps
-  extends ComponentPropsWithoutRef<'div'>,
+  extends
+    ComponentPropsWithoutRef<'div'>,
     Pick<FormFieldContextState, 'name' | 'state' | 'isRequired'> {
   /**
    * Change the component to the HTML tag or custom component of the only child. This will merge the original component props with the props of the supplied element/component and change the underlying DOM node.

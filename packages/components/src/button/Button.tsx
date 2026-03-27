@@ -6,8 +6,7 @@ import { Spinner, type SpinnerProps } from '../spinner'
 import { buttonStyles, type ButtonStylesProps } from './Button.styles'
 
 export interface ButtonProps
-  extends Omit<ComponentPropsWithoutRef<'button'>, 'disabled'>,
-    ButtonStylesProps {
+  extends Omit<ComponentPropsWithoutRef<'button'>, 'disabled'>, ButtonStylesProps {
   /**
    * Change the component to the HTML tag or custom component of the only child.
    */
@@ -107,7 +106,7 @@ export const Button = ({
         isLoading ? (
           <>
             <Spinner {...spinnerProps} />
-            {loadingText && loadingText}
+            {loadingText}
 
             <div
               aria-hidden

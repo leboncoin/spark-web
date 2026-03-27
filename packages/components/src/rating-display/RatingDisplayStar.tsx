@@ -38,8 +38,7 @@ type RatingDisplayStarIconStylesProps = Omit<
 >
 
 export interface RatingDisplayStarProps
-  extends RatingDisplayStarstylesProps,
-    RatingDisplayStarIconStylesProps {
+  extends RatingDisplayStarstylesProps, RatingDisplayStarIconStylesProps {
   value: StarValue
 }
 

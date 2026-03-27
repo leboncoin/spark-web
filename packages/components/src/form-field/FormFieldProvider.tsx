@@ -2,11 +2,10 @@ import { ReactNode, useCallback, useId, useMemo, useState } from 'react'
 
 import { FormFieldContext, FormFieldContextState, ID_PREFIX } from './FormFieldContext'
 
-export interface FormFieldProviderProps
-  extends Pick<
-    FormFieldContextState,
-    'id' | 'name' | 'disabled' | 'readOnly' | 'state' | 'isRequired'
-  > {
+export interface FormFieldProviderProps extends Pick<
+  FormFieldContextState,
+  'id' | 'name' | 'disabled' | 'readOnly' | 'state' | 'isRequired'
+> {
   children: ReactNode
 }
 

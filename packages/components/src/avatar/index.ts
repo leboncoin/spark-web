@@ -1,13 +1,14 @@
 import { Avatar } from './Avatar'
-import { AvatarImage } from './AvatarImage'
 import { AvatarAction } from './AvatarAction'
+import { AvatarImage } from './AvatarImage'
 import { AvatarOnlineBadge } from './AvatarOnlineBadge'
-import { AvatarUser } from './AvatarUser'
 import { AvatarPlaceholder } from './AvatarPlaceholder'
+import { AvatarUser } from './AvatarUser'
 import type { AvatarProps } from './types'
 
-export interface AvatarComponent
-  extends React.ForwardRefExoticComponent<AvatarProps & React.RefAttributes<HTMLDivElement>> {
+export interface AvatarComponent extends React.ForwardRefExoticComponent<
+  AvatarProps & React.RefAttributes<HTMLDivElement>
+> {
   Image: typeof AvatarImage
   Action: typeof AvatarAction
   OnlineBadge: typeof AvatarOnlineBadge

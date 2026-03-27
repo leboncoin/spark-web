@@ -6,7 +6,8 @@ import { SnackbarItemContext, type SnackbarItemState } from './SnackbarItemConte
 import { snackbarRegionVariant, type SnackbarRegionVariantProps } from './SnackbarRegion.styles'
 
 export interface SnackbarRegionProps
-  extends ComponentPropsWithRef<'div'>,
+  extends
+    ComponentPropsWithRef<'div'>,
     AriaToastRegionProps,
     SnackbarRegionVariantProps,
     Pick<SnackbarItemState, 'state'> {

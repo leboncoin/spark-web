@@ -8,13 +8,13 @@ import { Search } from '@spark-ui/icons/Search'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { ChangeEvent, useState } from 'react'
 
+import { Input, InputGroup, type InputGroupProps } from '.'
 import { Button } from '../button'
 import { Checkbox } from '../checkbox'
 import { FormField } from '../form-field'
 import { Icon } from '../icon'
 import { IconButton } from '../icon-button'
 import { VisuallyHidden } from '../visually-hidden'
-import { Input, InputGroup, type InputGroupProps } from '.'
 
 const meta: Meta<typeof Input> = {
   title: 'Components/Input',

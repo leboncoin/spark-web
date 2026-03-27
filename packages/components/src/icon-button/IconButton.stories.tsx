@@ -5,9 +5,9 @@ import { Meta, StoryFn } from '@storybook/react-vite'
 import { cx } from 'class-variance-authority'
 import { useState } from 'react'
 
+import { IconButton, IconButtonProps } from '.'
 import { Checkbox } from '../checkbox'
 import { Icon } from '../icon'
-import { IconButton, IconButtonProps } from '.'
 
 const meta: Meta<typeof IconButton> = {
   title: 'Components/IconButton',

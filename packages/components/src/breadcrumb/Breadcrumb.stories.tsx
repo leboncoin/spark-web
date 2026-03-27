@@ -1,8 +1,8 @@
 import { ArrowRight } from '@spark-ui/icons/ArrowRight'
 import { Meta, StoryFn } from '@storybook/react-vite'
 
-import { Icon } from '../icon'
 import { Breadcrumb } from '.'
+import { Icon } from '../icon'
 
 const meta: Meta<typeof Breadcrumb> = {
   title: 'Components/Breadcrumb',

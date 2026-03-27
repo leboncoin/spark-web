@@ -6,7 +6,8 @@ import { RadioIndicator } from './RadioIndicator'
 import { radioInputVariants, RadioInputVariantsProps } from './RadioInput.styles'
 
 export interface RadioInputProps
-  extends RadioInputVariantsProps,
+  extends
+    RadioInputVariantsProps,
     Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'value' | 'onChange'> {
   /**
    * Change the component to the HTML tag or custom component of the only child.

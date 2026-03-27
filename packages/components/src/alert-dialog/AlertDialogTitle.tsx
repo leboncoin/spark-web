@@ -2,8 +2,10 @@ import { AlertDialog as BaseAlertDialog } from '@base-ui/react/alert-dialog'
 import { cx } from 'class-variance-authority'
 import { ComponentProps, Ref } from 'react'
 
-export interface AlertDialogTitleProps
-  extends Omit<ComponentProps<typeof BaseAlertDialog.Title>, 'render'> {
+export interface AlertDialogTitleProps extends Omit<
+  ComponentProps<typeof BaseAlertDialog.Title>,
+  'render'
+> {
   ref?: Ref<HTMLHeadingElement>
 }
 

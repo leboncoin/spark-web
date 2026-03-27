@@ -5,8 +5,10 @@ import { ComponentProps, Ref } from 'react'
 import { dialogContentStyles } from '../dialog/DialogContent.styles'
 import { useAlertDialog } from './AlertDialogContext'
 
-export interface AlertDialogContentProps
-  extends Omit<ComponentProps<typeof BaseAlertDialog.Popup>, 'render'> {
+export interface AlertDialogContentProps extends Omit<
+  ComponentProps<typeof BaseAlertDialog.Popup>,
+  'render'
+> {
   ref?: Ref<HTMLDivElement>
 }
 

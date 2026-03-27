@@ -1,8 +1,10 @@
 import { AlertDialog as BaseAlertDialog } from '@base-ui/react/alert-dialog'
 import { ComponentProps, Ref } from 'react'
 
-export interface AlertDialogDescriptionProps
-  extends Omit<ComponentProps<typeof BaseAlertDialog.Description>, 'render'> {
+export interface AlertDialogDescriptionProps extends Omit<
+  ComponentProps<typeof BaseAlertDialog.Description>,
+  'render'
+> {
   ref?: Ref<HTMLParagraphElement>
 }
 

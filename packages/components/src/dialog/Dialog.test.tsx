@@ -2,8 +2,8 @@ import { fireEvent, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vitest } from 'vitest'
 
-import { Button } from '../button'
 import { Dialog } from '.'
+import { Button } from '../button'
 
 describe('Dialog', () => {
   it('should render', async () => {

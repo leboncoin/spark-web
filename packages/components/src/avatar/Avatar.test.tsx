@@ -5,9 +5,9 @@ import userEvent from '@testing-library/user-event'
 import { useState } from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
+import { Avatar } from '.'
 import { Button } from '../button'
 import { Icon } from '../icon'
-import { Avatar } from '.'
 
 const sizeMap = {
   xs: 24,

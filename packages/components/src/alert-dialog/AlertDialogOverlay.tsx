@@ -2,8 +2,10 @@ import { AlertDialog as BaseAlertDialog } from '@base-ui/react/alert-dialog'
 import { cx } from 'class-variance-authority'
 import { ComponentProps, Ref } from 'react'
 
-export interface AlertDialogOverlayProps
-  extends Omit<ComponentProps<typeof BaseAlertDialog.Backdrop>, 'render'> {
+export interface AlertDialogOverlayProps extends Omit<
+  ComponentProps<typeof BaseAlertDialog.Backdrop>,
+  'render'
+> {
   ref?: Ref<HTMLDivElement>
 }
 

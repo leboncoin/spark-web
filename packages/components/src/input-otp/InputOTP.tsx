@@ -80,8 +80,10 @@ const assignSlotIndexes = (children: ReactNode, startIndex: number = 0): [ReactN
   return [processed, currentIndex]
 }
 
-export interface InputOTPProps
-  extends Omit<ComponentPropsWithoutRef<'div'>, 'onChange' | 'inputMode'> {
+export interface InputOTPProps extends Omit<
+  ComponentPropsWithoutRef<'div'>,
+  'onChange' | 'inputMode'
+> {
   /**
    * Maximum length of the input value.
    * If not provided, will be automatically detected from the number of InputOTP.Slot children.

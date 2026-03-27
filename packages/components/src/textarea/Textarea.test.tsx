@@ -4,8 +4,8 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 
-import { FormField } from '../form-field'
 import { Textarea, TextareaGroup } from '.'
+import { FormField } from '../form-field'
 
 describe('Textarea', () => {
   it('should render', () => {
