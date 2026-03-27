@@ -1,3 +1,13 @@
+## 17.2.1 (2026-03-27)
+
+### 🩹 Fixes
+
+- **components:** improved segmented control styles ([e6a844700](https://github.com/leboncoin/spark-web/commit/e6a844700))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.2.0 (2026-03-24)
 
 This was a version bump only for @spark-ui/theme-utils to align it with other projects, there were no code changes.
