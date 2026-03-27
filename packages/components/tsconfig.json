@@ -1,9 +1,19 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.build.json",
   "include": [".", "../../global.d.ts", "./global.d.ts"],
   "exclude": ["dist", "build", "node_modules"],
-  "compilerOptions" : {
+  "compilerOptions": {
+    "composite": false,
     "incremental": false,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "paths": {
+      "@spark-ui/components": ["./src"],
+      "@spark-ui/components/*": ["./src/*"],
+      "@spark-ui/hooks/*": ["../hooks/dist/*/index"],
+      "@spark-ui/icons": ["../icons/dist/src/index"],
+      "@spark-ui/icons/*": ["../icons/dist/src/icons/*"],
+      "@spark-ui/internal-utils": ["../utils/internal-utils/dist/src/index"],
+      "@spark-ui/internal-utils/*": ["../utils/internal-utils/dist/src/*"]
+    }
   }
 }

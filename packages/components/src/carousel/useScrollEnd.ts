@@ -1,4 +1,4 @@
-import { useEffect, useRef, RefObject } from 'react'
+import { RefObject, useEffect, useRef } from 'react'
 
 export function useScrollEnd(scrollRef: RefObject<HTMLDivElement | null>, callback: () => void) {
   const scrollLeft = useRef(0)
@@ -10,7 +10,7 @@ export function useScrollEnd(scrollRef: RefObject<HTMLDivElement | null>, callba
    * Caveats:
    * - when using a trackpad or your fingers on a touch device, scrolling then holding the position might trigger the "scrollend" callback too early.
    */
-  const safariTimeout = useRef<NodeJS.Timeout | null>(null)
+  const safariTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     const element = scrollRef.current

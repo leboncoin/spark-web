@@ -1,4 +1,7 @@
 {
-  "extends": "../../../tsconfig.json",
-  "include": ["src/**/*", "../../global.d.ts"]
+  "extends": "../../../tsconfig.build.json",
+  "include": ["src/**/*", "../../../global.d.ts"],
+  "compilerOptions": {
+    "composite": false
+  }
 }
