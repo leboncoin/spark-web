@@ -9,12 +9,14 @@
 ## Architecture
 
 ### Monorepo Structure
+
 - **Package Manager**: NPM with workspaces
-- **Build Tool**: Vite + TSUP
+- **Build Tool**: Vite
 - **Monorepo Management**: Nx (with Nx Release for versioning and publishing)
 - **Node Version**: 22.x
 
 ### Packages
+
 ```
 packages/
 ├── components/     # Main React components library
@@ -24,6 +26,7 @@ packages/
 ```
 
 ### Key Technologies
+
 - **React**: 19.1.1
 - **TypeScript**: 5.9.2
 - **TailwindCSS**: 4.1.1

@@ -4,7 +4,6 @@ import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 
 // Find all entry points (index.ts or index.tsx in each component directory)
-// Same pattern as tsup: src/*/index.(ts|tsx)
 const entryPoints: Record<string, string> = {}
 const srcDir = resolve(__dirname, 'src')
 
@@ -38,8 +37,6 @@ export default defineConfig({
       copyDtsFiles: true,
       bundledPackages: [],
       afterBuild: () => {
-        // Generate .d.mts files from .d.ts files (same content, different extension)
-        // This matches tsup's behavior of generating both .d.ts and .d.mts
         const distDir = resolve(__dirname, 'dist')
 
         // Find all index.d.ts files in component directories
@@ -79,17 +76,14 @@ export default defineConfig({
     },
     rollupOptions: {
       external: id => {
-        // Externalize react (same as tsup external: ['react'])
         if (id === 'react' || id === 'react-dom' || id === 'react/jsx-runtime') {
           return true
         }
 
-        // Externalize @spark-ui/components/form-field (same as tsup external: ['@spark-ui/components/form-field'])
         if (id === '@spark-ui/components/form-field') {
           return true
         }
 
-        // Bundle other @spark-ui/components imports (same as tsup noExternal: ['!@spark-ui/components/form-field'])
         if (id.startsWith('@spark-ui/components/')) {
           return false
         }
