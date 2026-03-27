@@ -67,8 +67,8 @@
     "@types/node": "^24.5.2",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
-    "@typescript-eslint/eslint-plugin": "^8.44.1",
-    "@typescript-eslint/parser": "^8.44.1",
+    "@typescript-eslint/eslint-plugin": "8.57.2",
+    "@typescript-eslint/parser": "8.57.2",
     "@vitejs/plugin-react": "4.7.0",
     "@vitest/coverage-v8": "^4.0.8",
     "@vitest/ui": "4.0.15",
@@ -119,10 +119,10 @@
     "ts-node": "10.9.2",
     "tsup": "^8.5.0",
     "type-fest": "5.1.0",
-    "typescript": "5.9.3",
+    "typescript": "6.0.2",
     "vite": "^6.4.1",
     "vite-plugin-dts": "4.5.4",
-    "vite-tsconfig-paths": "5.1.4",
+    "vite-tsconfig-paths": "6.1.1",
     "vitest": "^4.0.8"
   },
   "optionalDependencies": {

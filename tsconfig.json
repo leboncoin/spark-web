@@ -1,18 +1,18 @@
 {
   "extends": "./tsconfig.build.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "composite": false,
-    "downlevelIteration": true,
     "emitDeclarationOnly": false,
     "noEmit": true,
     "module": "ESNext",
     "paths": {
       "@docs/*": ["./documentation/*"],
-      "@spark-ui/components/*": ["packages/components/src/*"],
-      "@spark-ui/hooks/*": ["packages/hooks/src/*"],
-      "@spark-ui/*": ["packages/*/src"],
-      "@/*": ["src/*"]
+      "@spark-ui/components/*": ["./packages/components/src/*"],
+      "@spark-ui/hooks/*": ["./packages/hooks/src/*"],
+      "@spark-ui/internal-utils": ["./packages/utils/internal-utils/src"],
+      "@spark-ui/internal-utils/*": ["./packages/utils/internal-utils/src/*"],
+      "@spark-ui/*": ["./packages/*/src"],
+      "@/*": ["./src/*"]
     }
   },
   "include": [
