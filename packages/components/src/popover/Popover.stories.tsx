@@ -2,9 +2,9 @@ import { Meta, StoryFn } from '@storybook/react-vite'
 import { cx } from 'class-variance-authority'
 import { PropsWithChildren, Ref, useState } from 'react'
 
+import { Popover } from '.'
 import { Button } from '../button'
 import { RadioGroup } from '../radio-group'
-import { Popover } from '.'
 import { type ContentProps } from './PopoverContent'
 
 const meta: Meta<typeof Popover> = {

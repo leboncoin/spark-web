@@ -1,8 +1,8 @@
 import { render, screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 
-import { Button } from '../button'
 import { ScrollingList } from '.'
+import { Button } from '../button'
 
 const products = [
   {

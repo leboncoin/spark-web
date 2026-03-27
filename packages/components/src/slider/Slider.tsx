@@ -7,7 +7,8 @@ import { SliderContext } from './SliderContext'
 import type { SliderRangeVariantsProps } from './SliderTrack.styles'
 
 export interface SliderProps
-  extends Omit<
+  extends
+    Omit<
       ComponentProps<typeof BaseSlider.Root>,
       'render' | 'orientation' | 'onValueChange' | 'onValueCommitted'
     >,

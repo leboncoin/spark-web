@@ -16,7 +16,8 @@ import {
 } from './SwitchInput.styles'
 
 export interface SwitchInputProps
-  extends StylesProps,
+  extends
+    StylesProps,
     Omit<ComponentPropsWithRef<typeof BaseSwitch.Root>, 'value' | 'render' | 'onCheckedChange'> {
   /**
    * The state of the switch when it is initially rendered. Use when you do not need to control its state.

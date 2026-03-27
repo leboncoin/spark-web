@@ -1,6 +1,6 @@
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'fs'
 import { join, resolve } from 'node:path'
 
-import { existsSync, readdirSync, readFileSync, writeFileSync } from 'fs'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 

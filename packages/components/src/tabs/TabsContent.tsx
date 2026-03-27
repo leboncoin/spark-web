@@ -5,8 +5,9 @@ import { contentStyles } from './TabsContent.styles'
 import { useTabsContext } from './TabsContext'
 import { useRenderSlot } from './useRenderSlot'
 
-export interface TabsContentProps
-  extends PropsWithChildren<Omit<ComponentProps<typeof BaseTabs.Panel>, 'keepMounted' | 'render'>> {
+export interface TabsContentProps extends PropsWithChildren<
+  Omit<ComponentProps<typeof BaseTabs.Panel>, 'keepMounted' | 'render'>
+> {
   /**
    * A unique value that associates the content with a trigger.
    */

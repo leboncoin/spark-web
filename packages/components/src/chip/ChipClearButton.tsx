@@ -17,8 +17,7 @@ import {
 import { useChipContext } from './useChipContext'
 
 export interface ChipClearButtonProps
-  extends ComponentPropsWithoutRef<'span'>,
-    ChipClearButtonStylesProps {
+  extends ComponentPropsWithoutRef<'span'>, ChipClearButtonStylesProps {
   label: string
   ref?: Ref<HTMLSpanElement>
 }

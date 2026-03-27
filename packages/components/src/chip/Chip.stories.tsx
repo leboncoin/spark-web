@@ -7,11 +7,11 @@ import { MailOutline } from '@spark-ui/icons/MailOutline'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { ComponentProps, useRef, useState } from 'react'
 
+import { Chip } from '.'
 import { Icon } from '../icon'
 import { Input as SparkInput, InputGroup } from '../input'
 import { Label } from '../label'
 import { VisuallyHidden } from '../visually-hidden'
-import { Chip } from '.'
 import { ChipLeadingIcon } from './ChipLeadingIcon'
 
 const meta: Meta<typeof Chip> = {

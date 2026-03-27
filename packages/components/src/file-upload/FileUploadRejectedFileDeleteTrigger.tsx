@@ -7,8 +7,9 @@ import { IconButton } from '../icon-button'
 import { type RejectedFile as RejectedFileType, useFileUploadContext } from './FileUpload'
 import { findFocusableElement } from './utils'
 
-export interface FileUploadRejectedFileDeleteTriggerProps
-  extends React.ComponentProps<typeof IconButton> {
+export interface FileUploadRejectedFileDeleteTriggerProps extends React.ComponentProps<
+  typeof IconButton
+> {
   /**
    * The rejected file to remove
    */

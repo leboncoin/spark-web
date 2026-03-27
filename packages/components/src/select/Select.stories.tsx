@@ -3,9 +3,9 @@ import { BookmarkFill } from '@spark-ui/icons/BookmarkFill'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { ComponentProps, useState } from 'react'
 
+import { Select } from '.'
 import { FormField } from '../form-field'
 import { VisuallyHidden } from '../visually-hidden'
-import { Select } from '.'
 
 const meta: Meta<typeof Select> = {
   title: 'Components/Select',

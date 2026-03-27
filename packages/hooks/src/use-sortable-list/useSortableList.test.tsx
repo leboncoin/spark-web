@@ -1,3 +1,4 @@
+// oxlint-disable max-lines
 import { act, renderHook } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 

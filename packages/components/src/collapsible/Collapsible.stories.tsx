@@ -3,9 +3,9 @@ import { MapExpand } from '@spark-ui/icons/MapExpand'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useState } from 'react'
 
+import { Collapsible } from '.'
 import { Icon } from '../icon'
 import { IconButton } from '../icon-button'
-import { Collapsible } from '.'
 
 const meta: Meta<typeof Collapsible> = {
   title: 'Components/Collapsible',

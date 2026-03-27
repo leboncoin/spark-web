@@ -1,4 +1,5 @@
 import * as React from 'react'
+
 import type { AvatarContextValue } from './types'
 
 const AvatarContext = React.createContext<AvatarContextValue | undefined>(undefined)

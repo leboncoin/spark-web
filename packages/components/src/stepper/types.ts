@@ -53,12 +53,11 @@ type SpectrumNumberFieldPropsFilter =
   | 'onBeforeInput'
   | 'onInput'
 
-export interface UseStepperArgs
-  extends Omit<
-    Omit<NumberFieldStateOptions, 'locale'> &
-      Omit<AriaNumberFieldProps, 'incrementAriaLabel' | 'decrementAriaLabel'>,
-    SpectrumNumberFieldPropsFilter
-  > {
+export interface UseStepperArgs extends Omit<
+  Omit<NumberFieldStateOptions, 'locale'> &
+    Omit<AriaNumberFieldProps, 'incrementAriaLabel' | 'decrementAriaLabel'>,
+  SpectrumNumberFieldPropsFilter
+> {
   inputRef: RefObject<HTMLInputElement | null>
   /**
    * Sets the component as interactive or not.

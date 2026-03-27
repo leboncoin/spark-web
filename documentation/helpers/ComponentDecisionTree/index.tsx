@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable max-lines-per-function */
 import '@xyflow/react/dist/style.css'
-
 import {
   Background,
   Controls,
@@ -184,7 +183,7 @@ const DecisionNode = memo(({ data }: NodeProps) => (
   <div
     className={cx(
       'sb-unstyled bg-surface text-on-surface',
-      Boolean(data.isCurrent || data.isOnPath)
+      data.isCurrent || data.isOnPath
         ? 'ring-main border-0 ring-2 ring-offset-2'
         : 'border-outline border-sm'
     )}

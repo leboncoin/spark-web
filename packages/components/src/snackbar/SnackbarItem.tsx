@@ -53,9 +53,7 @@ export interface SnackbarItemValue extends SnackbarItemVariantProps {
 }
 
 export interface SnackbarItemProps
-  extends ComponentPropsWithRef<'div'>,
-    SnackbarItemVariantProps,
-    SnackbarItemVariantContentProps {
+  extends ComponentPropsWithRef<'div'>, SnackbarItemVariantProps, SnackbarItemVariantContentProps {
   /**
    * Defines a string value that labels the current element.
    */

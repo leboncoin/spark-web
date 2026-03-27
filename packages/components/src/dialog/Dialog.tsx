@@ -3,8 +3,10 @@ import { ComponentProps, type ReactElement } from 'react'
 
 import { DialogProvider } from './DialogContext'
 
-export interface DialogProps
-  extends Omit<ComponentProps<typeof BaseDialog.Root>, 'onOpenChange' | 'render'> {
+export interface DialogProps extends Omit<
+  ComponentProps<typeof BaseDialog.Root>,
+  'onOpenChange' | 'render'
+> {
   /**
    * Specifies if the dialog is open or not.
    */

@@ -3,9 +3,9 @@ import { PenOutline } from '@spark-ui/icons/PenOutline'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useState } from 'react'
 
+import { Textarea, TextareaGroup } from '.'
 import { FormField } from '../form-field'
 import { VisuallyHidden } from '../visually-hidden'
-import { Textarea, TextareaGroup } from '.'
 
 const meta: Meta<typeof Textarea> = {
   title: 'Components/Textarea',

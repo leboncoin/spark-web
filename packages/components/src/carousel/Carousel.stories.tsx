@@ -3,13 +3,13 @@ import { Meta, StoryFn } from '@storybook/react-vite'
 import { cx } from 'class-variance-authority'
 import { memo, useState } from 'react'
 
+import { Carousel } from '.'
 import { Button } from '../button'
 import { FormField } from '../form-field'
 import { RadioGroup } from '../radio-group'
 import { Select } from '../select'
 import { Slider } from '../slider'
 import { Stepper } from '../stepper'
-import { Carousel } from '.'
 
 const meta: Meta<typeof Carousel> = {
   title: 'Components/Carousel',

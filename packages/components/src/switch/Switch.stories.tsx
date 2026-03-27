@@ -4,8 +4,8 @@ import { StarOutline } from '@spark-ui/icons/StarOutline'
 import type { Meta, StoryFn } from '@storybook/react-vite'
 import { type ComponentProps, useState } from 'react'
 
-import { FormField } from '../form-field'
 import { Switch } from '.'
+import { FormField } from '../form-field'
 
 const meta: Meta<typeof Switch> = {
   title: 'Components/Switch',

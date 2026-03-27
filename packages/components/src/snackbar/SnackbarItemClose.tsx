@@ -8,7 +8,8 @@ import type { SnackbarItemVariantProps } from './SnackbarItem.styles'
 import { useSnackbarItemContext } from './SnackbarItemContext'
 
 export interface SnackbarItemCloseProps
-  extends Omit<ComponentPropsWithRef<'button'>, 'aria-label' | 'disabled'>,
+  extends
+    Omit<ComponentPropsWithRef<'button'>, 'aria-label' | 'disabled'>,
     Pick<IconButtonProps, 'aria-label'>,
     SnackbarItemVariantProps {}
 

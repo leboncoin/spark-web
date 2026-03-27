@@ -1,9 +1,9 @@
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useRef, useState } from 'react'
 
+import { AlertDialog } from '.'
 import { Button } from '../button'
 import { Input } from '../input'
-import { AlertDialog } from '.'
 
 const meta: Meta<typeof AlertDialog> = {
   title: 'Components/AlertDialog',

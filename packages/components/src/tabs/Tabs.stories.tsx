@@ -6,9 +6,9 @@ import { MailFill } from '@spark-ui/icons/MailFill'
 import type { Meta, StoryFn } from '@storybook/react-vite'
 import { type ReactNode } from 'react'
 
+import { Tabs } from '.'
 import { Button } from '../button'
 import { Icon } from '../icon'
-import { Tabs } from '.'
 
 const meta: Meta<typeof Tabs> = {
   title: 'Components/Tabs',

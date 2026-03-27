@@ -1,6 +1,7 @@
-import { pascalCase } from 'change-case'
 import fs from 'fs'
 import path from 'path'
+
+import { pascalCase } from 'change-case'
 
 import componentize from './utils/componentize.mjs'
 import indexify from './utils/indexify.mjs'

@@ -3,11 +3,11 @@ import { BookmarkFill } from '@spark-ui/icons/BookmarkFill'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { ComponentProps, useState } from 'react'
 
+import { Dropdown } from '.'
 import { Button } from '../button'
 import { FormField } from '../form-field'
 import { Tag } from '../tag'
 import { VisuallyHidden } from '../visually-hidden'
-import { Dropdown } from '.'
 
 const meta: Meta<typeof Dropdown> = {
   title: 'Components/Dropdown',

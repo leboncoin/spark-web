@@ -2,8 +2,8 @@ import { Check } from '@spark-ui/icons/Check'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { type ComponentProps } from 'react'
 
-import { Icon } from '../icon'
 import { Tag } from '.'
+import { Icon } from '../icon'
 
 const meta: Meta<typeof Tag> = {
   title: 'Components/Tag',

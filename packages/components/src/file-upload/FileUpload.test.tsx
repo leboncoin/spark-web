@@ -5,8 +5,8 @@ import userEvent from '@testing-library/user-event'
 import { useState } from 'react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { FormField } from '../form-field'
 import { FileUpload } from '.'
+import { FormField } from '../form-field'
 import { uploadFiles } from './test-utils'
 
 describe('FileUpload', () => {

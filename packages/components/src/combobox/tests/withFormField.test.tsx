@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 
-import { FormField } from '../../form-field'
 import { Combobox } from '..'
+import { FormField } from '../../form-field'
 import { getInput } from './test-utils'
 
 describe('Combobox', () => {

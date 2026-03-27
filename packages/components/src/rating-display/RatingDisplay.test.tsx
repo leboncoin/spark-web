@@ -16,11 +16,11 @@ const getLocalizedFormattedValue = (value: number) =>
 const mockResolvedLocale = (locale: string) => {
   const resolvedOptions = Intl.DateTimeFormat.prototype.resolvedOptions
 
-  vi.spyOn(Intl.DateTimeFormat.prototype, 'resolvedOptions').mockImplementation(function (
-    this: Intl.DateTimeFormat
-  ) {
-    return { ...resolvedOptions.call(this), locale }
-  })
+  vi.spyOn(Intl.DateTimeFormat.prototype, 'resolvedOptions').mockImplementation(
+    function (this: Intl.DateTimeFormat) {
+      return { ...resolvedOptions.call(this), locale }
+    }
+  )
 }
 
 describe('RatingDisplay', () => {

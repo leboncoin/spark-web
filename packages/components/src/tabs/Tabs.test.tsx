@@ -4,8 +4,8 @@ import userEvent from '@testing-library/user-event'
 import { mockResizeObserver } from 'jsdom-testing-mocks'
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { Button } from '../button'
 import { Tabs, TabsListProps, TabsProps } from '.'
+import { Button } from '../button'
 import { type TabItem } from './Tabs.stories'
 
 const defaultTabs: TabItem[] = [

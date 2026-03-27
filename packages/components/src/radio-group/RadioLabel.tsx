@@ -4,8 +4,7 @@ import type { HTMLAttributes, PropsWithChildren } from 'react'
 import { radioLabelStyles, RadioLabelStylesProps } from './RadioLabel.styles'
 
 export interface RadioLabelProps
-  extends RadioLabelStylesProps,
-    PropsWithChildren<HTMLAttributes<HTMLLabelElement>> {
+  extends RadioLabelStylesProps, PropsWithChildren<HTMLAttributes<HTMLLabelElement>> {
   /**
    * Change the component to the HTML tag or custom component of the only child.
    */

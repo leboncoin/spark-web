@@ -3,8 +3,8 @@ import userEvent from '@testing-library/user-event'
 import { mockResizeObserver } from 'jsdom-testing-mocks'
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { FormField } from '../form-field'
 import { Slider } from '.'
+import { FormField } from '../form-field'
 
 describe('Slider', () => {
   beforeAll(() => {
@@ -306,6 +306,5 @@ describe('Slider', () => {
 
       expect(slider).toHaveAttribute('aria-valuetext', '30%')
     })
-
   })
 })

@@ -6,8 +6,7 @@ import { Slot } from '../slot'
 import { dividerStyles, type DividerStylesProps } from './Divider.styles'
 
 export interface DividerProps
-  extends HTMLAttributes<HTMLDivElement>,
-    Omit<DividerStylesProps, 'isEmpty'> {
+  extends HTMLAttributes<HTMLDivElement>, Omit<DividerStylesProps, 'isEmpty'> {
   /**
    * Change the component to the HTML tag or custom component of the only child.
    */

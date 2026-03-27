@@ -5,9 +5,9 @@ import { Meta, StoryFn, StoryObj } from '@storybook/react-vite'
 import { cx } from 'class-variance-authority'
 import { type ComponentProps, useState } from 'react'
 
+import { Button } from '.'
 import { Checkbox } from '../checkbox'
 import { Icon } from '../icon'
-import { Button } from '.'
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
@@ -174,7 +174,7 @@ export const LoadingWithText: StoryFn = () => {
         Toggle loading state
       </Checkbox>
 
-      <Button isLoading={isLoading}>
+      <Button isLoading={isLoading} loadingText="Loading...">
         <Icon>
           <FavoriteOutline />
         </Icon>

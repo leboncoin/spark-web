@@ -6,7 +6,8 @@ import { checkboxGroupStyles, CheckboxGroupStylesProps } from './CheckboxGroup.s
 import { CheckboxGroupContext, CheckboxGroupContextState } from './CheckboxGroupContext'
 
 export interface CheckboxGroupProps
-  extends Omit<ComponentPropsWithoutRef<'div'>, 'value' | 'defaultValue' | 'onChange'>,
+  extends
+    Omit<ComponentPropsWithoutRef<'div'>, 'value' | 'defaultValue' | 'onChange'>,
     CheckboxGroupStylesProps,
     Pick<CheckboxGroupContextState, 'intent' | 'name' | 'value' | 'reverse'> {
   /**

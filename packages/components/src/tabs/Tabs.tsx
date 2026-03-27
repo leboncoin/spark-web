@@ -7,7 +7,8 @@ import type { TabsTriggerVariantsProps } from './TabsTrigger.styles'
 import { useRenderSlot } from './useRenderSlot'
 
 export interface TabsProps
-  extends Omit<ComponentProps<typeof BaseTabs.Root>, 'render'>,
+  extends
+    Omit<ComponentProps<typeof BaseTabs.Root>, 'render'>,
     PropsWithChildren<Omit<TabsTriggerVariantsProps, 'orientation'>> {
   /**
    * Change the component to the HTML tag or custom component of the only child. This will merge the original component props with the props of the supplied element/component and change the underlying DOM node.

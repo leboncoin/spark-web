@@ -11,8 +11,10 @@ import { listStyles, navigationArrowStyles, wrapperStyles } from './TabsList.sty
 import { useRenderSlot } from './useRenderSlot'
 import { useResizeObserver } from './useResizeObserver'
 
-export interface TabsListProps
-  extends Omit<ComponentProps<typeof BaseTabs.List>, 'render' | 'loopFocus'> {
+export interface TabsListProps extends Omit<
+  ComponentProps<typeof BaseTabs.List>,
+  'render' | 'loopFocus'
+> {
   /**
    * Change the component to the HTML tag or custom component of the only child. This will merge the original component props with the props of the supplied element/component and change the underlying DOM node.
    * @default false

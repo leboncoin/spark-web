@@ -22,8 +22,9 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   shape?: 'circle' | 'square'
 }
 
-export interface AvatarComponent
-  extends React.ForwardRefExoticComponent<AvatarProps & React.RefAttributes<HTMLDivElement>> {
+export interface AvatarComponent extends React.ForwardRefExoticComponent<
+  AvatarProps & React.RefAttributes<HTMLDivElement>
+> {
   Image: typeof AvatarImage
   Action: typeof AvatarAction
 }

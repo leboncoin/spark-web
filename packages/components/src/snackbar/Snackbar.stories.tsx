@@ -1,8 +1,9 @@
+// oxlint-disable max-lines
 import { FavoriteFill } from '@spark-ui/icons/FavoriteFill'
 import { Meta, StoryFn, StoryObj } from '@storybook/react-vite'
 
-import { Button } from '../button'
 import { addSnackbar, type AddSnackbarArgs, Snackbar } from '.'
+import { Button } from '../button'
 
 const meta: Meta<typeof Snackbar> = {
   title: 'Deprecated/Snackbar',

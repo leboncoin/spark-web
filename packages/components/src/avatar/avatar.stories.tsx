@@ -5,9 +5,9 @@ import { ShareOutline } from '@spark-ui/icons/ShareOutline'
 import type { Meta, StoryFn, StoryObj } from '@storybook/react-vite'
 import { useEffect, useState } from 'react'
 
+import { Avatar } from '.'
 import { Button } from '../button'
 import { Icon } from '../icon'
-import { Avatar } from '.'
 import avatarImg from './avatar.png'
 
 const meta: Meta<typeof Avatar> = {

@@ -4,9 +4,9 @@ import { ArrowHorizontalUp } from '@spark-ui/icons/ArrowHorizontalUp'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useState } from 'react'
 
+import { Stepper, StepperProps } from '.'
 import { FormField } from '../form-field'
 import { Icon } from '../icon'
-import { Stepper, StepperProps } from '.'
 
 const meta: Meta<typeof Stepper> = {
   title: 'Components/Stepper',

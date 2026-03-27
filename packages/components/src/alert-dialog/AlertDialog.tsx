@@ -3,8 +3,10 @@ import { ComponentProps, Ref, useRef } from 'react'
 
 import { AlertDialogProvider } from './AlertDialogContext'
 
-export interface AlertDialogProps
-  extends Omit<ComponentProps<typeof BaseAlertDialog.Root>, 'onOpenChange' | 'render'> {
+export interface AlertDialogProps extends Omit<
+  ComponentProps<typeof BaseAlertDialog.Root>,
+  'onOpenChange' | 'render'
+> {
   /**
    * Specifies if the dialog is open or not.
    */

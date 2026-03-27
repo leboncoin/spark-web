@@ -13,8 +13,7 @@ import {
 import type { StarValue } from './types'
 
 export interface RatingStarProps
-  extends PropsWithChildren<RatingStarstylesProps>,
-    RatingStarIconStylesProps {
+  extends PropsWithChildren<RatingStarstylesProps>, RatingStarIconStylesProps {
   value: StarValue
   /** Whether this radio option is selected (for radiogroup pattern). */
   checked?: boolean

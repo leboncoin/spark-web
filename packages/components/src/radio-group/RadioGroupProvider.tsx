@@ -5,8 +5,7 @@ import { RadioGroupContext } from './RadioGroupContext'
 import type { RadioInputProps } from './RadioInput'
 
 export interface RadioGroupProviderProps
-  extends Pick<RadioInputProps, 'intent' | 'disabled'>,
-    Pick<RadioGroupProps, 'reverse'> {
+  extends Pick<RadioInputProps, 'intent' | 'disabled'>, Pick<RadioGroupProps, 'reverse'> {
   children: ReactNode
 }
 

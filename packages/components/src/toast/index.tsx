@@ -37,7 +37,8 @@ export function ToastProvider({ children, limit = 3, ...props }: ToastProviderPr
 }
 
 interface ToastTriggerProps
-  extends Omit<React.ComponentPropsWithRef<'button'>, 'title'>,
+  extends
+    Omit<React.ComponentPropsWithRef<'button'>, 'title'>,
     Pick<ToastObject, 'priority'>,
     Pick<ToastData, 'design' | 'intent' | 'icon' | 'isClosable' | 'action' | 'compact'> {
   children: React.ReactNode

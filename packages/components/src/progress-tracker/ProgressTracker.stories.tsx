@@ -3,8 +3,8 @@ import { BookmarkFill } from '@spark-ui/icons/BookmarkFill'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useState } from 'react'
 
-import { Icon } from '../icon'
 import { ProgressTracker, type ProgressTrackerProps } from '.'
+import { Icon } from '../icon'
 
 const meta: Meta<typeof ProgressTracker> = {
   title: 'Components/ProgressTracker',

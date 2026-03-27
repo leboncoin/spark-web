@@ -5,6 +5,7 @@ import { Search } from '@spark-ui/icons/Search'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { ComponentProps, useState } from 'react'
 
+import { Combobox } from '.'
 import { Button } from '../button'
 import { Checkbox, CheckboxGroup } from '../checkbox'
 import { Chip } from '../chip'
@@ -16,7 +17,6 @@ import { RadioGroup } from '../radio-group'
 import { Switch } from '../switch'
 import { Tag } from '../tag'
 import { VisuallyHidden } from '../visually-hidden'
-import { Combobox } from '.'
 
 const meta: Meta<typeof Combobox> = {
   title: 'Components/Combobox',

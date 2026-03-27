@@ -1,8 +1,8 @@
 import { Tag } from '@spark-ui/components/tag'
 import { Meta, StoryFn } from '@storybook/react-vite'
 
-import { Label } from '../label'
 import { CircularMeter, CircularMeterProps } from '.'
+import { Label } from '../label'
 
 const meta: Meta<typeof CircularMeter> = {
   title: 'Components/CircularMeter',

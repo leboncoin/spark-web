@@ -28,41 +28,48 @@ The Spark project uses GitHub Actions for continuous integration, deployment, an
 **Jobs**:
 
 #### PR Assignment (`assign-pr-owner`)
+
 - **Action**: `toshimaru/auto-author-assign@v1.6.0`
 - **Purpose**: Automatically assigns the PR author as the assignee when a PR is opened
 - **Condition**: Only runs on PR open events
 
 #### Linting (`lint`)
-- **Purpose**: Runs ESLint to check code quality and style consistency
+
+- **Purpose**: Runs OXLint to check code quality and style consistency
 - **Command**: `npm run lint`
 - **Dependencies**: Uses the `install` composite action
 
 #### Type Checking (`typecheck`)
+
 - **Purpose**: Runs TypeScript compiler to verify type safety
 - **Command**: `npm run typecheck`
 - **Dependencies**: Uses the `install` composite action
 
 #### Unit Testing (`test`)
+
 - **Purpose**: Runs unit tests with coverage reporting
 - **Command**: `npm run test:coverage`
 - **Coverage**: Uploads coverage reports to Codecov
 - **Artifacts**: Coverage data stored in `./dist/coverage/.coverage.json`
 
 #### E2E Testing (`test-e2e`)
+
 - **Purpose**: Runs end-to-end tests using Playwright
 - **Condition**: Only runs if files in `./e2e/**/*.{ts,tsx}` or `./packages/components/**/*.{ts,tsx,mdx,json}` have changed
 - **Timeout**: 60 minutes
 - **Dependencies**: Uses the `e2e` composite action
 
 #### Accessibility Testing (`test-a11y`)
+
 - **Purpose**: Runs accessibility tests using Playwright
 - **Condition**: Only runs if files in `./e2e/a11y/pages/**/*.tsx` or `./packages/components/**/*.{ts,tsx,mdx,json}` have changed
 - **Timeout**: 60 minutes
 - **Dependencies**: Uses the `pw-a11y` composite action
 
 #### Deployment (`deploy`)
+
 - **Purpose**: Deploys Storybook to Vercel for preview/production
-- **Environment**: 
+- **Environment**:
   - Production for non-PR events
   - Preview for pull requests
 - **Steps**:
@@ -72,6 +79,7 @@ The Spark project uses GitHub Actions for continuous integration, deployment, an
 - **Output**: Deployment URL for the environment
 
 #### Security (`security`)
+
 - **Purpose**: Runs security scanning using Lava Action
 - **Action**: `adevinta/lava-action@v0`
 - **Purpose**: Identifies security vulnerabilities in the codebase
@@ -87,6 +95,7 @@ The Spark project uses GitHub Actions for continuous integration, deployment, an
 **Jobs**:
 
 #### Release (`release`)
+
 - **Purpose**: Publishes packages to npm and creates GitHub releases
 - **Steps**:
   1. **Checkout**: Uses `SPARK_SA_TOKEN` for authentication with full history
@@ -96,6 +105,7 @@ The Spark project uses GitHub Actions for continuous integration, deployment, an
 - **Dependencies**: Requires `NPM_TOKEN` secret
 
 #### Deploy (`deploy`)
+
 - **Purpose**: Deploys Storybook to production after successful release
 - **Dependencies**: Waits for release job completion
 - **Steps**:
@@ -112,13 +122,15 @@ The Spark project uses GitHub Actions for continuous integration, deployment, an
 
 **Purpose**: Automatically updates icons and creates pull requests for icon changes.
 
-**Trigger**: 
+**Trigger**:
+
 - Push to `chore-updated-icons` branch
 - Manual workflow dispatch
 
 **Jobs**:
 
 #### PR Icon Updates (`pr-icon-updates`)
+
 - **Working Directory**: `packages/icons`
 - **Steps**:
   1. **Checkout**: Checks out the `chore-updated-icons` branch
@@ -138,6 +150,7 @@ The Spark project uses GitHub Actions for continuous integration, deployment, an
 **Jobs**:
 
 #### Deploy (`deploy`)
+
 - **Purpose**: Manual deployment of Storybook
 - **Steps**:
   1. Installs Vercel CLI
@@ -155,6 +168,7 @@ The Spark project uses GitHub Actions for continuous integration, deployment, an
 **Purpose**: Automated dependency updates with intelligent grouping.
 
 **Configuration**:
+
 - **Schedule**: Weekly updates
 - **Commit Prefix**: `build(npm)`
 - **Groups**:
@@ -173,6 +187,7 @@ The Spark project uses GitHub Actions for continuous integration, deployment, an
 **Purpose**: Configures automated changelog generation for releases.
 
 **Configuration**:
+
 - **Excluded Labels**: `ignore-for-release`, `dependencies`, `Doc: Improvement`
 - **Excluded Authors**: `octocat`, `dependabot`
 - **Categories**:
@@ -190,6 +205,7 @@ The Spark project uses GitHub Actions for continuous integration, deployment, an
 **Purpose**: Standardized Node.js setup and dependency installation.
 
 **Steps**:
+
 1. **Node Setup**: Uses `actions/setup-node@v4` with `.nvmrc` version
 2. **Cache**: Enables npm caching for faster builds
 3. **Install**: Runs `npm ci --prefer-offline --no-audit`
@@ -203,6 +219,7 @@ The Spark project uses GitHub Actions for continuous integration, deployment, an
 **Purpose**: Standardized end-to-end testing setup and execution.
 
 **Steps**:
+
 1. **Install**: Uses the `install` composite action
 2. **Playwright Setup**: Installs Playwright browsers with dependencies
 3. **Test Execution**: Runs `npm run test:e2e`
@@ -217,6 +234,7 @@ The Spark project uses GitHub Actions for continuous integration, deployment, an
 **Purpose**: Standardized accessibility testing using Playwright.
 
 **Steps**:
+
 1. **Install**: Uses the `install` composite action
 2. **Playwright Setup**: Installs Playwright browsers with dependencies
 3. **Test Execution**: Runs `npm run test:a11y`
@@ -239,39 +257,63 @@ The Spark project uses GitHub Actions for continuous integration, deployment, an
   </thead>
   <tbody>
     <tr>
-      <td><code>NPM_TOKEN</code></td>
+      <td>
+        <code>NPM_TOKEN</code>
+      </td>
       <td>NPM authentication token for package publishing</td>
-      <td><code>release.yml</code></td>
+      <td>
+        <code>release.yml</code>
+      </td>
       <td>NPM authentication token with publish permissions</td>
     </tr>
     <tr>
-      <td><code>SPARK_SA_TOKEN</code></td>
+      <td>
+        <code>SPARK_SA_TOKEN</code>
+      </td>
       <td>GitHub token for repository access during releases</td>
-      <td><code>release.yml</code></td>
+      <td>
+        <code>release.yml</code>
+      </td>
       <td>GitHub token with push and release creation permissions</td>
     </tr>
     <tr>
-      <td><code>VERCEL_TOKEN</code></td>
+      <td>
+        <code>VERCEL_TOKEN</code>
+      </td>
       <td>Vercel authentication token for deployments</td>
-      <td><code>release.yml</code>, <code>quality.yml</code>, <code>manual-deploy.yml</code></td>
+      <td>
+        <code>release.yml</code>, <code>quality.yml</code>, <code>manual-deploy.yml</code>
+      </td>
       <td>Vercel API token</td>
     </tr>
     <tr>
-      <td><code>VERCEL_ORG_ID</code></td>
+      <td>
+        <code>VERCEL_ORG_ID</code>
+      </td>
       <td>Vercel organization ID</td>
-      <td><code>release.yml</code>, <code>quality.yml</code>, <code>manual-deploy.yml</code></td>
+      <td>
+        <code>release.yml</code>, <code>quality.yml</code>, <code>manual-deploy.yml</code>
+      </td>
       <td>Found in Vercel settings</td>
     </tr>
     <tr>
-      <td><code>VERCEL_PROJECT_ID</code></td>
+      <td>
+        <code>VERCEL_PROJECT_ID</code>
+      </td>
       <td>Vercel project ID</td>
-      <td><code>release.yml</code>, <code>quality.yml</code>, <code>manual-deploy.yml</code></td>
+      <td>
+        <code>release.yml</code>, <code>quality.yml</code>, <code>manual-deploy.yml</code>
+      </td>
       <td>Found in Vercel project settings</td>
     </tr>
     <tr>
-      <td><code>CODECOV_TOKEN</code></td>
+      <td>
+        <code>CODECOV_TOKEN</code>
+      </td>
       <td>Codecov authentication token for coverage reporting</td>
-      <td><code>quality.yml</code></td>
+      <td>
+        <code>quality.yml</code>
+      </td>
       <td>Codecov API token</td>
     </tr>
   </tbody>
@@ -304,4 +346,4 @@ The Spark project uses GitHub Actions for continuous integration, deployment, an
 
 - All workflows include detailed logging
 - Artifacts are preserved for 30 days for investigation
-- Environment-specific deployments provide preview URLs for testing 
+- Environment-specific deployments provide preview URLs for testing

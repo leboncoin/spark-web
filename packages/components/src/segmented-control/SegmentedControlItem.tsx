@@ -3,8 +3,10 @@ import { Children, type ComponentProps, Ref } from 'react'
 
 import { itemStyles } from './SegmentedControl.styles'
 
-export interface SegmentedControlItemProps
-  extends Omit<ComponentProps<typeof Radio.Root>, 'value'> {
+export interface SegmentedControlItemProps extends Omit<
+  ComponentProps<typeof Radio.Root>,
+  'value'
+> {
   /**
    * A unique value that identifies this item within the segmented control.
    */

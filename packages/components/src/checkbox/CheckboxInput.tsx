@@ -12,7 +12,8 @@ type CheckedStatus = boolean | 'indeterminate'
 const CheckboxPrimitive = Checkbox.Checkbox
 
 export interface CheckboxInputProps
-  extends CheckboxInputStylesProps,
+  extends
+    CheckboxInputStylesProps,
     Omit<ComponentPropsWithoutRef<'button'>, 'onChange' | 'value' | 'checked' | 'defaultChecked'> {
   /**
    * The checked icon to use.

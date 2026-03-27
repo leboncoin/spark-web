@@ -5,8 +5,7 @@ import { ComponentProps, Ref } from 'react'
 import { drawerContentStyles, type DrawerContentStylesProps } from './DrawerContent.styles'
 
 export interface DrawerContentProps
-  extends Omit<ComponentProps<typeof BaseDialog.Popup>, 'render'>,
-    DrawerContentStylesProps {
+  extends Omit<ComponentProps<typeof BaseDialog.Popup>, 'render'>, DrawerContentStylesProps {
   ref?: Ref<HTMLDivElement>
 }
 
