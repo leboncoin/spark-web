@@ -1,12 +1,12 @@
 import { cx } from 'class-variance-authority'
 import { Ref, useId } from 'react'
 
+import { Label } from '../label'
 import { useRadioGroup } from './RadioGroupContext'
 import { RadioInput, RadioInputProps } from './RadioInput'
-import { RadioLabel } from './RadioLabel'
 
 export type RadioProps = RadioInputProps & {
-  ref?: Ref<HTMLButtonElement>
+  ref?: Ref<HTMLElement>
 }
 
 const ID_PREFIX = ':radio'
@@ -14,26 +14,32 @@ const ID_PREFIX = ':radio'
 export const Radio = ({
   className,
   children,
-  id,
   disabled: disabledProp,
   ref,
   ...others
 }: RadioProps) => {
-  const innerId = `${ID_PREFIX}-input-${useId()}`
   const innerLabelId = `${ID_PREFIX}-label-${useId()}`
 
   const { intent, disabled, reverse } = useRadioGroup()
 
+  const isDisabled = disabledProp || disabled
+
   const radioLabel = children && (
-    <RadioLabel disabled={disabledProp || disabled} htmlFor={id || innerId} id={innerLabelId}>
+    <Label
+      data-spark-component="radio-label"
+      id={innerLabelId}
+      className={cx(
+        'grow',
+        isDisabled ? 'text-neutral/dim-2 cursor-not-allowed' : 'cursor-pointer'
+      )}
+    >
       {children}
-    </RadioLabel>
+    </Label>
   )
 
   const radioInput = (
     <RadioInput
       ref={ref}
-      id={id || innerId}
       intent={intent}
       aria-labelledby={children ? innerLabelId : undefined}
       {...others}

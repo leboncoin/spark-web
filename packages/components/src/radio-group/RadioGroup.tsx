@@ -1,5 +1,5 @@
+import { RadioGroup as BaseUIRadioGroup } from '@base-ui/react/radio-group'
 import { useFormFieldControl } from '@spark-ui/components/form-field'
-import { RadioGroup as RadixRadioGroup } from 'radix-ui'
 import { HTMLAttributes, Ref } from 'react'
 
 import { radioGroupStyles, RadioGroupVariantsProps } from './RadioGroup.styles'
@@ -47,10 +47,6 @@ export interface RadioGroupProps
    */
   dir?: 'ltr' | 'rtl'
   /**
-   * When true, keyboard navigation will loop from last item to first, and vice versa.
-   */
-  loop?: boolean
-  /**
    * When true, the label will be placed on the left side of the Radio
    */
   reverse?: boolean
@@ -59,29 +55,33 @@ export interface RadioGroupProps
 
 export const RadioGroup = ({
   orientation = 'vertical',
-  loop = true,
   intent = 'support',
   disabled,
   className,
   required: requiredProp,
   reverse = false,
+  onValueChange: onValueChangeProp,
   ref,
   ...others
 }: RadioGroupProps) => {
   const { labelId, isInvalid, isRequired, description, name } = useFormFieldControl()
   const required = requiredProp !== undefined ? requiredProp : isRequired
 
+  const handleValueChange = onValueChangeProp
+    ? (value: unknown) => onValueChangeProp(value as string)
+    : undefined
+
   return (
     <RadioGroupProvider reverse={reverse} intent={intent} disabled={disabled}>
-      <RadixRadioGroup.RadioGroup
+      <BaseUIRadioGroup
         data-spark-component="radio-group"
         className={radioGroupStyles({ orientation, className })}
         name={name}
         ref={ref}
         disabled={disabled}
-        orientation={orientation}
-        loop={loop}
         required={required}
+        onValueChange={handleValueChange}
+        aria-orientation={orientation}
         aria-labelledby={labelId}
         aria-invalid={isInvalid}
         aria-required={required}
