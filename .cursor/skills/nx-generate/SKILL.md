@@ -149,10 +149,10 @@ Generators provide a starting point. Modify the output as needed to:
 Format all generated/modified files:
 
 ```bash
-nx format --fix
+npm run format
 ```
 
-This example is for built-in nx formatting with prettier. There might be other formatting tools for this workspace, use these when appropriate.
+This workspace uses **Oxfmt** via `npm run format` (see `.oxfmtrc.json`).
 
 Then verify the generated code works. Keep in mind that the changes you make with a generator or subsequent modifications might impact various projects so it's usually not enough to only run targets for the artifact you just created.
 

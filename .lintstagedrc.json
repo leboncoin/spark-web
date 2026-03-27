@@ -1,18 +1,18 @@
 {
   "config/**/*.{js,jsx,ts,tsx,mjs,mts,cjs,cts}": [
-    "eslint --config eslint.config.js --fix",
-    "prettier --config .prettierrc.cjs --write"
+    "oxlint -c .oxlintrc.json --fix",
+    "oxfmt"
   ],
   "documentation/**/*.{js,jsx,ts,tsx,mjs,mts,cjs,cts}": [
-    "eslint --config eslint.config.js --fix",
-    "prettier --config .prettierrc.cjs --write"
+    "oxlint -c .oxlintrc.json --fix",
+    "oxfmt"
   ],
   "packages/**/*.{js,jsx,ts,tsx,mjs,mts,cjs,cts}": [
-    "eslint --config eslint.config.js --fix",
-    "prettier --config .prettierrc.cjs --write"
+    "oxlint -c .oxlintrc.json --fix",
+    "oxfmt"
   ],
   "src/**/*.{js,jsx,ts,tsx,mjs,mts,cjs,cts}": [
-    "eslint --config eslint.config.js --fix",
-    "prettier --config .prettierrc.cjs --write"
+    "oxlint -c .oxlintrc.json --fix",
+    "oxfmt"
   ]
 }

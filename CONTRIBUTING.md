@@ -44,9 +44,11 @@ Some of the most important commands are listed below.
 
 - **`npm run release`** publish changed packages
 
-- **`npm run lint`** check for linting issues
+- **`npm run lint`** check for linting issues with Oxlint
 
-- **`npm run prettier`** check for formatting issues and fixes them
+- **`npm run format`** fix formatting with Oxfmt
+
+- **`npm run format:check`** verify formatting without writing files
 
 - **`npm run storybook:start`** start storybook in development mode
 
