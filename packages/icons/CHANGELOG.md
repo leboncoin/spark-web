@@ -1,3 +1,18 @@
+## 17.2.2 (2026-03-27)
+
+### 🩹 Fixes
+
+- **icons:** fixed invalid icons pathes ([2bda22c0b](https://github.com/leboncoin/spark-web/commit/2bda22c0b))
+- removed last docs bits about tsup builds ([944ab23d6](https://github.com/leboncoin/spark-web/commit/944ab23d6))
+
+### 💅 Refactors
+
+- typescript v6 ([74135c9ed](https://github.com/leboncoin/spark-web/commit/74135c9ed))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.2.1 (2026-03-27)
 
 ### 🩹 Fixes
