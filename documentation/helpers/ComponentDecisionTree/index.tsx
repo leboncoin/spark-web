@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable max-lines-per-function */
 import '@xyflow/react/dist/style.css'
 
@@ -157,7 +158,7 @@ const HANDLE_STYLE: React.CSSProperties = { visibility: 'hidden', pointerEvents:
 const baseNodeStyle: React.CSSProperties = {
   width: NODE_W,
   borderRadius: 8,
-  padding: '6px 10px',
+  padding: '8px 16px',
   textAlign: 'center',
   fontSize: 12,
   fontWeight: 600,
@@ -171,7 +172,7 @@ const RootNode = memo(({ data }: NodeProps) => (
       'sb-unstyled bg-main text-on-main shadow-md',
       (data.isCurrent as boolean) && 'ring-main ring-2 ring-offset-2'
     )}
-    style={{ ...baseNodeStyle, fontWeight: 700, borderRadius: 10 }}
+    style={{ ...baseNodeStyle, fontWeight: 700, borderRadius: 8 }}
   >
     <Handle type="source" position={Position.Right} style={HANDLE_STYLE} />
     {data.label as string}
@@ -182,8 +183,10 @@ RootNode.displayName = 'RootNode'
 const DecisionNode = memo(({ data }: NodeProps) => (
   <div
     className={cx(
-      'sb-unstyled bg-support text-on-support border-outline border shadow-sm',
-      (data.isCurrent as boolean) && 'ring-support ring-2 ring-offset-2'
+      'sb-unstyled bg-surface text-on-surface',
+      Boolean(data.isCurrent || data.isOnPath)
+        ? 'ring-main border-0 ring-2 ring-offset-2'
+        : 'border-outline border-sm'
     )}
     style={baseNodeStyle}
   >
@@ -198,8 +201,10 @@ const ComponentNode = memo(({ data }: NodeProps) => (
   <a
     href={data.href as string | undefined}
     className={cx(
-      'sb-unstyled bg-surface text-on-surface border-neutral-container hover:border-main hover:bg-main-container block border transition-colors',
-      (data.isCurrent as boolean) && 'ring-main border-main bg-main-container ring-2 ring-offset-2'
+      'sb-unstyled block transition-colors',
+      (data.isCurrent as boolean)
+        ? 'bg-main text-on-main'
+        : 'bg-main-container text-on-main-container'
     )}
     style={{ ...baseNodeStyle, display: 'block', textDecoration: 'none' }}
   >
@@ -244,7 +249,7 @@ export function ComponentDecisionTree({
 
     const nodes: Node[] = positionedNodes.map(n => {
       const compInfo = n.component ? components.find(c => c.name === n.component) : undefined
-      // const isOnPath = activePath ? activePath.includes(n.id) : true
+      const isOnPath = activePath ? activePath.includes(n.id) : true
       const isCurrent = focusNodeId === n.id
 
       let type: string
@@ -261,6 +266,7 @@ export function ComponentDecisionTree({
           href: compInfo?.href,
           component: n.component,
           isCurrent,
+          isOnPath,
         },
         style: {
           opacity: 1,
@@ -271,30 +277,31 @@ export function ComponentDecisionTree({
     })
 
     const styledEdges: Edge[] = edges.map(e => {
-      const isYes = Boolean(e.data?.isYes)
       const isRootEdge = Boolean(e.data?.isRootEdge)
       const isOnPath = activePath
         ? activePath.includes(e.source) && activePath.includes(e.target)
         : true
 
-      let stroke: string
-      if (isRootEdge) stroke = '#94a3b8'
-      else if (isYes) stroke = '#22c55e'
-      else stroke = '#ef4444'
-
       let edgeLabel: string | undefined
-      if (!isRootEdge) edgeLabel = isYes ? 'Yes' : 'No'
+      if (!isRootEdge) edgeLabel = e.data?.isYes ? 'Yes' : 'No'
 
       return {
         ...e,
         label: edgeLabel,
-        labelStyle: { fill: stroke, fontWeight: 700, fontSize: 10 },
+        labelStyle: {
+          fill: isOnPath ? 'var(--color-on-main, #094171)' : 'var(--color-on-surface, #ffffff)',
+          fontWeight: 700,
+          fontSize: 10,
+        },
         labelShowBg: true,
-        labelBgStyle: { fill: '#ffffff', fillOpacity: 0.9 },
-        labelBgPadding: [4, 6] as [number, number],
+        labelBgStyle: {
+          fill: isOnPath ? 'var(--color-main, #ffffff)' : 'var(--color-neutral-container, #ffffff)',
+        },
+        labelBgPadding: [8, 4] as [number, number],
         labelBgBorderRadius: 4,
         style: {
-          stroke,
+          zIndex: isOnPath ? 'var(--z-index-raised)' : -1,
+          stroke: isOnPath ? 'var(--color-main, #094171)' : 'var(--color-outline, #ffffff)',
           strokeWidth: isOnPath ? 2 : 1,
           opacity: 1,
           transition: 'opacity 0.35s ease, stroke-width 0.35s ease',
@@ -310,7 +317,7 @@ export function ComponentDecisionTree({
     : {
         width: '100%',
         height: 720,
-        borderRadius: 12,
+        borderRadius: 8,
         overflow: 'hidden',
         border: '1px solid',
         borderColor: 'var(--colors-neutral-container)',
@@ -340,7 +347,7 @@ export function ComponentDecisionTree({
           <MiniMap
             nodeColor={n => {
               if (n.type === 'root') return 'var(--colors-main)'
-              if (n.type === 'decision') return 'var(--colors-support)'
+              if (n.type === 'decision') return 'var(--color-support, #094171)'
 
               return 'var(--colors-neutral-container)'
             }}

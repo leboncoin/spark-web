@@ -162,7 +162,19 @@ export const decisionTree: DecisionTreeNode = {
                       label: 'In-page',
                       question: 'Does it switch between content panels (tabs)?',
                       children: [
-                        { id: 'c-Tabs', label: 'Tabs', component: 'Tabs' },
+                        {
+                          id: 'tabs-vs-segmented',
+                          label: 'Tabs or segmented control',
+                          question: 'Is it primary navigation between distinct sections/pages?',
+                          children: [
+                            { id: 'c-Tabs', label: 'Tabs', component: 'Tabs' },
+                            {
+                              id: 'c-SegmentedControl',
+                              label: 'SegmentedControl',
+                              component: 'SegmentedControl',
+                            },
+                          ],
+                        },
                         {
                           id: 'not-tabs',
                           label: 'Not tabs',

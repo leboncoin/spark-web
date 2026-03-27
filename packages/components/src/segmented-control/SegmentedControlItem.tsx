@@ -1,5 +1,5 @@
 import { Radio } from '@base-ui/react/radio'
-import { type ComponentProps, Ref } from 'react'
+import { Children, type ComponentProps, Ref } from 'react'
 
 import { itemStyles } from './SegmentedControl.styles'
 
@@ -25,6 +25,18 @@ export const SegmentedControlItem = ({
   ref,
   ...rest
 }: SegmentedControlItemProps) => {
+  const content = Children.toArray(children).map((child, index) => {
+    if (typeof child === 'string' || typeof child === 'number') {
+      return (
+        <span key={`text-${index}`} data-spark-segmented-control-text>
+          {child}
+        </span>
+      )
+    }
+
+    return child
+  })
+
   return (
     <Radio.Root
       ref={ref}
@@ -35,13 +47,7 @@ export const SegmentedControlItem = ({
       className={itemStyles({ className })}
       {...rest}
     >
-      {children}
-      <span
-        aria-hidden="true"
-        className="bg-success pointer-events-none h-0 overflow-hidden font-bold content-[attr(data-text)/'']"
-      >
-        {children}
-      </span>
+      {content}
     </Radio.Root>
   )
 }

@@ -23,6 +23,9 @@
     ],
     "conventionalCommits": {
       "types": {
+        "chore": {
+          "semverBump": "patch"
+        },
         "feat": {
           "semverBump": "minor"
         },
