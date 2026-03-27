@@ -23,6 +23,7 @@ The project is organized as follows:
 The main package containing all React components of the Design System.
 
 #### Structure
+
 ```
 packages/components/
 ├── src/
@@ -34,18 +35,20 @@ packages/components/
 │   ├── card/               # Card component
 │   └── ...                 # +45 other components
 ├── package.json
-├── tsup.config.ts          # Build configuration
+├── vite.config.ts          # Build configuration
 └── global.d.ts             # Global types
 ```
 
 #### Features
-- **Build** : Uses Tsup for TypeScript compilation and type generation
+
+- **Build** : Uses Vite for TypeScript compilation and type generation
 - **Exports** : Support for CommonJS and ESM formats with TypeScript types
 - **Dependencies** : Integration with Radix UI, React Aria, and Zag.js
 - **Accessibility** : WCAG compliance and ARIA attributes support
 - **Styling** : Uses Tailwind CSS with custom variants
 
 #### Component structure
+
 Each component follows a standardized structure:
 
 ```
@@ -68,6 +71,7 @@ dialog/
 Package containing reusable React hooks for common business logic.
 
 #### Structure
+
 ```
 packages/hooks/
 ├── src/
@@ -80,12 +84,14 @@ packages/hooks/
 ```
 
 #### Features
+
 - **Utility hooks** : Common functionality for managing refs, states and events
 - **TypeScript** : Complete type support with typed exports
-- **Build** : Compilation with Tsup for multi-format compatibility
+- **Build** : Compilation with Vite for multi-format compatibility
 - **Dependencies** : Uses Lodash for certain functionalities
 
 #### Usage examples
+
 ```tsx
 import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
 import { useMountedState } from '@spark-ui/hooks/use-mounted-state'
@@ -102,6 +108,7 @@ const isMounted = useMountedState()
 Package containing utilities and development tools.
 
 #### Structure
+
 ```
 packages/utils/
 ├── cli/                    # Command line tools
@@ -110,14 +117,17 @@ packages/utils/
 ```
 
 ##### @spark-ui/cli-utils
+
 CLI tools to improve the development experience.
 
 **Features** :
+
 - **Component generation** : `spark generate` to create new components
 - **Templates** : Template system for package creation
 - **Workflow** : Integration with the development process
 
 **Usage** :
+
 ```bash
 # Generate a new component
 npx spark generate
@@ -128,22 +138,25 @@ spark generate
 ```
 
 ##### @spark-ui/internal-utils
+
 Internal utilities shared between packages.
 
 **Features** :
+
 - **Variant management** : `makeVariants` to create component variants
 - **React utilities** : `deepFind`, `createSplitProps` for props manipulation
 - **Object utilities** : `omit`, `useEvent` for object and event management
 - **Tailwind integration** : `tw` for programmatic Tailwind usage
 
 **Examples** :
+
 ```tsx
 import { makeVariants, tw } from '@spark-ui/internal-utils'
 
 // Creating variants
 const buttonVariants = makeVariants({
   intent: ['main', 'support', 'accent'],
-  size: ['sm', 'md', 'lg']
+  size: ['sm', 'md', 'lg'],
 })
 
 // Programmatic Tailwind usage
@@ -151,15 +164,18 @@ const className = tw('px-4', 'py-2', 'bg-blue-500')
 ```
 
 ##### @spark-ui/theme-utils
+
 Theme configuration and CSS variables management.
 
 **Features** :
+
 - **CSS variables** : Definition of colors, spacings, typographies
 - **Themes** : Light/dark theme support with contrast variants
 - **Animations** : Custom keyframes and transitions
 - **Responsive** : Breakpoints and responsive utilities
 
 **Theme structure** :
+
 ```css
 @theme {
   --color-main: #ec5a13;
@@ -173,6 +189,7 @@ Theme configuration and CSS variables management.
 ## Development workflow
 
 ### Build and compilation
+
 ```bash
 # Build all packages
 npm run build
@@ -185,6 +202,7 @@ nx build @spark-ui/components
 ```
 
 ### Testing and quality
+
 ```bash
 # Unit tests
 npm run test
@@ -200,6 +218,7 @@ npm run typecheck
 ```
 
 ### Documentation
+
 ```bash
 # Start Storybook
 npm run storybook:start
@@ -213,6 +232,7 @@ npm run storybook:build
 Every published package follows a consistent structure regardless of its type:
 
 ### Required files
+
 - **`package.json`** : Package manifest with dependencies and scripts
 - **`README.md`** : Basic package documentation and usage
 - **`LICENSE`** : Usage, modification, and distribution terms
@@ -225,8 +245,8 @@ Every published package follows a consistent structure regardless of its type:
 - **`index.tsx`** : Main export file (imports and exports all exposed resources)
 
 ### Build artifacts
-- **`dist/`** : Generated bundle directory (ignored by `.gitignore`)
 
+- **`dist/`** : Generated bundle directory (ignored by `.gitignore`)
 
 ## Dependencies and technologies
 
@@ -237,7 +257,7 @@ Every published package follows a consistent structure regardless of its type:
 - **Vitest** : Unit testing
 - **Playwright** : End-to-end and accessibility testing
 - **Nx** : Monorepo management
-- **Tsup** : Build and bundling
+- **Vite** : Build and bundling
 
 ## Best practices
 
@@ -249,5 +269,3 @@ Every published package follows a consistent structure regardless of its type:
 6. **Versioning** : Use semantic versioning with Nx Release
 
 This modular architecture enables efficient maintenance, maximum reusability and Design System scalability while maintaining technical and visual consistency.
-
-

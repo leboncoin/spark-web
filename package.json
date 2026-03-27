@@ -117,7 +117,6 @@
     "storybook": "^10.3.1",
     "tailwindcss": "4.1.16",
     "ts-node": "10.9.2",
-    "tsup": "^8.5.0",
     "type-fest": "5.1.0",
     "typescript": "6.0.2",
     "vite": "^6.4.1",
