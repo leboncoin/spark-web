@@ -25,7 +25,7 @@
     "hook"
   ],
   "scripts": {
-    "build": "tsup"
+    "build": "vite build"
   },
   "dependencies": {
     "@types/lodash.isequal": "4.5.8",
