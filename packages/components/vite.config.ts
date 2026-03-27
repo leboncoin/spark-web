@@ -1,5 +1,6 @@
+import { join, resolve } from 'node:path'
+
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'fs'
-import { join, resolve } from 'path'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 
@@ -29,9 +30,13 @@ export default defineConfig({
   },
   plugins: [
     dts({
-      entryRoot: './src',
-      outDir: './dist',
-      include: ['src/**/*.{ts,tsx}'],
+      entryRoot: resolve(__dirname, 'src'),
+      outDir: resolve(__dirname, 'dist'),
+      include: [
+        'src/**/*.{ts,tsx}',
+        resolve(__dirname, '../../global.d.ts'),
+        resolve(__dirname, 'global.d.ts'),
+      ],
       exclude: ['src/**/*.test.{ts,tsx}', 'src/**/*.stories.{ts,tsx}', 'src/**/*.doc.*'],
       rollupTypes: false,
       copyDtsFiles: true,

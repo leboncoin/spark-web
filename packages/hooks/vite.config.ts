@@ -1,4 +1,4 @@
-import { readdirSync } from 'node:fs'
+import { cpSync, existsSync, readdirSync, rmSync } from 'node:fs'
 import { join } from 'node:path'
 
 import { defineConfig } from 'vite'
@@ -32,12 +32,32 @@ export default defineConfig({
   },
   plugins: [
     dts({
-      include: ['src/*/index.ts'],
+      include: ['src/**/*.ts', 'src/**/*.tsx'],
+      exclude: ['src/**/*.test.*', 'src/**/*.doc.*', 'src/**/*.stories.*'],
       entryRoot: 'src',
       outDir: 'dist',
       rollupTypes: false,
       insertTypesEntry: false,
       copyDtsFiles: false,
+      afterBuild: () => {
+        const distSrc = join(__dirname, 'dist/src')
+        if (!existsSync(distSrc)) return
+
+        for (const entry of readdirSync(distSrc, { withFileTypes: true })) {
+          if (!entry.isDirectory()) continue
+
+          const fromDir = join(distSrc, entry.name)
+          const toDir = join(__dirname, 'dist', entry.name)
+
+          for (const file of readdirSync(fromDir)) {
+            if (file.endsWith('.d.ts')) {
+              cpSync(join(fromDir, file), join(toDir, file), { force: true })
+            }
+          }
+        }
+
+        rmSync(distSrc, { recursive: true })
+      },
     }),
   ],
 })

@@ -43,7 +43,9 @@ export const CheckboxGroup = ({
   const current = useMemo(() => {
     const handleCheckedChange = (checked: boolean, changed: string) => {
       const values = value || []
-      const modified = checked ? [...values, changed] : values.filter(val => val !== changed)
+      const modified = checked
+        ? [...values, changed]
+        : values.filter((val: string) => val !== changed)
 
       setValue(modified)
 
