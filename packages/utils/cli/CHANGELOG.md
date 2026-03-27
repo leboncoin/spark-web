@@ -1,3 +1,13 @@
+## 17.2.3 (2026-03-27)
+
+### 🩹 Fixes
+
+- **components:** fix type resolution ([6b799aa0d](https://github.com/leboncoin/spark-web/commit/6b799aa0d))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.2.2 (2026-03-27)
 
 ### 🩹 Fixes
