@@ -1,6 +1,7 @@
 import { readdirSync } from 'node:fs'
 import { join, parse } from 'node:path'
 
+import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 
@@ -32,13 +33,15 @@ export default defineConfig({
       fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'mjs' : 'js'}`,
     },
     rollupOptions: {
-      external: ['react'],
+      // react/jsx-runtime must stay external: bundling its CJS into .mjs emits require() shims that break in the browser (Rolldown / Vite 8).
+      external: ['react', 'react/jsx-runtime', 'react/jsx-dev-runtime'],
       output: {
         exports: 'named',
       },
     },
   },
   plugins: [
+    react(),
     dts({
       include: ['src/index.ts', 'src/icons/**/*.{ts,tsx}', 'src/Types.ts', 'src/tags.ts'],
       entryRoot: 'src',

@@ -23,6 +23,9 @@
     ],
     "conventionalCommits": {
       "types": {
+        "build": {
+          "semverBump": "patch"
+        },
         "chore": {
           "semverBump": "patch"
         },
