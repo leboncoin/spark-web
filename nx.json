@@ -3,10 +3,7 @@
     "default": {
       "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "test"
-        ]
+        "cacheableOperations": ["build", "test"]
       }
     }
   },
@@ -23,6 +20,9 @@
     ],
     "conventionalCommits": {
       "types": {
+        "build": {
+          "semverBump": "patch"
+        },
         "chore": {
           "semverBump": "patch"
         },
