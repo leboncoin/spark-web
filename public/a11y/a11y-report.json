@@ -1,12 +1,12 @@
 {
   "@spark-ui/components/accordion": {
-    "timestamp": "2025-11-20T15:03:41.081Z",
+    "timestamp": "2026-03-28T15:49:46.459Z",
     "url": "http://localhost:3002/a11y/accordion",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/alert-dialog": {
-    "timestamp": "2025-11-20T15:03:42.604Z",
+    "timestamp": "2026-03-28T15:49:47.701Z",
     "url": "http://localhost:3002/a11y/alert-dialog",
     "incomplete": [
       {
@@ -35,9 +35,9 @@
                 "data": null,
                 "relatedNodes": [
                   {
-                    "html": "<span data-radix-focus-guard=\"\" tabindex=\"0\" data-aria-hidden=\"true\" aria-hidden=\"true\" style=\"outline: none; opacity: 0; position: fixed; pointer-events: none;\"></span>",
+                    "html": "<span data-type=\"inside\" aria-hidden=\"true\" tabindex=\"0\" data-base-ui-focus-guard=\"\" style=\"clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; position: fixed; top: 0px; left: 0px; border: 0px; padding: 0px; width: 1px; height: 1px; margin: -1px;\"></span>",
                     "target": [
-                      "span:nth-child(1)"
+                      "span[data-type=\"inside\"][data-base-ui-focus-guard=\"\"]:nth-child(3)"
                     ]
                   }
                 ],
@@ -47,9 +47,9 @@
             ],
             "none": [],
             "impact": "serious",
-            "html": "<span data-radix-focus-guard=\"\" tabindex=\"0\" data-aria-hidden=\"true\" aria-hidden=\"true\" style=\"outline: none; opacity: 0; position: fixed; pointer-events: none;\"></span>",
+            "html": "<span data-type=\"inside\" aria-hidden=\"true\" tabindex=\"0\" data-base-ui-focus-guard=\"\" style=\"clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; position: fixed; top: 0px; left: 0px; border: 0px; padding: 0px; width: 1px; height: 1px; margin: -1px;\"></span>",
             "target": [
-              "span:nth-child(1)"
+              "span[data-type=\"inside\"][data-base-ui-focus-guard=\"\"]:nth-child(3)"
             ]
           },
           {
@@ -60,9 +60,9 @@
                 "data": null,
                 "relatedNodes": [
                   {
-                    "html": "<span data-radix-focus-guard=\"\" tabindex=\"0\" data-aria-hidden=\"true\" aria-hidden=\"true\" style=\"outline: none; opacity: 0; position: fixed; pointer-events: none;\"></span>",
+                    "html": "<span data-type=\"inside\" aria-hidden=\"true\" tabindex=\"0\" data-base-ui-focus-guard=\"\" style=\"clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; position: fixed; top: 0px; left: 0px; border: 0px; padding: 0px; width: 1px; height: 1px; margin: -1px;\"></span>",
                     "target": [
-                      "span:nth-child(6)"
+                      "span[data-type=\"inside\"][data-base-ui-focus-guard=\"\"]:nth-child(5)"
                     ]
                   }
                 ],
@@ -72,9 +72,9 @@
             ],
             "none": [],
             "impact": "serious",
-            "html": "<span data-radix-focus-guard=\"\" tabindex=\"0\" data-aria-hidden=\"true\" aria-hidden=\"true\" style=\"outline: none; opacity: 0; position: fixed; pointer-events: none;\"></span>",
+            "html": "<span data-type=\"inside\" aria-hidden=\"true\" tabindex=\"0\" data-base-ui-focus-guard=\"\" style=\"clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; position: fixed; top: 0px; left: 0px; border: 0px; padding: 0px; width: 1px; height: 1px; margin: -1px;\"></span>",
             "target": [
-              "span:nth-child(6)"
+              "span[data-type=\"inside\"][data-base-ui-focus-guard=\"\"]:nth-child(5)"
             ]
           }
         ]
@@ -102,18 +102,18 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "controlsWithinPopup",
-                  "needsReview": "aria-controls=\"radix-_r_0_\""
+                  "needsReview": "aria-controls=\"_r_0_\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-_r_0_\""
+                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"_r_0_\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"alert-dialog-title\" type=\"button\" class=\"u-shadow-border-tran...\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-_r_0_\" data-state=\"open\">",
+            "html": "<button data-spark-component=\"alert-dialog-trigger\" type=\"button\" class=\"u-shadow-border-tran...\" aria-busy=\"false\" aria-live=\"off\" tabindex=\"0\" data-base-ui-click-t...=\"\" id=\"base-ui-_r_2_\" data-popup-open=\"\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"_r_0_\">",
             "target": [
-              "button[aria-haspopup=\"dialog\"]"
+              "#base-ui-_r_2_"
             ]
           }
         ]
@@ -122,19 +122,19 @@
     "violations": []
   },
   "@spark-ui/components/avatar": {
-    "timestamp": "2025-11-20T15:03:46.659Z",
+    "timestamp": "2026-03-28T15:49:48.871Z",
     "url": "http://localhost:3002/a11y/avatar",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/badge": {
-    "timestamp": "2025-11-20T15:03:49.622Z",
+    "timestamp": "2026-03-28T15:49:50.059Z",
     "url": "http://localhost:3002/a11y/badge",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/breadcrumb": {
-    "timestamp": "2025-11-20T15:03:53.551Z",
+    "timestamp": "2026-03-28T15:49:51.340Z",
     "url": "http://localhost:3002/a11y/breadcrumb",
     "incomplete": [
       {
@@ -195,13 +195,13 @@
     "violations": []
   },
   "@spark-ui/components/button": {
-    "timestamp": "2025-11-20T15:03:56.592Z",
+    "timestamp": "2026-03-28T15:49:52.479Z",
     "url": "http://localhost:3002/a11y/button",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/card": {
-    "timestamp": "2025-11-20T15:03:58.988Z",
+    "timestamp": "2026-03-28T15:49:53.659Z",
     "url": "http://localhost:3002/a11y/card",
     "incomplete": [
       {
@@ -262,25 +262,31 @@
     "violations": []
   },
   "@spark-ui/components/checkbox": {
-    "timestamp": "2025-11-20T15:04:00.879Z",
+    "timestamp": "2026-03-28T15:49:54.824Z",
     "url": "http://localhost:3002/a11y/checkbox",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/chip": {
-    "timestamp": "2025-11-20T15:04:04.605Z",
+    "timestamp": "2026-03-28T15:49:56.023Z",
     "url": "http://localhost:3002/a11y/chip",
     "incomplete": [],
     "violations": []
   },
+  "@spark-ui/components/circular-meter": {
+    "timestamp": "2026-03-28T15:49:57.209Z",
+    "url": "http://localhost:3002/a11y/circular-meter",
+    "incomplete": [],
+    "violations": []
+  },
   "@spark-ui/components/collapsible": {
-    "timestamp": "2025-11-20T15:04:07.318Z",
+    "timestamp": "2026-03-28T15:49:58.390Z",
     "url": "http://localhost:3002/a11y/collapsible",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/combobox": {
-    "timestamp": "2025-11-20T15:04:09.866Z",
+    "timestamp": "2026-03-28T15:49:59.541Z",
     "url": "http://localhost:3002/a11y/combobox",
     "incomplete": [
       {
@@ -347,7 +353,7 @@
     "violations": []
   },
   "@spark-ui/components/dialog": {
-    "timestamp": "2025-11-20T15:04:12.829Z",
+    "timestamp": "2026-03-28T15:50:00.724Z",
     "url": "http://localhost:3002/a11y/dialog",
     "incomplete": [
       {
@@ -376,9 +382,9 @@
                 "data": null,
                 "relatedNodes": [
                   {
-                    "html": "<span data-radix-focus-guard=\"\" tabindex=\"0\" data-aria-hidden=\"true\" aria-hidden=\"true\" style=\"outline: none; opacity: 0; position: fixed; pointer-events: none;\"></span>",
+                    "html": "<span data-type=\"inside\" aria-hidden=\"true\" tabindex=\"0\" data-base-ui-focus-guard=\"\" style=\"clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; position: fixed; top: 0px; left: 0px; border: 0px; padding: 0px; width: 1px; height: 1px; margin: -1px;\"></span>",
                     "target": [
-                      "span[data-radix-focus-guard=\"\"]:nth-child(1)"
+                      "span[data-type=\"inside\"][data-base-ui-focus-guard=\"\"]:nth-child(3)"
                     ]
                   }
                 ],
@@ -388,9 +394,9 @@
             ],
             "none": [],
             "impact": "serious",
-            "html": "<span data-radix-focus-guard=\"\" tabindex=\"0\" data-aria-hidden=\"true\" aria-hidden=\"true\" style=\"outline: none; opacity: 0; position: fixed; pointer-events: none;\"></span>",
+            "html": "<span data-type=\"inside\" aria-hidden=\"true\" tabindex=\"0\" data-base-ui-focus-guard=\"\" style=\"clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; position: fixed; top: 0px; left: 0px; border: 0px; padding: 0px; width: 1px; height: 1px; margin: -1px;\"></span>",
             "target": [
-              "span[data-radix-focus-guard=\"\"]:nth-child(1)"
+              "span[data-type=\"inside\"][data-base-ui-focus-guard=\"\"]:nth-child(3)"
             ]
           },
           {
@@ -401,9 +407,9 @@
                 "data": null,
                 "relatedNodes": [
                   {
-                    "html": "<span data-radix-focus-guard=\"\" tabindex=\"0\" data-aria-hidden=\"true\" aria-hidden=\"true\" style=\"outline: none; opacity: 0; position: fixed; pointer-events: none;\"></span>",
+                    "html": "<span data-type=\"inside\" aria-hidden=\"true\" tabindex=\"0\" data-base-ui-focus-guard=\"\" style=\"clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; position: fixed; top: 0px; left: 0px; border: 0px; padding: 0px; width: 1px; height: 1px; margin: -1px;\"></span>",
                     "target": [
-                      "span[data-radix-focus-guard=\"\"]:nth-child(6)"
+                      "span[data-type=\"inside\"][data-base-ui-focus-guard=\"\"]:nth-child(5)"
                     ]
                   }
                 ],
@@ -413,9 +419,9 @@
             ],
             "none": [],
             "impact": "serious",
-            "html": "<span data-radix-focus-guard=\"\" tabindex=\"0\" data-aria-hidden=\"true\" aria-hidden=\"true\" style=\"outline: none; opacity: 0; position: fixed; pointer-events: none;\"></span>",
+            "html": "<span data-type=\"inside\" aria-hidden=\"true\" tabindex=\"0\" data-base-ui-focus-guard=\"\" style=\"clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; position: fixed; top: 0px; left: 0px; border: 0px; padding: 0px; width: 1px; height: 1px; margin: -1px;\"></span>",
             "target": [
-              "span[data-radix-focus-guard=\"\"]:nth-child(6)"
+              "span[data-type=\"inside\"][data-base-ui-focus-guard=\"\"]:nth-child(5)"
             ]
           }
         ]
@@ -443,39 +449,18 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "controlsWithinPopup",
-                  "needsReview": "aria-controls=\"radix-_r_0_\""
+                  "needsReview": "aria-controls=\"_r_0_\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-_r_0_\""
+                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"_r_0_\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"dialog-trigger\" type=\"button\" class=\"u-shadow-border-tran...\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-_r_0_\" data-state=\"open\">",
+            "html": "<button data-spark-component=\"dialog-trigger\" type=\"button\" class=\"u-shadow-border-tran...\" aria-busy=\"false\" aria-live=\"off\" tabindex=\"0\" data-base-ui-click-t...=\"\" id=\"base-ui-_r_2_\" data-popup-open=\"\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"_r_0_\">",
             "target": [
-              "button[data-spark-component=\"dialog-trigger\"]"
-            ]
-          },
-          {
-            "any": [],
-            "all": [
-              {
-                "id": "aria-valid-attr-value",
-                "data": {
-                  "messageKey": "noId",
-                  "needsReview": "aria-describedby=\"radix-_r_2_\""
-                },
-                "relatedNodes": [],
-                "impact": "critical",
-                "message": "ARIA attribute element ID does not exist on the page: aria-describedby=\"radix-_r_2_\""
-              }
-            ],
-            "none": [],
-            "impact": "critical",
-            "html": "<div role=\"dialog\" id=\"radix-_r_0_\" aria-describedby=\"radix-_r_2_\" aria-labelledby=\"radix-_r_1_\" data-state=\"open\" data-spark-component=\"dialog-content\" class=\"z-modal flex flex-co...\" tabindex=\"-1\" style=\"pointer-events: auto...\">",
-            "target": [
-              "#radix-_r_0_"
+              "#base-ui-_r_2_"
             ]
           }
         ]
@@ -484,13 +469,13 @@
     "violations": []
   },
   "@spark-ui/components/divider": {
-    "timestamp": "2025-11-20T15:04:14.843Z",
+    "timestamp": "2026-03-28T15:50:01.900Z",
     "url": "http://localhost:3002/a11y/divider",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/drawer": {
-    "timestamp": "2025-11-20T15:04:18.984Z",
+    "timestamp": "2026-03-28T15:50:03.118Z",
     "url": "http://localhost:3002/a11y/drawer",
     "incomplete": [
       {
@@ -519,9 +504,9 @@
                 "data": null,
                 "relatedNodes": [
                   {
-                    "html": "<span data-radix-focus-guard=\"\" tabindex=\"0\" data-aria-hidden=\"true\" aria-hidden=\"true\" style=\"outline: none; opacity: 0; position: fixed; pointer-events: none;\"></span>",
+                    "html": "<span data-type=\"inside\" aria-hidden=\"true\" tabindex=\"0\" data-base-ui-focus-guard=\"\" style=\"clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; position: fixed; top: 0px; left: 0px; border: 0px; padding: 0px; width: 1px; height: 1px; margin: -1px;\"></span>",
                     "target": [
-                      "span:nth-child(1)"
+                      "span[data-type=\"inside\"][data-base-ui-focus-guard=\"\"]:nth-child(3)"
                     ]
                   }
                 ],
@@ -531,9 +516,9 @@
             ],
             "none": [],
             "impact": "serious",
-            "html": "<span data-radix-focus-guard=\"\" tabindex=\"0\" data-aria-hidden=\"true\" aria-hidden=\"true\" style=\"outline: none; opacity: 0; position: fixed; pointer-events: none;\"></span>",
+            "html": "<span data-type=\"inside\" aria-hidden=\"true\" tabindex=\"0\" data-base-ui-focus-guard=\"\" style=\"clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; position: fixed; top: 0px; left: 0px; border: 0px; padding: 0px; width: 1px; height: 1px; margin: -1px;\"></span>",
             "target": [
-              "span:nth-child(1)"
+              "span[data-type=\"inside\"][data-base-ui-focus-guard=\"\"]:nth-child(3)"
             ]
           },
           {
@@ -544,9 +529,9 @@
                 "data": null,
                 "relatedNodes": [
                   {
-                    "html": "<span data-radix-focus-guard=\"\" tabindex=\"0\" data-aria-hidden=\"true\" aria-hidden=\"true\" style=\"outline: none; opacity: 0; position: fixed; pointer-events: none;\"></span>",
+                    "html": "<span data-type=\"inside\" aria-hidden=\"true\" tabindex=\"0\" data-base-ui-focus-guard=\"\" style=\"clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; position: fixed; top: 0px; left: 0px; border: 0px; padding: 0px; width: 1px; height: 1px; margin: -1px;\"></span>",
                     "target": [
-                      "span:nth-child(6)"
+                      "span[data-type=\"inside\"][data-base-ui-focus-guard=\"\"]:nth-child(5)"
                     ]
                   }
                 ],
@@ -556,9 +541,9 @@
             ],
             "none": [],
             "impact": "serious",
-            "html": "<span data-radix-focus-guard=\"\" tabindex=\"0\" data-aria-hidden=\"true\" aria-hidden=\"true\" style=\"outline: none; opacity: 0; position: fixed; pointer-events: none;\"></span>",
+            "html": "<span data-type=\"inside\" aria-hidden=\"true\" tabindex=\"0\" data-base-ui-focus-guard=\"\" style=\"clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; position: fixed; top: 0px; left: 0px; border: 0px; padding: 0px; width: 1px; height: 1px; margin: -1px;\"></span>",
             "target": [
-              "span:nth-child(6)"
+              "span[data-type=\"inside\"][data-base-ui-focus-guard=\"\"]:nth-child(5)"
             ]
           }
         ]
@@ -586,18 +571,18 @@
                 "id": "aria-valid-attr-value",
                 "data": {
                   "messageKey": "controlsWithinPopup",
-                  "needsReview": "aria-controls=\"radix-_r_0_\""
+                  "needsReview": "aria-controls=\"_r_0_\""
                 },
                 "relatedNodes": [],
                 "impact": "critical",
-                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"radix-_r_0_\""
+                "message": "Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"_r_0_\""
               }
             ],
             "none": [],
             "impact": "critical",
-            "html": "<button data-spark-component=\"drawer-trigger\" type=\"button\" class=\"u-shadow-border-tran...\" aria-busy=\"false\" aria-live=\"off\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"radix-_r_0_\" data-state=\"open\">",
+            "html": "<button data-spark-component=\"drawer-trigger\" type=\"button\" class=\"u-shadow-border-tran...\" aria-busy=\"false\" aria-live=\"off\" tabindex=\"0\" data-base-ui-click-t...=\"\" id=\"base-ui-_r_2_\" data-popup-open=\"\" aria-haspopup=\"dialog\" aria-expanded=\"true\" aria-controls=\"_r_0_\">",
             "target": [
-              "button[data-spark-component=\"drawer-trigger\"]"
+              "#base-ui-_r_2_"
             ]
           }
         ]
@@ -606,7 +591,7 @@
     "violations": []
   },
   "@spark-ui/components/dropdown": {
-    "timestamp": "2025-11-20T15:04:22.549Z",
+    "timestamp": "2026-03-28T15:50:04.297Z",
     "url": "http://localhost:3002/a11y/dropdown",
     "incomplete": [
       {
@@ -673,61 +658,73 @@
     "violations": []
   },
   "@spark-ui/components/file-upload": {
-    "timestamp": "2025-11-20T15:04:26.361Z",
+    "timestamp": "2026-03-28T15:50:05.486Z",
     "url": "http://localhost:3002/a11y/file-upload",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/form-field": {
-    "timestamp": "2025-11-20T15:04:28.005Z",
+    "timestamp": "2026-03-28T15:50:06.745Z",
     "url": "http://localhost:3002/a11y/form-field",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/icon": {
-    "timestamp": "2025-11-20T15:04:32.287Z",
+    "timestamp": "2026-03-28T15:50:07.924Z",
     "url": "http://localhost:3002/a11y/icon",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/icon-button": {
-    "timestamp": "2025-11-20T15:04:35.429Z",
+    "timestamp": "2026-03-28T15:50:09.103Z",
     "url": "http://localhost:3002/a11y/icon-button",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/input": {
-    "timestamp": "2025-11-20T15:04:38.561Z",
+    "timestamp": "2026-03-28T15:50:10.259Z",
     "url": "http://localhost:3002/a11y/input",
     "incomplete": [],
     "violations": []
   },
+  "@spark-ui/components/input-otp": {
+    "timestamp": "2026-03-28T15:50:11.440Z",
+    "url": "http://localhost:3002/a11y/input-otp",
+    "incomplete": [],
+    "violations": []
+  },
   "@spark-ui/components/kbd": {
-    "timestamp": "2025-11-20T15:04:40.354Z",
+    "timestamp": "2026-03-28T15:50:12.623Z",
     "url": "http://localhost:3002/a11y/kbd",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/label": {
-    "timestamp": "2025-11-20T15:04:42.782Z",
+    "timestamp": "2026-03-28T15:50:13.763Z",
     "url": "http://localhost:3002/a11y/label",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/link-box": {
-    "timestamp": "2025-11-20T15:04:46.316Z",
+    "timestamp": "2026-03-28T15:50:15.190Z",
     "url": "http://localhost:3002/a11y/link-box",
     "incomplete": [],
     "violations": []
   },
+  "@spark-ui/components/meter": {
+    "timestamp": "2026-03-28T15:50:16.330Z",
+    "url": "http://localhost:3002/a11y/meter",
+    "incomplete": [],
+    "violations": []
+  },
   "@spark-ui/components/pagination": {
-    "timestamp": "2025-11-20T15:04:49.196Z",
+    "timestamp": "2026-03-28T15:50:17.491Z",
     "url": "http://localhost:3002/a11y/pagination",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/popover": {
-    "timestamp": "2025-11-20T15:04:51.909Z",
+    "timestamp": "2026-03-28T15:50:18.648Z",
     "url": "http://localhost:3002/a11y/popover",
     "incomplete": [
       {
@@ -794,91 +791,191 @@
     "violations": []
   },
   "@spark-ui/components/progress": {
-    "timestamp": "2025-11-20T15:04:54.401Z",
+    "timestamp": "2026-03-28T15:50:19.902Z",
     "url": "http://localhost:3002/a11y/progress",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/progress-tracker": {
-    "timestamp": "2025-11-20T15:04:57.486Z",
+    "timestamp": "2026-03-28T15:50:21.090Z",
     "url": "http://localhost:3002/a11y/progress-tracker",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/radio-group": {
-    "timestamp": "2025-11-20T15:04:59.519Z",
+    "timestamp": "2026-03-28T15:50:22.261Z",
     "url": "http://localhost:3002/a11y/radio-group",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/rating": {
-    "timestamp": "2025-11-20T15:05:03.129Z",
+    "timestamp": "2026-03-28T15:50:23.527Z",
     "url": "http://localhost:3002/a11y/rating",
     "incomplete": [],
     "violations": []
   },
+  "@spark-ui/components/rating-display": {
+    "timestamp": "2026-03-28T15:50:24.762Z",
+    "url": "http://localhost:3002/a11y/rating-display",
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "impact": "serious",
+        "tags": [
+          "cat.aria",
+          "wcag2a",
+          "wcag412",
+          "EN-301-549",
+          "EN-9.4.1.2",
+          "RGAAv4",
+          "RGAA-7.1.1"
+        ],
+        "description": "Ensure ARIA attributes are not prohibited for an element's role",
+        "help": "Elements must only use permitted ARIA attributes",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-prohibited-attr?application=playwright",
+        "nodes": [
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": {
+                  "role": null,
+                  "nodeName": "div",
+                  "messageKey": "noRoleSingular",
+                  "prohibited": [
+                    "aria-label"
+                  ]
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "aria-label attribute is not well supported on a div with no valid role attribute."
+              }
+            ],
+            "impact": "serious",
+            "html": "<div class=\"gap-x-sm relative inline-flex items-center\" data-spark-component=\"rating-display\" aria-label=\"Rating: 3.5 out of 5, based on 128 reviews\">",
+            "target": [
+              ".inline-flex.items-center[data-spark-component=\"rating-display\"]:nth-child(1)"
+            ]
+          },
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": {
+                  "role": null,
+                  "nodeName": "div",
+                  "messageKey": "noRoleSingular",
+                  "prohibited": [
+                    "aria-label"
+                  ]
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "aria-label attribute is not well supported on a div with no valid role attribute."
+              }
+            ],
+            "impact": "serious",
+            "html": "<div class=\"gap-x-sm relative inline-flex items-center\" data-spark-component=\"rating-display\" aria-label=\"Rating: 4 out of 5\">",
+            "target": [
+              "div[aria-label=\"Rating: 4 out of 5\"]"
+            ]
+          },
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": {
+                  "role": null,
+                  "nodeName": "div",
+                  "messageKey": "noRoleSingular",
+                  "prohibited": [
+                    "aria-label"
+                  ]
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "aria-label attribute is not well supported on a div with no valid role attribute."
+              }
+            ],
+            "impact": "serious",
+            "html": "<div class=\"gap-x-sm relative inline-flex items-center\" data-spark-component=\"rating-display\" aria-label=\"Rating: 2.3 out of 5\">",
+            "target": [
+              "div[aria-label=\"Rating: 2.3 out of 5\"]"
+            ]
+          }
+        ]
+      }
+    ],
+    "violations": []
+  },
   "@spark-ui/components/select": {
-    "timestamp": "2025-11-20T15:05:06.121Z",
+    "timestamp": "2026-03-28T15:50:25.953Z",
     "url": "http://localhost:3002/a11y/select",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/skeleton": {
-    "timestamp": "2025-11-20T15:05:08.893Z",
+    "timestamp": "2026-03-28T15:50:27.130Z",
     "url": "http://localhost:3002/a11y/skeleton",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/slider": {
-    "timestamp": "2025-11-20T15:05:12.637Z",
+    "timestamp": "2026-03-28T15:50:28.307Z",
     "url": "http://localhost:3002/a11y/slider",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/snackbar": {
-    "timestamp": "2025-11-20T15:05:15.471Z",
+    "timestamp": "2026-03-28T15:50:29.488Z",
     "url": "http://localhost:3002/a11y/snackbar",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/spinner": {
-    "timestamp": "2025-11-20T15:05:18.949Z",
+    "timestamp": "2026-03-28T15:50:30.647Z",
     "url": "http://localhost:3002/a11y/spinner",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/stepper": {
-    "timestamp": "2025-11-20T15:05:23.140Z",
+    "timestamp": "2026-03-28T15:50:31.834Z",
     "url": "http://localhost:3002/a11y/stepper",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/switch": {
-    "timestamp": "2025-11-20T15:05:25.978Z",
+    "timestamp": "2026-03-28T15:50:33.038Z",
     "url": "http://localhost:3002/a11y/switch",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/tabs": {
-    "timestamp": "2025-11-20T15:05:28.614Z",
+    "timestamp": "2026-03-28T15:50:34.211Z",
     "url": "http://localhost:3002/a11y/tabs",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/tag": {
-    "timestamp": "2025-11-20T15:05:32.051Z",
+    "timestamp": "2026-03-28T15:50:35.394Z",
     "url": "http://localhost:3002/a11y/tag",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/textarea": {
-    "timestamp": "2025-11-20T15:05:34.734Z",
+    "timestamp": "2026-03-28T15:50:36.641Z",
     "url": "http://localhost:3002/a11y/textarea",
     "incomplete": [],
     "violations": []
   },
   "@spark-ui/components/text-link": {
-    "timestamp": "2025-11-20T15:05:37.964Z",
+    "timestamp": "2026-03-28T15:50:37.831Z",
     "url": "http://localhost:3002/a11y/text-link",
     "incomplete": [
       {
@@ -938,8 +1035,14 @@
     ],
     "violations": []
   },
+  "@spark-ui/components/toast": {
+    "timestamp": "2026-03-28T15:50:39.212Z",
+    "url": "http://localhost:3002/a11y/toast",
+    "incomplete": [],
+    "violations": []
+  },
   "@spark-ui/components/visually-hidden": {
-    "timestamp": "2025-11-20T15:05:41.840Z",
+    "timestamp": "2026-03-28T15:50:40.384Z",
     "url": "http://localhost:3002/a11y/visually-hidden",
     "incomplete": [],
     "violations": []
