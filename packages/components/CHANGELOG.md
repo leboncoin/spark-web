@@ -1,3 +1,22 @@
+## 17.2.4 (2026-03-28)
+
+### 🩹 Fixes
+
+- replaced eslint and prettier with oxlint and oxfmt ([14fd2cf40](https://github.com/leboncoin/spark-web/commit/14fd2cf40))
+
+### 💅 Refactors
+
+- fixed a11y tests following vite updates ([fcd00dc47](https://github.com/leboncoin/spark-web/commit/fcd00dc47))
+- oxfmt fixes ([ed6eb5793](https://github.com/leboncoin/spark-web/commit/ed6eb5793))
+
+### 📦 Build
+
+- vite v8 ([6055bc430](https://github.com/leboncoin/spark-web/commit/6055bc430))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.2.3 (2026-03-27)
 
 ### 🩹 Fixes
