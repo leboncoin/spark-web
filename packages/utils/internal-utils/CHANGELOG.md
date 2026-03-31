@@ -1,3 +1,13 @@
+## 17.2.5 (2026-03-31)
+
+### 🩹 Fixes
+
+- **components:** deleted Snackbar, use Toast instead ([fd6cf16a9](https://github.com/leboncoin/spark-web/commit/fd6cf16a9))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.2.4 (2026-03-28)
 
 ### 🩹 Fixes
