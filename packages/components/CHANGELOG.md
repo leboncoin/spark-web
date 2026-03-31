@@ -1,3 +1,21 @@
+## 17.3.0 (2026-03-31)
+
+### 🚀 Features
+
+- **components:** table bulk edit bar ([03e902ed7](https://github.com/leboncoin/spark-web/commit/03e902ed7))
+- **components:** table with pagination ([c6ef29297](https://github.com/leboncoin/spark-web/commit/c6ef29297))
+- **components:** tablecolumn sorting hook ([1ae964700](https://github.com/leboncoin/spark-web/commit/1ae964700))
+- **components:** table row links ([db805d5dd](https://github.com/leboncoin/spark-web/commit/db805d5dd))
+- **components:** table component based on react-aria ([c8a76078c](https://github.com/leboncoin/spark-web/commit/c8a76078c))
+
+### 💅 Refactors
+
+- **components:** moved table grid prop to root table ([d5c0639fc](https://github.com/leboncoin/spark-web/commit/d5c0639fc))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.2.5 (2026-03-31)
 
 ### 🩹 Fixes

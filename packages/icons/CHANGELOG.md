@@ -1,3 +1,14 @@
+## 17.3.0 (2026-03-31)
+
+### 🚀 Features
+
+- **components:** table with pagination ([c6ef29297](https://github.com/leboncoin/spark-web/commit/c6ef29297))
+- **components:** table component based on react-aria ([c8a76078c](https://github.com/leboncoin/spark-web/commit/c8a76078c))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.2.5 (2026-03-31)
 
 ### 🩹 Fixes
