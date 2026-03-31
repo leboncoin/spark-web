@@ -1,4 +1,5 @@
 import { mergeProps } from '@zag-js/react'
+import { cx } from 'class-variance-authority'
 import { ComponentPropsWithoutRef, ReactElement, Ref } from 'react'
 
 import { Button } from '../button'
@@ -43,7 +44,7 @@ export function Item({ children, value, className, href, ref, ...props }: ItemPr
     'data-spark-component': 'pagination-item',
     intent: 'support',
     design: apiProps['aria-current'] === 'page' ? 'filled' : 'contrast',
-    className,
+    className: cx('size-sz-44', className),
     ...props,
   }
 

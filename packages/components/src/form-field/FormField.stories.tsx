@@ -113,7 +113,6 @@ export const State: StoryFn = () => (
           />
         )}
       </FormField.Control>
-
       <FormField.ErrorMessage>Name is invalid</FormField.ErrorMessage>
     </FormField>
 

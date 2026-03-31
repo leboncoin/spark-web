@@ -6,21 +6,22 @@ import remarkGfm from 'remark-gfm'
 const docgenConfig: ParserOptions = {
   shouldExtractLiteralValuesFromEnum: true,
   shouldRemoveUndefinedFromOptional: true,
-
+  /**
+   * Return true for props that intend to be documented.
+   */
   propFilter: prop => {
-    const prohibitedPropsRegexesNew = [/\/node_modules\/@types\/react\/.*.d.ts/]
-    const allowedReactProps = new Set(['children', 'className'])
+    const whitelistedProps = new Set(['children', 'className'])
 
     if (prop.declarations && prop.declarations?.length > 0) {
-      const isProhibitedProps = prop.declarations.some(declaration =>
-        prohibitedPropsRegexesNew.some(regex => regex.test(declaration.fileName))
+      const isDomProp = prop.declarations.some(
+        declaration =>
+          declaration.fileName.includes('node_modules/@types/react') ||
+          declaration.fileName.includes('node_modules/@react-types/shared/src/dom')
       )
 
-      if (isProhibitedProps && allowedReactProps.has(prop.name)) {
-        return true
+      if (isDomProp && !whitelistedProps.has(prop.name)) {
+        return false
       }
-
-      return !isProhibitedProps
     }
 
     return true
