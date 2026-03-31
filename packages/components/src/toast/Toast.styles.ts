@@ -157,35 +157,4 @@ export const toastStyles = cva(
   }
 )
 
-export const snackbarItemVariantContent = cva(
-  [
-    'inline-grid items-center',
-    'col-start-1 row-start-1',
-    'pl-md pr-lg', // applying padding on the parent prevents VoiceOver on Safari from reading snackbar content 🤷
-  ],
-  {
-    variants: {
-      /**
-       * Force action button displaying on a new line
-       * @default false
-       */
-      actionOnNewline: {
-        true: [
-          'grid-rows-[52px_1fr_52px]',
-          'grid-cols-[min-content_1fr_min-content]',
-          "[grid-template-areas:'icon_message_close'_'._message_.'_'action_action_action']",
-        ],
-        false: [
-          'grid-cols-[min-content_1fr_min-content_min-content]',
-          "[grid-template-areas:'icon_message_action_close']",
-        ],
-      },
-    },
-    defaultVariants: {
-      actionOnNewline: false,
-    },
-  }
-)
-
 export type ToastVariantProps = VariantProps<typeof toastStyles>
-export type SnackbarItemVariantContentProps = VariantProps<typeof snackbarItemVariantContent>
