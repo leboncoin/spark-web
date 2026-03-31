@@ -41,7 +41,6 @@ export const a11yComponents = {
   select: 'select',
   skeleton: 'skeleton',
   slider: 'slider',
-  snackbar: 'snackbar',
   spinner: 'spinner',
   stepper: 'stepper',
   switch: 'switch',

@@ -36,7 +36,6 @@ import { A11yRatingDisplay } from '../pages/RatingDisplay'
 import { A11ySelect } from '../pages/Select'
 import { A11ySkeleton } from '../pages/Skeleton'
 import { A11ySlider } from '../pages/Slider'
-import { A11ySnackbar } from '../pages/Snackbar'
 import { A11ySpinner } from '../pages/Spinner'
 import { A11yStepper } from '../pages/Stepper'
 import { A11ySwitch } from '../pages/Switch'
@@ -91,7 +90,6 @@ export const a11yElements: Record<A11yComponentsKey, ComponentType> = {
   select: A11ySelect,
   skeleton: A11ySkeleton,
   slider: A11ySlider,
-  snackbar: A11ySnackbar,
   spinner: A11ySpinner,
   stepper: A11yStepper,
   switch: A11ySwitch,
