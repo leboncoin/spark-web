@@ -1,3 +1,13 @@
+## 17.3.1 (2026-03-31)
+
+### 🎨 Styles
+
+- **components:** fixed invalid bg color on table bulkbar ([24815ee82](https://github.com/leboncoin/spark-web/commit/24815ee82))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.3.0 (2026-03-31)
 
 ### 🚀 Features
