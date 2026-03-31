@@ -52,7 +52,7 @@ function TableBulkBarRoot({ children, className }: TableBulkBarProps) {
         className={cx(
           'gap-lg min-h-sz-64 flex w-full flex-wrap items-center justify-between',
           'rounded-lg',
-          'bg-basic-container text-on-basic-container p-lg',
+          'bg-support-container text-on-support-container p-lg',
           className
         )}
       >

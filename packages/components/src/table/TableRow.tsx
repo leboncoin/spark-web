@@ -30,8 +30,8 @@ export function Row<T extends object>({ id, columns, children, className, ...pro
         'data-focus-visible:u-outline-inset outline-none data-focus-visible:outline-dashed',
         'data-react-aria-pressable:hover:bg-surface-hovered data-react-aria-pressable:pressed:bg-surface-hovered',
         // Selected row styles
-        'data-selected:bg-basic-container data-selected:text-on-basic-container',
-        'data-selected:hover:bg-basic-container-hovered data-selected:data-pressed:bg-basic-container-hovered',
+        'data-selected:bg-support-container data-selected:text-on-support-container',
+        'data-selected:hover:bg-support-container-hovered data-selected:data-pressed:bg-support-container-hovered',
         // Disabled row styles
         'data-disabled:text-on-surface/dim-3',
         // Href row styles
