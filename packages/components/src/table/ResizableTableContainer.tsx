@@ -3,11 +3,13 @@ import type { ComponentProps } from 'react'
 import { useLayoutEffect, useRef } from 'react'
 import { ResizableTableContainer as AriaResizableTableContainer } from 'react-aria-components'
 
-import { isColumnResizerElement, isInteractiveElement } from './table-utils'
+import { isColumnResizerElement, isKeyboardActivatableElement } from './table-utils'
 import { TableResizableContext } from './TableContext'
 
-export interface ResizableTableContainerProps
-  extends Omit<ComponentProps<typeof AriaResizableTableContainer>, 'className'> {
+export interface ResizableTableContainerProps extends Omit<
+  ComponentProps<typeof AriaResizableTableContainer>,
+  'className'
+> {
   className?: string
 }
 
@@ -24,7 +26,8 @@ export function ResizableTableContainer({
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key !== ' ' && e.key !== 'Enter') return
-      if (!isInteractiveElement(e.target)) return
+      if (e.defaultPrevented) return
+      if (!isKeyboardActivatableElement(e.target)) return
       if (!el.contains(e.target as Node)) return
       // Column resizer uses Enter to toggle keyboard resize mode (ArrowLeft/Right to resize). Do not convert to click.
       if (isColumnResizerElement(e.target)) return
@@ -39,9 +42,25 @@ export function ResizableTableContainer({
       target.click()
     }
 
-    el.addEventListener('keydown', handleKeyDown, true)
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.key !== ' ' && e.key !== 'Enter') return
+      if (e.defaultPrevented) return
+      if (!isKeyboardActivatableElement(e.target)) return
+      if (!el.contains(e.target as Node)) return
+      if (isColumnResizerElement(e.target)) return
 
-    return () => el.removeEventListener('keydown', handleKeyDown, true)
+      e.preventDefault()
+      e.stopPropagation()
+      e.stopImmediatePropagation()
+    }
+
+    el.addEventListener('keydown', handleKeyDown, true)
+    el.addEventListener('keyup', handleKeyUp, true)
+
+    return () => {
+      el.removeEventListener('keydown', handleKeyDown, true)
+      el.removeEventListener('keyup', handleKeyUp, true)
+    }
   }, [])
 
   return (

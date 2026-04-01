@@ -5,11 +5,16 @@ import { Table as AriaTable, type TableProps as AriaTableProps } from 'react-ari
 
 import type { ResizableTableContainerProps } from './ResizableTableContainer'
 import { ResizableTableContainer } from './ResizableTableContainer'
-import { isColumnResizerElement, isInteractiveElement } from './table-utils'
+import {
+  isColumnResizerElement,
+  isInteractiveElement,
+  isKeyboardActivatableElement,
+} from './table-utils'
 import { TableContext, type TableContextValue, useTableContext } from './TableContext'
 
 export interface TableProps
-  extends Omit<AriaTableProps, 'className'>,
+  extends
+    Omit<AriaTableProps, 'className'>,
     Pick<ResizableTableContainerProps, 'onResizeStart' | 'onResize' | 'onResizeEnd'> {
   className?: string
   onKeyDownCapture?: React.KeyboardEventHandler<Element>
@@ -106,9 +111,67 @@ export const TableRoot = ({ className, onKeyDownCapture, ...props }: TableProps)
     const el = wrapperRef.current
     if (!el) return
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key !== ' ' && e.key !== 'Enter') return
+    const getCellElement = (target: EventTarget | null) => {
+      if (!target || !(target instanceof Element)) return null
+      return target.closest(
+        '[data-spark-component="table-cell"], [role="gridcell"], [role="rowheader"]'
+      ) as HTMLElement | null
+    }
+
+    const focusableSelector = [
+      'button:not([disabled])',
+      '[role="button"]:not([aria-disabled="true"])',
+      '[href]',
+      'input:not([type="hidden"]):not([disabled])',
+      'select:not([disabled])',
+      'textarea:not([disabled])',
+      '[tabindex]:not([tabindex="-1"])',
+    ].join(', ')
+
+    const getFocusableDescendants = (container: HTMLElement) => {
+      return Array.from(container.querySelectorAll<HTMLElement>(focusableSelector)).filter(node => {
+        // Avoid focusing hidden/disabled items; keep it jsdom-friendly.
+        if (node.hasAttribute('disabled')) return false
+        if (node.getAttribute('aria-hidden') === 'true') return false
+        if (node.getAttribute('tabindex') === '-1') return false
+        return true
+      })
+    }
+
+    const handleArrowKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return
+      if (e.defaultPrevented) return
       if (!isInteractiveElement(e.target)) return
+      if (!el.contains(e.target as Node)) return
+      if (isColumnResizerElement(e.target)) return
+
+      const cell = getCellElement(e.target)
+      if (!cell) return
+
+      const focusables = getFocusableDescendants(cell)
+      if (focusables.length < 2) return
+
+      const currentTarget =
+        e.target instanceof Element
+          ? (e.target.closest(focusableSelector) as HTMLElement | null)
+          : null
+      const currentIndex = currentTarget ? focusables.indexOf(currentTarget) : -1
+      if (currentIndex === -1) return
+
+      const nextIndex = e.key === 'ArrowRight' ? currentIndex + 1 : currentIndex - 1
+      const next = focusables[nextIndex]
+      if (!next) return
+
+      e.preventDefault()
+      e.stopPropagation()
+      e.stopImmediatePropagation()
+      queueMicrotask(() => next.focus())
+    }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.defaultPrevented) return
+      if (e.key !== ' ' && e.key !== 'Enter') return
+      if (!isKeyboardActivatableElement(e.target)) return
       if (!el.contains(e.target as Node)) return
       // Column resizer uses Enter to toggle keyboard resize mode (ArrowLeft/Right to resize). Do not convert to click.
       if (isColumnResizerElement(e.target)) return
@@ -119,9 +182,30 @@ export const TableRoot = ({ className, onKeyDownCapture, ...props }: TableProps)
       ;(e.target as HTMLElement).click()
     }
 
-    el.addEventListener('keydown', handleKeyDown, true)
+    const handleKeyUp = (e: KeyboardEvent) => {
+      // Prevent "double toggle" for controls that handle activation on keyup (e.g. Space),
+      // since we already synthesized a click on keydown.
+      if (e.key !== ' ' && e.key !== 'Enter') return
+      if (e.defaultPrevented) return
+      if (!isKeyboardActivatableElement(e.target)) return
+      if (!el.contains(e.target as Node)) return
+      if (isColumnResizerElement(e.target)) return
 
-    return () => el.removeEventListener('keydown', handleKeyDown, true)
+      e.preventDefault()
+      e.stopPropagation()
+      e.stopImmediatePropagation()
+    }
+
+    const doc = el.ownerDocument
+    doc.addEventListener('keydown', handleArrowKeyDown, true)
+    el.addEventListener('keydown', handleKeyDown, true)
+    el.addEventListener('keyup', handleKeyUp, true)
+
+    return () => {
+      doc.removeEventListener('keydown', handleArrowKeyDown, true)
+      el.removeEventListener('keydown', handleKeyDown, true)
+      el.removeEventListener('keyup', handleKeyUp, true)
+    }
   }, [])
 
   return (
