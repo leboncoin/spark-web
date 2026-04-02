@@ -1,15 +1,18 @@
+import type { Selection } from '@react-types/shared'
+import type { SortDescriptor } from '@react-types/shared'
+import type { GridNode } from '@react-types/grid'
 import { createContext, useContext } from 'react'
-import type { Selection } from 'react-aria-components'
-import type { SortDescriptor } from 'react-aria-components'
 
 import type { ResizableTableContainerProps } from './ResizableTableContainer'
 
 export interface TableResizableContextValue {
   isResizable: boolean
+  tableWidth: number
 }
 
 export const TableResizableContext = createContext<TableResizableContextValue>({
   isResizable: false,
+  tableWidth: 0,
 })
 
 export function useTableResizableContext() {
@@ -17,8 +20,10 @@ export function useTableResizableContext() {
 }
 
 /** Values provided by Table (root) and consumed by Table.Grid and Table.BulkBar. */
-export interface TableContextValue
-  extends Pick<ResizableTableContainerProps, 'onResizeStart' | 'onResize' | 'onResizeEnd'> {
+export interface TableContextValue {
+  onResizeStart?: ResizableTableContainerProps['onResizeStart']
+  onResize?: ResizableTableContainerProps['onResize']
+  onResizeEnd?: ResizableTableContainerProps['onResizeEnd']
   // Selection (optional when table has no selection)
   selectionMode?: 'none' | 'single' | 'multiple'
   selectionBehavior?: 'toggle' | 'replace'
@@ -33,6 +38,8 @@ export interface TableContextValue
   onClearSelection: () => void
   // Layout / grid
   allowsResizing?: boolean
+  /** `aria-label` for column resizer control. */
+  resizeColumnAriaLabel?: string | ((column: GridNode<unknown>) => string)
   maxHeight?: number | string
   onKeyDownCapture?: React.KeyboardEventHandler<Element>
   sortDescriptor?: SortDescriptor

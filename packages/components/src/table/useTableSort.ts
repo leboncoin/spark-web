@@ -1,5 +1,5 @@
+import type { SortDescriptor } from '@react-types/shared'
 import { useMemo, useState } from 'react'
-import type { SortDescriptor } from 'react-aria-components'
 
 export interface UseTableSortOptions<T extends object> {
   /** Initial sort column and direction. */

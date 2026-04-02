@@ -31,6 +31,7 @@ export const Trigger = ({
     readOnly,
     state,
     setLastInteractionType,
+    isOpen,
   } = useDropdownContext()
 
   const [WrapperComponent, wrapperProps] = hasPopover
@@ -39,8 +40,12 @@ export const Trigger = ({
 
   const { ref: downshiftRef, ...downshiftTriggerProps } = getToggleButtonProps({
     ...getDropdownProps(),
-    onKeyDown: () => {
+    onKeyDown: e => {
       setLastInteractionType('keyboard')
+      // Escape: bubble-phase parents; table grid defers in capture via table-keyboard.
+      if (e.key === 'Escape' && isOpen) {
+        e.stopPropagation()
+      }
     },
   })
 

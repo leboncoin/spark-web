@@ -1,5 +1,5 @@
+import type { Key, Selection } from '@react-types/shared'
 import { useEffect, useMemo, useState } from 'react'
-import type { Key, Selection } from 'react-aria-components'
 
 export interface UseTablePaginationOptions<T> {
   /** Number of items per page. */

@@ -4,13 +4,25 @@ export const columnStyles = cva(
   [
     'h-sz-64 min-w-sz-64',
     'relative group/column first:rounded-l-xl last:rounded-r-xl bg-neutral-container',
-    'px-lg py-sm text-left outline-none box-border',
+    'pl-lg pr-lg py-sm text-left outline-none box-border',
     'cursor-default',
     'data-focus-visible:u-outline data-focus-visible:-outline-offset-2',
   ],
   {
-    variants: {},
-    defaultVariants: {},
+    variants: {
+      /** Selection-mode header checkbox column (first column). */
+      checkbox: {
+        true: ['w-sz-64 min-w-sz-64 max-w-sz-64', 'px-0 align-middle'],
+      },
+      /** When a header resizer is present, reserve more space on the right. */
+      resizable: {
+        true: ['pr-xl'],
+      },
+    },
+    defaultVariants: {
+      checkbox: false,
+      resizable: false,
+    },
   }
 )
 

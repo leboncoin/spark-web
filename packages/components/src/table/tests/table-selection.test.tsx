@@ -172,4 +172,42 @@ describe('Table row selection', () => {
     await user.click(firstRowCheckbox!)
     expect(onSelectionChange).toHaveBeenCalled()
   })
+
+  it('should toggle select all from the header checkbox with Space and Enter', async () => {
+    const user = userEvent.setup()
+    const onSelectionChange = vi.fn()
+
+    render(
+      <Table
+        selectionMode="multiple"
+        selectedKeys={new Set()}
+        onSelectionChange={onSelectionChange}
+      >
+        <Table.Grid aria-label="Select all keyboard">
+          <Table.Header>
+            <Table.Column id="name" label="Name" isRowHeader />
+            <Table.Column id="type" label="Type" />
+          </Table.Header>
+          <Table.Body items={rows}>
+            {item => (
+              <Table.Row id={item.id}>
+                <Table.Cell>{item.name}</Table.Cell>
+                <Table.Cell>{item.type}</Table.Cell>
+              </Table.Row>
+            )}
+          </Table.Body>
+        </Table.Grid>
+      </Table>
+    )
+
+    const selectAllCheckbox = screen.getByRole('checkbox', { name: 'Select All' })
+    selectAllCheckbox.focus()
+    await user.keyboard(' ')
+    expect(onSelectionChange).toHaveBeenCalled()
+
+    onSelectionChange.mockClear()
+    selectAllCheckbox.focus()
+    await user.keyboard('{Enter}')
+    expect(onSelectionChange).toHaveBeenCalled()
+  })
 })

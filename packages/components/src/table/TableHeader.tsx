@@ -1,61 +1,20 @@
-import { cx } from 'class-variance-authority'
-import type { ReactNode } from 'react'
-import {
-  Collection,
-  Column as AriaColumn,
-  TableHeader as AriaTableHeader,
-  type TableHeaderProps as AriaTableHeaderProps,
-  useTableOptions,
-} from 'react-aria-components'
+import type { TableHeaderProps as StatelyTableHeaderProps } from '@react-stately/table'
+import { TableHeader as StatelyTableHeader } from '@react-stately/table'
 
-import { columnStyles } from './Table.styles'
-import { TableHeaderSelectionCheckbox } from './TableHeaderSelectionCheckbox'
-
-export interface TableHeaderProps<T extends object = object>
-  extends Omit<AriaTableHeaderProps<T>, 'className'> {
+export interface TableHeaderProps<T extends object = object> extends StatelyTableHeaderProps<T> {
+  /**
+   * Spark-only props. They are stored on the collection node and used by the renderer.
+   * (No DOM is rendered by `@react-stately/table` collection components.)
+   */
   className?: string
-  /** When true (default), the header row is sticky with z-raised and top-0. */
   sticky?: boolean
 }
 
-export function TableHeader<T extends object>({
-  className,
-  columns,
-  children,
-  sticky = true,
-  ...props
-}: TableHeaderProps<T>) {
-  const { selectionBehavior, selectionMode, allowsDragging } = useTableOptions()
-
-  return (
-    <AriaTableHeader
-      data-spark-component="table-header"
-      className={cx(
-        [
-          sticky && 'z-raised sticky top-0',
-          'text-on-neutral-container text-body-1 font-semibold',
-          'after:pt-md after:block after:size-0',
-        ],
-        className
-      )}
-      columns={columns}
-      {...props}
-    >
-      {allowsDragging && (
-        <AriaColumn width={20} minWidth={20} className="w-sz-20 min-w-sz-20 box-border" />
-      )}
-      {selectionBehavior === 'toggle' && (
-        <AriaColumn width={56} minWidth={56} className={cx(columnStyles())}>
-          {selectionMode === 'multiple' && <TableHeaderSelectionCheckbox />}
-        </AriaColumn>
-      )}
-      {columns != null ? (
-        <Collection items={columns}>{children}</Collection>
-      ) : (
-        (children as ReactNode)
-      )}
-    </AriaTableHeader>
-  )
+export function TableHeader<T extends object>(props: TableHeaderProps<T>) {
+  return <StatelyTableHeader {...(props as unknown as StatelyTableHeaderProps<T>)} />
 }
 
 TableHeader.displayName = 'Table.Header'
+
+// Forward React Stately collection static for useTableState.
+;(TableHeader as any).getCollectionNode = (StatelyTableHeader as any).getCollectionNode

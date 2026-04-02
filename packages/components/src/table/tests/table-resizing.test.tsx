@@ -50,6 +50,27 @@ describe('Table column resizing', () => {
     expect(nameHeader).toBeInTheDocument()
   })
 
+  it('should not render a resizer on the last column (no trailing boundary to resize against)', () => {
+    const { container } = render(
+      <Table>
+        <Table.Grid aria-label="Last not resizable">
+          <Table.Header>
+            <Table.Column label="Name" allowsResizing />
+            <Table.Column label="Type" allowsResizing />
+          </Table.Header>
+          <Table.Body>
+            <Table.Row id="r1">
+              <Table.Cell>A</Table.Cell>
+              <Table.Cell>B</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Grid>
+      </Table>
+    )
+
+    expect(container.querySelectorAll('.cursor-col-resize')).toHaveLength(1)
+  })
+
   it('should not render column resizer when column has allowsResizing false', () => {
     const { container } = render(
       <Table>

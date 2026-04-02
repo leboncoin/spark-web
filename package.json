@@ -83,6 +83,7 @@
     "copy-to-clipboard": "3.3.3",
     "d3": "^7.9.0",
     "deepmerge": "4.3.1",
+    "figma": "^0.0.1",
     "husky": "9.1.7",
     "jsdom": "27.1.0",
     "lint-staged": "16.2.6",

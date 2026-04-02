@@ -16,9 +16,10 @@ function SelectableLinkTable({
 }) {
   const [selectedKeys, setSelectedKeys] = useState<SelectionKeys>(new Set())
 
+  // Hash-only hrefs keep jsdom on the same document (external URLs log navigation warnings).
   const rows = [
-    { id: 'row-1', name: 'Row one', type: 'Link row', href: 'https://example.com/one' },
-    { id: 'row-2', name: 'Row two', type: 'Link row', href: 'https://example.com/two' },
+    { id: 'row-1', name: 'Row one', type: 'Link row', href: '#row-1' },
+    { id: 'row-2', name: 'Row two', type: 'Link row', href: '#row-2' },
   ]
 
   const isSelected = (id: string) =>
@@ -67,13 +68,13 @@ function StaticLinkTable({ onRowAction }: { onRowAction: (id: string) => void })
       id: 'row-1',
       name: 'Alpha',
       description: 'Static content row',
-      href: 'https://example.com/alpha',
+      href: '#alpha',
     },
     {
       id: 'row-2',
       name: 'Beta',
       description: 'Static content row',
-      href: 'https://example.com/beta',
+      href: '#beta',
     },
   ]
 
@@ -123,7 +124,7 @@ describe('Table rows as links (selectable)', () => {
     expect(keys === 'all' || (keys instanceof Set && keys.has('row-1'))).toBe(true)
   })
 
-  it('Space on a row toggles selection without triggering the link 22', async () => {
+  it('Enter respects selection: no link while selected; link after row is cleared', async () => {
     const user = userEvent.setup()
     const onRowAction = vi.fn()
     const onSelectionChange = vi.fn()
