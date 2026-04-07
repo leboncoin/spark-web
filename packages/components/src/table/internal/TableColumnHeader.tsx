@@ -1,3 +1,4 @@
+// oxlint-disable max-lines-per-function
 import type { TableState } from '@react-stately/table'
 import type { GridNode } from '@react-types/grid'
 import { ArrowDown } from '@spark-ui/icons/ArrowDown'
@@ -10,19 +11,23 @@ import { mergeProps, useFocusRing, useTableColumnHeader } from 'react-aria'
 import { Icon } from '../../icon'
 import { columnHeaderContentStyles, columnStyles } from './Table.styles'
 import { TableColumnResizer } from './TableColumnResizer'
-import { TableHeaderSelectionCheckbox } from './TableHeaderSelectionCheckbox'
 import { useTableContext } from './TableContext'
+import { TableHeaderSelectionCheckbox } from './TableHeaderSelectionCheckbox'
+
+const stickyHeaderCellClassName = cx('sticky top-0 z-sticky')
 
 export function TableColumnHeader({
   column,
   state,
   resizeState,
+  stickyHeader,
   resizeCallbacks,
   isLastColumnInRow = false,
 }: {
   column: GridNode<unknown>
   state: TableState<unknown>
   resizeState: any
+  stickyHeader?: boolean
   resizeCallbacks: {
     onResizeStart?: (widths: any) => void
     onResize?: (widths: any) => void
@@ -35,8 +40,7 @@ export function TableColumnHeader({
   const { resizeColumnAriaLabel } = useTableContext()
   const { columnHeaderProps } = useTableColumnHeader({ node: column }, state, ref)
   const { isFocusVisible, focusProps } = useFocusRing()
-  const allowsResizing =
-    (column.props as any)?.allowsResizing !== false && !isLastColumnInRow
+  const allowsResizing = (column.props as any)?.allowsResizing !== false && !isLastColumnInRow
   const columnWidth = resizeState?.columnWidths?.get?.(column.key)
   const hasResizer = Boolean(resizeState && allowsResizing)
 
@@ -46,7 +50,7 @@ export function TableColumnHeader({
         {...columnHeaderProps}
         ref={ref}
         role="columnheader"
-        className={columnStyles({ checkbox: true })}
+        className={cx(columnStyles({ checkbox: true }), stickyHeader && stickyHeaderCellClassName)}
         data-spark-component="table-column"
         data-table-selection-columnheader
         data-focus-visible={isFocusVisible || undefined}
@@ -78,7 +82,10 @@ export function TableColumnHeader({
       {...mergeProps(columnHeaderProps, focusProps)}
       ref={ref}
       role="columnheader"
-      className={cx(columnStyles({ resizable: hasResizer }))}
+      className={cx(
+        columnStyles({ resizable: hasResizer }),
+        stickyHeader && stickyHeaderCellClassName
+      )}
       style={columnWidth ? { width: columnWidth } : undefined}
       data-spark-component="table-column"
       data-focus-visible={isFocusVisible || undefined}

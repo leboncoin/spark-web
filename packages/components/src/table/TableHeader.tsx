@@ -7,7 +7,6 @@ export interface TableHeaderProps<T extends object = object> extends StatelyTabl
    * (No DOM is rendered by `@react-stately/table` collection components.)
    */
   className?: string
-  sticky?: boolean
 }
 
 export function TableHeader<T extends object>(props: TableHeaderProps<T>) {

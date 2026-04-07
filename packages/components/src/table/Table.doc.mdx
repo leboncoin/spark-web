@@ -64,7 +64,7 @@ import {
 
 ### Table
 
-Root wrapper. Renders a flex column container (`gap-md flex flex-col`) for `Table.BulkBar`, `Table.Grid`, and optional siblings like `Pagination`. Pass selection props (`selectionMode`, `selectedKeys`, `onSelectionChange`), sort (`sortDescriptor`, `onSortChange`), layout (`allowsResizing`, `maxHeight`, resize callbacks), and BulkBar options (`totalCount`, `hasMultiplePages`, `onSelectAll`) on the root so they are provided via context to `Table.Grid` and `Table.BulkBar`. Accepts `className` and `children`.
+Root wrapper. Renders a flex column container (`gap-md flex flex-col`) for `Table.BulkBar`, `Table.Grid`, and optional siblings like `Pagination`. Pass selection props (`selectionMode`, `selectedKeys`, `onSelectionChange`), sort (`sortDescriptor`, `onSortChange`), layout (`allowsResizing`, `maxHeight`, `stickyHeader`, resize callbacks), and BulkBar options (`totalCount`, `hasMultiplePages`, `onSelectAll`) on the root so they are provided via context to `Table.Grid` and `Table.BulkBar`. Accepts `className` and `children`.
 
 <ArgTypes of={Table} />
 
@@ -181,6 +181,14 @@ Additionally, you can pass `onAction` to `Table.Row` to handle the action when t
 Column resizing is enabled by default. Set `allowsResizing={false}` on `Table` (root) to disable it entirely, or `allowsResizing={false}` on individual `Table.Column` to hide the resizer for that column. Pass `onResizeStart`, `onResize`, or `onResizeEnd` on `Table` to react to resize events.
 
 <Canvas of={stories.WithResizingDisabled} />
+
+### Sticky header
+
+Set `stickyHeader` on `Table` (root) so header cells use `position: sticky` inside the grid scroll container. Pair it with **`maxHeight`** (or another height constraint on the scroll area) so the body scrolls; otherwise there is no overflow and the sticky behavior has no visible effect.
+
+The example below uses plain text cells only so vertical scrolling illustrates the header staying visible.
+
+<Canvas of={stories.StickyHeader} />
 
 ### Custom interactive elements
 

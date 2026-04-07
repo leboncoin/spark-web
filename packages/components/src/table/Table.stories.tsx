@@ -41,6 +41,11 @@ export const Default: StoryFn = () => {
     { id: 'row-3', name: 'bootmgr', type: 'System file', dateModified: '11/20/2010' },
     { id: 'row-4', name: 'log.txt', type: 'Text Document', dateModified: '1/18/2016' },
     { id: 'row-5', name: 'Documents', type: 'File folder', dateModified: '3/12/2022' },
+    { id: 'row-6', name: 'Pictures', type: 'File folder', dateModified: '8/3/2023' },
+    { id: 'row-7', name: 'readme.md', type: 'Markdown', dateModified: '2/14/2024' },
+    { id: 'row-8', name: 'config.json', type: 'JSON', dateModified: '5/1/2024' },
+    { id: 'row-9', name: 'backup.zip', type: 'Compressed folder', dateModified: '9/30/2024' },
+    { id: 'row-10', name: 'notes.txt', type: 'Text Document', dateModified: '1/2/2025' },
   ]
 
   const [selected, setSelected] = useState<Set<string> | 'all'>(new Set())
@@ -109,6 +114,36 @@ export const Default: StoryFn = () => {
                   </Dropdown>
                 </div>
               </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table.Grid>
+    </Table>
+  )
+}
+
+export const StickyHeader: StoryFn = () => {
+  const rows = Array.from({ length: 24 }, (_, i) => ({
+    id: `row-${i + 1}`,
+    sku: `SKU-${1000 + i}`,
+    product: `Product ${i + 1}`,
+    quantity: String((i % 9) + 1),
+  }))
+
+  return (
+    <Table resizeColumnAriaLabel="Resize column" maxHeight={280} stickyHeader>
+      <Table.Grid aria-label="Inventory (sticky header)" className="max-w-sz-640">
+        <Table.Header>
+          <Table.Column id="sku" label="SKU" isRowHeader />
+          <Table.Column id="product" label="Product" />
+          <Table.Column id="quantity" label="Qty" minWidth={80} />
+        </Table.Header>
+        <Table.Body>
+          {rows.map(row => (
+            <Table.Row key={row.id} id={row.id}>
+              <Table.Cell>{row.sku}</Table.Cell>
+              <Table.Cell>{row.product}</Table.Cell>
+              <Table.Cell>{row.quantity}</Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

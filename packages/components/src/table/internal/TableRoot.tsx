@@ -8,8 +8,8 @@ import type { ReactNode } from 'react'
 import { useRef } from 'react'
 import { mergeProps, useTable, useTableRowGroup } from 'react-aria'
 
-import { tableBodySpacerRowStyles } from './Table.styles'
 import { useTableKeyboardModes } from './table-keyboard'
+import { tableBodySpacerRowStyles } from './Table.styles'
 import { TableBodyRowRenderer } from './TableBodyRowRenderer'
 import { useTableResizableContext } from './TableContext'
 import { TableHeaderRowRenderer } from './TableHeaderRowRenderer'
@@ -18,8 +18,14 @@ import { TableKeyboardModeContext } from './TableKeyboardModeContext'
 export function TableRoot({
   className,
   children,
+  stickyHeader: stickyHeaderProp,
   ...props
-}: AriaTableProps<object> & { className?: string; children?: AriaTableProps<object>['children'] }) {
+}: AriaTableProps<object> & {
+  className?: string
+  stickyHeader?: boolean
+  children?: AriaTableProps<object>['children']
+}) {
+  const stickyHeader = Boolean(stickyHeaderProp)
   const tableRef = useRef<HTMLTableElement>(null)
   const resizable = useTableResizableContext()
   const shouldUseFixedLayout = (props as any).selectionMode === 'multiple'
@@ -84,6 +90,7 @@ export function TableRoot({
               item={headerRow}
               state={state as TableState<unknown>}
               resizeState={resizeState as any}
+              stickyHeader={stickyHeader}
               resizeCallbacks={{
                 onResizeStart: (props as any).onResizeStart,
                 onResize: (props as any).onResize,
@@ -105,9 +112,7 @@ export function TableRoot({
           ) : null}
           {bodyRows.length === 0 && emptyStateRenderer ? (
             <tr data-empty>
-              <td colSpan={columnCount}>
-                {emptyStateRenderer({ isEmpty: true })}
-              </td>
+              <td colSpan={columnCount}>{emptyStateRenderer({ isEmpty: true })}</td>
             </tr>
           ) : null}
           {bodyRows.map(row => (

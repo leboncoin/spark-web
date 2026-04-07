@@ -1,6 +1,6 @@
+import type { GridNode } from '@react-types/grid'
 import type { Selection } from '@react-types/shared'
 import type { SortDescriptor } from '@react-types/shared'
-import type { GridNode } from '@react-types/grid'
 import { createContext, useContext } from 'react'
 
 import type { ResizableTableContainerProps } from './ResizableTableContainer'
@@ -41,6 +41,7 @@ export interface TableContextValue {
   /** `aria-label` for column resizer control. */
   resizeColumnAriaLabel?: string | ((column: GridNode<unknown>) => string)
   maxHeight?: number | string
+  stickyHeader?: boolean
   onKeyDownCapture?: React.KeyboardEventHandler<Element>
   sortDescriptor?: SortDescriptor
   onSortChange?: (descriptor: SortDescriptor) => void
