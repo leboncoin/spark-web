@@ -26,6 +26,7 @@ export function TableGrid({
   const {
     allowsResizing = true,
     maxHeight,
+    stickyHeader,
     onResizeStart,
     onResize,
     onResizeEnd,
@@ -48,6 +49,7 @@ export function TableGrid({
     onSortChange,
     onKeyDownCapture,
     className,
+    stickyHeader,
   }
 
   // React Aria's Table expects a tuple of [Header, Body] children.

@@ -1,5 +1,5 @@
-import type { Key, SelectionBehavior } from '@react-types/shared'
 import type { GridNode } from '@react-types/grid'
+import type { Key, SelectionBehavior } from '@react-types/shared'
 import type { ColumnSize } from '@react-types/table'
 import type { TableProps as AriaTableProps } from '@react-types/table'
 import { cx } from 'class-variance-authority'
@@ -20,6 +20,8 @@ export interface TableProps extends Omit<AriaTableProps<object>, 'children' | 'c
   onResizeEnd?: (widths: Map<Key, ColumnSize>) => void
   /** Max height of the scroll container (number in px or CSS value). Applied so vertical and horizontal scrollbars share the same container. */
   maxHeight?: number | string
+  /** When true, header cells use `position: sticky` inside the scroll container (pair with `maxHeight`). */
+  stickyHeader?: boolean
   /** For BulkBar: total number of items (e.g. for "Select all X items"). */
   totalCount?: number
   /** When true, BulkBar shows "Clear all" and "Select all" buttons. */
@@ -50,6 +52,7 @@ export function TableRootWrapper({
   allowsResizing = true,
   resizeColumnAriaLabel,
   maxHeight,
+  stickyHeader,
   onResizeStart,
   onResize,
   onResizeEnd,
@@ -81,6 +84,7 @@ export function TableRootWrapper({
     allowsResizing,
     resizeColumnAriaLabel,
     maxHeight,
+    stickyHeader,
     onResizeStart,
     onResize,
     onResizeEnd,

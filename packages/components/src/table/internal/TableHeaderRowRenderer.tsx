@@ -9,11 +9,13 @@ export function TableHeaderRowRenderer({
   item,
   state,
   resizeState,
+  stickyHeader,
   resizeCallbacks,
 }: {
   item: GridNode<unknown>
   state: TableState<unknown>
   resizeState: any
+  stickyHeader?: boolean
   resizeCallbacks: {
     onResizeStart?: (widths: any) => void
     onResize?: (widths: any) => void
@@ -31,6 +33,7 @@ export function TableHeaderRowRenderer({
           column={column}
           state={state}
           resizeState={resizeState}
+          stickyHeader={stickyHeader}
           resizeCallbacks={resizeCallbacks}
           isLastColumnInRow={index === columns.length - 1}
         />
