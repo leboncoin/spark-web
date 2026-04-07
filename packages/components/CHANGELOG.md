@@ -1,3 +1,17 @@
+## 17.4.0 (2026-04-07)
+
+### 🚀 Features
+
+- **components:** table sticky header ([b8c1ea418](https://github.com/leboncoin/spark-web/commit/b8c1ea418))
+
+### 🎨 Styles
+
+- **components:** micro animation for keyboard column reisizing ([e4ba07427](https://github.com/leboncoin/spark-web/commit/e4ba07427))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.3.2 (2026-04-07)
 
 ### 🩹 Fixes
