@@ -1,3 +1,17 @@
+## 17.3.2 (2026-04-07)
+
+### 🩹 Fixes
+
+- **components:** fix keyboard navigation on interactive elements inside cells ([f4a71e6d4](https://github.com/leboncoin/spark-web/commit/f4a71e6d4))
+
+### 💅 Refactors
+
+- **components:** migrating from react-aria-component to react-stately ([84d6f02da](https://github.com/leboncoin/spark-web/commit/84d6f02da))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.3.1 (2026-03-31)
 
 ### 🎨 Styles

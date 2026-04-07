@@ -1,3 +1,13 @@
+## 17.3.2 (2026-04-07)
+
+### 💅 Refactors
+
+- **components:** migrating from react-aria-component to react-stately ([84d6f02da](https://github.com/leboncoin/spark-web/commit/84d6f02da))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.3.1 (2026-03-31)
 
 This was a version bump only for @spark-ui/icons to align it with other projects, there were no code changes.
