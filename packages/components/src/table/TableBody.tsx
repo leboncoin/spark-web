@@ -1,38 +1,20 @@
-import { cx } from 'class-variance-authority'
-import {
-  TableBody as AriaTableBody,
-  type TableBodyProps as AriaTableBodyProps,
-} from 'react-aria-components'
+import type { TableBodyProps as StatelyTableBodyProps } from '@react-stately/table'
+import { TableBody as StatelyTableBody } from '@react-stately/table'
+import type { ReactNode } from 'react'
 
-import { tableBodyStyles } from './Table.styles'
-
-export interface TableBodyProps<T extends object = object>
-  extends Omit<AriaTableBodyProps<T>, 'className'> {
+export interface TableBodyProps<T extends object = object> extends StatelyTableBodyProps<T> {
   className?: string
+  /** Spark-only: used to re-render body when external deps change (Storybook/demo convenience). */
+  dependencies?: unknown[]
+  /** Spark-only: empty state renderer (handled by Spark Table renderer). */
+  renderEmptyState?: () => ReactNode
 }
 
-export function TableBody<T extends object>({
-  className,
-  renderEmptyState,
-  ...props
-}: TableBodyProps<T>) {
-  const wrappedRenderEmptyState: AriaTableBodyProps<T>['renderEmptyState'] =
-    renderEmptyState != null
-      ? renderProps => (
-          <div data-spark-component="table-empty" className="p-lg">
-            {renderEmptyState(renderProps)}
-          </div>
-        )
-      : undefined
-
-  return (
-    <AriaTableBody
-      data-spark-component="table-body"
-      className={cx(tableBodyStyles(), className)}
-      renderEmptyState={wrappedRenderEmptyState}
-      {...props}
-    />
-  )
+export function TableBody<T extends object>(props: TableBodyProps<T>) {
+  return <StatelyTableBody {...(props as unknown as StatelyTableBodyProps<T>)} />
 }
 
 TableBody.displayName = 'Table.Body'
+
+// Forward React Stately collection static for useTableState.
+;(TableBody as any).getCollectionNode = (StatelyTableBody as any).getCollectionNode

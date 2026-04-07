@@ -74,7 +74,11 @@ describe('Table rendering and structure', () => {
             <Table.Column label="Col" />
           </Table.Header>
           <Table.Body items={[]} renderEmptyState={() => 'No results found.'}>
-            {() => null}
+            {(_item: never) => (
+              <Table.Row id="noop">
+                <Table.Cell>{null}</Table.Cell>
+              </Table.Row>
+            )}
           </Table.Body>
         </Table.Grid>
       </Table>
@@ -118,10 +122,7 @@ describe('Table rendering and structure', () => {
   it('should accept className on Table.Grid', () => {
     render(
       <Table>
-        <Table.Grid
-          aria-label="Styled"
-          className="custom-table"
-        >
+        <Table.Grid aria-label="Styled" className="custom-table">
           <Table.Header>
             <Table.Column label="Col" />
           </Table.Header>

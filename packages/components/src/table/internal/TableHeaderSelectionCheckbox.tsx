@@ -1,8 +1,8 @@
+import { useTableSelectAllCheckbox } from '@react-aria/table'
+import type { TableState } from '@react-stately/table'
 import type { Key } from '@react-types/shared'
-import { useContext } from 'react'
-import { TableStateContext } from 'react-aria-components'
+import type { KeyboardEvent } from 'react'
 
-import { Checkbox } from '../checkbox'
 import { TableSelectionCheckbox } from './TableSelectionCheckbox'
 
 /**
@@ -11,17 +11,14 @@ import { TableSelectionCheckbox } from './TableSelectionCheckbox'
  * paginated table, the header shows unchecked instead of indeterminate when no
  * visible row is selected.
  *
- * Renders the Checkbox directly and calls selectionManager.toggleSelectAll() so
- * we fully control the displayed state instead of overriding React Aria's context.
+ * Keyboard: the column header `<th>` uses React Aria `usePress` for collection
+ * selection; Space/Enter would bubble from the checkbox and toggle the wrong key.
+ * We stop propagation on those keys and explicitly toggle on Enter (Radix checkbox
+ * prevents default Enter on the button so it does not activate like Space).
  */
-export function TableHeaderSelectionCheckbox() {
-  const tableState = useContext(TableStateContext)
-
-  if (!tableState) {
-    return <TableSelectionCheckbox />
-  }
-
-  const { collection, selectionManager } = tableState
+export function TableHeaderSelectionCheckbox({ state }: { state: TableState<unknown> }) {
+  const { checkboxProps: selectAllAriaProps } = useTableSelectAllCheckbox(state)
+  const { collection, selectionManager } = state
   const selectedKeys = selectionManager.selectedKeys
 
   // Visible row keys: only the body row keys (currently rendered rows).
@@ -44,21 +41,36 @@ export function TableHeaderSelectionCheckbox() {
   const isAllSelected = visibleCount > 0 && selectedVisibleCount === visibleCount
   const isIndeterminate = selectedVisibleCount > 0 && selectedVisibleCount < visibleCount
 
-  const checked = isIndeterminate ? 'indeterminate' : isAllSelected
+  const {
+    isSelected: _ignoredSelected,
+    isIndeterminate: _ignoredIndeterminate,
+    onChange: toggleAllOnChange,
+    ...selectAllRest
+  } = selectAllAriaProps
+
+  const onHeaderSelectAllKeyDown = (e: KeyboardEvent) => {
+    if (e.key === ' ' || e.key === 'Enter') {
+      e.stopPropagation()
+    }
+    if (e.key !== 'Enter') {
+      return
+    }
+    e.preventDefault()
+    if (!selectAllAriaProps.isDisabled) {
+      toggleAllOnChange?.(!isAllSelected)
+    }
+  }
 
   return (
-    <span
-      onClick={e => e.stopPropagation()}
-      onPointerDown={e => e.stopPropagation()}
-      className="flex h-full min-h-full items-center justify-center"
-    >
-      <Checkbox
-        checked={checked}
-        onCheckedChange={() => {
-          selectionManager.toggleSelectAll()
-        }}
-      />
-    </span>
+    <TableSelectionCheckbox
+      checkboxProps={{
+        ...selectAllRest,
+        isSelected: isAllSelected,
+        isIndeterminate,
+        onChange: toggleAllOnChange,
+        onKeyDown: onHeaderSelectAllKeyDown,
+      }}
+    />
   )
 }
 

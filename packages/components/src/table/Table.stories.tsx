@@ -1,15 +1,15 @@
-/* eslint-disable max-lines */
+import type { Selection, SortDescriptor } from '@react-types/shared'
 import { BookmarkOutline, CopyOutline } from '@spark-ui/icons'
-import { EyeOutline } from '@spark-ui/icons/EyeOutline'
 import { InfoOutline } from '@spark-ui/icons/InfoOutline'
 import { PenOutline } from '@spark-ui/icons/PenOutline'
 import { TrashOutline } from '@spark-ui/icons/TrashOutline'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { useMemo, useRef, useState } from 'react'
-import type { SortDescriptor } from 'react-aria-components'
 
 import { Table, useTablePagination, useTableSort } from '.'
 import { Button } from '../button'
+/* eslint-disable max-lines */
+import { Dropdown } from '../dropdown'
 import { Icon } from '../icon'
 import { IconButton } from '../icon-button'
 import { Pagination } from '../pagination'
@@ -41,11 +41,6 @@ export const Default: StoryFn = () => {
     { id: 'row-3', name: 'bootmgr', type: 'System file', dateModified: '11/20/2010' },
     { id: 'row-4', name: 'log.txt', type: 'Text Document', dateModified: '1/18/2016' },
     { id: 'row-5', name: 'Documents', type: 'File folder', dateModified: '3/12/2022' },
-    { id: 'row-6', name: 'Downloads', type: 'File folder', dateModified: '8/5/2023' },
-    { id: 'row-7', name: 'config.ini', type: 'Configuration', dateModified: '9/14/2019' },
-    { id: 'row-8', name: 'README', type: 'Text Document', dateModified: '2/28/2024' },
-    { id: 'row-9', name: 'System32', type: 'File folder', dateModified: '7/1/2020' },
-    { id: 'row-10', name: 'temp', type: 'File folder', dateModified: '12/9/2023' },
   ]
 
   const [selected, setSelected] = useState<Set<string> | 'all'>(new Set())
@@ -55,10 +50,10 @@ export const Default: StoryFn = () => {
 
   return (
     <Table
+      resizeColumnAriaLabel="Resize column"
       selectionMode="multiple"
       selectedKeys={selected}
-      maxHeight={500}
-      onSelectionChange={keys => setSelected(keys as Set<string> | 'all')}
+      onSelectionChange={(keys: Selection) => setSelected(keys as Set<string> | 'all')}
       sortDescriptor={sortDescriptor}
       onSortChange={onSortChange}
     >
@@ -85,7 +80,7 @@ export const Default: StoryFn = () => {
           </Table.Column>
           <Table.Column id="type" label="Type" allowsSorting />
           <Table.Column id="dateModified" label="Date Modified" allowsSorting />
-          <Table.Column id="actions" label="Actions" />
+          <Table.Column id="actions" label="Actions" minWidth={300} />
         </Table.Header>
         <Table.Body>
           {sortedItems.map(item => (
@@ -96,23 +91,22 @@ export const Default: StoryFn = () => {
               <Table.Cell>
                 <div className="gap-md flex flex-wrap">
                   <Switch>Agree</Switch>
-                  <div className="gap-md flex">
-                    <IconButton aria-label="Edit" intent="support" design="outlined" size="sm">
-                      <Icon>
-                        <PenOutline />
-                      </Icon>
-                    </IconButton>
-                    <IconButton aria-label="Delete" intent="support" design="outlined" size="sm">
-                      <Icon>
-                        <TrashOutline />
-                      </Icon>
-                    </IconButton>
-                    <IconButton aria-label="View" intent="support" design="outlined" size="sm">
-                      <Icon>
-                        <EyeOutline />
-                      </Icon>
-                    </IconButton>
-                  </div>
+                  <Dropdown>
+                    <Dropdown.Trigger aria-label="Book">
+                      <Dropdown.Value placeholder="Pick a book" />
+                    </Dropdown.Trigger>
+
+                    <Dropdown.Popover>
+                      <Dropdown.Items>
+                        <Dropdown.Item value="book-1">To Kill a Mockingbird</Dropdown.Item>
+                        <Dropdown.Item value="book-2">War and Peace</Dropdown.Item>
+                        <Dropdown.Item value="book-3">The Idiot</Dropdown.Item>
+                        <Dropdown.Item value="book-4">A Picture of Dorian Gray</Dropdown.Item>
+                        <Dropdown.Item value="book-5">1984</Dropdown.Item>
+                        <Dropdown.Item value="book-6">Pride and Prejudice</Dropdown.Item>
+                      </Dropdown.Items>
+                    </Dropdown.Popover>
+                  </Dropdown>
                 </div>
               </Table.Cell>
             </Table.Row>
@@ -136,7 +130,11 @@ export const Sortable: StoryFn = () => {
   })
 
   return (
-    <Table sortDescriptor={sortDescriptor} onSortChange={onSortChange}>
+    <Table
+      resizeColumnAriaLabel="Resize column"
+      sortDescriptor={sortDescriptor}
+      onSortChange={onSortChange}
+    >
       <Button
         className="self-start"
         onClick={() => setSortDescriptor({ column: 'name', direction: 'ascending' })}
@@ -202,7 +200,11 @@ export const SortableWithCustomComparator: StoryFn = () => {
   })
 
   return (
-    <Table sortDescriptor={sortDescriptor} onSortChange={onSortChange}>
+    <Table
+      resizeColumnAriaLabel="Resize column"
+      sortDescriptor={sortDescriptor}
+      onSortChange={onSortChange}
+    >
       <Table.Grid aria-label="Table with date column (custom comparator)" className="max-w-sz-640">
         <Table.Header>
           <Table.Column id="name" label="Name" isRowHeader allowsSorting />
@@ -231,7 +233,7 @@ export const EmptyState: StoryFn = () => {
   const emptyItems = useMemo(() => [] as RowData[], [])
 
   return (
-    <Table>
+    <Table resizeColumnAriaLabel="Resize column">
       <Table.Grid aria-label="Search results (items + renderEmptyState)" className="max-w-sz-640">
         <Table.Header>
           <Table.Column id="name" label="Name" isRowHeader />
@@ -267,9 +269,10 @@ export const WithSelectionMultiple: StoryFn = () => {
 
   return (
     <Table
+      resizeColumnAriaLabel="Resize column"
       selectionMode="multiple"
       selectedKeys={selected}
-      onSelectionChange={keys => setSelected(keys as Set<string> | 'all')}
+      onSelectionChange={(keys: Selection) => setSelected(keys as Set<string> | 'all')}
     >
       <Table.Grid aria-label="Selectable rows (multiple)" className="max-w-sz-640">
         <Table.Header>
@@ -321,10 +324,11 @@ export const WithSelectionMultipleWithLinks: StoryFn = () => {
   return (
     <>
       <Table
+        resizeColumnAriaLabel="Resize column"
         className="mb-lg"
         selectionMode="multiple"
         selectedKeys={selected}
-        onSelectionChange={keys => setSelected(keys as Set<string> | 'all')}
+        onSelectionChange={(keys: Selection) => setSelected(keys as Set<string> | 'all')}
         selectionBehavior="toggle"
       >
         <Table.Grid aria-label="Selectable rows (multiple) with links" className="max-w-sz-800">
@@ -373,9 +377,10 @@ export const WithSelectionSingle: StoryFn = () => {
 
   return (
     <Table
+      resizeColumnAriaLabel="Resize column"
       selectionMode="single"
       selectedKeys={selected}
-      onSelectionChange={keys => setSelected(keys as Set<string>)}
+      onSelectionChange={(keys: Selection) => setSelected(keys as Set<string>)}
     >
       <Table.Grid aria-label="Selectable rows (single)" className="max-w-sz-640">
         <Table.Header>
@@ -398,7 +403,7 @@ export const WithSelectionSingle: StoryFn = () => {
 }
 
 export const WithResizingDisabled: StoryFn = () => (
-  <Table allowsResizing={false}>
+  <Table resizeColumnAriaLabel="Resize column" allowsResizing={false}>
     <Table.Grid aria-label="Simple table without column resize" className="max-w-sz-640">
       <Table.Header>
         <Table.Column id="name" label="Name" isRowHeader />
@@ -435,7 +440,7 @@ export const CustomInteractiveElements: StoryFn = () => {
   })
 
   return (
-    <Table>
+    <Table resizeColumnAriaLabel="Resize column">
       <Table.Grid aria-label="Table with custom interactive elements" className="max-w-sz-640">
         <Table.Header>
           <Table.Column id="name" label="Name" isRowHeader />
@@ -536,6 +541,7 @@ export const PaginationStory: StoryFn = () => {
 
   return (
     <Table
+      resizeColumnAriaLabel="Resize column"
       className="max-w-sz-800"
       selectionMode="multiple"
       selectedKeys={selectedKeys}
@@ -547,7 +553,7 @@ export const PaginationStory: StoryFn = () => {
       sortDescriptor={sortDescriptor}
       onSortChange={handleSortChange}
     >
-      <Table.BulkBar>
+      <Table.BulkBar aria-label="Table bulk actions">
         <div className="flex flex-col justify-between">
           <Table.BulkBarSelectedCount>{`${selectedKeys.size} selected`}</Table.BulkBarSelectedCount>
           <div className="gap-x-lg flex flex-wrap">
@@ -680,7 +686,7 @@ export const WithItemsAndDependencies: StoryFn = () => {
           <p className="text-body-2 text-on-surface font-semibold">
             With <code>items</code> + <code>dependencies</code>
           </p>
-          <Table>
+          <Table resizeColumnAriaLabel="Resize column">
             <Table.Grid aria-label="Table with items and dependencies" className="max-w-sz-640">
               <Table.Header>
                 <Table.Column id="name" label="Name" isRowHeader />
@@ -703,7 +709,7 @@ export const WithItemsAndDependencies: StoryFn = () => {
           <p className="text-body-2 text-on-surface font-semibold">
             With <code>.map()</code>
           </p>
-          <Table>
+          <Table resizeColumnAriaLabel="Resize column">
             <Table.Grid aria-label="Table with map" className="max-w-sz-640">
               <Table.Header>
                 <Table.Column id="name" label="Name" isRowHeader />

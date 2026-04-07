@@ -46,7 +46,7 @@ export { TableWithSubcomponents as Table }
 
 export { useTableSort } from './useTableSort'
 export { useTablePagination } from './useTablePagination'
-export type { SortDescriptor } from 'react-aria-components'
+export type { SortDescriptor } from '@react-types/shared'
 export type { UseTableSortOptions } from './useTableSort'
 export type { UseTablePaginationOptions, UseTablePaginationResult } from './useTablePagination'
 export { type TableGridProps, type TableProps, type TableRootWrapperProps } from './Table'

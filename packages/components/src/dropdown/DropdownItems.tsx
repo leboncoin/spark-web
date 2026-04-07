@@ -19,6 +19,9 @@ interface ItemsProps {
  *    the "props" object, containing styles computed by Radix
  *    may erroneously contain "pointerEvents = 'none'", while the Dropdown is open,
  *    making it impossible to select a value using a pointer device
+ *
+ * 2. Closed + absolute still grows scrollable overflow of ancestors (e.g. Table.Grid).
+ *    max-h-0 overflow-hidden collapses that box; p-lg only applies when open.
  */
 
 export const Items = ({ children, className, ref: forwardedRef, ...props }: ItemsProps) => {
@@ -52,8 +55,8 @@ export const Items = ({ children, className, ref: forwardedRef, ...props }: Item
         'flex flex-col',
         isOpen
           ? 'pointer-events-auto! block' /* 1 */
-          : 'pointer-events-none invisible absolute opacity-0',
-        hasPopover && 'p-lg'
+          : 'pointer-events-none invisible absolute max-h-0 min-h-0 overflow-hidden opacity-0',
+        hasPopover && isOpen && 'p-lg'
       )}
       {...props}
       {...downshiftMenuProps}

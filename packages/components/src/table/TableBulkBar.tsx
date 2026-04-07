@@ -1,9 +1,9 @@
 import { cx } from 'class-variance-authority'
-import type { ReactNode } from 'react'
+import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 import { createContext, useContext } from 'react'
 
 import { Button, type ButtonProps } from '../button'
-import { useTableContext } from './TableContext'
+import { useTableContext } from './internal/TableContext'
 
 interface TableBulkBarContextValue {
   selectedCount: number
@@ -29,11 +29,17 @@ function useTableBulkBarContext() {
 export interface TableBulkBarProps {
   children: ReactNode
   className?: string
+  /** `aria-label` for the toolbar (for i18n). Overrides `bulkBarAriaLabel` from `Table`. */
+  'aria-label'?: string
+  /**
+   * Additional props passed to the root element.
+   * Note: `role` is fixed to "toolbar".
+   */
+  rootProps?: Omit<ComponentPropsWithoutRef<'div'>, 'children' | 'className' | 'role' | 'aria-label'>
 }
 
-function TableBulkBarRoot({ children, className }: TableBulkBarProps) {
-  const { selectedCount, totalCount, onClearSelection, onSelectAll, hasMultiplePages } =
-    useTableContext()
+function TableBulkBarRoot({ children, className, rootProps, ...props }: TableBulkBarProps) {
+  const { selectedCount, totalCount, onClearSelection, onSelectAll, hasMultiplePages } = useTableContext()
 
   const contextValue: TableBulkBarContextValue = {
     selectedCount,
@@ -47,7 +53,7 @@ function TableBulkBarRoot({ children, className }: TableBulkBarProps) {
     <TableBulkBarContext.Provider value={contextValue}>
       <div
         role="toolbar"
-        aria-label="Table bulk actions"
+        aria-label={props['aria-label'] ?? 'Table bulk actions'}
         data-spark-component="table-bulk-bar"
         className={cx(
           'gap-lg min-h-sz-64 flex w-full flex-wrap items-center justify-between',
@@ -55,6 +61,7 @@ function TableBulkBarRoot({ children, className }: TableBulkBarProps) {
           'bg-support-container text-on-support-container p-lg',
           className
         )}
+        {...rootProps}
       >
         {children}
       </div>

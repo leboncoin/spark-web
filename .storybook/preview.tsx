@@ -1,13 +1,13 @@
-import { DocsContainer, DocsContainerProps } from '@storybook/addon-docs/blocks'
-import { useDarkMode } from '@vueless/storybook-dark-mode'
 import { Icon } from '@spark-ui/components/icon'
 import { WarningOutline } from '@spark-ui/icons/WarningOutline'
+import { DocsContainer, DocsContainerProps } from '@storybook/addon-docs/blocks'
+import { useDarkMode } from '@vueless/storybook-dark-mode'
+import { cx } from 'class-variance-authority'
 import React, { ReactNode, useEffect, useLayoutEffect, useState } from 'react'
 import { INITIAL_VIEWPORTS } from 'storybook/viewport'
-import themes from './themes'
 
 import '../src/tailwind.css'
-import { cx } from 'class-variance-authority'
+import themes from './themes'
 
 /**
  * Wraps stories and syncs Spark theme (data-theme) with Storybook dark mode.
@@ -26,9 +26,12 @@ function ThemeWrapper({ children, viewMode }: { children: ReactNode; viewMode: s
   return (
     <div
       data-theme={theme}
-      className={cx('bg-background text-on-background w-min-content relative', {
-        'p-lg': viewMode === 'docs',
-      })}
+      className={cx(
+        'bg-background text-on-background relative box-border',
+        viewMode === 'docs'
+          ? 'w-full max-w-full min-w-0 p-lg'
+          : 'w-min-content'
+      )}
     >
       {children}
     </div>
