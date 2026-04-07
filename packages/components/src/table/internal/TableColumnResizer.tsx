@@ -38,9 +38,10 @@ export function TableColumnResizer({
         // Visible resize handle on the right edge of the header.
         'cursor-col-resize absolute inset-y-lg right-0 flex w-lg items-center justify-center',
         // Provide a visible affordance.
-        'after:block after:h-full after:w-[2px] after:bg-outline',
+        'after:block after:h-full after:w-[2px] after:bg-outline after:transition-all after:duration-75',
         // Focus visible when the hidden input is focused.
-        'has-[input:focus-visible]:after:u-outline has-[input:focus-visible]:after:outline-offset-2'
+        'has-[input:focus-visible]:after:u-outline has-[input:focus-visible]:after:outline-offset-2',
+        isResizing && 'after:bg-outline-high after:scale-120'
       )}
       data-resizable-direction="both"
       {...resizerProps}

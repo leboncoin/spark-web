@@ -23,6 +23,8 @@ coverage
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
+.cursor/settings.json
+.claude/settings.local.json
 .idea
 .DS_Store
 *.suo
