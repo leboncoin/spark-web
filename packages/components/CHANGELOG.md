@@ -1,3 +1,13 @@
+## 17.4.1 (2026-04-08)
+
+### 🩹 Fixes
+
+- **components:** fix FileUpload preview breaking on duplicate file upload ([30d10b20b](https://github.com/leboncoin/spark-web/commit/30d10b20b))
+
+### ❤️ Thank You
+
+- Christ Kankolongo
+
 ## 17.4.0 (2026-04-07)
 
 ### 🚀 Features
