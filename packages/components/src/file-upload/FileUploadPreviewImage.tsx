@@ -22,18 +22,25 @@ export const PreviewImage = ({
 }: FileUploadPreviewImageProps) => {
   const [imageError, setImageError] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
+  const [imageUrl, setImageUrl] = useState<string | null>(null)
 
   const isImage = file.type.startsWith('image/')
-  const imageUrl = isImage ? URL.createObjectURL(file) : null
 
-  // Clean up the object URL when component unmounts or file changes
+  // Create and clean up the object URL when file changes
   useEffect(() => {
-    return () => {
-      if (imageUrl) {
-        URL.revokeObjectURL(imageUrl)
-      }
+    if (!isImage) {
+      setImageUrl(null)
+      return
     }
-  }, [imageUrl])
+
+    const url = URL.createObjectURL(file)
+    setImageUrl(url)
+
+    // Clean up: only revoke when the file actually changes or component unmounts
+    return () => {
+      URL.revokeObjectURL(url)
+    }
+  }, [file, isImage])
 
   if (!isImage || imageError) {
     return (
