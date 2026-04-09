@@ -1,3 +1,13 @@
+## 17.4.2 (2026-04-09)
+
+### 🩹 Fixes
+
+- **components:** patch updates ([1630fc319](https://github.com/leboncoin/spark-web/commit/1630fc319))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.4.1 (2026-04-08)
 
 ### 🩹 Fixes
