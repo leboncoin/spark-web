@@ -67,6 +67,7 @@ const config: StorybookConfig = {
         },
       },
     },
+    '@storybook/addon-mcp'
   ],
   core: {
     disableTelemetry: true,
