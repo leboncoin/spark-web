@@ -1,3 +1,13 @@
+## 17.5.3 (2026-04-10)
+
+### 🩹 Fixes
+
+- disabled snapshot testing ([fd46e7ebf](https://github.com/leboncoin/spark-web/commit/fd46e7ebf))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.5.2 (2026-04-10)
 
 ### 🩹 Fixes
