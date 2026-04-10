@@ -122,10 +122,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    name: Deployment
-    environment:
-      name: ${{ github.event_name != 'pull_request' && 'Production' || 'Preview'}}
-      url: ${{ steps.deployment.outputs.url }}
+    name: Deploy Storybook
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -135,21 +132,14 @@ jobs:
       - name: Install
         uses: ./.github/composite-actions/install
 
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest --no-save --no-fund --no-audit --no-scripts
-
-      - name: Build Storybook
-        run: npm run storybook:build
-
-      - name: Deploy Storybook to Vercel
-        id: deployment
-        run: |
-          DEPLOYMENT_URL=$(vercel deploy --token $VERCEL_TOKEN --yes --archive=tgz)
-          echo "::set-output name=url::$(echo $DEPLOYMENT_URL)"
-        env:
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-          VERCEL_TOKEN: ${{secrets.VERCEL_TOKEN}}
+      - name: Publish to Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          onlyChanged: true
+          exitZeroOnChanges: true
+          exitOnceUploaded: true
 
   security:
     name: Security

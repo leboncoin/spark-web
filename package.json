@@ -14,6 +14,7 @@
     "release:beta": "node bin/release-beta.js --dry-run",
     "storybook:start": "storybook dev -p 6006",
     "storybook:build": "storybook build -o dist",
+    "build-storybook": "storybook build -o dist",
     "test": "vitest",
     "test:ui": "vitest watch --ui",
     "test:run": "vitest run",
@@ -42,6 +43,7 @@
     "@rollup/plugin-terser": "1.0.0",
     "@spark-ui/components": "*",
     "@spark-ui/theme-utils": "10.0.13",
+    "@storybook/mcp": "^0.6.2",
     "@xyflow/react": "12.10.2"
   },
   "devDependencies": {
@@ -78,6 +80,7 @@
     "babel-loader": "10.0.0",
     "browserslist-to-esbuild": "2.1.1",
     "chalk": "5.6.2",
+    "chromatic": "^16.2.0",
     "class-variance-authority": "0.7.1",
     "commitizen": "4.3.1",
     "concurrently": "9.2.1",

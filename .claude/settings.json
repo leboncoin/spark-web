@@ -1,4 +1,7 @@
 {
+  "enabledPlugins": {
+    "nx@nx-claude-plugins": true
+  },
   "extraKnownMarketplaces": {
     "nx-claude-plugins": {
       "source": {
@@ -6,8 +9,5 @@
         "repo": "nrwl/nx-ai-agents-config"
       }
     }
-  },
-  "enabledPlugins": {
-    "nx@nx-claude-plugins": true
   }
 }
