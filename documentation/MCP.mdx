@@ -23,7 +23,7 @@ Add the Spark UI MCP server to your Claude Code configuration file (`~/.claude/c
 {
   "mcpServers": {
     "spark-storybook": {
-      "url": "https://YOUR_CHROMATIC_URL/mcp",
+      "url": "https://main--69d967830091f4360fd30d22.chromatic.com/mcp",
       "transport": {
         "type": "http"
       }
@@ -123,10 +123,10 @@ Use the `list-all-documentation` tool to see all available component IDs.
 
 ## Architecture
 
-The MCP server is deployed separately from the Storybook static site:
+The MCP server is automatically published alongside the Storybook using Chromatic:
 
-- **Storybook**: https://sparkui.vercel.app (static site)
-- **MCP Server**: https://YOUR_CHROMATIC_URL (serverless API)
+- **Storybook**: https://main--69d967830091f4360fd30d22.chromatic.com
+- **MCP Server**: https://main--69d967830091f4360fd30d22.chromatic.com/mcp
 - **Manifests**: Built into the Storybook deployment
 
 Chromatic automatically:
