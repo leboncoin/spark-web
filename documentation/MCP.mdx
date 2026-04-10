@@ -1,0 +1,138 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta
+  title="MCP"
+  summary="Learn how to connect Claude Code to Spark UI Storybook using the Model Context Protocol (MCP) server."
+/>
+
+# MCP Integration
+
+The Spark UI Storybook is accessible via the **Model Context Protocol (MCP)**, enabling AI assistants like Claude Code to directly query component documentation, props, usage examples, and stories.
+
+## What is MCP?
+
+The Model Context Protocol is a standardized way for AI assistants to access external data sources. Our MCP server exposes the Spark UI design system documentation in a structured format that Claude can understand and use to help you build interfaces.
+
+## Setup
+
+### Add to Claude Code Settings
+
+Add the Spark UI MCP server to your Claude Code configuration file (`~/.claude/config.json` or your IDE settings):
+
+```json
+{
+  "mcpServers": {
+    "spark-storybook": {
+      "url": "https://YOUR_CHROMATIC_URL/mcp",
+      "transport": {
+        "type": "http"
+      }
+    }
+  }
+}
+```
+
+### Verify Connection
+
+Restart Claude Code and verify the connection by asking:
+
+> "Can you list all available Spark UI components?"
+
+Claude will use the MCP server to fetch the component list.
+
+## Available Tools
+
+The MCP server provides three main tools for exploring the Spark UI design system:
+
+### 1. `list-all-documentation`
+
+Lists all available components and documentation entries.
+
+**Example prompts:**
+
+> "List all Spark UI components"
+
+> "Show me all available components in the Spark design system"
+
+> "What components are available in Spark UI?"
+
+**What Claude returns:** A list of all components with their IDs and descriptions.
+
+### 2. `get-documentation`
+
+Retrieves detailed documentation for a specific component, including:
+
+- TypeScript prop definitions
+- The first 3 stories with code examples
+- Story IDs for further exploration
+- Usage patterns and best practices
+
+**Example prompts:**
+
+> "Show me how to use the Button component"
+
+> "What props does the Dialog component accept?"
+
+> "Get documentation for the FormField component"
+
+> "How do I use the Checkbox component?"
+
+**What Claude returns:** Complete component documentation including props, stories, and usage examples.
+
+### 3. `get-documentation-for-story`
+
+Retrieves documentation for a specific story variant of a component. Useful when you need to see more usage examples beyond the default 3 stories.
+
+**Example prompts:**
+
+> "Show me the Primary story for the Button component"
+
+> "Get documentation for the Large variant of Button"
+
+> "Show me the Disabled state of the Input component"
+
+> "What does the Error story of FormField look like?"
+
+**What Claude returns:** Detailed documentation for the specific story variant.
+
+## Usage with Claude Code
+
+Once configured, you can ask Claude Code questions about Spark UI components:
+
+- **"Show me how to use the Button component"** - Claude will fetch the component documentation
+- **"What props does the Dialog component accept?"** - Claude will retrieve type definitions
+- **"Create a form using Spark UI components"** - Claude will use multiple components correctly
+- **"What are the different variants of the Badge component?"** - Claude will explore stories
+
+Claude will automatically use the MCP server to:
+
+- ✅ Avoid hallucinating prop names or types
+- ✅ Use actual prop combinations from stories
+- ✅ Follow design system patterns and conventions
+- ✅ Access the latest documentation without context limits
+
+## Component IDs
+
+All components use the format `components-{name}` in lowercase:
+
+- Button → `components-button`
+- AlertDialog → `components-alertdialog`
+- FormField → `components-formfield`
+
+Use the `list-all-documentation` tool to see all available component IDs.
+
+## Architecture
+
+The MCP server is deployed separately from the Storybook static site:
+
+- **Storybook**: https://sparkui.vercel.app (static site)
+- **MCP Server**: https://YOUR_CHROMATIC_URL (serverless API)
+- **Manifests**: Built into the Storybook deployment
+
+Chromatic automatically:
+
+- Publishes both Storybook and MCP together
+- Keeps manifests in sync
+- Provides preview URLs for pull requests
+
+Built with [`@storybook/mcp`](https://www.npmjs.com/package/@storybook/mcp) and published via [Chromatic](https://www.chromatic.com/).

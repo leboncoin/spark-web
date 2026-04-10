@@ -161,8 +161,20 @@ jobs:
         run: npm run build
       - name: Build Storybook
         run: npm run storybook:build
+      - name: Verify manifests
+        run: |
+          if [ ! -f "dist/manifests/components.json" ]; then
+            echo "❌ Error: components.json manifest not found"
+            exit 1
+          fi
+          if [ ! -f "dist/manifests/docs.json" ]; then
+            echo "❌ Error: docs.json manifest not found"
+            exit 1
+          fi
+          echo "✅ Manifests verified"
+          ls -lh dist/manifests/
       - name: Deploy Storybook to Vercel
-        run: vercel deploy --token $VERCEL_TOKEN --prod --yes --archive=tgz
+        run: vercel deploy --token $VERCEL_TOKEN --prod --yes
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
