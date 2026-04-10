@@ -1,3 +1,13 @@
+## 17.5.0 (2026-04-10)
+
+### 🚀 Features
+
+- add self-hosted Storybook MCP server on Vercel ([bee809339](https://github.com/leboncoin/spark-web/commit/bee809339))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.4.2 (2026-04-09)
 
 ### 🩹 Fixes
