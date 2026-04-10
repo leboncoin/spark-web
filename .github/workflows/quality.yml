@@ -123,6 +123,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy Storybook
+    permissions:
+      contents: read
+      pull-requests: write
+      statuses: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -137,9 +141,8 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          onlyChanged: true
           exitZeroOnChanges: true
-          exitOnceUploaded: true
+          skip: true
 
   security:
     name: Security

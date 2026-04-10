@@ -33,7 +33,8 @@
     "prettify": "npm run lint && npm run format",
     "node:check": "node bin/check-node-version.js",
     "generate": "spark-generate",
-    "codecov:check-yml": "cat .codecov.yml | curl --data-binary @- https://codecov.io/validate"
+    "codecov:check-yml": "cat .codecov.yml | curl --data-binary @- https://codecov.io/validate",
+    "chromatic": "npx chromatic --project-token=chpt_3d05be2de334bac"
   },
   "repository": {
     "type": "git",
