@@ -45,6 +45,9 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
+  chromatic: {
+    disableSnapshot: true,
+  },
   stories: [
     '../documentation/*.mdx',
     '../documentation/**/*.mdx',

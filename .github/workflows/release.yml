@@ -162,4 +162,3 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           exitZeroOnChanges: true
           exitOnceUploaded: true
-          skip: true
