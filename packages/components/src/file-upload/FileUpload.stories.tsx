@@ -275,14 +275,15 @@ export const WithCustomFileRender: StoryFn = () => {
 
 export const WithDefaultFiles: StoryFn = () => {
   // Create sample files for demonstration with different sizes to showcase all units
+  // Note: Reduced file sizes for Chromatic to prevent browser crashes
   const defaultFiles = useMemo(
     () => [
       new File([new ArrayBuffer(500)], 'small.txt', { type: 'text/plain' }), // 500 bytes
       new File([new ArrayBuffer(1024 * 1.5)], 'medium.jpg', { type: 'image/jpeg' }), // 1.5 KB
       new File([new ArrayBuffer(1024 * 1024 * 2.3)], 'large.pdf', { type: 'application/pdf' }), // 2.3 MB
-      new File([new ArrayBuffer(1024 * 1024 * 1024 * 1.8)], 'huge.mp4', {
+      new File([new ArrayBuffer(1024 * 1024 * 50)], 'huge.mp4', {
         type: 'video/mp4',
-      }), // 1.8 GB
+      }), // 50 MB instead of 1.8 GB to avoid Chromatic crashes
     ],
     []
   )
@@ -702,9 +703,9 @@ export const Sortable: StoryFn = () => {
       new File([new ArrayBuffer(500)], 'small.txt', { type: 'text/plain' }), // 500 bytes
       new File([new ArrayBuffer(1024 * 1.5)], 'medium.jpg', { type: 'image/jpeg' }), // 1.5 KB
       new File([new ArrayBuffer(1024 * 1024 * 2.3)], 'large.pdf', { type: 'application/pdf' }), // 2.3 MB
-      new File([new ArrayBuffer(1024 * 1024 * 1024 * 1.8)], 'huge.mp4', {
+      new File([new ArrayBuffer(1024 * 1024 * 50)], 'huge.mp4', {
         type: 'video/mp4',
-      }), // 1.8 GB
+      }), // 50 MB instead of 1.8 GB to avoid Chromatic crashes
     ],
     []
   )

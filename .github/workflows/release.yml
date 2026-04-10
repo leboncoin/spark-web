@@ -153,29 +153,11 @@ jobs:
         uses: actions/checkout@v4
       - name: Install
         uses: ./.github/composite-actions/install
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest --no-save --no-fund --no-audit --no-scripts
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Build Project Artifacts
-        run: npm run build
-      - name: Build Storybook
-        run: npm run storybook:build
-      - name: Verify manifests
-        run: |
-          if [ ! -f "dist/manifests/components.json" ]; then
-            echo "❌ Error: components.json manifest not found"
-            exit 1
-          fi
-          if [ ! -f "dist/manifests/docs.json" ]; then
-            echo "❌ Error: docs.json manifest not found"
-            exit 1
-          fi
-          echo "✅ Manifests verified"
-          ls -lh dist/manifests/
-      - name: Deploy Storybook to Vercel
-        run: vercel deploy --token $VERCEL_TOKEN --prod --yes
-        env:
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-          VERCEL_TOKEN: ${{secrets.VERCEL_TOKEN}}
+      - name: Publish to Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          exitZeroOnChanges: true
+          exitOnceUploaded: true
+          skip: true
