@@ -5,6 +5,9 @@ import {
   SkeletonRectangle as Rectangle,
 } from './SkeletonItem'
 
+/**
+ * A placeholder component that displays a loading state with animated shimmer effect.
+ */
 export const Skeleton: typeof Root & {
   Circle: typeof Circle
   Line: typeof Line

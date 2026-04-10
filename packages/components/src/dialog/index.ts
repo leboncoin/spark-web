@@ -11,6 +11,9 @@ import { Portal } from './DialogPortal'
 import { Title } from './DialogTitle' // aria-labelledby
 import { Trigger } from './DialogTrigger'
 
+/**
+ * A modal window that displays content on top of the main page, requiring user interaction before returning to the main flow.
+ */
 export const Dialog: typeof Root & {
   Trigger: typeof Trigger
   Portal: typeof Portal

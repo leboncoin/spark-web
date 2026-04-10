@@ -9,6 +9,9 @@ import { NextTrigger } from './PaginationNextTrigger'
 import { Pages } from './PaginationPages'
 import { PrevTrigger } from './PaginationPrevTrigger'
 
+/**
+ * A navigation component that allows users to navigate through multiple pages of content.
+ */
 export const Pagination: FC<PaginationProps> & {
   PrevTrigger: typeof PrevTrigger
   NextTrigger: typeof NextTrigger

@@ -11,6 +11,9 @@ import { Value } from './SelectValue'
 
 export { useSelectContext, SelectProvider }
 
+/**
+ * A dropdown component that allows users to choose one option from a list of choices.
+ */
 export const Select: typeof Root & {
   Group: typeof Group
   Item: typeof Item

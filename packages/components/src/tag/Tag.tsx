@@ -27,6 +27,9 @@ export type ValidTagDesignIntent =
 
 export type TagProps = BaseTagProps & ValidTagDesignIntent
 
+/**
+ * A compact element that labels, categorizes, or organizes content using keywords.
+ */
 export const Tag = ({
   design = 'filled',
   intent = 'support',

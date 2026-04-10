@@ -4,6 +4,9 @@ import { ItemContent } from './AccordionItemContent'
 import { ItemHeader } from './AccordionItemHeader'
 import { ItemTrigger } from './AccordionItemTrigger'
 
+/**
+ * A vertically stacked set of expandable sections that allow users to show and hide content.
+ */
 export const Accordion: typeof Root & {
   Item: typeof Item
   ItemHeader: typeof ItemHeader

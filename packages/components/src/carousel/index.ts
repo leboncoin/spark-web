@@ -8,6 +8,9 @@ import { CarouselSlide as Slide } from './CarouselSlide'
 import { CarouselSlides as Slides } from './CarouselSlides'
 import { CarouselViewport as Viewport } from './CarouselViewport'
 
+/**
+ * A slideshow component that displays a series of content items in a scrollable container.
+ */
 export const Carousel: typeof Root & {
   Controls: typeof Controls
   NextButton: typeof NextButton

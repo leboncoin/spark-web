@@ -9,6 +9,9 @@ interface PortalProps {
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * A utility component that renders content into a different part of the DOM tree, typically outside the main hierarchy.
+ */
 export const Portal = (props: PropsWithChildren<PortalProps>) => {
   return <RadixPortal.Portal {...props} />
 }

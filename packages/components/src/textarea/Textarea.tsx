@@ -36,6 +36,9 @@ const Root = ({
   )
 }
 
+/**
+ * A multi-line text input field that allows users to enter longer text content.
+ */
 export const Textarea = Object.assign(Root, {
   id: Input.id,
 })

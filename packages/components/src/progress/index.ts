@@ -3,6 +3,9 @@ import { ProgressLabel } from './ProgressLabel'
 import { ProgressTrack } from './ProgressTrack'
 import { ProgressValue } from './ProgressValue'
 
+/**
+ * A visual indicator that displays the completion progress of a task or operation.
+ */
 export const Progress: typeof Root & {
   Label: typeof ProgressLabel
   Track: typeof ProgressTrack

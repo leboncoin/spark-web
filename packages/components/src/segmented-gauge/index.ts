@@ -3,6 +3,9 @@ import { SegmentedGaugeLabel } from './SegmentedGaugeLabel'
 import { SegmentedGaugeSegment } from './SegmentedGaugeSegment'
 import { SegmentedGaugeTrack } from './SegmentedGaugeTrack'
 
+/**
+ * A visual indicator that displays a value using discrete segments within a defined range.
+ */
 export const SegmentedGauge: typeof Root & {
   Track: typeof SegmentedGaugeTrack
   Segment: typeof SegmentedGaugeSegment

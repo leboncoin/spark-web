@@ -15,6 +15,9 @@ import { Value } from './DropdownValue'
 
 export { useDropdownContext, DropdownProvider }
 
+/**
+ * A list of options that appears when users interact with a trigger element.
+ */
 export const Dropdown: typeof Root & {
   Group: typeof Group
   Item: typeof Item

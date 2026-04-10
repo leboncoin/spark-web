@@ -4,6 +4,9 @@ import { Item } from './BreadcrumbItem'
 import { Link } from './BreadcrumbLink'
 import { Separator } from './BreadcrumbSeparator'
 
+/**
+ * A navigation component that shows the user's current location in a hierarchical structure.
+ */
 export const Breadcrumb: typeof Root & {
   Item: typeof Item
   Link: typeof Link

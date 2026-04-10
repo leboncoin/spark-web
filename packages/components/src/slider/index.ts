@@ -8,6 +8,9 @@ import { SliderThumb as Thumb, type SliderThumbProps } from './SliderThumb'
 import { SliderTrack as Track, type SliderTrackProps } from './SliderTrack'
 import { SliderValue as Value, type SliderValueProps } from './SliderValue'
 
+/**
+ * An input control that allows users to select a value from a continuous range by dragging a handle.
+ */
 export const Slider: typeof Root & {
   Control: typeof Control
   Indicator: typeof Indicator

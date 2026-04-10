@@ -3,6 +3,9 @@ import { MeterLabel } from './MeterLabel'
 import { MeterTrack } from './MeterTrack'
 import { MeterValue } from './MeterValue'
 
+/**
+ * A horizontal progress indicator that displays a scalar measurement within a known range.
+ */
 export const Meter: typeof Root & {
   Label: typeof MeterLabel
   Track: typeof MeterTrack

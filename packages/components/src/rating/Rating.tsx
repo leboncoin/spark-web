@@ -123,6 +123,9 @@ export interface RatingProps extends PropsWithChildren<ComponentPropsWithRef<'di
   getStarLabel?: (index: number) => string
 }
 
+/**
+ * An interactive component that allows users to provide a rating using a star-based scale.
+ */
 export const Rating = ({
   defaultValue,
   value: propValue,

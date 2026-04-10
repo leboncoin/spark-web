@@ -4,6 +4,9 @@ import { CircularMeterLabel } from './CircularMeterLabel'
 import { CircularMeterTrack } from './CircularMeterTrack'
 import { CircularMeterValue } from './CircularMeterValue'
 
+/**
+ * A circular progress indicator that displays a value within a defined range.
+ */
 export const CircularMeter: typeof Root & {
   Content: typeof CircularMeterContent
   Label: typeof CircularMeterLabel

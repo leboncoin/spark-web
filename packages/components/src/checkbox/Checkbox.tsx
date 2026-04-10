@@ -15,6 +15,9 @@ export type CheckboxProps = CheckboxInputProps &
 const ID_PREFIX = ':checkbox'
 
 // oxlint-disable-next-line max-lines-per-function
+/**
+ * A control that allows users to select one or multiple options from a set.
+ */
 export const Checkbox = ({
   id: idProp,
   className,

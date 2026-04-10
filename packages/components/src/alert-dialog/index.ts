@@ -25,6 +25,9 @@ export { type AlertDialogPortalProps } from './AlertDialogPortal'
 export { type AlertDialogTitleProps } from './AlertDialogTitle'
 export { type AlertDialogTriggerProps } from './AlertDialogTrigger'
 
+/**
+ * A modal dialog that interrupts the user with important content and requires a response.
+ */
 export const AlertDialog: typeof Root & {
   Action: typeof AlertDialogAction
   Body: typeof AlertDialogBody

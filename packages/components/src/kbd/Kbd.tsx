@@ -4,6 +4,9 @@ export type KbdProps = ComponentPropsWithoutRef<'div'> & {
   ref?: Ref<HTMLElement>
 }
 
+/**
+ * A component that displays keyboard keys or shortcuts in a styled format.
+ */
 export const Kbd = ({ className, ref, ...props }: PropsWithChildren<KbdProps>) => {
   return (
     <kbd

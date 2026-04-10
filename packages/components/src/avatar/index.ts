@@ -1,26 +1,32 @@
-import { Avatar } from './Avatar'
+import { Avatar as Root } from './Avatar'
 import { AvatarAction } from './AvatarAction'
 import { AvatarImage } from './AvatarImage'
 import { AvatarOnlineBadge } from './AvatarOnlineBadge'
 import { AvatarPlaceholder } from './AvatarPlaceholder'
 import { AvatarUser } from './AvatarUser'
-import type { AvatarProps } from './types'
 
-export interface AvatarComponent extends React.ForwardRefExoticComponent<
-  AvatarProps & React.RefAttributes<HTMLDivElement>
-> {
+/**
+ * A graphical representation of a user, typically displaying an image, initials, or icon.
+ */
+export const Avatar: typeof Root & {
   Image: typeof AvatarImage
   Action: typeof AvatarAction
   OnlineBadge: typeof AvatarOnlineBadge
   User: typeof AvatarUser
   Placeholder: typeof AvatarPlaceholder
-}
+} = Object.assign(Root, {
+  Image: AvatarImage,
+  Action: AvatarAction,
+  OnlineBadge: AvatarOnlineBadge,
+  User: AvatarUser,
+  Placeholder: AvatarPlaceholder,
+})
 
-const AvatarComponent = Avatar as AvatarComponent
+Avatar.displayName = 'Avatar'
+AvatarImage.displayName = 'Avatar.Image'
+AvatarAction.displayName = 'Avatar.Action'
+AvatarOnlineBadge.displayName = 'Avatar.OnlineBadge'
+AvatarUser.displayName = 'Avatar.User'
+AvatarPlaceholder.displayName = 'Avatar.Placeholder'
 
-AvatarComponent.Image = AvatarImage
-AvatarComponent.Action = AvatarAction
-AvatarComponent.OnlineBadge = AvatarOnlineBadge
-AvatarComponent.User = AvatarUser
-AvatarComponent.Placeholder = AvatarPlaceholder
-export { AvatarComponent as Avatar }
+export type { AvatarProps } from './types'

@@ -8,6 +8,9 @@ export interface IconButtonProps extends Omit<ButtonProps, 'loadingText'> {
   ref?: Ref<HTMLButtonElement>
 }
 
+/**
+ * A button component that contains only an icon without text label.
+ */
 export const IconButton = ({
   design = 'filled',
   disabled = false,

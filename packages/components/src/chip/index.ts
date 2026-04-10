@@ -4,6 +4,9 @@ import { ChipContent } from './ChipContent'
 import { ChipLeadingIcon } from './ChipLeadingIcon'
 import { ChipTrailingIcon } from './ChipTrailingIcon'
 
+/**
+ * A compact, interactive element used for input, filtering, or representing attributes.
+ */
 export const Chip: typeof Root & {
   Content: typeof ChipContent
   LeadingIcon: typeof ChipLeadingIcon

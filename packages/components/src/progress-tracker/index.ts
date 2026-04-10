@@ -6,6 +6,9 @@ import {
 } from './ProgressTrackerStepIndicator'
 import { ProgressTrackerStepLabel as StepLabel } from './ProgressTrackerStepLabel'
 
+/**
+ * A component that displays a multi-step process with visual indicators for completed, current, and upcoming steps.
+ */
 export const ProgressTracker: typeof Root & {
   Step: typeof Step
   StepLabel: typeof StepLabel

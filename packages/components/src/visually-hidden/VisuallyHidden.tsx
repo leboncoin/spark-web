@@ -10,6 +10,9 @@ export type VisuallyHiddenProps = PropsWithChildren<HTMLAttributes<HTMLElement>>
   ref?: Ref<HTMLElement>
 }
 
+/**
+ * A utility component that hides content visually while keeping it accessible to screen readers.
+ */
 export const VisuallyHidden = ({ asChild = false, ref, ...props }: VisuallyHiddenProps) => {
   const Component = asChild ? Slot : 'span'
 

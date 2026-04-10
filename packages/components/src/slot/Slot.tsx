@@ -14,6 +14,10 @@ export type SlotProps = PropsWithChildren<HTMLAttributes<HTMLElement>> & {
   ref?: Ref<HTMLElement>
 }
 
+/**
+ * A utility component that merges its props with its child component, enabling polymorphic
+ * component patterns through the `asChild` prop for flexible composition.
+ */
 export const Slot = ({ ref, ...props }: SlotProps) => {
   return <RadixSlot.Root ref={ref} {...props} />
 }

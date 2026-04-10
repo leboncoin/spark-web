@@ -26,6 +26,9 @@ export type {
 
 export { FILE_UPLOAD_ERRORS }
 
+/**
+ * A component that allows users to select and upload files from their device.
+ */
 export const FileUpload: typeof Root & {
   Trigger: typeof Trigger
   Dropzone: typeof Dropzone

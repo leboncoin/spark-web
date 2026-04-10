@@ -40,6 +40,9 @@ export interface TableRootWrapperProps extends TableProps {
   children: ReactNode
 }
 
+/**
+ * A data table component that displays information in rows and columns with support for sorting, selection, and resizing.
+ */
 export function TableRootWrapper({
   children,
   className,

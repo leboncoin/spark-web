@@ -3,6 +3,9 @@ import { InputOTPGroup } from './InputOTPGroup'
 import { InputOTPSeparator } from './InputOTPSeparator'
 import { InputOTPSlot } from './InputOTPSlot'
 
+/**
+ * An input component for entering one-time passwords or verification codes with individual character slots.
+ */
 export const InputOTP: typeof Root & {
   Group: typeof InputOTPGroup
   Slot: typeof InputOTPSlot
