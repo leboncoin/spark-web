@@ -1,3 +1,13 @@
+## 17.5.1 (2026-04-10)
+
+### 🩹 Fixes
+
+- chromatic release workflow ([a63a73c76](https://github.com/leboncoin/spark-web/commit/a63a73c76))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.5.0 (2026-04-10)
 
 ### 🚀 Features
