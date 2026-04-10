@@ -52,6 +52,9 @@ const blockedEventHandlers: DOMAttributesEventHandler[] = [
   'onSubmit',
 ]
 
+/**
+ * A clickable element that triggers an action or event when activated by the user.
+ */
 export const Button = ({
   children,
   design = 'filled',

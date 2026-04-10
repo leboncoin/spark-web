@@ -6,6 +6,9 @@ import { ScrollingListNextButton as NextButton } from './ScrollingListNextButton
 import { ScrollingListPrevButton as PrevButton } from './ScrollingListPrevButton'
 import { ScrollingListSkipButton as SkipButton } from './ScrollingListSkipButton'
 
+/**
+ * A horizontal scrollable list component with optional snap points and navigation controls.
+ */
 export const ScrollingList: typeof Root & {
   Controls: typeof Controls
   NextButton: typeof NextButton

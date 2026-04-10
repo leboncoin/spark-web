@@ -1,16 +1,10 @@
-import { Tag } from '@spark-ui/components/tag'
 import { Close } from '@spark-ui/icons/Close'
 import { Plus } from '@spark-ui/icons/Plus'
 import { Meta, StoryFn } from '@storybook/react-vite'
-import { cx } from 'class-variance-authority'
-import { useId, useState } from 'react'
+import { useState } from 'react'
 
 import { Button } from '../button'
-import { FormField } from '../form-field'
-import { Label } from '../label'
-import { VisuallyHidden } from '../visually-hidden'
 import { Checkbox, CheckboxProps } from './Checkbox'
-import { CheckboxGroup } from './CheckboxGroup'
 
 const meta: Meta<typeof Checkbox> = {
   title: 'Components/Checkbox',
@@ -34,14 +28,6 @@ export const Default: StoryFn = _args => (
   </Checkbox>
 )
 
-export const DefaultGroup: StoryFn = _args => (
-  <CheckboxGroup name="sport">
-    <Checkbox value="soccer">Soccer</Checkbox>
-    <Checkbox value="tennis">Tennis</Checkbox>
-    <Checkbox value="baseball">Baseball</Checkbox>
-  </CheckboxGroup>
-)
-
 export const Uncontrolled: StoryFn = () => {
   const handleCheckedChange = (current: boolean, indeterminate?: boolean) => {
     console.log(current, indeterminate)
@@ -53,20 +39,6 @@ export const Uncontrolled: StoryFn = () => {
         Accept terms and conditions
       </Checkbox>
     </div>
-  )
-}
-
-export const UncontrolledGroup: StoryFn = () => {
-  const handleCheckedChange = (value: string[]) => {
-    console.log(value)
-  }
-
-  return (
-    <CheckboxGroup defaultValue={['soccer', 'tennis']} onCheckedChange={handleCheckedChange}>
-      <Checkbox value="soccer">Soccer</Checkbox>
-      <Checkbox value="tennis">Tennis</Checkbox>
-      <Checkbox value="baseball">Baseball</Checkbox>
-    </CheckboxGroup>
   )
 }
 
@@ -90,43 +62,7 @@ export const Controlled: StoryFn = () => {
   )
 }
 
-export const ControlledGroup: StoryFn = () => {
-  const [value, setValue] = useState<string[]>([])
-
-  const handleCheckedChange = (current: string[]) => {
-    setValue(current)
-  }
-
-  return (
-    <CheckboxGroup value={value} onCheckedChange={handleCheckedChange}>
-      <Checkbox value="soccer">Soccer</Checkbox>
-      <Checkbox value="tennis">Tennis</Checkbox>
-      <Checkbox value="baseball">Baseball</Checkbox>
-    </CheckboxGroup>
-  )
-}
-
 export const Disabled: StoryFn = _args => <Checkbox disabled>Accept terms and conditions</Checkbox>
-
-const intents = ['support', 'error'] as const
-
-export const Intent: StoryFn = _args => (
-  <div className="gap-xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
-    {intents.map(intent => {
-      return (
-        <div key={intent}>
-          <Tag className="flex">{`${intent}${intent === 'support' ? ' (default)' : ''}`}</Tag>
-
-          <CheckboxGroup defaultValue={['soccer']} intent={intent} orientation="vertical">
-            <Checkbox value="soccer">Soccer</Checkbox>
-            <Checkbox value="tennis">Tennis</Checkbox>
-            <Checkbox value="baseball">Baseball</Checkbox>
-          </CheckboxGroup>
-        </div>
-      )
-    })}
-  </div>
-)
 
 export const Icon: StoryFn = _args => (
   <div className="gap-lg flex flex-col">
@@ -138,31 +74,6 @@ export const Icon: StoryFn = _args => (
     </Checkbox>
   </div>
 )
-
-export const GroupOrientation: StoryFn = _args => {
-  return (
-    <div className="gap-xl flex flex-col">
-      <div>
-        <Tag className="flex">Vertical (default)</Tag>
-
-        <CheckboxGroup orientation="vertical">
-          <Checkbox value="soccer">Soccer</Checkbox>
-          <Checkbox value="tennis">Tennis</Checkbox>
-          <Checkbox value="baseball">Baseball</Checkbox>
-        </CheckboxGroup>
-      </div>
-      <div>
-        <Tag className="flex">Horizontal</Tag>
-
-        <CheckboxGroup orientation="horizontal">
-          <Checkbox value="soccer">Soccer</Checkbox>
-          <Checkbox value="tennis">Tennis</Checkbox>
-          <Checkbox value="baseball">Baseball</Checkbox>
-        </CheckboxGroup>
-      </div>
-    </div>
-  )
-}
 
 export const Indeterminate: StoryFn = () => {
   const [checked, setChecked] = useState<CheckboxProps['checked']>('indeterminate')
@@ -182,130 +93,5 @@ export const Indeterminate: StoryFn = () => {
         Toggle indeterminate
       </Button>
     </div>
-  )
-}
-
-export const CustomImplementation: StoryFn = () => {
-  const CustomCheckbox = ({ children, checked, ...others }: CheckboxProps) => {
-    const id = useId()
-    const { value } = others
-
-    return (
-      <Label
-        id={id}
-        htmlFor={value}
-        className={cx(
-          'max-w-sz-320 bg-surface text-on-surface p-lg rounded-lg',
-          'gap-lg flex flex-wrap items-center',
-          checked ? 'ring-outline-high ring-2' : 'ring-outline ring-1',
-          'cursor-pointer'
-        )}
-      >
-        <Checkbox aria-labelledby={id} id={value} checked={checked} {...others} />
-        <span className="grow">{children}</span>
-      </Label>
-    )
-  }
-
-  const Example = () => {
-    const [checked, setChecked] = useState(['A'])
-
-    const values = ['A', 'B', 'C']
-
-    return (
-      <CheckboxGroup value={checked} name="sport" onCheckedChange={setChecked}>
-        {values.map(value => {
-          return (
-            <CustomCheckbox key={value} value={value} checked={checked.includes(value)}>
-              <span className="flex grow justify-between">
-                <span className="font-bold">{value}</span>
-                <span>this is a custom</span>
-              </span>
-              <span className="block w-full text-right italic">implementation of a checkbox</span>
-            </CustomCheckbox>
-          )
-        })}
-      </CheckboxGroup>
-    )
-  }
-
-  return <Example />
-}
-
-export const FieldLabel: StoryFn = _args => {
-  return (
-    <FormField name="sport">
-      <FormField.Label>Sports</FormField.Label>
-
-      <CheckboxGroup>
-        <Checkbox value="soccer">Soccer</Checkbox>
-        <Checkbox value="tennis">Tennis</Checkbox>
-        <Checkbox value="baseball">Baseball</Checkbox>
-      </CheckboxGroup>
-    </FormField>
-  )
-}
-
-export const FieldHiddenLabel: StoryFn = _args => {
-  return (
-    <FormField name="sport">
-      <VisuallyHidden>
-        <FormField.Label>Sports</FormField.Label>
-      </VisuallyHidden>
-
-      <CheckboxGroup>
-        <Checkbox value="soccer">Soccer</Checkbox>
-        <Checkbox value="tennis">Tennis</Checkbox>
-        <Checkbox value="baseball">Baseball</Checkbox>
-      </CheckboxGroup>
-    </FormField>
-  )
-}
-
-export const FieldRequired: StoryFn = _args => {
-  return (
-    <FormField name="sport" isRequired>
-      <FormField.Label>Sports</FormField.Label>
-
-      <CheckboxGroup>
-        <Checkbox value="soccer">Soccer</Checkbox>
-        <Checkbox value="tennis">Tennis</Checkbox>
-        <Checkbox value="baseball">Baseball</Checkbox>
-      </CheckboxGroup>
-    </FormField>
-  )
-}
-
-export const FieldHelperMessage: StoryFn = _args => {
-  return (
-    <FormField name="title">
-      <FormField.Label>Sports</FormField.Label>
-
-      <CheckboxGroup>
-        <Checkbox value="soccer">Soccer</Checkbox>
-        <Checkbox value="tennis">Tennis</Checkbox>
-        <Checkbox value="baseball">Baseball</Checkbox>
-      </CheckboxGroup>
-
-      <FormField.HelperMessage>Practicing sports is good for your health</FormField.HelperMessage>
-    </FormField>
-  )
-}
-
-export const FieldInvalid: StoryFn = () => {
-  const [value, setValue] = useState<string[]>([])
-
-  return (
-    <FormField name="sports" state={!value.length ? 'error' : undefined}>
-      <FormField.Label>Sports</FormField.Label>
-
-      <CheckboxGroup value={value} onCheckedChange={setValue}>
-        <Checkbox value="soccer">Soccer</Checkbox>
-        <Checkbox value="tennis">Tennis</Checkbox>
-        <Checkbox value="baseball">Baseball</Checkbox>
-      </CheckboxGroup>
-
-      <FormField.ErrorMessage>You must choose a sport among the list</FormField.ErrorMessage>
-    </FormField>
   )
 }

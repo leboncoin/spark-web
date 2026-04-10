@@ -11,7 +11,11 @@ import { Column } from './TableColumn'
 import { TableHeader } from './TableHeader'
 import { Row } from './TableRow'
 
-export const TableWithSubcomponents: typeof TableRootWrapper & {
+/**
+ * A compound component for building data tables with support for headers, rows, cells, sorting,
+ * pagination, and bulk selection functionality.
+ */
+export const TableCompound: typeof TableRootWrapper & {
   Grid: typeof TableGrid
   Header: typeof TableHeader
   Column: typeof Column
@@ -35,14 +39,14 @@ export const TableWithSubcomponents: typeof TableRootWrapper & {
   BulkBarSelectAllButton: TableBulkBarSelectAllButton,
 })
 
-TableWithSubcomponents.displayName = 'Table'
+TableCompound.displayName = 'Table'
 TableHeader.displayName = 'Table.Header'
 Column.displayName = 'Table.Column'
 TableBody.displayName = 'Table.Body'
 Row.displayName = 'Table.Row'
 Cell.displayName = 'Table.Cell'
 
-export { TableWithSubcomponents as Table }
+export { TableCompound as Table }
 
 export { useTableSort } from './useTableSort'
 export { useTablePagination } from './useTablePagination'

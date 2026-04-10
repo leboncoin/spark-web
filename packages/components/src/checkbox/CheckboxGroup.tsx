@@ -21,6 +21,10 @@ export interface CheckboxGroupProps
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * A group component that allows users to select one or more checkboxes from a list of choices,
+ * managing their state collectively with support for controlled and uncontrolled modes.
+ */
 export const CheckboxGroup = ({
   name: nameProp,
   value: valueProp,

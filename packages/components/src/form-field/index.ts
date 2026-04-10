@@ -9,6 +9,9 @@ import { FormFieldRequiredIndicator } from './FormFieldRequiredIndicator'
 import { FormFieldStateMessage } from './FormFieldStateMessage'
 import { FormFieldSuccessMessage } from './FormFieldSuccessMessage'
 
+/**
+ * A wrapper component that provides consistent layout and accessibility features for form inputs.
+ */
 export const FormField: typeof Root & {
   Label: typeof FormFieldLabel
   Control: typeof FormFieldControl

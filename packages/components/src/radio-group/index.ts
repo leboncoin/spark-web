@@ -1,6 +1,9 @@
 import { Radio } from './Radio'
 import { RadioGroup as Root } from './RadioGroup'
 
+/**
+ * A set of radio buttons that allows users to select a single option from a group of choices.
+ */
 export const RadioGroup: typeof Root & {
   Radio: typeof Radio
 } = Object.assign(Root, {

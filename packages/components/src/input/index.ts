@@ -7,6 +7,10 @@ import { InputTrailingIcon } from './InputTrailingIcon'
 
 export * from './Input'
 
+/**
+ * A wrapper component that combines an Input with addons, icons, and interactive elements
+ * to create more complex text input patterns like search bars, password fields, or URL inputs.
+ */
 export const InputGroup: typeof Root & {
   LeadingAddon: typeof InputLeadingAddon
   TrailingAddon: typeof InputTrailingAddon

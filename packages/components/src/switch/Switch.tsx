@@ -9,6 +9,9 @@ export type SwitchProps = SwitchInputProps
 
 const ID_PREFIX = ':switch'
 
+/**
+ * A toggle control that allows users to switch between two states, typically on and off.
+ */
 export const Switch = ({
   size = 'md',
   children,

@@ -5,6 +5,9 @@ import {
 } from './StepperButton'
 import { StepperInput as Input } from './StepperInput'
 
+/**
+ * A numeric input component with increment and decrement buttons for adjusting values.
+ */
 export const Stepper: typeof Root & {
   IncrementButton: typeof IncrementButton
   DecrementButton: typeof DecrementButton

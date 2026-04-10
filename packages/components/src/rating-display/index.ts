@@ -3,6 +3,9 @@ import { RatingDisplayCount as Count } from './RatingDisplayCount'
 import { RatingDisplayStars as Stars } from './RatingDisplayStars'
 import { RatingDisplayValue as Value } from './RatingDisplayValue'
 
+/**
+ * A read-only component that displays a rating value using stars.
+ */
 export const RatingDisplay: typeof Root & {
   Stars: typeof Stars
   Value: typeof Value

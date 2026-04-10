@@ -89,6 +89,9 @@ const Root = ({
   )
 }
 
+/**
+ * A text input field that allows users to enter and edit text content.
+ */
 export const Input = Object.assign(Root, {
   id: 'Input',
 })

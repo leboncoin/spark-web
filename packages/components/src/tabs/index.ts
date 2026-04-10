@@ -3,6 +3,9 @@ import { TabsContent as Content } from './TabsContent'
 import { TabsList as List } from './TabsList'
 import { TabsTrigger as Trigger } from './TabsTrigger'
 
+/**
+ * A set of layered sections of content that users can navigate between using tab controls.
+ */
 export const Tabs: typeof Root & {
   List: typeof List
   Trigger: typeof Trigger

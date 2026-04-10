@@ -67,7 +67,16 @@ const config: StorybookConfig = {
         },
       },
     },
-    '@storybook/addon-mcp'
+    {
+      name: '@storybook/addon-mcp',
+      options: {
+        toolsets: {
+          dev: true,
+          docs: true,
+          test: false, // We are not yet using vitest for integrated tests in the storybook UI.
+        },
+      },
+    }
   ],
   core: {
     disableTelemetry: true,

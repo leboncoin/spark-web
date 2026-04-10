@@ -5,6 +5,10 @@ import { TextareaTrailingIcon } from './TextareaTrailingIcon'
 
 export * from './Textarea'
 
+/**
+ * A wrapper component that combines a Textarea with icons and interactive elements
+ * to create enhanced text input patterns with visual indicators and clear functionality.
+ */
 export const TextareaGroup: typeof Root & {
   LeadingIcon: typeof TextareaLeadingIcon
   TrailingIcon: typeof TextareaTrailingIcon

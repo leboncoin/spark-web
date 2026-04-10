@@ -46,6 +46,9 @@ export type TextLinkProps = ComponentPropsWithRef<'a'> &
     asChild?: boolean
   }
 
+/**
+ * A clickable text element that navigates users to another page or section.
+ */
 export const TextLink = ({
   asChild = false,
   bold = false,

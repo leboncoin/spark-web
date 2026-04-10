@@ -3,9 +3,10 @@ import { Kbd } from '@spark-ui/components/kbd'
 import { A11yReport } from '@docs/helpers/A11yReport'
 import { Tag } from '@spark-ui/components/tag'
 import { Checkbox, CheckboxGroup } from '.'
-import * as stories from './Checkbox.stories'
+import * as CheckboxStories from './Checkbox.stories'
+import * as CheckboxGroupStories from './CheckboxGroup.stories'
 
-<Meta of={stories} />
+<Meta of={CheckboxStories} />
 
 # Checkbox
 
@@ -15,10 +16,10 @@ It is used in forms when a user needs to select multiple values from several opt
 Checkbox label can be multiline. Still you should care of not using elements (for the label) with greater line height than the checkbox input height, to preserve vertical alignment.
 
 <Tag className='sb-unstyled'>Standalone</Tag>
-<Canvas of={stories.Default} />
+<Canvas of={CheckboxStories.Default} />
 
 <Tag className='sb-unstyled'>Group</Tag>
-<Canvas of={stories.DefaultGroup} />
+<Canvas of={CheckboxGroupStories.DefaultGroup} />
 
 ## Install
 
@@ -67,14 +68,14 @@ A checkbox group allows users to select one or more items from a list of choices
 
 Use `defaultChecked` prop to set the default state of the checkbox. Optionally `onCheckedChange` prop can be used to know when the state of the checkbox changes.
 
-<Canvas of={stories.Uncontrolled} />
+<Canvas of={CheckboxStories.Uncontrolled} />
 
 <Tag className='sb-unstyled'>Group</Tag>
 
 The `defaultValue` prop can be used to set the default state of the group. Optionally `onCheckedChange`
 prop can be used to get the current state of the checkbox group.
 
-<Canvas of={stories.UncontrolledGroup} />
+<Canvas of={CheckboxGroupStories.UncontrolledGroup} />
 
 ### Controlled
 
@@ -82,25 +83,25 @@ prop can be used to get the current state of the checkbox group.
 
 Use `checked` and `onCheckedChange` props to control the state of the checkbox. The `checked` prop can also be set to indeterminate.
 
-<Canvas of={stories.Controlled} />
+<Canvas of={CheckboxStories.Controlled} />
 
 <Tag className='sb-unstyled'>Group</Tag>
 
 Use `value` and `onCheckedChange` props to control the state of the checkbox.
 
-<Canvas of={stories.ControlledGroup} />
+<Canvas of={CheckboxGroupStories.ControlledGroup} />
 
 ### Disabled
 
 Use the `disabled` prop to indicate that the checkbox is disabled.
 
-<Canvas of={stories.Disabled} />
+<Canvas of={CheckboxStories.Disabled} />
 
 ### Icon
 
 Use `icon` prop to change the default checked icon.
 
-<Canvas of={stories.Icon} />
+<Canvas of={CheckboxStories.Icon} />
 
 ### Intent
 
@@ -108,7 +109,7 @@ Use `intent` prop to change the color of the checkbox.
 
 **Note: set `intent` on the `CheckboxGroup` if you want to apply the same intent to every checkbox within a group**
 
-<Canvas of={stories.Intent} />
+<Canvas of={CheckboxGroupStories.Intent} />
 
 ### Orientation
 
@@ -116,7 +117,7 @@ Use `intent` prop to change the color of the checkbox.
 
 Use `orientation` prop to set the orientation of the checkbox group which could be `vertical` or `horizontal`.
 
-<Canvas of={stories.GroupOrientation} />
+<Canvas of={CheckboxGroupStories.GroupOrientation} />
 
 ## Advanced Examples
 
@@ -124,7 +125,7 @@ Use `orientation` prop to set the orientation of the checkbox group which could 
 
 You can set the checkbox to indeterminate by taking control of its state.
 
-<Canvas of={stories.Indeterminate} />
+<Canvas of={CheckboxStories.Indeterminate} />
 
 ### Custom implementation
 
@@ -132,7 +133,7 @@ Below is an implementation of a custom checkbox that might provide guidance if y
 
 When implementing a custom checkbox, it is important to be careful to properly handle **accessibility (a11y) requirements**, as a11y considerations will not be handled behind the scenes as they would be when using a regular checkbox implementation
 
-<Canvas of={stories.CustomImplementation} />
+<Canvas of={CheckboxGroupStories.CustomImplementation} />
 
 
 ## Form field
@@ -143,31 +144,31 @@ When using the `Checkbox` component you might want to use it in combination with
 
 Use the `FormField.HelperMessage` component to provide a description to the input.
 
-<Canvas of={stories.FieldHelperMessage} />
+<Canvas of={CheckboxGroupStories.FieldHelperMessage} />
 
 #### Hidden label
 
 In certain cases, a visible label may not be necessary, such as when using an input as a searcher. To achieve this behavior, use the `VisuallyHidden` component.
 
-<Canvas of={stories.FieldHiddenLabel} />
+<Canvas of={CheckboxGroupStories.FieldHiddenLabel} />
 
 ### Label
 
 Use `FormField.Label` to add a label to the input.
 
-<Canvas of={stories.FieldLabel} />
+<Canvas of={CheckboxGroupStories.FieldLabel} />
 
 ### Required
 
 Use the `isRequired` prop of the `FormField` to indicate that the input is required.
 
-<Canvas of={stories.FieldRequired} />
+<Canvas of={CheckboxGroupStories.FieldRequired} />
 
 ### Validation
 
 set the `state` prop of the `FormField` to `error` to indicate that the input is invalid. Optionally use the `FormField.ErrorMessage` to describe why the input is invalid.
 
-<Canvas of={stories.FieldInvalid} />
+<Canvas of={CheckboxGroupStories.FieldInvalid} />
 
 ## Accessibility
 

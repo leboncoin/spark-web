@@ -10,6 +10,9 @@ export interface SpinnerProps extends ComponentPropsWithRef<'div'>, SpinnerStyle
   label?: string
 }
 
+/**
+ * An animated indicator that shows a loading or processing state to users.
+ */
 export const Spinner = ({
   className,
   size = 'current',

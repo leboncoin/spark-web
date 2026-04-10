@@ -4,9 +4,10 @@ import { Callout } from '@docs/helpers/Callout'
 
 import { Input, InputGroup } from '.'
 
-import * as stories from './Input.stories'
+import * as InputStories from './Input.stories'
+import * as InputGroupStories from './InputGroup.stories'
 
-<Meta of={stories} />
+<Meta of={InputStories} />
 
 # Input
 
@@ -14,7 +15,7 @@ Component used to get user input in a text field.
 
 Use `InputGroup` component to group your input with addons and elements like icons.
 
-<Canvas of={stories.Default} />
+<Canvas of={InputStories.Default} />
 
 ## Install
 
@@ -92,13 +93,13 @@ Input component is a component that is used to get user input in a text field.
 
 Use `defaultValue` prop to set the default value of the input. Optionally `onChange` prop can be used to know when the value of the input changes.
 
-<Canvas of={stories.Uncontrolled} />
+<Canvas of={InputStories.Uncontrolled} />
 
 ### Controlled
 
 Use `value` and `onChange` props to control the value of the input.
 
-<Canvas of={stories.Controlled} />
+<Canvas of={InputStories.Controlled} />
 
 ### Addons
 
@@ -106,31 +107,31 @@ Each `InputGroup` can have a `LeadingAddon` and a `TrailingAddon`. You can use t
 
 **Note: we advise to use `solid` addons when possible to give the user a better clickable area**
 
-<Canvas of={stories.Addons} />
+<Canvas of={InputGroupStories.Addons} />
 
 ### Icons
 
 An `InputGroup` can have a `LeadingIcon` and/or `TrailingIcon`. Please note that the `TrailingIcon` will be automatically replaced by the state indicator if the input has one (`error`, `alert` or `success`).
 
-<Canvas of={stories.Icons} />
+<Canvas of={InputGroupStories.Icons} />
 
 ### Disabled
 
 To indicate that an input is disabled, use the `disabled` prop. If you're wrapping your `Input` with an `InputGroup`, set the prop on the group instead.
 
-<Canvas of={stories.Disabled} />
+<Canvas of={InputStories.Disabled} />
 
 ### Read Only
 
 Use `readOnly` prop to indicate the input is only readable.
 
-<Canvas of={stories.ReadOnly} />
+<Canvas of={InputStories.ReadOnly} />
 
 ### State
 
 Use `state` prop to assign a specific state to the group, choosing from: `error`, `alert` and `success`. By doing so, the outline styles will be updated.
 
-<Canvas of={stories.State} />
+<Canvas of={InputGroupStories.State} />
 
 ## Advanced Examples
 
@@ -138,13 +139,13 @@ Use `state` prop to assign a specific state to the group, choosing from: `error`
 
 Let's use `InputGroup` and its components to create a search input with a clear button
 
-<Canvas of={stories.SearchExample} />
+<Canvas of={InputGroupStories.SearchExample} />
 
 ### Password
 
 Let's use `InputGroup` and its components to create a password input with a show/hide password functionality
 
-<Canvas of={stories.PasswordExample} />
+<Canvas of={InputGroupStories.PasswordExample} />
 
 ## Form field
 
@@ -154,25 +155,25 @@ When using the `Input` component you might want to use it in combination with `F
 
 Use the `FormField.CharactersCount` component to display the actual text count and the max length allowed.
 
-<Canvas of={stories.FieldCharactersCount} />
+<Canvas of={InputStories.FieldCharactersCount} />
 
 ### Helper message
 
 Use the `FormField.HelperMessage` component to provide a description to the input.
 
-<Canvas of={stories.FieldHelperMessage} />
+<Canvas of={InputStories.FieldHelperMessage} />
 
 #### Hidden label
 
 In certain cases, a visible label may not be necessary, such as when using an input as a searcher. To achieve this behavior, use the `VisuallyHidden` component.
 
-<Canvas of={stories.FieldHiddenLabel} />
+<Canvas of={InputStories.FieldHiddenLabel} />
 
 ### Label
 
 Use `FormField.Label` to add a label to the input.
 
-<Canvas of={stories.FieldLabel} />
+<Canvas of={InputStories.FieldLabel} />
 
 ### Required
 
@@ -182,13 +183,13 @@ Use the `isRequired` prop of the `FormField` to indicate that the input is requi
   If your form has mandatory fields, you must include an explicit note at the top of the form, outside of the input fields, to inform users that certain fields are required.
 </Callout>
 
-<Canvas of={stories.FieldRequired} />
+<Canvas of={InputStories.FieldRequired} />
 
 ### Validation
 
 set the `state` prop of the `FormField` to `error` to indicate that the input is invalid. Optionally use the `FormField.ErrorMessage` to describe why the input is invalid.
 
-<Canvas of={stories.FieldInvalid} />
+<Canvas of={InputStories.FieldInvalid} />
 
 ## Accessibility
 

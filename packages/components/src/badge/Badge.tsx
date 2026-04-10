@@ -6,6 +6,9 @@ export type BadgeProps = PropsWithChildren<Omit<BadgeItemProps, 'type'>> & {
   ref?: Ref<HTMLElement>
 }
 
+/**
+ * A visual indicator that displays a count or status, typically positioned on top of another element.
+ */
 export const Badge = ({ children, ...props }: BadgeProps) => {
   const isStandalone = !children
 

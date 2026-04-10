@@ -19,6 +19,9 @@ interface ToastProviderProps extends React.ComponentProps<typeof BaseToast.Provi
   children: React.ReactNode
 }
 
+/**
+ * A provider component that manages and displays temporary notification messages to users.
+ */
 export function ToastProvider({ children, limit = 3, ...props }: ToastProviderProps) {
   return (
     <BaseToast.Provider limit={limit} {...props}>

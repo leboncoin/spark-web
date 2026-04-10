@@ -3,6 +3,9 @@ import { DividerContent } from './DividerContent'
 
 export { type DividerContentProps } from './DividerContent'
 
+/**
+ * A visual separator that divides content into distinct sections or groups.
+ */
 export const Divider: typeof Root & {
   Content: typeof DividerContent
 } = Object.assign(Root, {

@@ -7,6 +7,9 @@ import { Header } from './PopoverHeader'
 import { Portal } from './PopoverPortal'
 import { Trigger } from './PopoverTrigger'
 
+/**
+ * A floating container that displays additional content when triggered, positioned relative to its trigger element.
+ */
 export const Popover: typeof Root & {
   Anchor: typeof Anchor
   Arrow: typeof Arrow

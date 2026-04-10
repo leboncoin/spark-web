@@ -18,6 +18,9 @@ import { Trigger } from './ComboboxTrigger'
 
 export { useComboboxContext, ComboboxProvider }
 
+/**
+ * A searchable dropdown that combines a text input with a list of selectable options.
+ */
 export const Combobox: typeof Root & {
   Group: typeof Group
   Item: typeof Item

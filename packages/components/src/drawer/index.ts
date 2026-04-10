@@ -11,6 +11,9 @@ import { DrawerPortal } from './DrawerPortal'
 import { DrawerTitle } from './DrawerTitle'
 import { DrawerTrigger } from './DrawerTrigger'
 
+/**
+ * A panel that slides in from the edge of the screen, typically used for navigation or displaying additional content.
+ */
 export const Drawer: typeof Root & {
   Trigger: typeof DrawerTrigger
   Portal: typeof DrawerPortal

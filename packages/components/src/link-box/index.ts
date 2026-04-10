@@ -2,6 +2,9 @@ import { LinkBox as Root } from './LinkBox'
 import { LinkBoxLink } from './LinkBoxLink'
 import { LinkBoxRaised } from './LinkBoxRaised'
 
+/**
+ * A container component that makes an entire area clickable while keeping nested links semantically correct.
+ */
 export const LinkBox: typeof Root & {
   Link: typeof LinkBoxLink
   Raised: typeof LinkBoxRaised

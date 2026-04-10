@@ -15,6 +15,9 @@ export interface IconProps extends IconVariantsProps, ComponentPropsWithoutRef<'
   label?: string
 }
 
+/**
+ * A wrapper component that renders SVG icons with consistent sizing and styling.
+ */
 export const Icon = ({
   label,
   className,
