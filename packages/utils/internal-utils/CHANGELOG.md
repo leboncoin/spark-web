@@ -1,3 +1,13 @@
+## 17.5.2 (2026-04-10)
+
+### 🩹 Fixes
+
+- chromatic needs access to gh history ([605ddc597](https://github.com/leboncoin/spark-web/commit/605ddc597))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.5.1 (2026-04-10)
 
 ### 🩹 Fixes
