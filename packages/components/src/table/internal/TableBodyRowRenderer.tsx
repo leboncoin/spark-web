@@ -15,7 +15,7 @@ function chainUnlessInteractivePointer<E extends SyntheticEvent<unknown>>(
   return (e: E) => {
     // `react-aria` types sometimes differ between `Event`/`MouseEvent` generics and DOM `Event`.
     // We only need a DOM `Event` to extract `target`.
-    const eventTarget = getEventTarget(e.nativeEvent as any)
+    const eventTarget = getEventTarget(e.nativeEvent as any) as EventTarget | null
     if (shouldSuppressRowSelectionFromPointerTarget(eventTarget)) {
       return
     }
