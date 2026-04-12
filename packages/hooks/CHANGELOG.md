@@ -1,3 +1,13 @@
+## 17.5.4 (2026-04-12)
+
+### 💅 Refactors
+
+- update minor versions of depepencies ([f55c1303a](https://github.com/leboncoin/spark-web/commit/f55c1303a))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.5.3 (2026-04-10)
 
 ### 🩹 Fixes
