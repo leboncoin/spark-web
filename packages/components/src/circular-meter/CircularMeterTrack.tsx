@@ -47,6 +47,9 @@ const circularMeterIndicatorStyles = cva([], {
   },
 })
 
+/**
+ * The circular track of the meter showing progress. Renders an <svg> element.
+ */
 export const CircularMeterTrack = ({ className, children, ...others }: CircularMeterTrackProps) => {
   const { value, max, min, intent, size, radius, circumference, strokeWidth } = useCircularMeter()
   const percentage = ((value - min) / (max - min)) * 100

@@ -10,6 +10,9 @@ interface GroupProps {
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * A group of related combobox items. Renders a <div> element.
+ */
 export const Group = ({ children, ref: forwardedRef, ...props }: GroupProps) => {
   return (
     <ComboboxGroupProvider>

@@ -24,6 +24,10 @@ interface ItemsProps {
  *    max-h-0 overflow-hidden collapses that box; p-lg only applies when open.
  */
 
+/**
+ * Container for the dropdown items list. Renders a <ul> element.
+ */
+
 export const Items = ({ children, className, ref: forwardedRef, ...props }: ItemsProps) => {
   const { isOpen, getMenuProps, hasPopover, setLastInteractionType } = useDropdownContext()
 

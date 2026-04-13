@@ -5,6 +5,9 @@ import { useCircularMeter } from './CircularMeterContext'
 
 export type CircularMeterContentProps = ComponentProps<'div'> & PropsWithChildren
 
+/**
+ * Container for circular meter content such as labels and values. Renders a <div> element.
+ */
 export const CircularMeterContent = ({
   className,
   children,

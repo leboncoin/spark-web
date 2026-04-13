@@ -14,6 +14,10 @@ export interface ValueProps {
   ref?: Ref<HTMLSpanElement>
 }
 
+/**
+ * Displays the selected value in the select trigger. Renders a <span> element.
+ */
+
 export const Value = ({
   children,
   className,

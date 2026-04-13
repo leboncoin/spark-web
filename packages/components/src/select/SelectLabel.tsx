@@ -6,6 +6,10 @@ interface LabelProps {
   children: string
 }
 
+/**
+ * A label for a group of select items. Renders a <div> element.
+ */
+
 export const Label = ({ children }: LabelProps) => {
   const { setGroupLabel } = useSelectGroupContext()
 

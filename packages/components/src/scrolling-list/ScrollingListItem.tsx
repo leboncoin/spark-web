@@ -18,6 +18,7 @@ export interface ScrollingListItemProps extends ComponentPropsWithoutRef<'div'> 
   className?: string
 }
 
+/** A single item in the scrolling list. Renders a <div> element. */
 export const ScrollingListItem = ({
   asChild = false,
   children,

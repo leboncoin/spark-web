@@ -7,6 +7,9 @@ export interface AlertDialogHeaderProps {
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * The header section of the alert dialog. Renders a <header> element.
+ */
 export const AlertDialogHeader = ({
   children,
   className,

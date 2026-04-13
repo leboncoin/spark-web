@@ -25,6 +25,10 @@ export type LastPageTriggerProps = (AnchorProps | ButtonProps) & {
   ref?: Ref<HTMLButtonElement>
 }
 
+/**
+ * A button that navigates to the last page. Renders a <button> element.
+ */
+
 export const LastPageTrigger = ({
   children,
   className,

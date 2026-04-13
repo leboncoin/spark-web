@@ -12,6 +12,9 @@ export interface AlertDialogContentProps extends Omit<
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * The popup element that contains the alert dialog content. Renders a <div> element.
+ */
 export const AlertDialogContent = ({
   className,
   ref,

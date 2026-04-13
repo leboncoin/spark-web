@@ -14,6 +14,7 @@ export interface SegmentedControlIndicatorProps extends ComponentProps<'span'> {
   ref?: Ref<HTMLSpanElement>
 }
 
+/** The visual indicator that highlights the selected item. Renders a <span> element. */
 export const SegmentedControlIndicator = ({
   className,
   ref,

@@ -9,6 +9,9 @@ export interface DrawerContentProps
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * The popup element that contains the drawer content. Renders a <div> element.
+ */
 export const DrawerContent = ({
   className,
   size = 'md',

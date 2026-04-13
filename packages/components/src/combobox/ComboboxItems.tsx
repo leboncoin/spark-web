@@ -11,6 +11,9 @@ interface ItemsProps extends ComponentPropsWithoutRef<'ul'> {
   ref?: Ref<HTMLUListElement>
 }
 
+/**
+ * Container for the combobox items list. Renders a <ul> element.
+ */
 export const Items = ({ children, className, ref: forwardedRef, ...props }: ItemsProps) => {
   const ctx = useComboboxContext()
 

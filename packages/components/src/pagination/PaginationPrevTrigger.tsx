@@ -25,6 +25,10 @@ export type PrevTriggerProps = (AnchorProps | ButtonProps) & {
   ref?: Ref<HTMLButtonElement>
 }
 
+/**
+ * A button that navigates to the previous page. Renders a <button> element.
+ */
+
 export const PrevTrigger = ({ children, className, href, ref, ...props }: PrevTriggerProps) => {
   const { pagination, type } = usePagination()
 

@@ -4,6 +4,9 @@ import { Icon } from '../icon'
 import { IconButton, IconButtonProps } from '../icon-button'
 import { useCarouselContext } from './Carousel'
 
+/**
+ * A button that navigates to the previous slide. Renders a <button> element.
+ */
 export const CarouselPrevButton = ({
   'aria-label': ariaLabel,
   ...buttonProps

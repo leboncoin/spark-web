@@ -13,6 +13,9 @@ export interface AlertDialogBodyProps {
   inset?: boolean
 }
 
+/**
+ * The scrollable body section of the alert dialog. Renders a <div> element.
+ */
 export const AlertDialogBody = ({
   children,
   className,

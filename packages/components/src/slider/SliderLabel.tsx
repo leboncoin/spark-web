@@ -18,6 +18,7 @@ export interface SliderLabelProps extends LabelProps {
   ref?: Ref<HTMLLabelElement>
 }
 
+/** The label for the slider. Renders a <label> element. */
 export const SliderLabel = ({
   htmlFor: htmlForProp,
   id: idProp,

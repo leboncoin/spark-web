@@ -7,6 +7,9 @@ interface AvatarOnlineBadgeProps extends ComponentPropsWithoutRef<'div'> {
   angle?: number
 }
 
+/**
+ * A badge indicator showing the user's online status. Renders a <div> element.
+ */
 export const AvatarOnlineBadge = ({ angle = 135, ...props }: AvatarOnlineBadgeProps) => {
   const { isOnline, pixelSize, shape, onlineText, size } = useAvatarContext()
 

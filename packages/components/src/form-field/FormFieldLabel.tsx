@@ -14,6 +14,7 @@ export interface FormFieldLabelProps extends LabelProps {
   ref?: Ref<HTMLLabelElement>
 }
 
+/** The label for the form field control. Renders a <label> element. */
 export const FormFieldLabel = ({
   htmlFor: htmlForProp,
   className,

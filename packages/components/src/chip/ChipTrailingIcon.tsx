@@ -7,6 +7,9 @@ export type ChipTrailingIconProps = ChipIconProps & {
   ref?: Ref<HTMLSpanElement>
 }
 
+/**
+ * An icon displayed at the end of the chip. Renders a <span> element.
+ */
 export const ChipTrailingIcon = ({
   className,
   ref: forwardedRef,

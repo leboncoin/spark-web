@@ -8,6 +8,7 @@ export interface SliderMaxValueProps {
   children?: (value: number) => ReactNode
 }
 
+/** Displays the maximum value of the slider. Renders a <div> element. */
 export const SliderMaxValue = forwardRef<HTMLDivElement, SliderMaxValueProps>(
   ({ className, children }, ref) => {
     const { max = 100 } = useSliderContext()

@@ -39,6 +39,9 @@ const labelStyles = cva([], {
   },
 })
 
+/**
+ * The label of the circular meter, announced to assistive technology. Renders a <span> element.
+ */
 export const CircularMeterLabel = ({
   id: idProp,
   children,

@@ -8,6 +8,7 @@ export type InputTrailingAddonProps = InputAddonProps & {
   ref?: Ref<HTMLDivElement>
 }
 
+/** An addon displayed after the input. Renders a <span> element. */
 const Root = ({ className, ref, ...others }: InputTrailingAddonProps) => {
   const { disabled, readOnly } = useInputGroup()
   const isInactive = disabled || readOnly

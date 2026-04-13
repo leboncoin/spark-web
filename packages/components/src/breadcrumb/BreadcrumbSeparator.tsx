@@ -11,6 +11,9 @@ export interface SeparatorProps extends ComponentPropsWithoutRef<'li'> {
   ref?: Ref<HTMLLIElement>
 }
 
+/**
+ * A visual separator between breadcrumb items. Renders a <li> element.
+ */
 export const Separator = ({
   asChild = false,
   className,

@@ -7,6 +7,10 @@ export interface LinkBoxLinkProps extends ComponentPropsWithRef<'a'> {
   asChild?: boolean
 }
 
+/**
+ * The main navigable link within the link box. Renders an <a> element.
+ */
+
 export const LinkBoxLink = ({ className, asChild, ref, ...props }: LinkBoxLinkProps) => {
   const Component = asChild ? Slot : 'a'
 

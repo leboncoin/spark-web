@@ -25,6 +25,10 @@ export type NextTriggerProps = (AnchorProps | ButtonProps) & {
   ref?: Ref<HTMLButtonElement>
 }
 
+/**
+ * A button that navigates to the next page. Renders a <button> element.
+ */
+
 export const NextTrigger = ({ children, className, href, ref, ...props }: NextTriggerProps) => {
   const { pagination, type } = usePagination()
 

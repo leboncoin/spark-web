@@ -7,6 +7,9 @@ export interface FooterProps {
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * The footer section of the dialog, typically containing action buttons. Renders a <footer> element.
+ */
 export const Footer = ({ children, className, ref, ...rest }: FooterProps): ReactElement => (
   <footer
     data-spark-component="dialog-footer"

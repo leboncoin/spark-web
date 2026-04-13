@@ -7,6 +7,9 @@ export interface DrawerHeaderProps {
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * The header section of the drawer. Renders a <header> element.
+ */
 export const DrawerHeader = ({
   children,
   className,

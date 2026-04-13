@@ -7,6 +7,7 @@ import { ProgressIndicator } from './ProgressIndicator'
 
 export type ProgressTrackProps = Omit<ComponentProps<typeof BaseProgress.Track>, 'render'>
 
+/** The track of the progress indicator. Renders a <div> element. */
 export const ProgressTrack = ({ className, ...others }: ProgressTrackProps) => {
   const { shape } = useProgress()
 

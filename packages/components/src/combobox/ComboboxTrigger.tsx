@@ -15,6 +15,9 @@ interface TriggerProps {
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * The trigger area for the combobox containing input and controls. Renders a <div> element.
+ */
 export const Trigger = ({ className, children, ref: forwardedRef }: TriggerProps) => {
   const ctx = useComboboxContext()
   const field = useFormFieldControl()

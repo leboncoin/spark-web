@@ -9,6 +9,7 @@ import { SliderThumbContext } from './SliderThumbContext'
 export type SliderThumbProps = Omit<ComponentProps<typeof BaseSlider.Thumb>, 'render' | 'index'> &
   PropsWithChildren
 
+/** The draggable handle element of the slider. Renders a <span> element. */
 export const SliderThumb = ({
   className,
   ref: forwardedRef,

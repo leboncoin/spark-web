@@ -6,6 +6,7 @@ import { Icon } from '../icon'
 import { IconButton, IconButtonProps } from '../icon-button'
 import { ScrollingListContext } from './ScrollingList'
 
+/** A button to scroll to the next page of items. Renders a <button> element. */
 export const ScrollingListNextButton = ({ 'aria-label': ariaLabel, ...rest }: IconButtonProps) => {
   const ctx = useContext(ScrollingListContext)
 

@@ -12,6 +12,9 @@ export interface AccordionItemProps extends ExtentedZagInterface {
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * Groups an accordion header with the corresponding panel. Renders a <div> element.
+ */
 export const Item = ({
   asChild = false,
   className,

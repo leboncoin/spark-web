@@ -10,6 +10,9 @@ export interface CurrentPageProps extends ComponentPropsWithoutRef<typeof TextLi
   ref?: Ref<HTMLAnchorElement>
 }
 
+/**
+ * Indicates the current page in the breadcrumb trail. Renders a <span> element.
+ */
 export const CurrentPage = ({
   asChild = false,
   className,

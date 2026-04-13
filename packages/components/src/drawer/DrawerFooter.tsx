@@ -5,6 +5,9 @@ export type DrawerFooterProps = ComponentPropsWithoutRef<'footer'> & {
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * The footer section of the drawer, typically containing action buttons. Renders a <footer> element.
+ */
 export const DrawerFooter = ({ className, ref, ...rest }: DrawerFooterProps): ReactElement => (
   <footer
     data-spark-component="drawer-footer"

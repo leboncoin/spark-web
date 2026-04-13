@@ -6,6 +6,7 @@ import { Icon } from '../icon'
 import { IconButton, IconButtonProps } from '../icon-button'
 import { ScrollingListContext } from './ScrollingList'
 
+/** A button to scroll to the previous page of items. Renders a <button> element. */
 export const ScrollingListPrevButton = ({
   'aria-label': ariaLabel,
 

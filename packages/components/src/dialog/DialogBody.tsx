@@ -13,6 +13,9 @@ export interface BodyProps {
   inset?: boolean
 }
 
+/**
+ * The scrollable body section of the dialog. Renders a <div> element.
+ */
 export const Body = ({
   children,
   className,

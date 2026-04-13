@@ -15,9 +15,7 @@ export type SliderValueProps = Omit<
   children?: ReactNode | ((formatted: string, value: number) => ReactNode)
 }
 
-/**
- * Normalizes Base UI's (formattedValues, values) to single (formatted, value) for the render prop.
- */
+/** The current value of the slider. Renders an <output> element. */
 export const SliderValue = ({ className, children, ref, ...rest }: SliderValueProps) => {
   const { registerValueInThumb, controlRef, thumbRef } = useSliderContext()
   const thumbContext = useSliderThumbContext()
