@@ -2,14 +2,17 @@ import { Tag } from '@spark-ui/components/tag'
 import { Meta, StoryFn } from '@storybook/react-vite'
 
 import { Meter, MeterProps } from '.'
+import { MeterLabel } from './MeterLabel'
+import { MeterTrack } from './MeterTrack'
+import { MeterValue } from './MeterValue'
 
 const meta: Meta<typeof Meter> = {
   title: 'Components/Meter',
   component: Meter,
   subcomponents: {
-    'Meter.Label': Meter.Label,
-    'Meter.Track': Meter.Track,
-    'Meter.Value': Meter.Value,
+    'Meter.Label': MeterLabel,
+    'Meter.Track': MeterTrack,
+    'Meter.Value': MeterValue,
   },
   tags: ['indicators'],
   parameters: {

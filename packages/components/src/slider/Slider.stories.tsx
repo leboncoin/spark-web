@@ -4,19 +4,27 @@ import { Meta, StoryFn } from '@storybook/react-vite'
 import { useState } from 'react'
 
 import { Slider, type SliderProps } from '.'
+import { SliderControl as Control } from './SliderControl'
+import { SliderIndicator as Indicator } from './SliderIndicator'
+import { SliderLabel as Label } from './SliderLabel'
+import { SliderMaxValue as MaxValue } from './SliderMaxValue'
+import { SliderMinValue as MinValue } from './SliderMinValue'
+import { SliderThumb as Thumb } from './SliderThumb'
+import { SliderTrack as Track } from './SliderTrack'
+import { SliderValue as Value } from './SliderValue'
 
 const meta: Meta<typeof Slider> = {
   title: 'Components/Slider',
   component: Slider,
   subcomponents: {
-    'Slider.Control': Slider.Control,
-    'Slider.Indicator': Slider.Indicator,
-    'Slider.Label': Slider.Label,
-    'Slider.MaxValue': Slider.MaxValue,
-    'Slider.MinValue': Slider.MinValue,
-    'Slider.Thumb': Slider.Thumb,
-    'Slider.Track': Slider.Track,
-    'Slider.Value': Slider.Value,
+    'Slider.Control': Control,
+    'Slider.Indicator': Indicator,
+    'Slider.Label': Label,
+    'Slider.MaxValue': MaxValue,
+    'Slider.MinValue': MinValue,
+    'Slider.Thumb': Thumb,
+    'Slider.Track': Track,
+    'Slider.Value': Value,
   },
   tags: ['data-entry'],
   parameters: {

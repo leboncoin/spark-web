@@ -12,16 +12,21 @@ import { Button } from '../button'
 import { Checkbox } from '../checkbox'
 import { Icon } from '../icon'
 import { IconButton } from '../icon-button'
+import { InputClearButton } from './InputClearButton'
+import { InputLeadingAddon } from './InputLeadingAddon'
+import { InputLeadingIcon } from './InputLeadingIcon'
+import { InputTrailingAddon } from './InputTrailingAddon'
+import { InputTrailingIcon } from './InputTrailingIcon'
 
 const meta: Meta<typeof InputGroup> = {
   title: 'Components/InputGroup',
   component: InputGroup,
   subcomponents: {
-    'InputGroup.LeadingAddon': InputGroup.LeadingAddon,
-    'InputGroup.TrailingAddon': InputGroup.TrailingAddon,
-    'InputGroup.LeadingIcon': InputGroup.LeadingIcon,
-    'InputGroup.TrailingIcon': InputGroup.TrailingIcon,
-    'InputGroup.ClearButton': InputGroup.ClearButton,
+    'InputGroup.LeadingAddon': InputLeadingAddon,
+    'InputGroup.TrailingAddon': InputTrailingAddon,
+    'InputGroup.LeadingIcon': InputLeadingIcon,
+    'InputGroup.TrailingIcon': InputTrailingIcon,
+    'InputGroup.ClearButton': InputClearButton,
   },
   tags: ['data-entry'],
   parameters: {

@@ -4,18 +4,25 @@ import { useState } from 'react'
 import { Pagination } from '.'
 import { FormField } from '../form-field'
 import { RadioGroup } from '../radio-group'
+import { Ellipsis } from './PaginationEllipsis'
+import { FirstPageTrigger } from './PaginationFirstPageTrigger'
+import { Item } from './PaginationItem'
+import { LastPageTrigger } from './PaginationLastPageTrigger'
+import { NextTrigger } from './PaginationNextTrigger'
+import { Pages } from './PaginationPages'
+import { PrevTrigger } from './PaginationPrevTrigger'
 
 const meta: Meta<typeof Pagination> = {
   title: 'Components/Pagination',
   component: Pagination,
   subcomponents: {
-    'Pagination.PrevTrigger': Pagination.PrevTrigger,
-    'Pagination.NextTrigger': Pagination.NextTrigger,
-    'Pagination.Pages': Pagination.Pages,
-    'Pagination.Item': Pagination.Item,
-    'Pagination.Ellipsis': Pagination.Ellipsis,
-    'Pagination.FirstPageTrigger': Pagination.FirstPageTrigger,
-    'Pagination.LastPageTrigger': Pagination.LastPageTrigger,
+    'Pagination.PrevTrigger': PrevTrigger,
+    'Pagination.NextTrigger': NextTrigger,
+    'Pagination.Pages': Pages,
+    'Pagination.Item': Item,
+    'Pagination.Ellipsis': Ellipsis,
+    'Pagination.FirstPageTrigger': FirstPageTrigger,
+    'Pagination.LastPageTrigger': LastPageTrigger,
   },
   tags: ['navigation'],
   parameters: {

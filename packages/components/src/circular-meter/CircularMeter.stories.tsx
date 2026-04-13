@@ -3,15 +3,19 @@ import { Meta, StoryFn } from '@storybook/react-vite'
 
 import { CircularMeter, CircularMeterProps } from '.'
 import { Label } from '../label'
+import { CircularMeterContent } from './CircularMeterContent'
+import { CircularMeterLabel } from './CircularMeterLabel'
+import { CircularMeterTrack } from './CircularMeterTrack'
+import { CircularMeterValue } from './CircularMeterValue'
 
 const meta: Meta<typeof CircularMeter> = {
   title: 'Components/CircularMeter',
   component: CircularMeter,
   subcomponents: {
-    'CircularMeter.Content': CircularMeter.Content,
-    'CircularMeter.Label': CircularMeter.Label,
-    'CircularMeter.Track': CircularMeter.Track,
-    'CircularMeter.Value': CircularMeter.Value,
+    'CircularMeter.Content': CircularMeterContent,
+    'CircularMeter.Label': CircularMeterLabel,
+    'CircularMeter.Track': CircularMeterTrack,
+    'CircularMeter.Value': CircularMeterValue,
   },
   tags: ['indicators'],
   parameters: {

@@ -6,19 +6,27 @@ import { ComponentProps, useState } from 'react'
 import { Select } from '.'
 import { FormField } from '../form-field'
 import { VisuallyHidden } from '../visually-hidden'
+import { Group as SelectGroup } from './SelectGroup'
+import { Item as SelectItem } from './SelectItem'
+import { Items as SelectItems } from './SelectItems'
+import { Label as SelectLabel } from './SelectLabel'
+import { LeadingIcon as SelectLeadingIcon } from './SelectLeadingIcon'
+import { Placeholder as SelectPlaceholder } from './SelectPlaceholder'
+import { Trigger as SelectTrigger } from './SelectTrigger'
+import { Value as SelectValue } from './SelectValue'
 
 const meta: Meta<typeof Select> = {
   title: 'Components/Select',
   component: Select,
   subcomponents: {
-    'Select.Group': Select.Group,
-    'Select.Item': Select.Item,
-    'Select.Items': Select.Items,
-    'Select.Placeholder': Select.Placeholder,
-    'Select.Label': Select.Label,
-    'Select.Trigger': Select.Trigger,
-    'Select.Value': Select.Value,
-    'Select.LeadingIcon': Select.LeadingIcon,
+    'Select.Group': SelectGroup,
+    'Select.Item': SelectItem,
+    'Select.Items': SelectItems,
+    'Select.Placeholder': SelectPlaceholder,
+    'Select.Label': SelectLabel,
+    'Select.Trigger': SelectTrigger,
+    'Select.Value': SelectValue,
+    'Select.LeadingIcon': SelectLeadingIcon,
   },
   tags: ['data-entry'],
   parameters: {

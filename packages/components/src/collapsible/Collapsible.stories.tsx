@@ -6,13 +6,15 @@ import { useState } from 'react'
 import { Collapsible } from '.'
 import { Icon } from '../icon'
 import { IconButton } from '../icon-button'
+import { Content } from './Content'
+import { Trigger } from './Trigger'
 
 const meta: Meta<typeof Collapsible> = {
   title: 'Components/Collapsible',
   component: Collapsible,
   subcomponents: {
-    'Collapsible.Trigger': Collapsible.Trigger,
-    'Collapsible.Content': Collapsible.Content,
+    'Collapsible.Trigger': Trigger,
+    'Collapsible.Content': Content,
   },
   tags: ['data-display'],
 }

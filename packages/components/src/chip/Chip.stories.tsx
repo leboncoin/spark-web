@@ -12,16 +12,19 @@ import { Icon } from '../icon'
 import { Input as SparkInput, InputGroup } from '../input'
 import { Label } from '../label'
 import { VisuallyHidden } from '../visually-hidden'
+import { ChipClearButton } from './ChipClearButton'
+import { ChipContent } from './ChipContent'
 import { ChipLeadingIcon } from './ChipLeadingIcon'
+import { ChipTrailingIcon } from './ChipTrailingIcon'
 
 const meta: Meta<typeof Chip> = {
   title: 'Components/Chip',
   component: Chip,
   subcomponents: {
-    'Chip.Content': Chip.Content,
-    'Chip.LeadingIcon': Chip.LeadingIcon,
-    'Chip.TrailingIcon': Chip.TrailingIcon,
-    'Chip.ClearButton': Chip.ClearButton,
+    'Chip.Content': ChipContent,
+    'Chip.LeadingIcon': ChipLeadingIcon,
+    'Chip.TrailingIcon': ChipTrailingIcon,
+    'Chip.ClearButton': ChipClearButton,
   },
   tags: ['data-entry'],
   parameters: {

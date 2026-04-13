@@ -5,19 +5,26 @@ import { PropsWithChildren, Ref, useState } from 'react'
 import { Popover } from '.'
 import { Button } from '../button'
 import { RadioGroup } from '../radio-group'
+import { Anchor } from './PopoverAnchor'
+import { Arrow } from './PopoverArrow'
+import { CloseButton } from './PopoverCloseButton'
+import { Content } from './PopoverContent'
 import { type ContentProps } from './PopoverContent'
+import { Header } from './PopoverHeader'
+import { Portal } from './PopoverPortal'
+import { Trigger } from './PopoverTrigger'
 
 const meta: Meta<typeof Popover> = {
   title: 'Components/Popover',
   component: Popover,
   subcomponents: {
-    'Popover.Anchor': Popover.Anchor,
-    'Popover.Arrow': Popover.Arrow,
-    'Popover.CloseButton': Popover.CloseButton,
-    'Popover.Content': Popover.Content,
-    'Popover.Header': Popover.Header,
-    'Popover.Portal': Popover.Portal,
-    'Popover.Trigger': Popover.Trigger,
+    'Popover.Anchor': Anchor,
+    'Popover.Arrow': Arrow,
+    'Popover.CloseButton': CloseButton,
+    'Popover.Content': Content,
+    'Popover.Header': Header,
+    'Popover.Portal': Portal,
+    'Popover.Trigger': Trigger,
   },
   tags: ['overlays'],
   parameters: {
