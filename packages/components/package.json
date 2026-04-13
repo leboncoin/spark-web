@@ -48,9 +48,9 @@
   },
   "dependencies": {
     "@base-ui/react": "1.0.0",
-    "@react-aria/button": "3.13.3",
-    "@react-aria/numberfield": "3.11.16",
-    "@react-stately/numberfield": "3.9.13",
+    "@react-aria/button": "3.13.0",
+    "@react-aria/numberfield": "3.11.13",
+    "@react-stately/numberfield": "3.9.11",
     "@spark-ui/hooks": "17.5.4",
     "@spark-ui/icons": "17.5.4",
     "@spark-ui/internal-utils": "17.5.4",
