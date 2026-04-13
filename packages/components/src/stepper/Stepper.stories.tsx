@@ -7,14 +7,19 @@ import { useState } from 'react'
 import { Stepper, StepperProps } from '.'
 import { FormField } from '../form-field'
 import { Icon } from '../icon'
+import {
+  StepperDecrementButton as DecrementButton,
+  StepperIncrementButton as IncrementButton,
+} from './StepperButton'
+import { StepperInput as Input } from './StepperInput'
 
 const meta: Meta<typeof Stepper> = {
   title: 'Components/Stepper',
   component: Stepper,
   subcomponents: {
-    'Stepper.IncrementButton': Stepper.IncrementButton,
-    'Stepper.DecrementButton': Stepper.DecrementButton,
-    'Stepper.Input': Stepper.Input,
+    'Stepper.IncrementButton': IncrementButton,
+    'Stepper.DecrementButton': DecrementButton,
+    'Stepper.Input': Input,
   },
   tags: ['data-entry'],
   parameters: {

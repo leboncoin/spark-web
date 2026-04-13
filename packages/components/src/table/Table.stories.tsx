@@ -18,16 +18,31 @@ import { Switch } from '../switch'
 import { Tag } from '../tag'
 import { TextLink } from '../text-link'
 import pokedexData from './pokedex.json'
+import { TableBody } from './TableBody'
+import {
+  TableBulkBar,
+  TableBulkBarClearButton,
+  TableBulkBarSelectAllButton,
+  TableBulkBarSelectedCount,
+} from './TableBulkBar'
+import { Cell } from './TableCell'
+import { Column } from './TableColumn'
+import { TableHeader } from './TableHeader'
+import { Row } from './TableRow'
 
 const meta: Meta<typeof Table> = {
   title: 'Components/Table',
   component: Table,
   subcomponents: {
-    'Table.Header': Table.Header,
-    'Table.Column': Table.Column,
-    'Table.Body': Table.Body,
-    'Table.Row': Table.Row,
-    'Table.Cell': Table.Cell,
+    'Table.Header': TableHeader,
+    'Table.Column': Column,
+    'Table.Body': TableBody,
+    'Table.Row': Row,
+    'Table.Cell': Cell,
+    'Table.BulkBar': TableBulkBar,
+    'Table.BulkBarSelectedCount': TableBulkBarSelectedCount,
+    'Table.BulkBarClearButton': TableBulkBarClearButton,
+    'Table.BulkBarSelectAllButton': TableBulkBarSelectAllButton,
   },
   tags: ['data-display'],
   parameters: {

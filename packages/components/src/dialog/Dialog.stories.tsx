@@ -12,22 +12,33 @@ import { Meta, StoryFn } from '@storybook/react-vite'
 import { FormEvent, useRef, useState } from 'react'
 
 import { Dialog, type DialogContentProps } from '.'
+import { Body } from './DialogBody'
+import { Close } from './DialogClose'
+import { CloseButton } from './DialogCloseButton'
+import { Content } from './DialogContent'
+import { Description } from './DialogDescription'
+import { Footer } from './DialogFooter'
+import { Header } from './DialogHeader'
+import { Overlay } from './DialogOverlay'
+import { Portal } from './DialogPortal'
+import { Title } from './DialogTitle'
+import { Trigger } from './DialogTrigger'
 
 const meta: Meta<typeof Dialog> = {
   title: 'Components/Dialog',
   component: Dialog,
   subcomponents: {
-    'Dialog.Trigger': Dialog.Trigger,
-    'Dialog.Portal': Dialog.Portal,
-    'Dialog.Overlay': Dialog.Overlay,
-    'Dialog.Content': Dialog.Content,
-    'Dialog.Header': Dialog.Header,
-    'Dialog.Body': Dialog.Body,
-    'Dialog.Footer': Dialog.Footer,
-    'Dialog.Close': Dialog.Close,
-    'Dialog.CloseButton': Dialog.CloseButton,
-    'Dialog.Title': Dialog.Title,
-    'Dialog.Description': Dialog.Description,
+    'Dialog.Trigger': Trigger,
+    'Dialog.Portal': Portal,
+    'Dialog.Overlay': Overlay,
+    'Dialog.Content': Content,
+    'Dialog.Header': Header,
+    'Dialog.Body': Body,
+    'Dialog.Footer': Footer,
+    'Dialog.Close': Close,
+    'Dialog.CloseButton': CloseButton,
+    'Dialog.Title': Title,
+    'Dialog.Description': Description,
   },
   tags: ['overlays'],
   parameters: {

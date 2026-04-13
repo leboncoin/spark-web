@@ -9,14 +9,17 @@ import { type ReactNode } from 'react'
 import { Tabs } from '.'
 import { Button } from '../button'
 import { Icon } from '../icon'
+import { TabsContent as Content } from './TabsContent'
+import { TabsList as List } from './TabsList'
+import { TabsTrigger as Trigger } from './TabsTrigger'
 
 const meta: Meta<typeof Tabs> = {
   title: 'Components/Tabs',
   component: Tabs,
   subcomponents: {
-    'Tabs.List': Tabs.List,
-    'Tabs.Trigger': Tabs.Trigger,
-    'Tabs.Content': Tabs.Content,
+    'Tabs.List': List,
+    'Tabs.Trigger': Trigger,
+    'Tabs.Content': Content,
   },
   tags: ['navigation'],
   parameters: {

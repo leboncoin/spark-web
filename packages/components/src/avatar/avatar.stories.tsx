@@ -9,16 +9,21 @@ import { Avatar } from '.'
 import { Button } from '../button'
 import { Icon } from '../icon'
 import avatarImg from './avatar.png'
+import { AvatarAction } from './AvatarAction'
+import { AvatarImage } from './AvatarImage'
+import { AvatarOnlineBadge } from './AvatarOnlineBadge'
+import { AvatarPlaceholder } from './AvatarPlaceholder'
+import { AvatarUser } from './AvatarUser'
 
 const meta: Meta<typeof Avatar> = {
   title: 'Components/Avatar',
   component: Avatar,
   subcomponents: {
-    'Avatar.Image': Avatar.Image,
-    'Avatar.Action': Avatar.Action,
-    'Avatar.OnlineBadge': Avatar.OnlineBadge,
-    'Avatar.User': Avatar.User,
-    'Avatar.Placeholder': Avatar.Placeholder,
+    'Avatar.Image': AvatarImage,
+    'Avatar.Action': AvatarAction,
+    'Avatar.OnlineBadge': AvatarOnlineBadge,
+    'Avatar.User': AvatarUser,
+    'Avatar.Placeholder': AvatarPlaceholder,
   },
   tags: ['data-display'],
 }

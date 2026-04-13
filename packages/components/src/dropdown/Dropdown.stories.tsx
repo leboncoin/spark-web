@@ -8,23 +8,35 @@ import { Button } from '../button'
 import { FormField } from '../form-field'
 import { Tag } from '../tag'
 import { VisuallyHidden } from '../visually-hidden'
+import { Divider as DropdownDivider } from './DropdownDivider'
+import { Group as DropdownGroup } from './DropdownGroup'
+import { Item as DropdownItem } from './DropdownItem'
+import { ItemIndicator as DropdownItemIndicator } from './DropdownItemIndicator'
+import { Items as DropdownItems } from './DropdownItems'
+import { ItemText as DropdownItemText } from './DropdownItemText'
+import { Label as DropdownLabel } from './DropdownLabel'
+import { LeadingIcon as DropdownLeadingIcon } from './DropdownLeadingIcon'
+import { Popover as DropdownPopover } from './DropdownPopover'
+import { Portal as DropdownPortal } from './DropdownPortal'
+import { Trigger as DropdownTrigger } from './DropdownTrigger'
+import { Value as DropdownValue } from './DropdownValue'
 
 const meta: Meta<typeof Dropdown> = {
   title: 'Components/Dropdown',
   component: Dropdown,
   subcomponents: {
-    'Dropdown.Group': Dropdown.Group,
-    'Dropdown.Item': Dropdown.Item,
-    'Dropdown.Items': Dropdown.Items,
-    'Dropdown.ItemText': Dropdown.ItemText,
-    'Dropdown.ItemIndicator': Dropdown.ItemIndicator,
-    'Dropdown.Label': Dropdown.Label,
-    'Dropdown.Popover': Dropdown.Popover,
-    'Dropdown.Divider': Dropdown.Divider,
-    'Dropdown.Trigger': Dropdown.Trigger,
-    'Dropdown.Value': Dropdown.Value,
-    'Dropdown.LeadingIcon': Dropdown.LeadingIcon,
-    'Dropdown.Portal': Dropdown.Portal,
+    'Dropdown.Group': DropdownGroup,
+    'Dropdown.Item': DropdownItem,
+    'Dropdown.Items': DropdownItems,
+    'Dropdown.ItemText': DropdownItemText,
+    'Dropdown.ItemIndicator': DropdownItemIndicator,
+    'Dropdown.Label': DropdownLabel,
+    'Dropdown.Popover': DropdownPopover,
+    'Dropdown.Divider': DropdownDivider,
+    'Dropdown.Trigger': DropdownTrigger,
+    'Dropdown.Value': DropdownValue,
+    'Dropdown.LeadingIcon': DropdownLeadingIcon,
+    'Dropdown.Portal': DropdownPortal,
   },
   tags: ['data-entry'],
   parameters: {

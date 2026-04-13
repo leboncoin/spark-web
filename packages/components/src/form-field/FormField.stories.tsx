@@ -3,20 +3,29 @@ import { cx } from 'class-variance-authority'
 import { ChangeEvent, useState } from 'react'
 
 import { FormField } from '.'
+import { FormFieldAlertMessage } from './FormFieldAlertMessage'
+import { FormFieldCharactersCount } from './FormFieldCharactersCount'
+import { FormFieldControl } from './FormFieldControl'
+import { FormFieldErrorMessage } from './FormFieldErrorMessage'
+import { FormFieldHelperMessage } from './FormFieldHelperMessage'
+import { FormFieldLabel } from './FormFieldLabel'
+import { FormFieldRequiredIndicator } from './FormFieldRequiredIndicator'
+import { FormFieldStateMessage } from './FormFieldStateMessage'
+import { FormFieldSuccessMessage } from './FormFieldSuccessMessage'
 
 const meta: Meta<typeof FormField> = {
   title: 'Components/FormField',
   component: FormField,
   subcomponents: {
-    'FormField.Label': FormField.Label,
-    'FormField.Control': FormField.Control,
-    'FormField.StateMessage': FormField.StateMessage,
-    'FormField.SuccessMessage': FormField.SuccessMessage,
-    'FormField.AlertMessage': FormField.AlertMessage,
-    'FormField.ErrorMessage': FormField.ErrorMessage,
-    'FormField.HelperMessage': FormField.HelperMessage,
-    'FormField.RequiredIndicator': FormField.RequiredIndicator,
-    'FormField.CharactersCount': FormField.CharactersCount,
+    'FormField.Label': FormFieldLabel,
+    'FormField.Control': FormFieldControl,
+    'FormField.StateMessage': FormFieldStateMessage,
+    'FormField.SuccessMessage': FormFieldSuccessMessage,
+    'FormField.AlertMessage': FormFieldAlertMessage,
+    'FormField.ErrorMessage': FormFieldErrorMessage,
+    'FormField.HelperMessage': FormFieldHelperMessage,
+    'FormField.RequiredIndicator': FormFieldRequiredIndicator,
+    'FormField.CharactersCount': FormFieldCharactersCount,
   },
   tags: ['data-entry'],
   parameters: {

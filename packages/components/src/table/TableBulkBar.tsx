@@ -38,6 +38,10 @@ export interface TableBulkBarProps {
   rootProps?: Omit<ComponentPropsWithoutRef<'div'>, 'children' | 'className' | 'role' | 'aria-label'>
 }
 
+/**
+ * A toolbar component for bulk actions on table rows. Displays selected row count and action buttons.
+ * Must be used within a Table component.
+ */
 function TableBulkBarRoot({ children, className, rootProps, ...props }: TableBulkBarProps) {
   const { selectedCount, totalCount, onClearSelection, onSelectAll, hasMultiplePages } = useTableContext()
 
@@ -69,6 +73,9 @@ function TableBulkBarRoot({ children, className, rootProps, ...props }: TableBul
   )
 }
 
+/**
+ * Displays the count of selected rows in the bulk action bar. Typically used to show text like "5 items selected".
+ */
 function TableBulkBarSelectedCount({ children }: { children: ReactNode }) {
   useTableBulkBarContext() // enforce usage within BulkBar
 
@@ -77,6 +84,10 @@ function TableBulkBarSelectedCount({ children }: { children: ReactNode }) {
 
 type BulkBarButtonProps = Omit<ButtonProps, 'onClick'>
 
+/**
+ * A button to clear all selected rows. Only visible when hasMultiplePages is true in the Table context.
+ * Automatically disabled when no rows are selected.
+ */
 function TableBulkBarClearButton({ className, children, ...props }: BulkBarButtonProps) {
   const { selectedCount, onClearSelection, hasMultiplePages } = useTableBulkBarContext()
 
@@ -102,6 +113,10 @@ function TableBulkBarClearButton({ className, children, ...props }: BulkBarButto
   )
 }
 
+/**
+ * A button to select all rows across all pages. Only visible when hasMultiplePages is true in the Table context.
+ * Automatically disabled when all rows are already selected or when onSelectAll is not provided.
+ */
 function TableBulkBarSelectAllButton({ className, children, ...props }: BulkBarButtonProps) {
   const { selectedCount, totalCount, onSelectAll, hasMultiplePages } = useTableBulkBarContext()
 

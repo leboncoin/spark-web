@@ -1,7 +1,16 @@
-import { mergeConfig } from 'vite'
+import { dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
 import type { StorybookConfig } from '@storybook/react-vite'
 import { type ParserOptions } from 'react-docgen-typescript'
 import remarkGfm from 'remark-gfm'
+import { mergeConfig } from 'vite'
+
+type ExtendedStorybookConfig = StorybookConfig & {
+  chromatic?: {
+    disableSnapshot?: boolean
+  }
+}
 
 const docgenConfig: ParserOptions = {
   shouldExtractLiteralValuesFromEnum: true,
@@ -40,7 +49,7 @@ const docgenConfig: ParserOptions = {
  * StorybookConfig:
  * https://storybook.js.org/docs/api/main-config/main-config
  */
-const config: StorybookConfig = {
+const config: ExtendedStorybookConfig = {
   framework: {
     name: '@storybook/react-vite',
     options: {},
@@ -79,7 +88,7 @@ const config: StorybookConfig = {
           test: false, // We are not yet using vitest for integrated tests in the storybook UI.
         },
       },
-    }
+    },
   ],
   core: {
     disableTelemetry: true,

@@ -7,22 +7,33 @@ import { AlertDialog } from '../alert-dialog'
 import { Button } from '../button'
 import { Card } from '../card'
 import { RadioGroup } from '../radio-group'
+import { DrawerBody } from './DrawerBody'
+import { DrawerClose } from './DrawerClose'
+import { DrawerCloseButton } from './DrawerCloseButton'
+import { DrawerContent } from './DrawerContent'
+import { DrawerDescription } from './DrawerDescription'
+import { DrawerFooter } from './DrawerFooter'
+import { DrawerHeader } from './DrawerHeader'
+import { DrawerOverlay } from './DrawerOverlay'
+import { DrawerPortal } from './DrawerPortal'
+import { DrawerTitle } from './DrawerTitle'
+import { DrawerTrigger } from './DrawerTrigger'
 
 const meta: Meta<typeof Drawer> = {
   title: 'Components/Drawer',
   component: Drawer,
   subcomponents: {
-    'Drawer.Trigger': Drawer.Trigger,
-    'Drawer.Portal': Drawer.Portal,
-    'Drawer.Overlay': Drawer.Overlay,
-    'Drawer.Content': Drawer.Content,
-    'Drawer.Header': Drawer.Header,
-    'Drawer.Body': Drawer.Body,
-    'Drawer.Footer': Drawer.Footer,
-    'Drawer.Close': Drawer.Close,
-    'Drawer.CloseButton': Drawer.CloseButton,
-    'Drawer.Title': Drawer.Title,
-    'Drawer.Description': Drawer.Description,
+    'Drawer.Trigger': DrawerTrigger,
+    'Drawer.Portal': DrawerPortal,
+    'Drawer.Overlay': DrawerOverlay,
+    'Drawer.Content': DrawerContent,
+    'Drawer.Header': DrawerHeader,
+    'Drawer.Body': DrawerBody,
+    'Drawer.Footer': DrawerFooter,
+    'Drawer.Close': DrawerClose,
+    'Drawer.CloseButton': DrawerCloseButton,
+    'Drawer.Title': DrawerTitle,
+    'Drawer.Description': DrawerDescription,
   },
   tags: ['overlays'],
   parameters: {

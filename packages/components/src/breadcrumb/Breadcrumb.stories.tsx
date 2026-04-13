@@ -3,15 +3,19 @@ import { Meta, StoryFn } from '@storybook/react-vite'
 
 import { Breadcrumb } from '.'
 import { Icon } from '../icon'
+import { CurrentPage } from './BreadcrumbCurrentPage'
+import { Item } from './BreadcrumbItem'
+import { Link } from './BreadcrumbLink'
+import { Separator } from './BreadcrumbSeparator'
 
 const meta: Meta<typeof Breadcrumb> = {
   title: 'Components/Breadcrumb',
   component: Breadcrumb,
   subcomponents: {
-    'Breadcrumb.Item': Breadcrumb.Item,
-    'Breadcrumb.Link': Breadcrumb.Link,
-    'Breadcrumb.CurrentPage': Breadcrumb.CurrentPage,
-    'Breadcrumb.Separator': Breadcrumb.Separator,
+    'Breadcrumb.Item': Item,
+    'Breadcrumb.Link': Link,
+    'Breadcrumb.CurrentPage': CurrentPage,
+    'Breadcrumb.Separator': Separator,
   },
   tags: ['navigation'],
   parameters: {
