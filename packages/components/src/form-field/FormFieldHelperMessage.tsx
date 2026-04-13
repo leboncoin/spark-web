@@ -7,6 +7,7 @@ export type FormFieldHelperMessageProps = FormFieldMessageProps & {
   ref?: Ref<HTMLSpanElement>
 }
 
+/** A helper text message displayed below the form control. Renders a <span> element. */
 export const FormFieldHelperMessage = ({
   className,
   ref,

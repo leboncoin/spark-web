@@ -8,6 +8,9 @@ import { Close, CloseProps } from './DialogClose'
 export type CloseButtonProps = CloseProps &
   Pick<IconButtonProps, 'size' | 'intent' | 'design' | 'aria-label'>
 
+/**
+ * A styled close button positioned in the dialog header. Renders a <button> element.
+ */
 const Root = ({
   'aria-label': ariaLabel,
   className,

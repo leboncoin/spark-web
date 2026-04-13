@@ -30,6 +30,7 @@ export interface FileUploadRejectedFileProps extends ComponentPropsWithoutRef<'l
   className?: string
 }
 
+/** A list item displaying a rejected file with error messages and delete button. Renders a <li> element. */
 export const RejectedFile = ({
   className,
   rejectedFile,

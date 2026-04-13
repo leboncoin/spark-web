@@ -18,6 +18,7 @@ export interface ColumnProps<T extends object = object> extends Omit<
   allowsResizing?: boolean
 }
 
+/** A column definition for the table. This is a collection component that does not render DOM. */
 export function Column<T extends object>({
   label,
   allowsResizing = true,

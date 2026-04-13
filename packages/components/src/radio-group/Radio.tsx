@@ -11,6 +11,10 @@ export type RadioProps = RadioInputProps & {
 
 const ID_PREFIX = ':radio'
 
+/**
+ * A radio button option. Renders a <label> element.
+ */
+
 export const Radio = ({
   className,
   children,

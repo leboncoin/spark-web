@@ -24,6 +24,7 @@ const ratingDisplayCountStyles = cva('text-on-surface/dim-1', {
   },
 })
 
+/** The number of ratings or reviews. Renders a <span> element. */
 export const RatingDisplayCount = ({ className, children, ...rest }: RatingDisplayCountProps) => {
   const { count, size } = useRatingDisplay()
   if (count === undefined) return null

@@ -2,6 +2,9 @@ import { ComponentPropsWithoutRef } from 'react'
 
 export interface InputOTPSeparatorProps extends ComponentPropsWithoutRef<'div'> {}
 
+/**
+ * A visual separator between OTP input groups. Renders a <div> element.
+ */
 export const InputOTPSeparator = ({ className, ...props }: InputOTPSeparatorProps) => {
   return (
     <div

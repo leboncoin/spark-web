@@ -22,6 +22,7 @@ const CompleteIndicator = () => (
   </Icon>
 )
 
+/** The visual indicator (circle or checkmark) for a progress tracker step. Renders a <span> element. */
 export const ProgressTrackerStepIndicator = ({
   complete,
   incomplete,

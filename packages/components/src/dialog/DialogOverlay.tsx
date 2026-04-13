@@ -6,6 +6,9 @@ export interface OverlayProps extends Omit<ComponentProps<typeof BaseDialog.Back
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * The backdrop element that dims the rest of the page. Renders a <div> element.
+ */
 export const Overlay = ({ className, ...props }: OverlayProps) => {
   return (
     <BaseDialog.Backdrop

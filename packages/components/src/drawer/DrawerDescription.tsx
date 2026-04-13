@@ -8,6 +8,9 @@ export interface DrawerDescriptionProps extends Omit<
   ref?: Ref<HTMLParagraphElement>
 }
 
+/**
+ * A paragraph with additional information about the drawer. Renders a <p> element.
+ */
 export const DrawerDescription = (props: DrawerDescriptionProps) => {
   return <BaseDialog.Description data-spark-component="drawer-description" {...props} />
 }

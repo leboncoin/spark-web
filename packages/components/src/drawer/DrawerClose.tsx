@@ -11,6 +11,9 @@ export interface DrawerCloseProps extends Omit<ComponentProps<typeof BaseDialog.
   ref?: Ref<HTMLButtonElement>
 }
 
+/**
+ * A button that closes the drawer. Renders a <button> element.
+ */
 export const DrawerClose = ({ asChild = false, ...props }: DrawerCloseProps) => {
   const renderSlot = useRenderSlot(asChild, 'button')
 

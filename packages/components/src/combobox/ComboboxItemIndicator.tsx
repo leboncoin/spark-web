@@ -12,6 +12,9 @@ export interface ItemIndicatorProps {
   ref?: Ref<HTMLSpanElement>
 }
 
+/**
+ * A visual indicator showing the selected state of a combobox item. Renders a <span> element.
+ */
 export const ItemIndicator = ({
   className,
   children,

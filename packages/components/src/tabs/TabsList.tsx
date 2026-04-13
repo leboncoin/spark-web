@@ -31,6 +31,7 @@ export interface TabsListProps extends Omit<
 
 type ArrowState = 'visible' | 'hidden' | 'disabled'
 
+/** The container for the tab triggers. Renders a <div> element. */
 export const TabsList = ({
   /**
    * Default Base UI Primitive values

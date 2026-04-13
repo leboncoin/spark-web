@@ -38,6 +38,9 @@ const valueStyles = cva(['default:text-on-surface default:font-bold'], {
   },
 })
 
+/**
+ * The value display of the circular meter. Renders a <span> element.
+ */
 export const CircularMeterValue = ({
   className,
   children,

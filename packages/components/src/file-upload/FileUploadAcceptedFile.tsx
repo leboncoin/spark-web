@@ -28,6 +28,7 @@ export interface FileUploadAcceptedFileProps extends ComponentPropsWithoutRef<'l
   className?: string
 }
 
+/** A list item displaying an accepted file with its metadata and delete button. Renders a <li> element. */
 export const AcceptedFile = ({
   className,
   file,

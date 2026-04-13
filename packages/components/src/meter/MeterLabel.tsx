@@ -6,6 +6,9 @@ import { ID_PREFIX, useMeter } from './MeterContext'
 
 export type MeterLabelProps = Omit<ComponentProps<typeof BaseMeter.Label>, 'render'>
 
+/**
+ * The label of the meter, announced to assistive technology. Renders a <span> element.
+ */
 export const MeterLabel = ({
   id: idProp,
   children,

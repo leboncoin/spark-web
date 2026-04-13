@@ -9,6 +9,10 @@ interface LabelProps {
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * A label for a group of dropdown items. Renders a <div> element.
+ */
+
 export const Label = ({ children, className, ref: forwardedRef }: LabelProps) => {
   const { labelId } = useDropdownGroupContext()
 

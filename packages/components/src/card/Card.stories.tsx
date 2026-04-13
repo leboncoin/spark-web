@@ -17,7 +17,6 @@ const meta: Meta<typeof Card> = {
   component: Card,
   subcomponents: {
     'Card.Content': Card.Content,
-    'Card.Backdrop': Card.Backdrop,
   },
   tags: ['action', 'data-display'],
   parameters: {

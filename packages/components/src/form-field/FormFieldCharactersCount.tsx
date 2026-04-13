@@ -23,6 +23,7 @@ export type FormFieldCharactersCountProps = ComponentPropsWithoutRef<'span'> & {
   ref?: Ref<HTMLSpanElement>
 }
 
+/** Displays the character count and remaining characters for an input. Renders a <span> element. */
 export const FormFieldCharactersCount = ({
   className,
   value = '',

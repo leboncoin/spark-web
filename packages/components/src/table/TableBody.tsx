@@ -10,6 +10,7 @@ export interface TableBodyProps<T extends object = object> extends StatelyTableB
   renderEmptyState?: () => ReactNode
 }
 
+/** The body section of the table. Renders a <tbody> element. */
 export function TableBody<T extends object>(props: TableBodyProps<T>) {
   return <StatelyTableBody {...(props as unknown as StatelyTableBodyProps<T>)} />
 }

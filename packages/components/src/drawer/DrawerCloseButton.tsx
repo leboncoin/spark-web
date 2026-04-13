@@ -8,6 +8,9 @@ import { DrawerClose, type DrawerCloseProps } from './DrawerClose'
 export type DrawerCloseButtonProps = DrawerCloseProps &
   Pick<IconButtonProps, 'size' | 'intent' | 'design' | 'aria-label'>
 
+/**
+ * A styled close button positioned in the drawer header. Renders a <button> element.
+ */
 export const DrawerCloseButton = ({
   'aria-label': ariaLabel,
   className,

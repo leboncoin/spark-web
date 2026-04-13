@@ -26,6 +26,7 @@ const stepLabel = cva(
   }
 )
 
+/** The text label for a progress tracker step. Renders a <span> element. */
 export const ProgressTrackerStepLabel = ({
   className,
   children,

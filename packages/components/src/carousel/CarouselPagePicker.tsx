@@ -13,6 +13,9 @@ interface Props {
   className?: string
 }
 
+/**
+ * Container for page indicators using render props pattern. Renders a <div> element.
+ */
 export const CarouselPagePicker = ({ children, className }: Props) => {
   const ctx = useCarouselContext()
 

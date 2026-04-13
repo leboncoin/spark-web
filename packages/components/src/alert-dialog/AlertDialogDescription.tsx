@@ -8,6 +8,9 @@ export interface AlertDialogDescriptionProps extends Omit<
   ref?: Ref<HTMLParagraphElement>
 }
 
+/**
+ * A paragraph with additional information about the dialog. Renders a <p> element.
+ */
 export const AlertDialogDescription = (props: AlertDialogDescriptionProps) => {
   return <BaseAlertDialog.Description data-spark-component="alert-dialog-description" {...props} />
 }

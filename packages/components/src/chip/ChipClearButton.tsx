@@ -22,6 +22,9 @@ export interface ChipClearButtonProps
   ref?: Ref<HTMLSpanElement>
 }
 
+/**
+ * A button to remove or clear the chip. Renders a <button> element wrapped in a <span>.
+ */
 export const ChipClearButton = ({
   children = (
     <Icon>

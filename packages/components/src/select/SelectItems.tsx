@@ -35,6 +35,10 @@ export const styles = cva(
   }
 )
 
+/**
+ * Container for the select items list. Renders a <div> element.
+ */
+
 export const Items = ({
   children,
   className,

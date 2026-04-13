@@ -4,6 +4,10 @@ import { createContext, useContext, useRef } from 'react'
 import { useFileUploadContext } from './FileUpload'
 
 // Context to signal that we're inside a Dropzone
+/**
+ * A drop zone area for drag-and-drop file uploads. Renders a <div> element.
+ */
+
 export const DropzoneContext = createContext<boolean>(false)
 
 export const useDropzoneContext = () => useContext(DropzoneContext)

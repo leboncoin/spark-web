@@ -12,6 +12,9 @@ export interface AvatarActionProps extends React.ButtonHTMLAttributes<HTMLButton
   ariaLabel: string
 }
 
+/**
+ * An action button positioned on the avatar, typically for editing. Renders a <button> element.
+ */
 export const AvatarAction = ({
   className,
   children,

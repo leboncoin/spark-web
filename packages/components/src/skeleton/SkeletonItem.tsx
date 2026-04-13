@@ -38,6 +38,7 @@ const SkeletonItem = ({ shape, className, ref: forwardedRef, ...rest }: Skeleton
   )
 }
 
+/** A rectangular skeleton placeholder. Renders a <div> element. */
 export const SkeletonRectangle = ({ width = '100%', height, ...rest }: SkeletonRectangleProps) => {
   return (
     <SkeletonItem
@@ -55,6 +56,7 @@ export const SkeletonRectangle = ({ width = '100%', height, ...rest }: SkeletonR
   )
 }
 
+/** A circular skeleton placeholder. Renders a <div> element. */
 export const SkeletonCircle = ({ size, ...rest }: SkeletonCircleProps) => (
   <SkeletonItem
     style={{ '--skeleton-circle-size': getSizeValue(size) } as CSSProperties}
@@ -65,6 +67,7 @@ export const SkeletonCircle = ({ size, ...rest }: SkeletonCircleProps) => (
   />
 )
 
+/** Text line skeleton placeholders with configurable line count. Renders <div> elements. */
 export const SkeletonLine = ({
   lines = 1,
   gap: gapProp,

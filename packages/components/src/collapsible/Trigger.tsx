@@ -10,6 +10,9 @@ export interface TriggerProps extends ComponentProps<'button'> {
   asChild?: boolean
 }
 
+/**
+ * A button that toggles the collapsible content. Renders a <button> element.
+ */
 export const Trigger = ({ asChild = false, children, ...props }: TriggerProps) => {
   const renderSlot = useRenderSlot(asChild, 'button')
 

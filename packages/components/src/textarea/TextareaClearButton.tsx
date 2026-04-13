@@ -7,6 +7,7 @@ export interface TextareaClearButtonProps extends ComponentPropsWithoutRef<'butt
   ref?: Ref<HTMLButtonElement>
 }
 
+/** A button to clear the textarea value. Renders a <button> element. */
 export const TextareaClearButton = (props: TextareaClearButtonProps) => {
   return (
     <InputGroup.ClearButton inline data-spark-component="textarea-group-trailing-icon" {...props} />

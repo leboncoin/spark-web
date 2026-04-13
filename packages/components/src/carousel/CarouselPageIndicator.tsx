@@ -12,6 +12,9 @@ interface Props {
   intent?: 'support' | 'surface'
 }
 
+/**
+ * A page indicator button for navigating to a specific slide. Renders a <button> element.
+ */
 export const CarouselPageIndicator = ({
   children,
   unstyled = false,

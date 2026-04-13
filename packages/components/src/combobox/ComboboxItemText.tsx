@@ -10,6 +10,9 @@ export interface ItemTextProps {
   ref?: Ref<HTMLSpanElement>
 }
 
+/**
+ * The text content of a combobox item. Renders a <span> element.
+ */
 export const ItemText = ({ children, className, ref: forwardedRef }: ItemTextProps) => {
   const id = `${ID_PREFIX}-item-text-${useId()}`
 

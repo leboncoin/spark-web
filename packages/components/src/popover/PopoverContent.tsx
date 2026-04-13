@@ -9,6 +9,10 @@ export type ContentProps = RadixPopover.PopoverContentProps &
     ref?: Ref<HTMLDivElement>
   }
 
+/**
+ * The popup element containing popover content. Renders a <div> element.
+ */
+
 export const Content = ({
   // Spark props
   className,
