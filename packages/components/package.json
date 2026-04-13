@@ -50,25 +50,27 @@
     "@base-ui/react": "1.0.0",
     "@react-aria/button": "3.13.0",
     "@react-aria/numberfield": "3.11.13",
+    "@react-aria/toast": "^3.0.0-beta.18",
     "@react-stately/numberfield": "3.9.11",
-    "@spark-ui/hooks": "17.5.5",
-    "@spark-ui/icons": "17.5.5",
-    "@spark-ui/internal-utils": "17.5.5",
+    "@react-stately/toast": "^3.0.0-beta.7",
+    "@spark-ui/hooks": "^17.5.5",
+    "@spark-ui/icons": "^17.5.5",
+    "@spark-ui/internal-utils": "^17.5.5",
     "@zag-js/pagination": "1.30.0",
     "@zag-js/react": "1.30.0",
     "class-variance-authority": "0.7.1",
-    "downshift": "9.0.13",
-    "emulate-tab": "1.2.1",
-    "motion": "12.34.5",
+    "downshift": "9.0.10",
+    "emulate-tab": "^1.2.1",
+    "motion": "^12.34.3",
     "radix-ui": "1.4.3",
-    "react-aria-components": "1.15.1",
-    "react-snap-carousel": "0.5.1"
+    "react-aria-components": "^1.15.0",
+    "react-snap-carousel": "^0.5.1"
   },
   "peerDependencies": {
-    "@spark-ui/theme-utils": "17.5.5",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "tailwindcss": "4.1.18"
+    "@spark-ui/theme-utils": "latest",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "tailwindcss": "^4.1.13"
   },
   "devDependencies": {
     "jsdom-testing-mocks": "1.16.0"
