@@ -5,6 +5,9 @@ import { Label } from '.'
 const meta: Meta<typeof Label> = {
   title: 'Components/Label',
   component: Label,
+  subcomponents: {
+    'Label.RequiredIndicator': Label.RequiredIndicator,
+  },
   tags: ['indicators'],
   parameters: {
     design: {

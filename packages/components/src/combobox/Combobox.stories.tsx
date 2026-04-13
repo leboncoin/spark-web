@@ -21,6 +21,23 @@ import { VisuallyHidden } from '../visually-hidden'
 const meta: Meta<typeof Combobox> = {
   title: 'Components/Combobox',
   component: Combobox,
+  subcomponents: {
+    'Combobox.Group': Combobox.Group,
+    'Combobox.Item': Combobox.Item,
+    'Combobox.Items': Combobox.Items,
+    'Combobox.ItemText': Combobox.ItemText,
+    'Combobox.ItemIndicator': Combobox.ItemIndicator,
+    'Combobox.Label': Combobox.Label,
+    'Combobox.Popover': Combobox.Popover,
+    'Combobox.Trigger': Combobox.Trigger,
+    'Combobox.LeadingIcon': Combobox.LeadingIcon,
+    'Combobox.Empty': Combobox.Empty,
+    'Combobox.Input': Combobox.Input,
+    'Combobox.Disclosure': Combobox.Disclosure,
+    'Combobox.SelectedItems': Combobox.SelectedItems,
+    'Combobox.ClearButton': Combobox.ClearButton,
+    'Combobox.Portal': Combobox.Portal,
+  },
   tags: ['data-entry'],
   parameters: {
     design: {

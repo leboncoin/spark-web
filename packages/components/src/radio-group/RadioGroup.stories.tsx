@@ -11,6 +11,9 @@ import { VisuallyHidden } from '../visually-hidden'
 const meta: Meta<typeof RadioGroup> = {
   title: 'Components/RadioGroup',
   component: RadioGroup,
+  subcomponents: {
+    'RadioGroup.Radio': RadioGroup.Radio,
+  },
   tags: ['data-entry'],
   parameters: {
     design: {

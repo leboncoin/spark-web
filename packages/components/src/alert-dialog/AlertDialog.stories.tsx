@@ -8,6 +8,19 @@ import { Input } from '../input'
 const meta: Meta<typeof AlertDialog> = {
   title: 'Components/AlertDialog',
   component: AlertDialog,
+  subcomponents: {
+    'AlertDialog.Action': AlertDialog.Action,
+    'AlertDialog.Body': AlertDialog.Body,
+    'AlertDialog.Cancel': AlertDialog.Cancel,
+    'AlertDialog.Content': AlertDialog.Content,
+    'AlertDialog.Description': AlertDialog.Description,
+    'AlertDialog.Footer': AlertDialog.Footer,
+    'AlertDialog.Header': AlertDialog.Header,
+    'AlertDialog.Overlay': AlertDialog.Overlay,
+    'AlertDialog.Portal': AlertDialog.Portal,
+    'AlertDialog.Title': AlertDialog.Title,
+    'AlertDialog.Trigger': AlertDialog.Trigger,
+  },
   tags: ['overlays'],
   parameters: {
     design: {

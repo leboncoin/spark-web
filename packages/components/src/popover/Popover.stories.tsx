@@ -10,6 +10,15 @@ import { type ContentProps } from './PopoverContent'
 const meta: Meta<typeof Popover> = {
   title: 'Components/Popover',
   component: Popover,
+  subcomponents: {
+    'Popover.Anchor': Popover.Anchor,
+    'Popover.Arrow': Popover.Arrow,
+    'Popover.CloseButton': Popover.CloseButton,
+    'Popover.Content': Popover.Content,
+    'Popover.Header': Popover.Header,
+    'Popover.Portal': Popover.Portal,
+    'Popover.Trigger': Popover.Trigger,
+  },
   tags: ['overlays'],
   parameters: {
     design: {

@@ -10,6 +10,10 @@ import { IconButton } from '../icon-button'
 const meta: Meta<typeof Collapsible> = {
   title: 'Components/Collapsible',
   component: Collapsible,
+  subcomponents: {
+    'Collapsible.Trigger': Collapsible.Trigger,
+    'Collapsible.Content': Collapsible.Content,
+  },
   tags: ['data-display'],
 }
 

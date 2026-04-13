@@ -10,6 +10,16 @@ import { VisuallyHidden } from '../visually-hidden'
 const meta: Meta<typeof Select> = {
   title: 'Components/Select',
   component: Select,
+  subcomponents: {
+    'Select.Group': Select.Group,
+    'Select.Item': Select.Item,
+    'Select.Items': Select.Items,
+    'Select.Placeholder': Select.Placeholder,
+    'Select.Label': Select.Label,
+    'Select.Trigger': Select.Trigger,
+    'Select.Value': Select.Value,
+    'Select.LeadingIcon': Select.LeadingIcon,
+  },
   tags: ['data-entry'],
   parameters: {
     design: {

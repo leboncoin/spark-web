@@ -17,6 +17,12 @@ import { ChipLeadingIcon } from './ChipLeadingIcon'
 const meta: Meta<typeof Chip> = {
   title: 'Components/Chip',
   component: Chip,
+  subcomponents: {
+    'Chip.Content': Chip.Content,
+    'Chip.LeadingIcon': Chip.LeadingIcon,
+    'Chip.TrailingIcon': Chip.TrailingIcon,
+    'Chip.ClearButton': Chip.ClearButton,
+  },
   tags: ['data-entry'],
   parameters: {
     design: {

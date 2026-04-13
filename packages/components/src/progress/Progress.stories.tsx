@@ -8,6 +8,11 @@ import { Progress, ProgressProps } from '.'
 const meta: Meta<typeof Progress> = {
   title: 'Components/Progress',
   component: Progress,
+  subcomponents: {
+    'Progress.Label': Progress.Label,
+    'Progress.Track': Progress.Track,
+    'Progress.Value': Progress.Value,
+  },
   tags: ['indicators'],
   parameters: {
     design: {

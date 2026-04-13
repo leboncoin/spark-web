@@ -17,6 +17,10 @@ import pandaImg from './docAssets/panda.jpg'
 const meta: Meta<typeof Card> = {
   title: 'Components/Card',
   component: Card,
+  subcomponents: {
+    'Card.Content': Card.Content,
+    'Card.Backdrop': Card.Backdrop,
+  },
   tags: ['action', 'data-display'],
   parameters: {
     design: {

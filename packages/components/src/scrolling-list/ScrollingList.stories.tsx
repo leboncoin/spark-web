@@ -14,6 +14,14 @@ import { ScrollingList } from '.'
 const meta: Meta<typeof ScrollingList> = {
   title: 'Components/ScrollingList',
   component: ScrollingList,
+  subcomponents: {
+    'ScrollingList.Controls': ScrollingList.Controls,
+    'ScrollingList.NextButton': ScrollingList.NextButton,
+    'ScrollingList.PrevButton': ScrollingList.PrevButton,
+    'ScrollingList.Item': ScrollingList.Item,
+    'ScrollingList.Items': ScrollingList.Items,
+    'ScrollingList.SkipButton': ScrollingList.SkipButton,
+  },
 }
 
 export default meta

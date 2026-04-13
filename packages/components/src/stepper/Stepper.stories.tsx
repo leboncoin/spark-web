@@ -11,6 +11,11 @@ import { Icon } from '../icon'
 const meta: Meta<typeof Stepper> = {
   title: 'Components/Stepper',
   component: Stepper,
+  subcomponents: {
+    'Stepper.IncrementButton': Stepper.IncrementButton,
+    'Stepper.DecrementButton': Stepper.DecrementButton,
+    'Stepper.Input': Stepper.Input,
+  },
   tags: ['data-entry'],
   parameters: {
     design: {

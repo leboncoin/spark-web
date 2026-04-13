@@ -11,6 +11,19 @@ import { RadioGroup } from '../radio-group'
 const meta: Meta<typeof Drawer> = {
   title: 'Components/Drawer',
   component: Drawer,
+  subcomponents: {
+    'Drawer.Trigger': Drawer.Trigger,
+    'Drawer.Portal': Drawer.Portal,
+    'Drawer.Overlay': Drawer.Overlay,
+    'Drawer.Content': Drawer.Content,
+    'Drawer.Header': Drawer.Header,
+    'Drawer.Body': Drawer.Body,
+    'Drawer.Footer': Drawer.Footer,
+    'Drawer.Close': Drawer.Close,
+    'Drawer.CloseButton': Drawer.CloseButton,
+    'Drawer.Title': Drawer.Title,
+    'Drawer.Description': Drawer.Description,
+  },
   tags: ['overlays'],
   parameters: {
     design: {

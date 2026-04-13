@@ -8,6 +8,15 @@ import { RadioGroup } from '../radio-group'
 const meta: Meta<typeof Pagination> = {
   title: 'Components/Pagination',
   component: Pagination,
+  subcomponents: {
+    'Pagination.PrevTrigger': Pagination.PrevTrigger,
+    'Pagination.NextTrigger': Pagination.NextTrigger,
+    'Pagination.Pages': Pagination.Pages,
+    'Pagination.Item': Pagination.Item,
+    'Pagination.Ellipsis': Pagination.Ellipsis,
+    'Pagination.FirstPageTrigger': Pagination.FirstPageTrigger,
+    'Pagination.LastPageTrigger': Pagination.LastPageTrigger,
+  },
   tags: ['navigation'],
   parameters: {
     design: {

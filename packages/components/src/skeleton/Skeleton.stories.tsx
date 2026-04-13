@@ -6,6 +6,11 @@ import { Skeleton } from '.'
 const meta: Meta<typeof Skeleton> = {
   title: 'Components/Skeleton',
   component: Skeleton,
+  subcomponents: {
+    'Skeleton.Circle': Skeleton.Circle,
+    'Skeleton.Line': Skeleton.Line,
+    'Skeleton.Rectangle': Skeleton.Rectangle,
+  },
   tags: ['others'],
   parameters: {
     design: {

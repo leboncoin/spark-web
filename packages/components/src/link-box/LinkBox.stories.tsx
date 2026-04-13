@@ -9,6 +9,10 @@ import { TextLink } from '../text-link'
 const meta: Meta<typeof LinkBox> = {
   title: 'Components/LinkBox',
   component: LinkBox,
+  subcomponents: {
+    'LinkBox.Link': LinkBox.Link,
+    'LinkBox.Raised': LinkBox.Raised,
+  },
   tags: ['others'],
 }
 

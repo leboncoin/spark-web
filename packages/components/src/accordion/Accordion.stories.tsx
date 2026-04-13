@@ -8,6 +8,12 @@ import { Tag } from '../tag'
 const meta: Meta<typeof Accordion> = {
   title: 'Components/Accordion',
   component: Accordion,
+  subcomponents: {
+    'Accordion.Item': Accordion.Item,
+    'Accordion.ItemHeader': Accordion.ItemHeader,
+    'Accordion.ItemTrigger': Accordion.ItemTrigger,
+    'Accordion.ItemContent': Accordion.ItemContent,
+  },
   tags: ['data-display'],
   parameters: {
     design: {

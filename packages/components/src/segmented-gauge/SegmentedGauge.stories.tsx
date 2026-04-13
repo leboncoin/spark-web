@@ -6,6 +6,11 @@ import { SegmentedGauge } from '.'
 const meta: Meta<typeof SegmentedGauge> = {
   title: 'Components/SegmentedGauge',
   component: SegmentedGauge,
+  subcomponents: {
+    'SegmentedGauge.Track': SegmentedGauge.Track,
+    'SegmentedGauge.Segment': SegmentedGauge.Segment,
+    'SegmentedGauge.Label': SegmentedGauge.Label,
+  },
   tags: ['data-display'],
   parameters: {},
 }

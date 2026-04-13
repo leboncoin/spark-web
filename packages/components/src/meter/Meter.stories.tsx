@@ -6,6 +6,11 @@ import { Meter, MeterProps } from '.'
 const meta: Meta<typeof Meter> = {
   title: 'Components/Meter',
   component: Meter,
+  subcomponents: {
+    'Meter.Label': Meter.Label,
+    'Meter.Track': Meter.Track,
+    'Meter.Value': Meter.Value,
+  },
   tags: ['indicators'],
   parameters: {
     design: {

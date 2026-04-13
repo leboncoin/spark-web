@@ -16,6 +16,19 @@ import { Dialog, type DialogContentProps } from '.'
 const meta: Meta<typeof Dialog> = {
   title: 'Components/Dialog',
   component: Dialog,
+  subcomponents: {
+    'Dialog.Trigger': Dialog.Trigger,
+    'Dialog.Portal': Dialog.Portal,
+    'Dialog.Overlay': Dialog.Overlay,
+    'Dialog.Content': Dialog.Content,
+    'Dialog.Header': Dialog.Header,
+    'Dialog.Body': Dialog.Body,
+    'Dialog.Footer': Dialog.Footer,
+    'Dialog.Close': Dialog.Close,
+    'Dialog.CloseButton': Dialog.CloseButton,
+    'Dialog.Title': Dialog.Title,
+    'Dialog.Description': Dialog.Description,
+  },
   tags: ['overlays'],
   parameters: {
     design: {

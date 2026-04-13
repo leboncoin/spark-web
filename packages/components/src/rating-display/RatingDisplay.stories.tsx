@@ -7,6 +7,11 @@ import type { StarValue } from './types'
 const meta: Meta<typeof RatingDisplay> = {
   title: 'Components/RatingDisplay',
   component: RatingDisplay,
+  subcomponents: {
+    'RatingDisplay.Stars': RatingDisplay.Stars,
+    'RatingDisplay.Value': RatingDisplay.Value,
+    'RatingDisplay.Count': RatingDisplay.Count,
+  },
   tags: ['data-entry'],
   parameters: {
     design: {
