@@ -13,6 +13,10 @@ import { Tag } from '../tag'
 const meta: Meta<typeof SegmentedControl> = {
   title: 'Components/SegmentedControl',
   component: SegmentedControl,
+  subcomponents: {
+    'SegmentedControl.Item': SegmentedControl.Item,
+    'SegmentedControl.Indicator': SegmentedControl.Indicator,
+  },
   tags: ['form'],
   parameters: {
     design: {

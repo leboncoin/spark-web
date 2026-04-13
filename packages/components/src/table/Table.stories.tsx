@@ -22,6 +22,13 @@ import pokedexData from './pokedex.json'
 const meta: Meta<typeof Table> = {
   title: 'Components/Table',
   component: Table,
+  subcomponents: {
+    'Table.Header': Table.Header,
+    'Table.Column': Table.Column,
+    'Table.Body': Table.Body,
+    'Table.Row': Table.Row,
+    'Table.Cell': Table.Cell,
+  },
   tags: ['data-display'],
   parameters: {
     design: {

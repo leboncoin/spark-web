@@ -7,6 +7,12 @@ import { Icon } from '../icon'
 const meta: Meta<typeof Breadcrumb> = {
   title: 'Components/Breadcrumb',
   component: Breadcrumb,
+  subcomponents: {
+    'Breadcrumb.Item': Breadcrumb.Item,
+    'Breadcrumb.Link': Breadcrumb.Link,
+    'Breadcrumb.CurrentPage': Breadcrumb.CurrentPage,
+    'Breadcrumb.Separator': Breadcrumb.Separator,
+  },
   tags: ['navigation'],
   parameters: {
     design: {

@@ -9,6 +9,9 @@ type DividerProps = ComponentProps<typeof Divider>
 const meta: Meta<typeof Divider> = {
   title: 'Components/Divider',
   component: Divider,
+  subcomponents: {
+    'Divider.Content': Divider.Content,
+  },
   tags: ['data-display'],
   parameters: {
     design: {

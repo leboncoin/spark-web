@@ -7,6 +7,11 @@ import { Textarea, TextareaGroup } from '.'
 const meta: Meta<typeof TextareaGroup> = {
   title: 'Components/TextareaGroup',
   component: TextareaGroup,
+  subcomponents: {
+    'TextareaGroup.LeadingIcon': TextareaGroup.LeadingIcon,
+    'TextareaGroup.TrailingIcon': TextareaGroup.TrailingIcon,
+    'TextareaGroup.ClearButton': TextareaGroup.ClearButton,
+  },
   tags: ['data-entry'],
   parameters: {
     design: {

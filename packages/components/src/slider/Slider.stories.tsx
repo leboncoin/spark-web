@@ -8,6 +8,16 @@ import { Slider, type SliderProps } from '.'
 const meta: Meta<typeof Slider> = {
   title: 'Components/Slider',
   component: Slider,
+  subcomponents: {
+    'Slider.Control': Slider.Control,
+    'Slider.Indicator': Slider.Indicator,
+    'Slider.Label': Slider.Label,
+    'Slider.MaxValue': Slider.MaxValue,
+    'Slider.MinValue': Slider.MinValue,
+    'Slider.Thumb': Slider.Thumb,
+    'Slider.Track': Slider.Track,
+    'Slider.Value': Slider.Value,
+  },
   tags: ['data-entry'],
   parameters: {
     design: {

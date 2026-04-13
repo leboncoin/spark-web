@@ -8,6 +8,11 @@ import { InputOTP } from '.'
 const meta: Meta<typeof InputOTP> = {
   title: 'Components/InputOTP',
   component: InputOTP,
+  subcomponents: {
+    'InputOTP.Group': InputOTP.Group,
+    'InputOTP.Slot': InputOTP.Slot,
+    'InputOTP.Separator': InputOTP.Separator,
+  },
   tags: ['data-entry'],
 }
 

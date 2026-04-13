@@ -9,6 +9,11 @@ import { Icon } from '../icon'
 const meta: Meta<typeof ProgressTracker> = {
   title: 'Components/ProgressTracker',
   component: ProgressTracker,
+  subcomponents: {
+    'ProgressTracker.Step': ProgressTracker.Step,
+    'ProgressTracker.StepLabel': ProgressTracker.StepLabel,
+    'ProgressTracker.StepIndicator': ProgressTracker.StepIndicator,
+  },
   tags: ['indicators'],
   parameters: {
     design: {

@@ -14,6 +14,16 @@ import { Stepper } from '../stepper'
 const meta: Meta<typeof Carousel> = {
   title: 'Components/Carousel',
   component: Carousel,
+  subcomponents: {
+    'Carousel.Controls': Carousel.Controls,
+    'Carousel.NextButton': Carousel.NextButton,
+    'Carousel.PrevButton': Carousel.PrevButton,
+    'Carousel.Slide': Carousel.Slide,
+    'Carousel.Slides': Carousel.Slides,
+    'Carousel.Viewport': Carousel.Viewport,
+    'Carousel.PagePicker': Carousel.PagePicker,
+    'Carousel.PageIndicator': Carousel.PageIndicator,
+  },
   tags: ['layout'],
   parameters: {
     design: {

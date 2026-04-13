@@ -7,6 +7,12 @@ import { Label } from '../label'
 const meta: Meta<typeof CircularMeter> = {
   title: 'Components/CircularMeter',
   component: CircularMeter,
+  subcomponents: {
+    'CircularMeter.Content': CircularMeter.Content,
+    'CircularMeter.Label': CircularMeter.Label,
+    'CircularMeter.Track': CircularMeter.Track,
+    'CircularMeter.Value': CircularMeter.Value,
+  },
   tags: ['indicators'],
   parameters: {
     design: {

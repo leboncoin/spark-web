@@ -7,6 +7,17 @@ import { FormField } from '.'
 const meta: Meta<typeof FormField> = {
   title: 'Components/FormField',
   component: FormField,
+  subcomponents: {
+    'FormField.Label': FormField.Label,
+    'FormField.Control': FormField.Control,
+    'FormField.StateMessage': FormField.StateMessage,
+    'FormField.SuccessMessage': FormField.SuccessMessage,
+    'FormField.AlertMessage': FormField.AlertMessage,
+    'FormField.ErrorMessage': FormField.ErrorMessage,
+    'FormField.HelperMessage': FormField.HelperMessage,
+    'FormField.RequiredIndicator': FormField.RequiredIndicator,
+    'FormField.CharactersCount': FormField.CharactersCount,
+  },
   tags: ['data-entry'],
   parameters: {
     design: {

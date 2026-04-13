@@ -15,6 +15,16 @@ import { FormField } from '../form-field'
 const meta: Meta<typeof FileUpload> = {
   title: 'Components/FileUpload',
   component: FileUpload,
+  subcomponents: {
+    'FileUpload.Trigger': FileUpload.Trigger,
+    'FileUpload.Dropzone': FileUpload.Dropzone,
+    'FileUpload.Context': FileUpload.Context,
+    'FileUpload.ItemDeleteTrigger': FileUpload.ItemDeleteTrigger,
+    'FileUpload.PreviewImage': FileUpload.PreviewImage,
+    'FileUpload.AcceptedFile': FileUpload.AcceptedFile,
+    'FileUpload.RejectedFile': FileUpload.RejectedFile,
+    'FileUpload.RejectedFileDeleteTrigger': FileUpload.RejectedFileDeleteTrigger,
+  },
   tags: ['data-entry'],
   parameters: {
     design: {

@@ -12,6 +12,20 @@ import { VisuallyHidden } from '../visually-hidden'
 const meta: Meta<typeof Dropdown> = {
   title: 'Components/Dropdown',
   component: Dropdown,
+  subcomponents: {
+    'Dropdown.Group': Dropdown.Group,
+    'Dropdown.Item': Dropdown.Item,
+    'Dropdown.Items': Dropdown.Items,
+    'Dropdown.ItemText': Dropdown.ItemText,
+    'Dropdown.ItemIndicator': Dropdown.ItemIndicator,
+    'Dropdown.Label': Dropdown.Label,
+    'Dropdown.Popover': Dropdown.Popover,
+    'Dropdown.Divider': Dropdown.Divider,
+    'Dropdown.Trigger': Dropdown.Trigger,
+    'Dropdown.Value': Dropdown.Value,
+    'Dropdown.LeadingIcon': Dropdown.LeadingIcon,
+    'Dropdown.Portal': Dropdown.Portal,
+  },
   tags: ['data-entry'],
   parameters: {
     design: {

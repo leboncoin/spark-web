@@ -13,6 +13,11 @@ import { Icon } from '../icon'
 const meta: Meta<typeof Tabs> = {
   title: 'Components/Tabs',
   component: Tabs,
+  subcomponents: {
+    'Tabs.List': Tabs.List,
+    'Tabs.Trigger': Tabs.Trigger,
+    'Tabs.Content': Tabs.Content,
+  },
   tags: ['navigation'],
   parameters: {
     design: {

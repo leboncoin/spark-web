@@ -16,6 +16,13 @@ import { IconButton } from '../icon-button'
 const meta: Meta<typeof InputGroup> = {
   title: 'Components/InputGroup',
   component: InputGroup,
+  subcomponents: {
+    'InputGroup.LeadingAddon': InputGroup.LeadingAddon,
+    'InputGroup.TrailingAddon': InputGroup.TrailingAddon,
+    'InputGroup.LeadingIcon': InputGroup.LeadingIcon,
+    'InputGroup.TrailingIcon': InputGroup.TrailingIcon,
+    'InputGroup.ClearButton': InputGroup.ClearButton,
+  },
   tags: ['data-entry'],
   parameters: {
     design: {

@@ -13,6 +13,13 @@ import avatarImg from './avatar.png'
 const meta: Meta<typeof Avatar> = {
   title: 'Components/Avatar',
   component: Avatar,
+  subcomponents: {
+    'Avatar.Image': Avatar.Image,
+    'Avatar.Action': Avatar.Action,
+    'Avatar.OnlineBadge': Avatar.OnlineBadge,
+    'Avatar.User': Avatar.User,
+    'Avatar.Placeholder': Avatar.Placeholder,
+  },
   tags: ['data-display'],
 }
 
