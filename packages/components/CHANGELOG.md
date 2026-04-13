@@ -1,3 +1,13 @@
+## 17.5.5 (2026-04-13)
+
+### 🩹 Fixes
+
+- **components:** revert reat aria stepper ([f2822c0e9](https://github.com/leboncoin/spark-web/commit/f2822c0e9))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.5.4 (2026-04-12)
 
 ### 💅 Refactors
