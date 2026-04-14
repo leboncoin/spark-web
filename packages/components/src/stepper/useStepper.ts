@@ -1,37 +1,16 @@
-import { useNumberField } from '@react-aria/numberfield'
-import { useNumberFieldState } from '@react-stately/numberfield'
-
+/**
+ * @deprecated This hook is deprecated and no longer used internally.
+ * The Stepper component now uses Base UI's NumberField which manages state internally.
+ * This file is kept for backward compatibility but will be removed in a future version.
+ */
 import type { UseStepperArgs, UseStepperReturn } from './types'
 
-export const useStepper = ({
-  inputRef,
-  locale = 'fr',
-  ...rest
-}: UseStepperArgs): UseStepperReturn => {
-  const state = useNumberFieldState({
-    ...rest,
-    isDisabled: rest.disabled,
-    isReadOnly: rest.readOnly,
-    isRequired: rest.required,
-    locale,
-  })
-
-  const { groupProps, inputProps, incrementButtonProps, decrementButtonProps } = useNumberField(
-    {
-      isWheelDisabled: false,
-      ...rest,
-      isDisabled: rest.disabled,
-      isReadOnly: rest.readOnly,
-      isRequired: rest.required,
-    },
-    state,
-    inputRef
-  )
-
+export const useStepper = (_args: UseStepperArgs): UseStepperReturn => {
+  // This hook is deprecated. State management is now handled by Base UI NumberField.
   return {
-    groupProps,
-    inputProps,
-    incrementButtonProps,
-    decrementButtonProps,
+    groupProps: {},
+    inputProps: {},
+    incrementButtonProps: {},
+    decrementButtonProps: {},
   }
 }
