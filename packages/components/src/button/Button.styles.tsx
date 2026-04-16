@@ -59,6 +59,7 @@ export const buttonStyles = cva(
           'neutral',
           'surface',
           'surfaceInverse',
+          'ai',
         ]
       >({
         main: [],
@@ -71,6 +72,7 @@ export const buttonStyles = cva(
         neutral: [],
         surface: [],
         surfaceInverse: [],
+        ai: [],
       }),
       /**
        * Size of the button.

@@ -116,4 +116,16 @@ export const filledVariants = [
       'focus-visible:bg-surface-inverse-hovered',
     ]),
   },
+  // AI
+  {
+    intent: 'ai',
+    design: 'filled',
+    class: tw([
+      'bg-ai',
+      'text-on-ai',
+      'hover:bg-ai-hovered',
+      'enabled:active:bg-ai-hovered',
+      'focus-visible:bg-ai-hovered',
+    ]),
+  },
 ] as const

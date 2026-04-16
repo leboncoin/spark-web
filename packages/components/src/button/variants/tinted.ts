@@ -111,4 +111,15 @@ export const tintedVariants = [
       'focus-visible:bg-surface-inverse-hovered',
     ]),
   },
+  {
+    intent: 'ai',
+    design: 'tinted',
+    class: tw([
+      'bg-ai-container',
+      'text-on-ai-container',
+      'hover:bg-ai-container-hovered',
+      'enabled:active:bg-ai-container-hovered',
+      'focus-visible:bg-ai-container-hovered',
+    ]),
+  },
 ] as const

@@ -38,6 +38,7 @@ const intents: ButtonProps['intent'][] = [
   'neutral',
   'surface',
   'surfaceInverse',
+  'ai',
 ]
 const designs: ButtonProps['design'][] = ['filled', 'outlined', 'tinted', 'contrast', 'ghost']
 const shapes: ButtonProps['shape'][] = ['rounded', 'square', 'pill']

@@ -57,6 +57,12 @@
   --color-neutral-container: #f0f2f5;
   --color-on-neutral-container: #3a4757;
   --color-neutral-container-hovered: #f6f8f9;
+  --color-ai: #c0457a;
+  --color-on-ai: #ffffff;
+  --color-ai-hovered: #d15a90;
+  --color-ai-container: #fce8f2;
+  --color-on-ai-container: #7a1f4a;
+  --color-ai-container-hovered: #fef4f9;
   --color-background: #ffffff;
   --color-on-background: #152233;
   --color-background-variant: #f4f9fe;

@@ -125,6 +125,11 @@ export const getThemeContrastReport = () => {
     neutralHovered: 'bg-neutral-hovered text-on-neutral',
     neutralContainer: 'bg-neutral-container text-on-neutral-container',
     neutralContainerHovered: 'bg-neutral-container-hovered text-on-neutral-container',
+    // AI
+    ai: 'bg-ai text-on-ai',
+    aiHovered: 'bg-ai-hovered text-on-ai',
+    aiContainer: 'bg-ai-container text-on-ai-container',
+    aiContainerHovered: 'bg-ai-container-hovered text-on-ai-container',
     // BACKGROUND
     background: 'bg-background text-on-background',
     backgroundVariant: 'bg-background-variant text-on-background-variant',

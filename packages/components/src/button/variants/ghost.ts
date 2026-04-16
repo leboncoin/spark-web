@@ -101,4 +101,14 @@ export const ghostVariants = [
       'focus-visible:bg-surface-inverse/dim-5',
     ]),
   },
+  {
+    intent: 'ai',
+    design: 'ghost',
+    class: tw([
+      'text-on-ai-container',
+      'hover:bg-ai/dim-5',
+      'enabled:active:bg-ai/dim-5',
+      'focus-visible:bg-ai/dim-5',
+    ]),
+  },
 ] as const

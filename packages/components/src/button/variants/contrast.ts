@@ -101,4 +101,14 @@ export const contrastVariants = [
       'focus-visible:bg-surface-inverse-hovered',
     ]),
   },
+  {
+    intent: 'ai',
+    design: 'contrast',
+    class: tw([
+      'text-on-ai-container bg-surface',
+      'hover:bg-ai-container-hovered',
+      'enabled:active:bg-ai-container-hovered',
+      'focus-visible:bg-ai-container-hovered',
+    ]),
+  },
 ] as const
