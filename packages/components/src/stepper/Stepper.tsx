@@ -31,7 +31,9 @@ export const Stepper = ({
 }: PropsWithChildren<StepperProps>) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const formFieldControlProps = useFormFieldControl()
-  const lastCommittedValueRef = useRef<number | null>(null)
+  const lastCommittedValueRef = useRef<number | null>(
+    stepperProps.value ?? stepperProps.defaultValue ?? null
+  )
 
   const name = formFieldControlProps.name ?? nameProp
   const disabled = formFieldControlProps.disabled ?? stepperProps.disabled
@@ -42,7 +44,9 @@ export const Stepper = ({
   // We use onValueCommitted to preserve the old behavior where onValueChange is only called on blur for input changes,
   // but immediately for button clicks.
   const handleValueCommit = (value: number | null) => {
-    if (onValueChange && value !== null && value !== lastCommittedValueRef.current) {
+    // Allow null values to be propagated (when input is cleared)
+    // This is necessary for controlled mode and React Hook Form validation
+    if (onValueChange && value !== lastCommittedValueRef.current) {
       lastCommittedValueRef.current = value
       onValueChange(value)
     }

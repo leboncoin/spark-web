@@ -44,8 +44,9 @@ export interface UseStepperArgs extends Omit<
   formatOptions?: Intl.NumberFormatOptions
   /**
    * Callback fired when the value changes.
+   * The value is null when the input is cleared.
    */
-  onValueChange?: (value: number) => void
+  onValueChange?: (value: number | null) => void
   /**
    * The [BCP47](https://www.ietf.org/rfc/bcp/bcp47.txt) language code for the locale.
    * @default 'fr'
