@@ -1,3 +1,13 @@
+## 17.5.6 (2026-04-20)
+
+### 💅 Refactors
+
+- **components:** stepper to base ui ([87a20801e](https://github.com/leboncoin/spark-web/commit/87a20801e))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.5.5 (2026-04-13)
 
 ### 🩹 Fixes
