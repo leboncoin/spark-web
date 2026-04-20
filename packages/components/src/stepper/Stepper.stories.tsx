@@ -46,10 +46,19 @@ export const Uncontrolled: StoryFn = () => {
 }
 
 export const Controlled: StoryFn = () => {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState<number | null>(0)
+
+  const handleValueChange = (value: number | null) => {
+    console.log('ON VALUE CHANGE', value)
+    setCount(value)
+  }
 
   return (
-    <Stepper value={count} onValueChange={setCount} aria-label="Default stepper">
+    <Stepper
+      value={count ?? undefined}
+      onValueChange={handleValueChange}
+      aria-label="Default stepper"
+    >
       <Stepper.DecrementButton aria-label="Decrement" />
       <Stepper.Input />
       <Stepper.IncrementButton aria-label="Increment" />
