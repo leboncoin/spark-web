@@ -8,7 +8,7 @@ export const MailFill = ({
   stroke = 'none',
   ref,
   ...props
-}: IconProps) => (
+}: IconProps = {}) => (
   <svg
     ref={ref}
     viewBox="0 0 24 24"

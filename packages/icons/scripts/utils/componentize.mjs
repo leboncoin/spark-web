@@ -16,7 +16,7 @@ import { IconProps } from '../Types'
 
 export const ${pascalCase(
     name
-  )} = ({title, fill = '${fill}', stroke = '${stroke}', ref, ...props}: IconProps) => (
+  )} = ({title, fill = '${fill}', stroke = '${stroke}', ref, ...props}: IconProps = {}) => (
   <svg ref={ref} ${Object.entries(otherAttributes)
     .map(([key, value]) => `${key}="${value}"`)
     .join(' ')}

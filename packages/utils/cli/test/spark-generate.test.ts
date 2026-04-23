@@ -28,10 +28,10 @@ describe('CLI `spark generate` (component package)', () => {
   })
 
   it('should properly generate package from CLI when arguments are valid', async () => {
-    const response = await cliProcess.execute(
+    const response = (await cliProcess.execute(
       ['generate'],
       ['bar', ENTER, packageType, ENTER, 'This is my foo component', ENTER]
-    )
+    )) as string[]
 
     ;[
       '/index.ts',
@@ -47,7 +47,7 @@ describe('CLI `spark generate` (component package)', () => {
   })
 
   it('should prevent generating package when argument are invalid', async () => {
-    const response = await cliProcess.execute(['generate'], ['123', ENTER])
+    const response = (await cliProcess.execute(['generate'], ['123', ENTER])) as string[]
 
     expect(response.toString()).toContain(
       'Name name must contain letters and dash symbols only (ex: "my-package")'
