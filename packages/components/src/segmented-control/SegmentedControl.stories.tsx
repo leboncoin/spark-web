@@ -11,7 +11,7 @@ import { Icon } from '../icon'
 import { Tag } from '../tag'
 
 const meta: Meta<typeof SegmentedControl> = {
-  title: 'Experimental/SegmentedControl',
+  title: 'Components/SegmentedControl',
   component: SegmentedControl,
   tags: ['form'],
   parameters: {

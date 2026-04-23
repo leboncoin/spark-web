@@ -20,7 +20,7 @@ import { TextLink } from '../text-link'
 import pokedexData from './pokedex.json'
 
 const meta: Meta<typeof Table> = {
-  title: 'Experimental/Table',
+  title: 'Components/Table',
   component: Table,
   tags: ['data-display'],
   parameters: {

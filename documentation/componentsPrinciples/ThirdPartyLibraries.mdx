@@ -1,7 +1,10 @@
 import { Meta } from '@storybook/addon-docs/blocks'
 import { Callout } from '@docs/helpers/Callout'
 
-<Meta title="Components Principles/Third-party libraries" summary="Reference guide listing Spark components and their underlying third-party library dependencies, including migration plans to Base UI." />
+<Meta
+  title="Components Principles/Third-party libraries"
+  summary="Reference guide listing Spark components and their underlying third-party library dependencies, including migration plans to Base UI."
+/>
 
 # Third-party libraries
 
@@ -13,15 +16,16 @@ The mid-term goal is to migrate all component to `Base UI` if possible, as its c
 
 ## Stable
 
-| Section                 | Components                                                                                                                                                                                                                                                         |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Homemade components** | `Badge`, `Breadcrumb`, `Button`, `Carousel`, `Chip`, `FormField`, `Icon`, `IconButton`, `Input`, `Kbd`, `LinkBox`, `ProgressTracker`, `Rating`, `RatingDisplay`, `ScrollingList`, `Select`, `Skeleton`, `Spinner`, `Tag`, `TextLink`, `Textarea`, `VisuallyHidden` |
-| **Using Base UI**       | `Accordion`, `AlertDialog`, `Dialog`, `Divider`,`Drawer` (indirectly using Dialog), `CircularMeter`, `Meter`, `Collapsible`, `Progress`, `Slider`, `Switch`,`Toast`                                                                                                |
+| Section                      | Components                                                                                                                                                                                                                                                         |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Homemade components**      | `Badge`, `Breadcrumb`, `Button`, `Carousel`, `Chip`, `FormField`, `Icon`, `IconButton`, `Input`, `Kbd`, `LinkBox`, `ProgressTracker`, `Rating`, `RatingDisplay`, `ScrollingList`, `Select`, `Skeleton`, `Spinner`, `Tag`, `TextLink`, `Textarea`, `VisuallyHidden` |
+| **Using Base UI**            | `Accordion`, `AlertDialog`, `Dialog`, `Divider`,`Drawer` (indirectly using Dialog), `CircularMeter`, `Meter`, `Collapsible`, `Progress`, `Slider`, `Stepper`, `Switch`,`Tabs`, `Toast`                                                                             |
+| **Using React aria/stately** | `Table`                                                                                                                                                                                                                                                            |
 
 ## To migrate
 
 | Section                       | Components                                                                                                                                                                  |
 | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **TODO**                      | `Dropdown`, `Avatar`, `Combobox`, `Checkbox`, `Popover`, `RadioGroup`, `Slot`, `Tabs`, `Stepper`, `Pagination`, `Label`, `Portal`                                           |
+| **TODO**                      | `Dropdown`, `Avatar`, `Combobox`, `Checkbox`, `Popover`, `RadioGroup`, `Slot`, `Pagination`, `Label`, `Portal`                                                              |
 | **Base UI**                   | `AutoComplete`, `ContextMenu`, `Field`, `Fieldset`, `Form`, `Menu`, `Menubar`, `NavigationMenu`, `PreviewCard`, `ScrollArea`, `Toggle`, `ToggleGroup`, `Toolbar`, `Tooltip` |
 | **Base UI - incoming (2026)** | `Calendar`, `Date/Time Picker`, `Drawer`, `Tree`, `Listbox`, `Charts`, `Table`, `Window`, `Carousel`, `Color Picker`, `Window Splitter`                                     |
