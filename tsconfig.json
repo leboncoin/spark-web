@@ -5,6 +5,7 @@
     "emitDeclarationOnly": false,
     "noEmit": true,
     "module": "ESNext",
+    "types": ["node", "vitest/globals"],
     "paths": {
       "@docs/*": ["./documentation/*"],
       "@spark-ui/components/*": ["./packages/components/src/*"],

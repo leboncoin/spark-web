@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { IconProps } from '../Types'
 
 export const Sort = ({
@@ -7,7 +8,7 @@ export const Sort = ({
   stroke = 'none',
   ref,
   ...props
-}: IconProps) => (
+}: IconProps = {}) => (
   <svg
     ref={ref}
     viewBox="0 0 24 24"
