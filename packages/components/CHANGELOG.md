@@ -1,3 +1,13 @@
+## 17.5.7 (2026-04-23)
+
+### 📦 Build
+
+- typescript 7, faster with go ([6eba4d871](https://github.com/leboncoin/spark-web/commit/6eba4d871))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.5.6 (2026-04-20)
 
 ### 🩹 Fixes
