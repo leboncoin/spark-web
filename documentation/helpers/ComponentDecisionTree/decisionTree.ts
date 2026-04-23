@@ -373,16 +373,24 @@ export const decisionTree: DecisionTreeNode = {
                     {
                       id: 'static-container',
                       label: 'Static container',
-                      question: 'Is it a content card?',
+                      question: 'Is it a data grid (rows and columns)?',
                       children: [
-                        { id: 'c-Card', label: 'Card', component: 'Card' },
+                        { id: 'c-Table', label: 'Table', component: 'Table' },
                         {
-                          id: 'form-label',
-                          label: 'Form or label structure',
-                          question: 'Does it wrap an input with validation and helper text?',
+                          id: 'not-table',
+                          label: 'Not a data grid',
+                          question: 'Is it a content card?',
                           children: [
-                            { id: 'c-FormField', label: 'FormField', component: 'FormField' },
-                            { id: 'c-Label', label: 'Label', component: 'Label' },
+                            { id: 'c-Card', label: 'Card', component: 'Card' },
+                            {
+                              id: 'form-label',
+                              label: 'Form or label structure',
+                              question: 'Does it wrap an input with validation and helper text?',
+                              children: [
+                                { id: 'c-FormField', label: 'FormField', component: 'FormField' },
+                                { id: 'c-Label', label: 'Label', component: 'Label' },
+                              ],
+                            },
                           ],
                         },
                       ],
