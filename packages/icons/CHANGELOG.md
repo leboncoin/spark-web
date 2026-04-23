@@ -1,3 +1,13 @@
+## 17.6.0 (2026-04-23)
+
+### 🚀 Features
+
+- **components:** stable components: table and segmented-control ([199400fd7](https://github.com/leboncoin/spark-web/commit/199400fd7))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.5.7 (2026-04-23)
 
 ### 📦 Build
