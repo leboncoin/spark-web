@@ -7,17 +7,17 @@
   },
   "exports": {
     ".": {
-      "types": "./dist/src/index.d.ts",
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
     "./*": {
-      "types": "./dist/src/icons/*.d.ts",
+      "types": "./dist/icons/*.d.ts",
       "import": "./dist/icons/*.mjs",
       "require": "./dist/icons/*.js"
     }
   },
-  "types": "./dist/src/index.d.ts",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "generate": "node ./scripts/build.mjs",
     "build": "vite build"
