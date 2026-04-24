@@ -10,12 +10,12 @@
       "require": "./dist/index.js"
     },
     "./form-field": {
-      "types": "./dist/src/form-field/index.d.ts",
+      "types": "./dist/form-field/index.d.ts",
       "import": "./dist/form-field/index.mjs",
       "require": "./dist/form-field/index.js"
     },
     "./*": {
-      "types": "./dist/src/*/index.d.ts",
+      "types": "./dist/*/index.d.ts",
       "import": "./dist/*/index.mjs",
       "require": "./dist/*/index.js"
     }
@@ -23,7 +23,7 @@
   "typesVersions": {
     "*": {
       "*": [
-        "./dist/src/*/index.d.ts"
+        "./dist/*/index.d.ts"
       ]
     }
   },
