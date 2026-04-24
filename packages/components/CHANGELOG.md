@@ -1,3 +1,13 @@
+## 17.6.1 (2026-04-24)
+
+### 🩹 Fixes
+
+- update package exports to match TypeScript 7 output structure ([#3027](https://github.com/leboncoin/spark-web/issues/3027))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.6.0 (2026-04-23)
 
 ### 🚀 Features
