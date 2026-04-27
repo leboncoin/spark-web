@@ -11,6 +11,10 @@ export type CloseButtonProps = RadixPopover.PopoverCloseProps & {
   ref?: Ref<HTMLButtonElement>
 }
 
+/**
+ * A button that closes the popover. Renders a <button> element.
+ */
+
 export const CloseButton = ({
   'aria-label': ariaLabel,
   className,

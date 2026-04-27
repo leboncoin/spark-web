@@ -7,6 +7,9 @@ export interface AvatarPlaceholderProps extends React.ImgHTMLAttributes<HTMLDivE
   children?: React.ReactNode
 }
 
+/**
+ * A placeholder shown when no image is available, typically displaying the user's initial. Renders a <div> element.
+ */
 export const AvatarPlaceholder = ({ className, children, ...props }: AvatarPlaceholderProps) => {
   const { size, username } = useAvatarContext()
 

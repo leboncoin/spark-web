@@ -4,6 +4,9 @@ import { ComponentProps } from 'react'
 
 export type DrawerPortalProps = ComponentProps<typeof BaseDialog.Portal>
 
+/**
+ * A portal that renders the drawer in a different part of the DOM. Renders a <div> element.
+ */
 export const DrawerPortal = ({ className, ...props }: DrawerPortalProps) => {
   return (
     <BaseDialog.Portal

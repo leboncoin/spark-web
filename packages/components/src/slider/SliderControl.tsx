@@ -7,6 +7,7 @@ import { useSliderContext } from './SliderContext'
 
 export type SliderControlProps = Omit<ComponentProps<typeof BaseSlider.Control>, 'render'>
 
+/** The container for the slider track and thumb(s). Renders a <div> element. */
 export const SliderControl = ({ className, ref, ...rest }: SliderControlProps) => {
   const { hasValueInThumb, controlRef } = useSliderContext()
   const mergedRef = useMergeRefs(controlRef, ref)

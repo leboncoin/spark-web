@@ -20,6 +20,7 @@ export type ProgressTrackerStepProps = ComponentPropsWithRef<'li'> &
       }
   )
 
+/** An individual step in the progress tracker. Renders a <li> element. */
 export const ProgressTrackerStep = ({
   disabled = false,
   children,

@@ -8,6 +8,9 @@ export interface AvatarImageProps extends React.ImgHTMLAttributes<HTMLImageEleme
   asChild?: boolean
 }
 
+/**
+ * The avatar's image content. Renders an <img> element.
+ */
 export const AvatarImage = ({
   className,
   asChild,

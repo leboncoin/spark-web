@@ -11,6 +11,7 @@ export interface InputClearButtonProps extends ComponentPropsWithoutRef<'button'
   ref?: Ref<HTMLButtonElement>
 }
 
+/** A button to clear the input value. Renders a <button> element. */
 const Root = ({
   className,
   tabIndex = -1,

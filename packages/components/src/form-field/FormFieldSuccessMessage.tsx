@@ -6,6 +6,7 @@ export type FormFieldSuccessMessageProps = Omit<FormFieldStateMessageProps, 'sta
   ref?: Ref<HTMLSpanElement>
 }
 
+/** A success message displayed when the form field is in a success state. Renders a <span> element. */
 export const FormFieldSuccessMessage = ({ ref, ...props }: FormFieldSuccessMessageProps) => {
   return (
     <FormFieldStateMessage

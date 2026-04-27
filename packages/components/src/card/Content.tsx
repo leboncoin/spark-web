@@ -15,6 +15,9 @@ export interface ContentProps extends ComponentProps<'div'> {
   inset?: boolean
 }
 
+/**
+ * The main content area of the card. Renders a <div> element.
+ */
 export const Content = ({ children, inset, asChild, className, ref, ...props }: ContentProps) => {
   const Component = asChild ? Slot : 'div'
   const { design, intent, hasBackdrop } = useCardContext()

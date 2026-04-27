@@ -12,15 +12,47 @@ import { Chip } from '../chip'
 import { Dialog } from '../dialog'
 import { FormField } from '../form-field'
 import { Icon } from '../icon'
-import { Input } from '../input'
+import { Input as SparkInput } from '../input'
 import { RadioGroup } from '../radio-group'
 import { Switch } from '../switch'
 import { Tag } from '../tag'
 import { VisuallyHidden } from '../visually-hidden'
+import { ClearButton as ComboboxClearButton } from './ComboboxClearButton'
+import { Disclosure as ComboboxDisclosure } from './ComboboxDisclosure'
+import { Empty as ComboboxEmpty } from './ComboboxEmpty'
+import { Group as ComboboxGroup } from './ComboboxGroup'
+import { Input as ComboboxInput } from './ComboboxInput'
+import { Item as ComboboxItem } from './ComboboxItem'
+import { ItemIndicator as ComboboxItemIndicator } from './ComboboxItemIndicator'
+import { Items as ComboboxItems } from './ComboboxItems'
+import { ItemText as ComboboxItemText } from './ComboboxItemText'
+import { Label as ComboboxLabel } from './ComboboxLabel'
+import { LeadingIcon as ComboboxLeadingIcon } from './ComboboxLeadingIcon'
+import { Popover as ComboboxPopover } from './ComboboxPopover'
+import { Portal as ComboboxPortal } from './ComboboxPortal'
+import { SelectedItems as ComboboxSelectedItems } from './ComboboxSelectedItems'
+import { Trigger as ComboboxTrigger } from './ComboboxTrigger'
 
 const meta: Meta<typeof Combobox> = {
   title: 'Components/Combobox',
   component: Combobox,
+  subcomponents: {
+    'Combobox.Group': ComboboxGroup,
+    'Combobox.Item': ComboboxItem,
+    'Combobox.Items': ComboboxItems,
+    'Combobox.ItemText': ComboboxItemText,
+    'Combobox.ItemIndicator': ComboboxItemIndicator,
+    'Combobox.Label': ComboboxLabel,
+    'Combobox.Popover': ComboboxPopover,
+    'Combobox.Trigger': ComboboxTrigger,
+    'Combobox.LeadingIcon': ComboboxLeadingIcon,
+    'Combobox.Empty': ComboboxEmpty,
+    'Combobox.Input': ComboboxInput,
+    'Combobox.Disclosure': ComboboxDisclosure,
+    'Combobox.SelectedItems': ComboboxSelectedItems,
+    'Combobox.ClearButton': ComboboxClearButton,
+    'Combobox.Portal': ComboboxPortal,
+  },
   tags: ['data-entry'],
   parameters: {
     design: {
@@ -96,7 +128,7 @@ export const Controlled: StoryFn = () => {
         </FormField>
         <FormField>
           <FormField.Label className="font-bold">Input value:</FormField.Label>
-          <Input
+          <SparkInput
             value={inputValue}
             onValueChange={setInputValue}
             placeholder="Combobox input value"
@@ -105,7 +137,7 @@ export const Controlled: StoryFn = () => {
                 value ? Object.entries(books).find(([id]) => value === id)?.[1] || '' : ''
               )
             }}
-          ></Input>
+          ></SparkInput>
         </FormField>
       </div>
 
@@ -518,14 +550,14 @@ export const MultipleSelectionControlled: StoryFn = () => {
         </FormField>
         <FormField>
           <FormField.Label className="font-bold">Input value:</FormField.Label>
-          <Input
+          <SparkInput
             value={inputValue}
             onValueChange={setInputValue}
             placeholder="Combobox input value"
             onBlur={() => {
               setInputValue('')
             }}
-          ></Input>
+          ></SparkInput>
         </FormField>
       </div>
 

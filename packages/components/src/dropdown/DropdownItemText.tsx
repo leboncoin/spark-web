@@ -9,6 +9,10 @@ export interface ItemTextProps {
   ref?: Ref<HTMLSpanElement>
 }
 
+/**
+ * The text content of a dropdown item. Renders a <span> element.
+ */
+
 export const ItemText = ({ children, ref: forwardedRef }: ItemTextProps) => {
   const id = `${ID_PREFIX}-item-text-${useId()}`
 

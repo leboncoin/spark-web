@@ -11,10 +11,28 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 
 import { FileUpload, type FileUploadFileError, type RejectedFile } from '.'
 import { FormField } from '../form-field'
+import { AcceptedFile } from './FileUploadAcceptedFile'
+import { Context } from './FileUploadContext'
+import { Dropzone } from './FileUploadDropzone'
+import { ItemDeleteTrigger } from './FileUploadItemDeleteTrigger'
+import { PreviewImage } from './FileUploadPreviewImage'
+import { RejectedFile as RejectedFileComponent } from './FileUploadRejectedFile'
+import { RejectedFileDeleteTrigger } from './FileUploadRejectedFileDeleteTrigger'
+import { Trigger } from './FileUploadTrigger'
 
 const meta: Meta<typeof FileUpload> = {
   title: 'Components/FileUpload',
   component: FileUpload,
+  subcomponents: {
+    'FileUpload.Trigger': Trigger,
+    'FileUpload.Dropzone': Dropzone,
+    'FileUpload.Context': Context,
+    'FileUpload.ItemDeleteTrigger': ItemDeleteTrigger,
+    'FileUpload.PreviewImage': PreviewImage,
+    'FileUpload.AcceptedFile': AcceptedFile,
+    'FileUpload.RejectedFile': RejectedFileComponent,
+    'FileUpload.RejectedFileDeleteTrigger': RejectedFileDeleteTrigger,
+  },
   tags: ['data-entry'],
   parameters: {
     design: {

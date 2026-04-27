@@ -8,6 +8,7 @@ interface Props extends ComponentPropsWithoutRef<'button'> {
   children: string
 }
 
+/** A button to skip keyboard navigation, improving accessibility. Renders a <button> element. */
 export const ScrollingListSkipButton = ({ children, ...rest }: Props) => {
   const ctx = useContext(ScrollingListContext)
 

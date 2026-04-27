@@ -8,6 +8,7 @@ export interface SliderMinValueProps {
   children?: (value: number) => ReactNode
 }
 
+/** Displays the minimum value of the slider. Renders a <div> element. */
 export const SliderMinValue = forwardRef<HTMLDivElement, SliderMinValueProps>(
   ({ className, children }, ref) => {
     const { min = 0 } = useSliderContext()

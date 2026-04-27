@@ -7,6 +7,9 @@ export interface AvatarImageProps extends React.ImgHTMLAttributes<HTMLDivElement
   asChild?: boolean
 }
 
+/**
+ * The user container that wraps avatar content. Renders a <div> element.
+ */
 export const AvatarUser = ({ asChild, children, className, ...props }: AvatarImageProps) => {
   const { shape, isOnline, onlineText, username } = useAvatarContext()
   const Comp = asChild ? Slot : 'div'

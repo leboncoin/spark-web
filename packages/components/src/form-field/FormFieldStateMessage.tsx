@@ -13,6 +13,9 @@ export interface FormFieldStateMessageProps extends FormFieldMessageProps {
   ref?: Ref<HTMLSpanElement>
 }
 
+/**
+ * Container for state messages (helper, error, success, alert). Renders a <div> element.
+ */
 export const FormFieldStateMessage = ({
   className,
   state,

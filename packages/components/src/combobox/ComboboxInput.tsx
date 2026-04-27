@@ -26,6 +26,9 @@ interface InputProps extends Omit<InputPrimitiveProps, 'value' | 'placeholder'> 
   ref?: Ref<HTMLInputElement>
 }
 
+/**
+ * The input field for searching and filtering combobox items. Renders an <input> element.
+ */
 export const Input = ({
   'aria-label': ariaLabel,
   className,

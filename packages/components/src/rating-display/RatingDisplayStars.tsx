@@ -19,6 +19,7 @@ export interface RatingDisplayStarsProps {
   getFillMode?: ({ value, index }: { value?: number; index: number }) => StarValue
 }
 
+/** The visual star rating display. Renders a <div> element. */
 export const RatingDisplayStars = ({
   size,
   variant = 'default',

@@ -14,6 +14,7 @@ interface ScrollingListControls extends ComponentPropsWithoutRef<'div'> {
   children: ReactNode
 }
 
+/** Container for navigation controls (previous/next buttons) of the scrolling list. Renders a <div> element. */
 export const ScrollingListControls = ({
   children,
   visibility = 'always',

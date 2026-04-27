@@ -1,10 +1,14 @@
 import { Meta, StoryFn } from '@storybook/react-vite'
 
 import { Label } from '.'
+import { LabelRequiredIndicator } from './LabelRequiredIndicator'
 
 const meta: Meta<typeof Label> = {
   title: 'Components/Label',
   component: Label,
+  subcomponents: {
+    'Label.RequiredIndicator': LabelRequiredIndicator,
+  },
   tags: ['indicators'],
   parameters: {
     design: {

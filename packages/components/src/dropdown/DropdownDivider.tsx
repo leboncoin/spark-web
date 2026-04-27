@@ -6,6 +6,10 @@ interface DividerProps {
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * A visual divider between dropdown items. Renders a <div> element.
+ */
+
 export const Divider = ({ className, ref: forwardedRef }: DividerProps) => {
   return <div ref={forwardedRef} className={cx('my-md border-b-sm border-outline', className)} />
 }

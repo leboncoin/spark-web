@@ -7,6 +7,7 @@ export type FormFieldRequiredIndicatorProps = LabelRequiredIndicatorProps & {
   ref?: Ref<HTMLSpanElement>
 }
 
+/** An indicator shown when the form field is required. Renders a <span> element. */
 export const FormFieldRequiredIndicator = ({
   className,
   ref,

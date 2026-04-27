@@ -8,6 +8,9 @@ import { useIntersectionAnimation } from './useIntersectionAnimation'
 
 export type MeterTrackProps = Omit<ComponentProps<typeof BaseMeter.Track>, 'render'>
 
+/**
+ * The track of the meter showing progress. Renders a <div> element.
+ */
 export const MeterTrack = ({ className, ...others }: MeterTrackProps) => {
   const { value, max, min, intent, shape } = useMeter()
   const percentage = ((value - min) / (max - min)) * 100

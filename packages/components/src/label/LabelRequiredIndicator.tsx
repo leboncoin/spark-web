@@ -3,6 +3,9 @@ import { ComponentPropsWithRef } from 'react'
 
 export type LabelRequiredIndicatorProps = ComponentPropsWithRef<'span'>
 
+/**
+ * An indicator showing that a field is required. Renders a <span> element.
+ */
 export const LabelRequiredIndicator = ({
   className,
   children = '*',

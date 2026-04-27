@@ -6,6 +6,9 @@ export interface ItemProps extends ComponentPropsWithoutRef<'li'> {
   ref?: Ref<HTMLLIElement>
 }
 
+/**
+ * A breadcrumb item container. Renders a <li> element.
+ */
 export const Item = ({ className, ...rest }: ItemProps) => {
   return (
     <li

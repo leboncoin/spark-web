@@ -4,10 +4,34 @@ import { useRef, useState } from 'react'
 import { AlertDialog } from '.'
 import { Button } from '../button'
 import { Input } from '../input'
+import { AlertDialogAction } from './AlertDialogAction'
+import { AlertDialogBody } from './AlertDialogBody'
+import { AlertDialogCancel } from './AlertDialogCancel'
+import { AlertDialogContent } from './AlertDialogContent'
+import { AlertDialogDescription } from './AlertDialogDescription'
+import { AlertDialogFooter } from './AlertDialogFooter'
+import { AlertDialogHeader } from './AlertDialogHeader'
+import { AlertDialogOverlay } from './AlertDialogOverlay'
+import { AlertDialogPortal } from './AlertDialogPortal'
+import { AlertDialogTitle } from './AlertDialogTitle'
+import { AlertDialogTrigger } from './AlertDialogTrigger'
 
 const meta: Meta<typeof AlertDialog> = {
   title: 'Components/AlertDialog',
   component: AlertDialog,
+  subcomponents: {
+    'AlertDialog.Action': AlertDialogAction,
+    'AlertDialog.Body': AlertDialogBody,
+    'AlertDialog.Cancel': AlertDialogCancel,
+    'AlertDialog.Content': AlertDialogContent,
+    'AlertDialog.Description': AlertDialogDescription,
+    'AlertDialog.Footer': AlertDialogFooter,
+    'AlertDialog.Header': AlertDialogHeader,
+    'AlertDialog.Overlay': AlertDialogOverlay,
+    'AlertDialog.Portal': AlertDialogPortal,
+    'AlertDialog.Title': AlertDialogTitle,
+    'AlertDialog.Trigger': AlertDialogTrigger,
+  },
   tags: ['overlays'],
   parameters: {
     design: {

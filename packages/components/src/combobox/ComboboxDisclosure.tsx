@@ -14,6 +14,9 @@ interface DisclosureProps extends Omit<ComponentProps<typeof IconButton>, 'aria-
   ref?: Ref<HTMLButtonElement>
 }
 
+/**
+ * A button that toggles the combobox dropdown visibility. Renders a <button> element.
+ */
 export const Disclosure = ({
   className,
   closedLabel,

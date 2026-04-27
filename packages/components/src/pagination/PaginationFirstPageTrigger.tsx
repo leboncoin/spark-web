@@ -25,6 +25,10 @@ export type FirstPageTriggerProps = (AnchorProps | ButtonProps) & {
   ref?: Ref<HTMLButtonElement>
 }
 
+/**
+ * A button that navigates to the first page. Renders a <button> element.
+ */
+
 export const FirstPageTrigger = ({
   children,
   className,

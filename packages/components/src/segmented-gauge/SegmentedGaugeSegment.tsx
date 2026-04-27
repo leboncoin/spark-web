@@ -11,6 +11,10 @@ export interface SegmentedGaugeSegmentProps extends ComponentProps<'div'> {
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * An individual segment in the gauge. Renders a <div> element.
+ */
+
 export const SegmentedGaugeSegment = ({
   index = 0,
   className,

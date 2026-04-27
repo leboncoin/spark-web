@@ -10,6 +10,9 @@ export interface DividerContentProps extends HTMLAttributes<HTMLSpanElement> {
   ref?: Ref<HTMLSpanElement>
 }
 
+/**
+ * Content to display within the divider line. Renders a <span> element.
+ */
 export const DividerContent = ({ children, ref, className, ...props }: DividerContentProps) => {
   return children ? (
     <span

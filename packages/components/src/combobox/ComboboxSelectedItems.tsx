@@ -84,6 +84,9 @@ const SelectedItem = ({ item: selectedItem, index }: { item: ComboboxItem; index
   )
 }
 
+/**
+ * Displays the currently selected items as chips in multi-select mode. Renders a <span> or <button> element.
+ */
 export const SelectedItems = () => {
   const ctx = useComboboxContext()
 

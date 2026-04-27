@@ -9,6 +9,9 @@ export interface AlertDialogOverlayProps extends Omit<
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * The backdrop element that dims the rest of the page. Renders a <div> element.
+ */
 export const AlertDialogOverlay = ({ className, ...props }: AlertDialogOverlayProps) => {
   return (
     <BaseAlertDialog.Backdrop

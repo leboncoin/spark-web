@@ -11,6 +11,7 @@ export interface RowProps<T extends object = object> extends ReactTypesRowProps<
   onAction?: () => void
 }
 
+/** A row in the table. This is a collection component that does not render DOM. */
 export function Row<T extends object>(props: RowProps<T>) {
   // Collection component: does not render DOM.
   void props

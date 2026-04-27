@@ -2,6 +2,7 @@ import { Tag } from '@spark-ui/components/tag'
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { ComponentProps, Fragment } from 'react'
 
+import { DividerContent } from './DividerContent'
 import { Divider } from './index'
 
 type DividerProps = ComponentProps<typeof Divider>
@@ -9,6 +10,9 @@ type DividerProps = ComponentProps<typeof Divider>
 const meta: Meta<typeof Divider> = {
   title: 'Components/Divider',
   component: Divider,
+  subcomponents: {
+    'Divider.Content': DividerContent,
+  },
   tags: ['data-display'],
   parameters: {
     design: {

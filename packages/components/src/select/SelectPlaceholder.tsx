@@ -8,6 +8,10 @@ export interface PlaceholderProps {
   ref?: Ref<HTMLOptionElement>
 }
 
+/**
+ * Placeholder text shown when no item is selected. Renders a <span> element.
+ */
+
 export const Placeholder = ({
   disabled = false,
   children,

@@ -8,6 +8,7 @@ export interface SegmentedGaugeLabelProps extends ComponentProps<'span'> {
   id?: string
 }
 
+/** The text label for the gauge. Renders a <span> element. */
 export const SegmentedGaugeLabel = ({
   className,
   children,

@@ -6,6 +6,9 @@ import { ID_PREFIX, useProgress } from './ProgressContext'
 
 export type ProgressLabelProps = Omit<ComponentProps<typeof BaseProgress.Label>, 'render'>
 
+/**
+ * The label of the progress indicator. Renders a <span> element.
+ */
 export const ProgressLabel = ({
   id: idProp,
   children,

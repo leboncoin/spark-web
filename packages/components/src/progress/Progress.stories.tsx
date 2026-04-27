@@ -4,10 +4,18 @@ import { Meta, StoryFn } from '@storybook/react-vite'
 import { useRef, useState } from 'react'
 
 import { Progress, ProgressProps } from '.'
+import { ProgressLabel } from './ProgressLabel'
+import { ProgressTrack } from './ProgressTrack'
+import { ProgressValue } from './ProgressValue'
 
 const meta: Meta<typeof Progress> = {
   title: 'Components/Progress',
   component: Progress,
+  subcomponents: {
+    'Progress.Label': ProgressLabel,
+    'Progress.Track': ProgressTrack,
+    'Progress.Value': ProgressValue,
+  },
   tags: ['indicators'],
   parameters: {
     design: {

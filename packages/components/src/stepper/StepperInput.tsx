@@ -5,6 +5,7 @@ import { Input as SparkInput } from '../input'
 import { useStepperContext } from './Stepper'
 import type { StepperInputProps } from './types'
 
+/** The numeric input field displaying the stepper value. Renders an <input> element. */
 const Input = ({ ref: forwardedRef, ...props }: StepperInputProps) => {
   const { inputRef, fieldId, fieldLabelId, fieldIsInvalid, fieldIsRequired, ariaLabel } =
     useStepperContext()

@@ -3,10 +3,18 @@ import { PenOutline } from '@spark-ui/icons/PenOutline'
 import { Meta, StoryFn } from '@storybook/react-vite'
 
 import { Textarea, TextareaGroup } from '.'
+import { TextareaClearButton } from './TextareaClearButton'
+import { TextareaLeadingIcon } from './TextareaLeadingIcon'
+import { TextareaTrailingIcon } from './TextareaTrailingIcon'
 
 const meta: Meta<typeof TextareaGroup> = {
   title: 'Components/TextareaGroup',
   component: TextareaGroup,
+  subcomponents: {
+    'TextareaGroup.LeadingIcon': TextareaLeadingIcon,
+    'TextareaGroup.TrailingIcon': TextareaTrailingIcon,
+    'TextareaGroup.ClearButton': TextareaClearButton,
+  },
   tags: ['data-entry'],
   parameters: {
     design: {

@@ -16,6 +16,7 @@ export interface FileUploadRejectedFileDeleteTriggerProps extends React.Componen
   rejectedFile: RejectedFileType
 }
 
+/** A button to remove a rejected file from the list. Renders a <button> element. */
 export const RejectedFileDeleteTrigger = ({
   className,
   rejectedFile,

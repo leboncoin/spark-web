@@ -14,6 +14,9 @@ export interface AlertDialogTriggerProps extends Omit<
   ref?: Ref<HTMLButtonElement>
 }
 
+/**
+ * A button that opens the alert dialog. Renders a <button> element.
+ */
 export const AlertDialogTrigger = ({ asChild = false, ...props }: AlertDialogTriggerProps) => {
   const renderSlot = useRenderSlot(asChild, 'button')
 

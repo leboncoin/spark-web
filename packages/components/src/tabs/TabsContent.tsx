@@ -24,6 +24,7 @@ export interface TabsContentProps extends PropsWithChildren<
   ref?: Ref<HTMLDivElement>
 }
 
+/** The panel that displays content associated with a tab. Renders a <div> element. */
 export const TabsContent = ({
   /**
    * Default Base UI Primitive values

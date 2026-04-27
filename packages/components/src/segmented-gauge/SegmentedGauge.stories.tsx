@@ -2,10 +2,18 @@ import { Label } from '@spark-ui/components/label'
 import { Meta, StoryFn } from '@storybook/react-vite'
 
 import { SegmentedGauge } from '.'
+import { SegmentedGaugeLabel } from './SegmentedGaugeLabel'
+import { SegmentedGaugeSegment } from './SegmentedGaugeSegment'
+import { SegmentedGaugeTrack } from './SegmentedGaugeTrack'
 
 const meta: Meta<typeof SegmentedGauge> = {
   title: 'Components/SegmentedGauge',
   component: SegmentedGauge,
+  subcomponents: {
+    'SegmentedGauge.Track': SegmentedGaugeTrack,
+    'SegmentedGauge.Segment': SegmentedGaugeSegment,
+    'SegmentedGauge.Label': SegmentedGaugeLabel,
+  },
   tags: ['data-display'],
   parameters: {},
 }

@@ -11,6 +11,9 @@ export interface CloseProps extends Omit<ComponentProps<typeof BaseDialog.Close>
   ref?: Ref<HTMLButtonElement>
 }
 
+/**
+ * A button that closes the dialog. Renders a <button> element.
+ */
 export const Close = ({ asChild = false, ...props }: CloseProps) => {
   const renderSlot = useRenderSlot(asChild, 'button')
 

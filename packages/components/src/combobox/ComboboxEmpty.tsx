@@ -9,6 +9,9 @@ interface EmptyProps {
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * A message displayed when no items match the search. Renders a <div> element.
+ */
 export const Empty = ({ className, children, ref: forwardedRef }: EmptyProps) => {
   const ctx = useComboboxContext()
   const hasNoItemVisible = ctx.filteredItemsMap.size === 0

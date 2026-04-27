@@ -9,6 +9,7 @@ import { IconButton } from '../icon-button'
 import { useStepperContext } from './Stepper'
 import type { StepperButtonProps } from './types'
 
+/** A button to increment the stepper value. Renders a <button> element. */
 const IncrementButton = ({
   children,
   design = 'ghost',
@@ -64,6 +65,7 @@ const IncrementButton = ({
   )
 }
 
+/** A button to decrement the stepper value. Renders a <button> element. */
 const DecrementButton = ({
   children,
   design = 'ghost',

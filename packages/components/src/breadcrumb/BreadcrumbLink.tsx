@@ -11,6 +11,9 @@ export interface LinkProps extends ComponentPropsWithoutRef<typeof TextLink> {
   ref?: Ref<HTMLAnchorElement>
 }
 
+/**
+ * A navigable breadcrumb link. Renders an <a> element.
+ */
 export const Link = ({
   asChild = false,
   className,

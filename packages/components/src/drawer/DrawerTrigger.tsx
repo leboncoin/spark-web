@@ -14,6 +14,9 @@ export interface DrawerTriggerProps extends Omit<
   ref?: Ref<HTMLButtonElement>
 }
 
+/**
+ * A button that opens the drawer. Renders a <button> element.
+ */
 export const DrawerTrigger = ({ asChild = false, ...props }: DrawerTriggerProps) => {
   const renderSlot = useRenderSlot(asChild, 'button')
 

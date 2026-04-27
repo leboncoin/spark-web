@@ -16,6 +16,9 @@ export interface AlertDialogCancelProps extends Omit<
   ref?: Ref<HTMLButtonElement>
 }
 
+/**
+ * A button that closes the dialog without confirming the action. Renders a <button> element.
+ */
 export const AlertDialogCancel = ({
   asChild = false,
   ref: forwardedRef,

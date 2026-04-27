@@ -7,6 +7,9 @@ export type ChipLeadingIconProps = ChipIconProps & {
   ref?: Ref<HTMLSpanElement>
 }
 
+/**
+ * An icon displayed at the start of the chip. Renders a <span> element.
+ */
 export const ChipLeadingIcon = ({
   className,
   ref: forwardedRef,

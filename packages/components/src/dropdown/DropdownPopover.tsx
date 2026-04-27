@@ -4,6 +4,10 @@ import { ComponentProps, useEffect } from 'react'
 import { Popover as SparkPopover } from '../popover'
 import { useDropdownContext } from './DropdownContext'
 
+/**
+ * The popover container that displays the dropdown items. Renders a <div> element.
+ */
+
 export const Popover = ({
   children,
   matchTriggerWidth = true,

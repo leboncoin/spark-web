@@ -26,6 +26,7 @@ const ratingDisplayValueStyles = cva('text-on-surface font-bold', {
   },
 })
 
+/** The numeric rating value. Renders a <span> element. */
 export const RatingDisplayValue = ({ className, children, ...rest }: RatingDisplayValueProps) => {
   const { value, size } = useRatingDisplay()
   const formattedValue = formatRatingValue(value)

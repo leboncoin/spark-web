@@ -11,6 +11,9 @@ export interface TriggerProps extends Omit<ComponentProps<typeof BaseDialog.Trig
   ref?: Ref<HTMLButtonElement>
 }
 
+/**
+ * A button that opens the dialog. Renders a <button> element.
+ */
 export const Trigger = ({ asChild = false, ...props }: TriggerProps) => {
   const renderSlot = useRenderSlot(asChild, 'button')
 

@@ -56,6 +56,9 @@ interface BackdropProps extends BackdropStylesProps {
   className?: string
 }
 
+/**
+ * A decorative backdrop element at the top of the card. Renders a <div> element.
+ */
 export const Backdrop = ({ intent = 'main', animation = 'none', ...props }: BackdropProps) => {
   return <div className={backdropStyles({ intent, animation })} {...props} />
 }

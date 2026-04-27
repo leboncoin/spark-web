@@ -9,6 +9,9 @@ export interface DrawerOverlayProps extends Omit<
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * The backdrop element that dims the rest of the page. Renders a <div> element.
+ */
 export const DrawerOverlay = ({ className, ...props }: DrawerOverlayProps) => {
   return (
     <BaseDialog.Backdrop

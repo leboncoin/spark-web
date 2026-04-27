@@ -7,6 +7,10 @@ export interface ItemProps {
   ref?: Ref<HTMLOptionElement>
 }
 
+/**
+ * A selectable item in the select list. Renders a <div> element.
+ */
+
 export const Item = ({ disabled = false, value, children, ref: forwardedRef }: ItemProps) => {
   return (
     <option

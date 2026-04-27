@@ -6,6 +6,9 @@ export type TitleProps = ComponentProps<typeof BaseDialog.Title> & {
   ref?: Ref<HTMLHeadingElement>
 }
 
+/**
+ * The title of the dialog, announced to assistive technology. Renders an <h2> element.
+ */
 export const Title = ({ className, ref, ...others }: TitleProps) => {
   return (
     <BaseDialog.Title

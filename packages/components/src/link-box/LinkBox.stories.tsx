@@ -5,10 +5,16 @@ import { LinkBox } from '.'
 import { Icon } from '../icon'
 import { IconButton } from '../icon-button'
 import { TextLink } from '../text-link'
+import { LinkBoxLink } from './LinkBoxLink'
+import { LinkBoxRaised } from './LinkBoxRaised'
 
 const meta: Meta<typeof LinkBox> = {
   title: 'Components/LinkBox',
   component: LinkBox,
+  subcomponents: {
+    'LinkBox.Link': LinkBoxLink,
+    'LinkBox.Raised': LinkBoxRaised,
+  },
   tags: ['others'],
 }
 

@@ -14,6 +14,9 @@ export interface AlertDialogActionProps extends Omit<
   ref?: Ref<HTMLButtonElement>
 }
 
+/**
+ * A button that closes the dialog and confirms the action. Renders a <button> element.
+ */
 export const AlertDialogAction = ({ asChild = false, ...props }: AlertDialogActionProps) => {
   const renderSlot = useRenderSlot(asChild, 'button')
 

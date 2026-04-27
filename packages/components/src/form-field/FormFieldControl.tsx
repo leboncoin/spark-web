@@ -38,6 +38,7 @@ export const useFormFieldControl = () => {
   } as State
 }
 
+/** A render prop component providing access to form field state. Renders its children. */
 export const FormFieldControl = ({ children }: FormFieldControlProps) => {
   const props = useFormFieldControl()
 

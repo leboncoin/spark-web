@@ -12,6 +12,9 @@ export interface CarouselSlideProps extends ComponentProps<'div'> {
   className?: string
 }
 
+/**
+ * An individual slide within the carousel. Renders a <div> element.
+ */
 export const CarouselSlide = ({
   children,
   index = 0,
