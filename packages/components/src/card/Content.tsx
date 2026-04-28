@@ -17,7 +17,7 @@ export interface ContentProps extends ComponentProps<'div'> {
 
 export const Content = ({ children, inset, asChild, className, ref, ...props }: ContentProps) => {
   const Component = asChild ? Slot : 'div'
-  const { design, intent, hasBackdrop } = useCardContext()
+  const { design, intent, hasType } = useCardContext()
 
   return (
     <Component
@@ -28,7 +28,7 @@ export const Content = ({ children, inset, asChild, className, ref, ...props }: 
         design,
         intent,
         inset,
-        hasBackdrop,
+        hasType,
       })}
       {...props}
     >

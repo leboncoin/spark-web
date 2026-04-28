@@ -12,29 +12,17 @@ export const contentStyles = cva(
         false: ['default:p-lg'],
       },
       design: {
-        filled: [],
         outlined: [
           'default:bg-surface group-focus:bg-surface-hovered group-not-disabled:group-data-[interactive=true]:group-hover:bg-surface-hovered',
         ],
         tinted: [],
       },
-      hasBackdrop: {
-        true: ['rounded-t-[16px_8px] '],
+      hasType: {
+        true: ['rounded-t-0'],
       },
       intent: makeVariants<
         'intent',
-        [
-          'main',
-          'support',
-          'accent',
-          'success',
-          'alert',
-          'danger',
-          'info',
-          'neutral',
-          'surface',
-          'surfaceInverse',
-        ]
+        ['main', 'support', 'accent', 'success', 'alert', 'danger', 'info', 'neutral', 'surface']
       >({
         main: [],
         support: [],
@@ -45,83 +33,9 @@ export const contentStyles = cva(
         info: [],
         neutral: [],
         surface: [],
-        surfaceInverse: [],
       }),
     },
     compoundVariants: [
-      // FILLED
-      {
-        intent: 'main',
-        design: 'filled',
-        class: tw([
-          'bg-main text-on-main group-focus:bg-main-hovered',
-          'group-not-disabled:group-data-[interactive=true]:group-hover:bg-main-hovered',
-        ]),
-      },
-      {
-        intent: 'support',
-        design: 'filled',
-        class: tw([
-          'bg-support text-on-support group-focus:bg-support-hovered',
-          'group-not-disabled:group-data-[interactive=true]:group-hover:bg-support-hovered',
-        ]),
-      },
-      {
-        intent: 'accent',
-        design: 'filled',
-        class: tw([
-          'bg-accent text-on-accent group-focus:bg-accent-hovered',
-          'group-not-disabled:group-data-[interactive=true]:group-hover:bg-accent-hovered',
-        ]),
-      },
-      {
-        intent: 'success',
-        design: 'filled',
-        class: tw([
-          'bg-success text-on-success group-focus:bg-success-hovered',
-          'group-not-disabled:group-data-[interactive=true]:group-hover:bg-success-hovered',
-        ]),
-      },
-      {
-        intent: 'alert',
-        design: 'filled',
-        class: tw([
-          'bg-alert text-on-alert group-focus:bg-alert-hovered',
-          'group-not-disabled:group-data-[interactive=true]:group-hover:bg-alert-hovered',
-        ]),
-      },
-      {
-        intent: 'danger',
-        design: 'filled',
-        class: tw([
-          'text-on-error bg-error group-focus:bg-error-hovered',
-          'group-not-disabled:group-data-[interactive=true]:group-hover:bg-error-hovered',
-        ]),
-      },
-      {
-        intent: 'info',
-        design: 'filled',
-        class: tw([
-          'text-on-error bg-info group-focus:bg-info-hovered',
-          'group-not-disabled:group-data-[interactive=true]:group-hover:bg-info-hovered',
-        ]),
-      },
-      {
-        intent: 'neutral',
-        design: 'filled',
-        class: tw([
-          'bg-neutral text-on-neutral group-focus:bg-neutral-hovered',
-          'group-not-disabled:group-data-[interactive=true]:group-hover:bg-neutral-hovered',
-        ]),
-      },
-      {
-        intent: 'surface',
-        design: 'filled',
-        class: tw([
-          'bg-surface text-on-surface group-focus:bg-surface-hovered',
-          'group-not-disabled:group-data-[interactive=true]:group-hover:bg-surface-hovered',
-        ]),
-      },
       // OUTLINED
       /**
        * Outlined styles are handled by the Card component (parent)
@@ -201,10 +115,10 @@ export const contentStyles = cva(
       },
     ],
     defaultVariants: {
-      design: 'filled',
+      design: 'outlined',
       intent: 'surface',
       inset: false,
-      hasBackdrop: true,
+      hasType: true,
     },
   }
 )

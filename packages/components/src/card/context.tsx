@@ -5,7 +5,7 @@ import type { CardStylesProps } from './Card.styles'
 export interface CardContextValue {
   design: CardStylesProps['design']
   intent: CardStylesProps['intent']
-  hasBackdrop: boolean
+  hasType: boolean
   inset: boolean
   isInteractive: boolean
 }

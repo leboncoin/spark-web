@@ -9,30 +9,15 @@ export const cardStyles = cva(
   {
     variants: {
       design: {
-        filled: [],
         outlined: ['border-sm'],
         tinted: [],
-      },
-      hasBackdrop: {
-        true: ['pt-md'],
       },
       /**
        * Color scheme of the button.
        */
       intent: makeVariants<
         'intent',
-        [
-          'main',
-          'support',
-          'accent',
-          'success',
-          'alert',
-          'danger',
-          'info',
-          'neutral',
-          'surface',
-          'surfaceInverse',
-        ]
+        ['main', 'support', 'accent', 'success', 'alert', 'danger', 'info', 'neutral', 'surface']
       >({
         main: [],
         support: [],
@@ -43,7 +28,6 @@ export const cardStyles = cva(
         info: [],
         neutral: [],
         surface: [],
-        surfaceInverse: [],
       }),
     },
     compoundVariants: [
@@ -59,7 +43,7 @@ export const cardStyles = cva(
       { intent: 'surface', design: 'outlined', class: tw(['border-outline']) },
     ],
     defaultVariants: {
-      design: 'filled',
+      design: 'outlined',
       intent: 'surface',
     },
   }

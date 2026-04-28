@@ -3,7 +3,7 @@ import { ComponentProps } from 'react'
 import { Slot } from '../slot'
 import { cardStyles, type CardStylesProps } from './Card.styles'
 import { CardContext } from './context'
-import { hasBackdrop, isInteractive } from './utils'
+import { hasType, isInteractive } from './utils'
 
 export interface CardProps extends ComponentProps<'div'>, CardStylesProps {
   /**
@@ -18,7 +18,7 @@ export interface CardProps extends ComponentProps<'div'>, CardStylesProps {
 
 export const Card = ({
   children,
-  design = 'filled',
+  design = 'outlined',
   intent = 'surface',
   inset = false,
   asChild,
@@ -27,7 +27,7 @@ export const Card = ({
   ...props
 }: CardProps) => {
   const Component = asChild ? Slot : 'div'
-  const backdropDetected = hasBackdrop(children)
+  const typeDetected = hasType(children)
   const interactiveDetected = isInteractive(children, asChild, props)
 
   return (
@@ -35,7 +35,7 @@ export const Card = ({
       value={{
         design,
         intent,
-        hasBackdrop: backdropDetected,
+        hasType: typeDetected,
         inset,
         isInteractive: interactiveDetected,
       }}
@@ -48,7 +48,6 @@ export const Card = ({
           className,
           design,
           intent,
-          hasBackdrop: backdropDetected,
         })}
         {...props}
       >

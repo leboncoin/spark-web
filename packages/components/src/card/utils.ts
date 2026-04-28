@@ -13,22 +13,22 @@ const MOUSE_EVENTS = [
   'onContextMenu',
 ] as const
 
-export const hasBackdrop = (children: ReactNode): boolean => {
-  let backdropFound = false
+export const hasType = (children: ReactNode): boolean => {
+  let typeFound = false
 
-  const searchForBackdrop = (node: ReactNode): void => {
-    if (backdropFound) return
+  const searchForType = (node: ReactNode): void => {
+    if (typeFound) return
 
     Children.forEach(node, child => {
-      if (backdropFound) return
+      if (typeFound) return
 
       if (isValidElement(child)) {
-        const isBackdropComponent =
+        const isTypeComponent =
           typeof child.type === 'function' &&
-          (child.type as { displayName?: string }).displayName === 'Card.Backdrop'
+          (child.type as { displayName?: string }).displayName === 'Card.Type'
 
-        if (isBackdropComponent) {
-          backdropFound = true
+        if (isTypeComponent) {
+          typeFound = true
 
           return
         }
@@ -39,16 +39,16 @@ export const hasBackdrop = (children: ReactNode): boolean => {
         if (hasChildren) {
           const childChildren = (child.props as { children: ReactNode }).children
           if (childChildren !== undefined && childChildren !== null) {
-            searchForBackdrop(childChildren)
+            searchForType(childChildren)
           }
         }
       }
     })
   }
 
-  searchForBackdrop(children)
+  searchForType(children)
 
-  return backdropFound
+  return typeFound
 }
 
 export const isInteractive = (

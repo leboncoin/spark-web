@@ -1,8 +1,6 @@
-import { Divider } from '@spark-ui/components/divider'
 import { Icon } from '@spark-ui/components/icon'
 import { IconButton } from '@spark-ui/components/icon-button'
 import { LinkBox } from '@spark-ui/components/link-box'
-import { Skeleton } from '@spark-ui/components/skeleton'
 import { Switch } from '@spark-ui/components/switch'
 import { Tag } from '@spark-ui/components/tag'
 import { TextLink } from '@spark-ui/components/text-link'
@@ -42,13 +40,13 @@ const intents: CardProps['intent'][] = [
   'info',
   'neutral',
 ]
-const designs: CardProps['design'][] = ['filled', 'tinted', 'outlined']
+const designs: CardProps['design'][] = ['outlined', 'tinted']
 
 export const Default: StoryObj = {
   render: _args => {
     return (
       <Card className="max-w-sz-320">
-        <Card.Backdrop />
+        <Card.Type>Featured</Card.Type>
         <Card.Content className="gap-md flex flex-col items-start">
           <div className="h-sz-144 relative w-full">
             <img
@@ -67,53 +65,71 @@ export const Default: StoryObj = {
   },
 }
 
-export const Backdrop: StoryFn = _args => {
+export const Type: StoryFn = _args => {
   return (
     <div className="gap-lg flex flex-wrap">
-      <div>
-        <Tag className="mb-md">Default</Tag>
-        <Card className="min-w-sz-160">
-          <Card.Backdrop />
-          <Card.Content className="gap-md flex flex-col items-start">
-            <Skeleton label="Loading..." className="gap-xl flex w-full flex-col">
-              <Skeleton.Line lines={3} />
-            </Skeleton>
-          </Card.Content>
-        </Card>
-      </div>
-      <div>
-        <Tag className="mb-md">Animation: pulse</Tag>
-        <Card className="min-w-sz-160">
-          <Card.Backdrop animation="pulse" />
-          <Card.Content className="gap-md flex flex-col items-start">
-            <Skeleton label="Loading..." className="gap-xl flex w-full flex-col">
-              <Skeleton.Line lines={3} />
-            </Skeleton>
-          </Card.Content>
-        </Card>
-      </div>
+      <Card className="min-w-sz-208">
+        <Card.Type>Best seller</Card.Type>
+        <Card.Content className="gap-md flex flex-col items-start">
+          <div className="h-sz-80 relative w-full">
+            <img
+              src={pandaImg}
+              alt="Panda"
+              className="relative size-full rounded-lg object-cover"
+            />
+          </div>
+          <div>
+            <p className="text-headline-2">Premium Product</p>
+            <p>Top rated by customers</p>
+          </div>
+        </Card.Content>
+      </Card>
+
+      <Card className="min-w-sz-208">
+        <Card.Type intent="success">New product</Card.Type>
+        <Card.Content className="gap-md flex flex-col items-start">
+          <div className="h-sz-80 relative w-full">
+            <img
+              src={pandaImg}
+              alt="Panda"
+              className="relative size-full rounded-lg object-cover"
+            />
+          </div>
+          <div>
+            <p className="text-headline-2">Latest Release</p>
+            <p>Just arrived in store</p>
+          </div>
+        </Card.Content>
+      </Card>
+
+      <Card className="min-w-sz-208">
+        <Card.Type intent="alert">Limited edition</Card.Type>
+        <Card.Content className="gap-md flex flex-col items-start">
+          <div className="h-sz-80 relative w-full">
+            <img
+              src={pandaImg}
+              alt="Panda"
+              className="relative size-full rounded-lg object-cover"
+            />
+          </div>
+          <div>
+            <p className="text-headline-2">Exclusive Item</p>
+            <p>Only 5 left in stock</p>
+          </div>
+        </Card.Content>
+      </Card>
     </div>
   )
 }
 
 export const DesignAndIntentTable: StoryFn = _args => {
-  const [withShadows, setWithShadows] = useState(true)
-  const [withBackdrop, setWithBackdrop] = useState(true)
   const [disabled, setDisabled] = useState(false)
 
   return (
     <div className="gap-lg flex flex-col">
       <div className="gap-lg flex flex-wrap">
-        <Switch checked={withShadows} onCheckedChange={setWithShadows}>
-          With shadow
-        </Switch>
-        <Divider orientation="vertical" />
-        <Switch checked={withBackdrop} onCheckedChange={setWithBackdrop}>
-          With backdrop
-        </Switch>
-        <Divider orientation="vertical" />
         <Switch checked={disabled} onCheckedChange={setDisabled}>
-          Disabled (only for button cards)
+          Disabled
         </Switch>
       </div>
 
@@ -139,29 +155,43 @@ export const DesignAndIntentTable: StoryFn = _args => {
                   key={`${intent}-${design}`}
                   className="p-md border-sm border-outline text-center align-top"
                 >
-                  <Card
-                    intent={intent}
-                    design={design}
-                    className={cx('w-sz-208', withShadows && 'shadow-md')}
-                    asChild
-                  >
-                    <button type="button" className="text-left" disabled={disabled}>
-                      {withBackdrop && <Card.Backdrop intent={intent} />}
-                      <Card.Content className="gap-md flex flex-col items-start">
-                        <div className="h-sz-80 relative w-full">
-                          <img
-                            src={pandaImg}
-                            alt="Panda"
-                            className="relative size-full rounded-lg object-cover"
-                          />
-                        </div>
-                        <div>
-                          <p className="text-headline-2">All about pandas</p>
-                          <p>Read about Panda and Red Panda</p>
-                        </div>
-                      </Card.Content>
-                    </button>
-                  </Card>
+                  <div className="gap-md flex items-center">
+                    <Card intent={intent} design={design} className={cx('w-sz-208')} asChild>
+                      <button type="button" className="text-left" disabled={disabled}>
+                        <Card.Content className="gap-md flex flex-col items-start">
+                          <div className="h-sz-80 relative w-full">
+                            <img
+                              src={pandaImg}
+                              alt="Panda"
+                              className="relative size-full rounded-lg object-cover"
+                            />
+                          </div>
+                          <div>
+                            <p className="text-headline-2">All about pandas</p>
+                            <p>Read about Panda and Red Panda</p>
+                          </div>
+                        </Card.Content>
+                      </button>
+                    </Card>
+                    <Card intent={intent} design={design} className={cx('w-sz-208')} asChild>
+                      <button type="button" className="text-left" disabled={disabled}>
+                        <Card.Type>Featured</Card.Type>
+                        <Card.Content className="gap-md flex flex-col items-start">
+                          <div className="h-sz-80 relative w-full">
+                            <img
+                              src={pandaImg}
+                              alt="Panda"
+                              className="relative size-full rounded-lg object-cover"
+                            />
+                          </div>
+                          <div>
+                            <p className="text-headline-2">All about pandas</p>
+                            <p>Read about Panda and Red Panda</p>
+                          </div>
+                        </Card.Content>
+                      </button>
+                    </Card>
+                  </div>
                 </td>
               ))}
             </tr>
@@ -174,7 +204,7 @@ export const DesignAndIntentTable: StoryFn = _args => {
 
 export const InsetContent: StoryFn = _args => (
   <div className="gap-md flex flex-wrap">
-    <Card className="min-w-sz-160 shadow-md">
+    <Card className="min-w-sz-160">
       <Card.Content inset className="flex flex-col items-start">
         <div className="h-sz-144 relative w-full">
           <img
@@ -195,7 +225,7 @@ export const InsetContent: StoryFn = _args => (
 
 export const Link: StoryFn = _args => (
   <div className="gap-md flex flex-wrap">
-    <Card asChild className="min-w-sz-160 shadow-md">
+    <Card asChild className="min-w-sz-160">
       <a href="/">
         <Card.Content className="gap-md flex flex-col items-start">
           <div className="h-sz-144 relative w-full">
@@ -223,7 +253,7 @@ export const WithLinkBox: StoryFn = _args => {
   return (
     <div className="gap-md flex flex-wrap">
       <LinkBox>
-        <Card className="min-w-sz-160 shadow-md">
+        <Card className="min-w-sz-160">
           <Card.Content className="gap-md flex flex-col items-start">
             <div className="h-sz-144 relative w-full">
               <img src={pandaImg} alt="Panda" className="size-full rounded-lg object-cover" />

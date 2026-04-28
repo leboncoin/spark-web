@@ -9,7 +9,6 @@ import * as CardStories from './Card.stories'
 
 <Meta of={CardStories} />
 
-
 # Card
 
 A card is a generic container with multiple design and intent options. It is non-interactive by default but can be turned into either a link or a button.
@@ -29,18 +28,16 @@ import { Card } from '@spark-ui/components/card'
 
 export default () => (
   <Card>
-    <Card.Backdrop />
-    <Card.Content>
-      {/* Your content here */}
-    </Card.Content>
+    <Card.Type>Featured</Card.Type>
+    <Card.Content>{/* Your content here */}</Card.Content>
   </Card>
-);
+)
 ```
 
 The Card component consists of three main parts:
 
-- **Card**: The root container that provides the card's styling and context
-- **Card.Backdrop**: An optional gradient effect on the top of the card
+- **Card**: The root container that provides the card's styling and context (with `role="article"`)
+- **Card.Type**: An optional gradient banner with text to indicate the type or category of the card
 - **Card.Content**: The content container with proper padding and spacing
 
 ## API Reference
@@ -51,29 +48,31 @@ Contains all the parts of a card.
 
 <ArgTypes of={Card} />
 
-### _.Backdrop
+### \_.Type
 
-A gradient effect on the top of the card, to highlight it.
+A gradient banner with text on the top of the card to indicate its type or category (e.g., "Best seller", "New product", "Featured").
 
-<ArgTypes of={Card.Backdrop} />
+<ArgTypes of={Card.Type} />
 
-### _.Content
+### \_.Content
 
 Contains the content of the card.
 
 <ArgTypes of={Card.Content} />
 
-
 ## Examples
 
-### Backdrop
+### Type
 
-The `Card.Backdrop` component is used to create a gradient effect on the top of the card.
+The `Card.Type` component displays a text label on a gradient background at the top of the card. Use it to indicate the card's type, category, or status.
 
-Set the `animation` prop to `slideRight` to animate the backdrop gradient (more animation options could be added in the future).
+**Common use cases:**
 
-<Canvas of={CardStories.Backdrop} />
+- Product categories: "Best seller", "New product", "Limited edition"
+- Status indicators: "Featured", "Important", "Archived"
+- Loading states: "Loading..." (with `animation="pulse"`)
 
+<Canvas of={CardStories.Type} />
 
 ### Design and Intent
 
@@ -119,5 +118,34 @@ It will keep the HTML valid and accessible (as it is forbidden to have nested li
 <Canvas of={CardStories.WithLinkBox} />
 
 ## Accessibility
+
+### Semantic HTML
+
+Card uses `role="article"` to identify itself as a standalone article for screen readers. Card.Type uses a `<header>` element with non-heading text (not `<h1>`-`<h6>`) to avoid conflicts with the card's main title.
+
+### Heading Hierarchy
+
+When using Card.Type with content that includes headings, follow this pattern:
+
+```jsx
+<main>
+  <h1>Page Title</h1>
+
+  <Card role="article" aria-labelledby="card-title-1">
+    <Card.Type>Best seller</Card.Type> {/* Not a heading - just a label */}
+    <Card.Content>
+      <h2 id="card-title-1">Product Name</h2> {/* Main card title */}
+      <p>Description...</p>
+      <h3>Features</h3> {/* Subsection */}
+    </Card.Content>
+  </Card>
+</main>
+```
+
+**Key points:**
+
+- Card.Type displays a type/category label, not a hierarchical title
+- The main title should be inside Card.Content as an `<h2>` or `<h3>` (depending on page structure)
+- Use `aria-labelledby` to point to the main title for proper card identification
 
 <A11yReport of="card" />
