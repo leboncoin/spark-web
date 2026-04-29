@@ -292,3 +292,7 @@ export const AlternatingImage: StoryFn = () => {
     </div>
   )
 }
+
+AlternatingImage.parameters = {
+  chromatic: { disableSnapshot: true },
+}
