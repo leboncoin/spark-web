@@ -11,7 +11,7 @@ export const Label = ({ className, ref, ...others }: LabelProps) => {
     <RadixLabel.Label
       ref={ref}
       data-spark-component="label"
-      className={cx('text-body-1 font-bold', className)}
+      className={cx('text-body-1', className)}
       {...others}
     />
   )
