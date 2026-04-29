@@ -1,3 +1,13 @@
+## 17.7.0 (2026-04-29)
+
+### 🚀 Features
+
+- **components:** added type subcomponent to card ([38c07c0cd](https://github.com/leboncoin/spark-web/commit/38c07c0cd))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.6.1 (2026-04-24)
 
 This was a version bump only for @spark-ui/theme-utils to align it with other projects, there were no code changes.
