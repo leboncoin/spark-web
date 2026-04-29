@@ -26,29 +26,34 @@ const meta: Meta<typeof Carousel> = {
 
 export default meta
 
-const RandomImage = memo(
-  ({
-    imgWidth = 200,
-    imgHeight = 300,
-    className,
-  }: {
-    imgWidth?: number | string
-    imgHeight?: number | string
-    className?: string
-  }) => {
-    const randomSeed = Math.random().toString(36).substring(2, 10) // Génère un seed aléatoire
+// Import pug images from doc_assets
+const pugImages = [
+  new URL('./doc_assets/pug_01.jpg', import.meta.url).href,
+  new URL('./doc_assets/pug_02.jpg', import.meta.url).href,
+  new URL('./doc_assets/pug_03.jpg', import.meta.url).href,
+  new URL('./doc_assets/pug_04.jpg', import.meta.url).href,
+  new URL('./doc_assets/pug_05.jpg', import.meta.url).href,
+  new URL('./doc_assets/pug_06.jpg', import.meta.url).href,
+  new URL('./doc_assets/pug_07.jpg', import.meta.url).href,
+  new URL('./doc_assets/pug_08.jpg', import.meta.url).href,
+  new URL('./doc_assets/pug_09.jpg', import.meta.url).href,
+  new URL('./doc_assets/pug_10.jpg', import.meta.url).href,
+  new URL('./doc_assets/pug_11.jpg', import.meta.url).href,
+]
 
-    return (
-      <img
-        className={cx(className)}
-        width="100%"
-        height="100%"
-        src={`https://picsum.photos/seed/${randomSeed}/${imgWidth}/${imgHeight}`}
-        alt={`Random image with seed ${randomSeed}`}
-      />
-    )
-  }
-)
+const PugImage = memo(({ index, className }: { index: number; className?: string }) => {
+  const imageUrl = pugImages[index % pugImages.length]
+
+  return (
+    <img
+      className={cx(className)}
+      width="100%"
+      height="100%"
+      src={imageUrl}
+      alt={`Pug ${(index % pugImages.length) + 1}`}
+    />
+  )
+})
 
 export const Default: StoryFn = _args => {
   return (
@@ -58,7 +63,7 @@ export const Default: StoryFn = _args => {
           {Array.from({ length: 11 }).map((_, i) => {
             return (
               <Carousel.Slide key={i} className="flex items-center" aria-label={`Slide ${i}`}>
-                <RandomImage imgHeight={256} imgWidth={512} className="h-sz-256 object-contain" />
+                <PugImage index={i} className="h-sz-256 object-contain" />
 
                 <Button className="bottom-lg right-lg absolute">Read article</Button>
               </Carousel.Slide>
@@ -96,31 +101,31 @@ export const Controlled: StoryFn = _args => {
       name: 'EcoSoothe Skincare Serum',
       description:
         'A hydrating serum formulated with hyaluronic acid to replenish and rejuvenate the skin, leaving it soft and smooth.',
-      image: 'https://picsum.photos/id/45/4592/2576',
+      image: pugImages[0]!,
     },
     {
       name: 'QuantumFlex Yoga Mat',
       description:
         'A non-slip, eco-friendly yoga mat providing optimal cushioning and support for all your yoga and fitness routines.',
-      image: 'https://picsum.photos/id/46/3264/2448',
+      image: pugImages[1]!,
     },
     {
       name: 'LumaGlow LED Desk Lamp',
       description:
         'An adjustable LED desk lamp with multiple brightness levels and color temperatures, perfect for reading and working.',
-      image: 'https://picsum.photos/id/47/4272/2848',
+      image: pugImages[2]!,
     },
     {
       name: 'AquaPulse Water Bottle',
       description:
         'A durable, BPA-free water bottle with a built-in filter, ensuring fresh and clean hydration on the go.',
-      image: 'https://picsum.photos/id/48/5000/3333',
+      image: pugImages[3]!,
     },
     {
       name: 'ZenithWave Bluetooth Speaker',
       description:
         'A portable Bluetooth speaker delivering high-quality sound with a sleek, modern design.',
-      image: 'https://picsum.photos/id/49/1280/792',
+      image: pugImages[4]!,
     },
   ])
 
@@ -244,7 +249,7 @@ export const Gap: StoryFn = _args => {
           <Carousel.Slides>
             {Array.from({ length: 11 }).map((_, i) => (
               <Carousel.Slide key={i} aria-label={`Slide ${i}`} className="flex items-center">
-                <RandomImage imgHeight={600} imgWidth={600} className="h-sz-256 object-cover" />
+                <PugImage index={i} className="h-sz-256 object-cover" />
 
                 <Button className="bottom-lg right-lg absolute">Read article</Button>
               </Carousel.Slide>
@@ -281,7 +286,7 @@ export const InsetPagePicker: StoryFn = _args => {
             <Carousel.Slide key={i} aria-label={`Slide ${i}`} className="flex items-center">
               {/* Custom gradient element to ensure the contrast ratio is met */}
               <div className="h-sz-36 to-surface-inverse/dim-2 pointer-events-none absolute inset-x-0 bottom-0 bg-linear-to-b/oklch from-transparent" />
-              <RandomImage imgHeight={600} imgWidth={600} className="h-sz-256 object-cover" />
+              <PugImage index={i} className="h-sz-256 object-cover" />
             </Carousel.Slide>
           ))}
         </Carousel.Slides>
@@ -315,7 +320,7 @@ export const DefaultPage: StoryFn = _args => {
           {Array.from({ length: 5 }).map((_, i) => {
             return (
               <Carousel.Slide key={i} aria-label={`Slide ${i}`} className="flex items-center">
-                <RandomImage imgHeight={256} imgWidth={256} className="h-sz-256 object-contain" />
+                <PugImage index={i} className="h-sz-256 object-contain" />
 
                 <Button className="bottom-lg right-lg absolute">Read article</Button>
               </Carousel.Slide>
@@ -347,7 +352,7 @@ export const Loop: StoryFn = _args => {
           {Array.from({ length: 3 }).map((_, i) => {
             return (
               <Carousel.Slide key={i} aria-label={`Slide ${i}`} className="flex items-center">
-                <RandomImage imgHeight={256} imgWidth={256} className="h-sz-256 object-contain" />
+                <PugImage index={i} className="h-sz-256 object-contain" />
 
                 <Button className="bottom-lg right-lg absolute">Read article</Button>
               </Carousel.Slide>
@@ -443,7 +448,7 @@ export const ScrollBehavior: StoryFn = _args => {
           <Carousel.Slides>
             {Array.from({ length: 11 }).map((_, i) => (
               <Carousel.Slide key={i} aria-label={`Slide ${i}`} className="flex items-center">
-                <RandomImage imgHeight={600} imgWidth={600} className="h-sz-256 object-cover" />
+                <PugImage index={i} className="h-sz-256 object-cover" />
 
                 <Button className="bottom-lg right-lg absolute">Read article</Button>
               </Carousel.Slide>
@@ -506,7 +511,7 @@ export const SlidesPerPage: StoryFn = _args => {
           <Carousel.Slides>
             {Array.from({ length: 11 }).map((_, i) => (
               <Carousel.Slide key={i} aria-label={`Slide ${i}`} className="flex items-center">
-                <RandomImage imgHeight={600} imgWidth={600} className="h-sz-256 object-cover" />
+                <PugImage index={i} className="h-sz-256 object-cover" />
 
                 <Button className="bottom-lg right-lg absolute">Read article</Button>
               </Carousel.Slide>
@@ -542,7 +547,7 @@ export const SlidesPerMove: StoryFn = _args => {
           <Carousel.Slides>
             {Array.from({ length: 11 }).map((_, i) => (
               <Carousel.Slide key={i} aria-label={`Slide ${i}`} className="flex items-center">
-                <RandomImage imgHeight={600} imgWidth={600} className="h-sz-256 object-cover" />
+                <PugImage index={i} className="h-sz-256 object-cover" />
 
                 <Button className="bottom-lg right-lg absolute">Read article</Button>
               </Carousel.Slide>
@@ -582,31 +587,31 @@ export const CustomPageIndicators: StoryFn = () => {
       name: 'EcoSoothe Skincare Serum',
       description:
         'A hydrating serum formulated with hyaluronic acid to replenish and rejuvenate the skin, leaving it soft and smooth.',
-      image: 'https://picsum.photos/id/45/4592/2576',
+      image: pugImages[0]!,
     },
     {
       name: 'QuantumFlex Yoga Mat',
       description:
         'A non-slip, eco-friendly yoga mat providing optimal cushioning and support for all your yoga and fitness routines.',
-      image: 'https://picsum.photos/id/46/3264/2448',
+      image: pugImages[1]!,
     },
     {
       name: 'LumaGlow LED Desk Lamp',
       description:
         'An adjustable LED desk lamp with multiple brightness levels and color temperatures, perfect for reading and working.',
-      image: 'https://picsum.photos/id/47/4272/2848',
+      image: pugImages[2]!,
     },
     {
       name: 'AquaPulse Water Bottle',
       description:
         'A durable, BPA-free water bottle with a built-in filter, ensuring fresh and clean hydration on the go.',
-      image: 'https://picsum.photos/id/48/5000/3333',
+      image: pugImages[3]!,
     },
     {
       name: 'ZenithWave Bluetooth Speaker',
       description:
         'A portable Bluetooth speaker delivering high-quality sound with a sleek, modern design.',
-      image: 'https://picsum.photos/id/49/1280/792',
+      image: pugImages[4]!,
     },
   ])
 
@@ -711,7 +716,7 @@ export const MaxDots: StoryFn = () => {
           <Carousel.Slides>
             {Array.from({ length: 11 }).map((_, i) => (
               <Carousel.Slide key={i} aria-label={`Slide ${i}`} className="flex items-center">
-                <RandomImage imgHeight={600} imgWidth={600} className="h-sz-256 object-cover" />
+                <PugImage index={i} className="h-sz-256 object-cover" />
 
                 <Button className="bottom-lg right-lg absolute">Read article</Button>
               </Carousel.Slide>
