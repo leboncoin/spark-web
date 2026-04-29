@@ -1,3 +1,13 @@
+## 17.8.0 (2026-04-29)
+
+### 🚀 Features
+
+- **components:** added description to formfield compound ([9496bb965](https://github.com/leboncoin/spark-web/commit/9496bb965))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.7.0 (2026-04-29)
 
 ### 🚀 Features
