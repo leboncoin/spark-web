@@ -47,18 +47,18 @@
     "build": "NODE_OPTIONS='--max-old-space-size=8192' vite build"
   },
   "dependencies": {
-    "@base-ui/react": "1.0.0",
+    "@base-ui/react": "1.4.1",
     "@spark-ui/hooks": "17.7.0",
     "@spark-ui/icons": "17.7.0",
     "@spark-ui/internal-utils": "17.7.0",
     "@zag-js/pagination": "1.30.0",
     "@zag-js/react": "1.30.0",
     "class-variance-authority": "0.7.1",
-    "downshift": "9.0.13",
+    "downshift": "9.3.2",
     "emulate-tab": "1.2.1",
-    "motion": "12.34.5",
+    "motion": "12.38.0",
     "radix-ui": "1.4.3",
-    "react-aria-components": "1.15.1",
+    "react-aria-components": "1.17.0",
     "react-snap-carousel": "0.5.1"
   },
   "peerDependencies": {
