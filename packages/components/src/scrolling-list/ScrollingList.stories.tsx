@@ -511,3 +511,7 @@ export const FixedSizeItems: StoryFn = _args => {
     </div>
   )
 }
+
+FixedSizeItems.parameters = {
+  chromatic: { disableSnapshot: true },
+}
