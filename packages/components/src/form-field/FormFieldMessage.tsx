@@ -30,7 +30,7 @@ export const FormFieldMessage = ({
       ref={ref}
       id={id}
       data-spark-component="form-field-message"
-      className={cx(className, 'text-caption')}
+      className={cx(className, 'default:text-caption')}
       {...others}
     />
   )

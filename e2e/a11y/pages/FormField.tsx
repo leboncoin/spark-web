@@ -6,6 +6,7 @@ export const A11yFormField = () => (
     <div>
       <FormField name="email">
         <FormField.Label>Email</FormField.Label>
+        <FormField.Description>Enter your email address</FormField.Description>
 
         <FormField.Control>
           {({ id, name, description }) => (
@@ -26,6 +27,7 @@ export const A11yFormField = () => (
     <div>
       <FormField name="password" isRequired>
         <FormField.Label>Password</FormField.Label>
+        <FormField.Description>Choose a strong password</FormField.Description>
 
         <FormField.Control>
           {({ id, name, description, isRequired }) => (

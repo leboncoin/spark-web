@@ -94,6 +94,55 @@ describe('FormField', () => {
     expect(inputEl.getAttribute('aria-describedby')).toEqual(helperTextEl.getAttribute('id'))
   })
 
+  it('should render description', () => {
+    render(
+      <FormField name="email">
+        <FormField.Label>Email</FormField.Label>
+        <FormField.Description>Enter your email address</FormField.Description>
+
+        <FormField.Control>
+          {({ id, name, description }) => (
+            <input type="email" id={id} name={name} aria-describedby={description} />
+          )}
+        </FormField.Control>
+      </FormField>
+    )
+
+    const inputEl = screen.getByLabelText('Email')
+    const descriptionEl = screen.getByText('Enter your email address')
+
+    expect(inputEl.getAttribute('aria-describedby')).toEqual(descriptionEl.getAttribute('id'))
+  })
+
+  it('should combine description and helper message in aria-describedby', () => {
+    render(
+      <FormField name="email">
+        <FormField.Label>Email</FormField.Label>
+        <FormField.Description>Enter your email address</FormField.Description>
+
+        <FormField.Control>
+          {({ id, name, description }) => (
+            <input type="email" id={id} name={name} aria-describedby={description} />
+          )}
+        </FormField.Control>
+
+        <FormField.HelperMessage>We will never share your email</FormField.HelperMessage>
+      </FormField>
+    )
+
+    const inputEl = screen.getByLabelText('Email')
+    const descriptionEl = screen.getByText('Enter your email address')
+    const helperTextEl = screen.getByText('We will never share your email')
+
+    expect(inputEl).toHaveAttribute('aria-describedby')
+
+    const ids = (inputEl.getAttribute('aria-describedby') as string).split(' ')
+
+    expect(ids).toContain(descriptionEl.getAttribute('id'))
+    expect(ids).toContain(helperTextEl.getAttribute('id'))
+    expect(ids).toHaveLength(2)
+  })
+
   it('should render using custom label', () => {
     render(
       <FormField name="category">
