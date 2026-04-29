@@ -7,7 +7,6 @@ export const A11yCard = () => (
   <section>
     {/* Card */}
     <Card>
-      <Card.Backdrop />
       <Card.Content>
         <p>All about pandas</p>
       </Card.Content>
@@ -15,7 +14,6 @@ export const A11yCard = () => (
     {/* Card as a button */}
     <Card asChild>
       <button type="button">
-        <Card.Backdrop />
         <Card.Content>
           <p>All about pandas</p>
         </Card.Content>
@@ -24,7 +22,6 @@ export const A11yCard = () => (
     {/* Card as a link */}
     <Card asChild>
       <a href="/">
-        <Card.Backdrop />
         <Card.Content>
           <p>All about pandas</p>
         </Card.Content>
