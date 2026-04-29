@@ -2,6 +2,7 @@ import { FormField as Root } from './FormField'
 import { FormFieldAlertMessage } from './FormFieldAlertMessage'
 import { FormFieldCharactersCount } from './FormFieldCharactersCount'
 import { FormFieldControl } from './FormFieldControl'
+import { FormFieldDescription } from './FormFieldDescription'
 import { FormFieldErrorMessage } from './FormFieldErrorMessage'
 import { FormFieldHelperMessage } from './FormFieldHelperMessage'
 import { FormFieldLabel } from './FormFieldLabel'
@@ -14,6 +15,7 @@ import { FormFieldSuccessMessage } from './FormFieldSuccessMessage'
  */
 export const FormField: typeof Root & {
   Label: typeof FormFieldLabel
+  Description: typeof FormFieldDescription
   Control: typeof FormFieldControl
   StateMessage: typeof FormFieldStateMessage
   SuccessMessage: typeof FormFieldSuccessMessage
@@ -24,6 +26,7 @@ export const FormField: typeof Root & {
   CharactersCount: typeof FormFieldCharactersCount
 } = Object.assign(Root, {
   Label: FormFieldLabel,
+  Description: FormFieldDescription,
   Control: FormFieldControl,
   StateMessage: FormFieldStateMessage,
   SuccessMessage: FormFieldSuccessMessage,
@@ -36,6 +39,7 @@ export const FormField: typeof Root & {
 
 FormField.displayName = 'FormField'
 FormFieldLabel.displayName = 'FormField.Label'
+FormFieldDescription.displayName = 'FormField.Description'
 FormFieldControl.displayName = 'FormField.Control'
 FormFieldStateMessage.displayName = 'FormField.StateMessage'
 FormFieldSuccessMessage.displayName = 'FormField.SuccessMessage'
@@ -48,6 +52,7 @@ FormFieldCharactersCount.displayName = 'FormField.CharactersCount'
 export { type FormFieldProps } from './FormField'
 export { type FormFieldStateMessageProps } from './FormFieldStateMessage'
 export { type FormFieldControl, useFormFieldControl } from './FormFieldControl'
+export { type FormFieldDescriptionProps } from './FormFieldDescription'
 export { type FormFieldHelperMessageProps } from './FormFieldHelperMessage'
 export { type FormFieldSuccessMessageProps } from './FormFieldSuccessMessage'
 export { type FormFieldAlertMessageProps } from './FormFieldAlertMessage'

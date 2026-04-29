@@ -22,6 +22,7 @@ export default meta
 export const Default: StoryFn = () => (
   <FormField name="email">
     <FormField.Label>Email</FormField.Label>
+    <FormField.Description>Enter your email address</FormField.Description>
 
     <FormField.Control>
       {({ id, name, description }) => (
@@ -35,7 +36,7 @@ export const Default: StoryFn = () => (
       )}
     </FormField.Control>
 
-    <FormField.HelperMessage>We will never share your email</FormField.HelperMessage>
+    <FormField.HelperMessage>Use your work email for business accounts</FormField.HelperMessage>
   </FormField>
 )
 
@@ -44,6 +45,7 @@ export const Required: StoryFn = () => (
     <p className="mb-xl">* Required fields</p>
     <FormField name="password" isRequired>
       <FormField.Label>Password</FormField.Label>
+      <FormField.Description>Choose a strong password</FormField.Description>
 
       <FormField.Control>
         {({ id, name, description, isRequired }) => (
@@ -75,6 +77,7 @@ export const CustomRequired: StoryFn = () => (
     >
       Password
     </FormField.Label>
+    <FormField.Description>Must be at least 8 characters</FormField.Description>
 
     <FormField.Control>
       {({ id, name, description, isRequired }) => (
@@ -98,6 +101,7 @@ export const State: StoryFn = () => (
   <div className="gap-lg flex flex-col">
     <FormField name="email" state="error">
       <FormField.Label>Name</FormField.Label>
+      <FormField.Description>Enter your full name</FormField.Description>
 
       <FormField.Control>
         {({ id, name, description, state }) => (
@@ -118,6 +122,7 @@ export const State: StoryFn = () => (
 
     <FormField name="email" state="success">
       <FormField.Label>Email</FormField.Label>
+      <FormField.Description>We'll send a confirmation to this address</FormField.Description>
 
       <FormField.Control>
         {({ id, name, description, state }) => (
@@ -139,6 +144,7 @@ export const State: StoryFn = () => (
 
     <FormField name="email" state="alert">
       <FormField.Label>Password</FormField.Label>
+      <FormField.Description>Create a secure password for your account</FormField.Description>
 
       <FormField.Control>
         {({ id, name, description, state }) => (
@@ -171,6 +177,7 @@ export const CharactersCount: StoryFn = () => {
   return (
     <FormField name="input-with-a-characters-count">
       <FormField.Label>Email</FormField.Label>
+      <FormField.Description>Your primary contact email</FormField.Description>
 
       <FormField.Control>
         {({ id, name, description }) => (

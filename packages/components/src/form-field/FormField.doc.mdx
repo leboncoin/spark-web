@@ -3,6 +3,8 @@ import { A11yReport } from '@docs/helpers/A11yReport'
 import { Callout } from '@docs/helpers/Callout'
 
 import { FormField } from '.'
+import { Card } from '../card'
+import { Button } from '../button'
 
 import * as stories from './FormField.stories'
 
@@ -13,6 +15,57 @@ import * as stories from './FormField.stories'
 Provide context to your form elements easily.
 
 By default, all Spark input components use `FormField.Control` behind the scenes. However, if you want to use a custom input component, or if you need more fine-grained control over the state of a form control, it can be used.
+
+<Card intent="accent" className="sb-unstyled my-lg">
+  <Card.Type>Compatible Components</Card.Type>
+  <Card.Content className="gap-md flex flex-col">
+    <p className="text-body-2">
+      FormField works seamlessly with all Spark form components to provide consistent labeling,
+      descriptions, validation states, and accessibility features:
+    </p>
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-sm">
+      <Button design="ghost" underline intent="support" asChild>
+        <a href="/?path=/docs/components-input--docs">Input</a>
+      </Button>
+      <Button design="ghost" underline intent="support" asChild>
+        <a href="/?path=/docs/components-textarea--docs">Textarea</a>
+      </Button>
+      <Button design="ghost" underline intent="support" asChild>
+        <a href="/?path=/docs/components-select--docs">Select</a>
+      </Button>
+      <Button design="ghost" underline intent="support" asChild>
+        <a href="/?path=/docs/components-combobox--docs">Combobox</a>
+      </Button>
+      <Button design="ghost" underline intent="support" asChild>
+        <a href="/?path=/docs/components-checkbox--docs">Checkbox</a>
+      </Button>
+      <Button design="ghost" underline intent="support" asChild>
+        <a href="/?path=/docs/components-radiogroup--docs">RadioGroup</a>
+      </Button>
+      <Button design="ghost" underline intent="support" asChild>
+        <a href="/?path=/docs/components-switch--docs">Switch</a>
+      </Button>
+      <Button design="ghost" underline intent="support" asChild>
+        <a href="/?path=/docs/components-slider--docs">Slider</a>
+      </Button>
+      <Button design="ghost" underline intent="support" asChild>
+        <a href="/?path=/docs/components-stepper--docs">Stepper</a>
+      </Button>
+      <Button design="ghost" underline intent="support" asChild>
+        <a href="/?path=/docs/components-rating--docs">Rating</a>
+      </Button>
+      <Button design="ghost" underline intent="support" asChild>
+        <a href="/?path=/docs/components-fileupload--docs">FileUpload</a>
+      </Button>
+      <Button design="ghost" underline intent="support" asChild>
+        <a href="/?path=/docs/components-inputotp--docs">InputOTP</a>
+      </Button>
+      <Button design="ghost" underline intent="support" asChild>
+        <a href="/?path=/docs/components-segmentedcontrol--docs">SegmentedControl</a>
+      </Button>
+    </div>
+  </Card.Content>
+</Card>
 
 <Canvas of={stories.Default} />
 
@@ -30,13 +83,13 @@ import { FormField } from '@spark-ui/components/form-field'
 export default () => (
   <FormField>
     <FormField.Label />
-    /**
+    <FormField.Description />
+    {/**
      * FormField.Control can be replaced by any Spark component that is an input:
      * - Checkbox, Combobox, Dropdown, TextInput, RadioGroup, Select, Stepper, Switch, etc
-     */
-    <FormField.Control /> 
-
-    <FormField.HelperMessage>We will never share your email</FormField.HelperMessage>
+     */}
+    <FormField.Control />
+    <FormField.HelperMessage />
   </FormField>
 )
 ```
@@ -49,59 +102,59 @@ Wrap any type of input (Input, Checkbox, RadioGroup, etc.) to add contextual inf
 
 <ArgTypes of={FormField} />
 
-
-
-### _.Label
+### \_.Label
 
 Label to attach to the associated input to describe it and give it an accessible name.
 
 <ArgTypes of={FormField.Label} />
 
+### \_.Description
 
-### _.HelperMessage
+Provides an accessible description for the input field. The description is automatically linked to the input via `aria-describedby` and can be combined with helper messages and error messages.
+
+<ArgTypes of={FormField.Description} />
+
+### \_.HelperMessage
 
 Help users by showing an helper message below an input.
 
 <ArgTypes of={FormField.HelperMessage} />
 
-
-### _.SuccessMessage
+### \_.SuccessMessage
 
 Help users by showing an success message below an input. Indicates the input has been successfully filled in by the user.
 
 <ArgTypes of={FormField.SuccessMessage} />
 
-### _.AlertMessage
+### \_.AlertMessage
 
 Help users by showing an alert message (warning) below an input. For example: a password input with an insecure password.
 
 <ArgTypes of={FormField.AlertMessage} />
 
-### _.ErrorMessage
+### \_.ErrorMessage
 
 Help users by showing an error message below an input. Indicated the input has not been successfully filled in by the user.
 
 <ArgTypes of={FormField.ErrorMessage} />
 
-### _.Control
+### \_.Control
 
 This higher order component gives you access to the internal state of the field. Wrap an input with it to get access to the state. It can be used to build complex custom inputs.
 
 <ArgTypes of={FormField.Control} />
 
-### _.RequiredIndicator
+### \_.RequiredIndicator
 
 Render it inside the FormField.Label to mark the field as mandatory (required)
 
 <ArgTypes of={FormField.RequiredIndicator} />
 
-### _.CharactersCount
+### \_.CharactersCount
 
 Displays characters count for text inputs and textareas, and the max length allowed in these components.
 
 <ArgTypes of={FormField.CharactersCount} />
-
-
 
 ## Examples
 
@@ -110,10 +163,11 @@ Displays characters count for text inputs and textareas, and the max length allo
 Use `FormField.CharactersCount` to show users how many characters they have left. Can be used in combination with all types of text inputs.
 
 <Callout kind="warning" className="sb-unstyled">
-  Don't forget to pass both `description` and `liveAnnouncement` props to the `FormField.CharactersCount` component to make it compatible with screen readers:
+  Don't forget to pass both `description` and `liveAnnouncement` props to the
+  `FormField.CharactersCount` component to make it compatible with screen readers:
   <ul className="pl-3xl">
-    <li className='list-disc'>`description` is read when the focus is on the input.</li>
-    <li className='list-disc'>`liveAnnouncement` is read when the user types (after a delay).</li>
+    <li className="list-disc">`description` is read when the focus is on the input.</li>
+    <li className="list-disc">`liveAnnouncement` is read when the user types (after a delay).</li>
   </ul>
 </Callout>
 
@@ -124,7 +178,8 @@ Use `FormField.CharactersCount` to show users how many characters they have left
 Set `isRequired` prop to `true` to mark the input as required and display a required indicator. The default indicator is an asterisk `*`.
 
 <Callout kind="warning">
-  If your form has mandatory fields, you must include an explicit note at the top of the form, outside of the input fields, to inform users that certain fields are required.
+  If your form has mandatory fields, you must include an explicit note at the top of the form,
+  outside of the input fields, to inform users that certain fields are required.
 </Callout>
 
 <Canvas of={stories.Required} />
