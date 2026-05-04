@@ -1,77 +1,77 @@
 @utility text-display-1 {
   font-size: calc(2.5rem * var(--spacing-factor));
-  line-height: calc(3.5rem * var(--spacing-factor));
+  line-height: 1.2;
   font-weight: 700;
 }
 
 @utility text-display-2 {
   font-size: calc(2rem * var(--spacing-factor));
-  line-height: calc(2.75rem * var(--spacing-factor));
+  line-height: 1.2;
   font-weight: 700;
 }
 
 @utility text-display-3 {
   font-size: calc(1.5rem * var(--spacing-factor));
-  line-height: calc(2rem * var(--spacing-factor));
+  line-height: 1.2;
   font-weight: 700;
 }
 
 @utility text-headline-1 {
   font-size: calc(1.25rem * var(--spacing-factor));
-  line-height: calc(1.75rem * var(--spacing-factor));
+  line-height: 1.2;
   font-weight: 700;
 }
 
 @utility text-headline-2 {
   font-size: calc(1.125rem * var(--spacing-factor));
-  line-height: calc(1.5rem * var(--spacing-factor));
+  line-height: 1.2;
   font-weight: 700;
 }
 
 @utility text-subhead {
   font-size: calc(1rem * var(--spacing-factor));
-  line-height: calc(1.5rem * var(--spacing-factor));
+  line-height: 1.2;
   font-weight: 700;
 }
 
 @utility text-body-1 {
   font-size: calc(1rem * var(--spacing-factor));
-  line-height: calc(1.5rem * var(--spacing-factor));
-}
-
-@utility text-body-2 {
-  font-size: calc(0.875rem * var(--spacing-factor));
-  line-height: calc(1.25rem * var(--spacing-factor));
-}
-
-@utility text-caption {
-  font-size: calc(0.75rem * var(--spacing-factor));
-  line-height: calc(1rem * var(--spacing-factor));
-}
-
-@utility text-small {
-  font-size: calc(0.625rem * var(--spacing-factor));
-  line-height: calc(0.875rem * var(--spacing-factor));
+  line-height: 1.5;
 }
 
 @utility text-body-1-link {
   font-size: calc(1rem * var(--spacing-factor));
-  line-height: calc(1.5rem * var(--spacing-factor));
+  line-height: 1.5;
+}
+
+@utility text-body-2 {
+  font-size: calc(0.875rem * var(--spacing-factor));
+  line-height: 1.5;
 }
 
 @utility text-body-2-link {
   font-size: calc(0.875rem * var(--spacing-factor));
-  line-height: calc(1.125rem * var(--spacing-factor));
+  line-height: 1.5;
+}
+
+@utility text-caption {
+  font-size: calc(0.75rem * var(--spacing-factor));
+  line-height: 1.5;
 }
 
 @utility text-caption-link {
   font-size: calc(0.75rem * var(--spacing-factor));
-  line-height: calc(1rem * var(--spacing-factor));
+  line-height: 1.5;
+}
+
+@utility text-small {
+  font-size: calc(0.625rem * var(--spacing-factor));
+  line-height: 1.5;
 }
 
 @utility text-callout {
   font-size: calc(1rem * var(--spacing-factor));
-  line-height: calc(1.5rem * var(--spacing-factor));
+  line-height: 1.5;
 }
 
 @utility u-current-font-size {
