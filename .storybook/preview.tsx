@@ -205,6 +205,7 @@ const preview = {
           [
             'Overview',
             'Design Tokens',
+            'Typography',
             'Themes', // + custom themes
             'Themes - Contrast check',
             'Animations',
