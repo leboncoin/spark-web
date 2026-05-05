@@ -21,11 +21,7 @@ const Root = ({
 }: PropsWithChildren<TextareaProps>) => {
   return (
     <Input
-      className={cx(
-        className,
-        'py-[var(--spacing-sz-10)]',
-        isResizable ? 'resize-y' : 'resize-none'
-      )}
+      className={cx(className, 'py-sz-10 rounded-xl!', isResizable ? 'resize-y' : 'resize-none')}
       data-spark-component="textarea"
       disabled={disabled}
       asChild

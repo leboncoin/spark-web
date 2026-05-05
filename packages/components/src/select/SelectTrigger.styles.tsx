@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority'
 export const styles = cva(
   [
     'relative flex w-full items-center justify-between',
-    'min-h-sz-44 rounded-lg px-lg',
+    'min-h-sz-44 rounded-full px-lg',
     'text-body-1',
     // outline styles
     'ring-1 outline-hidden ring-inset focus-within:ring-focus',

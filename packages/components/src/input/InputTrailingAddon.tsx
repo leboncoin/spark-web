@@ -13,10 +13,10 @@ const Root = ({ className, ref, ...others }: InputTrailingAddonProps) => {
   const isInactive = disabled || readOnly
 
   return (
-    <div className={cx('rounded-r-lg', isInactive ? 'bg-on-surface/dim-5' : null)}>
+    <div className={cx('rounded-r-full', isInactive ? 'bg-on-surface/dim-5' : null)}>
       <InputAddon
         ref={ref}
-        className={cx(className, 'rounded-l-0! ml-[-1px] rounded-r-lg')}
+        className={cx(className, 'rounded-l-0! -ml-px rounded-r-full')}
         {...others}
       />
     </div>
