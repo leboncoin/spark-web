@@ -36,7 +36,7 @@ export const FormFieldLabel = ({
       data-spark-component="form-field-label"
       htmlFor={htmlFor}
       className={cx(
-        'default:font-bold',
+        'default:font-medium',
         className,
         disabled ? 'text-on-surface/dim-3  pointer-events-none' : undefined
       )}

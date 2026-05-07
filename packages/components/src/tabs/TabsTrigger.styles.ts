@@ -8,7 +8,7 @@ export const triggerVariants = cva(
     'border-outline',
     'hover:not-disabled:bg-surface-hovered',
     'after:absolute',
-    'data-[active]:font-bold',
+    'data-[active]:font-medium',
     'not-data-[active]:not-disabled:cursor-pointer',
     'data-[orientation=horizontal]:border-b-sm data-[orientation=horizontal]:after:inset-x-0 data-[orientation=horizontal]:after:bottom-[-1px] data-[orientation=horizontal]:after:h-sz-2',
     'data-[orientation=vertical]:border-r-sm data-[orientation=vertical]:after:inset-y-0 data-[orientation=vertical]:after:right-[-1px] data-[orientation=vertical]:after:w-sz-2',
