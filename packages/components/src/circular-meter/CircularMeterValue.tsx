@@ -7,7 +7,7 @@ import { useCircularMeterTrack } from './CircularMeterTrack'
 
 export type CircularMeterValueProps = Omit<ComponentProps<typeof BaseMeter.Value>, 'render'>
 
-const valueStyles = cva(['default:text-on-surface default:font-bold'], {
+const valueStyles = cva(['default:text-on-surface'], {
   variants: {
     size: {
       sm: '',
@@ -22,12 +22,12 @@ const valueStyles = cva(['default:text-on-surface default:font-bold'], {
   },
   compoundVariants: [
     // Inside the track
-    { size: 'sm', inside: true, class: 'default:text-body-2 default:font-bold' },
-    { size: 'md', inside: true, class: 'default:text-body-2 default:font-bold' },
-    { size: 'lg', inside: true, class: 'default:text-body-1 default:font-bold' },
+    { size: 'sm', inside: true, class: 'default:text-body-2-highlight' },
+    { size: 'md', inside: true, class: 'default:text-body-2-highlight' },
+    { size: 'lg', inside: true, class: 'default:text-body-1-highlight' },
     { size: 'xl', inside: true, class: 'default:text-display-3' },
     // Outside the track
-    { size: 'sm', inside: false, class: 'default:text-body-1 default:font-bold' },
+    { size: 'sm', inside: false, class: 'default:text-body-1-highlight' },
     { size: 'md', inside: false, class: 'default:text-headline-2' },
     { size: 'lg', inside: false, class: 'default:text-headline-2' },
     { size: 'xl', inside: false, class: 'default:text-display-3' },

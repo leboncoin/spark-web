@@ -2,7 +2,7 @@ import { makeVariants } from '@spark-ui/internal-utils'
 import { cva, VariantProps } from 'class-variance-authority'
 
 export const styles = cva(
-  ['inline-flex h-fit', 'empty:p-0', 'text-center font-bold', 'rounded-full box-content'],
+  ['inline-flex h-fit', 'empty:p-0', 'text-center', 'rounded-full box-content'],
   {
     variants: {
       /**
@@ -28,8 +28,12 @@ export const styles = cva(
        * @default 'md'
        */
       size: makeVariants<'size', ['sm', 'md']>({
-        sm: ['text-small', 'px-[var(--spacing-sz-6)] py-[var(--spacing-sz-2)]', 'empty:size-sz-8'],
-        md: ['text-caption', 'px-md py-sm', 'empty:size-sz-16'],
+        sm: [
+          'text-small-highlight',
+          'px-[var(--spacing-sz-6)] py-[var(--spacing-sz-2)]',
+          'empty:size-sz-8',
+        ],
+        md: ['text-caption-highlight', 'px-md py-sm', 'empty:size-sz-16'],
       }),
       /**
        * Type of the component.
