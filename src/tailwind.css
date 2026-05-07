@@ -5,3 +5,11 @@
 @import '@spark-ui/theme-utils/themes/dark';
 @import '@spark-ui/theme-utils/themes/light-more-contrast';
 @import '@spark-ui/theme-utils/themes/dark-more-contrast';
+
+/* Override font-sans for Storybook only - using LBC Denim INK instead of Nunito Sans */
+@theme {
+  --font-sans:
+    'LBC Denim INK', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+}

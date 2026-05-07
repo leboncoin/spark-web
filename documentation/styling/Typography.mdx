@@ -1,66 +1,64 @@
 import { Meta } from '@storybook/addon-docs/blocks'
 import { Callout } from '@docs/helpers/Callout'
 
-<Meta title="Styling/Typography" summary="Learn how to use the Denim INK font family included with Spark UI and how to integrate it into your project." />
+<Meta title="Styling/Typography" summary="Learn how to configure custom fonts with Spark UI and integrate them into your project." />
 
 # Typography
 
-## Denim INK Font
+## Font Requirements
 
-Spark UI includes the **Denim INK** font family, a custom typeface designed specifically for the design system. It comes with four weights to support various typographic hierarchies:
+Spark UI is designed to work with your own custom fonts. You must provide and host your own font files. The design system requires four font weights to support proper typographic hierarchy:
 
 - **Regular (400)** - For body text and standard content
 - **Medium (500)** - For subtle emphasis
 - **Semi-Bold (600)** - For subheadings and moderate emphasis
 - **Bold (700)** - For headings and strong emphasis
 
-## Setting up the font in your project
-
 <Callout variant="warning">
-  **Important**: Spark UI does not bundle font files in the npm package. You must host and load the Denim INK font yourself.
+  **Important**: Spark UI does not bundle or provide font files. You must provide your own custom font family.
 </Callout>
 
-The Denim INK font files are available in the Spark repository under [`assets/fonts/lbc-denim-ink/`](https://github.com/leboncoin/spark-web/tree/main/assets/fonts/lbc-denim-ink).
+## Setting up your custom font
 
 ### Option 1: Host on your CDN (Recommended)
 
-1. **Upload font files** to your CDN
+1. **Upload your font files** to your CDN
 2. **Add `@font-face` declarations** to your CSS:
 
 ```css
 /* Add before importing Spark theme */
 
 @font-face {
-  font-family: 'LBC Denim INK';
-  src: url('https://your-cdn.com/fonts/LBCDenimINK-Regular.woff2') format('woff2'),
-       url('https://your-cdn.com/fonts/LBCDenimINK-Regular.ttf') format('truetype');
+  font-family: 'Your Custom Font';
+  src: url('https://your-cdn.com/fonts/YourFont-Regular.woff2') format('woff2'),
+       url('https://your-cdn.com/fonts/YourFont-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'LBC Denim INK';
-  src: url('https://your-cdn.com/fonts/LBCDenimINK-Medium.woff2') format('woff2'),
-       url('https://your-cdn.com/fonts/LBCDenimINK-Medium.ttf') format('truetype');
+  font-family: 'Your Custom Font';
+  src: url('https://your-cdn.com/fonts/YourFont-Medium.woff2') format('woff2'),
+       url('https://your-cdn.com/fonts/YourFont-Medium.woff') format('woff');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'LBC Denim INK';
-  src: url('https://your-cdn.com/fonts/LBCDenimINK-SemiBold.woff2') format('woff2'),
-       url('https://your-cdn.com/fonts/LBCDenimINK-SemiBold.ttf') format('truetype');
+  font-family: 'Your Custom Font';
+  src: url('https://your-cdn.com/fonts/YourFont-SemiBold.woff2') format('woff2'),
+       url('https://your-cdn.com/fonts/YourFont-SemiBold.woff') format('woff');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'LBC Denim INK';
-  src: url('https://your-cdn.com/fonts/LBCDenimINK-Bold.woff2') format('woff2'),
-       url('https://your-cdn.com/fonts/LBCDenimINK-Bold.ttf') format('truetype');
+  font-family: 'Your Custom Font';
+  src: url('https://your-cdn.com/fonts/YourFont-Bold.woff2') format('woff2'),
+       url('https://your-cdn.com/fonts/YourFont-Bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -73,14 +71,14 @@ The Denim INK font files are available in the Spark repository under [`assets/fo
 
 ### Option 2: Self-host in your project
 
-1. **Copy font files** from `assets/fonts/lbc-denim-ink/` to your `public/fonts/` directory
+1. **Add your font files** to your project (e.g., `public/fonts/` directory)
 2. **Add `@font-face` declarations** with local paths:
 
 ```css
 @font-face {
-  font-family: 'LBC Denim INK';
-  src: url('/fonts/lbc-denim-ink/LBCDenimINK-Regular.woff2') format('woff2'),
-       url('/fonts/lbc-denim-ink/LBCDenimINK-Regular.ttf') format('truetype');
+  font-family: 'Your Custom Font';
+  src: url('/fonts/YourFont-Regular.woff2') format('woff2'),
+       url('/fonts/YourFont-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -89,25 +87,23 @@ The Denim INK font files are available in the Spark repository under [`assets/fo
 /* Repeat for weights 500, 600, 700 */
 ```
 
-3. **Import Spark theme**:
+3. **Override the `--font-sans` variable** in your Tailwind config:
 
 ```css
 @import 'tailwindcss';
 @import '@spark-ui/theme-utils/base';
+
+@theme {
+  --font-sans: 'Your Custom Font', ui-sans-serif, system-ui, sans-serif;
+}
 ```
-
-## Font loading characteristics
-
-- **Format**: WOFF2 (primary) and TTF (fallback) for optimal browser support
-- **Loading strategy**: `font-display: swap` to prevent invisible text during loading
-- **File size**: Optimized web fonts (~80KB for WOFF2, ~215KB for TTF per weight)
 
 ## Font stack
 
-The complete font stack includes system font fallbacks to ensure text remains readable even if the custom font fails to load:
+Include system font fallbacks to ensure text remains readable even if the custom font fails to load:
 
 ```css
-font-family: 'LBC Denim INK', ui-sans-serif, system-ui, -apple-system, 
+font-family: 'Your Custom Font', ui-sans-serif, system-ui, -apple-system, 
   BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 
   'Noto Sans', sans-serif;
 ```
@@ -136,40 +132,8 @@ Access different font weights using Tailwind's font-weight utilities:
 <p className="font-bold">Bold text (700)</p>
 ```
 
-## Using a custom font
-
-If you need to replace Denim INK with your own custom font:
-
-1. **Add your font files** to your project (e.g., in a `public/fonts/` directory)
-
-2. **Define `@font-face` declarations** in your CSS:
-
-```css
-@font-face {
-  font-family: 'Your Custom Font';
-  src: url('/fonts/your-font-regular.woff2') format('woff2'),
-       url('/fonts/your-font-regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Repeat for other weights... */
-```
-
-3. **Override the `--font-sans` variable** in your Tailwind config:
-
-```css
-@import 'tailwindcss';
-@import '@spark-ui/theme-utils/base';
-
-@theme {
-  --font-sans: 'Your Custom Font', ui-sans-serif, system-ui, sans-serif;
-}
-```
-
 <Callout variant="warning">
-  When using a custom font, ensure you include all necessary font weights (400, 500, 600, 700) to maintain the design system's typographic hierarchy.
+  Ensure you include all necessary font weights (400, 500, 600, 700) to maintain the design system's typographic hierarchy.
 </Callout>
 
 ## Performance considerations

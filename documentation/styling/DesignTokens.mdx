@@ -11,7 +11,7 @@ import {
 
 <Meta
   title="Styling/Design Tokens"
-  summary="Comprehensive reference for Spark's design tokens including color families, spacing, typography, shadows, and semantic theming system."
+  summary="Comprehensive reference tables for all Spark design tokens with live CSS values, Tailwind classes, and visual previews."
 />
 
 export function getCssVariableValue(varName) {
@@ -553,92 +553,6 @@ Feedback colors convey intent status (success, error, alert, info, neutral).
             </Table.Cell>
           </Table.Row>
         ))}
-      </Table.Body>
-    </Table.Grid>
-  </Table>
-</div>
-
-### Content
-
-export const contentFontSizes = [
-  { name: 'text-body-1', className: 'text-body-1' },
-  { name: 'text-body-1-highlight', className: 'text-body-1-highlight' },
-  { name: 'text-body-2', className: 'text-body-2' },
-  { name: 'text-body-2-highlight', className: 'text-body-2-highlight' },
-  { name: 'text-caption', className: 'text-caption' },
-  { name: 'text-caption-highlight', className: 'text-caption-highlight' },
-  { name: 'text-small', className: 'text-small' },
-  { name: 'text-small-highlight', className: 'text-small-highlight' },
-]
-
-<div className="sb-unstyled">
-  <Table resizeColumnAriaLabel="Resize column">
-    <Table.Grid aria-label="Title fonts design tokens">
-      <Table.Header>
-        <Table.Column id="name" label="Name" isRowHeader />
-        <Table.Column id="date" label="Preview" minWidth={700} />
-        <Table.Column id="date" label="Size" />
-        <Table.Column id="date" label="Line height" />
-        <Table.Column id="date" label="Weight" />
-      </Table.Header>
-      <Table.Body>
-        {contentFontSizes.map(fontSize => (
-          <Table.Row key={fontSize.name} id={fontSize.name}>
-            <Table.Cell>.{fontSize.name}</Table.Cell>
-            <Table.Cell>
-              <span className={fontSize.className}>Hello world</span>
-            </Table.Cell>
-            <Table.Cell>{getComputedCssVariable('font-size', fontSize.className)}</Table.Cell>
-            <Table.Cell>
-              1.5 (computed: {getComputedCssVariable('line-height', fontSize.className)})
-            </Table.Cell>
-            <Table.Cell>{getComputedCssVariable('font-weight', fontSize.className)}</Table.Cell>
-          </Table.Row>
-        ))}
-      </Table.Body>
-    </Table.Grid>
-  </Table>
-</div>
-
-### Font weight
-
-<div className="sb-unstyled">
-  <Table resizeColumnAriaLabel="Resize column">
-    <Table.Grid aria-label="Title fonts design tokens">
-      <Table.Header>
-        <Table.Column id="font-weight" label="Font weight" isRowHeader />
-        <Table.Column id="preview" label="Preview" />
-        <Table.Column id="value" label="Value" />
-      </Table.Header>
-      <Table.Body>
-        <Table.Row>
-          <Table.Cell>.font-regular</Table.Cell>
-          <Table.Cell>
-            <p className="text-body-1 font-regular">Hello world</p>
-          </Table.Cell>
-          <Table.Cell>400</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>.font-medium</Table.Cell>
-          <Table.Cell>
-            <p className="text-body-1 font-medium">Hello world</p>
-          </Table.Cell>
-          <Table.Cell>500</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>.font-semi-bold</Table.Cell>
-          <Table.Cell>
-            <p className="text-body-1 font-semi-bold">Hello world</p>
-          </Table.Cell>
-          <Table.Cell>600</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>.font-bold</Table.Cell>
-          <Table.Cell>
-            <p className="text-body-1 font-bold">Hello world</p>
-          </Table.Cell>
-          <Table.Cell>700</Table.Cell>
-        </Table.Row>
       </Table.Body>
     </Table.Grid>
   </Table>
