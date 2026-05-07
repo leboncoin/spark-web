@@ -35,11 +35,15 @@ export interface TableBulkBarProps {
    * Additional props passed to the root element.
    * Note: `role` is fixed to "toolbar".
    */
-  rootProps?: Omit<ComponentPropsWithoutRef<'div'>, 'children' | 'className' | 'role' | 'aria-label'>
+  rootProps?: Omit<
+    ComponentPropsWithoutRef<'div'>,
+    'children' | 'className' | 'role' | 'aria-label'
+  >
 }
 
 function TableBulkBarRoot({ children, className, rootProps, ...props }: TableBulkBarProps) {
-  const { selectedCount, totalCount, onClearSelection, onSelectAll, hasMultiplePages } = useTableContext()
+  const { selectedCount, totalCount, onClearSelection, onSelectAll, hasMultiplePages } =
+    useTableContext()
 
   const contextValue: TableBulkBarContextValue = {
     selectedCount,
@@ -72,7 +76,7 @@ function TableBulkBarRoot({ children, className, rootProps, ...props }: TableBul
 function TableBulkBarSelectedCount({ children }: { children: ReactNode }) {
   useTableBulkBarContext() // enforce usage within BulkBar
 
-  return <span className="text-body-1 font-bold">{children}</span>
+  return <span className="text-body-1-highlight">{children}</span>
 }
 
 type BulkBarButtonProps = Omit<ButtonProps, 'onClick'>

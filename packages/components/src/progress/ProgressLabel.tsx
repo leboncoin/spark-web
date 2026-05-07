@@ -28,7 +28,7 @@ export const ProgressLabel = ({
     <BaseProgress.Label
       data-spark-component="progress-label"
       id={id}
-      className="default:text-body-1 text-on-surface default:font-bold"
+      className="default:text-body-1-highlight text-on-surface"
       ref={ref}
       {...others}
     >

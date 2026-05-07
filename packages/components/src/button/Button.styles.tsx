@@ -14,7 +14,7 @@ export const buttonStyles = cva(
     'u-shadow-border-transition',
     'box-border inline-flex items-center justify-center gap-md whitespace-nowrap',
     'default:px-lg',
-    'text-body-1 font-bold',
+    'text-body-1-highlight',
     'focus-visible:u-outline',
   ],
   {

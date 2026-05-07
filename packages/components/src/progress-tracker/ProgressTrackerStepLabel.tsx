@@ -9,7 +9,7 @@ type ProgressTrackerStepLabelProps = ComponentPropsWithoutRef<'span'> & {
 
 const stepLabel = cva(
   [
-    'flex text-body-2 ',
+    'flex text-body-2',
     'text-on-surface group-disabled/btn:text-on-surface/dim-1',
     'group-data-[orientation=horizontal]/list:mt-md',
     'group-data-[orientation=vertical]/list:ml-md',
@@ -20,7 +20,7 @@ const stepLabel = cva(
       state: {
         complete: '',
         incomplete: '',
-        active: 'font-bold',
+        active: 'font-medium',
       },
     },
   }
