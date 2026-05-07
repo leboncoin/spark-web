@@ -84,6 +84,11 @@
   line-height: 1.5;
 }
 
+@utility text-small-highlight {
+  @apply text-small;
+  font-weight: var(--font-weight-medium);
+}
+
 @utility text-callout {
   font-size: calc(1rem * var(--spacing-factor));
   line-height: 1.5;
