@@ -9,10 +9,16 @@ import { SegmentedControl } from '.'
 import { FormField } from '../form-field'
 import { Icon } from '../icon'
 import { Tag } from '../tag'
+import { SegmentedControlIndicator as Indicator } from './SegmentedControlIndicator'
+import { SegmentedControlItem as Item } from './SegmentedControlItem'
 
 const meta: Meta<typeof SegmentedControl> = {
   title: 'Components/SegmentedControl',
   component: SegmentedControl,
+  subcomponents: {
+    'SegmentedControl.Item': Item,
+    'SegmentedControl.Indicator': Indicator,
+  },
   tags: ['form'],
   parameters: {
     design: {

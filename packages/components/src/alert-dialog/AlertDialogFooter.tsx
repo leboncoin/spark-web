@@ -7,6 +7,9 @@ export interface AlertDialogFooterProps {
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * The footer section of the alert dialog, typically containing action buttons. Renders a <footer> element.
+ */
 export const AlertDialogFooter = ({
   children,
   className,

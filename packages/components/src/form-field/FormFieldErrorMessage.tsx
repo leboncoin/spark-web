@@ -6,6 +6,7 @@ export type FormFieldErrorMessageProps = Omit<FormFieldStateMessageProps, 'state
   ref?: Ref<HTMLSpanElement>
 }
 
+/** An error message displayed when the form field is in an error state. Renders a <span> element. */
 export const FormFieldErrorMessage = ({ ref, ...props }: FormFieldErrorMessageProps) => {
   return (
     <FormFieldStateMessage

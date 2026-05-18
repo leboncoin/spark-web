@@ -10,11 +10,17 @@ import { cx } from 'class-variance-authority'
 import { type ComponentProps, useState } from 'react'
 
 import { Card } from '.'
+import { Content as CardContent } from './Content'
 import pandaImg from './docAssets/panda.jpg'
+import { Type as CardType } from './Type'
 
 const meta: Meta<typeof Card> = {
   title: 'Components/Card',
   component: Card,
+  subcomponents: {
+    'Card.Content': CardContent,
+    'Card.Type': CardType,
+  },
   tags: ['action', 'data-display'],
   parameters: {
     design: {

@@ -19,6 +19,7 @@ export interface SegmentedControlItemProps extends Omit<
   ref?: Ref<HTMLElement>
 }
 
+/** A selectable item in the segmented control. Renders a <button> element. */
 export const SegmentedControlItem = ({
   value,
   disabled = false,

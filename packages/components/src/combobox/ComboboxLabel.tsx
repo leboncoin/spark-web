@@ -9,6 +9,9 @@ interface LabelProps {
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * A label for a group of combobox items. Renders a <div> element.
+ */
 export const Label = ({ children, className, ref: forwardedRef }: LabelProps) => {
   const groupCtx = useComboboxGroupContext()
 

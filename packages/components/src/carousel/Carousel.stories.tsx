@@ -10,10 +10,28 @@ import { RadioGroup } from '../radio-group'
 import { Select } from '../select'
 import { Slider } from '../slider'
 import { Stepper } from '../stepper'
+import { CarouselControls as Controls } from './CarouselControls'
+import { CarouselNextButton as NextButton } from './CarouselNextButton'
+import { CarouselPageIndicator as PageIndicator } from './CarouselPageIndicator'
+import { CarouselPagePicker as PagePicker } from './CarouselPagePicker'
+import { CarouselPrevButton as PrevButton } from './CarouselPrevButton'
+import { CarouselSlide as Slide } from './CarouselSlide'
+import { CarouselSlides as Slides } from './CarouselSlides'
+import { CarouselViewport as Viewport } from './CarouselViewport'
 
 const meta: Meta<typeof Carousel> = {
   title: 'Components/Carousel',
   component: Carousel,
+  subcomponents: {
+    'Carousel.Controls': Controls,
+    'Carousel.NextButton': NextButton,
+    'Carousel.PrevButton': PrevButton,
+    'Carousel.Slide': Slide,
+    'Carousel.Slides': Slides,
+    'Carousel.Viewport': Viewport,
+    'Carousel.PagePicker': PagePicker,
+    'Carousel.PageIndicator': PageIndicator,
+  },
   tags: ['layout'],
   parameters: {
     design: {

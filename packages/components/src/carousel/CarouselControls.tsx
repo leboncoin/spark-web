@@ -7,6 +7,9 @@ interface ControlsProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode
 }
 
+/**
+ * Container for carousel navigation controls. Renders a <div> element.
+ */
 export const CarouselControls = ({ children, className, ...props }: ControlsProps) => {
   const ctx = useCarouselContext()
 

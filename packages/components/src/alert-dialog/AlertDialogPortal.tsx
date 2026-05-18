@@ -4,6 +4,9 @@ import { ComponentProps } from 'react'
 
 export type AlertDialogPortalProps = ComponentProps<typeof BaseAlertDialog.Portal>
 
+/**
+ * A portal that renders the dialog in a different part of the DOM. Renders a <div> element.
+ */
 export const AlertDialogPortal = ({ className, ...props }: AlertDialogPortalProps) => {
   return (
     <BaseAlertDialog.Portal

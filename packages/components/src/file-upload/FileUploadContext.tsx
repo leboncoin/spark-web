@@ -15,6 +15,7 @@ export interface FileUploadContextProps {
   }) => ReactNode
 }
 
+/** A render prop component providing access to file upload state and utilities. Renders its children. */
 export const Context = ({ children }: FileUploadContextProps) => {
   const { files = [], rejectedFiles = [], locale } = useFileUploadContext()
 

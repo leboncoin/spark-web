@@ -16,6 +16,10 @@ interface TriggerProps {
   ref?: Ref<HTMLButtonElement>
 }
 
+/**
+ * The trigger button for the dropdown. Renders a <button> element.
+ */
+
 export const Trigger = ({
   'aria-label': ariaLabel,
   children,

@@ -4,10 +4,17 @@ import { useState } from 'react'
 import { Accordion } from '.'
 import { Checkbox, CheckboxGroup } from '../checkbox'
 import { Tag } from '../tag'
+import { Item as AccordionItem } from './AccordionItem'
 
 const meta: Meta<typeof Accordion> = {
   title: 'Components/Accordion',
   component: Accordion,
+  subcomponents: {
+    'Accordion.Item': AccordionItem,
+    'Accordion.ItemHeader': Accordion.ItemHeader,
+    'Accordion.ItemTrigger': Accordion.ItemTrigger,
+    'Accordion.ItemContent': Accordion.ItemContent,
+  },
   tags: ['data-display'],
   parameters: {
     design: {

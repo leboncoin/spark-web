@@ -42,6 +42,7 @@ export interface TabsTriggerProps extends Omit<ComponentProps<typeof BaseTabs.Ta
   ref?: Ref<HTMLButtonElement>
 }
 
+/** A button that activates a tab panel. Renders a <button> element. */
 export const TabsTrigger = ({
   /**
    * Default Base UI Primitive values

@@ -14,6 +14,10 @@ export interface FileUploadTriggerProps extends Omit<ButtonProps, 'children' | '
   unstyled?: boolean
 }
 
+/**
+ * A button that opens the file selection dialog. Renders a <button> element.
+ */
+
 export const Trigger = ({
   className,
   children,

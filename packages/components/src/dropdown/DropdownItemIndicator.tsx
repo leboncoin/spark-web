@@ -12,6 +12,10 @@ export interface ItemIndicatorProps {
   ref?: Ref<HTMLSpanElement>
 }
 
+/**
+ * A visual indicator showing the selected state of a dropdown item. Renders a <span> element.
+ */
+
 export const ItemIndicator = ({
   className,
   children,

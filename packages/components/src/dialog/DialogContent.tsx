@@ -14,6 +14,9 @@ export interface ContentProps
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * The popup element that contains the dialog content. Renders a <div> element.
+ */
 export const Content = ({
   className,
   isNarrow = false,

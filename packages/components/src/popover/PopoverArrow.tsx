@@ -8,6 +8,10 @@ export type ArrowProps = RadixPopover.PopoverArrowProps & {
   ref?: Ref<SVGSVGElement>
 }
 
+/**
+ * An arrow pointing to the anchor element. Renders an <svg> element.
+ */
+
 export const Arrow = ({
   asChild = false,
   width = 16,

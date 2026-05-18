@@ -5,10 +5,18 @@ import { useState } from 'react'
 
 import { ProgressTracker, type ProgressTrackerProps } from '.'
 import { Icon } from '../icon'
+import { ProgressTrackerStep as Step } from './ProgressTrackerStep'
+import { ProgressTrackerStepIndicator as StepIndicator } from './ProgressTrackerStepIndicator'
+import { ProgressTrackerStepLabel as StepLabel } from './ProgressTrackerStepLabel'
 
 const meta: Meta<typeof ProgressTracker> = {
   title: 'Components/ProgressTracker',
   component: ProgressTracker,
+  subcomponents: {
+    'ProgressTracker.Step': Step,
+    'ProgressTracker.StepLabel': StepLabel,
+    'ProgressTracker.StepIndicator': StepIndicator,
+  },
   tags: ['indicators'],
   parameters: {
     design: {

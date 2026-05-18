@@ -13,6 +13,9 @@ export interface ItemProps extends HTMLAttributes<HTMLLIElement> {
   ref?: Ref<HTMLLIElement>
 }
 
+/**
+ * A selectable item in the combobox list. Renders a <li> element.
+ */
 export const Item = ({ children, ref: forwardedRef, ...props }: ItemProps) => {
   const { value, disabled } = props
 

@@ -32,6 +32,7 @@ export function mergeRefs<T>(...refs: (Ref<T> | undefined | null)[]): Ref<T> {
   }
 }
 
+/** The scrollable container for the list items. Renders a <div> element. */
 export const ScrollingListItems = ({ children, ref, className = '', ...rest }: Props) => {
   const ctx = useContext(ScrollingListContext)
 

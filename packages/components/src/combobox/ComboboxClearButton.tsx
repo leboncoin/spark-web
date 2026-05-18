@@ -10,6 +10,9 @@ export interface ClearButtonProps extends ComponentPropsWithoutRef<'button'> {
   ref?: Ref<HTMLButtonElement>
 }
 
+/**
+ * A button to clear all selected items. Renders a <button> element.
+ */
 export const ClearButton = ({
   className,
   tabIndex = -1,

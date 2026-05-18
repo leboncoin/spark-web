@@ -6,6 +6,7 @@ export type FormFieldAlertMessageProps = Omit<FormFieldStateMessageProps, 'state
   ref?: Ref<HTMLSpanElement>
 }
 
+/** An alert message displayed when the form field is in an alert state. Renders a <span> element. */
 export const FormFieldAlertMessage = ({ ref, ...props }: FormFieldAlertMessageProps) => {
   return (
     <FormFieldStateMessage

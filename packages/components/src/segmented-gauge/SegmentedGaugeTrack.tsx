@@ -5,6 +5,7 @@ export interface SegmentedGaugeTrackProps extends ComponentProps<'div'> {
   ref?: Ref<HTMLDivElement>
 }
 
+/** The container track for the gauge segments. Renders a <div> element. */
 export const SegmentedGaugeTrack = ({
   className,
   children,

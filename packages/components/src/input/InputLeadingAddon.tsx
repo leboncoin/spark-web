@@ -8,6 +8,9 @@ export type InputLeadingAddonProps = InputAddonProps & {
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * An addon displayed before the input. Renders a <span> element.
+ */
 const Root = ({ className, ref, ...others }: InputLeadingAddonProps) => {
   const { disabled, readOnly } = useInputGroup()
   const isInactive = disabled || readOnly

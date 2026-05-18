@@ -14,6 +14,7 @@ export interface FileUploadPreviewImageProps extends ComponentPropsWithoutRef<'d
   fallback?: React.ReactNode
 }
 
+/** Displays an image preview for an uploaded file. Renders a <div> element. */
 export const PreviewImage = ({
   className,
   file,

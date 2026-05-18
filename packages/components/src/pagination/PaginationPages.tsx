@@ -16,6 +16,10 @@ interface PagesProps<T extends 'noEllipsis' | ''> {
   children: (pagination: TweakedPaginationApi<T>) => ReactNode
 }
 
+/**
+ * Container for page number buttons. Renders a <div> element.
+ */
+
 export const Pages = <T extends 'noEllipsis' | '' = ''>({ children }: PagesProps<T>) => {
   const { pagination } = usePagination()
 

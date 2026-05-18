@@ -11,6 +11,9 @@ export interface DrawerBodyProps extends DrawerBodyStylesProps {
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * The scrollable body section of the drawer. Renders a <div> element.
+ */
 export const DrawerBody = ({
   children,
   inset = false,

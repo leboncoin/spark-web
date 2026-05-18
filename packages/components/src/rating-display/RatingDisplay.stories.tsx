@@ -2,11 +2,19 @@ import { Tag } from '@spark-ui/components/tag'
 import { Meta, StoryFn } from '@storybook/react-vite'
 
 import { RatingDisplay } from '.'
+import { RatingDisplayCount as Count } from './RatingDisplayCount'
+import { RatingDisplayStars as Stars } from './RatingDisplayStars'
+import { RatingDisplayValue as Value } from './RatingDisplayValue'
 import type { StarValue } from './types'
 
 const meta: Meta<typeof RatingDisplay> = {
   title: 'Components/RatingDisplay',
   component: RatingDisplay,
+  subcomponents: {
+    'RatingDisplay.Stars': Stars,
+    'RatingDisplay.Value': Value,
+    'RatingDisplay.Count': Count,
+  },
   tags: ['data-entry'],
   parameters: {
     design: {

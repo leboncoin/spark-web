@@ -9,6 +9,7 @@ export interface TableHeaderProps<T extends object = object> extends StatelyTabl
   className?: string
 }
 
+/** The header section of the table. Renders a <thead> element. */
 export function TableHeader<T extends object>(props: TableHeaderProps<T>) {
   return <StatelyTableHeader {...(props as unknown as StatelyTableHeaderProps<T>)} />
 }

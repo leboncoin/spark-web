@@ -9,6 +9,9 @@ interface Props extends ComponentProps<'div'> {
   className?: string
 }
 
+/**
+ * Container for all carousel slides. Renders a <div> element.
+ */
 export const CarouselSlides = ({ children, className = '' }: Props) => {
   const ctx = useCarouselContext()
 

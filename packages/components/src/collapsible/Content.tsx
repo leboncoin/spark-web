@@ -11,6 +11,9 @@ export interface ContentProps extends ComponentProps<typeof Collapsible.Panel> {
   asChild?: boolean
 }
 
+/**
+ * The collapsible content panel. Renders a <div> element.
+ */
 export const Content = ({
   asChild = false,
   className,

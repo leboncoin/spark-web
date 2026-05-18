@@ -7,10 +7,14 @@ import { RadioGroup, RadioGroupProps, RadioProps } from '.'
 import { FormField } from '../form-field'
 import { Label } from '../label'
 import { VisuallyHidden } from '../visually-hidden'
+import { Radio } from './Radio'
 
 const meta: Meta<typeof RadioGroup> = {
   title: 'Components/RadioGroup',
   component: RadioGroup,
+  subcomponents: {
+    'RadioGroup.Radio': Radio,
+  },
   tags: ['data-entry'],
   parameters: {
     design: {

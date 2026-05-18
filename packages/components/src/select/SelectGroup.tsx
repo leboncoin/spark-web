@@ -9,6 +9,10 @@ interface GroupProps {
   ref?: Ref<HTMLOptGroupElement>
 }
 
+/**
+ * A group of related select items. Renders a <div> element.
+ */
+
 export const Group = ({ children, ref: forwardedRef, ...props }: GroupProps) => {
   return (
     <SelectGroupProvider>

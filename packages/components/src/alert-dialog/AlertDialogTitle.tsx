@@ -9,6 +9,9 @@ export interface AlertDialogTitleProps extends Omit<
   ref?: Ref<HTMLHeadingElement>
 }
 
+/**
+ * The title of the alert dialog, announced to assistive technology. Renders an <h2> element.
+ */
 export const AlertDialogTitle = ({ className, ...props }: AlertDialogTitleProps) => {
   return (
     <BaseAlertDialog.Title

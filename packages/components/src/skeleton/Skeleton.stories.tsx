@@ -2,10 +2,20 @@ import { Tag } from '@spark-ui/components/tag'
 import { Meta, StoryFn } from '@storybook/react-vite'
 
 import { Skeleton } from '.'
+import {
+  SkeletonCircle as Circle,
+  SkeletonLine as Line,
+  SkeletonRectangle as Rectangle,
+} from './SkeletonItem'
 
 const meta: Meta<typeof Skeleton> = {
   title: 'Components/Skeleton',
   component: Skeleton,
+  subcomponents: {
+    'Skeleton.Circle': Circle,
+    'Skeleton.Line': Line,
+    'Skeleton.Rectangle': Rectangle,
+  },
   tags: ['others'],
   parameters: {
     design: {

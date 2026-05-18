@@ -10,10 +10,24 @@ import { Meta, StoryFn } from '@storybook/react-vite'
 import { useEffect, useRef, useState } from 'react'
 
 import { ScrollingList } from '.'
+import { ScrollingListControls as Controls } from './ScrollingListControls'
+import { ScrollingListItem as Item } from './ScrollingListItem'
+import { ScrollingListItems as Items } from './ScrollingListItems'
+import { ScrollingListNextButton as NextButton } from './ScrollingListNextButton'
+import { ScrollingListPrevButton as PrevButton } from './ScrollingListPrevButton'
+import { ScrollingListSkipButton as SkipButton } from './ScrollingListSkipButton'
 
 const meta: Meta<typeof ScrollingList> = {
   title: 'Components/ScrollingList',
   component: ScrollingList,
+  subcomponents: {
+    'ScrollingList.Controls': Controls,
+    'ScrollingList.NextButton': NextButton,
+    'ScrollingList.PrevButton': PrevButton,
+    'ScrollingList.Item': Item,
+    'ScrollingList.Items': Items,
+    'ScrollingList.SkipButton': SkipButton,
+  },
 }
 
 export default meta

@@ -7,6 +7,9 @@ export interface HeaderProps {
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * The header section of the dialog. Renders a <header> element.
+ */
 export const Header = ({ children, className, ref, ...rest }: HeaderProps): ReactElement => (
   <header
     data-spark-component="dialog-header"

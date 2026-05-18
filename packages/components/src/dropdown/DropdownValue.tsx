@@ -10,6 +10,10 @@ export interface ValueProps {
   ref?: Ref<HTMLSpanElement>
 }
 
+/**
+ * Displays the selected value(s) in the dropdown trigger. Renders a <span> element.
+ */
+
 export const Value = ({ children, className, placeholder, ref: forwardedRef }: ValueProps) => {
   const { selectedItem, multiple, selectedItems } = useDropdownContext()
 

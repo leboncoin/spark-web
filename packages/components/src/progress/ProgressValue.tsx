@@ -4,6 +4,7 @@ import { ComponentProps, PropsWithChildren } from 'react'
 
 export type ProgressValueProps = Omit<ComponentProps<typeof BaseProgress.Value>, 'render'>
 
+/** The numeric value of the progress indicator. Renders an <output> element. */
 export const ProgressValue = ({
   className,
   children,

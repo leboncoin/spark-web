@@ -6,6 +6,7 @@ export interface CellProps extends StatelyCellProps {
   checkbox?: boolean
 }
 
+/** A cell in the table. This is a collection component that does not render DOM. */
 export function Cell(props: CellProps) {
   return <StatelyCell {...(props as unknown as StatelyCellProps)} />
 }

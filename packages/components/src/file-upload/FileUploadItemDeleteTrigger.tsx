@@ -14,6 +14,10 @@ export interface FileUploadItemDeleteTriggerProps extends React.ComponentProps<t
   file: File
 }
 
+/**
+ * A button to remove an uploaded file. Renders a <button> element.
+ */
+
 export const ItemDeleteTrigger = ({
   className,
   file,

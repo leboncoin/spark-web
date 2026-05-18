@@ -16,6 +16,10 @@ interface TriggerProps {
  * This trigger acts as a fake button for the `select` tag.
  * It is not interactive.
  */
+/**
+ * The trigger button for the select dropdown. Renders a <button> element.
+ */
+
 export const Trigger = ({
   'aria-label': ariaLabel,
   children,

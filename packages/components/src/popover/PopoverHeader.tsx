@@ -9,6 +9,10 @@ export interface HeaderProps {
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * The header section of the popover. Renders a <header> element.
+ */
+
 export const Header = ({ children, className, ref, ...rest }: HeaderProps) => {
   const id = `${ID_PREFIX}-header-${useId()}`
   const { setHeaderId } = usePopover()

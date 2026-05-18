@@ -8,6 +8,9 @@ interface PopoverProps extends ComponentProps<typeof SparkPopover.Content> {
   ref?: Ref<HTMLDivElement>
 }
 
+/**
+ * The popover container that displays the combobox items. Renders a <div> element.
+ */
 export const Popover = ({
   children,
   matchTriggerWidth = true,

@@ -11,6 +11,9 @@ export interface InputOTPSlotProps extends ComponentPropsWithoutRef<'div'> {
   index?: number
 }
 
+/**
+ * An individual slot for a single OTP character. Renders a <div> element.
+ */
 export const InputOTPSlot = ({ index: indexProp, className, ...props }: InputOTPSlotProps) => {
   const context = useInputOTPContext()
 

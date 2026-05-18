@@ -5,6 +5,10 @@ export type TriggerProps = RadixPopover.PopoverTriggerProps & {
   ref?: Ref<HTMLButtonElement>
 }
 
+/**
+ * A button that opens the popover. Renders a <button> element.
+ */
+
 export const Trigger = ({ asChild = false, children, ref, ...rest }: TriggerProps) => (
   <RadixPopover.Trigger
     data-spark-component="popover-trigger"

@@ -9,6 +9,9 @@ export type MeterValueProps = Omit<
   children?: ((formattedValue: string, value: number) => ReactNode) | null | undefined
 }
 
+/**
+ * The value display of the meter. Renders a <span> element.
+ */
 export const MeterValue = ({ className, children, ...others }: MeterValueProps) => {
   return (
     <BaseMeter.Value

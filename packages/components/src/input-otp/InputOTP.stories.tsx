@@ -4,10 +4,18 @@ import { Meta, StoryFn } from '@storybook/react-vite'
 import { useState } from 'react'
 
 import { InputOTP } from '.'
+import { InputOTPGroup } from './InputOTPGroup'
+import { InputOTPSeparator } from './InputOTPSeparator'
+import { InputOTPSlot } from './InputOTPSlot'
 
 const meta: Meta<typeof InputOTP> = {
   title: 'Components/InputOTP',
   component: InputOTP,
+  subcomponents: {
+    'InputOTP.Group': InputOTPGroup,
+    'InputOTP.Slot': InputOTPSlot,
+    'InputOTP.Separator': InputOTPSeparator,
+  },
   tags: ['data-entry'],
 }
 

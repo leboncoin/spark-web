@@ -8,6 +8,10 @@ interface EllipsisProps extends ComponentPropsWithRef<'span'> {
   index: number
 }
 
+/**
+ * An ellipsis indicating skipped pages. Renders a <span> element.
+ */
+
 export const Ellipsis = ({ children, index, className, ref, ...rest }: EllipsisProps) => {
   const { pagination } = usePagination()
   const apiProps = pagination.getEllipsisProps({ index })
