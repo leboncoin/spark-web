@@ -1,6 +1,159 @@
 /* eslint-disable max-lines-per-function */
+import { useEffect, useState } from 'react'
+
 export const getCssVariable = (varName: string) =>
   getComputedStyle(document.documentElement).getPropertyValue(varName)
+
+/**
+ * Hook that returns a CSS variable value and updates when the theme changes
+ */
+export const useCssVariable = (varName: string) => {
+  const [value, setValue] = useState(() => {
+    if (typeof window === 'undefined') return ''
+    return getCssVariable(varName)
+  })
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    // Update immediately on mount
+    setValue(getCssVariable(varName))
+
+    // Create observer to watch for attribute changes on document element
+    const observer = new MutationObserver(() => {
+      setValue(getCssVariable(varName))
+    })
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class', 'data-theme'],
+    })
+
+    // Also listen for custom theme change events
+    const handleThemeChange = () => {
+      setValue(getCssVariable(varName))
+    }
+
+    window.addEventListener('themechange', handleThemeChange)
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('themechange', handleThemeChange)
+    }
+  }, [varName])
+
+  return value
+}
+
+/**
+ * Component that displays a CSS variable value and updates when the theme changes
+ */
+export const CssVariableValue = ({ varName }: { varName: string }) => {
+  const value = useCssVariable(varName)
+  return <>{value}</>
+}
+
+/**
+ * Hook that computes a CSS property value for a given class and updates when theme changes
+ */
+export const useComputedValue = (cssProperty: string, className: string) => {
+  const [value, setValue] = useState('')
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const updateValue = () => {
+      const element = document.createElement('div')
+      element.className = className
+      element.style.position = 'absolute'
+      element.style.left = '-9999px'
+      document.body.appendChild(element)
+      const val = getComputedStyle(element).getPropertyValue(cssProperty)
+      document.body.removeChild(element)
+      setValue(val)
+    }
+
+    updateValue()
+
+    const observer = new MutationObserver(updateValue)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class', 'data-theme'],
+    })
+
+    return () => observer.disconnect()
+  }, [cssProperty, className])
+
+  return value
+}
+
+/**
+ * Component that displays a computed CSS property value and updates when the theme changes
+ */
+export const ComputedValue = ({
+  cssProperty,
+  className,
+}: {
+  cssProperty: string
+  className: string
+}) => {
+  const value = useComputedValue(cssProperty, className)
+  return <>{value}</>
+}
+
+/**
+ * Hook that computes relative line height for a given class and updates when theme changes
+ */
+export const useRelativeLineHeight = (className: string) => {
+  const [value, setValue] = useState('')
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const updateValue = () => {
+      const element = document.createElement('div')
+      element.className = className
+      element.style.position = 'absolute'
+      element.style.left = '-9999px'
+      document.body.appendChild(element)
+      const computedStyle = getComputedStyle(element)
+      const lineHeight = parseFloat(computedStyle.lineHeight)
+      const fontSize = parseFloat(computedStyle.fontSize)
+      document.body.removeChild(element)
+      const relative = (lineHeight / fontSize).toFixed(3)
+      setValue(relative)
+    }
+
+    updateValue()
+
+    const observer = new MutationObserver(updateValue)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class', 'data-theme'],
+    })
+
+    return () => observer.disconnect()
+  }, [className])
+
+  return value
+}
+
+/**
+ * Component that displays relative line height and updates when the theme changes
+ */
+export const RelativeLineHeight = ({ className }: { className: string }) => {
+  const value = useRelativeLineHeight(className)
+  return <>{value}</>
+}
+
+/**
+ * Component that displays the first part of a CSS variable value (split by comma)
+ * Useful for font-family values
+ */
+export const CssVariableValueFirst = ({ varName }: { varName: string }) => {
+  const value = useCssVariable(varName)
+  return <>{value.split(',')[0]}</>
+}
 
 export const getComputedCssVariable = (cssAttributeName: string, className: string) => {
   const element = document.createElement('div')
@@ -13,16 +166,6 @@ export const getComputedCssVariable = (cssAttributeName: string, className: stri
   document.body.removeChild(element)
 
   return value
-}
-
-export const ColorPreview = ({ bg }: { bg: string }) => {
-  return (
-    <div>
-      <div className={`size-sz-144 ${bg}`} />
-      <p className="text-body-1">{bg}</p>
-      <p className="text-body-2 opacity-dim-1">{getCssVariable('--color-main')}</p>
-    </div>
-  )
 }
 
 export const BackgroundColorPreview = () => {
@@ -134,10 +277,12 @@ export const BackgroundColorPreview = () => {
         </p>
         <div className="gap-lg grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] flex-wrap">
           {Object.entries(mainColors).map(([bg, { token, styles }]) => (
-            <div className="gap-sm flex flex-col">
+            <div className="gap-sm flex flex-col" key={bg}>
               <div className={`w-sz-160 h-sz-56 relative rounded-lg shadow-sm ${styles}`}></div>
               <p className="text-body-1">{bg}</p>
-              <p className="text-body-2 opacity-dim-1">{getCssVariable(token)}</p>
+              <p className="text-body-2 opacity-dim-1">
+                <CssVariableValue varName={token} />
+              </p>
             </div>
           ))}
         </div>
@@ -147,10 +292,12 @@ export const BackgroundColorPreview = () => {
         <p>Use Feedback colors to clearly convey an intent status.</p>
         <div className="gap-lg grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] flex-wrap">
           {Object.entries(feedBackColors).map(([bg, { token, styles }]) => (
-            <div className="gap-sm flex flex-col">
+            <div className="gap-sm flex flex-col" key={bg}>
               <div className={`w-sz-160 h-sz-56 relative rounded-lg shadow-sm ${styles}`}></div>
               <p className="text-body-1">{bg}</p>
-              <p className="text-body-2 opacity-dim-1">{getCssVariable(token)}</p>
+              <p className="text-body-2 opacity-dim-1">
+                <CssVariableValue varName={token} />
+              </p>
             </div>
           ))}
         </div>
@@ -164,10 +311,12 @@ export const BackgroundColorPreview = () => {
 
         <div className="gap-lg grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] flex-wrap">
           {Object.entries(baseColors).map(([bg, { token, styles }]) => (
-            <div className="gap-sm flex flex-col">
+            <div className="gap-sm flex flex-col" key={bg}>
               <div className={`w-sz-160 h-sz-56 relative rounded-lg shadow-sm ${styles}`}></div>
               <p className="text-body-1">{bg}</p>
-              <p className="text-body-2 opacity-dim-1">{getCssVariable(token)}</p>
+              <p className="text-body-2 opacity-dim-1">
+                <CssVariableValue varName={token} />
+              </p>
             </div>
           ))}
         </div>
@@ -252,7 +401,7 @@ export const TextColorPreview = () => {
     <div className="sb-unstyled">
       <div className="gap-lg grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] flex-wrap">
         {Object.entries(textColors).map(([bg, { token, styles }]) => (
-          <div className="gap-md flex flex-row items-center">
+          <div className="gap-md flex flex-row items-center" key={bg}>
             <div
               className={`size-sz-56 text-headline-1 relative flex items-center justify-center rounded-lg shadow-sm ${styles}`}
             >
@@ -260,13 +409,38 @@ export const TextColorPreview = () => {
             </div>
             <div className="flex flex-col">
               <p className="text-body-1">{bg}</p>
-              <p className="text-body-2 opacity-dim-1">{getCssVariable(token)}</p>
+              <p className="text-body-2 opacity-dim-1">
+                <CssVariableValue varName={token} />
+              </p>
             </div>
           </div>
         ))}
       </div>
     </div>
   )
+}
+
+/**
+ * Component that displays the computed pixel value for spacing tokens
+ */
+export const SpacingValue = ({ varName }: { varName: string }) => {
+  const [pixelValue, setPixelValue] = useState('')
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    // Create a temporary element to compute the actual pixel value
+    const element = document.createElement('div')
+    element.style.position = 'absolute'
+    element.style.left = '-9999px'
+    element.style.width = `var(${varName})`
+    document.body.appendChild(element)
+    const computed = getComputedStyle(element).width
+    document.body.removeChild(element)
+    setPixelValue(computed)
+  }, [varName])
+
+  return <>{pixelValue}</>
 }
 
 export const OutlineColorPreview = () => {
@@ -317,13 +491,15 @@ export const OutlineColorPreview = () => {
     <div className="sb-unstyled">
       <div className="gap-lg grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] flex-wrap">
         {Object.entries(outlineColors).map(([bg, { token, styles }]) => (
-          <div className="gap-md flex flex-row">
+          <div className="gap-md flex flex-row" key={bg}>
             <div
               className={`size-sz-56 border-md shrink-0 rounded-lg border-dashed ${styles}`}
             ></div>
             <div className="flex flex-col">
               <p className="text-body-1">{bg}</p>
-              <p className="text-body-2 opacity-dim-1">{getCssVariable(token)}</p>
+              <p className="text-body-2 opacity-dim-1">
+                <CssVariableValue varName={token} />
+              </p>
             </div>
           </div>
         ))}

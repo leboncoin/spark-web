@@ -26,7 +26,7 @@ export const AvatarPlaceholder = ({ className, children, ...props }: AvatarPlace
           'text-display-2': ['xl', 'lg'].includes(size),
           'text-display-3': size === 'md',
           'text-headline-2': size === 'sm',
-          'text-body-2 font-bold': size === 'xs',
+          'text-body-2-highlight': size === 'xs',
         },
         className
       )}

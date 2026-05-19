@@ -6,7 +6,7 @@ import { useCardContext } from './context'
 export const typeStyles = cva(
   [
     // Base structure
-    'rounded-t-lg default:text-body-2 default:font-bold',
+    'rounded-t-lg default:text-body-2-highlight',
     'default:text-center',
 
     // Height and layout
