@@ -30,6 +30,7 @@ export const a11yComponents = {
   kbd: 'kbd',
   label: 'label',
   'link-box': 'link-box',
+  menu: 'menu',
   meter: 'meter',
   pagination: 'pagination',
   popover: 'popover',
