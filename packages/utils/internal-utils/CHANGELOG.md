@@ -1,3 +1,17 @@
+## 17.9.0 (2026-05-20)
+
+### 🚀 Features
+
+- **components:** mvp for menu component ([fc30ba2e5](https://github.com/leboncoin/spark-web/commit/fc30ba2e5))
+
+### 💅 Refactors
+
+- **theme-utils:** bold font utilities ([b1ea459e4](https://github.com/leboncoin/spark-web/commit/b1ea459e4))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.8.0 (2026-04-29)
 
 ### 🚀 Features
