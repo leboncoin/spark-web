@@ -1,3 +1,13 @@
+## 17.9.1 (2026-05-20)
+
+### 🩹 Fixes
+
+- **theme-utils:** caption highlight font token ([f62caab2c](https://github.com/leboncoin/spark-web/commit/f62caab2c))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.9.0 (2026-05-20)
 
 ### 🚀 Features
