@@ -187,7 +187,7 @@ export const CustomLayout: StoryFn = () => {
           <CircularMeter.Value />
         </CircularMeter.Track>
         <CircularMeter.Content>
-          <CircularMeter.Label className="text-on-surface text-body-1 font-bold">
+          <CircularMeter.Label className="text-on-surface text-body-1-highlight">
             of missed calls
           </CircularMeter.Label>
           <p className="text-body-2 text-on-surface/dim-1">14 missed calls</p>
@@ -211,7 +211,7 @@ export const CustomLayout: StoryFn = () => {
       </CircularMeter>
 
       <div className="border-sm border-outline p-lg gap-lg flex flex-col rounded-lg">
-        <Label className="text-body-1 font-bold">Ad completion score:</Label>
+        <Label className="text-body-1-highlight">Ad completion score:</Label>
         <CircularMeter
           aria-label="Ad completion score"
           value={70}
@@ -222,7 +222,7 @@ export const CustomLayout: StoryFn = () => {
             <CircularMeter.Value />
           </CircularMeter.Track>
           <CircularMeter.Content>
-            <p className="text-on-surface text-body-1 font-bold">your ad has potential !</p>
+            <p className="text-on-surface text-body-1-highlight">your ad has potential !</p>
             <p className="text-body-2 text-on-surface/dim-1">
               Add more information to get more visibility
             </p>

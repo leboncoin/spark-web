@@ -205,7 +205,7 @@ export const Controlled: StoryFn = _args => {
                     alt={product.description}
                   />
 
-                  <p className="bg-overlay/dim-1 p-md text-body-1 text-on-overlay absolute top-0 w-full font-bold">
+                  <p className="bg-overlay/dim-1 p-md text-body-1-highlight text-on-overlay absolute top-0 w-full">
                     {product.name}
                   </p>
                   <Button asChild>
@@ -653,7 +653,7 @@ export const CustomPageIndicators: StoryFn = () => {
                     alt={product.description}
                   />
 
-                  <p className="bg-overlay/dim-1 p-md text-body-1 text-on-overlay absolute top-0 w-full font-bold">
+                  <p className="bg-overlay/dim-1 p-md text-body-1-highlight text-on-overlay absolute top-0 w-full">
                     {product.name}
                   </p>
                   <Button asChild>

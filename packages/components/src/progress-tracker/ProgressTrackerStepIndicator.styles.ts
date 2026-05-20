@@ -4,7 +4,7 @@ export const stepIndicatorVariant = cva(
   [
     'relative flex shrink-0 justify-center items-center',
     'rounded-full',
-    'text-body-2 font-bold',
+    'text-body-2-highlight',
     'group-disabled/btn:opacity-dim-3',
   ],
   {

@@ -20,7 +20,7 @@ const ratingDisplayStarStyles = cva(['relative block after:absolute after:block 
 const ratingDisplayStarIconStyles = cva('', {
   variants: {
     size: {
-      sm: 'text-caption-link',
+      sm: 'text-caption',
       md: 'text-body-1',
       lg: 'text-display-3',
     },

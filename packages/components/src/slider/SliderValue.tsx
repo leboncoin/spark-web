@@ -35,8 +35,8 @@ export const SliderValue = ({ className, children, ref, ...rest }: SliderValuePr
 
   const resolvedClassName = cx(
     isInsideThumb
-      ? 'absolute left-1/2 -translate-x-1/2 top-[calc(-100%-var(--spacing-sm))] text-body-1 font-bold whitespace-nowrap'
-      : 'default:text-body-1 col-start-2 text-right default:font-bold',
+      ? 'absolute left-1/2 -translate-x-1/2 top-[calc(-100%-var(--spacing-sm))] text-body-1-highlight whitespace-nowrap'
+      : 'default:text-body-1-highlight col-start-2 text-right',
     className
   )
 

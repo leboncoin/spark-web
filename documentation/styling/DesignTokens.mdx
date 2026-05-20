@@ -1,657 +1,1462 @@
-import { useState, useId } from 'react'
 import { Meta } from '@storybook/addon-docs/blocks'
-import { Card } from '@docs/helpers/Card'
+import { Table } from '@spark-ui/components/table'
 import { Tag } from '@spark-ui/components/tag'
-import { Button } from '@spark-ui/components/button'
-import { IconButton } from '@spark-ui/components/icon-button'
-import { LikeOutline } from '@spark-ui/icons/LikeOutline'
-import { BookmarkOutline } from '@spark-ui/icons/BookmarkOutline'
-import { Icon } from '@spark-ui/components/icon'
-import { Label } from '@spark-ui/components/label'
-import { RadioGroup } from '@spark-ui/components/radio-group'
-import { VisuallyHidden } from '@spark-ui/components/visually-hidden'
-import { cx } from 'class-variance-authority'
-import Xarrow, { Xwrapper } from 'react-xarrows'
 import {
-  getCssVariable,
-  getComputedCssVariable,
-  BackgroundColorPreview,
-  TextColorPreview,
-  OutlineColorPreview,
+  CssVariableValue,
+  CssVariableValueFirst,
+  ComputedValue,
+  RelativeLineHeight,
+  SpacingValue,
 } from '@docs/helpers/TokenPreview'
 
-<Meta title="Styling/Design Tokens" summary="Comprehensive reference for Spark's design tokens including color families, spacing, typography, shadows, and semantic theming system." />
+<Meta
+  title="Styling/Design Tokens"
+  summary="Comprehensive reference tables for all Spark design tokens with live CSS values, Tailwind classes, and visual previews."
+/>
 
-# Spark Tokens
+export function getCssVariableValue(varName) {
+  return <CssVariableValue varName={varName} />
+}
 
-export const CustomRadio = ({
-    children,
-    selectedValue,
-    ...others
-  }) => {
-    const id = useId()
-    const { value } = others
+export function getComputedValue(cssProperty, className) {
+  return <ComputedValue cssProperty={cssProperty} className={className} />
+}
 
+export function getRelativeLineHeight(className) {
+  return <RelativeLineHeight className={className} />
+}
+
+export function getSpacingValue(varName) {
+  return <SpacingValue varName={varName} />
+}
+
+export const ColorCell = ({ className, isText = false }) => {
+  if (isText) {
     return (
-      <Label
-        id={id}
-        htmlFor={value}
-        className={cx(
-          'py-sm px-lg rounded-md border-sm',
-          value === selectedValue ? 'bg-support text-on-support border-support' : 'border-support',
-          'cursor-pointer',
-          'focus-within:u-outline',
-          '[&:has(:focus-visible)]:focus-within:ring-2'
-        )}
+      <div
+        className={`${className} text-headline-1 p-md rounded-md inline-flex items-center justify-center`}
       >
-        <VisuallyHidden>
-          <RadioGroup.Radio aria-labelledby={id} id={value} {...others} />
-        </VisuallyHidden>
-        {children}
-      </Label>
+        Aa
+      </div>
     )
-
+  }
+  return <div className={`${className} size-sz-48 rounded-md border-sm border-outline/dim-2`} />
 }
 
-export const ColorCard = () => {
-    const [currentIntent, setCurrentIntent] = useState('main')
-    const arrowProps = {
-        color: 'var(--color-info)',
-        strokeWidth: 2,
-        headShape: 'circle',
-        tailShape: "circle",
-        showTail: false,
-        headSize: 4,
-    }
+# Design Tokens
 
-    const intents = [
-        { name: 'Main', intentProp: 'main', styles: { card: 'bg-main-container text-on-main-container', button: 'bg-main text-on-main'}, description: 'Use Main color to emphasize the most relevant components and essential elements on the UI, like primary actions or brand panels. These colors play a crucial role in helping to strengthen the brand identity. By using the Main colors strategically, users can easily recognize and connect with the brand, which leads to building trust and familiarity with an interface that is cohesive and unique.' },
-        { name: 'Support', intentProp: 'support', styles: { card: 'bg-support-container text-on-support-container', button: 'bg-support text-on-support'}, description: 'Use Support colors to complement the main actions or primary elements to provide a sense of hierarchy and visual consistency in the UI. They are typically darker tones that complement the primary color scheme without overpowering it. They help distinguish secondary elements from primary ones, making it easy for users to navigate the interface.' },
-        { name: 'Accent', intentProp: 'accent', styles: { card: 'bg-accent-container text-on-accent-container', button: 'bg-accent text-on-accent'}, description: 'Use accent color to highlight important elements in the interface. Draw attention to specific elements and create visual interest while guiding users\' focus.' },
-        { name: 'Success', intentProp: 'success', styles: { card: 'bg-success-container text-on-success-container', button: 'bg-success text-on-success'}, description: 'Convey to the user a successful action, like after a form has been successfully submitted.' },
-        { name: 'Alert', intentProp: 'alert', styles: { card: 'bg-alert-container text-on-alert-container', button: 'bg-alert text-on-alert'}, description: 'Convey to the user a warning, for example over a sensitive action.' },
-        { name: 'Error', intentProp: 'danger', styles: { card: 'bg-error-container text-on-error-container', button: 'bg-error text-on-error'}, description: 'Convey to the user an error, for example when a form field is invalid.' },
-        { name: 'Info', intentProp: 'info', styles: { card: 'bg-info-container text-on-info-container', button: 'bg-info text-on-info'}, description: 'Convet to the user additional information, for example in a tooltip.' },
-        { name: 'Neutral', intentProp: 'neutral', styles: { card: 'bg-neutral-container text-on-neutral-container', button: 'bg-neutral text-on-neutral'}, description: 'Neutral family should be using grey colors and is used for neutral elements, such as: border, dividers, a banner with no specific intent, etc.' },
-    ]
+Comprehensive reference for all Spark design tokens including colors, spacing, typography, shadows, borders, and more. All values are computed live from the CSS.
 
-    const currentConfig = intents.find(intent => intent.intentProp === currentIntent)
+## Color Tokens
 
-    return (
-        <div className='flex flex-col gap-md sb-unstyled'>
-            <RadioGroup value={currentIntent} name="sport" onValueChange={setCurrentIntent} orientation='horizontal' className='gap-md! flex-wrap'>
-                {intents.map(intent => {
-                    return (
-                        <CustomRadio selectedValue={currentIntent} key={intent.intentProp} value={intent.intentProp}>
-                                <span className="font-bold">{intent.name}</span>
-                        </CustomRadio>
-                    )
-                })}
-            </RadioGroup>
+### Main Colors
 
-            <div className={cx('p-lg rounded-lg ', currentConfig.styles.card)}>
-              <p className='bg-surface text-on-suface p-lg'>{currentConfig.description}</p>
-            </div>
-
-            <div className='sb-unstyled relative flex justify-center items-center min-h-sz-400 bg-neutral-container'>
-                <Xwrapper>
-                    <div id='card-target' className={cx('shadow-md flex overflow-hidden items-stretch rounded-lg ', currentConfig.styles.card)}>
-
-                        <div className='flex flex-col gap-sm p-lg'>
-                            <p id="card-text-target" className='text-headline-1'>This is a title</p>
-                            <p className='text-body-2'>Lorem ipsum dolor sit amet</p>
-
-                            <Button id="card-button-target" intent={currentConfig.intentProp} design='filled'><span id="card-button-text-target">Read more</span></Button>
-                        </div>
-
-                        <div id="card-surface-target" className="relative flex flex-col gap-sm bg-surface flex-1 p-md border-l-sm border-outline">
-                            <IconButton id="card-surface-button-target" size="sm" intent={currentConfig.intentProp} design='outlined'>
-                                <Icon><LikeOutline /></Icon>
-                            </IconButton>
-
-                            <IconButton id="card-surface-button-target" size="sm" intent={currentConfig.intentProp} design='outlined'>
-                                <Icon><BookmarkOutline /></Icon>
-                            </IconButton>
-
-
-                            <div id="card-outline-target" className='absolute left-0 top-0 h-full' />
-
-                        </div>
-                    </div>
-
-                    <div className='flex flex-col gap-sm absolute left-lg top-lg'>
-                        <Tag id="card-bg-tip" intent='info' design='tinted'>
-                            {currentConfig.name} container
-                        </Tag>
-
-                        <Tag id="card-text-tip" intent='info' design='tinted'>
-                            On {currentConfig.name} container
-                        </Tag>
-                    </div>
-
-                    <div className='flex flex-col gap-sm absolute left-lg bottom-lg'>
-                        <Tag id="card-button-tip" intent='info' design='tinted'>
-                            {currentConfig.name}
-                        </Tag>
-
-                        <Tag id="card-button-text-tip" intent='info' design='tinted'>
-                            On {currentConfig.name}
-                        </Tag>
-                    </div>
-
-                    <div className='flex flex-col gap-sm absolute right-lg top-lg'>
-                        <Tag id="card-surface-tip" intent='info' design='tinted'>
-                            Surface
-                        </Tag>
-                    </div>
-
-                    <div className='flex flex-col gap-sm absolute right-lg bottom-lg'>
-                        <Tag id="card-outline-tip" intent='info' design='tinted'>
-                            Outline
-                        </Tag>
-                    </div>
-
-
-                    <Xarrow start="card-target" end="card-bg-tip" {...arrowProps} startAnchor="top"/>
-                    <Xarrow start="card-text-target" end="card-text-tip" {...arrowProps}/>
-                    <Xarrow start="card-button-target" end="card-button-tip" {...arrowProps}/>
-                    <Xarrow start="card-button-text-target" end="card-button-text-tip" {...arrowProps} startAnchor="bottom"/>
-                    <Xarrow start="card-surface-target" end="card-surface-tip" {...arrowProps} startAnchor="top"/>
-                    <Xarrow start="card-outline-target" end="card-outline-tip" {...arrowProps} startAnchor="bottom"/>
-
-
-                </Xwrapper>
-            </div>
-        </div>
-    )
-
-}
-
-## Colors
-
-### Color families
-
-Spark opt-outs of the default TailwindCSS color palette and offers 9 color families, each with multiple color tokens with their own semantic usage.
-
-<ColorCard />
-
-### Colors syntax
-
-Each color family offers various tokens with their own semantic usage.
-
-#### Base token
-
-Main color tokens of each family, they represent the visual identity of your theme and should be vivid/strong. They are used for important elements of your interfaces, such as the main call to actions and elements that makes your website identity (logo, illustrations, etc)
-
-```jsx
-<div className="bg-main" />
-```
-
-#### Container token
-
-Toned down versions of the main color tokens. They must re-use the same color hue but be less saturated or with softer lightness. They are used for background elements of your interfaces.
-
-```jsx
-<div className="bg-main-container" />
-```
-
-#### Contrasting color token
-
-Colors to use on top of a `*` or `*-container` background. Usually for text or icons. Their purpose is to contrast with the background color.
-
-- Never use as a background.
-- Never use on a background of a different color family.
-- They don't exist in an `*-hovered` state, as Spark chose to animate the background color instead.
-
-```jsx
-<div className="bg-main text-on-main" />
-<div className="bg-main-container text-on-main-container" />
-```
-
-#### Hovered token
-
-Hovered state of a `*` or `*-container` element. We advise to use the same color hue and saturation as the base colorand simply apply a delta on the lightness.
-
-```jsx
-<button type="button" className="bg-main hover:bg-main-hovered">
-  Click me
-</button>
-```
-
-#### Outline token
-
-Colors to use for generic outlines/dividers. **Never use on text or background**.
-
-```jsx
-<hr className="border-sm border-outline" />
-```
-
-#### Outline high token
-
-Colors to use for high contrast outlines/dividers. **Never use on text or background**.
-
-```jsx
-<hr className="border-sm border-outline-high" />
-```
-
-#### Overlay token
-
-Colors to use for overlays (ex: modals, tooltips, dropdowns). Combine it with `dim-3` opacity for consistancy.
-
-```jsx
-<div className="bg-overlay/dim-3" />
-```
-
-### Backgrounds
-
-<BackgroundColorPreview />
-
-### Text
-
-<TextColorPreview />
-
-### Outlines
-
-<OutlineColorPreview />
-
-## Shadows
-
-### Regular shadows
-
-Use utilities like `shadow-xs` and `shadow-sm` to apply a box shadow to an element. You can prefix it with `inset-` to apply it to the inside of the element.
-
-You can also have both an inset and a regular shadow at once.
+Main color tokens represent the visual identity of your theme. They are used for important elements like primary CTAs and brand elements.
 
 <div className="sb-unstyled">
-  <div className="gap-lg flex flex-wrap">
-    <div className="gap-md flex flex-col items-center">
-      <Tag intent="info" design="tinted" className="self-center">
-        shadow-xs
-      </Tag>
-      <div className="size-sz-64 shadow-xs" />
-    </div>
-    <div className="gap-md flex flex-col items-center">
-      <Tag intent="info" design="tinted" className="self-center">
-        shadow-sm
-      </Tag>
-      <div className="size-sz-64 shadow-sm" />
-    </div>
-    <div className="gap-md flex flex-col items-center">
-      <Tag intent="info" design="tinted" className="self-center">
-        shadow-md
-      </Tag>
-      <div className="size-sz-64 shadow-md" />
-    </div>
-    <div className="gap-md flex flex-col items-center">
-      <Tag intent="info" design="tinted" className="self-center">
-        shadow-lg
-      </Tag>
-      <div className="size-sz-64 shadow-lg" />
-    </div>
-    <div className="gap-md flex flex-col items-center">
-      <Tag intent="info" design="tinted" className="self-center">
-        shadow-xl
-      </Tag>
-      <div className="size-sz-64 shadow-xl" />
-    </div>
-    <div className="gap-md flex flex-col items-center">
-      <Tag intent="info" design="tinted" className="self-center">
-        inset-shadow-xs
-      </Tag>
-      <div className="size-sz-64 inset-shadow-xs" />
-    </div>
-    <div className="gap-md flex flex-col items-center">
-      <Tag intent="info" design="tinted" className="self-center">
-        inset-shadow-sm
-      </Tag>
-      <div className="size-sz-64 inset-shadow-sm" />
-    </div>
-    <div className="gap-md flex flex-col items-center">
-      <Tag intent="info" design="tinted" className="self-center">
-        inset-shadow-md
-      </Tag>
-      <div className="size-sz-64 inset-shadow-md" />
-    </div>
-    <div className="gap-md flex flex-col items-center">
-      <Tag intent="info" design="tinted" className="self-center">
-        inset-shadow-lg
-      </Tag>
-      <div className="size-sz-64 inset-shadow-lg" />
-    </div>
-    <div className="gap-md flex flex-col items-center">
-      <Tag intent="info" design="tinted" className="self-center">
-        inset-shadow-xl
-      </Tag>
-      <div className="size-sz-64 inset-shadow-xl" />
-    </div>
-  </div>
+  <Table resizeColumnAriaLabel="Resize column">
+    <Table.Grid aria-label="Main color tokens">
+      <Table.Header>
+        <Table.Column id="preview" label="Preview" isRowHeader minWidth={100} />
+        <Table.Column id="class" label="Tailwind Class" minWidth={200} />
+        <Table.Column id="token" label="CSS Variable" minWidth={200} />
+        <Table.Column id="value" label="Computed Value" minWidth={150} />
+      </Table.Header>
+      <Table.Body>
+        <Table.Row id="main-1">
+          <Table.Cell>
+            <ColorCell className="bg-main" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">bg-main</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-main</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">{getCssVariableValue('--color-main')}</code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="main-2">
+          <Table.Cell>
+            <ColorCell className="bg-main-hovered" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">bg-main-hovered</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-main-hovered</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-main-hovered')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="main-3">
+          <Table.Cell>
+            <ColorCell className="bg-main-container" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">bg-main-container</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-main-container</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-main-container')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="main-4">
+          <Table.Cell>
+            <ColorCell className="bg-main-container-hovered" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">bg-main-container-hovered</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-main-container-hovered</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-main-container-hovered')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="main-5">
+          <Table.Cell>
+            <ColorCell className="bg-main text-on-main" isText />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">text-on-main</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-on-main</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-on-main')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="main-6">
+          <Table.Cell>
+            <ColorCell className="bg-main-container text-on-main-container" isText />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">text-on-main-container</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-on-main-container</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-on-main-container')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table.Grid>
+  </Table>
 </div>
 
-### Ring shadows
+### Support Colors
 
-Use utilities like `ring-2` and `ring-4` to apply a solid box-shadow to an element. You can prefix it with `inset-` to apply it to the inside of the element.
-
-You can combine a ring with a shadow to create a more complex effect. You can also have both an inset and a regular ring at once.
+Support color tokens are used for secondary actions and elements that complement the main brand identity. They provide visual variety while maintaining hierarchy in the interface.
 
 <div className="sb-unstyled">
-  <div className="gap-lg flex flex-wrap">
-    <div className="gap-md flex flex-col items-center">
-      <Tag intent="info" design="tinted" className="self-center">
-        ring-1
-      </Tag>
-      <div className="size-sz-64 ring-1" />
-    </div>
-    <div className="gap-md flex flex-col items-center">
-      <Tag intent="info" design="tinted" className="self-center">
-        ring-2
-      </Tag>
-      <div className="size-sz-64 ring-2" />
-    </div>
-    <div className="gap-md flex flex-col items-center">
-      <Tag intent="info" design="tinted" className="self-center">
-        ring-4
-      </Tag>
-      <div className="size-sz-64 ring-4" />
-    </div>
-    <div className="gap-md flex flex-col items-center">
-      <Tag intent="info" design="tinted" className="self-center">
-        ring-8
-      </Tag>
-      <div className="size-sz-64 ring-8" />
-    </div>
-  </div>
+  <Table resizeColumnAriaLabel="Resize column">
+    <Table.Grid aria-label="Support color tokens">
+      <Table.Header>
+        <Table.Column id="preview" label="Preview" isRowHeader minWidth={100} />
+        <Table.Column id="class" label="Tailwind Class" minWidth={200} />
+        <Table.Column id="token" label="CSS Variable" minWidth={200} />
+        <Table.Column id="value" label="Computed Value" minWidth={150} />
+      </Table.Header>
+      <Table.Body>
+        <Table.Row id="support-1">
+          <Table.Cell>
+            <ColorCell className="bg-support" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">bg-support</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-support</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-support')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="support-2">
+          <Table.Cell>
+            <ColorCell className="bg-support-hovered" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">bg-support-hovered</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-support-hovered</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-support-hovered')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="support-3">
+          <Table.Cell>
+            <ColorCell className="bg-support-container" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">bg-support-container</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-support-container</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-support-container')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="support-4">
+          <Table.Cell>
+            <ColorCell className="bg-support-container-hovered" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">bg-support-container-hovered</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-support-container-hovered</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-support-container-hovered')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="support-5">
+          <Table.Cell>
+            <ColorCell className="bg-support text-on-support" isText />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">text-on-support</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-on-support</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-on-support')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="support-6">
+          <Table.Cell>
+            <ColorCell className="bg-support-container text-on-support-container" isText />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">text-on-support-container</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-on-support-container</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-on-support-container')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table.Grid>
+  </Table>
 </div>
 
-### Colored shadows
+### Accent Colors
 
-Use utilities like `shadow-main` (or any other Spark color) to change the color of a box shadow.
-
-Use utilities like `ring-main` (or any other Spark color) to change the color of a ring.
+Accent color tokens are used to draw attention to specific UI elements and highlight important information. They provide emphasis and visual interest without competing with main brand colors.
 
 <div className="sb-unstyled">
-  <div className="gap-lg flex flex-wrap">
-    <div className="gap-md flex flex-col items-center">
-      <Tag intent="info" design="tinted" className="self-center">
-        shadow-md +shadow-main
-      </Tag>
-      <div className="size-sz-64 shadow-main shadow-md" />
-    </div>
-    <div className="gap-md flex flex-col items-center">
-      <Tag intent="info" design="tinted" className="self-center">
-        inset-shadow-md + inset-shadow-main
-      </Tag>
-      <div className="size-sz-64 inset-shadow-md inset-shadow-main" />
-    </div>
-    <div className="gap-md flex flex-col items-center">
-      <Tag intent="info" design="tinted" className="self-center">
-        ring-2 + ring-main
-      </Tag>
-      <div className="size-sz-64 ring-main ring-2" />
-    </div>
-    <div className="gap-md flex flex-col items-center">
-      <Tag intent="info" design="tinted" className="self-center">
-        inset-ring-2 + inset-ring-main
-      </Tag>
-      <div className="size-sz-64 inset-ring-main inset-ring-2" />
-    </div>
-  </div>
+  <Table resizeColumnAriaLabel="Resize column">
+    <Table.Grid aria-label="Accent color tokens">
+      <Table.Header>
+        <Table.Column id="preview" label="Preview" isRowHeader minWidth={100} />
+        <Table.Column id="class" label="Tailwind Class" minWidth={200} />
+        <Table.Column id="token" label="CSS Variable" minWidth={200} />
+        <Table.Column id="value" label="Computed Value" minWidth={150} />
+      </Table.Header>
+      <Table.Body>
+        <Table.Row id="accent-1">
+          <Table.Cell>
+            <ColorCell className="bg-accent" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">bg-accent</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-accent</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-accent')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="accent-2">
+          <Table.Cell>
+            <ColorCell className="bg-accent-hovered" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">bg-accent-hovered</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-accent-hovered</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-accent-hovered')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="accent-3">
+          <Table.Cell>
+            <ColorCell className="bg-accent-container" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">bg-accent-container</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-accent-container</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-accent-container')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="accent-4">
+          <Table.Cell>
+            <ColorCell className="bg-accent-container-hovered" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">bg-accent-container-hovered</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-accent-container-hovered</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-accent-container-hovered')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="accent-5">
+          <Table.Cell>
+            <ColorCell className="bg-accent text-on-accent" isText />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">text-on-accent</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-on-accent</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-on-accent')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="accent-6">
+          <Table.Cell>
+            <ColorCell className="bg-accent-container text-on-accent-container" isText />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">text-on-accent-container</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-on-accent-container</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-on-accent-container')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table.Grid>
+  </Table>
 </div>
 
-## Spacing
+### Feedback Colors
 
-export const spacing = [
-  { computed: 'p-sm', className: 'size-sm' },
-  { computed: 'p-md', className: 'size-md' },
-  { computed: 'p-lg', className: 'size-lg' },
-  { computed: 'p-xl', className: 'size-xl' },
-  { computed: 'p-2xl', className: 'size-2xl' },
-  { computed: 'p-3xl', className: 'size-3xl' },
-]
-
-<div className="sb-unstyled gap-xl flex flex-col">
-  {spacing.map(({ computed, className }) => {
-    return (
-      <div className="gap-lg flex items-center">
-        <div className={`${className} bg-support`} />
-        <div className="flex flex-col">
-          <p className="text-body-1">{computed}</p>
-          <p className="text-body-2 opacity-dim-1">{getComputedCssVariable('padding', computed)}</p>
-        </div>
-      </div>
-    )
-  })}
-</div>
-
-## Font Sizes
-
-export const fontSizes = [
-  'text-display-1',
-  'text-display-2',
-  'text-display-3',
-  'text-headline-1',
-  'text-headline-2',
-  'text-subhead',
-  'text-body-1',
-  'text-body-2',
-  'text-caption',
-  'text-small',
-]
+Feedback colors convey intent status (success, error, alert, info, neutral).
 
 <div className="sb-unstyled">
-  <div className="gap-lg grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] flex-wrap">
-    {fontSizes.map(fontSize => {
-      return (
-        <div>
-          <p className={`${fontSize} bg-support-container text-on-support-container px-lg`}>
-            Hello world.
-          </p>
-          <p>{fontSize}</p>
-          <p className="text-body-2 opacity-dim-1">
-            font-size: {getComputedCssVariable('font-size', fontSize)}, line-height:{' '}
-            {getComputedCssVariable('line-height', fontSize)}, font-weight:{' '}
-            {getComputedCssVariable('font-weight', fontSize)}
-          </p>
-        </div>
-      )
-    })}
-  </div>
+  <Table resizeColumnAriaLabel="Resize column">
+    <Table.Grid aria-label="Feedback color tokens">
+      <Table.Header>
+        <Table.Column id="preview" label="Preview" isRowHeader minWidth={100} />
+        <Table.Column id="class" label="Tailwind Class" minWidth={200} />
+        <Table.Column id="token" label="CSS Variable" minWidth={200} />
+        <Table.Column id="value" label="Computed Value" minWidth={150} />
+      </Table.Header>
+      <Table.Body>
+        {[
+          { name: 'success', token: '--color-success', className: 'bg-success' },
+          {
+            name: 'success-hovered',
+            token: '--color-success-hovered',
+            className: 'bg-success-hovered',
+          },
+          {
+            name: 'success-container',
+            token: '--color-success-container',
+            className: 'bg-success-container',
+          },
+          {
+            name: 'success-container-hovered',
+            token: '--color-success-container-hovered',
+            className: 'bg-success-container-hovered',
+          },
+          {
+            name: 'on-success',
+            token: '--color-on-success',
+            className: 'bg-success text-on-success',
+            isText: true,
+          },
+          {
+            name: 'on-success-container',
+            token: '--color-on-success-container',
+            className: 'bg-success-container text-on-success-container',
+            isText: true,
+          },
+          { name: 'error', token: '--color-error', className: 'bg-error' },
+          { name: 'error-hovered', token: '--color-error-hovered', className: 'bg-error-hovered' },
+          {
+            name: 'error-container',
+            token: '--color-error-container',
+            className: 'bg-error-container',
+          },
+          {
+            name: 'error-container-hovered',
+            token: '--color-error-container-hovered',
+            className: 'bg-error-container-hovered',
+          },
+          {
+            name: 'on-error',
+            token: '--color-on-error',
+            className: 'bg-error text-on-error',
+            isText: true,
+          },
+          {
+            name: 'on-error-container',
+            token: '--color-on-error-container',
+            className: 'bg-error-container text-on-error-container',
+            isText: true,
+          },
+          { name: 'alert', token: '--color-alert', className: 'bg-alert' },
+          { name: 'alert-hovered', token: '--color-alert-hovered', className: 'bg-alert-hovered' },
+          {
+            name: 'alert-container',
+            token: '--color-alert-container',
+            className: 'bg-alert-container',
+          },
+          {
+            name: 'alert-container-hovered',
+            token: '--color-alert-container-hovered',
+            className: 'bg-alert-container-hovered',
+          },
+          {
+            name: 'on-alert',
+            token: '--color-on-alert',
+            className: 'bg-alert text-on-alert',
+            isText: true,
+          },
+          {
+            name: 'on-alert-container',
+            token: '--color-on-alert-container',
+            className: 'bg-alert-container text-on-alert-container',
+            isText: true,
+          },
+          { name: 'info', token: '--color-info', className: 'bg-info' },
+          { name: 'info-hovered', token: '--color-info-hovered', className: 'bg-info-hovered' },
+          {
+            name: 'info-container',
+            token: '--color-info-container',
+            className: 'bg-info-container',
+          },
+          {
+            name: 'info-container-hovered',
+            token: '--color-info-container-hovered',
+            className: 'bg-info-container-hovered',
+          },
+          {
+            name: 'on-info',
+            token: '--color-on-info',
+            className: 'bg-info text-on-info',
+            isText: true,
+          },
+          {
+            name: 'on-info-container',
+            token: '--color-on-info-container',
+            className: 'bg-info-container text-on-info-container',
+            isText: true,
+          },
+          { name: 'neutral', token: '--color-neutral', className: 'bg-neutral' },
+          {
+            name: 'neutral-hovered',
+            token: '--color-neutral-hovered',
+            className: 'bg-neutral-hovered',
+          },
+          {
+            name: 'neutral-container',
+            token: '--color-neutral-container',
+            className: 'bg-neutral-container',
+          },
+          {
+            name: 'neutral-container-hovered',
+            token: '--color-neutral-container-hovered',
+            className: 'bg-neutral-container-hovered',
+          },
+          {
+            name: 'on-neutral',
+            token: '--color-on-neutral',
+            className: 'bg-neutral text-on-neutral',
+            isText: true,
+          },
+          {
+            name: 'on-neutral-container',
+            token: '--color-on-neutral-container',
+            className: 'bg-neutral-container text-on-neutral-container',
+            isText: true,
+          },
+        ].map((item, index) => (
+          <Table.Row key={item.name} id={`feedback-${index}`}>
+            <Table.Cell>
+              <ColorCell className={item.className} isText={item.isText} />
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">
+                {item.isText ? `text-${item.name}` : item.className}
+              </code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">{item.token}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2 opacity-dim-2">{getCssVariableValue(item.token)}</code>
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table.Grid>
+  </Table>
 </div>
 
-## Screen Sizes
+### Surface & Background Colors
 
-## Shadows
+Base colors for surfaces, backgrounds, and structural elements.
 
 <div className="sb-unstyled">
-  <div className="gap-lg flex flex-col">
-    <div className="gap-lg flex">
-      <p className="size-sz-44 rounded-lg shadow-xs" />
-      <div className="flex flex-col">
-        <p>shadow-xs</p>
-        <p className="text-body-2 opacity-dim-1">{getCssVariable('--shadow-xs')}</p>
-      </div>
-    </div>
-    <div className="gap-lg flex">
-      <p className="size-sz-44 rounded-lg shadow-sm" />
-      <div className="flex flex-col">
-        <p>shadow-sm</p>
-        <p className="text-body-2 opacity-dim-1">{getCssVariable('--shadow-sm')}</p>
-      </div>
-    </div>
-    <div className="gap-lg flex">
-      <p className="size-sz-44 rounded-lg shadow-md" />
-      <div className="flex flex-col">
-        <p>shadow-md</p>
-        <p className="text-body-2 opacity-dim-1">{getCssVariable('--shadow-md')}</p>
-      </div>
-    </div>
-    <div className="gap-lg flex">
-      <p className="size-sz-44 rounded-lg shadow-lg" />
-      <div className="flex flex-col">
-        <p>shadow-lg</p>
-        <p className="text-body-2 opacity-dim-1">{getCssVariable('--shadow-lg')}</p>
-      </div>
-    </div>
-    <div className="gap-lg flex">
-      <p className="size-sz-44 rounded-lg shadow-xl" />
-      <div className="flex flex-col">
-        <p>shadow-xl</p>
-        <p className="text-body-2 opacity-dim-1">{getCssVariable('--shadow-xl')}</p>
-      </div>
-    </div>
-  </div>
+  <Table resizeColumnAriaLabel="Resize column">
+    <Table.Grid aria-label="Surface and background color tokens">
+      <Table.Header>
+        <Table.Column id="preview" label="Preview" isRowHeader minWidth={100} />
+        <Table.Column id="class" label="Tailwind Class" minWidth={200} />
+        <Table.Column id="token" label="CSS Variable" minWidth={200} />
+        <Table.Column id="value" label="Computed Value" minWidth={150} />
+      </Table.Header>
+      <Table.Body>
+        {[
+          { name: 'background', token: '--color-background', className: 'bg-background' },
+          {
+            name: 'background-variant',
+            token: '--color-background-variant',
+            className: 'bg-background-variant',
+          },
+          { name: 'surface', token: '--color-surface', className: 'bg-surface' },
+          {
+            name: 'surface-hovered',
+            token: '--color-surface-hovered',
+            className: 'bg-surface-hovered',
+          },
+          {
+            name: 'surface-inverse',
+            token: '--color-surface-inverse',
+            className: 'bg-surface-inverse border-outline-high',
+          },
+          {
+            name: 'surface-inverse-hovered',
+            token: '--color-surface-inverse-hovered',
+            className: 'bg-surface-inverse-hovered border-outline-high',
+          },
+          {
+            name: 'surface-dark',
+            token: '--color-surface-dark',
+            className: 'bg-surface-dark border-outline-high',
+          },
+          {
+            name: 'surface-dark-hovered',
+            token: '--color-surface-dark-hovered',
+            className: 'bg-surface-dark-hovered border-outline-high',
+          },
+        ].map((item, index) => (
+          <Table.Row key={item.name} id={`surface-${index}`}>
+            <Table.Cell>
+              <ColorCell className={item.className} />
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">bg-{item.name}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">{item.token}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2 opacity-dim-2">{getCssVariableValue(item.token)}</code>
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table.Grid>
+  </Table>
 </div>
 
-## Opacity
+### Outline & Special Colors
 
 <div className="sb-unstyled">
-  <div
-    className="p-xl bg-surface-inverse w-full rounded-lg"
-    style={{
-      background:
-        'repeating-linear-gradient(45deg, var(--color-surface-inverse), var(--color-surface-inverse) 5px, #1e1e1e 5px, #1e1e1e 10px) !important',
-    }}
-  >
-    <div className="gap-y-xl grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] flex-wrap">
-      <div className="gap-md text-on-main flex flex-col">
-        <div className="bg-surface p-xl border-sm border-outline" />
-        <Tag intent="info" design="tinted" className="self-center">
-          none
-        </Tag>
-      </div>
-      <div className="gap-md text-on-main flex flex-col">
-        <div className="bg-surface/dim-1 p-xl border-sm border-outline -ml-px" />
-        <Tag intent="info" design="tinted" className="self-center">
-          dim-1
-        </Tag>
-      </div>
-      <div className="gap-md text-on-main flex flex-col">
-        <div className="bg-surface/dim-2 p-xl border-sm border-outline -ml-px" />
-        <Tag intent="info" design="tinted" className="self-center">
-          dim-2
-        </Tag>
-      </div>
-      <div className="gap-md text-on-main flex flex-col">
-        <div className="bg-surface/dim-3 p-xl border-sm border-outline -ml-px" />
-        <Tag intent="info" design="tinted" className="self-center">
-          dim-3
-        </Tag>
-      </div>
-      <div className="gap-md text-on-main flex flex-col">
-        <div className="bg-surface/dim-4 p-xl border-sm border-outline -ml-px" />
-        <Tag intent="info" design="tinted" className="self-center">
-          dim-4
-        </Tag>
-      </div>
-      <div className="gap-md text-on-main flex flex-col">
-        <div className="bg-surface/dim-5 p-xl border-sm border-outline -ml-px" />
-        <Tag intent="info" design="tinted" className="self-center">
-          dim-5
-        </Tag>
-      </div>
-      <div className="gap-md text-on-main flex flex-col">
-        <div className="bg-surface/0 p-xl border-sm border-outline -ml-px" />
-        <div className="gap-md flex justify-center">
-          <Tag intent="info" design="tinted" className="self-center">
-            dim-full
-          </Tag>
-          <p>or</p>
-          <Tag intent="info" design="tinted" className="self-center">
-            0
-          </Tag>
-        </div>
-      </div>
-    </div>
-  </div>
+  <Table resizeColumnAriaLabel="Resize column">
+    <Table.Grid aria-label="Outline and special color tokens">
+      <Table.Header>
+        <Table.Column id="preview" label="Preview" isRowHeader minWidth={100} />
+        <Table.Column id="class" label="Tailwind Class" minWidth={200} />
+        <Table.Column id="token" label="CSS Variable" minWidth={200} />
+        <Table.Column id="value" label="Computed Value" minWidth={150} />
+      </Table.Header>
+      <Table.Body>
+        <Table.Row id="outline-1">
+          <Table.Cell>
+            <div className="size-sz-48 rounded-md border-md border-outline border-dashed" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">border-outline</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-outline</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-outline')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="outline-2">
+          <Table.Cell>
+            <div className="size-sz-48 rounded-md border-md border-outline-high border-dashed" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">border-outline-high</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-outline-high</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-outline-high')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="overlay">
+          <Table.Cell>
+            <ColorCell className="bg-overlay/dim-3" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">bg-overlay/dim-3</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-overlay + --opacity-dim-3</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-overlay')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="focus">
+          <Table.Cell>
+            <div className="size-sz-48 rounded-md bg-focus" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">bg-focus</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-focus</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-focus')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="shadow">
+          <Table.Cell>
+            <div className="size-sz-48 rounded-md shadow-xl" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">shadow-*</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-shadow</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-shadow')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table.Grid>
+  </Table>
 </div>
 
-## Border Radius
+### Summary
+
+Comprehensive overview of all color tokens showing how they render across different CSS properties.
 
 <div className="sb-unstyled">
-  <div className="gap-lg grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] flex-wrap">
-    <div className="gap-sm flex flex-col">
-      <div className="bg-main size-sz-44 rounded-tl-0 p-xl" />
-      <p>rounded-0</p>
-      <p className="text-body-2 opacity-dim-1">
-        {getComputedCssVariable('border-radius', 'rounded-0')}
-      </p>
-    </div>
-    <div className="gap-sm flex flex-col">
-      <div className="bg-main size-sz-44 p-xl rounded-tl-sm" />
-      <p>rounded-sm</p>
-      <p className="text-body-2 opacity-dim-1">
-        {getComputedCssVariable('border-radius', 'rounded-sm')}
-      </p>
-    </div>
-    <div className="gap-sm flex flex-col">
-      <div className="bg-main size-sz-44 p-xl rounded-tl-md" />
-      <p>rounded-md</p>
-      <p className="text-body-2 opacity-dim-1">
-        {getComputedCssVariable('border-radius', 'rounded-md')}
-      </p>
-    </div>
-    <div className="gap-sm flex flex-col">
-      <div className="bg-main size-sz-44 p-xl rounded-tl-lg" />
-      <p>rounded-lg</p>
-      <p className="text-body-2 opacity-dim-1">
-        {getComputedCssVariable('border-radius', 'rounded-lg')}
-      </p>
-    </div>
-    <div className="gap-sm flex flex-col">
-      <div className="bg-main size-sz-44 p-xl rounded-tl-xl" />
-      <p>rounded-xl</p>
-      <p className="text-body-2 opacity-dim-1">
-        {getComputedCssVariable('border-radius', 'rounded-xl')}
-      </p>
-    </div>
-    <div className="gap-sm flex flex-col">
-      <div className="bg-main size-sz-44 p-xl rounded-tl-full" />
-      <p>rounded-full</p>
-      <p className="text-body-2 opacity-dim-1">
-        {getComputedCssVariable('border-radius', 'rounded-full')}
-      </p>
-    </div>
-  </div>
+  <Table resizeColumnAriaLabel="Resize column" maxHeight={600} stickyHeader>
+    <Table.Grid aria-label="Color tokens summary">
+      <Table.Header>
+        <Table.Column id="token" label="Token" isRowHeader minWidth={200} />
+        <Table.Column id="background" label="Background" minWidth={120} />
+        <Table.Column id="text" label="Text" minWidth={120} />
+        <Table.Column id="border" label="Border" minWidth={120} />
+        <Table.Column id="shadow" label="Shadow" minWidth={120} />
+      </Table.Header>
+      <Table.Body>
+        {[
+          // Main colors
+          {
+            token: 'main',
+            bg: 'bg-main',
+            text: 'text-main',
+            border: 'border-main',
+            shadow: 'shadow-md shadow-main',
+          },
+          {
+            token: 'main-container',
+            bg: 'bg-main-container',
+          },
+          {
+            token: 'on-main',
+            text: 'text-on-main bg-main',
+          },
+          {
+            token: 'on-main-container',
+            text: 'text-on-main-container',
+          },
+          // Support colors
+          {
+            token: 'support',
+            bg: 'bg-support',
+            text: 'text-support',
+            border: 'border-support',
+            shadow: 'shadow-md shadow-support',
+          },
+          {
+            token: 'support-container',
+            bg: 'bg-support-container',
+          },
+          {
+            token: 'on-support',
+            text: 'text-on-support',
+          },
+          {
+            token: 'on-support-container',
+            text: 'text-on-support-container',
+          },
+          // Accent colors
+          {
+            token: 'accent',
+            bg: 'bg-accent',
+            text: 'text-accent',
+            border: 'border-accent',
+            shadow: 'shadow-md shadow-accent',
+          },
+          {
+            token: 'accent-container',
+            bg: 'bg-accent-container',
+          },
+          {
+            token: 'on-accent',
+            text: 'text-on-accent',
+          },
+          {
+            token: 'on-accent-container',
+            text: 'text-on-accent-container',
+          },
+          // Feedback colors
+          {
+            token: 'success',
+            bg: 'bg-success',
+            text: 'text-success',
+            border: 'border-success',
+            shadow: 'shadow-md shadow-success',
+          },
+          {
+            token: 'success-container',
+            bg: 'bg-success-container',
+          },
+          {
+            token: 'on-success',
+            text: 'text-on-success',
+          },
+          {
+            token: 'on-success-container',
+            text: 'text-on-success-container',
+          },
+          {
+            token: 'error',
+            bg: 'bg-error',
+            text: 'text-error',
+            border: 'border-error',
+            shadow: 'shadow-md shadow-error',
+          },
+          {
+            token: 'error-container',
+            bg: 'bg-error-container',
+          },
+          {
+            token: 'on-error',
+            text: 'text-on-error',
+          },
+          {
+            token: 'on-error-container',
+            text: 'text-on-error-container',
+          },
+          {
+            token: 'alert',
+            bg: 'bg-alert',
+            text: 'text-alert',
+            border: 'border-alert',
+            shadow: 'shadow-md shadow-alert',
+          },
+          {
+            token: 'alert-container',
+            bg: 'bg-alert-container',
+          },
+          {
+            token: 'on-alert',
+            text: 'text-on-alert',
+          },
+          {
+            token: 'on-alert-container',
+            text: 'text-on-alert-container',
+          },
+          {
+            token: 'info',
+            bg: 'bg-info',
+            text: 'text-info',
+            border: 'border-info',
+            shadow: 'shadow-md shadow-info',
+          },
+          {
+            token: 'info-container',
+            bg: 'bg-info-container',
+          },
+          {
+            token: 'on-info',
+            text: 'text-on-info',
+          },
+          {
+            token: 'on-info-container',
+            text: 'text-on-info-container',
+          },
+          {
+            token: 'neutral',
+            bg: 'bg-neutral',
+            text: 'text-neutral',
+            border: 'border-neutral',
+            shadow: 'shadow-md shadow-neutral',
+          },
+          {
+            token: 'neutral-container',
+            bg: 'bg-neutral-container',
+          },
+          {
+            token: 'on-neutral',
+            text: 'text-on-neutral bg-neutral',
+          },
+          {
+            token: 'on-neutral-container',
+            text: 'text-on-neutral-container',
+          },
+          // Surface & Background colors
+          {
+            token: 'background',
+            bg: 'bg-background',
+          },
+          {
+            token: 'background-variant',
+            bg: 'bg-background-variant',
+          },
+          {
+            token: 'surface',
+            bg: 'bg-surface',
+          },
+          {
+            token: 'surface-inverse',
+            bg: 'bg-surface-inverse',
+          },
+          {
+            token: 'surface-dark',
+            bg: 'bg-surface-dark',
+          },
+          // Outline & Special colors
+          {
+            token: 'outline',
+            border: 'border-outline',
+          },
+          {
+            token: 'outline-high',
+            border: 'border-outline-high',
+          },
+          {
+            token: 'overlay',
+            bg: 'bg-overlay/dim-3',
+          },
+          {
+            token: 'focus',
+            border: 'border-focus',
+          },
+        ].map((item, index) => (
+          <Table.Row key={item.token} id={`summary-${index}`}>
+            <Table.Cell>
+              <code className="text-body-2">{item.token}</code>
+            </Table.Cell>
+            <Table.Cell>
+              {!item.bg ? (
+                <p className="size-sz-48 flex items-center justify-center text-outline">-</p>
+              ) : (
+                <div className={` size-sz-48 rounded-md flex items-center justify-center`}>
+                  <div
+                    className={`${item.bg} size-sz-40 rounded-sm border-sm border-outline/dim-2`}
+                  />
+                </div>
+              )}
+            </Table.Cell>
+            <Table.Cell>
+              {!item.text ? (
+                <p className="size-sz-48 flex items-center justify-center text-outline">-</p>
+              ) : (
+                <div
+                  className={`size-sz-48 rounded-md flex items-center justify-center text-headline-1 ${item.text}`}
+                >
+                  Aa
+                </div>
+              )}
+            </Table.Cell>
+            <Table.Cell>
+              {!item.border ? (
+                <p className="size-sz-48 flex items-center justify-center text-outline">-</p>
+              ) : (
+                <div className={`size-sz-48 rounded-md flex items-center justify-center`}>
+                  <div className={`size-sz-40 bg-surface rounded-sm border-md ${item.border}`} />
+                </div>
+              )}
+            </Table.Cell>
+            <Table.Cell>
+              {!item.shadow ? (
+                <p className="size-sz-48 flex items-center justify-center text-outline">-</p>
+              ) : (
+                <div className={`size-sz-48  rounded-md flex items-center justify-center`}>
+                  <div className={`size-sz-40 bg-surface rounded-sm ${item.shadow}`} />
+                </div>
+              )}
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table.Grid>
+
+  </Table>
 </div>
 
-## Border Width
+## Spacing Tokens
 
 <div className="sb-unstyled">
-  <div className="gap-lg grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] flex-wrap">
-    <div className="gap-sm flex flex-col">
-      <div className="bg-main-container size-sz-44 border-outline-high p-xl border-0" />
-      <p>border-width-0</p>
-      <p className="text-body-2 opacity-dim-1">{getCssVariable('--border-width-0')}</p>
-    </div>
-    <div className="gap-sm flex flex-col">
-      <div className="bg-main-container size-sz-44 border-sm border-outline-high p-xl" />
-      <p>border-width-sm</p>
-      <p className="text-body-2 opacity-dim-1">{getCssVariable('--border-width-sm')}</p>
-    </div>
-    <div className="gap-sm flex flex-col">
-      <div className="bg-main-container size-sz-44 border-md border-outline-high p-xl" />
-      <p>border-width-md</p>
-      <p className="text-body-2 opacity-dim-1">{getCssVariable('--border-width-md')}</p>
-    </div>
-  </div>
+  <Table resizeColumnAriaLabel="Resize column">
+    <Table.Grid aria-label="Semantic spacing tokens">
+      <Table.Header>
+        <Table.Column id="preview" label="Preview" isRowHeader minWidth={120} />
+        <Table.Column id="class" label="Tailwind Class" minWidth={150} />
+        <Table.Column id="token" label="CSS Variable" minWidth={180} />
+        <Table.Column id="value" label="Computed Value" minWidth={150} />
+      </Table.Header>
+      <Table.Body>
+        {[
+          { name: '0', token: '--spacing-0', className: 'size-0' },
+          { name: 'sm', token: '--spacing-sm', className: 'size-sm' },
+          { name: 'md', token: '--spacing-md', className: 'size-md' },
+          { name: 'lg', token: '--spacing-lg', className: 'size-lg' },
+          { name: 'xl', token: '--spacing-xl', className: 'size-xl' },
+          { name: '2xl', token: '--spacing-2xl', className: 'size-2xl' },
+          { name: '3xl', token: '--spacing-3xl', className: 'size-3xl' },
+        ].map(item => (
+          <Table.Row key={item.name} id={`spacing-${item.name}`}>
+            <Table.Cell>
+              <div
+                className={`bg-support-container border-sm border-outline border-dashed ${item.className}`}
+              ></div>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">p-{item.name}</code>,{' '}
+              <code className="text-body-2">gap-{item.name}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">{item.token}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2 opacity-dim-2">{getSpacingValue(item.token)}</code>
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table.Grid>
+  </Table>
 </div>
 
-## Elevation
+## Typography Tokens
 
-<div className='sb-unstyled w-full'>
+Spark typography are composite tokens (Tailwindcss utilities) that combines font-size, line-height and sometimes font-weight.
 
-    <div className="relative">
-        <div className="bg-linear-to-b to-surface from-main-container  size-sz-192 px-lg py-sm rounded-lg shadow-md z-base absolute left-0 top-sz-0">
-            <Tag design="outlined" intent="info">z-base: <span>{getCssVariable('--z-index-base')}</span></Tag>
-        </div>
-        <div className="bg-linear-to-b to-surface from-support-container size-sz-192 px-lg py-sm rounded-lg shadow-md z-raised absolute left-sz-24 top-sz-32"><Tag design="outlined" intent="info">z-raised: <span>{getCssVariable('--z-index-raised')}</span></Tag></div>
-        <div className="bg-linear-to-b to-surface from-accent-container size-sz-192 px-lg py-sm rounded-lg shadow-md z-dropdown absolute left-sz-48 top-sz-64"><Tag design="outlined" intent="info">z-dropdown: <span>{getCssVariable('--z-index-dropdown')}</span></Tag></div>
-        <div className="bg-linear-to-b to-surface from-success-container size-sz-192 px-lg py-sm rounded-lg shadow-md z-sticky absolute left-[72px] top-sz-96"><Tag design="outlined" intent="info">z-sticky: <span>{getCssVariable('--z-index-sticky')}</span></Tag></div>
-        <div className="bg-linear-to-b to-surface from-alert-container size-sz-192 px-lg py-sm rounded-lg shadow-md z-overlay absolute left-sz-96 top-sz-128"><Tag design="outlined" intent="info">z-overlay: <span>{getCssVariable('--z-index-overlay')}</span></Tag></div>
-        <div className="bg-linear-to-b to-surface from-error-container size-sz-192 px-lg py-sm rounded-lg shadow-md z-modal absolute left-[120px] top-sz-160"><Tag design="outlined" intent="info">z-modal: <span>{getCssVariable('--z-index-modal')}</span></Tag></div>
-        <div className="bg-linear-to-b to-surface from-info-container size-sz-192 px-lg py-sm rounded-lg shadow-md z-popover absolute left-[144px] top-sz-192"><Tag design="outlined" intent="info">z-popover: <span>{getCssVariable('--z-index-popover')}</span></Tag></div>
-        <div className="bg-linear-to-b to-surface from-neutral-container size-sz-192 px-lg py-sm rounded-lg shadow-md z-skip-link absolute left-[168px] top-sz-224"><Tag design="outlined" intent="info">z-skip-link: <span>{getCssVariable('--z-index-skip-link')}</span></Tag></div>
-        <div className="bg-linear-to-b to-surface from-support-container size-sz-192 px-lg py-sm rounded-lg shadow-md z-toast absolute left-[192px] top-sz-256"><Tag design="outlined" intent="info">z-toast: <span>{getCssVariable('--z-index-toast')}</span></Tag></div>
-        <div className="bg-linear-to-b to-surface from-main-container size-sz-192 px-lg py-sm rounded-lg shadow-md z-tooltip absolute left-[216px] top-sz-288"><Tag design="outlined" intent="info">z-tooltip: <span>{getCssVariable('--z-index-tooltip')}</span></Tag></div>
-    </div>
+<div className="sb-unstyled">
+  <Table resizeColumnAriaLabel="Resize column">
+    <Table.Grid aria-label="Typography tokens">
+      <Table.Header>
+        <Table.Column id="preview" label="Preview" isRowHeader minWidth={400} />
+        <Table.Column id="class" label="Tailwind Class" minWidth={180} />
+        <Table.Column id="size" label="Font Size" minWidth={120} />
+        <Table.Column id="lineHeight" label="Line Height" minWidth={120} />
+        <Table.Column id="weight" label="Font Weight" minWidth={120} />
+      </Table.Header>
+      <Table.Body>
+        {[
+          { name: 'display-1', className: 'text-display-1' },
+          { name: 'display-2', className: 'text-display-2' },
+          { name: 'display-3', className: 'text-display-3' },
+          { name: 'headline-1', className: 'text-headline-1' },
+          { name: 'headline-2', className: 'text-headline-2' },
+          { name: 'subhead', className: 'text-subhead' },
+          { name: 'body-1', className: 'text-body-1' },
+          { name: 'body-1-highlight', className: 'text-body-1-highlight' },
+          { name: 'body-2', className: 'text-body-2' },
+          { name: 'body-2-highlight', className: 'text-body-2-highlight' },
+          { name: 'caption', className: 'text-caption' },
+          { name: 'small', className: 'text-small' },
+          { name: 'small-highlight', className: 'text-small-highlight' },
+          { name: 'callout', className: 'text-callout' },
+        ].map(style => (
+          <Table.Row key={style.name} id={`type-${style.name}`}>
+            <Table.Cell>
+              <span className={style.className}>The quick brown fox</span>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">{style.className}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2 opacity-dim-2">
+                {getComputedValue('font-size', style.className)}
+              </code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2 opacity-dim-2">
+                {getRelativeLineHeight(style.className)} (
+                {getComputedValue('line-height', style.className)})
+              </code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2 opacity-dim-2">
+                {getComputedValue('font-weight', style.className)}
+              </code>
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table.Grid>
+  </Table>
+</div>
 
+### Font Weight Tokens
+
+<div className="sb-unstyled">
+  <Table resizeColumnAriaLabel="Resize column">
+    <Table.Grid aria-label="Font weight tokens">
+      <Table.Header>
+        <Table.Column id="preview" label="Preview" isRowHeader minWidth={200} />
+        <Table.Column id="class" label="Tailwind Class" minWidth={180} />
+        <Table.Column id="token" label="CSS Variable" minWidth={200} />
+        <Table.Column id="value" label="Computed Value" minWidth={120} />
+      </Table.Header>
+      <Table.Body>
+        {[
+          { name: 'regular', token: '--font-weight-regular', className: 'font-regular' },
+          { name: 'medium', token: '--font-weight-medium', className: 'font-medium' },
+          { name: 'semi-bold', token: '--font-weight-semi-bold', className: 'font-semi-bold' },
+          { name: 'bold', token: '--font-weight-bold', className: 'font-bold' },
+        ].map(item => (
+          <Table.Row key={item.name} id={`weight-${item.name}`}>
+            <Table.Cell>
+              <span className={`${item.className} text-body-1`}>The quick brown fox</span>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">{item.className}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">{item.token}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2 opacity-dim-2">{getCssVariableValue(item.token)}</code>
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table.Grid>
+  </Table>
+</div>
+
+## Shadow Tokens
+
+### Box Shadows
+
+<div className="sb-unstyled">
+  <Table resizeColumnAriaLabel="Resize column">
+    <Table.Grid aria-label="Shadow tokens">
+      <Table.Header>
+        <Table.Column id="preview" label="Preview" isRowHeader minWidth={120} />
+        <Table.Column id="class" label="Tailwind Class" minWidth={180} />
+        <Table.Column id="token" label="CSS Variable" minWidth={180} />
+        <Table.Column id="value" label="Computed Value" minWidth={200} />
+      </Table.Header>
+      <Table.Body>
+        {[
+          { name: 'none', token: '--shadow-none', className: 'shadow-none' },
+          { name: 'xs', token: '--shadow-xs', className: 'shadow-xs' },
+          { name: 'sm', token: '--shadow-sm', className: 'shadow-sm' },
+          { name: 'md', token: '--shadow-md', className: 'shadow-md' },
+          { name: 'lg', token: '--shadow-lg', className: 'shadow-lg' },
+          { name: 'xl', token: '--shadow-xl', className: 'shadow-xl' },
+        ].map(item => (
+          <Table.Row key={item.name} id={`shadow-${item.name}`}>
+            <Table.Cell>
+              <div className={`size-sz-48 rounded-md ${item.className} bg-surface`} />
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">{item.className}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">{item.token}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2 opacity-dim-2">{getCssVariableValue(item.token)}</code>
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table.Grid>
+  </Table>
+</div>
+
+### Inset Shadows
+
+<div className="sb-unstyled">
+  <Table resizeColumnAriaLabel="Resize column">
+    <Table.Grid aria-label="Inset shadow tokens">
+      <Table.Header>
+        <Table.Column id="preview" label="Preview" isRowHeader minWidth={120} />
+        <Table.Column id="class" label="Tailwind Class" minWidth={180} />
+        <Table.Column id="token" label="CSS Variable" minWidth={200} />
+        <Table.Column id="value" label="Computed Value" minWidth={220} />
+      </Table.Header>
+      <Table.Body>
+        {[
+          { name: 'xs', token: '--inset-shadow-xs', className: 'inset-shadow-xs' },
+          { name: 'sm', token: '--inset-shadow-sm', className: 'inset-shadow-sm' },
+          { name: 'md', token: '--inset-shadow-md', className: 'inset-shadow-md' },
+          { name: 'lg', token: '--inset-shadow-lg', className: 'inset-shadow-lg' },
+          { name: 'xl', token: '--inset-shadow-xl', className: 'inset-shadow-xl' },
+        ].map(item => (
+          <Table.Row key={item.name} id={`inset-shadow-${item.name}`}>
+            <Table.Cell>
+              <div className={`size-sz-48 rounded-md ${item.className} bg-surface`} />
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">{item.className}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">{item.token}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2 opacity-dim-2">{getCssVariableValue(item.token)}</code>
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table.Grid>
+  </Table>
+</div>
+
+## Border Radius Tokens
+
+<div className="sb-unstyled">
+  <Table resizeColumnAriaLabel="Resize column">
+    <Table.Grid aria-label="Border radius tokens">
+      <Table.Header>
+        <Table.Column id="preview" label="Preview" isRowHeader minWidth={120} />
+        <Table.Column id="class" label="Tailwind Class" minWidth={150} />
+        <Table.Column id="token" label="CSS Variable" minWidth={180} />
+        <Table.Column id="value" label="Computed Value" minWidth={150} />
+      </Table.Header>
+      <Table.Body>
+        {[
+          { name: '0', token: '--radius-0', className: 'rounded-0' },
+          { name: 'sm', token: '--radius-sm', className: 'rounded-sm' },
+          { name: 'md', token: '--radius-md', className: 'rounded-md' },
+          { name: 'lg', token: '--radius-lg', className: 'rounded-lg' },
+          { name: 'xl', token: '--radius-xl', className: 'rounded-xl' },
+          { name: 'full', token: '--radius-full', className: 'rounded-full' },
+        ].map(item => (
+          <Table.Row key={item.name} id={`radius-${item.name}`}>
+            <Table.Cell>
+              <div className={`size-sz-64 bg-main ${item.className}`} />
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">{item.className}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">{item.token}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2 opacity-dim-2">{getCssVariableValue(item.token)}</code>
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table.Grid>
+  </Table>
+</div>
+
+## Border Width Tokens
+
+<div className="sb-unstyled">
+  <Table resizeColumnAriaLabel="Resize column">
+    <Table.Grid aria-label="Border width tokens">
+      <Table.Header>
+        <Table.Column id="preview" label="Preview" isRowHeader minWidth={120} />
+        <Table.Column id="class" label="Tailwind Class" minWidth={150} />
+        <Table.Column id="token" label="CSS Variable" minWidth={200} />
+        <Table.Column id="value" label="Computed Value" minWidth={120} />
+      </Table.Header>
+      <Table.Body>
+        {[
+          { name: '0', token: '--border-width-0', className: 'border-0' },
+          { name: 'sm', token: '--border-width-sm', className: 'border-sm' },
+          { name: 'md', token: '--border-width-md', className: 'border-md' },
+          { name: 'lg', token: '--border-width-lg', className: 'border-lg' },
+        ].map(item => (
+          <Table.Row key={item.name} id={`border-${item.name}`}>
+            <Table.Cell>
+              <div className={`size-sz-48 ${item.className} border-outline-high rounded-md`} />
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">{item.className}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">{item.token}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2 opacity-dim-2">{getCssVariableValue(item.token)}</code>
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table.Grid>
+  </Table>
+</div>
+
+## Opacity Tokens
+
+Opacity tokens can be applied as modifiers to color tokens using the `/` syntax, such as `bg-overlay/dim-3` or `text-main/dim-2`.
+
+<div className="sb-unstyled">
+  <Table resizeColumnAriaLabel="Resize column">
+    <Table.Grid aria-label="Opacity tokens">
+      <Table.Header>
+        <Table.Column id="preview" label="Preview" isRowHeader minWidth={120} />
+        <Table.Column id="class" label="Tailwind Class" minWidth={150} />
+        <Table.Column id="token" label="CSS Variable" minWidth={180} />
+        <Table.Column id="value" label="Computed Value" minWidth={120} />
+      </Table.Header>
+      <Table.Body>
+        {[
+          { name: 'none', token: '--opacity-none', className: 'opacity-none' },
+          { name: 'dim-1', token: '--opacity-dim-1', className: 'opacity-dim-1' },
+          { name: 'dim-2', token: '--opacity-dim-2', className: 'opacity-dim-2' },
+          { name: 'dim-3', token: '--opacity-dim-3', className: 'opacity-dim-3' },
+          { name: 'dim-4', token: '--opacity-dim-4', className: 'opacity-dim-4' },
+          { name: 'dim-5', token: '--opacity-dim-5', className: 'opacity-dim-5' },
+          { name: 'dim-full', token: '--opacity-dim-full', className: 'opacity-dim-full' },
+        ].map(item => (
+          <Table.Row key={item.name} id={`opacity-${item.name}`}>
+            <Table.Cell>
+              <div className="bg-surface-inverse size-sz-48 rounded-md flex items-center justify-center">
+                <div className={`bg-surface size-sz-32 rounded-sm ${item.className}`} />
+              </div>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">{item.className}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">{item.token}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2 opacity-dim-2">{getCssVariableValue(item.token)}</code>
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table.Grid>
+  </Table>
+</div>
+
+## Z-Index Tokens
+
+<div className="sb-unstyled">
+  <Table resizeColumnAriaLabel="Resize column">
+    <Table.Grid aria-label="Z-index tokens">
+      <Table.Header>
+        <Table.Column id="name" label="Name" isRowHeader minWidth={180} />
+        <Table.Column id="class" label="Tailwind Class" minWidth={150} />
+        <Table.Column id="token" label="CSS Variable" minWidth={180} />
+        <Table.Column id="value" label="Computed Value" minWidth={120} />
+      </Table.Header>
+      <Table.Body>
+        {[
+          { name: 'hide', token: '--z-index-hide', className: 'z-hide' },
+          { name: 'base', token: '--z-index-base', className: 'z-base' },
+          { name: 'raised', token: '--z-index-raised', className: 'z-raised' },
+          { name: 'dropdown', token: '--z-index-dropdown', className: 'z-dropdown' },
+          { name: 'sticky', token: '--z-index-sticky', className: 'z-sticky' },
+          { name: 'overlay', token: '--z-index-overlay', className: 'z-overlay' },
+          { name: 'modal', token: '--z-index-modal', className: 'z-modal' },
+          { name: 'popover', token: '--z-index-popover', className: 'z-popover' },
+          { name: 'skip-link', token: '--z-index-skip-link', className: 'z-skip-link' },
+          { name: 'toast', token: '--z-index-toast', className: 'z-toast' },
+          { name: 'tooltip', token: '--z-index-tooltip', className: 'z-tooltip' },
+        ].map(item => (
+          <Table.Row key={item.name} id={`z-${item.name}`}>
+            <Table.Cell>{item.name}</Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">{item.className}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">{item.token}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2 opacity-dim-2">{getCssVariableValue(item.token)}</code>
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table.Grid>
+  </Table>
+</div>
+
+## Breakpoint Tokens
+
+<div className="sb-unstyled">
+  <Table resizeColumnAriaLabel="Resize column">
+    <Table.Grid aria-label="Breakpoint tokens">
+      <Table.Header>
+        <Table.Column id="name" label="Name" isRowHeader minWidth={150} />
+        <Table.Column id="class" label="Usage" minWidth={200} />
+        <Table.Column id="token" label="CSS Variable" minWidth={180} />
+        <Table.Column id="value" label="Computed Value" minWidth={120} />
+      </Table.Header>
+      <Table.Body>
+        {[
+          { name: 'sm', token: '--breakpoint-sm' },
+          { name: 'md', token: '--breakpoint-md' },
+          { name: 'lg', token: '--breakpoint-lg' },
+          { name: 'xl', token: '--breakpoint-xl' },
+        ].map(item => (
+          <Table.Row key={item.name} id={`breakpoint-${item.name}`}>
+            <Table.Cell>{item.name}</Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">{item.name}:class-name</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">{item.token}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2 opacity-dim-2">{getCssVariableValue(item.token)}</code>
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table.Grid>
+  </Table>
+</div>
+
+## Font Family Tokens
+
+<div className="sb-unstyled">
+  <Table resizeColumnAriaLabel="Resize column">
+    <Table.Grid aria-label="Font family tokens">
+      <Table.Header>
+        <Table.Column id="preview" label="Preview" isRowHeader minWidth={200} />
+        <Table.Column id="class" label="Tailwind Class" minWidth={150} />
+        <Table.Column id="token" label="CSS Variable" minWidth={150} />
+        <Table.Column id="value" label="Computed Value" minWidth={300} />
+      </Table.Header>
+      <Table.Body>
+        <Table.Row id="font-sans">
+          <Table.Cell>
+            <span className="font-sans text-body-1">The quick brown fox</span>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">font-sans</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--font-sans</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              <CssVariableValueFirst varName="--font-sans" />
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="font-mono">
+          <Table.Cell>
+            <span className="font-mono text-body-1">The quick brown fox</span>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">font-mono</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--font-mono</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              <CssVariableValueFirst varName="--font-mono" />
+            </code>
+          </Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table.Grid>
+  </Table>
 </div>

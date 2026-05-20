@@ -41,7 +41,7 @@ const ratingStarStyles = cva(['peer after:inset-0 group relative after:block aft
 const ratingStarIconStyles = cva('', {
   variants: {
     size: {
-      sm: 'text-caption-link',
+      sm: 'text-caption',
       md: 'text-body-1',
       lg: 'text-display-1',
     },
