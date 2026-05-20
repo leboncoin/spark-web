@@ -1,0 +1,291 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { Callout } from '@docs/helpers/Callout'
+import { Kbd } from '../kbd'
+
+import { Menu } from '.'
+
+import * as stories from './Menu.stories'
+
+<Meta of={stories} />
+
+# Menu
+
+A menu component that enables users to select options from a dropdown menu triggered by a button or other interactive element. It provides accessible navigation with keyboard support and follows the WAI-ARIA Menu pattern.
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```sh
+npm install @spark-ui/components
+```
+
+## Import
+
+```tsx
+import { Menu } from '@spark-ui/components/menu'
+```
+
+## Anatomy
+
+```tsx
+import { Menu } from '@spark-ui/components/menu'
+
+export default () => (
+  <Menu>
+    <Menu.Trigger>Open menu</Menu.Trigger>
+    <Menu.Portal>
+      <Menu.Positioner>
+        <Menu.Popup>
+          <Menu.Arrow />
+          <Menu.Group>
+            <Menu.GroupLabel>Group Label</Menu.GroupLabel>
+            <Menu.Item>Item</Menu.Item>
+            <Menu.LinkItem href="/path">Link Item</Menu.LinkItem>
+            <Menu.CheckboxItem>Checkbox Item</Menu.CheckboxItem>
+          </Menu.Group>
+          <Menu.Separator />
+          <Menu.RadioGroup>
+            <Menu.RadioItem>Radio Item</Menu.RadioItem>
+          </Menu.RadioGroup>
+          <Menu.Separator />
+          <Menu.Submenu>
+            <Menu.SubmenuTrigger>Submenu</Menu.SubmenuTrigger>
+            <Menu.Positioner>
+              <Menu.Popup>
+                <Menu.Item>Nested Item</Menu.Item>
+              </Menu.Popup>
+            </Menu.Positioner>
+          </Menu.Submenu>
+        </Menu.Popup>
+      </Menu.Positioner>
+    </Menu.Portal>
+  </Menu>
+)
+```
+
+## API Reference
+
+### Menu
+
+Root container for menu state and styling context. Wraps Base UI Menu.Root and provides intent/size context to all child components.
+
+<ArgTypes of={Menu} />
+
+### \_.Trigger
+
+The button that toggles the menu. Renders a `<button>` element by default, or uses `asChild` for custom elements.
+
+<ArgTypes of={Menu.Trigger} />
+
+### \_.Portal
+
+Portal wrapper that renders the menu in a different part of the DOM tree. Useful for avoiding z-index and overflow issues.
+
+<ArgTypes of={Menu.Portal} />
+
+### \_.Positioner
+
+Positioning wrapper for the menu with collision detection. Handles menu placement relative to the trigger and viewport boundaries.
+
+<ArgTypes of={Menu.Positioner} />
+
+### \_.Popup
+
+The scrollable menu container that holds menu items. Serves as the viewport for menu content with overflow handling.
+
+<ArgTypes of={Menu.Popup} />
+
+### \_.Item
+
+A menu item that triggers an action when activated. Renders a clickable menu option with keyboard support.
+
+<ArgTypes of={Menu.Item} />
+
+### \_.LinkItem
+
+A menu item that acts as a link. Navigates to a URL when activated, useful for navigation menus. Use with Next.js Link or React Router Link via the children prop.
+
+<ArgTypes of={Menu.LinkItem} />
+
+### \_.Submenu
+
+A nested submenu that appears when its trigger is activated. Inherits styling context from the parent menu.
+
+<ArgTypes of={Menu.Submenu} />
+
+### \_.SubmenuTrigger
+
+A menu item that opens a submenu when activated. Displays an arrow indicator to show submenu availability.
+
+<ArgTypes of={Menu.SubmenuTrigger} />
+
+### \_.Group
+
+A container for grouping related menu items together. Works with Menu.GroupLabel for semantic grouping.
+
+<ArgTypes of={Menu.Group} />
+
+### \_.GroupLabel
+
+A label for a group of menu items. Provides semantic context and visual separation for grouped items.
+
+<ArgTypes of={Menu.GroupLabel} />
+
+### \_.RadioGroup
+
+A container for radio menu items where only one item can be selected at a time. Manages the selection state for its radio items.
+
+<ArgTypes of={Menu.RadioGroup} />
+
+### \_.RadioItem
+
+A menu item with radio button functionality. Only one radio item can be selected within its RadioGroup. The radio indicator is automatically rendered on the left side and is always present to prevent layout shift.
+
+<ArgTypes of={Menu.RadioItem} />
+
+### \_.CheckboxItem
+
+A menu item with checkbox functionality. Can be toggled on and off, allowing multiple selections. The checkbox indicator is automatically rendered on the left side and is always present to prevent layout shift.
+
+<ArgTypes of={Menu.CheckboxItem} />
+
+### \_.Separator
+
+A visual divider between menu items or groups. Creates clear separation between different sections of the menu.
+
+<ArgTypes of={Menu.Separator} />
+
+## Examples
+
+### Default
+
+A basic menu with standard items and separators.
+
+<Canvas of={stories.Default} />
+
+### CloseOnClick
+
+By default, clicking an item closes the menu, use `closeOnClick` to alter this behavior.
+
+Note: `LinkItem`, `RadioItem` and `CheckboxItem` do no close the Menu by default.
+
+<Canvas of={stories.CloseOnClick} />
+
+### Controlled
+
+Use `open` and `onOpenChange` props to control the menu state externally.
+
+<Canvas of={stories.Controlled} />
+
+### CheckboxItems
+
+Menu items with checkbox functionality for multiple selections.
+
+<Canvas of={stories.CheckboxItems} />
+
+### RadioItems
+
+Menu items with radio button functionality where only one item can be selected at a time.
+
+<Canvas of={stories.RadioItems} />
+
+### LinkItem
+
+Use `Menu.LinkItem` to create menu items that navigate to different pages or external URLs.
+
+<Canvas of={stories.NavigateToAnotherPage} />
+
+### GroupLabels
+
+Organize menu items into labeled groups for better structure and readability.
+
+<Canvas of={stories.GroupLabels} />
+
+### NestedMenu
+
+Create multi-level nested menus using `Menu.Submenu` for hierarchical navigation.
+
+<Canvas of={stories.NestedMenu} />
+
+### OpenOnHover
+
+Placeholder for hover-triggered menu functionality (requires additional Base UI configuration).
+
+<Canvas of={stories.OpenOnHover} />
+
+## Advanced usage
+
+### OpenDialog
+
+Menus can trigger other components like dialogs, demonstrating integration with the broader component ecosystem.
+
+<Canvas of={stories.OpenDialog} />
+
+### MultipleTriggers
+
+Multiple trigger buttons can open the same menu.
+
+<Canvas of={stories.MultipleTriggers} />
+
+### ControlledModeMultipleTriggers
+
+Multiple trigger buttons controlling the same menu with external state management.
+
+<Canvas of={stories.ControlledModeMultipleTriggers} />
+
+### DetachedTriggers
+
+Trigger elements can be placed anywhere within the Menu root, not necessarily adjacent to the Portal.
+
+<Canvas of={stories.DetachedTriggers} />
+
+## Accessibility
+
+<A11yReport of="menu" />
+
+Adheres to the [Menu Button](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/) pattern from WAI-ARIA Authoring Practices Guide.
+
+### Keyboard Interactions
+
+- <Kbd>Enter</Kbd> or <Kbd>Space</Kbd> - When focus is on a menu item, activates the item. For
+  checkbox items, toggles the checked state. For radio items, selects the item.
+- <Kbd>ArrowDown</Kbd> - Moves focus to the next menu item. If focus is on the last item, wraps to
+  the first item.
+- <Kbd>ArrowUp</Kbd> - Moves focus to the previous menu item. If focus is on the first item, wraps
+  to the last item.
+- <Kbd>ArrowRight</Kbd> - When focus is on a submenu trigger, opens the submenu and moves focus to
+  the first item.
+- <Kbd>ArrowLeft</Kbd> - When focus is within a submenu, closes the submenu and returns focus to the
+  submenu trigger.
+- <Kbd>Home</Kbd> - Moves focus to the first menu item.
+- <Kbd>End</Kbd> - Moves focus to the last menu item.
+- <Kbd>Escape</Kbd> - Closes the menu and returns focus to the trigger button. If within a submenu,
+  closes only the submenu.
+- <Kbd>Tab</Kbd> - Closes the menu and moves focus to the next focusable element outside the menu.
+
+### ARIA Roles and Attributes
+
+- The trigger button has `aria-haspopup="menu"` and `aria-expanded` to indicate menu availability and state
+- The menu popup has `role="menu"`
+- Menu items have `role="menuitem"`, `role="menuitemcheckbox"`, or `role="menuitemradio"` as appropriate
+- Checkbox and radio items use `aria-checked` to indicate their state
+- Groups use `role="group"` with `aria-labelledby` referencing the group label
+- Disabled items have `aria-disabled="true"`
+- Submenu triggers have `aria-haspopup="menu"` to indicate nested content
+
+### Screen Reader Support
+
+- The menu announces its role and the number of items when opened
+- Item states (checked, selected) are announced when navigating
+- Group labels are announced before their items
+- Focus management ensures screen readers always know the current location
+
+### Focus Management
+
+- When the menu opens, focus moves to the first menu item (or the last if opened with <Kbd>ArrowUp</Kbd>)
+- Focus remains within the menu until it is closed
+- When the menu closes, focus returns to the trigger button
+- Focus is visible at all times with clear visual indicators
+- Disabled items are not focusable but remain in the DOM for screen reader context

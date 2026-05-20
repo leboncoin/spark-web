@@ -25,6 +25,7 @@ import { A11yInputOTP } from '../pages/InputOTP'
 import { A11yKbd } from '../pages/Kbd'
 import { A11yLabel } from '../pages/Label'
 import { A11yLinkBox } from '../pages/LinkBox'
+import { A11yMenu } from '../pages/Menu'
 import { A11yMeter } from '../pages/Meter'
 import { A11yPagination } from '../pages/Pagination'
 import { A11yPopover } from '../pages/Popover'
@@ -79,6 +80,7 @@ export const a11yElements: Record<A11yComponentsKey, ComponentType> = {
   kbd: A11yKbd,
   label: A11yLabel,
   'link-box': A11yLinkBox,
+  menu: A11yMenu,
   meter: A11yMeter,
   pagination: A11yPagination,
   popover: A11yPopover,
