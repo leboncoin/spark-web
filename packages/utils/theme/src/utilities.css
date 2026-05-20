@@ -61,7 +61,7 @@
   line-height: 1.333;
 }
 
-@utility text-caption {
+@utility text-caption-highlight {
   font-size: calc(0.75rem * var(--spacing-factor));
   line-height: 1.333;
   font-weight: 700;
