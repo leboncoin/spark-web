@@ -51,7 +51,7 @@ export const RatingDisplayStar = ({ value, size }: RatingDisplayStarProps) => {
         gap: size === 'lg' ? 'md' : 'sm',
       })}
     >
-      <div className={cx('z-raised absolute overflow-hidden')} style={{ width: value * 100 + '%' }}>
+      <div className={cx('absolute overflow-hidden')} style={{ width: value * 100 + '%' }}>
         <Icon
           className={ratingDisplayStarIconStyles({
             size,
