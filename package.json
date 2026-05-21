@@ -42,11 +42,13 @@
     "url": "git@github.com:leboncoin/spark-web.git"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@rollup/plugin-terser": "1.0.0",
     "@spark-ui/components": "^17.5.3",
     "@spark-ui/theme-utils": "^17.5.3",
     "@storybook/mcp": "^0.6.2",
-    "@xyflow/react": "12.10.2"
+    "@xyflow/react": "12.10.2",
+    "gsap": "^3.15.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.10.2",
