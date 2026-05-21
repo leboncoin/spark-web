@@ -1,3 +1,13 @@
+## 17.9.2 (2026-05-21)
+
+### 🩹 Fixes
+
+- **components:** rating star appearing above other components ([172ea5d79](https://github.com/leboncoin/spark-web/commit/172ea5d79))
+
+### ❤️ Thank You
+
+- Nicolas Ramz
+
 ## 17.9.1 (2026-05-20)
 
 ### 🩹 Fixes
