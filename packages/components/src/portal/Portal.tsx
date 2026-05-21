@@ -1,5 +1,5 @@
-import { Portal as RadixPortal } from 'radix-ui'
-import { type PropsWithChildren, Ref } from 'react'
+import { type PropsWithChildren, Ref, useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 interface PortalProps {
   /**
@@ -12,6 +12,19 @@ interface PortalProps {
 /**
  * A utility component that renders content into a different part of the DOM tree, typically outside the main hierarchy.
  */
-export const Portal = (props: PropsWithChildren<PortalProps>) => {
-  return <RadixPortal.Portal {...props} />
+export const Portal = ({ children, container }: PropsWithChildren<PortalProps>) => {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    return () => setMounted(false)
+  }, [])
+
+  if (!mounted) return null
+
+  const targetContainer = container ?? (typeof document !== 'undefined' ? document.body : null)
+
+  if (!targetContainer) return null
+
+  return createPortal(children, targetContainer)
 }
