@@ -1,3 +1,13 @@
+## 17.9.3 (2026-05-21)
+
+### 💅 Refactors
+
+- **components:** portal no longer uses Radix UI ([95a75a5a4](https://github.com/leboncoin/spark-web/commit/95a75a5a4))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.9.2 (2026-05-21)
 
 This was a version bump only for @spark-ui/icons to align it with other projects, there were no code changes.
