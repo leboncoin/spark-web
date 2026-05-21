@@ -1,13 +1,19 @@
+import { useGSAP } from '@gsap/react'
 import { Icon } from '@spark-ui/components/icon'
 import { WarningOutline } from '@spark-ui/icons/WarningOutline'
 import { DocsContainer, DocsContainerProps } from '@storybook/addon-docs/blocks'
 import { useDarkMode } from '@vueless/storybook-dark-mode'
 import { cx } from 'class-variance-authority'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import React, { ReactNode, useEffect, useLayoutEffect, useState } from 'react'
 import { INITIAL_VIEWPORTS } from 'storybook/viewport'
 
 import '../src/tailwind.css'
 import themes from './themes'
+
+// Register GSAP plugins globally for Storybook
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 /**
  * Wraps stories and syncs Spark theme (data-theme) with Storybook dark mode.
@@ -28,9 +34,7 @@ function ThemeWrapper({ children, viewMode }: { children: ReactNode; viewMode: s
       data-theme={theme}
       className={cx(
         'bg-background text-on-background relative box-border',
-        viewMode === 'docs'
-          ? 'w-full max-w-full min-w-0 p-lg'
-          : 'w-min-content'
+        viewMode === 'docs' ? 'w-full max-w-full min-w-0 p-lg' : 'w-min-content'
       )}
     >
       {children}
@@ -61,6 +65,78 @@ const ExampleContainer = ({ children, ...props }: Props) => {
     setShouldDisplayExperimentalBanner(primaryStoryTitle?.startsWith('Experimental') || false)
     setShouldDisplayDeprecatedBanner(primaryStoryTitle?.startsWith('Deprecated') || false)
   }, [props.context?.channel])
+
+  // Setup ScrollTrigger animations for canvas previews
+  useEffect(() => {
+    // Wait for canvas elements to be fully rendered and positioned
+    const setupAnimations = () => {
+      const canvasElements = document.querySelectorAll('.sbdocs-preview')
+
+      if (canvasElements.length === 0) {
+        // Retry if elements not found yet
+        setTimeout(setupAnimations, 100)
+        return
+      }
+
+      // Create ScrollTrigger for each canvas
+      canvasElements.forEach(canvas => {
+        // Animation when entering from bottom with 3D tilt
+        gsap.fromTo(
+          canvas,
+          {
+            scale: 0.9,
+            opacity: 0,
+          },
+          {
+            scale: 1,
+            opacity: 1,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: canvas,
+              start: 'top bottom',
+              end: 'top+=100px bottom',
+              scrub: 1,
+              invalidateOnRefresh: true,
+            },
+          }
+        )
+
+        // Animation when exiting from top
+        gsap.fromTo(
+          canvas,
+          {
+            scale: 1,
+            opacity: 1,
+          },
+          {
+            scale: 0.8,
+            opacity: 0,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: canvas,
+              start: 'bottom top+=100px',
+              end: 'bottom top',
+              scrub: 1,
+              invalidateOnRefresh: true,
+            },
+          }
+        )
+      })
+
+      // Refresh after a delay to recalculate positions
+      setTimeout(() => {
+        ScrollTrigger.refresh()
+      }, 500)
+    }
+
+    // Start setup after DOM is ready
+    setTimeout(setupAnimations, 300)
+
+    // Cleanup ScrollTrigger instances on unmount
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+    }
+  }, [children])
 
   return (
     <DocsContainer {...props} theme={isDarkMode ? themes.dark : themes.light} data-theme={theme}>
