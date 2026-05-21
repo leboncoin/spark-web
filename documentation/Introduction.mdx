@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks'
 import { Card } from '@docs/helpers/Card'
 import { Callout } from '@docs/helpers/Callout'
+import { AnimatedHero, AnimatedButtons } from './components/AnimatedHero'
 
 import { Accordion } from '@spark-ui/components/accordion'
 import { Button } from '@spark-ui/components/button'
@@ -15,16 +16,13 @@ import { TextLink } from '@spark-ui/components/text-link'
 {/* Hero */}
 
 <section className="sb-unstyled gap-xl py-3xl flex flex-col items-center text-center">
-  <p className="text-display-1 text-on-background">
-    Create <span className="text-main">accessible</span> React apps
-    <span className="text-support"> with ease</span>.
-  </p>
+  <AnimatedHero />
   <p className="text-headline-1 text-on-neutral-container">
     **Spark UI** is a React design system built for **modularity**, **accessibility** and **semantic
     theming**. Ship consistent, inclusive interfaces without reinventing the wheel.
   </p>
-  <div className="gap-md pt-md flex flex-wrap justify-center">
-    <Button asChild>
+  <AnimatedButtons>
+    <Button className="animated-button" asChild>
       <a
         href="#setup"
         onClick={e => {
@@ -35,10 +33,10 @@ import { TextLink } from '@spark-ui/components/text-link'
         Get started
       </a>
     </Button>
-    <Button design="outlined" intent="neutral" asChild>
+    <Button className="animated-button" design="outlined" intent="neutral" asChild>
       <a href="/?path=/docs/components-list--docs">Browse components</a>
     </Button>
-  </div>
+  </AnimatedButtons>
 </section>
 
 ## Why Spark?
