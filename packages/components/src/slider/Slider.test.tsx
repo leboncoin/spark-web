@@ -143,6 +143,33 @@ describe('Slider', () => {
       expect(label).toHaveAttribute('data-spark-component', 'slider-label')
       expect(slider).toHaveAttribute('aria-labelledby', labelId)
     })
+
+    it('should support asChild prop with required indicator', () => {
+      render(
+        <FormField name="volume" isRequired>
+          <Slider defaultValue={50}>
+            <Slider.Label asChild>
+              <h3>Volume Control</h3>
+            </Slider.Label>
+            <Slider.Control>
+              <Slider.Track>
+                <Slider.Indicator />
+                <Slider.Thumb />
+              </Slider.Track>
+            </Slider.Control>
+          </Slider>
+        </FormField>
+      )
+
+      const label = screen.getByText('Volume Control')
+      const requiredIndicator = screen.getByText('*')
+
+      // When using asChild, the custom element (h3) is used but wrapped
+      // The h3 should be inside the label structure
+      expect(label.tagName).toBe('H3')
+      // Required indicator should be rendered
+      expect(requiredIndicator).toBeInTheDocument()
+    })
   })
 
   describe('Slider.Value', () => {

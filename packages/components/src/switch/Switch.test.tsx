@@ -192,4 +192,53 @@ describe('Switch', () => {
       )
     })
   })
+
+  describe('custom icons', () => {
+    it('should render custom unchecked icon using Slot', () => {
+      const CustomCloseIcon = () => <span data-testid="custom-close">✗</span>
+
+      render(
+        <Switch uncheckedIcon={<CustomCloseIcon />} defaultChecked={false}>
+          Toggle
+        </Switch>
+      )
+
+      // Unchecked state should show close icon
+      expect(screen.getByTestId('custom-close')).toBeInTheDocument()
+    })
+
+    it('should render custom checked icon using Slot', () => {
+      const CustomCheckIcon = () => <span data-testid="custom-check">✓</span>
+
+      render(
+        <Switch checkedIcon={<CustomCheckIcon />} defaultChecked={true}>
+          Toggle
+        </Switch>
+      )
+
+      // Checked state should show check icon
+      expect(screen.getByTestId('custom-check')).toBeInTheDocument()
+    })
+
+    it('should merge className to custom icons through Slot', () => {
+      const CustomIcon = (props: React.SVGProps<SVGSVGElement>) => (
+        <svg {...props} data-testid="custom-svg">
+          icon
+        </svg>
+      )
+
+      render(
+        <Switch checkedIcon={<CustomIcon />} defaultChecked={true} size="md">
+          Toggle
+        </Switch>
+      )
+
+      const icon = screen.getByTestId('custom-svg')
+
+      // Verify that Slot merged the size-specific className (h-sz-12 and w-sz-12 for md size)
+      expect(icon).toHaveClass('h-sz-12')
+      expect(icon).toHaveClass('w-sz-12')
+      expect(icon).toHaveClass('transition-opacity')
+    })
+  })
 })
