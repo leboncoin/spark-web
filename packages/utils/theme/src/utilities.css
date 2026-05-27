@@ -1,37 +1,37 @@
 @utility text-display-1 {
   font-size: calc(2.5rem * var(--spacing-factor));
   line-height: 1.4;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 @utility text-display-2 {
   font-size: calc(2rem * var(--spacing-factor));
   line-height: 1.375;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 @utility text-display-3 {
   font-size: calc(1.5rem * var(--spacing-factor));
   line-height: 1.333;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 @utility text-headline-1 {
   font-size: calc(1.25rem * var(--spacing-factor));
   line-height: 1.4;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 @utility text-headline-2 {
   font-size: calc(1.125rem * var(--spacing-factor));
   line-height: 1.333;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 @utility text-subhead {
   font-size: calc(1rem * var(--spacing-factor));
   line-height: 1.5;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 @utility text-body-1 {
@@ -40,9 +40,8 @@
 }
 
 @utility text-body-1-highlight {
-  font-size: calc(1rem * var(--spacing-factor));
-  line-height: 1.5;
-  font-weight: 700;
+  @apply text-body-1;
+  font-weight: var(--font-weight-bold);
 }
 
 @utility text-body-2 {
@@ -51,9 +50,8 @@
 }
 
 @utility text-body-2-highlight {
-  font-size: calc(0.875rem * var(--spacing-factor));
-  line-height: 1.428;
-  font-weight: 700;
+  @apply text-body-2;
+  font-weight: var(--font-weight-bold);
 }
 
 @utility text-caption {
@@ -62,9 +60,8 @@
 }
 
 @utility text-caption-highlight {
-  font-size: calc(0.75rem * var(--spacing-factor));
-  line-height: 1.333;
-  font-weight: 700;
+  @apply text-caption;
+  font-weight: var(--font-weight-bold);
 }
 
 @utility text-small {
@@ -73,13 +70,8 @@
 }
 
 @utility text-small-highlight {
-  font-size: calc(0.625rem * var(--spacing-factor));
-  line-height: 1.4;
-}
-
-@utility text-small-highlight {
   @apply text-small;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-bold);
 }
 
 @utility text-callout {
