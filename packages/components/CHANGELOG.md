@@ -1,3 +1,22 @@
+## 17.10.0 (2026-05-27)
+
+### 🚀 Features
+
+- **theme-utils:** new default font family ([bb1633f07](https://github.com/leboncoin/spark-web/commit/bb1633f07))
+
+### 🩹 Fixes
+
+- **theme-utils:** small font highlight token ([5200c422e](https://github.com/leboncoin/spark-web/commit/5200c422e))
+
+### 🎨 Styles
+
+- **components:** used medium font size in content components ([0e4082f6a](https://github.com/leboncoin/spark-web/commit/0e4082f6a))
+- **theme-utils:** adding font utilities ([d77714afe](https://github.com/leboncoin/spark-web/commit/d77714afe))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.9.3 (2026-05-21)
 
 ### 💅 Refactors
