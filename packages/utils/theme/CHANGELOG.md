@@ -1,3 +1,13 @@
+## 17.10.1 (2026-05-27)
+
+### 🩹 Fixes
+
+- **theme-utils:** duplicated small text utility ([ba9ea07bd](https://github.com/leboncoin/spark-web/commit/ba9ea07bd))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.10.0 (2026-05-27)
 
 ### 🚀 Features
