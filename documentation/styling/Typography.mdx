@@ -1,0 +1,162 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+import { Callout } from '@docs/helpers/Callout'
+
+<Meta title="Styling/Typography" summary="Learn how to configure custom fonts with Spark UI and integrate them into your project." />
+
+# Typography
+
+## Font Requirements
+
+Spark UI is designed to work with your own custom fonts. You must provide and host your own font files. The design system requires four font weights to support proper typographic hierarchy:
+
+- **Regular (400)** - For body text and standard content
+- **Medium (500)** - For subtle emphasis
+- **Semi-Bold (600)** - For subheadings and moderate emphasis
+- **Bold (700)** - For headings and strong emphasis
+
+<Callout variant="warning">
+  **Important**: Spark UI does not bundle or provide font files. You must provide your own custom font family.
+</Callout>
+
+## Setting up your custom font
+
+### Option 1: Host on your CDN (Recommended)
+
+1. **Upload your font files** to your CDN
+2. **Add `@font-face` declarations** to your CSS:
+
+```css
+/* Add before importing Spark theme */
+
+@font-face {
+  font-family: 'Your Custom Font';
+  src: url('https://your-cdn.com/fonts/YourFont-Regular.woff2') format('woff2'),
+       url('https://your-cdn.com/fonts/YourFont-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Your Custom Font';
+  src: url('https://your-cdn.com/fonts/YourFont-Medium.woff2') format('woff2'),
+       url('https://your-cdn.com/fonts/YourFont-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Your Custom Font';
+  src: url('https://your-cdn.com/fonts/YourFont-SemiBold.woff2') format('woff2'),
+       url('https://your-cdn.com/fonts/YourFont-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Your Custom Font';
+  src: url('https://your-cdn.com/fonts/YourFont-Bold.woff2') format('woff2'),
+       url('https://your-cdn.com/fonts/YourFont-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Then import Spark theme */
+@import 'tailwindcss';
+@import '@spark-ui/theme-utils/base';
+```
+
+### Option 2: Self-host in your project
+
+1. **Add your font files** to your project (e.g., `public/fonts/` directory)
+2. **Add `@font-face` declarations** with local paths:
+
+```css
+@font-face {
+  font-family: 'Your Custom Font';
+  src: url('/fonts/YourFont-Regular.woff2') format('woff2'),
+       url('/fonts/YourFont-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Repeat for weights 500, 600, 700 */
+```
+
+3. **Override the `--font-sans` variable** in your Tailwind config:
+
+```css
+@import 'tailwindcss';
+@import '@spark-ui/theme-utils/base';
+
+@theme {
+  --font-sans: 'Your Custom Font', ui-sans-serif, system-ui, sans-serif;
+}
+```
+
+## Font stack
+
+Include system font fallbacks to ensure text remains readable even if the custom font fails to load:
+
+```css
+font-family: 'Your Custom Font', ui-sans-serif, system-ui, -apple-system, 
+  BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 
+  'Noto Sans', sans-serif;
+```
+
+## Typography utilities
+
+Spark provides pre-defined typography utilities that use the Denim INK font with appropriate weights and sizes. Use these classes for consistent typography:
+
+```jsx
+<h1 className="text-display-1">Display heading</h1>
+<h2 className="text-headline-1">Section heading</h2>
+<p className="text-body-1">Body text</p>
+<small className="text-caption">Caption text</small>
+```
+
+See the [Design Tokens](?path=/docs/styling-design-tokens--docs) page for the complete list of typography utilities.
+
+## Font weights
+
+Access different font weights using Tailwind's font-weight utilities:
+
+```jsx
+<p className="font-regular">Regular text (400)</p>
+<p className="font-medium">Medium text (500)</p>
+<p className="font-semibold">Semi-bold text (600)</p>
+<p className="font-bold">Bold text (700)</p>
+```
+
+<Callout variant="warning">
+  Ensure you include all necessary font weights (400, 500, 600, 700) to maintain the design system's typographic hierarchy.
+</Callout>
+
+## Performance considerations
+
+To optimize font loading performance:
+
+- **Preload critical fonts** in your HTML `<head>`:
+
+```html
+<link rel="preload" href="/path/to/font.woff2" as="font" type="font/woff2" crossorigin>
+```
+
+- **Use `font-display: swap`** to show fallback fonts while custom fonts load
+- **Subset fonts** if you only need specific character sets
+- **Serve fonts from a CDN** for better caching and geographic distribution
+
+## Accessibility
+
+The Denim INK font has been designed with readability in mind:
+
+- Clear letterforms with good x-height
+- Adequate spacing between characters
+- Multiple weights for proper hierarchy
+- Works well at various sizes from small (caption) to large (display)
+
+Always ensure sufficient color contrast ratios when using different font weights. Refer to the [Themes](?path=/docs/styling-themes--docs) documentation for color accessibility guidelines.

@@ -4,7 +4,7 @@ import lightLogo from './spark-logo-light.svg'
 import darkLogo from './spark-logo-dark.svg'
 
 const common = {
-  fontBase: '"Nunito", sans-serif',
+  fontBase: '"LBC Denim INK", sans-serif',
   fontCode: 'monospace',
   brandTitle: 'Spark design system',
   brandUrl: 'https://zeroheight.com/1186e1705/p/0879a9-colors/b/27d7a3',

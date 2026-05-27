@@ -18,7 +18,7 @@
     "./themes/*": "./dist/themes/*.css"
   },
   "scripts": {
-    "build": "node --experimental-transform-types build.ts"
+    "build": "node --experimental-strip-types build.ts"
   },
   "repository": {
     "type": "git",

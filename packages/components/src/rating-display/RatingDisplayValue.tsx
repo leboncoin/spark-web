@@ -13,11 +13,11 @@ export interface RatingDisplayValueProps extends Omit<ComponentPropsWithRef<'spa
   children?: ReactNode | ((formattedValue: string, value: number) => ReactNode)
 }
 
-const ratingDisplayValueStyles = cva('text-on-surface font-bold', {
+const ratingDisplayValueStyles = cva('text-on-surface', {
   variants: {
     size: {
-      sm: 'text-caption',
-      md: 'text-body-2',
+      sm: 'text-caption-highlight',
+      md: 'text-body-2-highlight',
       lg: 'text-display-3',
     },
   },

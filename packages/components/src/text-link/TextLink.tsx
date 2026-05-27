@@ -18,7 +18,7 @@ const textLinkStyles = cva(['inline-flex items-center focus-visible:u-outline'],
     },
     /** By default, TextLink inherits the current font weight. Use `bold` to highlight it. */
     bold: {
-      true: 'font-bold',
+      true: 'font-medium',
     },
     /**
      * Underline is enabled by default.
