@@ -20,7 +20,7 @@ import { MenuSubmenuTrigger } from './MenuSubmenuTrigger'
 import { MenuTrigger } from './MenuTrigger'
 
 const meta: Meta<typeof Menu> = {
-  title: 'Experimental/Menu',
+  title: 'Components/Menu',
   component: Menu,
   subcomponents: {
     'Menu.Trigger': MenuTrigger,
