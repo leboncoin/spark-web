@@ -66,7 +66,7 @@ const ExampleContainer = ({ children, ...props }: Props) => {
     setShouldDisplayDeprecatedBanner(primaryStoryTitle?.startsWith('Deprecated') || false)
   }, [props.context?.channel])
 
-  // Setup ScrollTrigger animations for canvas previews
+
   useEffect(() => {
     // Wait for canvas elements to be fully rendered and positioned
     const setupAnimations = () => {

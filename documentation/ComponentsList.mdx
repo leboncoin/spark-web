@@ -4,6 +4,7 @@ import { Card } from '@docs/helpers/Card'
 import { ComponentDecisionTree } from '@docs/helpers/ComponentDecisionTree'
 import { ComponentDecisionGuide } from '@docs/helpers/ComponentDecisionTree/ComponentDecisionGuide'
 import { decisionTree } from '@docs/helpers/ComponentDecisionTree/decisionTree'
+import { useDarkMode } from '@vueless/storybook-dark-mode'
 
 import { Divider } from '@spark-ui/components/divider'
 import { Input } from '@spark-ui/components/input'
@@ -20,388 +21,353 @@ import { Button } from '@spark-ui/components/button'
 
 # Components list
 
+export const COMPONENTS_TYPES = {
+  ACTION: 'action',
+  INPUT: 'input',
+  INDICATOR: 'indicator',
+  LAYOUT: 'layout',
+  NAVIGATION: 'navigation',
+  OVERLAY: 'overlay',
+  VISUAL_ASSET: 'visual asset',
+}
+
 export const components = [
   {
     name: 'Accordion',
+    type: COMPONENTS_TYPES.LAYOUT,
     href: '/?path=/docs/components-accordion--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/accordion.png',
-    },
+    thumbnail: 'accordion.png'
   },
   {
     name: 'AlertDialog',
+    type: COMPONENTS_TYPES.OVERLAY,
     href: '/?path=/docs/components-alertdialog--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/alert-dialog.png',
-    },
+    thumbnail: 'alert-dialog.png'
   },
   {
     name: 'Avatar',
+    type: COMPONENTS_TYPES.VISUAL_ASSET,
     href: '/?path=/docs/components-avatar--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/avatar.png',
-    },
+    thumbnail: 'avatar.png'
   },
   {
     name: 'Badge',
+    type: COMPONENTS_TYPES.INDICATOR,
     href: '/?path=/docs/components-badge--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/badge.png',
-    },
+    thumbnail: 'badge.png'
   },
   {
     name: 'Breadcrumb',
+    type: COMPONENTS_TYPES.NAVIGATION,
     href: '/?path=/docs/components-breadcrumb--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/breadcrumb.png',
-    },
+    thumbnail: 'breadcrumb.png'
   },
   {
     name: 'Button',
+    type: COMPONENTS_TYPES.ACTION,
     href: '/?path=/docs/components-button--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/button.png',
-    },
+    thumbnail: 'button.png'
   },
   {
     name: 'Card',
+    type: COMPONENTS_TYPES.LAYOUT,
     href: '/?path=/docs/components-card--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/card.png',
-    },
+    thumbnail: 'card.png'
   },
   {
     name: 'Carousel',
+    type: COMPONENTS_TYPES.LAYOUT,
     href: '/?path=/docs/components-carousel--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/carousel.png',
-    },
+    thumbnail: 'carousel.png'
   },
   {
     name: 'Checkbox',
+    type: COMPONENTS_TYPES.INPUT,
     href: '/?path=/docs/components-checkbox--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/checkbox.png',
-    },
+    thumbnail: 'checkbox.png'
   },
   {
     name: 'Chip',
+    type: COMPONENTS_TYPES.INPUT,
     href: '/?path=/docs/components-chip--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/chip.png',
-    },
+    thumbnail: 'chip.png'
   },
   {
     name: 'CircularMeter',
+    type: COMPONENTS_TYPES.INDICATOR,
     href: '/?path=/docs/components-circularmeter--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/empty.png',
-    },
+    thumbnail: 'empty.png'
   },
   {
     name: 'Collapsible',
+    type: COMPONENTS_TYPES.LAYOUT,
     href: '/?path=/docs/components-collapsible--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/empty.png',
-    },
+    thumbnail: 'empty.png'
   },
   {
     name: 'Combobox',
+    type: COMPONENTS_TYPES.INPUT,
     href: '/?path=/docs/components-combobox--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/combobox.png',
-    },
+    thumbnail: 'combobox.png'
   },
   {
     name: 'Dialog',
+    type: COMPONENTS_TYPES.OVERLAY,
     href: '/?path=/docs/components-dialog--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/dialog.png',
-    },
+    thumbnail: 'dialog.png'
   },
   {
     name: 'Divider',
+    type: COMPONENTS_TYPES.LAYOUT,
     href: '/?path=/docs/components-divider--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/divider.png',
-    },
+    thumbnail: 'divider.png'
   },
   {
     name: 'Drawer',
+    type: COMPONENTS_TYPES.OVERLAY,
     href: '/?path=/docs/components-drawer--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/drawer.png',
-    },
+    thumbnail: 'drawer.png'
   },
   {
     name: 'Dropdown',
+    type: COMPONENTS_TYPES.INPUT,
     href: '/?path=/docs/components-dropdown--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/dropdown.png',
-    },
+    thumbnail: 'dropdown.png'
   },
   {
     name: 'FileUpload',
+    type: COMPONENTS_TYPES.INPUT,
     href: '/?path=/docs/components-fileupload--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/file-upload.png',
-    },
+    thumbnail: 'file-upload.png'
   },
   {
     name: 'FormField',
+    type: COMPONENTS_TYPES.INPUT,
     description: 'A form field is a component that wraps a form control and a label.',
     href: '/?path=/docs/components-formfield--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/form-field.png',
-    },
+    thumbnail: 'form-field.png'
   },
   {
     name: 'IconButton',
+    type: COMPONENTS_TYPES.ACTION,
     href: '/?path=/docs/components-iconbutton--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/icon-button.png',
-    },
+    thumbnail: 'icon-button.png'
   },
   {
     name: 'Icon',
+    type: COMPONENTS_TYPES.VISUAL_ASSET,
     href: '/?path=/docs/components-icon--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/icon.png',
-    },
+    thumbnail: 'icon.png'
   },
   {
     name: 'Input',
+    type: COMPONENTS_TYPES.INPUT,
     href: '/?path=/docs/components-input--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/input.png',
-    },
+    thumbnail: 'input.png'
   },
   {
     name: 'InputOTP',
+    type: COMPONENTS_TYPES.INPUT,
     href: '/?path=/docs/components-inputotp--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/empty.png',
-    },
+    thumbnail: 'input-OTP.png'
   },
   {
     name: 'Kbd',
+    type: COMPONENTS_TYPES.INDICATOR,
     href: '/?path=/docs/components-kbd--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/empty.png',
-    },
+    thumbnail: 'empty.png'
   },
   {
     name: 'Label',
+    type: COMPONENTS_TYPES.INDICATOR,
     href: '/?path=/docs/components-label--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/label.png',
-    },
+    thumbnail: 'label.png'
   },
   {
     name: 'LinkBox',
+    type: COMPONENTS_TYPES.LAYOUT,
     href: '/?path=/docs/components-linkbox--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/empty.png',
-    },
+    thumbnail: 'empty.png'
+  },
+  {
+    name: 'Menu',
+    type: COMPONENTS_TYPES.NAVIGATION,
+    href: '/?path=/docs/components-menu--docs',
+    thumbnail: 'empty.png'
   },
   {
     name: 'Meter',
+    type: COMPONENTS_TYPES.INDICATOR,
     href: '/?path=/docs/components-meter--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/empty.png',
-    },
+    thumbnail: 'meter.png'
   },
   {
     name: 'Pagination',
+    type: COMPONENTS_TYPES.NAVIGATION,
     href: '/?path=/docs/components-pagination--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/pagination.png',
-    },
+    thumbnail: 'pagination.png'
   },
   {
     name: 'Popover',
+    type: COMPONENTS_TYPES.OVERLAY,
     href: '/?path=/docs/components-popover--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/popover.png',
-    },
+    thumbnail: 'popover.png'
   },
   {
     name: 'Portal',
+    type: COMPONENTS_TYPES.LAYOUT,
     href: '/?path=/docs/components-portal--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/empty.png',
-    },
+    thumbnail: 'empty.png'
   },
   {
     name: 'ProgressTracker',
+    type: COMPONENTS_TYPES.INDICATOR,
     href: '/?path=/docs/components-progress-tracker--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/progress-tracker.png',
-    },
+    thumbnail: 'progress-tracker.png'
   },
   {
     name: 'Progress',
+    type: COMPONENTS_TYPES.INDICATOR,
     href: '/?path=/docs/components-progress--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/progress-bar.png',
-    },
+    thumbnail: 'progress-bar.png'
   },
   {
     name: 'RadioGroup',
+    type: COMPONENTS_TYPES.INPUT,
     href: '/?path=/docs/components-radiogroup--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/radio-button.png',
-    },
+    thumbnail: 'radio-button.png'
   },
   {
     name: 'Rating',
+    type: COMPONENTS_TYPES.INPUT,
     href: '/?path=/docs/components-rating--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/ratings.png',
-    },
+    thumbnail: 'ratings.png'
+  },
+  {
+    name: 'RatingDisplay',
+    type: COMPONENTS_TYPES.INDICATOR,
+    href: '/?path=/docs/components-rating--docs',
+    thumbnail: 'ratings.png'
   },
   {
     name: 'ScrollingList',
+    type: COMPONENTS_TYPES.LAYOUT,
     href: '/?path=/docs/components-scrollinglist--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/empty.png',
-    },
+    thumbnail: 'empty.png'
   },
   {
     name: 'SegmentedControl',
+    type: COMPONENTS_TYPES.INPUT,
     href: '/?path=/docs/experimental-segmentedcontrol--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/empty.png',
-    },
+    thumbnail: 'segmented-control.png'
   },
   {
     name: 'SegmentedGauge',
+    type: COMPONENTS_TYPES.INDICATOR,
     href: '/?path=/docs/components-segmentedgauge--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/gauge.png',
-    },
+    thumbnail: 'gauge.png'
   },
   {
     name: 'Select',
+    type: COMPONENTS_TYPES.INPUT,
     href: '/?path=/docs/components-select--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/select.png',
-    },
+    thumbnail: 'select.png'
   },
   {
     name: 'Skeleton',
+    type: COMPONENTS_TYPES.INDICATOR,
     href: '/?path=/docs/components-skeleton--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/skeleton.png',
-    },
+    thumbnail: 'skeleton.png'
   },
   {
     name: 'Slider',
+    type: COMPONENTS_TYPES.INPUT,
     href: '/?path=/docs/components-slider--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/slider.png',
-    },
+    thumbnail: 'slider.png'
   },
   {
     name: 'Slot',
+    type: COMPONENTS_TYPES.LAYOUT,
     href: '/?path=/docs/components-slot--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/empty.png',
-    },
+    thumbnail: 'empty.png'
   },
   {
     name: 'Spinner',
+    type: COMPONENTS_TYPES.INDICATOR,
     href: '/?path=/docs/components-spinner--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/spinner.png',
-    },
+    thumbnail: 'spinner.png'
   },
   {
     name: 'Stepper',
+    type: COMPONENTS_TYPES.INPUT,
     href: '/?path=/docs/components-stepper--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/stepper.png',
-    },
+    thumbnail: 'stepper.png'
   },
   {
     name: 'Switch',
+    type: COMPONENTS_TYPES.INPUT,
     href: '/?path=/docs/components-switch--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/switch.png',
-    },
+    thumbnail: 'switch.png'
   },
   {
     name: 'Table',
+    type: COMPONENTS_TYPES.LAYOUT,
     href: '/?path=/docs/components-table--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/empty.png',
-    },
+    thumbnail: 'table.png'
   },
   {
     name: 'Tabs',
+    type: COMPONENTS_TYPES.NAVIGATION,
     href: '/?path=/docs/components-tabs--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/tab.png',
-    },
+    thumbnail: 'tab.png'
   },
   {
     name: 'Tag',
+    type: COMPONENTS_TYPES.INDICATOR,
     href: '/?path=/docs/components-tag--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/tag.png',
-    },
+    thumbnail: 'tag.png'
   },
   {
     name: 'TextLink',
+    type: COMPONENTS_TYPES.ACTION,
     href: '/?path=/docs/components-textlink--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/textlink.png',
-    },
+    thumbnail: 'textlink.png'
   },
   {
     name: 'Textarea',
+    type: COMPONENTS_TYPES.INPUT,
     href: '/?path=/docs/components-textarea--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/textarea.png',
-    },
+    thumbnail: 'textarea.png'
   },
   {
     name: 'Toast',
+    type: COMPONENTS_TYPES.OVERLAY,
     href: '/?path=/docs/components-toast--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/toast.png',
-    },
+    thumbnail: 'toast.png',
   },
   {
     name: 'VisuallyHidden',
+    type: COMPONENTS_TYPES.LAYOUT,
     href: '/?path=/docs/components-visuallyhidden--docs',
-    thumbnails: {
-      light: '/assets/components-thumbnails/light/empty.png',
-    },
+    thumbnail: 'empty.png'
   },
 ]
 
-export const FilterableComponentsList = () => {
-  const [filter, setFilter] = useState('')
-  const filtered = !filter.trim()
-    ? components
-    : components.filter((c) => {
-        const lower = filter.toLowerCase().trim()
-        return (
-          c.name.toLowerCase().includes(lower) ||
-          (c.description && c.description.toLowerCase().includes(lower))
-        )
-      })
+export const FilterableComponentsList = ({ filterType = null } = props) => {
+  const isDarkMode = useDarkMode()
+  const theme = isDarkMode ? 'dark' : 'light'
+
+  const filtered = components.filter((c) => {
+    return filterType != null && c.type === filterType
+  })
+
+  const getImgUrl = (fileName) => {
+    return `/assets/components-thumbnails/${theme}/${fileName}`
+  }
+
+
   return (
     <>
-      <div className="sb-unstyled mb-xl max-w-sz-320">
-        <Input
-          placeholder="Button, Input, etc."
-          value={filter}
-          onValueChange={setFilter}
-          aria-label="Filter components by name"
-        />
-      </div>
       <div className="sb-unstyled my-xl gap-lg flex-wrap flex">
         {filtered.length === 0 ? (
           <p className="text-body-1 text-neutral-outline">
@@ -417,7 +383,7 @@ export const FilterableComponentsList = () => {
 
                 <div className="group-hover:scale-110 group-hover:shadow-sm transition-transform duration-150 w-[184px] h-[100px] bg-neutral-container rounded-lg flex items-center justify-center">
                   <img
-                    src={component.thumbnails?.light}
+                    src={getImgUrl(component.thumbnail)}
                     alt={`${component.name} component thumbnail`}
                     className="w-full h-full object-contain"
                     loading="lazy"
@@ -437,7 +403,55 @@ export const FilterableComponentsList = () => {
 
 ## Components
 
-<FilterableComponentsList />
+### Actions
+
+Components that trigger user-initiated operations. They allow users to perform tasks such as submitting data, confirming choices, or initiating workflows. Typical examples include buttons, links, and menu items.
+
+<FilterableComponentsList filterType={COMPONENTS_TYPES.ACTION} />
+
+
+### Data inputs
+
+Components that let users enter, edit, or select data. They are designed to capture user input in a structured way, such as text fields, checkboxes, radio buttons, selects, and date pickers.
+
+<FilterableComponentsList filterType={COMPONENTS_TYPES.INPUT} />
+
+
+
+### Indicators
+
+Components that provide feedback about system status or ongoing processes. They help users understand what is happening, such as loading states, success/error messages, badges, or progress indicators.
+
+<FilterableComponentsList filterType={COMPONENTS_TYPES.INDICATOR} />
+
+
+### Layouts
+
+Components that structure and organize content on the page. They define spatial relationships and alignment, helping create consistent and responsive page compositions (e.g. grids, stacks, containers, sections).
+
+<FilterableComponentsList filterType={COMPONENTS_TYPES.LAYOUT} />
+
+
+### Navigations
+
+Components that help users move through the application and access different sections or views. They provide orientation and wayfinding, such as menus, tabs, breadcrumbs, and sidebars.
+
+<FilterableComponentsList filterType={COMPONENTS_TYPES.NAVIGATION} />
+
+
+### Overlays
+
+Components that appear above the main content to capture attention or require interaction. They are typically used for temporary or contextual interactions, such as modals, dialogs, popovers, and tooltips.
+
+<FilterableComponentsList filterType={COMPONENTS_TYPES.OVERLAY} />
+
+
+### Visual assets
+
+Components used to display non-interactive visual content that supports understanding or branding. This includes icons, illustrations, images, avatars, and logos.
+
+<FilterableComponentsList filterType={COMPONENTS_TYPES.VISUAL_ASSET} />
+
 
 ## Decision tree
 
