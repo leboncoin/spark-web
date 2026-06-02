@@ -17,9 +17,6 @@ export const typeStyles = cva(
     // Layout
     'flex items-center justify-center', // Vertical centering of text
     'whitespace-normal break-words', // Allow text wrapping
-
-    // Fix border-radius visual gap by overlapping parent border
-    '-mx-px -mt-px',
   ],
   {
     variants: {
@@ -34,9 +31,14 @@ export const typeStyles = cva(
         neutral: ['bg-neutral text-on-neutral'],
         surface: ['bg-surface-inverse text-on-surface-inverse'],
       },
+      design: {
+        outlined: ['-mx-px -mt-px'], // Fix border-radius visual gap by overlapping parent border
+        tinted: [],
+      },
     },
     defaultVariants: {
       intent: 'main',
+      design: 'outlined',
     },
   }
 )
@@ -62,7 +64,10 @@ export const Type = ({ intent, children, ...props }: TypeProps) => {
   }
 
   return (
-    <header className={typeStyles({ intent: resolvedIntent })} {...props}>
+    <header
+      className={typeStyles({ intent: resolvedIntent, design: cardContext.design })}
+      {...props}
+    >
       {children}
     </header>
   )

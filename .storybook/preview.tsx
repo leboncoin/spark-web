@@ -100,40 +100,34 @@ const ExampleContainer = ({ children, ...props }: Props) => {
             },
           }
         )
-
-        // Animation when exiting from top
-        gsap.fromTo(
-          canvas,
-          {
-            scale: 1,
-            opacity: 1,
-          },
-          {
-            scale: 0.8,
-            opacity: 0,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: canvas,
-              start: 'bottom top+=100px',
-              end: 'bottom top',
-              scrub: 1,
-              invalidateOnRefresh: true,
-            },
-          }
-        )
       })
 
       // Refresh after a delay to recalculate positions
       setTimeout(() => {
         ScrollTrigger.refresh()
       }, 500)
+
+      // Observe size changes to canvas elements (e.g., when "show source" is clicked)
+      const resizeObserver = new ResizeObserver(() => {
+        ScrollTrigger.refresh()
+      })
+
+      canvasElements.forEach(canvas => {
+        resizeObserver.observe(canvas)
+      })
+
+      // Return cleanup function for the observer
+      return () => {
+        resizeObserver.disconnect()
+      }
     }
 
     // Start setup after DOM is ready
-    setTimeout(setupAnimations, 300)
+    const cleanupObserver = setupAnimations()
 
-    // Cleanup ScrollTrigger instances on unmount
+    // Cleanup ScrollTrigger instances and observer on unmount
     return () => {
+      cleanupObserver?.()
       ScrollTrigger.getAll().forEach(trigger => trigger.kill())
     }
   }, [children])

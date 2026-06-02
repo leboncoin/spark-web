@@ -3,7 +3,7 @@ import { cva, VariantProps } from 'class-variance-authority'
 
 export const contentStyles = cva(
   [
-    'relative h-full default:rounded-lg w-full focus-visible:u-outline',
+    'relative default:rounded-lg w-full focus-visible:u-outline',
     'default:transition-colors default:duration-200 ease-linear',
   ],
   {
