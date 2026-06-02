@@ -11,33 +11,48 @@ export const AnimatedHero = () => {
 
       const words = containerRef.current.querySelectorAll('.gsap-word')
       const highlight = containerRef.current.querySelector('.gsap-highlight')
+      const mm = gsap.matchMedia()
 
-      // Set initial states
-      gsap.set(words, {
-        opacity: 0,
-        y: 50,
-        rotateX: -90,
+      // Only animate if user has not opted out of animation at the OS level
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        // Set initial states
+        gsap.set(words, {
+          opacity: 0,
+          y: 50,
+          rotateX: -90,
+        })
+
+        gsap.set(highlight, {
+          '--gradient-position': '0%',
+        })
+
+        // Create shared timeline
+        const timeline = gsap.timeline({
+          defaults: {
+            ease: 'power4.out',
+          },
+        })
+
+        // Animate words appearing one by one
+        timeline.to(words, {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          duration: 0.8,
+          stagger: 0.15,
+        })
       })
 
-      gsap.set(highlight, {
-        '--gradient-position': '0%',
+      // If reduced motion is preferred, ensure elements are visible
+      mm.add('(prefers-reduced-motion: reduce)', () => {
+        gsap.set(words, {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+        })
       })
 
-      // Create shared timeline
-      const timeline = gsap.timeline({
-        defaults: {
-          ease: 'power4.out',
-        },
-      })
-
-      // Animate words appearing one by one
-      timeline.to(words, {
-        opacity: 1,
-        y: 0,
-        rotateX: 0,
-        duration: 0.8,
-        stagger: 0.15,
-      })
+      return () => mm.revert()
     },
     { scope: containerRef }
   )
@@ -76,34 +91,48 @@ interface AnimatedButtonsProps {
 export const AnimatedButtons = ({ children }: AnimatedButtonsProps) => {
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // Create shared timeline
-  const timeline = gsap.timeline({
-    defaults: {
-      ease: 'power4.out',
-    },
-  })
-
   useGSAP(
     () => {
       if (!containerRef.current) return
 
       const buttons = containerRef.current.querySelectorAll('.animated-button')
+      const mm = gsap.matchMedia()
 
-      // Set initial states
-      gsap.set(buttons, {
-        opacity: 0,
-        scale: 0.5,
+      // Only animate if user has not opted out of animation at the OS level
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        // Set initial states
+        gsap.set(buttons, {
+          opacity: 0,
+          scale: 0.5,
+        })
+
+        // Create shared timeline
+        const timeline = gsap.timeline({
+          defaults: {
+            ease: 'power4.out',
+          },
+        })
+
+        // Add button animation to the shared timeline
+        timeline.to(buttons, {
+          delay: 1,
+          opacity: 1,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: 'back.out(1.7)',
+        })
       })
 
-      // Add button animation to the shared timeline
-      timeline.to(buttons, {
-        delay: 1,
-        opacity: 1,
-        scale: 1,
-        duration: 0.6,
-        stagger: 0.15,
-        ease: 'back.out(1.7)',
+      // If reduced motion is preferred, ensure buttons are visible
+      mm.add('(prefers-reduced-motion: reduce)', () => {
+        gsap.set(buttons, {
+          opacity: 1,
+          scale: 1,
+        })
       })
+
+      return () => mm.revert()
     },
     { scope: containerRef }
   )
