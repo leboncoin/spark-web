@@ -1,3 +1,13 @@
+## 17.10.2 (2026-06-02)
+
+### 🩹 Fixes
+
+- **components:** fixed negative margins on cards ([9199714a2](https://github.com/leboncoin/spark-web/commit/9199714a2))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.10.1 (2026-05-27)
 
 This was a version bump only for @spark-ui/hooks to align it with other projects, there were no code changes.
