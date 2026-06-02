@@ -96,13 +96,11 @@ export const components = [
     name: 'CircularMeter',
     type: COMPONENTS_TYPES.INDICATOR,
     href: '/?path=/docs/components-circularmeter--docs',
-    thumbnail: 'empty.png'
   },
   {
     name: 'Collapsible',
     type: COMPONENTS_TYPES.LAYOUT,
     href: '/?path=/docs/components-collapsible--docs',
-    thumbnail: 'empty.png'
   },
   {
     name: 'Combobox',
@@ -175,7 +173,6 @@ export const components = [
     name: 'Kbd',
     type: COMPONENTS_TYPES.INDICATOR,
     href: '/?path=/docs/components-kbd--docs',
-    thumbnail: 'empty.png'
   },
   {
     name: 'Label',
@@ -187,13 +184,12 @@ export const components = [
     name: 'LinkBox',
     type: COMPONENTS_TYPES.LAYOUT,
     href: '/?path=/docs/components-linkbox--docs',
-    thumbnail: 'empty.png'
   },
   {
     name: 'Menu',
     type: COMPONENTS_TYPES.NAVIGATION,
     href: '/?path=/docs/components-menu--docs',
-    thumbnail: 'empty.png'
+    thumbnail: 'menu.png'
   },
   {
     name: 'Meter',
@@ -217,7 +213,6 @@ export const components = [
     name: 'Portal',
     type: COMPONENTS_TYPES.LAYOUT,
     href: '/?path=/docs/components-portal--docs',
-    thumbnail: 'empty.png'
   },
   {
     name: 'ProgressTracker',
@@ -253,7 +248,6 @@ export const components = [
     name: 'ScrollingList',
     type: COMPONENTS_TYPES.LAYOUT,
     href: '/?path=/docs/components-scrollinglist--docs',
-    thumbnail: 'empty.png'
   },
   {
     name: 'SegmentedControl',
@@ -289,7 +283,6 @@ export const components = [
     name: 'Slot',
     type: COMPONENTS_TYPES.LAYOUT,
     href: '/?path=/docs/components-slot--docs',
-    thumbnail: 'empty.png'
   },
   {
     name: 'Spinner',
@@ -349,7 +342,6 @@ export const components = [
     name: 'VisuallyHidden',
     type: COMPONENTS_TYPES.LAYOUT,
     href: '/?path=/docs/components-visuallyhidden--docs',
-    thumbnail: 'empty.png'
   },
 ]
 
@@ -361,10 +353,19 @@ export const FilterableComponentsList = ({ filterType = null } = props) => {
     return filterType != null && c.type === filterType
   })
 
-  const getImgUrl = (fileName) => {
+  const getImgUrl = (fileName = 'empty.png') => {
     return `/assets/components-thumbnails/${theme}/${fileName}`
   }
 
+  const getInitials = (str) => {
+    const uppercaseLetters = str.match(/[A-Z]/g) || []
+    
+    if (uppercaseLetters.length >= 2) {
+      return uppercaseLetters[0] + uppercaseLetters[1]
+    }
+    
+    return str.slice(0, 2).toUpperCase()
+  }
 
   return (
     <>
@@ -381,7 +382,7 @@ export const FilterableComponentsList = ({ filterType = null } = props) => {
                   {component.name}
                 </TextLink>
 
-                <div className="group-hover:scale-110 group-hover:shadow-sm transition-transform duration-150 w-[184px] h-[100px] bg-neutral-container rounded-lg flex items-center justify-center">
+                <div className="relative group-hover:scale-110 group-hover:shadow-sm transition-transform duration-150 w-[184px] h-[100px] bg-neutral-container rounded-lg flex items-center justify-center">
                   <img
                     src={getImgUrl(component.thumbnail)}
                     alt={`${component.name} component thumbnail`}
@@ -390,6 +391,11 @@ export const FilterableComponentsList = ({ filterType = null } = props) => {
                     width="184"
                     height="100"
                   />
+                  {!component.thumbnail && (
+                    <p className="absolute inset-0 z-raised flex justify-center items-center text-on-support-container text-display-1">
+                      {getInitials(component.name)}
+                    </p>
+                  )}
                 </div>
               </a>
             </div>
