@@ -66,8 +66,9 @@ const ExampleContainer = ({ children, ...props }: Props) => {
     setShouldDisplayDeprecatedBanner(primaryStoryTitle?.startsWith('Deprecated') || false)
   }, [props.context?.channel])
 
-
   useEffect(() => {
+    const mm = gsap.matchMedia()
+
     // Wait for canvas elements to be fully rendered and positioned
     const setupAnimations = () => {
       const canvasElements = document.querySelectorAll('.sbdocs-preview')
@@ -78,34 +79,38 @@ const ExampleContainer = ({ children, ...props }: Props) => {
         return
       }
 
-      // Create ScrollTrigger for each canvas
-      canvasElements.forEach(canvas => {
-        // Animation when entering from bottom with 3D tilt
-        gsap.fromTo(
-          canvas,
-          {
-            scale: 0.9,
-            opacity: 0,
-          },
-          {
-            scale: 1,
-            opacity: 1,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: canvas,
-              start: 'top bottom',
-              end: 'top+=100px bottom',
-              scrub: 1,
-              invalidateOnRefresh: true,
+      // Only animate if user has not opted out of animation at the OS level
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        // Create ScrollTrigger for each canvas
+        canvasElements.forEach(canvas => {
+          // Animation when entering from bottom with 3D tilt
+          gsap.fromTo(
+            canvas,
+            {
+              scale: 0.9,
+              opacity: 0,
             },
-          }
-        )
-      })
+            {
+              scale: 1,
+              opacity: 1,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: canvas,
+                start: 'top bottom',
+                end: 'top+=100px bottom',
+                scrub: 1,
+                invalidateOnRefresh: true,
+                once: true
+              },
+            }
+          )
+        })
 
-      // Refresh after a delay to recalculate positions
-      setTimeout(() => {
-        ScrollTrigger.refresh()
-      }, 500)
+        // Refresh after a delay to recalculate positions
+        setTimeout(() => {
+          ScrollTrigger.refresh()
+        }, 500)
+      })
 
       // Observe size changes to canvas elements (e.g., when "show source" is clicked)
       const resizeObserver = new ResizeObserver(() => {
@@ -125,9 +130,10 @@ const ExampleContainer = ({ children, ...props }: Props) => {
     // Start setup after DOM is ready
     const cleanupObserver = setupAnimations()
 
-    // Cleanup ScrollTrigger instances and observer on unmount
+    // Cleanup ScrollTrigger instances and matchMedia on unmount
     return () => {
       cleanupObserver?.()
+      mm.revert()
       ScrollTrigger.getAll().forEach(trigger => trigger.kill())
     }
   }, [children])
