@@ -1,3 +1,13 @@
+## 17.10.3 (2026-06-03)
+
+### 🎨 Styles
+
+- **theme-utils:** added ai related color tokens ([27c7d6de8](https://github.com/leboncoin/spark-web/commit/27c7d6de8))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.10.2 (2026-06-02)
 
 ### 🩹 Fixes
