@@ -100,6 +100,11 @@ export const getThemeContrastReport = () => {
     accentHovered: 'bg-accent-hovered text-on-accent',
     accentContainer: 'bg-accent-container text-on-accent-container',
     accentContainerHovered: 'bg-accent-container-hovered text-on-accent-container',
+    // ACCENT
+    ai: 'bg-ai text-on-ai',
+    aiHovered: 'bg-ai-hovered text-on-ai',
+    aiContainer: 'bg-ai-container text-on-ai-container',
+    aiContainerHovered: 'bg-ai-container-hovered text-on-ai-container',
     // SUCCESS
     success: 'bg-success text-on-success',
     successHovered: 'bg-success-hovered text-on-success',

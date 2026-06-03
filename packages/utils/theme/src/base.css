@@ -35,7 +35,8 @@
   --font-weight-semi-bold: 600;
   --font-weight-bold: 700;
 
-  --color-focus: #00f;
+  
+  /* Base colors */
   --color-accent: #8526d9;
   --color-on-accent: #ffffff;
   --color-accent-hovered: #9f47eb;
@@ -63,6 +64,13 @@
   --color-support-variant: #0c5291;
   --color-on-support-variant: #ffffff;
   --color-support-variant-hovered: #0f69b9;
+  --color-ai: #A1479A;
+  --color-on-ai: #FFFFFF;
+  --color-ai-hovered: #80367D;
+  --color-ai-container: #F8EAF4;
+  --color-on-ai-container: #141110;
+  --color-ai-container-hovered: #F0CDE6;
+  /* Feedback colors */
   --color-success: #1d6340;
   --color-on-success: #ffffff;
   --color-success-hovered: #278456;
@@ -93,6 +101,7 @@
   --color-neutral-container: #f0f2f5;
   --color-on-neutral-container: #3a4757;
   --color-neutral-container-hovered: #f6f8f9;
+  /* Surface and backgrounds */
   --color-background: #ffffff;
   --color-on-background: #152233;
   --color-background-variant: #f4f9fe;
@@ -106,6 +115,8 @@
   --color-surface-dark: #2b3441;
   --color-on-surface-dark: #ffffff;
   --color-surface-dark-hovered: #3a4757;
+  /* Outline & special colors */
+  --color-focus: #00f;
   --color-outline: #acb8c7;
   --color-outline-high: #202730;
   --color-overlay: #202730;

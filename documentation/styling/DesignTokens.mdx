@@ -392,6 +392,122 @@ Accent color tokens are used to draw attention to specific UI elements and highl
   </Table>
 </div>
 
+### AI Colors
+
+AI color tokens are designed specifically for AI-powered features and interfaces. They help users identify AI-generated content, AI assistants, and machine learning features with a distinct and recognizable visual treatment.
+
+<div className="sb-unstyled">
+  <Table resizeColumnAriaLabel="Resize column">
+    <Table.Grid aria-label="AI color tokens">
+      <Table.Header>
+        <Table.Column id="preview" label="Preview" isRowHeader minWidth={100} />
+        <Table.Column id="class" label="Tailwind Class" minWidth={200} />
+        <Table.Column id="token" label="CSS Variable" minWidth={200} />
+        <Table.Column id="value" label="Computed Value" minWidth={150} />
+      </Table.Header>
+      <Table.Body>
+        <Table.Row id="ai-1">
+          <Table.Cell>
+            <ColorCell className="bg-ai" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">bg-ai</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-ai</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-ai')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="ai-2">
+          <Table.Cell>
+            <ColorCell className="bg-ai-hovered" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">bg-ai-hovered</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-ai-hovered</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-ai-hovered')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="ai-3">
+          <Table.Cell>
+            <ColorCell className="bg-ai-container" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">bg-ai-container</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-ai-container</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-ai-container')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="ai-4">
+          <Table.Cell>
+            <ColorCell className="bg-ai-container-hovered" />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">bg-ai-container-hovered</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-ai-container-hovered</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-ai-container-hovered')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="ai-5">
+          <Table.Cell>
+            <ColorCell className="bg-ai text-on-ai" isText />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">text-on-ai</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-on-ai</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-on-ai')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="ai-6">
+          <Table.Cell>
+            <ColorCell className="bg-ai-container text-on-ai-container" isText />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">text-on-ai-container</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-on-ai-container</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-on-ai-container')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table.Grid>
+  </Table>
+</div>
+
+
 ### Feedback Colors
 
 Feedback colors convey intent status (success, error, alert, info, neutral).

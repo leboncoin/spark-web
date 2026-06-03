@@ -31,6 +31,13 @@
   --color-on-support-variant: #1a1a1a;
   --color-support-variant-hovered: #8d8d8d;
 
+  --color-ai: #bcbcbc;
+  --color-on-ai: #1a1a1a;
+  --color-ai-hovered: #8d8d8d;
+  --color-ai-container: #4c4c4c;
+  --color-on-ai-container: #f9f9f9;
+  --color-ai-container-hovered: #303030;
+
   --color-success: #bcbcbc;
   --color-on-success: #1a1a1a;
   --color-success-hovered: #8d8d8d;
