@@ -1,3 +1,13 @@
+## 17.10.4 (2026-06-05)
+
+### 🎨 Styles
+
+- **theme-utils:** added first component level design tokens ([1fe1e9996](https://github.com/leboncoin/spark-web/commit/1fe1e9996))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.10.3 (2026-06-03)
 
 ### 🎨 Styles
