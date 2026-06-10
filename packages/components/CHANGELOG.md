@@ -1,3 +1,13 @@
+## 17.11.0 (2026-06-10)
+
+### 🚀 Features
+
+- **components:** allow editing last cell in OTP ([833761947](https://github.com/leboncoin/spark-web/commit/833761947))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.10.4 (2026-06-05)
 
 ### 🎨 Styles
