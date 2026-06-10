@@ -88,7 +88,7 @@
     "chromatic": "^16.2.0",
     "class-variance-authority": "0.7.1",
     "commitizen": "4.3.1",
-    "concurrently": "9.2.1",
+    "concurrently": "10.0.3",
     "copy-to-clipboard": "3.3.3",
     "d3": "7.9.0",
     "deepmerge": "4.3.1",
