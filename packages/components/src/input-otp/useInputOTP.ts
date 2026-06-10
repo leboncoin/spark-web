@@ -246,6 +246,41 @@ export const useInputOTP = ({
       return
     }
 
+    // Check if user is typing a printable character when input is full
+    const isPrintableCharacter = e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey
+    if (isPrintableCharacter && currentValue.length === maxLength) {
+      e.preventDefault()
+
+      // Process the new character through filters
+      const processedChar = processInputValue(e.key)
+
+      // If the character is filtered out, don't do anything
+      if (processedChar.length === 0) {
+        return
+      }
+
+      // Replace the last character with the new one
+      const newValue = currentValue.slice(0, maxLength - 1) + processedChar
+
+      // Call onValueChange callback
+      if (onValueChange) {
+        onValueChange(newValue)
+      }
+
+      // Update state only in uncontrolled mode
+      if (controlledValue === undefined) {
+        setInternalValue(newValue)
+      }
+
+      // Keep cursor at the end
+      const newActiveIndex = maxLength - 1
+      if (inputRef.current) {
+        inputRef.current.setSelectionRange(newActiveIndex, newActiveIndex)
+      }
+
+      return
+    }
+
     switch (e.key) {
       case BACKSPACE_KEY:
         e.preventDefault()
