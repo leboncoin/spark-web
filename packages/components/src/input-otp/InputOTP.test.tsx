@@ -118,6 +118,114 @@ describe('InputOTP', () => {
     expect(onValueChange).toHaveBeenCalledWith('123')
   })
 
+  it('should replace last character when typing in a full input', async () => {
+    const onValueChange = vi.fn()
+    const user = userEvent.setup()
+
+    renderInputOTP({ maxLength: 4, defaultValue: '1234', onValueChange }, 4)
+
+    const input = screen.getByRole('textbox')
+    input.focus()
+
+    // Type a new character when all slots are filled
+    await user.type(input, '5')
+
+    // Should replace the last character (4) with the new one (5)
+    expect(onValueChange).toHaveBeenCalledWith('1235')
+  })
+
+  it('should replace last character multiple times when typing in a full input', async () => {
+    const onValueChange = vi.fn()
+    const user = userEvent.setup()
+
+    renderInputOTP({ maxLength: 4, defaultValue: '1234', onValueChange }, 4)
+
+    const input = screen.getByRole('textbox')
+    input.focus()
+
+    // Type multiple new characters when all slots are filled
+    await user.type(input, '567')
+
+    // Should replace the last character each time
+    expect(onValueChange).toHaveBeenNthCalledWith(1, '1235')
+    expect(onValueChange).toHaveBeenNthCalledWith(2, '1236')
+    expect(onValueChange).toHaveBeenNthCalledWith(3, '1237')
+  })
+
+  it('should respect filters when replacing last character in full input', async () => {
+    const onValueChange = vi.fn()
+    const user = userEvent.setup()
+
+    renderInputOTP({ maxLength: 4, defaultValue: '1234', type: 'number', onValueChange }, 4)
+
+    const input = screen.getByRole('textbox')
+    input.focus()
+
+    // Try to type a letter when all slots are filled
+    await user.type(input, 'a')
+
+    // Should not replace because 'a' is filtered out
+    expect(onValueChange).not.toHaveBeenCalled()
+
+    // Type a number
+    await user.type(input, '5')
+
+    // Should replace the last character
+    expect(onValueChange).toHaveBeenCalledWith('1235')
+  })
+
+  it('should respect pattern when replacing last character in full input', async () => {
+    const onValueChange = vi.fn()
+    const user = userEvent.setup()
+
+    renderInputOTP({ maxLength: 4, defaultValue: 'abcd', pattern: '[a-c]', onValueChange }, 4)
+
+    const input = screen.getByRole('textbox')
+    input.focus()
+
+    // Try to type a character not matching pattern
+    await user.type(input, 'd')
+
+    // Should not replace because 'd' doesn't match pattern
+    expect(onValueChange).not.toHaveBeenCalled()
+
+    // Type a character matching pattern
+    await user.type(input, 'a')
+
+    // Should replace the last character
+    expect(onValueChange).toHaveBeenCalledWith('abca')
+  })
+
+  it('should replace last character in controlled mode', async () => {
+    const onValueChange = vi.fn()
+    const user = userEvent.setup()
+
+    const { rerender } = renderInputOTP({ maxLength: 4, value: '1234', onValueChange }, 4)
+
+    const input = screen.getByRole('textbox')
+    input.focus()
+
+    // Type a new character when all slots are filled
+    await user.type(input, '5')
+
+    // Should call onValueChange with the new value
+    expect(onValueChange).toHaveBeenCalledWith('1235')
+
+    // Simulate parent component updating the value
+    rerender(
+      <InputOTP maxLength={4} value="1235" onValueChange={onValueChange}>
+        <InputOTP.Group>
+          {Array.from({ length: 4 }, (_, i) => (
+            <InputOTP.Slot key={i} index={i} />
+          ))}
+        </InputOTP.Group>
+      </InputOTP>
+    )
+
+    // Input should now have the updated value
+    expect(input).toHaveValue('1235')
+  })
+
   it('should handle paste multiple characters', async () => {
     const onValueChange = vi.fn()
     const user = userEvent.setup()
