@@ -32,7 +32,7 @@ export const PopoverProvider = ({
   const [headerId, setHeaderId] = useState<HeaderId>(null)
 
   return (
-    <PopoverContext.Provider
+    <PopoverContext
       value={{
         headerId,
         setHeaderId,
@@ -40,7 +40,7 @@ export const PopoverProvider = ({
       }}
     >
       {children}
-    </PopoverContext.Provider>
+    </PopoverContext>
   )
 }
 

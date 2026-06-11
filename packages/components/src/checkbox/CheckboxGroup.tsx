@@ -78,7 +78,7 @@ export const CheckboxGroup = ({
   }, [onCheckedChangeProp])
 
   return (
-    <CheckboxGroupContext.Provider value={current}>
+    <CheckboxGroupContext value={current}>
       <div
         ref={ref}
         className={checkboxGroupStyles({ className, orientation })}
@@ -89,7 +89,7 @@ export const CheckboxGroup = ({
       >
         {children}
       </div>
-    </CheckboxGroupContext.Provider>
+    </CheckboxGroupContext>
   )
 }
 

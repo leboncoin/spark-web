@@ -68,7 +68,7 @@ export function Dropzone({
   const isDisabled = ctx.disabled || ctx.readOnly
 
   return (
-    <DropzoneContext.Provider value={true}>
+    <DropzoneContext value={true}>
       <div
         ref={node => {
           dropzoneRef.current = node
@@ -116,7 +116,7 @@ export function Dropzone({
       >
         {children}
       </div>
-    </DropzoneContext.Provider>
+    </DropzoneContext>
   )
 }
 

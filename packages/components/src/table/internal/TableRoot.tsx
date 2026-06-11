@@ -65,7 +65,7 @@ export function TableRoot({
   })
 
   return (
-    <TableKeyboardModeContext.Provider value={keyboardMode}>
+    <TableKeyboardModeContext value={keyboardMode}>
       <table
         {...mergeProps(keyboardGridProps, filterDOMProps(props as any, { global: true }))}
         ref={tableRef}
@@ -125,7 +125,7 @@ export function TableRoot({
           ))}
         </tbody>
       </table>
-    </TableKeyboardModeContext.Provider>
+    </TableKeyboardModeContext>
   )
 }
 

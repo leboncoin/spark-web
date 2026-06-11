@@ -40,7 +40,7 @@ export function ResizableTableContainer({
   })
 
   return (
-    <TableResizableContext.Provider value={{ isResizable: true, tableWidth }}>
+    <TableResizableContext value={{ isResizable: true, tableWidth }}>
       <div
         ref={containerRef}
         data-spark-component="resizable-table-container"
@@ -49,7 +49,7 @@ export function ResizableTableContainer({
       >
         {children}
       </div>
-    </TableResizableContext.Provider>
+    </TableResizableContext>
   )
 }
 

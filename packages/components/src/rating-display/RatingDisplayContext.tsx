@@ -18,11 +18,7 @@ export const RatingDisplayProvider = ({
   count,
   children,
 }: RatingDisplayProviderProps) => {
-  return (
-    <RatingDisplayContext.Provider value={{ value, size, count }}>
-      {children}
-    </RatingDisplayContext.Provider>
-  )
+  return <RatingDisplayContext value={{ value, size, count }}>{children}</RatingDisplayContext>
 }
 
 export const useRatingDisplay = () => {

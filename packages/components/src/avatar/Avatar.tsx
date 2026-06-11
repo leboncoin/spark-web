@@ -43,7 +43,7 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
     )
 
     return (
-      <AvatarContext.Provider value={contextValue}>
+      <AvatarContext value={contextValue}>
         <Comp
           ref={ref}
           style={{
@@ -56,7 +56,7 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
         >
           {children}
         </Comp>
-      </AvatarContext.Provider>
+      </AvatarContext>
     )
   }
 )

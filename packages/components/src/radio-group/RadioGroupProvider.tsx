@@ -17,5 +17,5 @@ export const RadioGroupProvider = ({
 }: RadioGroupProviderProps) => {
   const value = useMemo(() => ({ intent, disabled, reverse }), [intent, disabled, reverse])
 
-  return <RadioGroupContext.Provider value={value}>{children}</RadioGroupContext.Provider>
+  return <RadioGroupContext value={value}>{children}</RadioGroupContext>
 }

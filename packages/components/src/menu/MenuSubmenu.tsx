@@ -20,7 +20,7 @@ export interface MenuSubmenuProps extends Omit<
 export const MenuSubmenu = ({ children, ...rest }: MenuSubmenuProps) => {
   return (
     <BaseMenu.SubmenuRoot data-spark-component="menu-submenu" {...rest}>
-      <MenuSubmenuContext.Provider value={true}>{children}</MenuSubmenuContext.Provider>
+      <MenuSubmenuContext value={true}>{children}</MenuSubmenuContext>
     </BaseMenu.SubmenuRoot>
   )
 }

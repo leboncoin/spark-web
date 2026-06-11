@@ -17,14 +17,14 @@ export const AlertDialogProvider = ({
   cancelRef: MutableRefObject<HTMLButtonElement | null>
 }) => {
   return (
-    <AlertDialogContext.Provider
+    <AlertDialogContext
       value={{
         cancelRef,
         withFade,
       }}
     >
       {children}
-    </AlertDialogContext.Provider>
+    </AlertDialogContext>
   )
 }
 

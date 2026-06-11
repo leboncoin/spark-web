@@ -96,7 +96,7 @@ export const CircularMeter = ({
   ])
 
   return (
-    <CircularMeterContext.Provider value={contextValue}>
+    <CircularMeterContext value={contextValue}>
       <BaseMeter.Root
         data-spark-component="circular-meter"
         ref={ref}
@@ -110,7 +110,7 @@ export const CircularMeter = ({
       >
         {children}
       </BaseMeter.Root>
-    </CircularMeterContext.Provider>
+    </CircularMeterContext>
   )
 }
 

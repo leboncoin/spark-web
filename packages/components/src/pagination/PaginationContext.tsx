@@ -80,7 +80,7 @@ export const PaginationProvider = ({
     : api.pages
 
   return (
-    <PaginationContext.Provider
+    <PaginationContext
       value={{
         type,
         pagination: {
@@ -107,7 +107,7 @@ export const PaginationProvider = ({
       }}
     >
       {children}
-    </PaginationContext.Provider>
+    </PaginationContext>
   )
 }
 

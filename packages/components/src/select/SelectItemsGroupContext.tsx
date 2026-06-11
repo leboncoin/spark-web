@@ -12,11 +12,7 @@ const SelectGroupContext = createContext<SelectContextState | null>(null)
 export const SelectGroupProvider = ({ children }: SelectContextProps) => {
   const [groupLabel, setGroupLabel] = useState('')
 
-  return (
-    <SelectGroupContext.Provider value={{ groupLabel, setGroupLabel }}>
-      {children}
-    </SelectGroupContext.Provider>
-  )
+  return <SelectGroupContext value={{ groupLabel, setGroupLabel }}>{children}</SelectGroupContext>
 }
 
 export const useSelectGroupContext = () => {

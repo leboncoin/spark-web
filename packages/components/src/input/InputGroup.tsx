@@ -141,7 +141,7 @@ export const InputGroup = ({
   const inputRefValue = inputRef.current?.value
 
   return (
-    <InputGroupContext.Provider value={current}>
+    <InputGroupContext value={current}>
       <div
         data-spark-component="input-group"
         ref={forwardedRef}
@@ -168,7 +168,7 @@ export const InputGroup = ({
 
         {hasTrailingAddon && trailingAddon}
       </div>
-    </InputGroupContext.Provider>
+    </InputGroupContext>
   )
 }
 

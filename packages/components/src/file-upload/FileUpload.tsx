@@ -199,7 +199,7 @@ export const FileUpload = ({
   }
 
   return (
-    <FileUploadContext.Provider
+    <FileUploadContext
       value={{
         inputRef,
         files,
@@ -263,7 +263,7 @@ export const FileUpload = ({
         />
       </div>
       {/* </Comp> */}
-    </FileUploadContext.Provider>
+    </FileUploadContext>
   )
 }
 

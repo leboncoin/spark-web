@@ -142,7 +142,7 @@ export const SelectProvider = ({
   }, [children])
 
   return (
-    <SelectContext.Provider
+    <SelectContext
       value={{
         disabled,
         readOnly,
@@ -164,7 +164,7 @@ export const SelectProvider = ({
       }}
     >
       {children}
-    </SelectContext.Provider>
+    </SelectContext>
   )
 }
 

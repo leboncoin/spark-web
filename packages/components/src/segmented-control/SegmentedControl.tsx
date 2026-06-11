@@ -72,7 +72,7 @@ export const SegmentedControl = ({
   const { labelId, description, isRequired, isInvalid, name } = useFormFieldControl()
 
   return (
-    <SegmentedControlContext.Provider
+    <SegmentedControlContext
       value={{
         checkedValue,
         containerRef,
@@ -94,7 +94,7 @@ export const SegmentedControl = ({
       >
         {children}
       </RadioGroup>
-    </SegmentedControlContext.Provider>
+    </SegmentedControlContext>
   )
 }
 

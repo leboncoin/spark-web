@@ -110,9 +110,9 @@ export const Popover = ({ popoverSide, popoverTriggerRef, children }: PopoverAbs
   )
 
   const PopoverWrapper: typeof SparkPopover = ((props: PopoverProps) => (
-    <TabsPopoverContext.Provider value={contextValue}>
+    <TabsPopoverContext value={contextValue}>
       <SparkPopover {...props}>{props.children}</SparkPopover>
-    </TabsPopoverContext.Provider>
+    </TabsPopoverContext>
   )) as typeof SparkPopover
 
   const PopoverComponent = Object.assign(PopoverWrapper, SparkPopover, {
@@ -120,11 +120,7 @@ export const Popover = ({ popoverSide, popoverTriggerRef, children }: PopoverAbs
     Trigger: TabsPopoverTrigger,
   }) as ConfiguredPopoverComponent
 
-  return (
-    <TabsPopoverContext.Provider value={contextValue}>
-      {children(PopoverComponent)}
-    </TabsPopoverContext.Provider>
-  )
+  return <TabsPopoverContext value={contextValue}>{children(PopoverComponent)}</TabsPopoverContext>
 }
 
 Popover.displayName = 'Popover'

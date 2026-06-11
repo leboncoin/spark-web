@@ -58,7 +58,7 @@ function TableBulkBarRoot({ children, className, rootProps, ...props }: TableBul
   }
 
   return (
-    <TableBulkBarContext.Provider value={contextValue}>
+    <TableBulkBarContext value={contextValue}>
       <div
         role="toolbar"
         aria-label={props['aria-label'] ?? 'Table bulk actions'}
@@ -73,7 +73,7 @@ function TableBulkBarRoot({ children, className, rootProps, ...props }: TableBul
       >
         {children}
       </div>
-    </TableBulkBarContext.Provider>
+    </TableBulkBarContext>
   )
 }
 

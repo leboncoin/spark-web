@@ -66,7 +66,7 @@ export const Chip = ({
   const { clearButton } = compoundElements
 
   return (
-    <ChipContext.Provider value={{ disabled, design, intent, onClear }}>
+    <ChipContext value={{ disabled, design, intent, onClear }}>
       <ChipElement
         ref={forwardedRef}
         className={chipStyles({
@@ -84,7 +84,7 @@ export const Chip = ({
       >
         {formattedChildren}
       </ChipElement>
-    </ChipContext.Provider>
+    </ChipContext>
   )
 }
 

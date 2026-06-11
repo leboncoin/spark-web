@@ -59,7 +59,7 @@ export const FormFieldProvider = ({
     handleMessageIdRemove,
   ])
 
-  return <FormFieldContext.Provider value={value}>{children}</FormFieldContext.Provider>
+  return <FormFieldContext value={value}>{children}</FormFieldContext>
 }
 
 FormFieldProvider.displayName = 'FormFieldProvider'

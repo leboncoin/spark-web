@@ -140,7 +140,7 @@ export const ScrollingList = ({
   }
 
   return (
-    <ScrollingListContext.Provider value={ctxValue}>
+    <ScrollingListContext value={ctxValue}>
       <div
         data-spark-component="scrolling-list"
         className={cx(
@@ -152,7 +152,7 @@ export const ScrollingList = ({
         {children}
       </div>
       <span ref={skipAnchorRef} className="size-0 overflow-hidden" tabIndex={-1} />
-    </ScrollingListContext.Provider>
+    </ScrollingListContext>
   )
 }
 

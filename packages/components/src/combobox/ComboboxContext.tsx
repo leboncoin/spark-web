@@ -420,7 +420,7 @@ export const ComboboxProvider = ({
   const [WrapperComponent, wrapperProps] = hasPopover ? [Popover, { open: true }] : [Fragment, {}]
 
   return (
-    <ComboboxContext.Provider
+    <ComboboxContext
       value={{
         // Data
         itemsMap,
@@ -454,7 +454,7 @@ export const ComboboxProvider = ({
       }}
     >
       <WrapperComponent {...wrapperProps}>{children}</WrapperComponent>
-    </ComboboxContext.Provider>
+    </ComboboxContext>
   )
 }
 

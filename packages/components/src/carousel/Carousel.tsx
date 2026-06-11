@@ -44,7 +44,7 @@ export const Carousel = ({
   })
 
   return (
-    <CarouselContext.Provider
+    <CarouselContext
       value={{
         ...carouselApi,
         scrollBehavior,
@@ -58,7 +58,7 @@ export const Carousel = ({
       >
         {children}
       </div>
-    </CarouselContext.Provider>
+    </CarouselContext>
   )
 }
 
