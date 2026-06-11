@@ -62,7 +62,7 @@ export const InputGroup = ({
 
   const inputRef = useRef<HTMLInputElement>(null!)
   const onClearRef = useRef(onClear)
-  const ref = useMergeRefs<HTMLInputElement>(input?.ref, inputRef)
+  const ref = useMergeRefs<HTMLInputElement>(input?.props.ref, inputRef)
   const [value, onChange] = useCombinedState(
     props.value as string,
     props.defaultValue as string,
