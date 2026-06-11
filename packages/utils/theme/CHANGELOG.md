@@ -1,3 +1,9 @@
+## 17.11.1 (2026-06-11)
+
+### 📦 Build
+
+- **npm:** bump shell-quote and concurrently ([1b264e3e4](https://github.com/leboncoin/spark-web/commit/1b264e3e4))
+
 ## 17.11.0 (2026-06-10)
 
 This was a version bump only for @spark-ui/theme-utils to align it with other projects, there were no code changes.
