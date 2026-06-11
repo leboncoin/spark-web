@@ -41,11 +41,9 @@ export const ComboboxItemProvider = ({
     : ctx.selectedItem?.value === value
 
   return (
-    <ComboboxItemContext.Provider
-      value={{ textId, setTextId, isSelected, itemData, index, disabled }}
-    >
+    <ComboboxItemContext value={{ textId, setTextId, isSelected, itemData, index, disabled }}>
       {children}
-    </ComboboxItemContext.Provider>
+    </ComboboxItemContext>
   )
 }
 

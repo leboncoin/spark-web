@@ -13,11 +13,7 @@ const ComboboxGroupContext = createContext<ComboboxContextState | null>(null)
 export const ComboboxGroupProvider = ({ children }: ComboboxContextProps) => {
   const groupLabelId = `${ID_PREFIX}-group-label-${useId()}`
 
-  return (
-    <ComboboxGroupContext.Provider value={{ groupLabelId }}>
-      {children}
-    </ComboboxGroupContext.Provider>
-  )
+  return <ComboboxGroupContext value={{ groupLabelId }}>{children}</ComboboxGroupContext>
 }
 
 export const useComboboxGroupContext = () => {

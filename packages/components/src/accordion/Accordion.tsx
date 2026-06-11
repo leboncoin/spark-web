@@ -40,7 +40,7 @@ export const Accordion = ({
   const renderSlot = useRenderSlot(asChild, 'div')
 
   return (
-    <AccordionContext.Provider value={{ design }}>
+    <AccordionContext value={{ design }}>
       <BaseAccordion.Root
         data-spark-component="accordion"
         ref={ref}
@@ -52,7 +52,7 @@ export const Accordion = ({
       >
         {children}
       </BaseAccordion.Root>
-    </AccordionContext.Provider>
+    </AccordionContext>
   )
 }
 

@@ -56,7 +56,7 @@ export const Stepper = ({
   const { 'aria-label': ariaLabel, ...restStepperProps } = stepperProps
 
   return (
-    <StepperContext.Provider
+    <StepperContext
       value={{
         inputRef,
         fieldId: formFieldControlProps.id,
@@ -89,7 +89,7 @@ export const Stepper = ({
           {children}
         </div>
       </NumberField.Root>
-    </StepperContext.Provider>
+    </StepperContext>
   )
 }
 

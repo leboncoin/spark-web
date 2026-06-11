@@ -41,11 +41,9 @@ export const DropdownItemProvider = ({
     : selectedItem?.value === value
 
   return (
-    <DropdownItemContext.Provider
-      value={{ textId, setTextId, isSelected, itemData, index, disabled }}
-    >
+    <DropdownItemContext value={{ textId, setTextId, isSelected, itemData, index, disabled }}>
       {children}
-    </DropdownItemContext.Provider>
+    </DropdownItemContext>
   )
 }
 

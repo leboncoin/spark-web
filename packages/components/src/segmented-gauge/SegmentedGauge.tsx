@@ -154,7 +154,7 @@ export const SegmentedGauge = ({
         }
 
   return (
-    <SegmentedGaugeContext.Provider value={contextValue}>
+    <SegmentedGaugeContext value={contextValue}>
       <div
         id={gaugeId}
         data-spark-component="segmented-gauge"
@@ -185,7 +185,7 @@ export const SegmentedGauge = ({
           </>
         )}
       </div>
-    </SegmentedGaugeContext.Provider>
+    </SegmentedGaugeContext>
   )
 }
 

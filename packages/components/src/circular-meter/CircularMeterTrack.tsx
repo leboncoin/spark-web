@@ -66,7 +66,7 @@ export const CircularMeterTrack = ({ className, children, ...others }: CircularM
 
   return (
     <BaseMeter.Track data-spark-component="circular-meter-track" className={className} {...others}>
-      <CircularMeterTrackContext.Provider value={true}>
+      <CircularMeterTrackContext value={true}>
         <svg ref={svgRef} width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
           <g style={{ transform: 'rotate(-90deg)', transformOrigin: 'center' }}>
             <circle
@@ -112,7 +112,7 @@ export const CircularMeterTrack = ({ className, children, ...others }: CircularM
             </foreignObject>
           )}
         </svg>
-      </CircularMeterTrackContext.Provider>
+      </CircularMeterTrackContext>
     </BaseMeter.Track>
   )
 }

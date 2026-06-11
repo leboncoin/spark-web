@@ -18,7 +18,7 @@ export const DialogProvider = ({
   const [isFullScreen, setIsFullScreen] = useState(false)
 
   return (
-    <DialogContext.Provider
+    <DialogContext
       value={{
         isFullScreen,
         setIsFullScreen,
@@ -26,7 +26,7 @@ export const DialogProvider = ({
       }}
     >
       {childrenProp}
-    </DialogContext.Provider>
+    </DialogContext>
   )
 }
 

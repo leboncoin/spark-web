@@ -184,7 +184,7 @@ export const DropdownProvider = ({
   const [WrapperComponent, wrapperProps] = hasPopover ? [Popover, { open: true }] : [Fragment, {}]
 
   return (
-    <DropdownContext.Provider
+    <DropdownContext
       value={{
         multiple,
         disabled,
@@ -200,7 +200,7 @@ export const DropdownProvider = ({
       }}
     >
       <WrapperComponent {...wrapperProps}>{children}</WrapperComponent>
-    </DropdownContext.Provider>
+    </DropdownContext>
   )
 }
 

@@ -48,7 +48,7 @@ export const ProgressTracker = ({
   const Component = readOnly ? 'div' : 'nav'
 
   return (
-    <ProgressTrackerContext.Provider
+    <ProgressTrackerContext
       value={{ stepIndex, onStepClick, steps, setSteps, size, intent, readOnly }}
     >
       <Component
@@ -65,7 +65,7 @@ export const ProgressTracker = ({
           {children}
         </ol>
       </Component>
-    </ProgressTrackerContext.Provider>
+    </ProgressTrackerContext>
   )
 }
 

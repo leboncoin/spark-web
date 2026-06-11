@@ -99,7 +99,7 @@ export const Slider = ({
   }, [])
 
   return (
-    <SliderContext.Provider
+    <SliderContext
       value={{
         intent,
         min,
@@ -148,7 +148,7 @@ export const Slider = ({
       >
         {children}
       </BaseSlider.Root>
-    </SliderContext.Provider>
+    </SliderContext>
   )
 }
 

@@ -267,7 +267,7 @@ export const InputOTP = ({
   const accessibleNameProps = getAccessibleNameProps()
 
   return (
-    <InputOTPContext.Provider value={contextValue}>
+    <InputOTPContext value={contextValue}>
       <div
         ref={containerRef}
         data-spark-component="input-otp"
@@ -325,7 +325,7 @@ export const InputOTP = ({
         {/* Children render slots with auto-assigned indexes */}
         {processedChildren}
       </div>
-    </InputOTPContext.Provider>
+    </InputOTPContext>
   )
 }
 

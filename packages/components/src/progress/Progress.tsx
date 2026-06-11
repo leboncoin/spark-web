@@ -67,7 +67,7 @@ export const Progress = ({
       : undefined)
 
   return (
-    <ProgressContext.Provider value={contextValue}>
+    <ProgressContext value={contextValue}>
       <BaseProgress.Root
         data-spark-component="progress"
         ref={ref}
@@ -81,7 +81,7 @@ export const Progress = ({
       >
         {children}
       </BaseProgress.Root>
-    </ProgressContext.Provider>
+    </ProgressContext>
   )
 }
 

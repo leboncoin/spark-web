@@ -14,13 +14,13 @@ export const DrawerProvider = ({
   withFade?: boolean
 }) => {
   return (
-    <DrawerContext.Provider
+    <DrawerContext
       value={{
         withFade,
       }}
     >
       {childrenProp}
-    </DrawerContext.Provider>
+    </DrawerContext>
   )
 }
 

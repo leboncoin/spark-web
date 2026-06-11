@@ -46,7 +46,7 @@ export const Tabs = ({
   const renderSlot = useRenderSlot(asChild)
 
   return (
-    <TabsContext.Provider
+    <TabsContext
       value={{
         intent,
         size,
@@ -64,7 +64,7 @@ export const Tabs = ({
       >
         {children}
       </BaseTabs.Root>
-    </TabsContext.Provider>
+    </TabsContext>
   )
 }
 

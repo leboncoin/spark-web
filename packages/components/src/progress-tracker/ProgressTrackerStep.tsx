@@ -106,14 +106,14 @@ export const ProgressTrackerStep = ({
           className,
         })}
       >
-        <ProgressTrackerStepContext.Provider
+        <ProgressTrackerStepContext
           value={{
             index: stepIndex,
             state: progressState,
           }}
         >
           {children || <ProgressTrackerStepIndicator />}
-        </ProgressTrackerStepContext.Provider>
+        </ProgressTrackerStepContext>
       </button>
     </li>
   )

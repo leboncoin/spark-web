@@ -98,9 +98,9 @@ export function TableRootWrapper({
   }
 
   return (
-    <TableContext.Provider value={contextValue as TableContextValue}>
+    <TableContext value={contextValue as TableContextValue}>
       <div className={cx('gap-md flex flex-col', className)}>{children}</div>
-    </TableContext.Provider>
+    </TableContext>
   )
 }
 

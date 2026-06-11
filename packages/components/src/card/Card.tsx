@@ -31,7 +31,7 @@ export const Card = ({
   const interactiveDetected = isInteractive(children, asChild, props)
 
   return (
-    <CardContext.Provider
+    <CardContext
       value={{
         design,
         intent,
@@ -53,7 +53,7 @@ export const Card = ({
       >
         {children}
       </Component>
-    </CardContext.Provider>
+    </CardContext>
   )
 }
 

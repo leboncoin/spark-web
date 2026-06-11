@@ -45,7 +45,7 @@ export const Meter = ({
   }, [max, min, value, intent, shape, setLabelId])
 
   return (
-    <MeterContext.Provider value={contextValue}>
+    <MeterContext value={contextValue}>
       <BaseMeter.Root
         data-spark-component="meter"
         ref={ref}
@@ -61,7 +61,7 @@ export const Meter = ({
       >
         {children}
       </BaseMeter.Root>
-    </MeterContext.Provider>
+    </MeterContext>
   )
 }
 

@@ -22,7 +22,7 @@ export const SliderThumb = ({
   const ref = useMergeRefs(contextThumbRef, forwardedRef ?? innerRef)
 
   return (
-    <SliderThumbContext.Provider value={{ isInsideThumb: true }}>
+    <SliderThumbContext value={{ isInsideThumb: true }}>
       <BaseSlider.Thumb
         data-spark-component="slider-thumb"
         ref={ref}
@@ -33,7 +33,7 @@ export const SliderThumb = ({
       >
         {children}
       </BaseSlider.Thumb>
-    </SliderThumbContext.Provider>
+    </SliderThumbContext>
   )
 }
 
