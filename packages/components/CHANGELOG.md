@@ -1,3 +1,13 @@
+## 17.11.2 (2026-06-11)
+
+### 🩹 Fixes
+
+- **components:** fixed invalid direct access to ref ([8e33efd5e](https://github.com/leboncoin/spark-web/commit/8e33efd5e))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.11.1 (2026-06-11)
 
 ### 💅 Refactors
