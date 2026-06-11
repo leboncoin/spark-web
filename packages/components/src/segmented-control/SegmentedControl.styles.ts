@@ -2,7 +2,7 @@ import { cva, VariantProps } from 'class-variance-authority'
 
 export const rootStyles = cva([
   'default:self-start',
-  'group inline-grid grid-flow-col auto-cols-fr',
+  'group inline-flex flex-wrap',
   'relative items-stretch min-w-max',
   'rounded-xl p-sm',
   'bg-surface border-sm border-outline',
@@ -10,7 +10,7 @@ export const rootStyles = cva([
 
 export const itemStyles = cva([
   'relative z-raised min-h-sz-44 focus-visible:outline-none',
-  'flex flex-none items-center justify-center gap-md',
+  'flex flex-auto items-center justify-center gap-md',
   'default:px-lg default:py-md',
   'rounded-[20px]',
   'cursor-pointer select-none',
