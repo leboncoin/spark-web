@@ -242,7 +242,7 @@ export const Multiple: StoryFn = () => {
 }
 
 export const Controlled: StoryFn = () => {
-  const [value, setValue] = useState(['watercraft'])
+  const [value, setValue] = useState<string[]>(['watercraft'])
 
   return (
     <div>
@@ -257,7 +257,7 @@ export const Controlled: StoryFn = () => {
         <Checkbox value="aircrafts">Aircrafts</Checkbox>
       </CheckboxGroup>
 
-      <Accordion multiple value={value} onValueChange={setValue}>
+      <Accordion multiple value={value} onValueChange={newValue => setValue(newValue as string[])}>
         <Accordion.Item value="watercraft">
           <Accordion.ItemTrigger>Watercraft</Accordion.ItemTrigger>
           <Accordion.ItemContent>

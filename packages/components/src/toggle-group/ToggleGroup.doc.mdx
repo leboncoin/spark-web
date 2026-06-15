@@ -1,0 +1,104 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
+import { A11yReport } from '@docs/helpers/A11yReport'
+import { AriaRoles } from '@docs/helpers/AriaRoles'
+import { ToggleGroup } from '.'
+import { Kbd } from '@spark-ui/components/kbd'
+
+import * as stories from './ToggleGroup.stories'
+
+<Meta of={stories} />
+
+# ToggleGroup
+
+A set of two-state buttons that can be toggled on or off within a group context.
+
+<Canvas of={stories.Default} />
+
+## Install
+
+```
+npm install @spark-ui/components
+```
+
+## Anatomy
+
+```tsx
+import { ToggleGroup } from '@spark-ui/components/toggle-group'
+
+export default () => (
+  <ToggleGroup>
+    <ToggleGroup.Toggle value="option-1" />
+    <ToggleGroup.Toggle value="option-2" />
+  </ToggleGroup>
+)
+```
+
+## API Reference
+
+### ToggleGroup
+
+Contains all the toggle group component parts.
+
+<ArgTypes of={ToggleGroup} />
+
+### \_.Toggle
+
+A toggle button within the group.
+
+<ArgTypes of={ToggleGroup.Toggle} />
+
+## Examples
+
+### Multiple
+
+Use the `multiple` prop to allow multiple toggles to be pressed simultaneously. 
+
+**Important:** Both `value` and `defaultValue` must always be arrays, even for single selection mode.
+
+<Canvas of={stories.Multiple} />
+
+### With Existing Spark Components
+
+Use the `asChild` prop on `ToggleGroup.Toggle` to compose with existing Spark components like Button or Chip.
+
+<Canvas of={stories.WithExistingSparkComponents} />
+
+### Controlled
+
+Control the toggle group state using the `value` and `onValueChange` props.
+
+<Canvas of={stories.Controlled} />
+
+### Disabled
+
+Use the `disabled` prop on individual toggles to prevent user interaction.
+
+<Canvas of={stories.Disabled} />
+
+### With FormField
+
+Integrate ToggleGroup with FormField for form contexts using `FormField.Control`.
+
+<Canvas of={stories.WithFormField} />
+
+## Implementation
+
+This component provides a custom implementation of a toggle group pattern, allowing for single or multiple selection of toggle buttons.
+
+## Accessibility
+
+<A11yReport of="toggle-group" />
+
+Adheres to the [Toggle Button WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/button/).
+
+### Tips
+
+- Always provide an `aria-label` prop on the `ToggleGroup` to describe the group's purpose.
+- Each `ToggleGroup.Toggle` should have an `aria-label` that describes its specific action.
+- Use the `value` prop to uniquely identify each toggle within the group.
+
+### Keyboard Interactions
+
+- <Kbd>Tab</Kbd>: Moves focus to the next toggle in the group.
+- <Kbd>Space</Kbd>: Toggles the pressed state of the focused toggle.
+- <Kbd>Enter</Kbd>: Toggles the pressed state of the focused toggle.
