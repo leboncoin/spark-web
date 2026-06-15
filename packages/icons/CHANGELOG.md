@@ -1,3 +1,13 @@
+## 17.12.0 (2026-06-15)
+
+### 🚀 Features
+
+- **components:** togglegroup component ([a867b7034](https://github.com/leboncoin/spark-web/commit/a867b7034))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.11.3 (2026-06-15)
 
 This was a version bump only for @spark-ui/icons to align it with other projects, there were no code changes.
