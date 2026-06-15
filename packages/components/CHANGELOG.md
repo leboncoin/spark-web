@@ -1,3 +1,13 @@
+## 17.11.3 (2026-06-15)
+
+### 🩹 Fixes
+
+- **components:** updated chips radius ([929c190f1](https://github.com/leboncoin/spark-web/commit/929c190f1))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.11.2 (2026-06-11)
 
 ### 🩹 Fixes
