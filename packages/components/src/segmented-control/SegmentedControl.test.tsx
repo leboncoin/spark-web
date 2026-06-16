@@ -147,6 +147,75 @@ describe('SegmentedControl', () => {
 
       expect(screen.getByRole('radio', { name: 'Week' })).toHaveFocus()
     })
+
+    it('wraps navigation in single-row mode', async () => {
+      const user = userEvent.setup()
+
+      renderSegmentedControl({ defaultValue: 'month' })
+
+      screen.getByRole('radio', { name: 'Month' }).focus()
+      await user.keyboard('{ArrowRight}')
+
+      expect(screen.getByRole('radio', { name: 'Day' })).toHaveFocus()
+    })
+
+    it('skips disabled items during navigation', async () => {
+      const user = userEvent.setup()
+
+      renderSegmentedControl({ defaultValue: 'week', disabled: true })
+
+      // Start at Week, navigate left - should skip disabled Day and wrap to Month
+      screen.getByRole('radio', { name: 'Week' }).focus()
+      await user.keyboard('{ArrowLeft}')
+      expect(screen.getByRole('radio', { name: 'Month' })).toHaveFocus()
+    })
+
+    it('navigates sequentially in multi-row layout with ArrowDown', async () => {
+      const user = userEvent.setup()
+
+      render(
+        <SegmentedControl defaultValue="hour" rowLength={3}>
+          <SegmentedControl.Indicator />
+          <SegmentedControl.Item value="hour">Hour</SegmentedControl.Item>
+          <SegmentedControl.Item value="day">Day</SegmentedControl.Item>
+          <SegmentedControl.Item value="week">Week</SegmentedControl.Item>
+          <SegmentedControl.Item value="month">Month</SegmentedControl.Item>
+          <SegmentedControl.Item value="year">Year</SegmentedControl.Item>
+        </SegmentedControl>
+      )
+
+      // ArrowDown behaves like ArrowRight (sequential navigation)
+      screen.getByRole('radio', { name: 'Hour' }).focus()
+      await user.keyboard('{ArrowDown}')
+      expect(screen.getByRole('radio', { name: 'Day' })).toHaveFocus()
+
+      await user.keyboard('{ArrowDown}')
+      expect(screen.getByRole('radio', { name: 'Week' })).toHaveFocus()
+    })
+
+    it('wraps navigation in multi-row layout', async () => {
+      const user = userEvent.setup()
+
+      render(
+        <SegmentedControl defaultValue="year" rowLength={3}>
+          <SegmentedControl.Indicator />
+          <SegmentedControl.Item value="hour">Hour</SegmentedControl.Item>
+          <SegmentedControl.Item value="day">Day</SegmentedControl.Item>
+          <SegmentedControl.Item value="week">Week</SegmentedControl.Item>
+          <SegmentedControl.Item value="month">Month</SegmentedControl.Item>
+          <SegmentedControl.Item value="year">Year</SegmentedControl.Item>
+        </SegmentedControl>
+      )
+
+      // From last item, ArrowRight should wrap to first item
+      screen.getByRole('radio', { name: 'Year' }).focus()
+      await user.keyboard('{ArrowRight}')
+      expect(screen.getByRole('radio', { name: 'Hour' })).toHaveFocus()
+
+      // From first item, ArrowLeft should wrap to last item
+      await user.keyboard('{ArrowLeft}')
+      expect(screen.getByRole('radio', { name: 'Year' })).toHaveFocus()
+    })
   })
 
   describe('a11y', () => {
@@ -165,6 +234,70 @@ describe('SegmentedControl', () => {
 
       items.forEach(({ label }) => {
         expect(screen.getByRole('radio', { name: label })).toHaveAttribute('aria-checked')
+      })
+    })
+  })
+
+  describe('multi-row layout (rowLength)', () => {
+    it('renders items in single row when rowLength is undefined', () => {
+      const { container } = renderSegmentedControl()
+      const root = container.querySelector('[data-spark-component="segmented-control"]')
+
+      expect(root).toHaveClass('flex-wrap')
+      expect(root).not.toHaveAttribute('style')
+    })
+
+    it('applies flex styles and rowGap when rowLength is set', () => {
+      const { container } = render(
+        <SegmentedControl defaultValue="day" rowLength={2}>
+          <SegmentedControl.Indicator />
+          <SegmentedControl.Item value="day">Day</SegmentedControl.Item>
+          <SegmentedControl.Item value="week">Week</SegmentedControl.Item>
+          <SegmentedControl.Item value="month">Month</SegmentedControl.Item>
+        </SegmentedControl>
+      )
+
+      const root = container.querySelector('[data-spark-component="segmented-control"]')
+      expect(root).toHaveStyle({
+        rowGap: 'var(--spacing-md)',
+      })
+    })
+
+    it('allows selection across multiple rows', async () => {
+      const user = userEvent.setup()
+      const onValueChange = vi.fn()
+
+      render(
+        <SegmentedControl defaultValue="day" rowLength={2} onValueChange={onValueChange}>
+          <SegmentedControl.Indicator />
+          <SegmentedControl.Item value="day">Day</SegmentedControl.Item>
+          <SegmentedControl.Item value="week">Week</SegmentedControl.Item>
+          <SegmentedControl.Item value="month">Month</SegmentedControl.Item>
+          <SegmentedControl.Item value="year">Year</SegmentedControl.Item>
+        </SegmentedControl>
+      )
+
+      await user.click(screen.getByRole('radio', { name: 'Year' }))
+
+      expect(onValueChange).toHaveBeenCalledWith('year')
+      expect(screen.getByRole('radio', { name: 'Year' })).toHaveAttribute('aria-checked', 'true')
+    })
+
+    it('items grow to fill available space in last row', () => {
+      const { container } = render(
+        <SegmentedControl defaultValue="day" rowLength={2}>
+          <SegmentedControl.Indicator />
+          <SegmentedControl.Item value="day">Day</SegmentedControl.Item>
+          <SegmentedControl.Item value="week">Week</SegmentedControl.Item>
+          <SegmentedControl.Item value="month">Month</SegmentedControl.Item>
+        </SegmentedControl>
+      )
+
+      const items = container.querySelectorAll('[data-spark-component="segmented-control-item"]')
+      items.forEach(item => {
+        expect(item).toHaveStyle({
+          flexBasis: 'calc(100% / var(--segmented-control-cols))',
+        })
       })
     })
   })

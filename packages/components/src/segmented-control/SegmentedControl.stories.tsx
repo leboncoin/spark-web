@@ -20,6 +20,16 @@ const meta: Meta<typeof SegmentedControl> = {
     'SegmentedControl.Indicator': Indicator,
   },
   tags: ['form'],
+  argTypes: {
+    rowLength: {
+      control: { type: 'number', min: 1, max: 10 },
+      description: 'Number of items per row. Undefined displays all items in a single row.',
+      table: {
+        defaultValue: { summary: 'undefined' },
+        type: { summary: 'number | undefined' },
+      },
+    },
+  },
   parameters: {
     design: {
       type: 'figma',
@@ -143,3 +153,18 @@ export const FieldRequired: StoryFn = _args => (
     </SegmentedControl>
   </FormField>
 )
+
+export const MultiRowThreeColumns: StoryFn = () => {
+  const [value, setValue] = useState<string>('hour')
+
+  return (
+    <SegmentedControl value={value} onValueChange={setValue} rowLength={3}>
+      <SegmentedControl.Indicator />
+      <SegmentedControl.Item value="hour">Hour</SegmentedControl.Item>
+      <SegmentedControl.Item value="day">Day</SegmentedControl.Item>
+      <SegmentedControl.Item value="week">Week</SegmentedControl.Item>
+      <SegmentedControl.Item value="month">Month</SegmentedControl.Item>
+      <SegmentedControl.Item value="year">Year</SegmentedControl.Item>
+    </SegmentedControl>
+  )
+}

@@ -100,6 +100,18 @@ SegmentedControl integrates with `FormField` to receive an accessible label, hel
 
 ## Advanced usage
 
+### Multi-row layout
+
+Use the `rowLength` prop to create a multi-row grid layout. This is useful when you have more options and want to display them in a compact, wrapped format—typically for form inputs like filters.
+
+<Callout kind="info">
+  The `rowLength` prop specifies how many items appear per row. Items wrap to the next row when
+  exceeding this count. The indicator automatically animates vertically and horizontally to track
+  the selected item.
+</Callout>
+
+<Canvas of={stories.MultiRowThreeColumns} />
+
 ### Custom content
 
 Items accept any React content. This example uses a two-line layout with a bold price and a `Tag` for additional context.

@@ -1,16 +1,22 @@
-import { RadioGroup } from '@base-ui/react/radio-group'
 import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
-import { Children, type ComponentProps, isValidElement, Ref, useRef, useState } from 'react'
+import {
+  Children,
+  type ComponentProps,
+  CSSProperties,
+  isValidElement,
+  Ref,
+  useRef,
+  useState,
+} from 'react'
 
 import type { SegmentedControlStylesProps } from './SegmentedControl.styles'
 import { rootStyles } from './SegmentedControl.styles'
 import { SegmentedControlContext } from './SegmentedControlContext'
+import { useSegmentedControlNavigation } from './useSegmentedControlNavigation'
 
 export interface SegmentedControlProps
-  extends
-    Omit<ComponentProps<typeof RadioGroup>, 'value' | 'defaultValue' | 'onValueChange'>,
-    SegmentedControlStylesProps {
+  extends Omit<ComponentProps<'div'>, 'onValueChange'>, SegmentedControlStylesProps {
   /**
    * The controlled selected value.
    */
@@ -23,6 +29,19 @@ export interface SegmentedControlProps
    * Callback fired when the selected value changes.
    */
   onValueChange?: (value: string) => void
+  /**
+   * Number of items per row in multi-row layout.
+   * When undefined, items display in a single row (default behavior).
+   * @default undefined
+   * @example
+   * // Create 3-column grid with wrapping rows
+   * <SegmentedControl rowLength={3}>
+   */
+  rowLength?: number
+  /**
+   * The name attribute for the radio group (used in form submissions).
+   */
+  name?: string
   ref?: Ref<HTMLDivElement>
 }
 
@@ -45,6 +64,8 @@ export const SegmentedControl = ({
   onValueChange,
   className,
   children,
+  rowLength,
+  name: nameProp,
   ref,
   ...rest
 }: SegmentedControlProps) => {
@@ -59,41 +80,66 @@ export const SegmentedControl = ({
   )
   const checkedValue = isControlled ? (value ?? null) : internalValue
 
-  const handleValueChange = (newValue: unknown) => {
-    const next = newValue as string
-
+  const handleValueChange = (newValue: string) => {
     if (!isControlled) {
-      setInternalValue(next)
+      setInternalValue(newValue)
     }
 
-    onValueChange?.(next)
+    onValueChange?.(newValue)
   }
 
-  const { labelId, description, isRequired, isInvalid, name } = useFormFieldControl()
+  const { labelId, description, isRequired, isInvalid, name: nameFromField } = useFormFieldControl()
+  const name = nameProp ?? nameFromField
+
+  // Get all item values in order
+  const itemValues: string[] = []
+  Children.forEach(children, child => {
+    if (isValidElement(child) && typeof (child.props as { value?: string }).value === 'string') {
+      itemValues.push((child.props as { value: string }).value)
+    }
+  })
+
+  // Keyboard navigation (sequential left/right)
+  const { handleKeyDown } = useSegmentedControlNavigation({
+    itemValues,
+    containerRef,
+    onValueChange: handleValueChange,
+  })
+
+  // Compute dynamic flex styles for multi-row layout
+  const flexStyles = rowLength
+    ? ({
+        '--segmented-control-cols': rowLength,
+        rowGap: 'var(--spacing-md)',
+      } as CSSProperties)
+    : undefined
 
   return (
     <SegmentedControlContext
       value={{
         checkedValue,
         containerRef,
+        onValueChange: handleValueChange,
+        name,
+        rowLength,
+        itemValues,
       }}
     >
-      <RadioGroup
+      <div
         ref={mergedRef}
-        value={isControlled ? value : undefined}
-        defaultValue={!isControlled ? (defaultValue ?? firstValue ?? undefined) : undefined}
-        onValueChange={handleValueChange}
+        role="radiogroup"
         data-spark-component="segmented-control"
         className={rootStyles({ className })}
+        style={flexStyles}
         aria-labelledby={labelId}
         aria-describedby={description}
         aria-required={isRequired || undefined}
         aria-invalid={isInvalid || undefined}
-        name={name}
+        onKeyDown={handleKeyDown}
         {...rest}
       >
         {children}
-      </RadioGroup>
+      </div>
     </SegmentedControlContext>
   )
 }
