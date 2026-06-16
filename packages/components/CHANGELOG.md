@@ -1,3 +1,13 @@
+## 17.13.0 (2026-06-16)
+
+### 🚀 Features
+
+- **components:** multiline segmented control ([189976d56](https://github.com/leboncoin/spark-web/commit/189976d56))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.12.0 (2026-06-15)
 
 ### 🚀 Features
