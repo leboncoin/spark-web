@@ -1,3 +1,13 @@
+## 17.13.1 (2026-06-17)
+
+### 🩹 Fixes
+
+- **components:** force array value on accordion ([177ad3cbe](https://github.com/leboncoin/spark-web/commit/177ad3cbe))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.13.0 (2026-06-16)
 
 ### 🚀 Features
