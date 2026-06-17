@@ -4,9 +4,14 @@ import { ComponentProps, createContext, Ref, useContext } from 'react'
 
 import { useRenderSlot } from './useRenderSlot'
 
-type ExtentedZagInterface = Omit<ComponentProps<typeof BaseAccordion.Root>, 'multiple' | 'render'>
+type BaseAccordionRootProps = ComponentProps<typeof BaseAccordion.Root<string | string[]>>
 
-export interface AccordionProps extends ExtentedZagInterface {
+type ExtentedBaseUIInterface = Omit<
+  BaseAccordionRootProps,
+  'multiple' | 'render' | 'value' | 'defaultValue' | 'onValueChange'
+>
+
+export interface AccordionProps extends ExtentedBaseUIInterface {
   /**
    * Change the default rendered element for the one passed as a child, merging their props and behavior.
    */
@@ -21,13 +26,25 @@ export interface AccordionProps extends ExtentedZagInterface {
   multiple?: boolean
   design?: 'filled' | 'outlined'
   ref?: Ref<HTMLDivElement>
+  /**
+   * The controlled value (always an array of strings)
+   */
+  value?: string[]
+  /**
+   * The default value (always an array of strings)
+   */
+  defaultValue?: string[]
+  /**
+   * Callback when the value changes (always receives an array of strings)
+   */
+  onValueChange?: (value: string[]) => void
 }
 
 const AccordionContext = createContext<{
   design: 'filled' | 'outlined'
 } | null>(null)
 
-export const Accordion = ({
+export function Accordion({
   asChild = false,
   children,
   design = 'outlined',
@@ -35,9 +52,22 @@ export const Accordion = ({
   multiple = false,
   className,
   ref,
+  value,
+  defaultValue,
+  onValueChange,
   ...props
-}: AccordionProps) => {
+}: AccordionProps) {
   const renderSlot = useRenderSlot(asChild, 'div')
+
+  // Wrap the onValueChange to always provide string[]
+  const handleValueChange = onValueChange
+    ? (newValue: string | string[]) => {
+        // Base UI returns string when multiple=false, string[] when multiple=true
+        // We normalize to always return string[]
+        const normalizedValue = Array.isArray(newValue) ? newValue : [newValue]
+        onValueChange(normalizedValue)
+      }
+    : undefined
 
   return (
     <AccordionContext value={{ design }}>
@@ -48,6 +78,9 @@ export const Accordion = ({
         hiddenUntilFound={hiddenUntilFound}
         className={cx('bg-surface h-fit rounded-lg', className)}
         render={renderSlot}
+        value={value as any}
+        defaultValue={defaultValue as any}
+        onValueChange={handleValueChange as any}
         {...props}
       >
         {children}
