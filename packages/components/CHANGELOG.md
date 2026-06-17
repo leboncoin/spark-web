@@ -1,3 +1,13 @@
+## 17.13.2 (2026-06-17)
+
+### 🩹 Fixes
+
+- **components:** adds scrolling-list onclick full support ([7226d27fa](https://github.com/leboncoin/spark-web/commit/7226d27fa))
+
+### ❤️ Thank You
+
+- jean-paul.lescouzeres
+
 ## 17.13.1 (2026-06-17)
 
 ### 🩹 Fixes
