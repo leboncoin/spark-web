@@ -1,21 +1,27 @@
 import { ArrowVerticalRight } from '@spark-ui/icons/ArrowVerticalRight'
 import { cx } from 'class-variance-authority'
-import { useContext } from 'react'
+import { useContext, MouseEvent } from 'react'
 
 import { Icon } from '../icon'
 import { IconButton, IconButtonProps } from '../icon-button'
 import { ScrollingListContext } from './ScrollingList'
 
 /** A button to scroll to the next page of items. Renders a <button> element. */
-export const ScrollingListNextButton = ({ 'aria-label': ariaLabel, ...rest }: IconButtonProps) => {
+export const ScrollingListNextButton = ({
+  'aria-label': ariaLabel,
+  onClick,
+  ...rest
+}: IconButtonProps) => {
   const ctx = useContext(ScrollingListContext)
 
-  const handleNextPage = () => {
+  const handleNextPage = (e: MouseEvent<HTMLButtonElement>) => {
     if (ctx.hasNextPage) {
       ctx.next({ behavior: ctx.scrollBehavior })
     } else {
       ctx.goTo(0, { behavior: ctx.scrollBehavior })
     }
+
+    onClick?.(e)
   }
 
   const listHasOverflow = ctx.overflow.left || ctx.overflow.right
