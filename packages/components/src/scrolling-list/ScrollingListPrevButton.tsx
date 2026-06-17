@@ -1,6 +1,6 @@
 import { ArrowVerticalLeft } from '@spark-ui/icons/ArrowVerticalLeft'
 import { cx } from 'class-variance-authority'
-import { useContext } from 'react'
+import { useContext, MouseEvent } from 'react'
 
 import { Icon } from '../icon'
 import { IconButton, IconButtonProps } from '../icon-button'
@@ -9,12 +9,12 @@ import { ScrollingListContext } from './ScrollingList'
 /** A button to scroll to the previous page of items. Renders a <button> element. */
 export const ScrollingListPrevButton = ({
   'aria-label': ariaLabel,
-
+  onClick,
   ...rest
 }: IconButtonProps) => {
   const ctx = useContext(ScrollingListContext)
 
-  const handlePrevPage = () => {
+  const handlePrevPage = (e: MouseEvent<HTMLButtonElement>) => {
     const shouldSnapFirstPage =
       ctx.activePageIndex === 0 && (ctx.scrollAreaRef.current?.scrollLeft || 0) > 0
 
@@ -25,6 +25,8 @@ export const ScrollingListPrevButton = ({
     } else {
       ctx.goTo(ctx.pages.length - 1, { behavior: ctx.scrollBehavior })
     }
+
+    onClick?.(e)
   }
 
   const listHasOverflow = ctx.overflow.left || ctx.overflow.right
