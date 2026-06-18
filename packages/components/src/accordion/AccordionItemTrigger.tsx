@@ -33,9 +33,8 @@ export const ItemTrigger = ({
         'group',
         'gap-lg min-h-sz-48 relative flex items-center justify-between',
         'px-lg py-md text-headline-2 data-panel-open:rounded-b-0 w-full rounded-[inherit] text-left',
-
         'focus-visible:u-outline focus-visible:z-raised focus-visible:outline-hidden',
-        'disabled:opacity-dim-3 cursor-pointer disabled:cursor-not-allowed',
+        'data-disabled:opacity-dim-3 cursor-pointer data-disabled:cursor-not-allowed',
         intent === 'surface' &&
           'bg-surface text-on-surface hover:enabled:bg-surface-hovered focus:bg-surface-hovered',
         intent === 'support' &&
