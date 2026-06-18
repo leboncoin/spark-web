@@ -25,6 +25,11 @@ export interface AccordionProps extends ExtentedBaseUIInterface {
    */
   multiple?: boolean
   design?: 'filled' | 'outlined'
+  /**
+   * Change the color scheme of the accordion
+   * @default surface
+   */
+  intent?: 'surface' | 'support'
   ref?: Ref<HTMLDivElement>
   /**
    * The controlled value (always an array of strings)
@@ -42,12 +47,14 @@ export interface AccordionProps extends ExtentedBaseUIInterface {
 
 const AccordionContext = createContext<{
   design: 'filled' | 'outlined'
+  intent: 'surface' | 'support'
 } | null>(null)
 
 export function Accordion({
   asChild = false,
   children,
   design = 'outlined',
+  intent = 'surface',
   hiddenUntilFound = true,
   multiple = false,
   className,
@@ -70,7 +77,7 @@ export function Accordion({
     : undefined
 
   return (
-    <AccordionContext value={{ design }}>
+    <AccordionContext value={{ design, intent }}>
       <BaseAccordion.Root
         data-spark-component="accordion"
         ref={ref}

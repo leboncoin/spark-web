@@ -169,6 +169,64 @@ export const Design: StoryFn = _args => {
   )
 }
 
+export const Intent: StoryFn = _args => {
+  const intents = ['surface', 'support'] as const
+
+  return (
+    <div className="gap-xl p-xl grid grid-cols-2">
+      {intents.map(intent => {
+        return (
+          <div key={intent}>
+            <Tag className="mb-sm">{intent === 'surface' ? 'surface (default)' : intent}</Tag>
+            <Accordion
+              multiple
+              intent={intent}
+              defaultValue={['watercraft']}
+              aria-label={`Accordion with ${intent} intent`}
+            >
+              <Accordion.Item value="watercraft">
+                <Accordion.ItemTrigger>
+                  Watercraft <span className="sr-only">{intent}</span>
+                </Accordion.ItemTrigger>
+                <Accordion.ItemContent>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua.
+                  </p>
+                </Accordion.ItemContent>
+              </Accordion.Item>
+
+              <Accordion.Item value="automobiles">
+                <Accordion.ItemTrigger>
+                  Automobiles <span className="sr-only">{intent}</span>
+                </Accordion.ItemTrigger>
+                <Accordion.ItemContent>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua.
+                  </p>
+                </Accordion.ItemContent>
+              </Accordion.Item>
+
+              <Accordion.Item value="aircrafts">
+                <Accordion.ItemTrigger>
+                  Aircrafts <span className="sr-only">{intent}</span>
+                </Accordion.ItemTrigger>
+                <Accordion.ItemContent>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua.
+                  </p>
+                </Accordion.ItemContent>
+              </Accordion.Item>
+            </Accordion>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 export const DisabledItem: StoryFn = () => {
   return (
     <Accordion defaultValue={['watercraft']}>
