@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from '@testing-library/react'
+import { act, fireEvent, render, renderHook, screen } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { ToastProvider, ToastTrigger, useToastManager } from '.'
@@ -189,27 +189,25 @@ describe('Toast', () => {
     })
 
     it('should return a stable reference across re-renders', () => {
-      const refs: ReturnType<typeof useToastManager>[] = []
+      const { result, rerender } = renderHook(() => useToastManager(), {
+        wrapper: ToastProvider,
+      })
 
-      const Implementation = () => {
-        const toastManager = useToastManager()
-        refs.push(toastManager)
-        return null
-      }
+      const first = result.current
+      rerender()
 
-      const { rerender } = render(
-        <ToastProvider>
-          <Implementation />
-        </ToastProvider>
-      )
+      expect(result.current).toBe(first)
+    })
 
-      rerender(
-        <ToastProvider>
-          <Implementation />
-        </ToastProvider>
-      )
+    it('should return a stable reference after adding a toast', () => {
+      const { result } = renderHook(() => useToastManager(), {
+        wrapper: ToastProvider,
+      })
 
-      expect(refs[0]).toBe(refs[1])
+      const first = result.current
+      act(() => result.current.add({ title: 'Hello' }))
+
+      expect(result.current).toBe(first)
     })
   })
 })
