@@ -1,3 +1,13 @@
+## 17.14.3 (2026-06-19)
+
+### 🩹 Fixes
+
+- **components:** prevent useToastManager from causing infinite loops part 2 ([fb48c3b09](https://github.com/leboncoin/spark-web/commit/fb48c3b09))
+
+### ❤️ Thank You
+
+- acd02
+
 ## 17.14.2 (2026-06-19)
 
 ### 🩹 Fixes

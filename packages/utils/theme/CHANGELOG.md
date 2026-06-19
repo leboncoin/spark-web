@@ -1,3 +1,7 @@
+## 17.14.3 (2026-06-19)
+
+This was a version bump only for @spark-ui/theme-utils to align it with other projects, there were no code changes.
+
 ## 17.14.2 (2026-06-19)
 
 This was a version bump only for @spark-ui/theme-utils to align it with other projects, there were no code changes.
