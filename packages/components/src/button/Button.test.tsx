@@ -124,5 +124,40 @@ describe('Button', () => {
 
       expect(element).toHaveAttribute('aria-busy', 'true')
     })
+
+    it('should not submit form when loading', async () => {
+      const user = userEvent.setup()
+      const submitSpy = vi.fn()
+
+      render(
+        <form onSubmit={submitSpy}>
+          <Button type="submit" isLoading loadingLabel="Loading...">
+            Submit
+          </Button>
+        </form>
+      )
+
+      await user.click(screen.getByRole('button', { name: 'Loading...' }))
+
+      expect(submitSpy).not.toHaveBeenCalled()
+    })
+
+    it('should allow focus to move away with Tab when loading', async () => {
+      const user = userEvent.setup()
+
+      render(
+        <>
+          <Button isLoading loadingLabel="Loading...">
+            Submit
+          </Button>
+          <button>Next</button>
+        </>
+      )
+
+      screen.getByRole('button', { name: 'Loading...' }).focus()
+      await user.keyboard('{Tab}')
+
+      expect(screen.getByRole('button', { name: 'Next' })).toHaveFocus()
+    })
   })
 })

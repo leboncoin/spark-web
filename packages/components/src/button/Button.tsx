@@ -78,10 +78,20 @@ export const Button = ({
   const useNativeDisabled = !!disabled && !ariaDisabled
 
   const disabledEventHandlers = useMemo(() => {
-    const result: Partial<Record<DOMAttributesEventHandler, () => void>> = {}
+    const result: Partial<Record<DOMAttributesEventHandler, (e: React.SyntheticEvent) => void>> = {}
 
     if (shouldNotInteract) {
-      blockedEventHandlers.forEach(eventHandler => (result[eventHandler] = undefined))
+      blockedEventHandlers.forEach(key => {
+        result[key] = (e: React.SyntheticEvent) => {
+          // Allow Tab to move focus away from the button
+          if (e.type === 'keydown' && (e as React.KeyboardEvent).key === 'Tab') return
+          /*
+            Setting handlers to `undefined` (e.g. `result[eventHandler] = undefined`) only blocks JS-level handlers, it does not prevent native browser behavior.
+            Calling preventDefault() here also blocks native form submission when type="submit", since the browser triggers it from the click chain.
+          */
+          e.preventDefault()
+        }
+      })
     }
 
     return result
