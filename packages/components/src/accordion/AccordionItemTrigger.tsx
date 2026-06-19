@@ -4,6 +4,7 @@ import { cx } from 'class-variance-authority'
 import { type ComponentProps, Ref } from 'react'
 
 import { Icon } from '../icon'
+import { useAccordionContext } from './Accordion'
 import { useRenderSlot } from './useRenderSlot'
 
 type ExtentedZagInterface = Omit<ComponentProps<typeof BaseAccordion.Trigger>, 'render'>
@@ -21,6 +22,7 @@ export const ItemTrigger = ({
   ...props
 }: AccordionItemTriggerProps) => {
   const renderSlot = useRenderSlot(asChild, 'button')
+  const { intent } = useAccordionContext()
 
   return (
     <BaseAccordion.Trigger
@@ -30,10 +32,13 @@ export const ItemTrigger = ({
       className={cx(
         'group',
         'gap-lg min-h-sz-48 relative flex items-center justify-between',
-        'px-lg py-md text-headline-2 text-on-surface data-[panel-open]:rounded-b-0 w-full rounded-[inherit] text-left',
-        'hover:enabled:bg-surface-hovered focus:bg-surface-hovered',
+        'px-lg py-md text-headline-2 data-panel-open:rounded-b-0 w-full rounded-[inherit] text-left',
         'focus-visible:u-outline focus-visible:z-raised focus-visible:outline-hidden',
-        'disabled:opacity-dim-3 cursor-pointer disabled:cursor-not-allowed',
+        'data-disabled:opacity-dim-3 cursor-pointer data-disabled:cursor-not-allowed',
+        intent === 'surface' &&
+          'bg-surface text-on-surface hover:enabled:bg-surface-hovered focus:bg-surface-hovered',
+        intent === 'support' &&
+          'bg-support-container text-on-support-container hover:enabled:bg-support-container-hovered focus:bg-support-container-hovered',
         className
       )}
       {...props}
@@ -43,7 +48,7 @@ export const ItemTrigger = ({
         intent="neutral"
         className={cx(
           'shrink-0 rotate-0 duration-100 ease-in motion-reduce:transition-none',
-          'group-data-[panel-open]:rotate-180'
+          'group-data-panel-open:rotate-180'
         )}
         size="sm"
       >

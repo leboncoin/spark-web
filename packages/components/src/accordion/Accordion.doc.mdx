@@ -32,21 +32,19 @@ npm install @spark-ui/components
 ## Anatomy
 
 ```tsx
-import { Accordion } from "@spark-ui/components/accordion"
+import { Accordion } from '@spark-ui/components/accordion'
 
 export default () => (
   <Accordion>
-    <Accordion.Item> 
+    <Accordion.Item>
       <Accordion.ItemHeader>
         <Accordion.ItemTrigger />
       </Accordion.ItemHeader>
       <Accordion.ItemContent />
     </Accordion.Item>
   </Accordion>
-);
+)
 ```
-
-
 
 ## API Reference
 
@@ -56,35 +54,31 @@ Contains all the parts of an accordion.
 
 <ArgTypes of={Accordion} />
 
-### _.Item
+### \_.Item
 
 Contains all the parts of a collapsible section.
 
 <ArgTypes of={Accordion.Item} />
 
-### _.ItemHeader
+### \_.ItemHeader
 
 Set the heading level for your accordion trigger elements. By default, renders an `h3`.
 
 <ArgTypes of={Accordion.ItemHeader} />
 
-### _.ItemTrigger
+### \_.ItemTrigger
 
 Toggles the collapsed state of its associated item.
 
 <ArgTypes of={Accordion.ItemTrigger} />
 
-
-### _.ItemContent
+### \_.ItemContent
 
 Contains the collapsible content for an item.
 
 <ArgTypes of={Accordion.ItemContent} />
 
-
-
 ## Examples
-
 
 ### Controlled
 
@@ -97,6 +91,12 @@ Use `value` to control which panels are opened.
 Use `design` to pick the overall look of the component (`filled` or `outlined`).
 
 <Canvas of={stories.Design} />
+
+### Intent
+
+Use `intent` to change the color scheme of the accordion (`surface` or `support`).
+
+<Canvas of={stories.Intent} />
 
 ### Disabled
 
@@ -117,6 +117,15 @@ Use `multiple` to allow multiple panels to be opened at the same time.
 Use `defaultValue` to pass an array of panels values to open by default.
 
 <Canvas of={stories.Multiple} />
+
+## Advanced Usage
+
+### Custom header content
+
+`Accordion.ItemTrigger` accepts dynamic children, allowing you for more than just a string of text.
+Note that the full textual content of the children will become the accessible name for the trigger.
+
+<Canvas of={stories.CustomHeaders} />
 
 ## Accessibility
 
@@ -171,11 +180,14 @@ Adheres to the [Accordion Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/acco
 
 ### Roles
 
-<AriaRoles of={Accordion} role="none" subcomponents={{
-  'Accordion.Item': {
-    of: Accordion.Item,
-    role: 'none',
-  },
+<AriaRoles
+  of={Accordion}
+  role="none"
+  subcomponents={{
+    'Accordion.Item': {
+      of: Accordion.Item,
+      role: 'none',
+    },
     'Accordion.ItemHeader': {
       of: Accordion.ItemHeader,
       role: 'heading',
@@ -188,4 +200,5 @@ Adheres to the [Accordion Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/acco
       of: Accordion.ItemContent,
       role: 'region',
     },
-}} />
+  }}
+/>
