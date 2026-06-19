@@ -1,3 +1,13 @@
+## 17.14.0 (2026-06-19)
+
+### 🚀 Features
+
+- **components:** accordion support intent ([4205dd607](https://github.com/leboncoin/spark-web/commit/4205dd607))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.13.2 (2026-06-17)
 
 ### 🩹 Fixes
