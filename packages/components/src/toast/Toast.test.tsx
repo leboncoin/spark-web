@@ -187,5 +187,29 @@ describe('Toast', () => {
         expect(screen.getByText('View it here')).toBeInTheDocument()
       })
     })
+
+    it('should return a stable reference across re-renders', () => {
+      const refs: ReturnType<typeof useToastManager>[] = []
+
+      const Implementation = () => {
+        const toastManager = useToastManager()
+        refs.push(toastManager)
+        return null
+      }
+
+      const { rerender } = render(
+        <ToastProvider>
+          <Implementation />
+        </ToastProvider>
+      )
+
+      rerender(
+        <ToastProvider>
+          <Implementation />
+        </ToastProvider>
+      )
+
+      expect(refs[0]).toBe(refs[1])
+    })
   })
 })
