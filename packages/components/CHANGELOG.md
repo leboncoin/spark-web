@@ -1,3 +1,13 @@
+## 17.14.2 (2026-06-19)
+
+### 🩹 Fixes
+
+- **components:** stabilize useToastManager return reference across renders ([df41a4118](https://github.com/leboncoin/spark-web/commit/df41a4118))
+
+### ❤️ Thank You
+
+- acd02
+
 ## 17.14.1 (2026-06-19)
 
 ### 🩹 Fixes
