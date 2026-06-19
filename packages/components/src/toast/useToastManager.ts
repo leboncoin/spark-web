@@ -10,8 +10,10 @@ export function useToastManager(): UseToastManagerReturnValue {
     baseToastManager.toasts.forEach(({ id }) => baseToastManager.close(id))
   }, [baseToastManager])
 
-  return {
-    ...baseToastManager,
-    closeAll,
-  } as UseToastManagerReturnValue
+  // Memoize the returned object so its reference is stable across renders,
+  // preventing infinite loops when used as a useEffect dependency.
+  return React.useMemo(
+    () => ({ ...baseToastManager, closeAll }) as UseToastManagerReturnValue,
+    [baseToastManager, closeAll]
+  )
 }
