@@ -1,3 +1,7 @@
+## 17.14.1 (2026-06-19)
+
+This was a version bump only for @spark-ui/hooks to align it with other projects, there were no code changes.
+
 ## 17.14.0 (2026-06-19)
 
 This was a version bump only for @spark-ui/hooks to align it with other projects, there were no code changes.

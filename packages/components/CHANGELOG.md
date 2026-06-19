@@ -1,3 +1,13 @@
+## 17.14.1 (2026-06-19)
+
+### 🩹 Fixes
+
+- **components:** prevent native form submission on loading buttons ([30fc7dbf3](https://github.com/leboncoin/spark-web/commit/30fc7dbf3))
+
+### ❤️ Thank You
+
+- acd02
+
 ## 17.14.0 (2026-06-19)
 
 ### 🚀 Features
