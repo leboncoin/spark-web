@@ -69,7 +69,7 @@ export const Default: StoryFn = () => {
       <Dialog.Portal>
         <Dialog.Overlay />
 
-        <Dialog.Content size="lg">
+        <Dialog.Content size="lg" fullscreenBelow="md">
           <Dialog.Header>
             <Dialog.Title>Accessibilité</Dialog.Title>
           </Dialog.Header>
@@ -236,6 +236,59 @@ export const Sizes = () => {
           </Dialog.Footer>
 
           <Dialog.CloseButton aria-label="Close edit size" />
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog>
+  )
+}
+
+export const Responsive: StoryFn = () => {
+  const [fullscreenBelow, setFullscreenBelow] =
+    useState<ExcludeNull<DialogContentProps>['fullscreenBelow']>('md')
+
+  return (
+    <Dialog>
+      <div className="gap-md flex">
+        <Dialog.Trigger asChild>
+          <Button>Open</Button>
+        </Dialog.Trigger>
+      </div>
+
+      <Dialog.Portal>
+        <Dialog.Overlay />
+
+        <Dialog.Content fullscreenBelow={fullscreenBelow}>
+          <Dialog.Header>
+            <Dialog.Title>Responsive fullscreen</Dialog.Title>
+          </Dialog.Header>
+
+          <Dialog.Body className="gap-lg flex flex-col">
+            <Dialog.Description>
+              Resize the window to see the dialog go fullscreen below the selected breakpoint.
+            </Dialog.Description>
+
+            <RadioGroup
+              className="gap-md flex flex-wrap"
+              value={fullscreenBelow}
+              onValueChange={value =>
+                setFullscreenBelow(value as ExcludeNull<DialogContentProps>['fullscreenBelow'])
+              }
+            >
+              <RadioGroup.Radio value="sm">sm</RadioGroup.Radio>
+              <RadioGroup.Radio value="md">md</RadioGroup.Radio>
+              <RadioGroup.Radio value="lg">lg</RadioGroup.Radio>
+              <RadioGroup.Radio value="xl">xl</RadioGroup.Radio>
+              <RadioGroup.Radio value="always">always</RadioGroup.Radio>
+            </RadioGroup>
+          </Dialog.Body>
+
+          <Dialog.Footer className="gap-md flex justify-end">
+            <Dialog.Close asChild>
+              <Button>Close</Button>
+            </Dialog.Close>
+          </Dialog.Footer>
+
+          <Dialog.CloseButton aria-label="Close dialog" />
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog>
