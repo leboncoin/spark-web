@@ -435,6 +435,58 @@ export const AssistEvent: StoryFn = _args => {
   )
 }
 
+export const Icons: StoryFn = () => (
+  <div className="gap-lg flex flex-col">
+    <div className="gap-md flex flex-row">
+      <Chip>
+        <Chip.LeadingIcon>
+          <Icon label="calendar">
+            <CalendarOutline />
+          </Icon>
+        </Chip.LeadingIcon>
+        <Chip.Content>Leading icon</Chip.Content>
+      </Chip>
+      <Chip>
+        <Chip.Content>Trailing icon</Chip.Content>
+        <Chip.TrailingIcon>
+          <Icon label="eye">
+            <EyeOutline />
+          </Icon>
+        </Chip.TrailingIcon>
+      </Chip>
+      <Chip>
+        <Chip.LeadingIcon>
+          <Icon label="mail">
+            <MailOutline />
+          </Icon>
+        </Chip.LeadingIcon>
+        <Chip.Content>Both icons</Chip.Content>
+        <Chip.TrailingIcon>
+          <Icon label="check">
+            <Check />
+          </Icon>
+        </Chip.TrailingIcon>
+      </Chip>
+    </div>
+    <div className="gap-md flex flex-row">
+      <Chip onClear={() => console.log('clear')}>
+        <Chip.LeadingIcon>
+          <Icon label="account">
+            <AccountFill />
+          </Icon>
+        </Chip.LeadingIcon>
+        <Chip.Content>With clear button</Chip.Content>
+        <Chip.TrailingIcon>
+          <Icon label="eye">
+            <EyeOutline />
+          </Icon>
+        </Chip.TrailingIcon>
+        <Chip.ClearButton label="clear" />
+      </Chip>
+    </div>
+  </div>
+)
+
 export const Suggestion: StoryFn = () => {
   const [isBlurred, setIsBlurred] = useState<boolean>(false)
   const [content, setContent] = useState<string>('')
