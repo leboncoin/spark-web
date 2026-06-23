@@ -111,7 +111,7 @@ export const useChipElement = ({
     <>
       {leadingIcon}
       {content}
-      {leadingIcon === undefined ? trailingIcon : null}
+      {clearButton === undefined ? trailingIcon : null}
       {clearButton}
     </>
   )

@@ -134,6 +134,16 @@ When the chip has a `pressed` status configured it becomes a toggle button.
 
 <Canvas of={stories.SelectionIntent} />
 
+### Icon
+
+Chips can display icons to provide additional visual context using `Chip.LeadingIcon` and `Chip.TrailingIcon`.
+
+<Callout kind="info">
+  When a `Chip.ClearButton` is present, the `Chip.TrailingIcon` will not be displayed as the clear button takes priority in the trailing position.
+</Callout>
+
+<Canvas of={stories.Icons} />
+
 ### Disabled
 
 When a chip is `disabled`, no action is fired when clicking on it.
