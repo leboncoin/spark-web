@@ -1,3 +1,13 @@
+## 17.14.4 (2026-06-23)
+
+### 🩹 Fixes
+
+- **components:** replace external image URL in LinkBox a11y test to prevent networkidle timeout ([bfa9b157c](https://github.com/leboncoin/spark-web/commit/bfa9b157c))
+
+### ❤️ Thank You
+
+- acd02
+
 ## 17.14.3 (2026-06-19)
 
 This was a version bump only for @spark-ui/internal-utils to align it with other projects, there were no code changes.

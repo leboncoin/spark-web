@@ -1,3 +1,15 @@
+## 17.14.4 (2026-06-23)
+
+### 🩹 Fixes
+
+- **components:** allow dual icons on chips ([cb65d2d89](https://github.com/leboncoin/spark-web/commit/cb65d2d89))
+- **components:** replace external image URL in LinkBox a11y test to prevent networkidle timeout ([bfa9b157c](https://github.com/leboncoin/spark-web/commit/bfa9b157c))
+
+### ❤️ Thank You
+
+- acd02
+- Powerplex @Powerplex
+
 ## 17.14.3 (2026-06-19)
 
 ### 🩹 Fixes
