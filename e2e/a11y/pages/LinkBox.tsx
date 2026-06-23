@@ -11,7 +11,7 @@ export const A11yLinkBox = () => (
       <LinkBox asChild>
         <article className="space-y-md">
           <div className="bg-neutral relative aspect-square w-full overflow-hidden rounded-md shadow-md">
-            <img className="size-full" src="https://picsum.photos/200/200" alt="Card image" />
+            <img className="size-full" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23ccc'/%3E%3C/svg%3E" alt="Card image" />
 
             <LinkBox.Raised>
               <IconButton shape="pill" aria-label="Like" className="bottom-md right-md !absolute">
