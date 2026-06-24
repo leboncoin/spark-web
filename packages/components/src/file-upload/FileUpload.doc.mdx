@@ -262,11 +262,23 @@ Use `FileUpload.Context` to access `acceptedFiles` and `rejectedFiles`, then use
 
 Use the `disabled` prop to prevent user interaction with the file upload component. When disabled, users cannot add, remove, or modify files. The component is visually disabled with reduced opacity and a "not-allowed" cursor. Existing files are still displayed but cannot be modified. Disabled fields do not participate in form submission.
 
+<Callout kind="warning" marginY="large">
+  <p>
+    <strong>Important:</strong> When using `FileUpload` inside a `FormField`, you must set the `disabled` prop on the `FormField` component rather than on `FileUpload` itself. The `FormField`'s `disabled` state will be automatically propagated to the `FileUpload`.
+  </p>
+</Callout>
+
 <Canvas of={stories.Disabled} />
 
 ### Read-only state
 
 Use the `readOnly` prop to set the file upload to read-only mode. Similar to disabled, users cannot add, remove, or modify files, but the component maintains a more subtle visual appearance (no opacity reduction). Existing files are displayed but cannot be modified. Read-only fields participate in form submission.
+
+<Callout kind="warning" marginY="large">
+  <p>
+    <strong>Important:</strong> When using `FileUpload` inside a `FormField`, you must set the `readOnly` prop on the `FormField` component rather than on `FileUpload` itself. The `FormField`'s `readOnly` state will be automatically propagated to the `FileUpload`.
+  </p>
+</Callout>
 
 <Canvas of={stories.ReadOnly} />
 
@@ -321,6 +333,12 @@ The implementation includes:
 ## Form field
 
 When using the `FileUpload` component you might want to use it in combination with `FormField` to add a proper label, error message, etc.
+
+<Callout kind="info" marginY="large">
+  <p>
+    <strong>State management:</strong> When `FileUpload` is used inside a `FormField`, the `disabled` and `readOnly` props should be set on the `FormField` component. The `FormField` will automatically propagate these states to the `FileUpload`. Setting them directly on `FileUpload` in this context will not work as expected.
+  </p>
+</Callout>
 
 ### Label
 
