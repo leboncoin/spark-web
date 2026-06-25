@@ -32,6 +32,16 @@ export const ghostVariants = [
     ]),
   },
   {
+    intent: 'ai',
+    design: 'ghost',
+    class: tw([
+      'text-on-ai-container',
+      'hover:bg-ai/dim-5',
+      'enabled:active:bg-ai/dim-5',
+      'focus-visible:bg-ai/dim-5',
+    ]),
+  },
+  {
     intent: 'success',
     design: 'ghost',
     class: tw([

@@ -4,6 +4,7 @@ const intents = [
   'current',
   'main',
   'support',
+  'ai',
   'success',
   'error',
   'info',
