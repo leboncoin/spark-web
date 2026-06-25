@@ -37,6 +37,18 @@ export const filledVariants = [
       'focus-visible:bg-accent-hovered',
     ]),
   },
+  // AI
+  {
+    intent: 'ai',
+    design: 'filled',
+    class: tw([
+      'bg-ai',
+      'text-on-ai',
+      'hover:bg-ai-hovered',
+      'enabled:active:bg-ai-hovered',
+      'focus-visible:bg-ai-hovered',
+    ]),
+  },
   // Success
   {
     intent: 'success',
