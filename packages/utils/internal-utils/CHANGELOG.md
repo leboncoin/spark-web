@@ -1,3 +1,13 @@
+## 17.15.0 (2026-06-25)
+
+### 🚀 Features
+
+- **components:** added ai intent to buttons ([27012776a](https://github.com/leboncoin/spark-web/commit/27012776a))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.14.4 (2026-06-23)
 
 ### 🩹 Fixes
