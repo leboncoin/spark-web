@@ -1,3 +1,13 @@
+## 17.15.1 (2026-06-29)
+
+### 💅 Refactors
+
+- **components:** removed complex tailwind classes from accordion ([92dfc6008](https://github.com/leboncoin/spark-web/commit/92dfc6008))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.15.0 (2026-06-25)
 
 ### 🚀 Features
