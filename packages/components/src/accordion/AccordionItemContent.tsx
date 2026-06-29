@@ -25,8 +25,8 @@ export const ItemContent = ({
       ref={ref}
       data-spark-component="accordion-item-content"
       className={cx(
-        '[&>:first-child]:p-lg overflow-hidden',
-        'h-[var(--accordion-panel-height)] transition-all duration-200 data-[ending-style]:h-0 data-[starting-style]:h-0',
+        '*:first:p-lg overflow-hidden',
+        'h-(--accordion-panel-height) transition-all duration-200 data-ending-style:h-0 data-starting-style:h-0',
         'text-body-1 text-on-surface',
         className
       )}
