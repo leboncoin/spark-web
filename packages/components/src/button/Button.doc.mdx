@@ -9,7 +9,6 @@ import * as ButtonStories from './Button.stories'
 
 <Meta of={ButtonStories} />
 
-
 # Button
 
 Button component is used to trigger an action or event, such as submitting a form, opening a Dialog, canceling an action, or performing a delete operation.
@@ -27,9 +26,7 @@ npm install @spark-ui/components
 ```js
 import { Button } from '@spark-ui/components/button'
 
-export default () => (
-  <Button />
-);
+export default () => <Button />
 ```
 
 ## API Reference
@@ -78,12 +75,6 @@ It preserves the width of your button to avoid content layout shifting.
 Alternatively, use `loadingText` if you prefer the loading text to be visible to the user (**Warning: using this might cause layout shifting**)
 
 <Canvas of={ButtonStories.LoadingWithText} />
-
-### Shapes
-
-Use `shape` prop to set the shape of a button.
-
-<Canvas of={ButtonStories.Shapes} />
 
 ### Sizes
 
