@@ -7,9 +7,9 @@ import { Icon } from '../icon'
 import { useAccordionContext } from './Accordion'
 import { useRenderSlot } from './useRenderSlot'
 
-type ExtentedZagInterface = Omit<ComponentProps<typeof BaseAccordion.Trigger>, 'render'>
+type ExtendedBaseUiInterface = Omit<ComponentProps<typeof BaseAccordion.Trigger>, 'render'>
 
-export interface AccordionItemTriggerProps extends ExtentedZagInterface {
+export interface AccordionItemTriggerProps extends ExtendedBaseUiInterface {
   asChild?: boolean
   ref?: Ref<HTMLButtonElement>
 }

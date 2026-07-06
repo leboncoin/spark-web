@@ -5,9 +5,9 @@ import { type ComponentProps, Ref } from 'react'
 import { useAccordionContext } from './Accordion'
 import { useRenderSlot } from './useRenderSlot'
 
-type ExtentedZagInterface = Omit<ComponentProps<typeof BaseAccordion.Item>, 'render'>
+type ExtendedBaseUiInterface = Omit<ComponentProps<typeof BaseAccordion.Item>, 'render'>
 
-export interface AccordionItemProps extends ExtentedZagInterface {
+export interface AccordionItemProps extends ExtendedBaseUiInterface {
   asChild?: boolean
   ref?: Ref<HTMLDivElement>
 }
