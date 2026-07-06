@@ -5,7 +5,6 @@
  */
 
 export const a11yComponents = {
-  accordion: 'accordion',
   'alert-dialog': 'alert-dialog',
   avatar: 'avatar',
   badge: 'badge',

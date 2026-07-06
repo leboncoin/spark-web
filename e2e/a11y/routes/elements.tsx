@@ -1,6 +1,5 @@
 import { type ComponentType } from 'react'
 
-import { A11yAccordion } from '../pages/Accordion'
 import { A11yAlertDialog } from '../pages/AlertDialog'
 import { A11yAvatar } from '../pages/Avatar'
 import { A11yBadge } from '../pages/Badge'
@@ -55,7 +54,6 @@ import { type A11yComponentsKey } from './components'
  */
 
 export const a11yElements: Record<A11yComponentsKey, ComponentType> = {
-  accordion: A11yAccordion,
   'alert-dialog': A11yAlertDialog,
   avatar: A11yAvatar,
   badge: A11yBadge,
