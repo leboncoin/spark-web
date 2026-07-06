@@ -1,3 +1,13 @@
+## 17.15.2 (2026-07-06)
+
+### 💅 Refactors
+
+- **components:** rename zag interface ([a2508c876](https://github.com/leboncoin/spark-web/commit/a2508c876))
+
+### ❤️ Thank You
+
+- chrssb
+
 ## 17.15.1 (2026-06-29)
 
 ### 💅 Refactors

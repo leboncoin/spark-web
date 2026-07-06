@@ -1,3 +1,7 @@
+## 17.15.2 (2026-07-06)
+
+This was a version bump only for @spark-ui/icons to align it with other projects, there were no code changes.
+
 ## 17.15.1 (2026-06-29)
 
 This was a version bump only for @spark-ui/icons to align it with other projects, there were no code changes.
