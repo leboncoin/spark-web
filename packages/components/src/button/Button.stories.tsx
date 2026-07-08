@@ -1,4 +1,5 @@
 import { Switch } from '@spark-ui/components/switch'
+import { Table } from '@spark-ui/components/table'
 import { Check } from '@spark-ui/icons/Check'
 import { FavoriteOutline } from '@spark-ui/icons/FavoriteOutline'
 import { Meta, StoryFn, StoryObj } from '@storybook/react-vite'
@@ -34,6 +35,17 @@ const intents: ButtonProps['intent'][] = [
   'surfaceInverse',
 ]
 const designs: ButtonProps['design'][] = ['filled', 'outlined', 'tinted', 'contrast', 'ghost']
+const appearances: NonNullable<ButtonProps['appearance']>[] = [
+  'primary',
+  'secondary',
+  'tertiary',
+  'contrast',
+  'ghost',
+  'success',
+  'danger',
+  'boost',
+  'AI',
+]
 
 export const Default: StoryObj = {
   render: _args => {
@@ -186,5 +198,59 @@ export const Toggle: StoryFn = () => {
         </Icon>
       )}
     </Button>
+  )
+}
+
+export const Appearance: StoryFn = _args => {
+  const [underline, setUnderline] = useState(false)
+
+  const appearanceRows = appearances.map((appearance, index) => ({
+    id: `appearance-${index}`,
+    appearance,
+  }))
+
+  return (
+    <div className="gap-lg flex flex-col">
+      <Switch checked={underline} onClick={() => setUnderline(!underline)}>
+        Show underline
+      </Switch>
+      <Table>
+        <Table.Grid aria-label="Button appearance by state">
+          <Table.Header>
+            <Table.Column id="appearance" label="Appearance" isRowHeader />
+            <Table.Column id="base" label="Base" />
+            <Table.Column id="disabled" label="Disabled" />
+            <Table.Column id="loading" label="Loading" />
+          </Table.Header>
+          <Table.Body>
+            {appearanceRows.map(row => (
+              <Table.Row key={row.id} id={row.id}>
+                <Table.Cell>{row.appearance}</Table.Cell>
+                <Table.Cell className="bg-neutral-container">
+                  <Button appearance={row.appearance} underline={underline}>
+                    Click me
+                  </Button>
+                </Table.Cell>
+                <Table.Cell>
+                  <Button appearance={row.appearance} underline={underline} disabled>
+                    Click me
+                  </Button>
+                </Table.Cell>
+                <Table.Cell>
+                  <Button
+                    appearance={row.appearance}
+                    underline={underline}
+                    isLoading
+                    loadingLabel="Loading..."
+                  >
+                    Click me
+                  </Button>
+                </Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table.Grid>
+      </Table>
+    </div>
   )
 }
