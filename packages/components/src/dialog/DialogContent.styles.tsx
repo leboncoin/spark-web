@@ -6,6 +6,14 @@ export const dialogContentStyles = cva(
     'focus-visible:outline-hidden focus-visible:u-outline',
     '[&:not(:has(footer))]:pb-lg',
     '[&:not(:has(header))]:pt-lg',
+    '[@container_style(--size:fullscreen)]:fixed',
+    '[@container_style(--size:fullscreen)]:size-full',
+    '[@container_style(--size:fullscreen)]:top-0',
+    '[@container_style(--size:fullscreen)]:left-0',
+    '[@container_style(--size:fullscreen)]:max-w-none',
+    '[@container_style(--size:fullscreen)]:max-h-none',
+    '[@container_style(--size:fullscreen)]:translate-none!',
+    '[@container_style(--size:fullscreen)]:rounded-none',
     'data-open:animation-duration-400 data-closed:animation-duration-200',
     'data-starting-style:scale-90 data-starting-style:opacity-0',
     'data-ending-style:scale-90 data-ending-style:opacity-0',
@@ -22,6 +30,7 @@ export const dialogContentStyles = cva(
   {
     variants: {
       size: {
+        /** @deprecated Use `fullscreenBelow="always"` instead. */
         fullscreen: 'fixed size-full top-0 left-0',
         sm: 'max-w-[min(480px,calc(100vw-2rem))] data-nested-dialog-open:scale-90',
         md: 'max-w-[min(672px,calc(100vw-2rem))] data-nested-dialog-open:scale-90',
