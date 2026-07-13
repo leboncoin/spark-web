@@ -1,3 +1,18 @@
+## 17.15.3 (2026-07-13)
+
+### 🩹 Fixes
+
+- **cli-utils:** sync chromatic version with gha ([b89272f59](https://github.com/leboncoin/spark-web/commit/b89272f59))
+
+### 📦 Build
+
+- **npm:** bump svgo from 3.3.3 to 4.0.2 ([d455dbb4f](https://github.com/leboncoin/spark-web/commit/d455dbb4f))
+- **npm:** bump ws from 8.20.0 to 8.21.0 ([b7406f0f1](https://github.com/leboncoin/spark-web/commit/b7406f0f1))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.15.2 (2026-07-06)
 
 This was a version bump only for @spark-ui/hooks to align it with other projects, there were no code changes.
