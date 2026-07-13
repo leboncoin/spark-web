@@ -1,3 +1,18 @@
+## 17.15.5 (2026-07-13)
+
+### 🩹 Fixes
+
+- updated vite dts types ([11b217f5f](https://github.com/leboncoin/spark-web/commit/11b217f5f))
+
+### 📦 Build
+
+- **npm:** bump the vite group across 1 directory with 3 updates ([7d8f828b6](https://github.com/leboncoin/spark-web/commit/7d8f828b6))
+- **npm:** bump the testing group across 1 directory with 4 updates ([87fafa4ae](https://github.com/leboncoin/spark-web/commit/87fafa4ae))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.15.4 (2026-07-13)
 
 ### 📦 Build
