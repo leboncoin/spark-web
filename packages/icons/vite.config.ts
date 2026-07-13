@@ -45,8 +45,8 @@ export default defineConfig({
     dts({
       include: ['src/index.ts', 'src/icons/**/*.{ts,tsx}', 'src/Types.ts', 'src/tags.ts'],
       entryRoot: 'src',
-      outDir: 'dist',
-      rollupTypes: false,
+      outDirs: ['dist'],
+      bundleTypes: false,
       insertTypesEntry: false,
       copyDtsFiles: false,
     }),
