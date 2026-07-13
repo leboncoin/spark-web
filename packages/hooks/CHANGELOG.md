@@ -1,3 +1,11 @@
+## 17.15.4 (2026-07-13)
+
+### 📦 Build
+
+- **npm:** bump fs-extra from 11.3.4 to 11.3.6 ([cfa327e2c](https://github.com/leboncoin/spark-web/commit/cfa327e2c))
+- **npm:** bump @babel/core from 7.28.6 to 7.29.6 ([53c0690f3](https://github.com/leboncoin/spark-web/commit/53c0690f3))
+- **npm:** bump @xyflow/react from 12.10.2 to 12.11.2 ([19a51832f](https://github.com/leboncoin/spark-web/commit/19a51832f))
+
 ## 17.15.3 (2026-07-13)
 
 ### 🩹 Fixes
