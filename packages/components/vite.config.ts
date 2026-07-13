@@ -33,16 +33,15 @@ export default defineConfig({
     react(),
     dts({
       entryRoot: resolve(__dirname, 'src'),
-      outDir: resolve(__dirname, 'dist'),
+      outDirs: [resolve(__dirname, 'dist')],
       include: [
         'src/**/*.{ts,tsx}',
         resolve(__dirname, '../../global.d.ts'),
         resolve(__dirname, 'global.d.ts'),
       ],
       exclude: ['src/**/*.test.{ts,tsx}', 'src/**/*.stories.{ts,tsx}', 'src/**/*.doc.*'],
-      rollupTypes: false,
+      bundleTypes: false,
       copyDtsFiles: true,
-      bundledPackages: [],
       afterBuild: () => {
         const distDir = resolve(__dirname, 'dist')
 

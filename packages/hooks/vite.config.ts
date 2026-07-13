@@ -35,8 +35,8 @@ export default defineConfig({
       include: ['src/**/*.ts', 'src/**/*.tsx'],
       exclude: ['src/**/*.test.*', 'src/**/*.doc.*', 'src/**/*.stories.*'],
       entryRoot: 'src',
-      outDir: 'dist',
-      rollupTypes: false,
+      outDirs: ['dist'],
+      bundleTypes: false,
       insertTypesEntry: false,
       copyDtsFiles: false,
       afterBuild: () => {
