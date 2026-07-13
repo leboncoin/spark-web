@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "4.10.2",
-    "@babel/core": "7.28.6",
+    "@babel/core": "7.29.6",
     "@commitlint/cli": "20.0.0",
     "@commitlint/config-conventional": "20.0.0",
     "@commitlint/config-workspace-scopes": "20.0.0",
