@@ -2,6 +2,7 @@ version: 2
 updates:
   - package-ecosystem: 'npm'
     directory: '/'
+    open-pull-requests-limit: 10
     schedule:
       interval: 'weekly'
     commit-message:
@@ -32,27 +33,3 @@ updates:
           - 'vite'
           - '@vitejs/*'
           - '*vite*'
-      dependencies:
-        patterns:
-          - '*'
-        exclude-patterns:
-          - '@zag-js/*'
-          - '@react-aria/*'
-          - '@react-stately/*'
-          - '@testing-library/*'
-          - '@testing-library'
-          - 'vitest'
-          - '@vitest/*'
-          - '@vitest'
-          - '@playwright/*'
-          - '@playwright'
-          - '@storybook/*'
-          - '*storybook*'
-          - 'vite'
-          - '@vitejs/*'
-          - '*vite*'
-        update-types: ['minor', 'patch']
-      major:
-        patterns:
-          - '*'
-        update-types: ['major']
