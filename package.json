@@ -82,7 +82,7 @@
     "@vitest/ui": "4.1.10",
     "@vueless/storybook-dark-mode": "10.0.7",
     "aria-query": "5.3.2",
-    "babel-loader": "10.0.0",
+    "babel-loader": "10.1.1",
     "browserslist-to-esbuild": "2.1.1",
     "chalk": "5.6.2",
     "chromatic": "^18.0.1",
