@@ -1,6 +1,5 @@
 import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { AriaRoles } from '@docs/helpers/AriaRoles'
 import { Callout } from '@docs/helpers/Callout'
 import { Kbd } from '../kbd'
 import { FileUpload } from '.'
@@ -12,6 +11,7 @@ import * as stories from './FileUpload.stories'
 # FileUpload
 
 A file upload component that provides a flexible way to handle file selection, drag-and-drop functionality, and file previews. The component supports both simple button triggers and dropzone interfaces with customizable file rendering.
+
 <Canvas of={stories.Default} />
 
 ## Install
@@ -23,13 +23,11 @@ npm install @spark-ui/components
 ## Anatomy
 
 ```tsx
-import { FileUpload } from "@spark-ui/components/file-upload"
+import { FileUpload } from '@spark-ui/components/file-upload'
 
 export default () => (
   <FileUpload>
-    <FileUpload.Trigger>
-      Upload Files
-    </FileUpload.Trigger>
+    <FileUpload.Trigger>Upload Files</FileUpload.Trigger>
     <FileUpload.Context>
       {({ acceptedFiles }) => (
         <ul>
@@ -40,7 +38,7 @@ export default () => (
       )}
     </FileUpload.Context>
   </FileUpload>
-);
+)
 ```
 
 ## Callbacks
@@ -48,27 +46,30 @@ export default () => (
 The FileUpload component provides several callback props that allow you to respond to file selection and validation events:
 
 - **`onFileAccept`** - Called when files are accepted after validation. Receives details about the accepted files.
+
   ```tsx
   onFileAccept?: (details: FileAcceptDetails) => void
-  
+
   interface FileAcceptDetails {
     files: File[]
   }
   ```
 
 - **`onFileReject`** - Called when files are rejected due to validation errors. Receives details about the rejected files and their error codes.
+
   ```tsx
   onFileReject?: (details: FileRejectDetails) => void
-  
+
   interface FileRejectDetails {
     files: RejectedFile[]
   }
   ```
 
 - **`onFileChange`** - Called when files change (both accepted and rejected). Receives details about both accepted and rejected files. Use this for controlled mode by extracting `details.acceptedFiles` to update the `value` prop.
+
   ```tsx
   onFileChange?: (details: FileChangeDetails) => void
-  
+
   interface FileChangeDetails {
     acceptedFiles: File[]
     rejectedFiles: RejectedFile[]
@@ -83,19 +84,19 @@ Contains all the parts of a file upload.
 
 <ArgTypes of={FileUpload} />
 
-### _.Trigger
+### \_.Trigger
 
 Triggers the file selection dialog when clicked. Can be styled as a button or rendered as any component using the `asChild` prop.
 
 <ArgTypes of={FileUpload.Trigger} />
 
-### _.Dropzone
+### \_.Dropzone
 
 Provides a drag-and-drop area for file selection. Can be customized with children and supports the `unstyled` prop to remove default styling.
 
 <ArgTypes of={FileUpload.Dropzone} />
 
-### _.Context
+### \_.Context
 
 A render prop component that provides access to the FileUpload internal state and utilities. Use this component when you need to build custom file previews or access file data programmatically.
 
@@ -126,24 +127,25 @@ The render prop function receives an object with the following properties:
     - `FILE_TOO_SMALL` - File size below `minFileSize`
     - `FILE_INVALID` - Generic validation failure
     - `FILE_EXISTS` - Duplicate file detected
-  
+
   You can use the `FILE_UPLOAD_ERRORS` constant object to reference these error codes instead of using string literals.
 
 - **`formatFileSize`** - `(bytes: number, locale?: string) => string`  
   A utility function to format file sizes in bytes to a human-readable format. The function uses `Intl.NumberFormat` to format sizes according to the locale, supporting units from bytes to gigabytes.
-  
+
   **Parameters:**
   - `bytes`: The file size in bytes
   - `locale` (optional): A [BCP47](https://www.ietf.org/rfc/bcp/bcp47.txt) language code (e.g., `'en'`, `'fr'`). If not provided, uses the locale from the FileUpload component.
-  
+
   **Returns:** A formatted string with the appropriate unit (e.g., `"1.5 MB"`, `"1,5 Mo"`).
-  
+
   **Examples:**
+
   ```tsx
-  formatFileSize(1024)           // "1 kB" (or "1 ko" in French)
-  formatFileSize(1024 * 1024)    // "1 MB" (or "1 Mo" in French)
-  formatFileSize(1536, 'en')     // "1.5 kB"
-  formatFileSize(1536, 'fr')     // "1,5 ko"
+  formatFileSize(1024) // "1 kB" (or "1 ko" in French)
+  formatFileSize(1024 * 1024) // "1 MB" (or "1 Mo" in French)
+  formatFileSize(1536, 'en') // "1.5 kB"
+  formatFileSize(1536, 'fr') // "1,5 ko"
   ```
 
 - **`locale`** - `string`  
@@ -184,18 +186,17 @@ The render prop function receives an object with the following properties:
 
 <ArgTypes of={FileUpload.Context} />
 
-### _.AcceptedFile
+### \_.AcceptedFile
 
 Displays an accepted file with its name, size, and a delete button. Supports upload progress display via the `uploadProgress` prop.
 
 <ArgTypes of={FileUpload.AcceptedFile} />
 
-### _.RejectedFile
+### \_.RejectedFile
 
 Displays a rejected file with its name, size, error messages, and a delete button. Requires a `renderError` function to customize error message display.
 
 <ArgTypes of={FileUpload.RejectedFile} />
-
 
 ## Examples
 
@@ -216,8 +217,6 @@ Use the `defaultValue` prop to initialize the component with existing files. Thi
 Use the `multiple={false}` prop to allow only a single file to be selected. When a new file is selected, it will replace the existing file.
 
 <Canvas of={stories.SingleFile} />
-
-
 
 ### Error Handling
 
@@ -284,7 +283,8 @@ Use `unstyled` on the `FileUpload.Trigger` and wrap it with a Spark UI component
 
 <Callout kind="warning" marginY="large">
   <p>
-    a11y: It is important that the trigger remain a button (with `type="button"`) and that it is focusable and clickable.
+    a11y: It is important that the trigger remain a button (with `type="button"`) and that it is
+    focusable and clickable.
   </p>
 </Callout>
 
@@ -311,12 +311,12 @@ Use `FileUpload.Context` to access `acceptedFiles` and customize the markup of t
 You can make the file previews sortable using drag and drop. This example uses the [`useSortableList`](/docs/hooks-usesortablelist--docs) hook to implement drag and drop reordering with the HTML5 Drag and Drop API. The component uses controlled mode to manage the file order state, allowing users to reorder files by dragging them.
 
 The implementation includes:
+
 - Drag and drop reordering with visual feedback (opacity change during drag)
 - Keyboard navigation support (Arrow Up/Down keys to reorder)
 - Controlled mode to keep the file order synchronized with external state
 
 <Canvas of={stories.Sortable} />
-
 
 ## Form field
 
@@ -327,7 +327,10 @@ When using the `FileUpload` component you might want to use it in combination wi
 Use `FormField.Label` to add a label to the file upload. The label provides visual context and can display the required indicator.
 
 <Callout kind="info">
-  **Note**: Unlike other form components, the `FormField.Label` is not automatically linked to the trigger button or dropzone via `aria-labelledby`. The accessible name of the button/dropzone remains their natural text content. The label is still useful for visual consistency, required indicators, and form structure.
+  **Note**: Unlike other form components, the `FormField.Label` is not automatically linked to the
+  trigger button or dropzone via `aria-labelledby`. The accessible name of the button/dropzone
+  remains their natural text content. The label is still useful for visual consistency, required
+  indicators, and form structure.
 </Callout>
 
 <Canvas of={stories.FieldLabel} />
@@ -337,7 +340,8 @@ Use `FormField.Label` to add a label to the file upload. The label provides visu
 Use the `isRequired` prop of the `FormField` to indicate that the file upload is required.
 
 <Callout kind="warning">
-  If your form has mandatory fields, you must include an explicit note at the top of the form, outside of the input fields, to inform users that certain fields are required.
+  If your form has mandatory fields, you must include an explicit note at the top of the form,
+  outside of the input fields, to inform users that certain fields are required.
 </Callout>
 
 <Canvas of={stories.FieldRequired} />
@@ -369,4 +373,3 @@ Adheres to the [file upload pattern](https://www.w3.org/WAI/ARIA/apg/patterns/fi
 ### Pattern
 
 The FileUpload component uses a context-based architecture where the main component provides file management state and the sub-components handle specific functionality like triggering file selection and displaying file previews.
-

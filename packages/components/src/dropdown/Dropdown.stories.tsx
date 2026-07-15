@@ -39,13 +39,6 @@ const meta: Meta<typeof Dropdown> = {
     'Dropdown.Portal': DropdownPortal,
   },
   tags: ['data-entry'],
-  parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/0QchRdipAVuvVoDfTjLrgQ/Component-Specs-of-Spark?node-id=46530-8050&t=RvxIc25Ub8xTcBFf-4',
-      allowFullscreen: true,
-    },
-  },
 }
 
 export default meta

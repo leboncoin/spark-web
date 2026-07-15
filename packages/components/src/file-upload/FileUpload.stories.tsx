@@ -34,13 +34,6 @@ const meta: Meta<typeof FileUpload> = {
     'FileUpload.RejectedFileDeleteTrigger': RejectedFileDeleteTrigger,
   },
   tags: ['data-entry'],
-  parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/0QchRdipAVuvVoDfTjLrgQ/Spark-Component-Specs?node-id=59809-7264&t=W6FxPCamO7mFQu07-4',
-      allowFullscreen: true,
-    },
-  },
 }
 
 export default meta

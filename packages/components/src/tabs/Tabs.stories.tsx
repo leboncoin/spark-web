@@ -22,13 +22,6 @@ const meta: Meta<typeof Tabs> = {
     'Tabs.Content': Content,
   },
   tags: ['navigation'],
-  parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/0QchRdipAVuvVoDfTjLrgQ/Component-Specs-of-Spark?node-id=1613-37148&t=RvxIc25Ub8xTcBFf-4',
-      allowFullscreen: true,
-    },
-  },
 }
 
 export default meta

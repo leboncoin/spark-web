@@ -27,13 +27,6 @@ const meta: Meta<typeof Chip> = {
     'Chip.ClearButton': ChipClearButton,
   },
   tags: ['data-entry'],
-  parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/0QchRdipAVuvVoDfTjLrgQ/Component-Specs-of-Spark?node-id=1613-34616&t=RvxIc25Ub8xTcBFf-4',
-      allowFullscreen: true,
-    },
-  },
 }
 
 type ChipProps = ComponentProps<typeof Chip>

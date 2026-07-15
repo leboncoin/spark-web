@@ -18,13 +18,6 @@ const meta: Meta<typeof Breadcrumb> = {
     'Breadcrumb.Separator': Separator,
   },
   tags: ['navigation'],
-  parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/0QchRdipAVuvVoDfTjLrgQ/Component-Specs-of-Spark?node-id=51823-4175&t=RvxIc25Ub8xTcBFf-4',
-      allowFullscreen: true,
-    },
-  },
 }
 
 export default meta

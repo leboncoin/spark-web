@@ -13,13 +13,6 @@ const meta: Meta<typeof CheckboxGroup> = {
   title: 'Components/CheckboxGroup',
   component: CheckboxGroup,
   tags: ['data-entry'],
-  parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/0QchRdipAVuvVoDfTjLrgQ/Component-Specs-of-Spark?node-id=1613-26132&t=RvxIc25Ub8xTcBFf-4',
-      allowFullscreen: true,
-    },
-  },
 }
 
 export default meta

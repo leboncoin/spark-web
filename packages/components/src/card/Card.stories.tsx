@@ -22,13 +22,6 @@ const meta: Meta<typeof Card> = {
     'Card.Type': CardType,
   },
   tags: ['action', 'data-display'],
-  parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/0QchRdipAVuvVoDfTjLrgQ/Component-Specs-of-Spark?node-id=2340-22557&t=RvxIc25Ub8xTcBFf-4',
-      allowFullscreen: true,
-    },
-  },
 }
 
 export default meta

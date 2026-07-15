@@ -68,7 +68,6 @@ const config: ExtendedStorybookConfig = {
   addons: [
     '@vueless/storybook-dark-mode',
     '@storybook/addon-a11y',
-    '@storybook/addon-designs',
     {
       name: '@storybook/addon-docs',
       options: {
