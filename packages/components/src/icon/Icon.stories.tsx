@@ -8,13 +8,6 @@ const meta: Meta<typeof Icon> = {
   title: 'Components/Icon',
   component: Icon,
   tags: ['data-display'],
-  parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/0QchRdipAVuvVoDfTjLrgQ/Component-Specs-of-Spark?node-id=2411-22587&t=RvxIc25Ub8xTcBFf-4',
-      allowFullscreen: true,
-    },
-  },
 }
 
 export default meta

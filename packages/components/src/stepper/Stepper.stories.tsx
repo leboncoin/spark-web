@@ -22,13 +22,6 @@ const meta: Meta<typeof Stepper> = {
     'Stepper.Input': Input,
   },
   tags: ['data-entry'],
-  parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/0QchRdipAVuvVoDfTjLrgQ/Component-Specs-of-Spark?node-id=55687-12472&t=RvxIc25Ub8xTcBFf-4',
-      allowFullscreen: true,
-    },
-  },
 }
 
 export default meta

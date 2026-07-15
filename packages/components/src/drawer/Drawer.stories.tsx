@@ -36,13 +36,6 @@ const meta: Meta<typeof Drawer> = {
     'Drawer.Description': DrawerDescription,
   },
   tags: ['overlays'],
-  parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/0QchRdipAVuvVoDfTjLrgQ/Component-Specs-of-Spark?node-id=11237-18028&t=RvxIc25Ub8xTcBFf-4',
-      allowFullscreen: true,
-    },
-  },
 }
 
 export default meta

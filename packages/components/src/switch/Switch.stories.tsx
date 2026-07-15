@@ -11,13 +11,6 @@ const meta: Meta<typeof Switch> = {
   title: 'Components/Switch',
   component: Switch,
   tags: ['data-entry'],
-  parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/0QchRdipAVuvVoDfTjLrgQ/Component-Specs-of-Spark?node-id=55014-22749&t=RvxIc25Ub8xTcBFf-4',
-      allowFullscreen: true,
-    },
-  },
 }
 
 export default meta

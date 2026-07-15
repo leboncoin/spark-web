@@ -10,13 +10,6 @@ const meta: Meta<typeof Label> = {
     'Label.RequiredIndicator': LabelRequiredIndicator,
   },
   tags: ['indicators'],
-  parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/0QchRdipAVuvVoDfTjLrgQ/Component-Specs-of-Spark?node-id=10003-24215&t=RvxIc25Ub8xTcBFf-4',
-      allowFullscreen: true,
-    },
-  },
 }
 
 export default meta

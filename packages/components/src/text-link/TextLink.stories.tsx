@@ -8,13 +8,6 @@ const meta: Meta<typeof TextLink> = {
   title: 'Components/TextLink',
   component: TextLink,
   tags: ['action'],
-  parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/0QchRdipAVuvVoDfTjLrgQ/Component-Specs-of-Spark?node-id=8718-2496&t=RvxIc25Ub8xTcBFf-4',
-      allowFullscreen: true,
-    },
-  },
 }
 
 export default meta

@@ -33,13 +33,6 @@ const meta: Meta<typeof Carousel> = {
     'Carousel.PageIndicator': PageIndicator,
   },
   tags: ['layout'],
-  parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/0QchRdipAVuvVoDfTjLrgQ/Component-Specs-of-Spark?node-id=55718-50111&t=BBIndEY6dnQTRa1G-4',
-      allowFullscreen: true,
-    },
-  },
 }
 
 export default meta

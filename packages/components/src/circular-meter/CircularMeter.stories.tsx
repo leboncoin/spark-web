@@ -18,13 +18,6 @@ const meta: Meta<typeof CircularMeter> = {
     'CircularMeter.Value': CircularMeterValue,
   },
   tags: ['indicators'],
-  parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/0QchRdipAVuvVoDfTjLrgQ/Component-Specs-of-Spark?node-id=54401-18032&t=RvxIc25Ub8xTcBFf-4',
-      allowFullscreen: true,
-    },
-  },
 }
 
 export default meta

@@ -13,13 +13,6 @@ const meta: Meta<typeof IconButton> = {
   title: 'Components/IconButton',
   component: IconButton,
   tags: ['action'],
-  parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/0QchRdipAVuvVoDfTjLrgQ/Component-Specs-of-Spark?node-id=1835-22582&t=RvxIc25Ub8xTcBFf-4',
-      allowFullscreen: true,
-    },
-  },
 }
 
 export default meta

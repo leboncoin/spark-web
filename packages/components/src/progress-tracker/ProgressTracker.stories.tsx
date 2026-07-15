@@ -18,13 +18,6 @@ const meta: Meta<typeof ProgressTracker> = {
     'ProgressTracker.StepIndicator': StepIndicator,
   },
   tags: ['indicators'],
-  parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/0QchRdipAVuvVoDfTjLrgQ/Component-Specs-of-Spark?node-id=41021-14134&t=RvxIc25Ub8xTcBFf-4',
-      allowFullscreen: true,
-    },
-  },
 }
 
 export default meta

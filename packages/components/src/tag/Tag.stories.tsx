@@ -9,13 +9,6 @@ const meta: Meta<typeof Tag> = {
   title: 'Components/Tag',
   component: Tag,
   tags: ['data-display'],
-  parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/0QchRdipAVuvVoDfTjLrgQ/Component-Specs-of-Spark?node-id=1613-33301&t=RvxIc25Ub8xTcBFf-4',
-      allowFullscreen: true,
-    },
-  },
 }
 
 export default meta

@@ -1,6 +1,5 @@
 import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks'
 import { A11yReport } from '@docs/helpers/A11yReport'
-import { AriaRoles } from '@docs/helpers/AriaRoles'
 import { Tabs } from '.'
 import { Kbd } from '@spark-ui/components/kbd'
 
@@ -23,16 +22,16 @@ npm install @spark-ui/components
 ## Anatomy
 
 ```tsx
-import { Tabs } from "@spark-ui/components/tabs"
+import { Tabs } from '@spark-ui/components/tabs'
 
 export default () => (
   <Tabs>
-    <Tabs.List> 
+    <Tabs.List>
       <Tabs.Trigger />
     </Tabs.List>
     <Tabs.Content />
   </Tabs>
-);
+)
 ```
 
 ## API Reference
@@ -43,28 +42,23 @@ Contains all the tabs component parts.
 
 <ArgTypes of={Tabs} />
 
-
-### _.List
+### \_.List
 
 Contains the triggers that are aligned along the edge of the active content.
 
 <ArgTypes of={Tabs.List} />
 
-
-### _.Trigger
+### \_.Trigger
 
 The button that activates its associated content.
 
 <ArgTypes of={Tabs.Trigger} />
 
-
-
-### _.Content
+### \_.Content
 
 Contains the content associated with each trigger.
 
 <ArgTypes of={Tabs.Content} />
-
 
 ## Examples
 
@@ -145,25 +139,5 @@ Adheres to the [Tabs WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/pa
   its associated content.
 - <Kbd>Home</Kbd>: Moves focus to the first trigger and activates its associated content.
 - <Kbd>End</Kbd>: Moves focus to the last trigger and activates its associated content.
-- <Kbd>Shift</Kbd>+<Kbd>F10</Kbd>: Opens the popover associated with the focused trigger (if available).
-
-### Roles
-
-<AriaRoles
-  of={Tabs}
-  role="none"
-  subcomponents={{
-    'Tabs.List': {
-      of: Tabs.List,
-      role: 'tablist',
-    },
-    'Tabs.Trigger': {
-      of: Tabs.Trigger,
-      role: 'tab',
-    },
-    'Tabs.Content': {
-      of: Tabs.Content,
-      role: 'tabpanel',
-    },
-  }}
-/>
+- <Kbd>Shift</Kbd>+<Kbd>F10</Kbd>: Opens the popover associated with the focused trigger (if
+  available).

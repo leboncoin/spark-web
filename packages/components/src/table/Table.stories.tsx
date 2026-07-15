@@ -45,13 +45,6 @@ const meta: Meta<typeof Table> = {
     'Table.BulkBarSelectAllButton': TableBulkBarSelectAllButton,
   },
   tags: ['data-display'],
-  parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/0QchRdipAVuvVoDfTjLrgQ/Component-Specs-of-Spark',
-      allowFullscreen: true,
-    },
-  },
 }
 
 export default meta
