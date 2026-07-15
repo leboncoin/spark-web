@@ -1,3 +1,13 @@
+## 17.15.7 (2026-07-15)
+
+### 🎨 Styles
+
+- **components:** updated radius on various components ([93b28335b](https://github.com/leboncoin/spark-web/commit/93b28335b))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.15.6 (2026-07-15)
 
 ### 🏡 Chore
