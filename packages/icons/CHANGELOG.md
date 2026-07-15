@@ -1,3 +1,13 @@
+## 17.15.6 (2026-07-15)
+
+### 🏡 Chore
+
+- deps cleanup ([8e5b2c38c](https://github.com/leboncoin/spark-web/commit/8e5b2c38c))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.15.5 (2026-07-13)
 
 ### 🩹 Fixes
