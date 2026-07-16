@@ -1,3 +1,13 @@
+## 17.15.8 (2026-07-16)
+
+### 🎨 Styles
+
+- **components:** fixed chip padding to match new rounded shape ([80abac3e5](https://github.com/leboncoin/spark-web/commit/80abac3e5))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.15.7 (2026-07-15)
 
 ### 🎨 Styles
