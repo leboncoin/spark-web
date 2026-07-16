@@ -1,3 +1,19 @@
+## 17.15.9 (2026-07-16)
+
+### 🩹 Fixes
+
+- dependabot tailwindcss group ([37cfe9f29](https://github.com/leboncoin/spark-web/commit/37cfe9f29))
+
+### 📦 Build
+
+- **npm:** bump tailwindcss from 4.1.18 to 4.3.3 ([3ba6c420a](https://github.com/leboncoin/spark-web/commit/3ba6c420a))
+- **npm:** bump rollup from 4.59.0 to 4.62.2 ([04518b81b](https://github.com/leboncoin/spark-web/commit/04518b81b))
+- **npm:** bump @babel/core from 7.29.6 to 7.29.7 ([61d8849bc](https://github.com/leboncoin/spark-web/commit/61d8849bc))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.15.8 (2026-07-16)
 
 ### 🎨 Styles
