@@ -114,11 +114,11 @@ export const tintedVariants = [
   {
     design: 'tinted',
     hasClearButton: false,
-    class: tw(['px-md']),
+    class: tw(['px-lg']),
   },
   {
     design: 'tinted',
     hasClearButton: true,
-    class: tw(['pl-md']),
+    class: tw(['pl-lg']),
   },
 ] as const

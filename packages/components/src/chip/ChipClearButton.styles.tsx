@@ -10,8 +10,8 @@ export const chipClearButtonWrapperStyles = cva(
         true: ['cursor-not-allowed'],
       },
       isBordered: {
-        false: ['pr-md'],
-        true: ['pr-[7px]'],
+        false: ['pr-lg'],
+        true: ['pr-[calc(var(--spacing-lg)-var(--border-width-sm))]'],
       },
       design: {
         outlined: [],
