@@ -98,7 +98,7 @@
     "react-router-dom": "7.13.2",
     "remark-gfm": "4.0.1",
     "resize-observer-polyfill": "1.5.1",
-    "rollup": "4.59.0",
+    "rollup": "4.62.2",
     "storybook": "10.4.0",
     "tailwindcss": "4.1.18",
     "typescript": "6.0.2",
