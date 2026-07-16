@@ -8,6 +8,10 @@ updates:
     commit-message:
       prefix: 'build(npm)'
     groups:
+      tailwindcss:
+        patterns:
+          - 'tailwindcss'
+          - '@tailwindcss/*'
       zag-js:
         patterns:
           - '@zag-js/*'
