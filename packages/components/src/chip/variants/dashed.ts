@@ -105,11 +105,11 @@ export const dashedVariants = [
   {
     design: 'dashed',
     hasClearButton: false,
-    class: tw(['px-[calc(var(--spacing-md)-var(--border-width-sm))]']),
+    class: tw(['px-[calc(var(--spacing-lg)-var(--border-width-sm))]']),
   },
   {
     design: 'dashed',
     hasClearButton: true,
-    class: tw(['pl-[calc(var(--spacing-md)-var(--border-width-sm))]']),
+    class: tw(['pl-[calc(var(--spacing-lg)-var(--border-width-sm))]']),
   },
 ] as const
