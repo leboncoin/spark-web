@@ -1,3 +1,13 @@
+## 17.16.0 (2026-07-17)
+
+### 🚀 Features
+
+- **components:** button preset variants ([73a1a3cd6](https://github.com/leboncoin/spark-web/commit/73a1a3cd6))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.15.9 (2026-07-16)
 
 ### 🩹 Fixes
