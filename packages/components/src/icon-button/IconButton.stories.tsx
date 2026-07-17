@@ -1,3 +1,5 @@
+import { Switch } from '@spark-ui/components/switch'
+import { Table } from '@spark-ui/components/table'
 import { Tag } from '@spark-ui/components/tag'
 import { LikeFill } from '@spark-ui/icons/LikeFill'
 import { LikeOutline } from '@spark-ui/icons/LikeOutline'
@@ -31,6 +33,17 @@ const intents: IconButtonProps['intent'][] = [
   'surface',
 ]
 const designs: IconButtonProps['design'][] = ['filled', 'outlined', 'tinted', 'contrast', 'ghost']
+const appearances: NonNullable<IconButtonProps['appearance']>[] = [
+  'primary',
+  'secondary',
+  'tertiary',
+  'contrast',
+  'ghost',
+  'success',
+  'danger',
+  'boost',
+  'AI',
+]
 
 const icon = (
   <Icon>
@@ -144,5 +157,69 @@ export const Toggle: StoryFn = () => {
     >
       <Icon>{pressed ? <LikeFill /> : <LikeOutline />}</Icon>
     </IconButton>
+  )
+}
+
+export const Appearance: StoryFn = _args => {
+  const [underline, setUnderline] = useState(false)
+
+  const appearanceRows = appearances.map((appearance, index) => ({
+    id: `appearance-${index}`,
+    appearance,
+  }))
+
+  return (
+    <div className="gap-lg flex flex-col">
+      <Switch checked={underline} onClick={() => setUnderline(!underline)}>
+        Show underline
+      </Switch>
+      <Table>
+        <Table.Grid aria-label="IconButton appearance by state">
+          <Table.Header>
+            <Table.Column id="appearance" label="Appearance" isRowHeader />
+            <Table.Column id="base" label="Base" />
+            <Table.Column id="disabled" label="Disabled" />
+            <Table.Column id="loading" label="Loading" />
+          </Table.Header>
+          <Table.Body>
+            {appearanceRows.map(row => (
+              <Table.Row key={row.id} id={row.id}>
+                <Table.Cell>{row.appearance}</Table.Cell>
+                <Table.Cell className="bg-neutral-container">
+                  <IconButton
+                    appearance={row.appearance}
+                    underline={underline}
+                    aria-label={`${row.appearance} button`}
+                  >
+                    {icon}
+                  </IconButton>
+                </Table.Cell>
+                <Table.Cell>
+                  <IconButton
+                    appearance={row.appearance}
+                    underline={underline}
+                    disabled
+                    aria-label={`${row.appearance} disabled button`}
+                  >
+                    {icon}
+                  </IconButton>
+                </Table.Cell>
+                <Table.Cell>
+                  <IconButton
+                    appearance={row.appearance}
+                    underline={underline}
+                    isLoading
+                    loadingLabel="Loading..."
+                    aria-label={`${row.appearance} loading button`}
+                  >
+                    {icon}
+                  </IconButton>
+                </Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table.Grid>
+      </Table>
+    </div>
   )
 }

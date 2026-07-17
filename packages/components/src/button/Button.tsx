@@ -3,10 +3,30 @@ import { ComponentPropsWithoutRef, type DOMAttributes, Ref, useMemo } from 'reac
 
 import { Slot, wrapPolymorphicSlot } from '../slot'
 import { Spinner, type SpinnerProps } from '../spinner'
+import {
+  buttonAppearanceStyles,
+  type ButtonAppearanceStylesProps,
+} from './Button.appearance-styles'
 import { buttonStyles, type ButtonStylesProps } from './Button.styles'
 
 export interface ButtonProps
-  extends Omit<ComponentPropsWithoutRef<'button'>, 'disabled'>, ButtonStylesProps {
+  extends
+    Omit<ComponentPropsWithoutRef<'button'>, 'disabled'>,
+    Omit<ButtonStylesProps, 'design' | 'intent'>,
+    Pick<ButtonAppearanceStylesProps, 'appearance'> {
+  /**
+   * Main style of the button.
+   */
+  design?: ButtonStylesProps['design']
+  /**
+   * Color scheme of the button.
+   */
+  intent?: ButtonStylesProps['intent']
+  /**
+   * Combined appearance preset (replaces `design` and `intent`).
+   * @beta This API is in beta and may change in future versions.
+   */
+  appearance?: ButtonAppearanceStylesProps['appearance']
   /**
    * Change the component to the HTML tag or custom component of the only child.
    */
@@ -69,6 +89,7 @@ export const Button = ({
   asChild,
   className,
   underline = false,
+  appearance,
   ref,
   ...others
 }: ButtonProps) => {
@@ -103,12 +124,16 @@ export const Button = ({
     ...(loadingLabel && { 'aria-label': loadingLabel }),
   }
 
-  return (
-    <Component
-      data-spark-component="button"
-      {...(Component === 'button' && { type: 'button' })}
-      ref={ref}
-      className={buttonStyles({
+  // Use appearance styles when appearance is specified, otherwise use legacy styles
+  const buttonClassName = appearance
+    ? buttonAppearanceStyles({
+        className,
+        appearance,
+        disabled: shouldNotInteract,
+        size,
+        underline,
+      })
+    : buttonStyles({
         className,
         design,
         disabled: shouldNotInteract,
@@ -116,7 +141,14 @@ export const Button = ({
         shape,
         size,
         underline,
-      })}
+      })
+
+  return (
+    <Component
+      data-spark-component="button"
+      {...(Component === 'button' && { type: 'button' })}
+      ref={ref}
+      className={buttonClassName}
       disabled={useNativeDisabled}
       aria-disabled={shouldNotInteract ? true : undefined}
       aria-busy={isLoading}

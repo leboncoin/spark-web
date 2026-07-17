@@ -105,6 +105,34 @@ Use `aria-pressed` to transform the button into a toggle button.
 
 <Canvas of={ButtonStories.Toggle} />
 
+### Appearance (Experimental)
+
+<Callout kind="warning">
+  **Experimental API**: The `appearance` prop is currently in beta and should not be used in
+  production. The API may change in future versions. For production use, please use the `design` and
+  `intent` props instead.
+</Callout>
+
+Use the `appearance` prop to set semantic button styles that combine both design and intent.
+
+The appearance prop provides a simplified API for common button patterns:
+
+- `primary`: Main action with filled background
+- `secondary`: Secondary action with support color
+- `tertiary`: Tertiary action with outlined surface
+- `contrast`: Contrast action with surface background
+- `ghost`: Link-style without background
+- `success`: Success action with outlined style
+- `danger`: Danger action with outlined style
+- `boost`: Accent action with filled accent background
+- `AI`: AI action with filled AI background
+
+<Canvas of={ButtonStories.Appearance} />
+
+<Callout kind="info">
+  When using the `appearance` prop, both `design` and `intent` props are ignored.
+</Callout>
+
 ## Accessibility
 
 <A11yReport of="button" />

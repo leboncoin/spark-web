@@ -12,6 +12,7 @@ export interface IconButtonProps extends Omit<ButtonProps, 'loadingText'> {
  * A button component that contains only an icon without text label.
  */
 export const IconButton = ({
+  appearance,
   design = 'filled',
   disabled = false,
   intent = 'main',
@@ -26,6 +27,7 @@ export const IconButton = ({
       data-spark-component="icon-button"
       ref={ref}
       className={iconButtonStyles({ size, className })}
+      appearance={appearance}
       design={design}
       disabled={disabled}
       intent={intent}

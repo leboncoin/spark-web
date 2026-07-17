@@ -160,4 +160,55 @@ describe('Button', () => {
       expect(screen.getByRole('button', { name: 'Next' })).toHaveFocus()
     })
   })
+
+  describe('Appearance prop', () => {
+    it('should render with appearance prop', () => {
+      const props = {
+        ...defaultProps,
+        appearance: 'primary' as const,
+      }
+
+      render(<Button {...props} />)
+
+      expect(screen.getByRole('button', { name: props.children })).toBeInTheDocument()
+    })
+
+    it('should ignore design and intent when appearance is specified', () => {
+      const props = {
+        ...defaultProps,
+        appearance: 'primary' as const,
+        design: 'outlined' as const,
+        intent: 'success' as const,
+      }
+
+      render(<Button {...props} />)
+
+      const button = screen.getByRole('button', { name: props.children })
+      expect(button).toBeInTheDocument()
+      // The button should have primary appearance styles (bg-main text-on-main)
+      expect(button.className).toContain('bg-main')
+      expect(button.className).toContain('text-on-main')
+    })
+
+    it.each([
+      'primary',
+      'secondary',
+      'tertiary',
+      'contrast',
+      'ghost',
+      'success',
+      'danger',
+      'boost',
+      'AI',
+    ] as const)('should render %s appearance', appearance => {
+      const props = {
+        ...defaultProps,
+        appearance,
+      }
+
+      render(<Button {...props} />)
+
+      expect(screen.getByRole('button', { name: props.children })).toBeInTheDocument()
+    })
+  })
 })

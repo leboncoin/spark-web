@@ -2,6 +2,7 @@ import { useTableSelectionCheckbox } from '@react-aria/table'
 import type { TableState } from '@react-stately/table'
 import type { GridNode } from '@react-types/grid'
 import type { Key } from '@react-types/shared'
+import { cx } from 'class-variance-authority'
 import { useCallback, useContext, useRef, type KeyboardEvent } from 'react'
 import { mergeProps, useFocusRing, useTableCell } from 'react-aria'
 
@@ -20,7 +21,7 @@ export function TableBodyCellRenderer({
 }) {
   const ref = useRef<HTMLTableCellElement>(null)
   const { gridCellProps } = useTableCell({ node: cell }, state, ref)
-  const { isFocusVisible, focusProps } = useFocusRing()
+  const { isFocusVisible, focusProps } = useFocusRing({ within: true })
   const keyboardMode = useContext(TableKeyboardModeContext)
 
   const stopRowKeyboardSelectionInInteractionMode = useCallback(
@@ -53,6 +54,7 @@ export function TableBodyCellRenderer({
   const selectionCheckbox = useTableSelectionCheckbox({ key: rowKey }, state)
   const columnKey = (state.collection.columns[cell.index ?? 0]?.key ?? null) as Key | null
   const columnWidth = columnKey ? resizeState?.columnWidths?.get?.(columnKey) : undefined
+  const customClassName = (cell.props as any)?.className
 
   if ((cell.props as any)?.isSelectionCell) {
     return (
@@ -87,7 +89,7 @@ export function TableBodyCellRenderer({
       )}
       ref={ref}
       data-spark-component="table-cell"
-      className={cellStyles()}
+      className={cx(cellStyles(), customClassName)}
       data-focus-visible={isFocusVisible || undefined}
       style={columnWidth ? { width: columnWidth } : undefined}
     >
