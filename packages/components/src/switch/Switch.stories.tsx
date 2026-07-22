@@ -6,6 +6,7 @@ import { type ComponentProps, useState } from 'react'
 
 import { Switch } from '.'
 import { FormField } from '../form-field'
+import { Table } from '../table'
 
 const meta: Meta<typeof Switch> = {
   title: 'Components/Switch',
@@ -37,15 +38,39 @@ export const Icons: StoryFn = _args => (
   </Switch>
 )
 
-export const Disabled: StoryFn = _args => (
-  <div className="gap-lg flex">
-    <Switch disabled>Agreed</Switch>
+export const Disabled: StoryFn = _args => {
+  const rows = [
+    { id: 'enabled', label: 'Enabled', disabled: false },
+    { id: 'disabled', label: 'Disabled', disabled: true },
+  ]
 
-    <Switch defaultChecked disabled>
-      Agreed
-    </Switch>
-  </div>
-)
+  return (
+    <Table>
+      <Table.Grid aria-label="Switch states">
+        <Table.Header>
+          <Table.Column id="state" label="State" isRowHeader />
+          <Table.Column id="unchecked" label="Unchecked" />
+          <Table.Column id="checked" label="Checked" />
+        </Table.Header>
+        <Table.Body>
+          {rows.map(row => (
+            <Table.Row key={row.id} id={row.id}>
+              <Table.Cell>{row.label}</Table.Cell>
+              <Table.Cell>
+                <Switch disabled={row.disabled}>Agreed</Switch>
+              </Table.Cell>
+              <Table.Cell>
+                <Switch defaultChecked disabled={row.disabled}>
+                  Agreed
+                </Switch>
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table.Grid>
+    </Table>
+  )
+}
 
 const sizes: ComponentProps<typeof Switch>['size'][] = ['sm', 'md']
 

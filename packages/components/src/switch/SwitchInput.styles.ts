@@ -4,15 +4,16 @@ import { cva, VariantProps } from 'class-variance-authority'
 export const styles = cva(
   tw([
     'relative shrink-0 self-baseline',
-    'cursor-pointer',
+    'cursor-pointer aria-disabled:cursor-not-allowed',
     'rounded-full border-transparent',
     'hover:ring-4',
     'transition-colors duration-200 ease-in-out',
-    'disabled:hover:ring-transparent disabled:cursor-not-allowed disabled:opacity-dim-3',
+    'aria-disabled:opacity-dim-3',
     'focus-visible:u-outline',
-    'data-unchecked:bg-on-surface/dim-3',
+    'text-support bg-support data-unchecked:bg-neutral/dim-3',
     'u-shadow-border-transition',
     'overflow-x-hidden',
+    'hover:ring-support-container aria-disabled:hover:ring-transparent ',
   ]),
   {
     variants: {
@@ -23,25 +24,8 @@ export const styles = cva(
         sm: tw(['h-sz-24', 'w-sz-40', 'border-md']),
         md: tw(['h-sz-32', 'w-sz-56', 'border-[4px]']),
       }),
-      /**
-       * Color scheme of the switch input.
-       */
-      intent: makeVariants<
-        'intent',
-        ['main', 'support', 'accent', 'success', 'alert', 'error', 'info', 'neutral']
-      >({
-        main: ['[&[data-checked]]:bg-main', 'hover:ring-main-container', 'text-main'],
-        support: ['[&[data-checked]]:bg-support', 'hover:ring-support-container', 'text-support'],
-        accent: ['[&[data-checked]]:bg-accent', 'hover:ring-accent-container', 'text-accent'],
-        success: ['[&[data-checked]]:bg-success', 'hover:ring-success-container', 'text-success'],
-        alert: ['[&[data-checked]]:bg-alert', 'hover:ring-alert-container', 'text-alert'],
-        error: ['[&[data-checked]]:bg-error', 'hover:ring-error-container', 'text-error'],
-        info: ['[&[data-checked]]:bg-info', 'hover:ring-info-container', 'text-info'],
-        neutral: ['[&[data-checked]]:bg-neutral', 'hover:ring-neutral-container', 'text-neutral'],
-      }),
     },
     defaultVariants: {
-      intent: 'support',
       size: 'sm',
     },
   }
