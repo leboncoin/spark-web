@@ -1,3 +1,17 @@
+# 18.0.0 (2026-07-22)
+
+### 💅 Refactors
+
+- ⚠️  **components:** removed intent from switch and updated unchecked styles ([f72397ef7](https://github.com/leboncoin/spark-web/commit/f72397ef7))
+
+### ⚠️  Breaking Changes
+
+- **components:** To consumers: please remove the intent prop from any instance of the Switch
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 17.16.0 (2026-07-17)
 
 This was a version bump only for @spark-ui/hooks to align it with other projects, there were no code changes.
