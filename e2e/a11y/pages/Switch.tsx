@@ -4,11 +4,11 @@ import React from 'react'
 export const A11ySwitch = () => (
   <section>
     <div>
-      <Switch intent="main">Agreed</Switch>
+      <Switch>Agreed</Switch>
     </div>
 
     <div>
-      <Switch intent="main" aria-label="Agreed again" defaultChecked />
+      <Switch aria-label="Agreed again" defaultChecked />
     </div>
   </section>
 )

@@ -69,7 +69,6 @@ export const SwitchInput = ({
   checked,
   checkedIcon = <Check />,
   defaultChecked,
-  intent: intentProp,
   uncheckedIcon = <Close />,
   size = 'md',
   onCheckedChange,
@@ -80,8 +79,7 @@ export const SwitchInput = ({
   ...rest
 }: SwitchInputProps) => {
   const [isChecked, setIsChecked] = useCombinedState(checked, defaultChecked)
-  const { name, description, state, isRequired, isInvalid } = useFormFieldControl()
-  const intent = state ?? intentProp
+  const { name, description, isRequired, isInvalid } = useFormFieldControl()
   const renderSlot = useRenderSlot(asChild, 'span')
   const isRequiredComputed = Boolean(required || isRequired)
 
@@ -95,7 +93,7 @@ export const SwitchInput = ({
       data-spark-component="switch-input"
       ref={ref}
       render={renderSlot}
-      className={styles({ intent, size, className })}
+      className={styles({ size, className })}
       checked={checked}
       defaultChecked={defaultChecked}
       onCheckedChange={nextChecked => handleCheckedChange(nextChecked)}
