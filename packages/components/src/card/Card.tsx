@@ -48,6 +48,7 @@ export const Card = ({
           className,
           design,
           intent,
+          hasType: typeDetected,
         })}
         {...props}
       >

@@ -32,13 +32,26 @@ export const typeStyles = cva(
         surface: ['bg-surface-inverse text-on-surface-inverse'],
       },
       design: {
-        outlined: ['-mx-px -mt-px'], // Fix border-radius visual gap by overlapping parent border
+        outlined: [], // Margins handled via compoundVariants to account for border width
         tinted: [],
       },
+      hasMediumBorder: {
+        true: [],
+        false: [],
+      },
     },
+    compoundVariants: [
+      { design: 'outlined', hasMediumBorder: false, class: '-mx-px -mt-px' },
+      {
+        design: 'outlined',
+        hasMediumBorder: true,
+        class: '-mx-(--border-width-md) -mt-(--border-width-md)',
+      },
+    ],
     defaultVariants: {
       intent: 'main',
       design: 'outlined',
+      hasMediumBorder: false,
     },
   }
 )
@@ -58,6 +71,9 @@ export const Type = ({ intent, children, ...props }: TypeProps) => {
   // Use intent from props if provided, otherwise inherit from parent Card context
   const resolvedIntent = intent ?? cardContext.intent ?? 'main'
 
+  // Card with outlined design and hasType=true uses border-md (2px), so Type needs -2px margins
+  const hasMediumBorder = cardContext.design === 'outlined' && cardContext.hasType
+
   // Don't render if no children provided (for backward compatibility with Backdrop)
   if (!children) {
     return null
@@ -65,7 +81,11 @@ export const Type = ({ intent, children, ...props }: TypeProps) => {
 
   return (
     <header
-      className={typeStyles({ intent: resolvedIntent, design: cardContext.design })}
+      className={typeStyles({
+        intent: resolvedIntent,
+        design: cardContext.design,
+        hasMediumBorder,
+      })}
       {...props}
     >
       {children}
