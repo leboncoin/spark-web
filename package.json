@@ -83,7 +83,7 @@
     "chalk": "5.6.2",
     "chromatic": "^18.0.1",
     "class-variance-authority": "0.7.1",
-    "commitizen": "4.3.1",
+    "commitizen": "4.3.2",
     "copy-to-clipboard": "3.3.3",
     "d3": "7.9.0",
     "husky": "9.1.7",
