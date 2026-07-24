@@ -9,7 +9,7 @@ export const cardStyles = cva(
   {
     variants: {
       design: {
-        outlined: ['border-sm'],
+        outlined: [],
         tinted: [],
       },
       /**
@@ -29,6 +29,10 @@ export const cardStyles = cva(
         neutral: [],
         surface: [],
       }),
+      hasType: {
+        true: [],
+        false: [],
+      },
     },
     compoundVariants: [
       // OUTLINED
@@ -41,6 +45,10 @@ export const cardStyles = cva(
       { intent: 'info', design: 'outlined', class: tw(['border-info']) },
       { intent: 'neutral', design: 'outlined', class: tw(['border-neutral']) },
       { intent: 'surface', design: 'outlined', class: tw(['border-outline']) },
+      // OUTLINED + TYPE
+      { design: 'outlined', hasType: true, class: tw(['border-md']) },
+      // OUTLINED + NO TYPE
+      { design: 'outlined', hasType: false, class: tw(['border-sm']) },
     ],
     defaultVariants: {
       design: 'outlined',
