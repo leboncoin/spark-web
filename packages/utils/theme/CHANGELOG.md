@@ -1,3 +1,10 @@
+## 18.0.2 (2026-07-24)
+
+### 📦 Build
+
+- **npm:** bump postcss from 8.5.9 to 8.5.12 ([1d297ea40](https://github.com/leboncoin/spark-web/commit/1d297ea40))
+- **npm:** bump @commitlint/cz-commitlint from 20.0.0 to 21.2.0 ([e57e4d041](https://github.com/leboncoin/spark-web/commit/e57e4d041))
+
 ## 18.0.1 (2026-07-24)
 
 This was a version bump only for @spark-ui/theme-utils to align it with other projects, there were no code changes.
