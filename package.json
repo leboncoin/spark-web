@@ -57,7 +57,7 @@
     "@commitlint/config-workspace-scopes": "20.0.0",
     "@commitlint/cz-commitlint": "21.2.0",
     "@commitlint/prompt-cli": "20.0.0",
-    "@nx/devkit": "21.5.3",
+    "@nx/devkit": "23.1.0",
     "@nx/js": "21.5.3",
     "@playwright/test": "1.61.1",
     "@spark-ui/cli-utils": "^17.5.3",
