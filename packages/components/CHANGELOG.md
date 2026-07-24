@@ -1,3 +1,13 @@
+## 18.0.1 (2026-07-24)
+
+### 🎨 Styles
+
+- **components:** outlined cards with a Card.Type banner now has thicker border-width ([53c2b65d9](https://github.com/leboncoin/spark-web/commit/53c2b65d9))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 # 18.0.0 (2026-07-22)
 
 ### 💅 Refactors

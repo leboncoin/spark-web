@@ -1,3 +1,7 @@
+## 18.0.1 (2026-07-24)
+
+This was a version bump only for @spark-ui/cli-utils to align it with other projects, there were no code changes.
+
 # 18.0.0 (2026-07-22)
 
 ### 💅 Refactors
