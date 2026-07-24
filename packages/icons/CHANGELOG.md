@@ -1,3 +1,9 @@
+## 18.0.3 (2026-07-24)
+
+### 📦 Build
+
+- **npm:** bump cssnano from 7.1.4 to 8.0.2 ([a3d0b31a5](https://github.com/leboncoin/spark-web/commit/a3d0b31a5))
+
 ## 18.0.2 (2026-07-24)
 
 ### 📦 Build
