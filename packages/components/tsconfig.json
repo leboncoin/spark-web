@@ -14,6 +14,7 @@
       "@spark-ui/icons/*": ["../icons/dist/src/icons/*"],
       "@spark-ui/internal-utils": ["../utils/internal-utils/dist/src/index"],
       "@spark-ui/internal-utils/*": ["../utils/internal-utils/dist/src/*"]
-    }
+    },
+    "ignoreDeprecations": "6.0"
   }
 }

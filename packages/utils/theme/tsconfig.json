@@ -1,4 +1,11 @@
 {
   "extends": "../../../tsconfig.json",
-  "include": ["src/**/*", "build.ts", "../../global.d.ts"]
+  "include": [
+    "src/**/*",
+    "build.ts",
+    "../../global.d.ts"
+  ],
+  "compilerOptions": {
+    "ignoreDeprecations": "6.0"
+  }
 }

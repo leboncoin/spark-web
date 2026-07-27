@@ -2,6 +2,7 @@
   "extends": "../../../tsconfig.build.json",
   "include": ["src/**/*", "../../../global.d.ts"],
   "compilerOptions": {
-    "composite": false
+    "composite": false,
+    "ignoreDeprecations": "6.0"
   }
 }

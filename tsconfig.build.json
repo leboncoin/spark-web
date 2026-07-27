@@ -23,7 +23,10 @@
       "noUnusedLocals": true,
       "noUnusedParameters": true,
       "rootDir": "./",
-      "types": ["node"]
+      "types": [
+        "node"
+      ],
+      "noUncheckedSideEffectImports": false
     },
     "exclude": ["node_modules"],
     "references": [{ "path": "./tsconfig.node.json" }]

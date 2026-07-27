@@ -13,7 +13,8 @@
       "@spark-ui/internal-utils": ["./packages/utils/internal-utils/src"],
       "@spark-ui/internal-utils/*": ["./packages/utils/internal-utils/src/*"],
       "@/*": ["./src/*"]
-    }
+    },
+    "ignoreDeprecations": "6.0"
   },
   "include": [
     "vitest.setup.ts",
