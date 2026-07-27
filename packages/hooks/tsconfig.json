@@ -5,6 +5,7 @@
   "compilerOptions": {
     "composite": false,
     "incremental": false,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "ignoreDeprecations": "6.0"
   }
 }

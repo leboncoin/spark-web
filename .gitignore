@@ -41,3 +41,5 @@ coverage
 /e2e/report/
 /blob-report/
 /playwright/.cache/
+
+.claude/worktrees

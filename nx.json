@@ -57,7 +57,6 @@
       "workspaceChangelog": false,
       "projectChangelogs": true
     },
-    "releaseTagPattern": "v{version}",
     "git": {
       "commit": true,
       "commitMessage": "chore: release packages [skip ci]",
@@ -66,6 +65,10 @@
       "stageChanges": false,
       "push": true
     },
-    "projectsRelationship": "fixed"
-  }
+    "projectsRelationship": "fixed",
+    "releaseTag": {
+      "pattern": "v{version}"
+    }
+  },
+  "analytics": true
 }
