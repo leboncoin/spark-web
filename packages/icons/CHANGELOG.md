@@ -1,3 +1,18 @@
+## 18.0.4 (2026-07-27)
+
+### 📦 Build
+
+- **npm:** bump postcss from 8.5.12 to 8.5.18 ([7cdc7ef23](https://github.com/leboncoin/spark-web/commit/7cdc7ef23))
+- **npm:** bump the storybook group across 1 directory with 7 updates ([a31233e25](https://github.com/leboncoin/spark-web/commit/a31233e25))
+- **npm:** bump @commitlint/cli from 20.0.0 to 21.2.1 ([7882a61bd](https://github.com/leboncoin/spark-web/commit/7882a61bd))
+- **npm:** bump @nx/devkit from 21.5.3 to 23.1.0 ([55f101260](https://github.com/leboncoin/spark-web/commit/55f101260))
+- **npm:** bump tmp from 0.2.5 to 0.2.7 ([5aef7db6f](https://github.com/leboncoin/spark-web/commit/5aef7db6f))
+- **npm:** bump oxfmt from 0.42.0 to 0.60.0 ([413f6293d](https://github.com/leboncoin/spark-web/commit/413f6293d))
+- **npm:** bump fast-uri from 3.1.0 to 3.1.4 ([f298d9a90](https://github.com/leboncoin/spark-web/commit/f298d9a90))
+- **npm:** bump react-router and react-router-dom ([848f2cee2](https://github.com/leboncoin/spark-web/commit/848f2cee2))
+- **npm:** bump the vite group across 1 directory with 2 updates ([b2cc39939](https://github.com/leboncoin/spark-web/commit/b2cc39939))
+- **npm:** bump lodash and commitizen ([96fabcc99](https://github.com/leboncoin/spark-web/commit/96fabcc99))
+
 ## 18.0.3 (2026-07-24)
 
 ### 📦 Build
