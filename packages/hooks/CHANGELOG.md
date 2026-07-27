@@ -1,3 +1,13 @@
+## 18.0.5 (2026-07-27)
+
+### 📦 Build
+
+- updating nx ecosystem ([6dd65ff9a](https://github.com/leboncoin/spark-web/commit/6dd65ff9a))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 18.0.4 (2026-07-27)
 
 ### 📦 Build
