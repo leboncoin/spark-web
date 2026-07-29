@@ -59,7 +59,12 @@ describe('CircularMeter', () => {
     const meterEl = screen.getByRole('meter', { name: 'Storage Used' })
 
     expect(meterEl).toHaveAttribute('aria-valuenow', value.toString())
-    expect(meterEl).toHaveAttribute('aria-valuetext', `${value}%`)
+    // BaseMeter exposes the value as a localized percentage based on the min/max range
+    // value=50, max=100 (default) => 50%
+    const expectedPercentage = new Intl.NumberFormat(undefined, { style: 'percent' }).format(
+      value / 100
+    )
+    expect(meterEl).toHaveAttribute('aria-valuetext', expectedPercentage)
   })
 
   it('should render expected meter when value and max props are set', () => {
@@ -77,8 +82,12 @@ describe('CircularMeter', () => {
 
     expect(meterEl).toHaveAttribute('aria-valuemax', max.toString())
     expect(meterEl).toHaveAttribute('aria-valuenow', value.toString())
-    // BaseMeter exposes the value as a percentage string, not normalized with max
-    expect(meterEl).toHaveAttribute('aria-valuetext', `${value}%`)
+    // BaseMeter exposes the value as a localized percentage based on the min/max range
+    // value=1, max=4 => 25%
+    const expectedPercentage = new Intl.NumberFormat(undefined, { style: 'percent' }).format(
+      value / max
+    )
+    expect(meterEl).toHaveAttribute('aria-valuetext', expectedPercentage)
   })
 
   it('should render expected meter when value, min and max props are set', () => {
@@ -98,9 +107,12 @@ describe('CircularMeter', () => {
     expect(meterEl).toHaveAttribute('aria-valuemin', min.toString())
     expect(meterEl).toHaveAttribute('aria-valuemax', max.toString())
     expect(meterEl).toHaveAttribute('aria-valuenow', value.toString())
+    // BaseMeter exposes the value as a localized percentage based on the min/max range
     // (value - min) / (max - min) => (20 - 10) / (30 - 10) = 0.5 => 50%
-    // BaseMeter exposes the value as a percentage string even when min/max are provided
-    expect(meterEl).toHaveAttribute('aria-valuetext', `${value}%`)
+    const expectedPercentage = new Intl.NumberFormat(undefined, { style: 'percent' }).format(
+      (value - min) / (max - min)
+    )
+    expect(meterEl).toHaveAttribute('aria-valuetext', expectedPercentage)
   })
 
   it('should use aria-label on label when its visible text is not a good accessible name', () => {
