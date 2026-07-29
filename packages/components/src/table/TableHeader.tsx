@@ -1,5 +1,5 @@
-import type { TableHeaderProps as StatelyTableHeaderProps } from '@react-stately/table'
-import { TableHeader as StatelyTableHeader } from '@react-stately/table'
+import type { TableHeaderProps as StatelyTableHeaderProps } from 'react-stately'
+import { TableHeader as StatelyTableHeader } from 'react-stately'
 
 export interface TableHeaderProps<T extends object = object> extends StatelyTableHeaderProps<T> {
   /**

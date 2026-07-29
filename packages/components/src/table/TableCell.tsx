@@ -1,5 +1,5 @@
-import type { CellProps as StatelyCellProps } from '@react-stately/table'
-import { Cell as StatelyCell } from '@react-stately/table'
+import type { CellProps as StatelyCellProps } from 'react-stately'
+import { Cell as StatelyCell } from 'react-stately'
 
 export interface CellProps extends StatelyCellProps {
   className?: string

@@ -1,5 +1,3 @@
-// oxlint-disable max-lines-per-function
-import type { TableState } from '@react-stately/table'
 import type { GridNode } from '@react-types/grid'
 import { ArrowDown } from '@spark-ui/icons/ArrowDown'
 import { ArrowUp } from '@spark-ui/icons/ArrowUp'
@@ -7,6 +5,8 @@ import { Sort } from '@spark-ui/icons/Sort'
 import { cx } from 'class-variance-authority'
 import { useRef } from 'react'
 import { mergeProps, useFocusRing, useTableColumnHeader } from 'react-aria'
+// oxlint-disable max-lines-per-function
+import type { TableState } from 'react-stately'
 
 import { Icon } from '../../icon'
 import { columnHeaderContentStyles, columnStyles } from './Table.styles'

@@ -1,4 +1,4 @@
-import type { TableProps as AriaTableProps } from '@react-types/table'
+import type { TableProps as AriaTableProps } from 'react-stately'
 
 import { ResizableTableContainer } from './ResizableTableContainer'
 import { useTableContext } from './TableContext'

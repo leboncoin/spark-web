@@ -1,7 +1,7 @@
 import type { PartialNode } from '@react-stately/collections'
 import type { Key } from '@react-types/shared'
-import type { RowProps as ReactTypesRowProps } from '@react-types/table'
 import React, { type ReactElement } from 'react'
+import type { RowProps as ReactTypesRowProps } from 'react-stately'
 
 export interface RowProps<T extends object = object> extends ReactTypesRowProps<T> {
   className?: string

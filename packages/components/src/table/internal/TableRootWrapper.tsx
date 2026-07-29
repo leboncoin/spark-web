@@ -1,9 +1,9 @@
 import type { GridNode } from '@react-types/grid'
 import type { Key, SelectionBehavior } from '@react-types/shared'
-import type { ColumnSize } from '@react-types/table'
-import type { TableProps as AriaTableProps } from '@react-types/table'
 import { cx } from 'class-variance-authority'
 import type { ReactNode } from 'react'
+import type { ColumnSize } from 'react-stately'
+import type { TableProps as AriaTableProps } from 'react-stately'
 
 import { TableContext, type TableContextValue } from './TableContext'
 
