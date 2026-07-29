@@ -1,3 +1,9 @@
+## 18.0.6 (2026-07-29)
+
+### 📦 Build
+
+- **npm:** bump motion from 12.34.5 to 12.42.2 ([c80a864dd](https://github.com/leboncoin/spark-web/commit/c80a864dd))
+
 ## 18.0.5 (2026-07-27)
 
 ### 📦 Build
