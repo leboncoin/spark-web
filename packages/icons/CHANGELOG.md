@@ -1,3 +1,9 @@
+## 18.0.10 (2026-07-29)
+
+### 📦 Build
+
+- **npm:** bump lightningcss-linux-x64-gnu from 1.30.2 to 1.33.0 ([ffaa06663](https://github.com/leboncoin/spark-web/commit/ffaa06663))
+
 ## 18.0.9 (2026-07-29)
 
 ### 📦 Build
