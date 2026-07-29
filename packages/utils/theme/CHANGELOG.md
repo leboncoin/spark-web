@@ -1,3 +1,9 @@
+## 18.0.8 (2026-07-29)
+
+### 📦 Build
+
+- **npm:** bump commander from 14.0.3 to 15.0.0 ([903c6b98c](https://github.com/leboncoin/spark-web/commit/903c6b98c))
+
 ## 18.0.7 (2026-07-29)
 
 ### 📦 Build
