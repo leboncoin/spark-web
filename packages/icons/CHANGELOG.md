@@ -1,3 +1,17 @@
+## 18.0.16 (2026-07-29)
+
+### 🩹 Fixes
+
+- updated copy-to-clipboard implementation ([3bb9f5d39](https://github.com/leboncoin/spark-web/commit/3bb9f5d39))
+
+### 📦 Build
+
+- **npm:** bump copy-to-clipboard from 3.3.3 to 4.0.2 ([5b7251db5](https://github.com/leboncoin/spark-web/commit/5b7251db5))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 18.0.15 (2026-07-29)
 
 ### 📦 Build
