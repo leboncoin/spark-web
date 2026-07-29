@@ -1,3 +1,17 @@
+## 18.0.11 (2026-07-29)
+
+### 📦 Build
+
+- **npm:** bump the react group with 3 updates ([4c9bf6b1d](https://github.com/leboncoin/spark-web/commit/4c9bf6b1d))
+
+### 🏡 Chore
+
+- dependabot react group ([7bee369a6](https://github.com/leboncoin/spark-web/commit/7bee369a6))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 18.0.10 (2026-07-29)
 
 ### 📦 Build
