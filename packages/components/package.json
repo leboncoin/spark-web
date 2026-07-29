@@ -48,6 +48,11 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
+    "@react-aria/utils": "^3.34.1",
+    "@react-stately/collections": "^3.13.1",
+    "@react-types/checkbox": "^3.11.0",
+    "@react-types/grid": "^3.4.0",
+    "@react-types/shared": "^3.36.0",
     "@spark-ui/hooks": "18.0.16",
     "@spark-ui/icons": "18.0.16",
     "@spark-ui/internal-utils": "18.0.16",

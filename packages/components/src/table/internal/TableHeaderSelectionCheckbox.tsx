@@ -1,7 +1,7 @@
-import { useTableSelectAllCheckbox } from '@react-aria/table'
-import type { TableState } from '@react-stately/table'
 import type { Key } from '@react-types/shared'
 import type { KeyboardEvent } from 'react'
+import { useTableSelectAllCheckbox } from 'react-aria'
+import type { TableState } from 'react-stately'
 
 import { TableSelectionCheckbox } from './TableSelectionCheckbox'
 

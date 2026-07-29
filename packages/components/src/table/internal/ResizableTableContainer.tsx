@@ -1,9 +1,9 @@
 import { useResizeObserver } from '@react-aria/utils'
 import type { Key } from '@react-types/shared'
-import type { ColumnSize } from '@react-types/table'
 import { cx } from 'class-variance-authority'
 import type { ComponentPropsWithoutRef } from 'react'
 import { useLayoutEffect, useRef, useState } from 'react'
+import type { ColumnSize } from 'react-stately'
 
 import { TableResizableContext } from './TableContext'
 

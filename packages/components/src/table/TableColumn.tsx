@@ -1,7 +1,7 @@
 import type { PartialNode } from '@react-stately/collections'
 import type { Key } from '@react-types/shared'
-import type { ColumnProps as ReactTypesColumnProps } from '@react-types/table'
 import React, { type ReactElement, type ReactNode } from 'react'
+import type { ColumnProps as ReactTypesColumnProps } from 'react-stately'
 
 export interface ColumnProps<T extends object = object> extends Omit<
   ReactTypesColumnProps<T>,

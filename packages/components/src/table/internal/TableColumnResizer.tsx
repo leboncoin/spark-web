@@ -1,7 +1,7 @@
-import { useTableColumnResize } from '@react-aria/table'
 import type { GridNode } from '@react-types/grid'
 import { cx } from 'class-variance-authority'
 import { useRef } from 'react'
+import { useTableColumnResize } from 'react-aria'
 
 export function TableColumnResizer({
   column,

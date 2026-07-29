@@ -1,9 +1,9 @@
 import { getEventTarget } from '@react-aria/utils'
-import type { TableState } from '@react-stately/table'
 import type { GridNode } from '@react-types/grid'
 import { cx } from 'class-variance-authority'
 import { useRef, type SyntheticEvent } from 'react'
 import { mergeProps, useFocusRing, useTableRow } from 'react-aria'
+import type { TableState } from 'react-stately'
 
 import { shouldSuppressRowSelectionFromPointerTarget } from './table-utils'
 import { TableBodyCellRenderer } from './TableBodyCellRenderer'

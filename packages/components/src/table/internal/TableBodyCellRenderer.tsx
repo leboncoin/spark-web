@@ -1,10 +1,10 @@
-import { useTableSelectionCheckbox } from '@react-aria/table'
-import type { TableState } from '@react-stately/table'
 import type { GridNode } from '@react-types/grid'
 import type { Key } from '@react-types/shared'
 import { cx } from 'class-variance-authority'
 import { useCallback, useContext, useRef, type KeyboardEvent } from 'react'
+import { useTableSelectionCheckbox } from 'react-aria'
 import { mergeProps, useFocusRing, useTableCell } from 'react-aria'
+import type { TableState } from 'react-stately'
 
 import { cellStyles } from './Table.styles'
 import { TableKeyboardModeContext } from './TableKeyboardModeContext'

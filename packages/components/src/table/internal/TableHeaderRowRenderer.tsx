@@ -1,7 +1,7 @@
-import type { TableState } from '@react-stately/table'
 import type { GridNode } from '@react-types/grid'
 import { useRef } from 'react'
 import { useTableHeaderRow } from 'react-aria'
+import type { TableState } from 'react-stately'
 
 import { TableColumnHeader } from './TableColumnHeader'
 

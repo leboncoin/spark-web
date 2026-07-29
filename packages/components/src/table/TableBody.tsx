@@ -1,6 +1,6 @@
-import type { TableBodyProps as StatelyTableBodyProps } from '@react-stately/table'
-import { TableBody as StatelyTableBody } from '@react-stately/table'
 import type { ReactNode } from 'react'
+import type { TableBodyProps as StatelyTableBodyProps } from 'react-stately'
+import { TableBody as StatelyTableBody } from 'react-stately'
 
 export interface TableBodyProps<T extends object = object> extends StatelyTableBodyProps<T> {
   className?: string
