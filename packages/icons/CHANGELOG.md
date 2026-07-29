@@ -1,3 +1,9 @@
+## 18.0.13 (2026-07-29)
+
+### 📦 Build
+
+- **npm:** bump fs-extra from 11.3.6 to 11.4.0 ([6d5d16a3c](https://github.com/leboncoin/spark-web/commit/6d5d16a3c))
+
 ## 18.0.12 (2026-07-29)
 
 ### 📦 Build
