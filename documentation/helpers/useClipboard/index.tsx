@@ -6,7 +6,9 @@ export function useClipboard(value: string) {
   const [hasCopied, setHasCopied] = useState(false)
 
   const onCopy = useCallback(() => {
-    setHasCopied(copy(value))
+    copy(value).then(result => {
+      setHasCopied(result)
+    })
   }, [value])
 
   useEffect(() => {
