@@ -8,6 +8,12 @@ updates:
     commit-message:
       prefix: 'build(npm)'
     groups:
+      react:
+        patterns:
+          - 'react'
+          - 'react-dom'
+          - '@types/react'
+          - '@types/react-dom'
       tailwindcss:
         patterns:
           - 'tailwindcss'
