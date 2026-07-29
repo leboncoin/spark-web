@@ -1,3 +1,9 @@
+## 18.0.14 (2026-07-29)
+
+### 📦 Build
+
+- **npm:** bump react-router-dom from 7.18.1 to 7.18.2 ([ccc515f97](https://github.com/leboncoin/spark-web/commit/ccc515f97))
+
 ## 18.0.13 (2026-07-29)
 
 ### 📦 Build
