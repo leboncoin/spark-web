@@ -1,6 +1,6 @@
 {
   "name": "@spark-ui/components",
-  "version": "18.0.17",
+  "version": "18.0.18",
   "license": "MIT",
   "description": "Spark (Leboncoin design system) components.",
   "exports": {
@@ -53,9 +53,9 @@
     "@react-types/checkbox": "^3.11.0",
     "@react-types/grid": "^3.4.0",
     "@react-types/shared": "^3.36.0",
-    "@spark-ui/hooks": "18.0.17",
-    "@spark-ui/icons": "18.0.17",
-    "@spark-ui/internal-utils": "18.0.17",
+    "@spark-ui/hooks": "18.0.18",
+    "@spark-ui/icons": "18.0.18",
+    "@spark-ui/internal-utils": "18.0.18",
     "@zag-js/pagination": "1.30.0",
     "@zag-js/react": "1.30.0",
     "class-variance-authority": "0.7.1",
@@ -67,7 +67,7 @@
     "react-snap-carousel": "0.5.1"
   },
   "peerDependencies": {
-    "@spark-ui/theme-utils": "18.0.17",
+    "@spark-ui/theme-utils": "18.0.18",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "tailwindcss": "4.1.18"

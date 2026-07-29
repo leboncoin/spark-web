@@ -1,3 +1,9 @@
+## 18.0.18 (2026-07-29)
+
+### 📦 Build
+
+- **npm:** bump @base-ui/react from 1.5.0 to 1.6.0 ([03238cc62](https://github.com/leboncoin/spark-web/commit/03238cc62))
+
 ## 18.0.17 (2026-07-29)
 
 ### 💅 Refactors
