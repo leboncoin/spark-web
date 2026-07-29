@@ -1,3 +1,9 @@
+## 18.0.15 (2026-07-29)
+
+### 📦 Build
+
+- **npm:** bump @types/node from 24.5.2 to 26.1.2 ([9a7451401](https://github.com/leboncoin/spark-web/commit/9a7451401))
+
 ## 18.0.14 (2026-07-29)
 
 ### 📦 Build
