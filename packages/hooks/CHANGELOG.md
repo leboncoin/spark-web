@@ -1,3 +1,14 @@
+## 18.0.9 (2026-07-29)
+
+### 📦 Build
+
+- ignore max lines for stories in linter ([2bf3a13ea](https://github.com/leboncoin/spark-web/commit/2bf3a13ea))
+- **npm:** bump oxlint from 1.57.0 to 1.76.0 ([be6a3d122](https://github.com/leboncoin/spark-web/commit/be6a3d122))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 18.0.8 (2026-07-29)
 
 ### 📦 Build
