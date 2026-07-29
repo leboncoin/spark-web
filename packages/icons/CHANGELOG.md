@@ -1,3 +1,9 @@
+## 18.0.12 (2026-07-29)
+
+### 📦 Build
+
+- **npm:** bump rollup from 4.62.2 to 4.62.3 ([d1f01d424](https://github.com/leboncoin/spark-web/commit/d1f01d424))
+
 ## 18.0.11 (2026-07-29)
 
 ### 📦 Build
