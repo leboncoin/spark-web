@@ -1,3 +1,9 @@
+## 18.0.7 (2026-07-29)
+
+### 📦 Build
+
+- **npm:** bump the testing group across 1 directory with 2 updates ([abe731247](https://github.com/leboncoin/spark-web/commit/abe731247))
+
 ## 18.0.6 (2026-07-29)
 
 ### 📦 Build
