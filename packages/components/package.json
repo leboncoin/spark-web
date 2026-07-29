@@ -47,7 +47,7 @@
     "build": "NODE_OPTIONS='--max-old-space-size=8192' vite build"
   },
   "dependencies": {
-    "@base-ui/react": "^1.5.0",
+    "@base-ui/react": "^1.6.0",
     "@react-aria/utils": "^3.34.1",
     "@react-stately/collections": "^3.13.1",
     "@react-types/checkbox": "^3.11.0",
