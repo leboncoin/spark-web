@@ -1,3 +1,17 @@
+## 18.0.17 (2026-07-29)
+
+### 💅 Refactors
+
+- **components:** updated react-stately for unified imports ([348b8439f](https://github.com/leboncoin/spark-web/commit/348b8439f))
+
+### 📦 Build
+
+- **npm:** bump react-aria-components from 1.15.1 to 1.19.0 ([98e000e33](https://github.com/leboncoin/spark-web/commit/98e000e33))
+
+### ❤️ Thank You
+
+- Powerplex @Powerplex
+
 ## 18.0.16 (2026-07-29)
 
 ### 🩹 Fixes
