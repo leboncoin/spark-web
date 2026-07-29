@@ -58,7 +58,7 @@
     "emulate-tab": "1.2.1",
     "motion": "12.42.2",
     "radix-ui": "1.4.3",
-    "react-aria-components": "1.15.1",
+    "react-aria-components": "1.19.0",
     "react-snap-carousel": "0.5.1"
   },
   "peerDependencies": {
