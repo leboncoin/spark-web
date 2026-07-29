@@ -94,7 +94,7 @@
     "oxlint": "1.76.0",
     "postcss": "8.5.18",
     "react": "19.2.4",
-    "react-dom": "19.2.4",
+    "react-dom": "19.2.8",
     "react-router-dom": "7.18.1",
     "remark-gfm": "4.0.1",
     "resize-observer-polyfill": "1.5.1",
