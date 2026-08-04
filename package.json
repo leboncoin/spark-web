@@ -59,7 +59,7 @@
     "@commitlint/prompt-cli": "20.0.0",
     "@nx/devkit": "23.1.0",
     "@nx/js": "23.1.0",
-    "@playwright/test": "1.62.0",
+    "@playwright/test": "1.62.1",
     "@spark-ui/cli-utils": "^17.5.3",
     "@storybook/addon-a11y": "10.5.4",
     "@storybook/addon-docs": "10.5.4",
