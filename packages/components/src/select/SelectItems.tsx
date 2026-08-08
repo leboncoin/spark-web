@@ -53,6 +53,7 @@ export const Items = ({
     fieldLabelId,
     isControlled,
     onValueChange,
+    onBlur,
     selectedItem,
     setValue,
     name,
@@ -81,6 +82,7 @@ export const Items = ({
       className={styles({ className, state, disabled, readOnly })}
       value={selectedItem?.value}
       onChange={handleChange}
+      onBlur={onBlur}
       id={fieldId}
       {...rest}
     >

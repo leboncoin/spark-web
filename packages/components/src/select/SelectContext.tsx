@@ -3,6 +3,7 @@ import { useCombinedState } from '@spark-ui/hooks/use-combined-state'
 import {
   createContext,
   Dispatch,
+  FocusEventHandler,
   PropsWithChildren,
   ReactElement,
   SetStateAction,
@@ -25,6 +26,7 @@ export interface SelectContextState {
   setValue: (value: string) => void
   isControlled: boolean
   onValueChange?: (value: string) => void
+  onBlur?: FocusEventHandler<HTMLSelectElement>
   ariaLabel: string | undefined
   setAriaLabel: Dispatch<SetStateAction<string | undefined>>
   fieldId: string
@@ -60,6 +62,12 @@ export type SelectContextProps = PropsWithChildren<{
    * Event handler called when the value changes.
    */
   onValueChange?: (value: string) => void
+  /**
+   * Event handler called when the select loses focus. Useful for integrating with form
+   * libraries (e.g. React Hook Form, TanStack Form) that rely on `onBlur` to mark fields as
+   * touched and trigger validation.
+   */
+  onBlur?: FocusEventHandler<HTMLSelectElement>
 
   itemsComponent: ReactElement | undefined
   /**
@@ -82,6 +90,7 @@ export const SelectProvider = ({
   defaultValue,
   value: valueProp,
   onValueChange,
+  onBlur,
   disabled: disabledProp = false,
   readOnly: readOnlyProp = false,
   state: stateProp,
@@ -153,6 +162,7 @@ export const SelectProvider = ({
         setValue,
         isControlled,
         onValueChange,
+        onBlur,
         ariaLabel,
         setAriaLabel,
         fieldId,

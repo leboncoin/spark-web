@@ -348,4 +348,60 @@ describe('Select', () => {
       expect(onValueChangeSpy).not.toHaveBeenCalled()
     })
   })
+
+  describe('onBlur', () => {
+    beforeEach(vi.clearAllMocks)
+
+    const onBlurSpy = vi.fn()
+
+    const Implementation = () => (
+      <Select onBlur={onBlurSpy}>
+        <Select.Trigger aria-label="Book">
+          <Select.Value placeholder="Pick a book" />
+        </Select.Trigger>
+
+        <Select.Items>
+          <Select.Placeholder>--Pick a book--</Select.Placeholder>
+          <Select.Item value="book-1">War and Peace</Select.Item>
+          <Select.Item value="book-2">1984</Select.Item>
+        </Select.Items>
+      </Select>
+    )
+
+    it('should call the onBlur prop when the select loses focus', async () => {
+      const user = userEvent.setup()
+
+      render(<Implementation />)
+
+      await user.click(getSelect('Book'))
+      expect(onBlurSpy).not.toHaveBeenCalled()
+
+      await user.tab()
+      expect(onBlurSpy).toHaveBeenCalledTimes(1)
+    })
+
+    it('should let Select.Items directly override the onBlur handler from Select', async () => {
+      const user = userEvent.setup()
+      const itemsOnBlurSpy = vi.fn()
+
+      render(
+        <Select onBlur={onBlurSpy}>
+          <Select.Trigger aria-label="Book">
+            <Select.Value placeholder="Pick a book" />
+          </Select.Trigger>
+
+          <Select.Items onBlur={itemsOnBlurSpy}>
+            <Select.Placeholder>--Pick a book--</Select.Placeholder>
+            <Select.Item value="book-1">War and Peace</Select.Item>
+          </Select.Items>
+        </Select>
+      )
+
+      await user.click(getSelect('Book'))
+      await user.tab()
+
+      expect(itemsOnBlurSpy).toHaveBeenCalledTimes(1)
+      expect(onBlurSpy).not.toHaveBeenCalled()
+    })
+  })
 })
