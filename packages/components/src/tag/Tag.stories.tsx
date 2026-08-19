@@ -25,6 +25,7 @@ const intents: TagProps['intent'][] = [
   'info',
   'neutral',
   'surface',
+  'ai',
 ]
 const designs: TagProps['design'][] = ['filled', 'outlined', 'tinted']
 
@@ -45,7 +46,10 @@ export const Intent: StoryFn = _args => (
     {designs.map(design => (
       <div key={design} className="gap-md flex flex-row">
         {intents.map(intent => {
-          if (design !== 'filled' && intent === 'surface') {
+          if (
+            (design !== 'filled' && intent === 'surface') ||
+            (design !== 'tinted' && intent === 'ai')
+          ) {
             return (
               <span key={intent} className="text-small self-center">
                 N/A
@@ -100,6 +104,7 @@ export const AllCombinations: StoryFn = _args => {
     'info',
     'neutral',
     'surface',
+    'ai',
   ]
   const shapes: TagProps['shape'][] = ['rounded']
 
@@ -125,7 +130,10 @@ export const AllCombinations: StoryFn = _args => {
               <td className="border-outline p-lg border-sm font-bold capitalize">{intent}</td>
               {designs.map(design => {
                 // Skip surface intent for outlined and tinted designs
-                if (design !== 'filled' && intent === 'surface') {
+                if (
+                  (design !== 'filled' && intent === 'surface') ||
+                  (design !== 'tinted' && intent === 'ai')
+                ) {
                   return (
                     <td
                       key={design}

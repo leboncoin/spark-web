@@ -41,4 +41,9 @@ export const tintedVariants = [
     design: 'tinted',
     class: tw(['bg-neutral-container', 'text-on-neutral-container']),
   },
+  {
+    intent: 'ai',
+    design: 'tinted',
+    class: tw(['bg-ai-container', 'text-on-ai-container']),
+  },
 ] as const
