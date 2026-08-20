@@ -1,3 +1,13 @@
+## 18.1.0 (2026-08-20)
+
+### 🚀 Features
+
+- **components:** adding support to ai intent for tag comp ([2bb961917](https://github.com/leboncoin/spark-web/commit/2bb961917))
+
+### ❤️ Thank You
+
+- jean-paul.lescouzeres
+
 ## 18.0.18 (2026-07-29)
 
 ### 📦 Build
