@@ -67,7 +67,7 @@ describe('Progress', () => {
     // Base UI uses Intl.NumberFormat(style: 'percent') which may use a non-breaking space (e.g. fr locale)
     const expectedValueText = new Intl.NumberFormat(undefined, {
       style: 'percent',
-    }).format(value / 100)
+    }).format(value / max)
     expect(progressEl).toHaveAttribute('aria-valuetext', expectedValueText)
   })
 
