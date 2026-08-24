@@ -25,13 +25,13 @@ export const MenuPopup = ({
   ref,
   ...rest
 }: MenuPopupProps) => {
-  const renderSlot = useRenderSlot(asChild)
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
   return (
     <BaseMenu.Popup
       ref={ref}
       data-spark-component="menu-popup"
-      render={renderSlot}
+      render={renderProp}
       className={cx(
         [
           'rounded-md bg-surface shadow-lg min-w-sz-192',
@@ -47,7 +47,7 @@ export const MenuPopup = ({
       )}
       {...rest}
     >
-      {children}
+      {innerChildren}
     </BaseMenu.Popup>
   )
 }

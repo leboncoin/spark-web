@@ -14,11 +14,11 @@ export interface TriggerProps extends ComponentProps<'button'> {
  * A button that toggles the collapsible content. Renders a <button> element.
  */
 export const Trigger = ({ asChild = false, children, ...props }: TriggerProps) => {
-  const renderSlot = useRenderSlot(asChild, 'button')
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
   return (
-    <Collapsible.Trigger data-spark-component="collapsible-trigger" render={renderSlot} {...props}>
-      {children}
+    <Collapsible.Trigger data-spark-component="collapsible-trigger" render={renderProp} {...props}>
+      {innerChildren}
     </Collapsible.Trigger>
   )
 }

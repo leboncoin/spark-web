@@ -17,10 +17,14 @@ export interface DrawerTriggerProps extends Omit<
 /**
  * A button that opens the drawer. Renders a <button> element.
  */
-export const DrawerTrigger = ({ asChild = false, ...props }: DrawerTriggerProps) => {
-  const renderSlot = useRenderSlot(asChild, 'button')
+export const DrawerTrigger = ({ asChild = false, children, ...props }: DrawerTriggerProps) => {
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
-  return <BaseDialog.Trigger data-spark-component="drawer-trigger" render={renderSlot} {...props} />
+  return (
+    <BaseDialog.Trigger data-spark-component="drawer-trigger" render={renderProp} {...props}>
+      {innerChildren}
+    </BaseDialog.Trigger>
+  )
 }
 
 DrawerTrigger.displayName = 'Drawer.Trigger'

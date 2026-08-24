@@ -14,10 +14,14 @@ export interface DrawerCloseProps extends Omit<ComponentProps<typeof BaseDialog.
 /**
  * A button that closes the drawer. Renders a <button> element.
  */
-export const DrawerClose = ({ asChild = false, ...props }: DrawerCloseProps) => {
-  const renderSlot = useRenderSlot(asChild, 'button')
+export const DrawerClose = ({ asChild = false, children, ...props }: DrawerCloseProps) => {
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
-  return <BaseDialog.Close data-spark-component="drawer-close" render={renderSlot} {...props} />
+  return (
+    <BaseDialog.Close data-spark-component="drawer-close" render={renderProp} {...props}>
+      {innerChildren}
+    </BaseDialog.Close>
+  )
 }
 
 DrawerClose.displayName = 'Drawer.Close'

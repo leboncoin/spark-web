@@ -11,11 +11,11 @@ export interface RootProps extends ComponentProps<typeof Collapsible.Root> {
 }
 
 export const Root = ({ asChild = false, children, ...props }: RootProps) => {
-  const renderSlot = useRenderSlot(asChild, 'div')
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
   return (
-    <Collapsible.Root data-spark-component="collapsible" render={renderSlot} {...props}>
-      {children}
+    <Collapsible.Root data-spark-component="collapsible" render={renderProp} {...props}>
+      {innerChildren}
     </Collapsible.Root>
   )
 }

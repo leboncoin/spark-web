@@ -19,19 +19,19 @@ export interface MenuItemProps extends Omit<ComponentProps<typeof BaseMenu.Item>
  * Renders a clickable menu option with keyboard support.
  */
 export const MenuItem = ({ asChild = false, children, className, ref, ...rest }: MenuItemProps) => {
-  const renderSlot = useRenderSlot(asChild)
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
   return (
     <BaseMenu.Item
       ref={ref}
       data-spark-component="menu-item"
-      render={renderSlot}
+      render={renderProp}
       className={menuItemStyles({
         className,
       })}
       {...rest}
     >
-      {children}
+      {innerChildren}
     </BaseMenu.Item>
   )
 }

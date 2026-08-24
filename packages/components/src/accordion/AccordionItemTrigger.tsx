@@ -21,14 +21,14 @@ export const ItemTrigger = ({
   ref,
   ...props
 }: AccordionItemTriggerProps) => {
-  const renderSlot = useRenderSlot(asChild, 'button')
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
   const { intent } = useAccordionContext()
 
   return (
     <BaseAccordion.Trigger
       ref={ref}
       data-spark-component="accordion-item-trigger"
-      render={renderSlot}
+      render={renderProp}
       className={cx(
         'group',
         'gap-lg min-h-sz-48 relative flex items-center justify-between',
@@ -43,7 +43,7 @@ export const ItemTrigger = ({
       )}
       {...props}
     >
-      <div className="gap-lg flex grow items-center">{children}</div>
+      <div className="gap-lg flex grow items-center">{innerChildren}</div>
       <Icon
         intent="neutral"
         className={cx(

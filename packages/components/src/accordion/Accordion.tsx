@@ -64,7 +64,7 @@ export function Accordion({
   onValueChange,
   ...props
 }: AccordionProps) {
-  const renderSlot = useRenderSlot(asChild, 'div')
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
   // Wrap the onValueChange to always provide string[]
   const handleValueChange = onValueChange
@@ -84,13 +84,13 @@ export function Accordion({
         multiple={multiple}
         hiddenUntilFound={hiddenUntilFound}
         className={cx('bg-surface h-fit rounded-lg', className)}
-        render={renderSlot}
+        render={renderProp}
         value={value as any}
         defaultValue={defaultValue as any}
         onValueChange={handleValueChange as any}
         {...props}
       >
-        {children}
+        {innerChildren}
       </BaseAccordion.Root>
     </AccordionContext>
   )

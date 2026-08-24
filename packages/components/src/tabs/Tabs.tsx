@@ -43,7 +43,7 @@ export const Tabs = ({
   ref,
   ...rest
 }: TabsProps) => {
-  const renderSlot = useRenderSlot(asChild)
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
   return (
     <TabsContext
@@ -59,10 +59,10 @@ export const Tabs = ({
         orientation={orientation}
         className={rootStyles({ className })}
         data-spark-component="tabs"
-        render={renderSlot}
+        render={renderProp}
         {...rest}
       >
-        {children}
+        {innerChildren}
       </BaseTabs.Root>
     </TabsContext>
   )

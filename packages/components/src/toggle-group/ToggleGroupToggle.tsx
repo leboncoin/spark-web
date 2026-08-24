@@ -36,7 +36,7 @@ export const ToggleGroupToggle = ({
   ref,
   ...rest
 }: ToggleGroupToggleProps) => {
-  const renderSlot = useRenderSlot(asChild)
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
   return (
     <Toggle
@@ -47,12 +47,12 @@ export const ToggleGroupToggle = ({
         'disabled:cursor-not-allowed disabled:opacity-dim-3',
         className
       )}
-      {...(asChild && { render: renderSlot })}
+      {...(asChild && { render: renderProp })}
       disabled={disabled}
       value={value}
       {...rest}
     >
-      {children}
+      {innerChildren}
     </Toggle>
   )
 }

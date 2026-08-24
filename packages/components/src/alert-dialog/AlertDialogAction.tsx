@@ -17,15 +17,21 @@ export interface AlertDialogActionProps extends Omit<
 /**
  * A button that closes the dialog and confirms the action. Renders a <button> element.
  */
-export const AlertDialogAction = ({ asChild = false, ...props }: AlertDialogActionProps) => {
-  const renderSlot = useRenderSlot(asChild, 'button')
+export const AlertDialogAction = ({
+  asChild = false,
+  children,
+  ...props
+}: AlertDialogActionProps) => {
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
   return (
     <BaseAlertDialog.Close
       data-spark-component="alert-dialog-action"
-      render={renderSlot}
+      render={renderProp}
       {...props}
-    />
+    >
+      {innerChildren}
+    </BaseAlertDialog.Close>
   )
 }
 

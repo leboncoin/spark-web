@@ -14,8 +14,12 @@ export interface CloseProps extends Omit<ComponentProps<typeof BaseDialog.Close>
 /**
  * A button that closes the dialog. Renders a <button> element.
  */
-export const Close = ({ asChild = false, ...props }: CloseProps) => {
-  const renderSlot = useRenderSlot(asChild, 'button')
+export const Close = ({ asChild = false, children, ...props }: CloseProps) => {
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
-  return <BaseDialog.Close data-spark-component="dialog-close" render={renderSlot} {...props} />
+  return (
+    <BaseDialog.Close data-spark-component="dialog-close" render={renderProp} {...props}>
+      {innerChildren}
+    </BaseDialog.Close>
+  )
 }

@@ -32,13 +32,13 @@ export const MenuCheckboxItem = ({
   ref,
   ...rest
 }: MenuCheckboxItemProps) => {
-  const renderSlot = useRenderSlot(asChild)
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
   return (
     <BaseMenu.CheckboxItem
       ref={ref}
       data-spark-component="menu-checkbox-item"
-      render={renderSlot}
+      render={renderProp}
       className={cx(
         menuItemStyles({
           className,
@@ -61,7 +61,7 @@ export const MenuCheckboxItem = ({
           <Check />
         </Icon>
       </BaseMenu.CheckboxItemIndicator>
-      {children}
+      {innerChildren}
     </BaseMenu.CheckboxItem>
   )
 }

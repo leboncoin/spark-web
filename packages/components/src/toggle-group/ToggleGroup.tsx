@@ -47,7 +47,7 @@ export const ToggleGroup = ({
   ref,
   ...rest
 }: ToggleGroupProps) => {
-  const renderSlot = useRenderSlot(asChild)
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
   return (
     <BaseToggleGroup
@@ -56,9 +56,9 @@ export const ToggleGroup = ({
       multiple={multiple}
       className={cx('gap-none inline-flex', className)}
       data-spark-component="toggle-group"
-      {...(asChild && { render: renderSlot })}
+      {...(asChild && { render: renderProp })}
     >
-      {children}
+      {innerChildren}
     </BaseToggleGroup>
   )
 }

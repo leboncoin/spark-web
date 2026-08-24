@@ -1,7 +1,14 @@
-import { Slot } from '../slot'
+import { createElement, isValidElement, type ReactElement, type ReactNode } from 'react'
 
-export function useRenderSlot(asChild: boolean, defaultTag: string) {
-  const Component = asChild ? Slot : defaultTag
+export function useRenderSlot(asChild: boolean, children: ReactNode) {
+  if (!asChild || !isValidElement(children)) {
+    return { renderProp: undefined, innerChildren: children }
+  }
 
-  return asChild ? ({ ...props }) => <Component {...props} /> : undefined
+  const { children: innerChildren, ...childProps } = (children as ReactElement<any>).props
+
+  return {
+    renderProp: createElement((children as ReactElement<any>).type, childProps),
+    innerChildren,
+  }
 }

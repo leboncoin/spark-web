@@ -76,11 +76,12 @@ export const SwitchInput = ({
   required,
   ref,
   asChild = false,
+  children,
   ...rest
 }: SwitchInputProps) => {
   const [isChecked, setIsChecked] = useCombinedState(checked, defaultChecked)
   const { name, description, isRequired, isInvalid } = useFormFieldControl()
-  const renderSlot = useRenderSlot(asChild, 'span')
+  const { renderProp } = useRenderSlot(asChild, children)
   const isRequiredComputed = Boolean(required || isRequired)
 
   const handleCheckedChange = (updatedValue: boolean): void => {
@@ -92,7 +93,7 @@ export const SwitchInput = ({
     <BaseSwitch.Root
       data-spark-component="switch-input"
       ref={ref}
-      render={renderSlot}
+      render={renderProp}
       className={styles({ size, className })}
       checked={checked}
       defaultChecked={defaultChecked}

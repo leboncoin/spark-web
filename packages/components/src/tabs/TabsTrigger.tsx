@@ -61,10 +61,11 @@ export const TabsTrigger = ({
   const { intent, size, orientation } = useTabsContext()
   const popoverTriggerRef = useRef<HTMLButtonElement>(null)
   const tabsTriggerRef = useRef<HTMLButtonElement>(null)
-  const renderSlot = useRenderSlot(asChild)
 
   // Combine internal ref with forwarded ref
   const mergedRef = useMergeRefs(ref, tabsTriggerRef)
+
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
   const handleKeyDown = (e: TabKeyDownEvent) => {
     // Handle Shift+F10 for popover
@@ -91,7 +92,7 @@ export const TabsTrigger = ({
         orientation: orientation ?? 'horizontal',
         className,
       })}
-      render={renderSlot}
+      render={renderProp}
       disabled={disabled}
       value={value}
       onFocus={({ target }: FocusEvent<HTMLButtonElement>) =>
@@ -105,7 +106,7 @@ export const TabsTrigger = ({
       aria-haspopup={hasMenu ? 'true' : undefined}
       {...rest}
     >
-      {children}
+      {innerChildren}
     </BaseTabs.Tab>
   )
 

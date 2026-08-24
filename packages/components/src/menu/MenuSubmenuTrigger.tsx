@@ -30,19 +30,19 @@ export const MenuSubmenuTrigger = ({
   ref,
   ...rest
 }: MenuSubmenuTriggerProps) => {
-  const renderSlot = useRenderSlot(asChild)
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
   return (
     <BaseMenu.SubmenuTrigger
       ref={ref}
       data-spark-component="menu-submenu-trigger"
-      render={renderSlot}
+      render={renderProp}
       className={menuItemStyles({
         className,
       })}
       {...rest}
     >
-      <span className="flex-1">{children}</span>
+      <span className="flex-1">{innerChildren}</span>
       <Icon size="sm" intent="current" className="ml-auto shrink-0">
         <ArrowVerticalRight />
       </Icon>

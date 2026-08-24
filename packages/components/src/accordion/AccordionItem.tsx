@@ -24,13 +24,13 @@ export const Item = ({
 }: AccordionItemProps) => {
   const accordion = useAccordionContext()
 
-  const renderSlot = useRenderSlot(asChild, 'div')
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
   return (
     <BaseAccordion.Item
       ref={ref}
       data-spark-component="accordion-item"
-      render={renderSlot}
+      render={renderProp}
       className={cx(
         'relative first:rounded-t-lg last:rounded-b-lg',
         'not-last:border-b-0',
@@ -39,7 +39,7 @@ export const Item = ({
       )}
       {...props}
     >
-      {children}
+      {innerChildren}
     </BaseAccordion.Item>
   )
 }

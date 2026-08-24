@@ -32,13 +32,13 @@ export const MenuRadioItem = ({
   ref,
   ...rest
 }: MenuRadioItemProps) => {
-  const renderSlot = useRenderSlot(asChild)
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
   return (
     <BaseMenu.RadioItem
       ref={ref}
       data-spark-component="menu-radio-item"
-      render={renderSlot}
+      render={renderProp}
       className={cx(
         menuItemStyles({
           className,
@@ -61,7 +61,7 @@ export const MenuRadioItem = ({
           <Check />
         </Icon>
       </BaseMenu.RadioItemIndicator>
-      {children}
+      {innerChildren}
     </BaseMenu.RadioItem>
   )
 }

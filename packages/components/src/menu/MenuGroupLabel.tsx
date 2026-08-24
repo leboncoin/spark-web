@@ -28,17 +28,17 @@ export const MenuGroupLabel = ({
   ref,
   ...rest
 }: MenuGroupLabelProps) => {
-  const renderSlot = useRenderSlot(asChild)
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
   return (
     <BaseMenu.GroupLabel
       ref={ref}
       data-spark-component="menu-group-label"
-      render={renderSlot}
+      render={renderProp}
       className={cx('text-on-surface/dim-1 text-body-2 font-bold', 'px-lg py-sm', className)}
       {...rest}
     >
-      {children}
+      {innerChildren}
     </BaseMenu.GroupLabel>
   )
 }

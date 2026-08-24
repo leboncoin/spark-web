@@ -21,7 +21,7 @@ export const Content = ({
   hiddenUntilFound = true,
   ...props
 }: ContentProps) => {
-  const renderSlot = useRenderSlot(asChild, 'div')
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
   return (
     <Collapsible.Panel
@@ -35,11 +35,11 @@ export const Content = ({
         'data-[ending-style]:h-0',
         className
       )}
-      render={renderSlot}
+      render={renderProp}
       hiddenUntilFound={hiddenUntilFound}
       {...props}
     >
-      {children}
+      {innerChildren}
     </Collapsible.Panel>
   )
 }

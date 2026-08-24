@@ -18,7 +18,7 @@ export const ItemContent = ({
   ref,
   ...props
 }: AccordionItemContentProps) => {
-  const renderSlot = useRenderSlot(asChild, 'div')
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
   return (
     <BaseAccordion.Panel
@@ -30,10 +30,10 @@ export const ItemContent = ({
         'text-body-1 text-on-surface',
         className
       )}
-      render={renderSlot}
+      render={renderProp}
       {...props}
     >
-      {children}
+      {innerChildren}
     </BaseAccordion.Panel>
   )
 }

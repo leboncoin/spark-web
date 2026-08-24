@@ -48,7 +48,7 @@ export const TabsList = ({
   const innerRef = useRef(null)
   const listRef = ref || innerRef
   const { orientation } = useTabsContext()
-  const renderSlot = useRenderSlot(asChild)
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
   const { width } = useResizeObserver(wrapperRef)
 
@@ -156,12 +156,12 @@ export const TabsList = ({
         data-spark-component="tabs-list"
         ref={listRef}
         className={listStyles()}
-        render={renderSlot}
+        render={renderProp}
         loopFocus={loop}
         activateOnFocus
         {...rest}
       >
-        {children}
+        {innerChildren}
       </BaseTabs.List>
 
       {arrows.next !== 'hidden' && (

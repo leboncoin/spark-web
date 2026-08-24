@@ -22,19 +22,22 @@ export interface AlertDialogCancelProps extends Omit<
 export const AlertDialogCancel = ({
   asChild = false,
   ref: forwardedRef,
+  children,
   ...props
 }: AlertDialogCancelProps) => {
   const { cancelRef } = useAlertDialog()
   const ref = useMergeRefs(forwardedRef, cancelRef)
-  const renderSlot = useRenderSlot(asChild, 'button')
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
 
   return (
     <BaseAlertDialog.Close
       ref={ref}
       data-spark-component="alert-dialog-cancel"
-      render={renderSlot}
+      render={renderProp}
       {...props}
-    />
+    >
+      {innerChildren}
+    </BaseAlertDialog.Close>
   )
 }
 

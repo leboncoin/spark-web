@@ -38,7 +38,7 @@ export const TabsContent = ({
   ...rest
 }: TabsContentProps) => {
   const { forceMount: contextForceMount } = useTabsContext()
-  const renderSlot = useRenderSlot(asChild)
+  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
   const keepMounted = contextForceMount || forceMount
 
   return (
@@ -47,10 +47,10 @@ export const TabsContent = ({
       ref={ref}
       keepMounted={keepMounted}
       className={contentStyles({ className, forceMount: keepMounted })}
-      render={renderSlot}
+      render={renderProp}
       {...rest}
     >
-      {children}
+      {innerChildren}
     </BaseTabs.Panel>
   )
 }
