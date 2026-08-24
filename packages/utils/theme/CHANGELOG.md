@@ -1,3 +1,17 @@
+## 18.1.1 (2026-08-24)
+
+### 🏡 Chore
+
+- bump @base-ui/react from 1.6.0 to 1.7.0 ([adb4c889f](https://github.com/leboncoin/spark-web/commit/adb4c889f))
+
+### 🎨 Styles
+
+- **theme-utils:** added sz tokens section ([adf2233d7](https://github.com/leboncoin/spark-web/commit/adf2233d7))
+
+### ❤️ Thank You
+
+- acd02
+
 ## 18.1.0 (2026-08-20)
 
 This was a version bump only for @spark-ui/theme-utils to align it with other projects, there were no code changes.
