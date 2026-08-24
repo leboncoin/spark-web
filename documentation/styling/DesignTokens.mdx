@@ -1146,6 +1146,101 @@ Comprehensive overview of all color tokens showing how they render across differ
   </Table>
 </div>
 
+## Sz Tokens
+
+Sz tokens are a **web-only** addition, they are not part of the designer token set and have no equivalent on native platforms.
+
+They provide a curated set of fixed pixel-equivalent sizes for widths, heights, and positional properties (`top`, `right`, `bottom`, `left`), giving web developers a finite, predictable scale to pick from instead of resorting to arbitrary values.
+
+The token name directly reflects its pixel value, e.g., `sz-14` equals 14px (expressed as `rem` under the hood).
+
+<div className="sb-unstyled">
+  <Table resizeColumnAriaLabel="Resize column">
+    <Table.Grid aria-label="Sz tokens">
+      <Table.Header>
+        <Table.Column id="preview" label="Preview" isRowHeader minWidth={200} />
+        <Table.Column id="class" label="Tailwind Class" minWidth={180} />
+        <Table.Column id="token" label="CSS Variable" minWidth={220} />
+        <Table.Column id="value" label="Computed Value" minWidth={120} />
+      </Table.Header>
+      <Table.Body>
+        {[
+          { name: '0', className: 'w-sz-0' },
+          { name: '1', className: 'w-sz-1' },
+          { name: '2', className: 'w-sz-2' },
+          { name: '4', className: 'w-sz-4' },
+          { name: '6', className: 'w-sz-6' },
+          { name: '8', className: 'w-sz-8' },
+          { name: '10', className: 'w-sz-10' },
+          { name: '12', className: 'w-sz-12' },
+          { name: '14', className: 'w-sz-14' },
+          { name: '16', className: 'w-sz-16' },
+          { name: '20', className: 'w-sz-20' },
+          { name: '24', className: 'w-sz-24' },
+          { name: '28', className: 'w-sz-28' },
+          { name: '32', className: 'w-sz-32' },
+          { name: '36', className: 'w-sz-36' },
+          { name: '40', className: 'w-sz-40' },
+          { name: '44', className: 'w-sz-44' },
+          { name: '48', className: 'w-sz-48' },
+          { name: '56', className: 'w-sz-56' },
+          { name: '64', className: 'w-sz-64' },
+          { name: '80', className: 'w-sz-80' },
+          { name: '96', className: 'w-sz-96' },
+          { name: '112', className: 'w-sz-112' },
+          { name: '128', className: 'w-sz-128' },
+          { name: '144', className: 'w-sz-144' },
+          { name: '160', className: 'w-sz-160' },
+          { name: '176', className: 'w-sz-176' },
+          { name: '192', className: 'w-sz-192' },
+          { name: '208', className: 'w-sz-208' },
+          { name: '224', className: 'w-sz-224' },
+          { name: '240', className: 'w-sz-240' },
+          { name: '256', className: 'w-sz-256' },
+          { name: '288', className: 'w-sz-288' },
+          { name: '320', className: 'w-sz-320' },
+          { name: '384', className: 'w-sz-384' },
+          { name: '400', className: 'w-sz-400' },
+          { name: '416', className: 'w-sz-416' },
+          { name: '432', className: 'w-sz-432' },
+          { name: '448', className: 'w-sz-448' },
+          { name: '464', className: 'w-sz-464' },
+          { name: '480', className: 'w-sz-480' },
+          { name: '512', className: 'w-sz-512' },
+          { name: '544', className: 'w-sz-544' },
+          { name: '576', className: 'w-sz-576' },
+          { name: '608', className: 'w-sz-608' },
+          { name: '640', className: 'w-sz-640' },
+          { name: '672', className: 'w-sz-672' },
+          { name: '704', className: 'w-sz-704' },
+          { name: '736', className: 'w-sz-736' },
+          { name: '768', className: 'w-sz-768' },
+          { name: '800', className: 'w-sz-800' },
+          { name: '832', className: 'w-sz-832' },
+          { name: '864', className: 'w-sz-864' },
+        ].map(item => (
+          <Table.Row key={item.name} id={`sz-${item.name}`}>
+            <Table.Cell>
+              <div className="overflow-x-auto max-w-[200px]">
+                <div className={`h-sz-8 bg-main rounded-sm ${item.className}`} />
+              </div>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">**-sz-{item.name}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2">--spacing-sz-{item.name}</code>
+            </Table.Cell>
+            <Table.Cell>
+              <code className="text-body-2 opacity-dim-2">{getSpacingValue(`--spacing-sz-${item.name}`)}</code>
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table.Grid>
+  </Table>
+</div>
+
 ## Typography Tokens
 
 Spark typography are composite tokens (Tailwindcss utilities) that combines font-size, line-height and sometimes font-weight.
