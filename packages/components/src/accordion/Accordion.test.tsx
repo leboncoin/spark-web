@@ -145,4 +145,23 @@ describe('Accordion', () => {
     expect(screen.getByText('First panel')).toBeVisible()
     expect(screen.getByText('Second panel')).not.toBeVisible()
   })
+
+  describe('asChild', () => {
+    it('should render Accordion.ItemTrigger as a custom element', () => {
+      render(
+        <Accordion>
+          <Accordion.Item value="a">
+            <Accordion.ItemTrigger asChild nativeButton={false}>
+              <a href="#">Custom trigger</a>
+            </Accordion.ItemTrigger>
+            <Accordion.ItemContent>Panel content</Accordion.ItemContent>
+          </Accordion.Item>
+        </Accordion>
+      )
+
+      const trigger = screen.getByRole('button', { name: 'Custom trigger' })
+      expect(trigger.tagName).toBe('A')
+      expect(trigger).toHaveAttribute('data-spark-component', 'accordion-item-trigger')
+    })
+  })
 })

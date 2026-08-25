@@ -396,4 +396,27 @@ describe('Tabs', () => {
       expect(overriddenMenuContent).toHaveClass('custom-class')
     })
   })
+
+  describe('asChild', () => {
+    it('should render Tabs.Trigger as a custom element', () => {
+      render(
+        <Tabs defaultValue="tab1">
+          <Tabs.List>
+            {['tab1', 'tab2', 'tab3'].map(value => (
+              <Tabs.Trigger key={value} value={value} asChild nativeButton={false}>
+                <a href="#">{value}</a>
+              </Tabs.Trigger>
+            ))}
+          </Tabs.List>
+          <Tabs.Content value="tab1">Content 1</Tabs.Content>
+          <Tabs.Content value="tab2">Content 2</Tabs.Content>
+          <Tabs.Content value="tab3">Content 3</Tabs.Content>
+        </Tabs>
+      )
+
+      const trigger = screen.getByRole('tab', { name: 'tab1' })
+      expect(trigger.tagName).toBe('A')
+      expect(trigger).toHaveAttribute('data-spark-component', 'tabs-trigger')
+    })
+  })
 })
