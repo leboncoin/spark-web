@@ -1,3 +1,17 @@
+## 18.1.2 (2026-08-25)
+
+### 🩹 Fixes
+
+- **components:** replace Slot render prop with createElement to fix infinite loop in base-ui 1.7.0 ([0835be6a0](https://github.com/leboncoin/spark-web/commit/0835be6a0))
+
+### 💅 Refactors
+
+- **components:** consolidate useRenderSlot into shared createRenderSlot utility ([2f1f082e7](https://github.com/leboncoin/spark-web/commit/2f1f082e7))
+
+### ❤️ Thank You
+
+- acd02
+
 ## 18.1.1 (2026-08-24)
 
 ### 🏡 Chore

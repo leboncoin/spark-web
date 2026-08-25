@@ -1,3 +1,13 @@
+## 18.1.2 (2026-08-25)
+
+### 💅 Refactors
+
+- **components:** consolidate useRenderSlot into shared createRenderSlot utility ([2f1f082e7](https://github.com/leboncoin/spark-web/commit/2f1f082e7))
+
+### ❤️ Thank You
+
+- acd02
+
 ## 18.1.1 (2026-08-24)
 
 ### 🏡 Chore
