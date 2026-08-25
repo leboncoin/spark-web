@@ -1,7 +1,6 @@
 import { AlertDialog as BaseAlertDialog } from '@base-ui/react/alert-dialog'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { ComponentProps, Ref } from 'react'
-
-import { useRenderSlot } from './useRenderSlot'
 
 export interface AlertDialogActionProps extends Omit<
   ComponentProps<typeof BaseAlertDialog.Close>,
@@ -22,7 +21,7 @@ export const AlertDialogAction = ({
   children,
   ...props
 }: AlertDialogActionProps) => {
-  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   return (
     <BaseAlertDialog.Close

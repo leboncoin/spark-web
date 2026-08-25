@@ -1,10 +1,10 @@
 import { Menu as BaseMenu } from '@base-ui/react/menu'
 import { Check } from '@spark-ui/icons/Check'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { cx } from 'class-variance-authority'
 import { type ComponentProps, type Ref } from 'react'
 
 import { Icon } from '../icon'
-import { useRenderSlot } from './useRenderSlot'
 
 export interface MenuCheckboxItemIndicatorProps extends Omit<
   ComponentProps<typeof BaseMenu.CheckboxItemIndicator>,
@@ -37,7 +37,7 @@ export const MenuCheckboxItemIndicator = ({
   children,
   ...rest
 }: MenuCheckboxItemIndicatorProps) => {
-  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   return (
     <BaseMenu.CheckboxItemIndicator

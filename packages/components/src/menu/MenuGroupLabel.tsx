@@ -1,8 +1,7 @@
 import { Menu as BaseMenu } from '@base-ui/react/menu'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { cx } from 'class-variance-authority'
 import { type ComponentProps, type Ref } from 'react'
-
-import { useRenderSlot } from './useRenderSlot'
 
 export interface MenuGroupLabelProps extends Omit<
   ComponentProps<typeof BaseMenu.GroupLabel>,
@@ -28,7 +27,7 @@ export const MenuGroupLabel = ({
   ref,
   ...rest
 }: MenuGroupLabelProps) => {
-  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   return (
     <BaseMenu.GroupLabel

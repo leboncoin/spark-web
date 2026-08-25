@@ -1,8 +1,7 @@
 import { Toggle } from '@base-ui/react/toggle'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { cx } from 'class-variance-authority'
 import { type ComponentPropsWithoutRef, Ref } from 'react'
-
-import { useRenderSlot } from './useRenderSlot'
 
 export interface ToggleGroupToggleProps extends ComponentPropsWithoutRef<'button'> {
   /**
@@ -36,7 +35,7 @@ export const ToggleGroupToggle = ({
   ref,
   ...rest
 }: ToggleGroupToggleProps) => {
-  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   return (
     <Toggle

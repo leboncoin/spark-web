@@ -2,13 +2,13 @@
 import { Tabs as BaseTabs } from '@base-ui/react/tabs'
 import { ArrowVerticalLeft } from '@spark-ui/icons/ArrowVerticalLeft'
 import { ArrowVerticalRight } from '@spark-ui/icons/ArrowVerticalRight'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { type ComponentProps, type ReactElement, Ref, useEffect, useRef, useState } from 'react'
 
 import { Button } from '../button'
 import { Icon } from '../icon'
 import { useTabsContext } from './TabsContext'
 import { listStyles, navigationArrowStyles, wrapperStyles } from './TabsList.styles'
-import { useRenderSlot } from './useRenderSlot'
 import { useResizeObserver } from './useResizeObserver'
 
 export interface TabsListProps extends Omit<
@@ -48,7 +48,7 @@ export const TabsList = ({
   const innerRef = useRef(null)
   const listRef = ref || innerRef
   const { orientation } = useTabsContext()
-  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   const { width } = useResizeObserver(wrapperRef)
 

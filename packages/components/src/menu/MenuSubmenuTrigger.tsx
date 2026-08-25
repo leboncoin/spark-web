@@ -1,10 +1,10 @@
 import { Menu as BaseMenu } from '@base-ui/react/menu'
 import { ArrowVerticalRight } from '@spark-ui/icons/ArrowVerticalRight'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { type ComponentProps, type Ref } from 'react'
 
 import { Icon } from '../icon'
 import { menuItemStyles } from './MenuItemStyles'
-import { useRenderSlot } from './useRenderSlot'
 
 export interface MenuSubmenuTriggerProps extends Omit<
   ComponentProps<typeof BaseMenu.SubmenuTrigger>,
@@ -30,7 +30,7 @@ export const MenuSubmenuTrigger = ({
   ref,
   ...rest
 }: MenuSubmenuTriggerProps) => {
-  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   return (
     <BaseMenu.SubmenuTrigger

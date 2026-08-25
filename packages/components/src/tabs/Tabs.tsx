@@ -1,10 +1,10 @@
 import { Tabs as BaseTabs } from '@base-ui/react/tabs'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { type ComponentProps, type PropsWithChildren, Ref } from 'react'
 
 import { TabsContext } from './TabsContext'
 import { rootStyles } from './TabsRoot.styles'
 import type { TabsTriggerVariantsProps } from './TabsTrigger.styles'
-import { useRenderSlot } from './useRenderSlot'
 
 export interface TabsProps
   extends
@@ -43,7 +43,7 @@ export const Tabs = ({
   ref,
   ...rest
 }: TabsProps) => {
-  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   return (
     <TabsContext

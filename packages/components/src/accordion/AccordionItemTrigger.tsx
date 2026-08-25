@@ -1,11 +1,11 @@
 import { Accordion as BaseAccordion } from '@base-ui/react/accordion'
 import { ArrowHorizontalDown } from '@spark-ui/icons/ArrowHorizontalDown'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { cx } from 'class-variance-authority'
 import { type ComponentProps, Ref } from 'react'
 
 import { Icon } from '../icon'
 import { useAccordionContext } from './Accordion'
-import { useRenderSlot } from './useRenderSlot'
 
 type ExtendedBaseUiInterface = Omit<ComponentProps<typeof BaseAccordion.Trigger>, 'render'>
 
@@ -21,7 +21,7 @@ export const ItemTrigger = ({
   ref,
   ...props
 }: AccordionItemTriggerProps) => {
-  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
   const { intent } = useAccordionContext()
 
   return (

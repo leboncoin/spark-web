@@ -1,6 +1,6 @@
 import { createElement, isValidElement, type ReactElement, type ReactNode } from 'react'
 
-export function useRenderSlot(asChild: boolean, children: ReactNode) {
+export function createRenderSlot(asChild: boolean, children: ReactNode) {
   if (!asChild || !isValidElement(children)) {
     return { renderProp: undefined, innerChildren: children }
   }

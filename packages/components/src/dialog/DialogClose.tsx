@@ -1,7 +1,6 @@
 import { Dialog as BaseDialog } from '@base-ui/react/dialog'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { ComponentProps, Ref } from 'react'
-
-import { useRenderSlot } from '../drawer/useRenderSlot'
 
 export interface CloseProps extends Omit<ComponentProps<typeof BaseDialog.Close>, 'render'> {
   /**
@@ -15,7 +14,7 @@ export interface CloseProps extends Omit<ComponentProps<typeof BaseDialog.Close>
  * A button that closes the dialog. Renders a <button> element.
  */
 export const Close = ({ asChild = false, children, ...props }: CloseProps) => {
-  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   return (
     <BaseDialog.Close data-spark-component="dialog-close" render={renderProp} {...props}>

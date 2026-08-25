@@ -1,9 +1,9 @@
 import { Accordion as BaseAccordion } from '@base-ui/react/accordion'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { cx } from 'class-variance-authority'
 import { type ComponentProps, Ref } from 'react'
 
 import { useAccordionContext } from './Accordion'
-import { useRenderSlot } from './useRenderSlot'
 
 type ExtendedBaseUiInterface = Omit<ComponentProps<typeof BaseAccordion.Item>, 'render'>
 
@@ -24,7 +24,7 @@ export const Item = ({
 }: AccordionItemProps) => {
   const accordion = useAccordionContext()
 
-  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   return (
     <BaseAccordion.Item

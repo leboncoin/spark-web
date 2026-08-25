@@ -1,8 +1,8 @@
 import { Menu as BaseMenu } from '@base-ui/react/menu'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { type ComponentProps, type Ref } from 'react'
 
 import { menuItemStyles } from './MenuItemStyles'
-import { useRenderSlot } from './useRenderSlot'
 
 export interface MenuItemProps extends Omit<ComponentProps<typeof BaseMenu.Item>, 'render'> {
   /**
@@ -19,7 +19,7 @@ export interface MenuItemProps extends Omit<ComponentProps<typeof BaseMenu.Item>
  * Renders a clickable menu option with keyboard support.
  */
 export const MenuItem = ({ asChild = false, children, className, ref, ...rest }: MenuItemProps) => {
-  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   return (
     <BaseMenu.Item

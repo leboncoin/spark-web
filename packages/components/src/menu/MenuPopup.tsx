@@ -1,8 +1,7 @@
 import { Menu as BaseMenu } from '@base-ui/react/menu'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { cx } from 'class-variance-authority'
 import { type ComponentProps, type Ref } from 'react'
-
-import { useRenderSlot } from './useRenderSlot'
 
 export interface MenuPopupProps extends Omit<ComponentProps<typeof BaseMenu.Popup>, 'render'> {
   /**
@@ -25,7 +24,7 @@ export const MenuPopup = ({
   ref,
   ...rest
 }: MenuPopupProps) => {
-  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   return (
     <BaseMenu.Popup

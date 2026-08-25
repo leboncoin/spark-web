@@ -1,8 +1,7 @@
 import { ToggleGroup as BaseToggleGroup } from '@base-ui/react/toggle-group'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { cx } from 'class-variance-authority'
 import { type ComponentPropsWithoutRef, type PropsWithChildren, Ref } from 'react'
-
-import { useRenderSlot } from './useRenderSlot'
 
 export interface ToggleGroupProps extends PropsWithChildren, ComponentPropsWithoutRef<'div'> {
   /**
@@ -47,7 +46,7 @@ export const ToggleGroup = ({
   ref,
   ...rest
 }: ToggleGroupProps) => {
-  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   return (
     <BaseToggleGroup

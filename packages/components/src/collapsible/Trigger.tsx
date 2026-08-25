@@ -1,7 +1,6 @@
 import { Collapsible } from '@base-ui/react/collapsible'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { type ComponentProps } from 'react'
-
-import { useRenderSlot } from './useRenderSlot'
 
 export interface TriggerProps extends ComponentProps<'button'> {
   /**
@@ -14,7 +13,7 @@ export interface TriggerProps extends ComponentProps<'button'> {
  * A button that toggles the collapsible content. Renders a <button> element.
  */
 export const Trigger = ({ asChild = false, children, ...props }: TriggerProps) => {
-  const { renderProp, innerChildren } = useRenderSlot(asChild, children)
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   return (
     <Collapsible.Trigger data-spark-component="collapsible-trigger" render={renderProp} {...props}>
