@@ -1,7 +1,6 @@
 import { Collapsible } from '@base-ui/react/collapsible'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { type ComponentProps } from 'react'
-
-import { useRenderSlot } from './useRenderSlot'
 
 export interface RootProps extends ComponentProps<typeof Collapsible.Root> {
   /**
@@ -11,11 +10,11 @@ export interface RootProps extends ComponentProps<typeof Collapsible.Root> {
 }
 
 export const Root = ({ asChild = false, children, ...props }: RootProps) => {
-  const renderSlot = useRenderSlot(asChild, 'div')
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   return (
-    <Collapsible.Root data-spark-component="collapsible" render={renderSlot} {...props}>
-      {children}
+    <Collapsible.Root data-spark-component="collapsible" render={renderProp} {...props}>
+      {innerChildren}
     </Collapsible.Root>
   )
 }

@@ -574,4 +574,55 @@ describe('Menu', () => {
       expect(link).toHaveAttribute('rel', 'noopener')
     })
   })
+
+  describe('asChild', () => {
+    it('should render Menu.Trigger as a custom element', () => {
+      render(
+        <Menu>
+          <Menu.Trigger asChild nativeButton={false}>
+            <a href="#">Open menu</a>
+          </Menu.Trigger>
+
+          <Menu.Portal>
+            <Menu.Positioner>
+              <Menu.Popup>
+                <Menu.Item>Item</Menu.Item>
+              </Menu.Popup>
+            </Menu.Positioner>
+          </Menu.Portal>
+        </Menu>
+      )
+
+      const trigger = screen.getByRole('button', { name: 'Open menu' })
+      expect(trigger.tagName).toBe('A')
+      expect(trigger).toHaveAttribute('data-spark-component', 'menu-trigger')
+    })
+
+    it('should render Menu.Item as a custom element', async () => {
+      const user = userEvent.setup()
+
+      render(
+        <Menu>
+          <Menu.Trigger>Open menu</Menu.Trigger>
+
+          <Menu.Portal>
+            <Menu.Positioner>
+              <Menu.Popup>
+                <Menu.Item asChild>
+                  <a href="#">Custom item</a>
+                </Menu.Item>
+              </Menu.Popup>
+            </Menu.Positioner>
+          </Menu.Portal>
+        </Menu>
+      )
+
+      await user.click(getMenuTrigger('Open menu'))
+      await waitFor(() => expect(getMenu()).toBeInTheDocument())
+
+      const item = getMenuItem('Custom item')
+      expect(item.tagName).toBe('A')
+      expect(item).toHaveAttribute('data-spark-component', 'menu-item')
+    })
+  })
 })

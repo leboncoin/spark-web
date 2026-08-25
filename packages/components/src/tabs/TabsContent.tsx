@@ -1,9 +1,9 @@
 import { Tabs as BaseTabs } from '@base-ui/react/tabs'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { type ComponentProps, type PropsWithChildren, Ref } from 'react'
 
 import { contentStyles } from './TabsContent.styles'
 import { useTabsContext } from './TabsContext'
-import { useRenderSlot } from './useRenderSlot'
 
 export interface TabsContentProps extends PropsWithChildren<
   Omit<ComponentProps<typeof BaseTabs.Panel>, 'keepMounted' | 'render'>
@@ -38,7 +38,7 @@ export const TabsContent = ({
   ...rest
 }: TabsContentProps) => {
   const { forceMount: contextForceMount } = useTabsContext()
-  const renderSlot = useRenderSlot(asChild)
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
   const keepMounted = contextForceMount || forceMount
 
   return (
@@ -47,10 +47,10 @@ export const TabsContent = ({
       ref={ref}
       keepMounted={keepMounted}
       className={contentStyles({ className, forceMount: keepMounted })}
-      render={renderSlot}
+      render={renderProp}
       {...rest}
     >
-      {children}
+      {innerChildren}
     </BaseTabs.Panel>
   )
 }

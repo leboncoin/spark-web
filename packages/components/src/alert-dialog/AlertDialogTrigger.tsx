@@ -1,7 +1,6 @@
 import { AlertDialog as BaseAlertDialog } from '@base-ui/react/alert-dialog'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { ComponentProps, Ref } from 'react'
-
-import { useRenderSlot } from './useRenderSlot'
 
 export interface AlertDialogTriggerProps extends Omit<
   ComponentProps<typeof BaseAlertDialog.Trigger>,
@@ -17,15 +16,21 @@ export interface AlertDialogTriggerProps extends Omit<
 /**
  * A button that opens the alert dialog. Renders a <button> element.
  */
-export const AlertDialogTrigger = ({ asChild = false, ...props }: AlertDialogTriggerProps) => {
-  const renderSlot = useRenderSlot(asChild, 'button')
+export const AlertDialogTrigger = ({
+  asChild = false,
+  children,
+  ...props
+}: AlertDialogTriggerProps) => {
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   return (
     <BaseAlertDialog.Trigger
       data-spark-component="alert-dialog-trigger"
-      render={renderSlot}
+      render={renderProp}
       {...props}
-    />
+    >
+      {innerChildren}
+    </BaseAlertDialog.Trigger>
   )
 }
 

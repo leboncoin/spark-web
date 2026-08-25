@@ -1,8 +1,7 @@
 import { Accordion as BaseAccordion } from '@base-ui/react/accordion'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { cx } from 'class-variance-authority'
 import { ComponentProps, createContext, Ref, useContext } from 'react'
-
-import { useRenderSlot } from './useRenderSlot'
 
 type BaseAccordionRootProps = ComponentProps<typeof BaseAccordion.Root<string | string[]>>
 
@@ -64,7 +63,7 @@ export function Accordion({
   onValueChange,
   ...props
 }: AccordionProps) {
-  const renderSlot = useRenderSlot(asChild, 'div')
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   // Wrap the onValueChange to always provide string[]
   const handleValueChange = onValueChange
@@ -84,13 +83,13 @@ export function Accordion({
         multiple={multiple}
         hiddenUntilFound={hiddenUntilFound}
         className={cx('bg-surface h-fit rounded-lg', className)}
-        render={renderSlot}
+        render={renderProp}
         value={value as any}
         defaultValue={defaultValue as any}
         onValueChange={handleValueChange as any}
         {...props}
       >
-        {children}
+        {innerChildren}
       </BaseAccordion.Root>
     </AccordionContext>
   )

@@ -1,11 +1,11 @@
 import { Menu as BaseMenu } from '@base-ui/react/menu'
 import { Check } from '@spark-ui/icons/Check'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { cx } from 'class-variance-authority'
 import { type ComponentProps, type Ref } from 'react'
 
 import { Icon } from '../icon'
 import { menuItemStyles } from './MenuItemStyles'
-import { useRenderSlot } from './useRenderSlot'
 
 export interface MenuRadioItemProps extends Omit<
   ComponentProps<typeof BaseMenu.RadioItem>,
@@ -32,13 +32,13 @@ export const MenuRadioItem = ({
   ref,
   ...rest
 }: MenuRadioItemProps) => {
-  const renderSlot = useRenderSlot(asChild)
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   return (
     <BaseMenu.RadioItem
       ref={ref}
       data-spark-component="menu-radio-item"
-      render={renderSlot}
+      render={renderProp}
       className={cx(
         menuItemStyles({
           className,
@@ -61,7 +61,7 @@ export const MenuRadioItem = ({
           <Check />
         </Icon>
       </BaseMenu.RadioItemIndicator>
-      {children}
+      {innerChildren}
     </BaseMenu.RadioItem>
   )
 }

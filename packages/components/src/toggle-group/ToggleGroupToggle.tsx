@@ -1,8 +1,7 @@
 import { Toggle } from '@base-ui/react/toggle'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { cx } from 'class-variance-authority'
 import { type ComponentPropsWithoutRef, Ref } from 'react'
-
-import { useRenderSlot } from './useRenderSlot'
 
 export interface ToggleGroupToggleProps extends ComponentPropsWithoutRef<'button'> {
   /**
@@ -36,7 +35,7 @@ export const ToggleGroupToggle = ({
   ref,
   ...rest
 }: ToggleGroupToggleProps) => {
-  const renderSlot = useRenderSlot(asChild)
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   return (
     <Toggle
@@ -47,12 +46,12 @@ export const ToggleGroupToggle = ({
         'disabled:cursor-not-allowed disabled:opacity-dim-3',
         className
       )}
-      {...(asChild && { render: renderSlot })}
+      {...(asChild && { render: renderProp })}
       disabled={disabled}
       value={value}
       {...rest}
     >
-      {children}
+      {innerChildren}
     </Toggle>
   )
 }

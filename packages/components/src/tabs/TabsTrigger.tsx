@@ -4,10 +4,11 @@ import { type ComponentProps, type FocusEvent, type ReactNode, Ref, useRef } fro
 
 type TabKeyDownEvent = Parameters<NonNullable<ComponentProps<typeof BaseTabs.Tab>['onKeyDown']>>[0]
 
+import { createRenderSlot } from '@spark-ui/internal-utils'
+
 import { useTabsContext } from './TabsContext'
 import { type ConfiguredPopoverComponent, Popover } from './TabsPopoverAbstraction'
 import { triggerVariants } from './TabsTrigger.styles'
-import { useRenderSlot } from './useRenderSlot'
 
 export interface TabsTriggerProps extends Omit<ComponentProps<typeof BaseTabs.Tab>, 'render'> {
   /**
@@ -61,10 +62,11 @@ export const TabsTrigger = ({
   const { intent, size, orientation } = useTabsContext()
   const popoverTriggerRef = useRef<HTMLButtonElement>(null)
   const tabsTriggerRef = useRef<HTMLButtonElement>(null)
-  const renderSlot = useRenderSlot(asChild)
 
   // Combine internal ref with forwarded ref
   const mergedRef = useMergeRefs(ref, tabsTriggerRef)
+
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   const handleKeyDown = (e: TabKeyDownEvent) => {
     // Handle Shift+F10 for popover
@@ -91,7 +93,7 @@ export const TabsTrigger = ({
         orientation: orientation ?? 'horizontal',
         className,
       })}
-      render={renderSlot}
+      render={renderProp}
       disabled={disabled}
       value={value}
       onFocus={({ target }: FocusEvent<HTMLButtonElement>) =>
@@ -105,7 +107,7 @@ export const TabsTrigger = ({
       aria-haspopup={hasMenu ? 'true' : undefined}
       {...rest}
     >
-      {children}
+      {innerChildren}
     </BaseTabs.Tab>
   )
 

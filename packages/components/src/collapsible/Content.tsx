@@ -1,8 +1,7 @@
 import { Collapsible } from '@base-ui/react/collapsible'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { cx } from 'class-variance-authority'
 import { type ComponentProps } from 'react'
-
-import { useRenderSlot } from './useRenderSlot'
 
 export interface ContentProps extends ComponentProps<typeof Collapsible.Panel> {
   /**
@@ -21,7 +20,7 @@ export const Content = ({
   hiddenUntilFound = true,
   ...props
 }: ContentProps) => {
-  const renderSlot = useRenderSlot(asChild, 'div')
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   return (
     <Collapsible.Panel
@@ -35,11 +34,11 @@ export const Content = ({
         'data-[ending-style]:h-0',
         className
       )}
-      render={renderSlot}
+      render={renderProp}
       hiddenUntilFound={hiddenUntilFound}
       {...props}
     >
-      {children}
+      {innerChildren}
     </Collapsible.Panel>
   )
 }

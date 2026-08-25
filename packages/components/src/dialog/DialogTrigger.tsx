@@ -1,7 +1,6 @@
 import { Dialog as BaseDialog } from '@base-ui/react/dialog'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { ComponentProps, Ref } from 'react'
-
-import { useRenderSlot } from '../drawer/useRenderSlot'
 
 export interface TriggerProps extends Omit<ComponentProps<typeof BaseDialog.Trigger>, 'render'> {
   /**
@@ -14,10 +13,14 @@ export interface TriggerProps extends Omit<ComponentProps<typeof BaseDialog.Trig
 /**
  * A button that opens the dialog. Renders a <button> element.
  */
-export const Trigger = ({ asChild = false, ...props }: TriggerProps) => {
-  const renderSlot = useRenderSlot(asChild, 'button')
+export const Trigger = ({ asChild = false, children, ...props }: TriggerProps) => {
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
-  return <BaseDialog.Trigger data-spark-component="dialog-trigger" render={renderSlot} {...props} />
+  return (
+    <BaseDialog.Trigger data-spark-component="dialog-trigger" render={renderProp} {...props}>
+      {innerChildren}
+    </BaseDialog.Trigger>
+  )
 }
 
 Trigger.displayName = 'Dialog.Trigger'

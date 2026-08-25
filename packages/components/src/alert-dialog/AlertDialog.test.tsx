@@ -258,4 +258,28 @@ describe('AlertDialog', () => {
 
     expect(screen.getByRole('button', { name: 'Delete' })).toHaveFocus()
   })
+
+  describe('asChild', () => {
+    it('should render AlertDialog.Trigger as a custom element', () => {
+      render(
+        <AlertDialog>
+          <AlertDialog.Trigger asChild nativeButton={false}>
+            <a href="#">Open</a>
+          </AlertDialog.Trigger>
+
+          <AlertDialog.Portal>
+            <AlertDialog.Overlay />
+            <AlertDialog.Content>
+              <AlertDialog.Title>Delete account</AlertDialog.Title>
+              <AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
+            </AlertDialog.Content>
+          </AlertDialog.Portal>
+        </AlertDialog>
+      )
+
+      const trigger = screen.getByRole('button', { name: 'Open' })
+      expect(trigger.tagName).toBe('A')
+      expect(trigger).toHaveAttribute('data-spark-component', 'alert-dialog-trigger')
+    })
+  })
 })

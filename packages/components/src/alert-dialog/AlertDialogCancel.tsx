@@ -1,9 +1,9 @@
 import { AlertDialog as BaseAlertDialog } from '@base-ui/react/alert-dialog'
 import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { ComponentProps, Ref } from 'react'
 
 import { useAlertDialog } from './AlertDialogContext'
-import { useRenderSlot } from './useRenderSlot'
 
 export interface AlertDialogCancelProps extends Omit<
   ComponentProps<typeof BaseAlertDialog.Close>,
@@ -22,19 +22,22 @@ export interface AlertDialogCancelProps extends Omit<
 export const AlertDialogCancel = ({
   asChild = false,
   ref: forwardedRef,
+  children,
   ...props
 }: AlertDialogCancelProps) => {
   const { cancelRef } = useAlertDialog()
   const ref = useMergeRefs(forwardedRef, cancelRef)
-  const renderSlot = useRenderSlot(asChild, 'button')
+  const { renderProp, innerChildren } = createRenderSlot(asChild, children)
 
   return (
     <BaseAlertDialog.Close
       ref={ref}
       data-spark-component="alert-dialog-cancel"
-      render={renderSlot}
+      render={renderProp}
       {...props}
-    />
+    >
+      {innerChildren}
+    </BaseAlertDialog.Close>
   )
 }
 

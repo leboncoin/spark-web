@@ -5,6 +5,7 @@ import { describe, expect, it, vi } from 'vitest'
 
 import { FormField } from '../form-field'
 import { Switch } from './Switch'
+import { SwitchInput } from './SwitchInput'
 
 describe('Switch', () => {
   it('should render', () => {
@@ -190,6 +191,20 @@ describe('Switch', () => {
         'aria-describedby',
         screen.getByText('Agreement is required').getAttribute('id')
       )
+    })
+  })
+
+  describe('asChild', () => {
+    it('should render SwitchInput as a custom element', () => {
+      render(
+        <SwitchInput asChild>
+          <span />
+        </SwitchInput>
+      )
+
+      const el = screen.getByRole('switch')
+      expect(el.tagName).toBe('SPAN')
+      expect(el).toHaveAttribute('data-spark-component', 'switch-input')
     })
   })
 })

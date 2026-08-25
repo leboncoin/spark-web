@@ -1,5 +1,6 @@
 import { Menu as BaseMenu } from '@base-ui/react/menu'
 import { ArrowHorizontalDown } from '@spark-ui/icons/ArrowHorizontalDown'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { cx } from 'class-variance-authority'
 import {
   cloneElement,
@@ -10,7 +11,6 @@ import {
 } from 'react'
 
 import { Icon } from '../icon'
-import { useRenderSlot } from './useRenderSlot'
 
 export interface MenuTriggerProps extends Omit<ComponentProps<typeof BaseMenu.Trigger>, 'render'> {
   /**
@@ -35,8 +35,6 @@ export const MenuTrigger = ({
   ref,
   ...rest
 }: MenuTriggerProps) => {
-  const renderSlot = useRenderSlot(asChild)
-
   // When asChild is used with a Button, enhance it with the arrow icon
   const enhancedChildren =
     asChild && isValidElement(children)
@@ -57,11 +55,13 @@ export const MenuTrigger = ({
         )
       : children
 
+  const { renderProp, innerChildren } = createRenderSlot(asChild, enhancedChildren)
+
   return (
     <BaseMenu.Trigger
       ref={ref}
       data-spark-component="menu-trigger"
-      render={renderSlot}
+      render={renderProp}
       className={cx(
         'inline-flex items-center justify-center',
         'focus-visible:u-outline',
@@ -69,7 +69,7 @@ export const MenuTrigger = ({
       )}
       {...rest}
     >
-      {enhancedChildren}
+      {innerChildren}
     </BaseMenu.Trigger>
   )
 }

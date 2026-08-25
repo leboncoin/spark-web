@@ -3,9 +3,9 @@ import { useFormFieldControl } from '@spark-ui/components/form-field'
 import { useCombinedState } from '@spark-ui/hooks/use-combined-state'
 import { Check } from '@spark-ui/icons/Check'
 import { Close } from '@spark-ui/icons/Close'
+import { createRenderSlot } from '@spark-ui/internal-utils'
 import { type ComponentPropsWithRef, type ReactNode } from 'react'
 
-import { useRenderSlot } from '../drawer/useRenderSlot'
 import { Slot } from '../slot'
 import {
   styles,
@@ -76,11 +76,12 @@ export const SwitchInput = ({
   required,
   ref,
   asChild = false,
+  children,
   ...rest
 }: SwitchInputProps) => {
   const [isChecked, setIsChecked] = useCombinedState(checked, defaultChecked)
   const { name, description, isRequired, isInvalid } = useFormFieldControl()
-  const renderSlot = useRenderSlot(asChild, 'span')
+  const { renderProp } = createRenderSlot(asChild, children)
   const isRequiredComputed = Boolean(required || isRequired)
 
   const handleCheckedChange = (updatedValue: boolean): void => {
@@ -92,7 +93,7 @@ export const SwitchInput = ({
     <BaseSwitch.Root
       data-spark-component="switch-input"
       ref={ref}
-      render={renderSlot}
+      render={renderProp}
       className={styles({ size, className })}
       checked={checked}
       defaultChecked={defaultChecked}
