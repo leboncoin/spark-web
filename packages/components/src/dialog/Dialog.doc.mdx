@@ -156,6 +156,19 @@ Pick a size among `sm`, `md`, `lg` and `fullscreen`.
 
 <Canvas of={stories.Sizes} />
 
+### Responsive fullscreen
+
+Use `fullscreenBelow` on `Dialog.Content` to make the dialog go fullscreen below a given breakpoint. Accepted values are `sm`, `md`, `lg`, `xl`, and `always`.
+
+```tsx
+// Fullscreen until md breakpoint, then size will be lg
+<Dialog.Content size="lg" fullscreenBelow="md">
+```
+
+This is the preferred alternative to `size="fullscreen"`, which is now deprecated. Using `fullscreenBelow="always"` is equivalent to `size="fullscreen"` and does not require a breakpoint.
+
+<Canvas of={stories.Responsive} />
+
 ## Advanced Examples
 
 ### Form inside a dialog
