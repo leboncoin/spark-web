@@ -2,7 +2,7 @@ import { cva, VariantProps } from 'class-variance-authority'
 
 export const toastStyles = cva(
   [
-    'gap-lg p-md flex w-max !w-[min(400px,calc(100vw-2rem))] flex-col rounded-lg border-md',
+    'gap-lg p-md flex w-max w-[min(400px,calc(100vw-var(--spacing-sz-32)))]! flex-col rounded-lg border-md',
     'absolute right-0 bottom-0 left-auto mr-0',
     'bg-clip-padding shadow-md select-none',
     'focus-visible:ring-focus focus-visible:ring-2 focus-visible:outline-none',

@@ -35,7 +35,7 @@ export const AlertDialogContent = ({
       className={state =>
         cx(
           dialogContentStyles({ size: 'md', isNarrow: true }),
-          'min-w-[min(288px,calc(100vw-2rem))]',
+          'min-w-[min(288px,calc(100vw-var(--spacing-sz-32)))]',
           // Base UI automatically adds data-[starting-style] and data-[ending-style] attributes
           // Transition with opacity and scale for smooth open/close animations
           'transition-all duration-150',
