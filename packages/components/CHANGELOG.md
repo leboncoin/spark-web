@@ -1,3 +1,13 @@
+## 18.1.3 (2026-09-10)
+
+### 🩹 Fixes
+
+- **components:** replace 2rem gutter with sz token in Toast, Dialog, and AlertDialog ([be9e0c042](https://github.com/leboncoin/spark-web/commit/be9e0c042))
+
+### ❤️ Thank You
+
+- acd02
+
 ## 18.1.2 (2026-08-25)
 
 ### 🩹 Fixes
