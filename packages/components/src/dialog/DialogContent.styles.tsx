@@ -23,12 +23,12 @@ export const dialogContentStyles = cva(
     variants: {
       size: {
         fullscreen: 'fixed size-full top-0 left-0',
-        sm: 'max-w-[min(480px,calc(100vw-2rem))] data-nested-dialog-open:scale-90',
-        md: 'max-w-[min(672px,calc(100vw-2rem))] data-nested-dialog-open:scale-90',
-        lg: 'max-w-[min(864px,calc(100vw-2rem))] data-nested-dialog-open:scale-90',
+        sm: 'max-w-[min(480px,calc(100vw-var(--spacing-sz-32)))] data-nested-dialog-open:scale-90',
+        md: 'max-w-[min(672px,calc(100vw-var(--spacing-sz-32)))] data-nested-dialog-open:scale-90',
+        lg: 'max-w-[min(864px,calc(100vw-var(--spacing-sz-32)))] data-nested-dialog-open:scale-90',
       },
       isNarrow: {
-        true: ['max-w-[calc(100vw-2rem)]'],
+        true: ['max-w-[calc(100vw-var(--spacing-sz-32))]'],
         false: [],
       },
     },
