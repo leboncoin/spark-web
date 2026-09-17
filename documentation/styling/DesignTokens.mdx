@@ -173,6 +173,22 @@ Main color tokens represent the visual identity of your theme. They are used for
             </code>
           </Table.Cell>
         </Table.Row>
+        <Table.Row id="main-8">
+          <Table.Cell>
+            <ColorCell className="text-on-surface" isText />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">text-on-surface</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-on-surface</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue('--color-on-surface')}
+            </code>
+          </Table.Cell>
+        </Table.Row>
       </Table.Body>
     </Table.Grid>
   </Table>
@@ -665,6 +681,12 @@ Feedback colors convey intent status (success, error, alert, info, neutral).
             name: 'on-neutral-container',
             token: '--color-on-neutral-container',
             className: 'bg-neutral-container text-on-neutral-container',
+            isText: true,
+          },
+          {
+            name: 'neutral-hovered',
+            token: '--color-neutral-hovered',
+            className: 'bg-neutral-container text-neutral-hovered',
             isText: true,
           },
         ].map((item, index) => (
