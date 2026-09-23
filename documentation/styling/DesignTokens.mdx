@@ -1,13 +1,13 @@
-import { Meta } from '@storybook/addon-docs/blocks'
-import { Table } from '@spark-ui/components/table'
-import { Tag } from '@spark-ui/components/tag'
+import { Meta } from "@storybook/addon-docs/blocks";
+import { Table } from "@spark-ui/components/table";
+import { Tag } from "@spark-ui/components/tag";
 import {
   CssVariableValue,
   CssVariableValueFirst,
   ComputedValue,
   RelativeLineHeight,
   SpacingValue,
-} from '@docs/helpers/TokenPreview'
+} from "@docs/helpers/TokenPreview";
 
 <Meta
   title="Styling/Design Tokens"
@@ -15,19 +15,19 @@ import {
 />
 
 export function getCssVariableValue(varName) {
-  return <CssVariableValue varName={varName} />
+  return <CssVariableValue varName={varName} />;
 }
 
 export function getComputedValue(cssProperty, className) {
-  return <ComputedValue cssProperty={cssProperty} className={className} />
+  return <ComputedValue cssProperty={cssProperty} className={className} />;
 }
 
 export function getRelativeLineHeight(className) {
-  return <RelativeLineHeight className={className} />
+  return <RelativeLineHeight className={className} />;
 }
 
 export function getSpacingValue(varName) {
-  return <SpacingValue varName={varName} />
+  return <SpacingValue varName={varName} />;
 }
 
 export const ColorCell = ({ className, isText = false }) => {
@@ -38,10 +38,14 @@ export const ColorCell = ({ className, isText = false }) => {
       >
         Aa
       </div>
-    )
+    );
   }
-  return <div className={`${className} size-sz-48 rounded-md border-sm border-outline/dim-2`} />
-}
+  return (
+    <div
+      className={`${className} size-sz-48 rounded-md border-sm border-outline/dim-2`}
+    />
+  );
+};
 
 # Design Tokens
 
@@ -74,7 +78,9 @@ Main color tokens represent the visual identity of your theme. They are used for
             <code className="text-body-2">--color-main</code>
           </Table.Cell>
           <Table.Cell>
-            <code className="text-body-2 opacity-dim-2">{getCssVariableValue('--color-main')}</code>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue("--color-main")}
+            </code>
           </Table.Cell>
         </Table.Row>
         <Table.Row id="main-2">
@@ -89,7 +95,7 @@ Main color tokens represent the visual identity of your theme. They are used for
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-main-hovered')}
+              {getCssVariableValue("--color-main-hovered")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -105,7 +111,7 @@ Main color tokens represent the visual identity of your theme. They are used for
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-main-container')}
+              {getCssVariableValue("--color-main-container")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -121,7 +127,7 @@ Main color tokens represent the visual identity of your theme. They are used for
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-main-container-hovered')}
+              {getCssVariableValue("--color-main-container-hovered")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -137,7 +143,7 @@ Main color tokens represent the visual identity of your theme. They are used for
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-main-variant')}
+              {getCssVariableValue("--color-main-variant")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -153,13 +159,16 @@ Main color tokens represent the visual identity of your theme. They are used for
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-on-main')}
+              {getCssVariableValue("--color-on-main")}
             </code>
           </Table.Cell>
         </Table.Row>
         <Table.Row id="main-6">
           <Table.Cell>
-            <ColorCell className="bg-main-container text-on-main-container" isText />
+            <ColorCell
+              className="bg-main-container text-on-main-container"
+              isText
+            />
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2">text-on-main-container</code>
@@ -169,7 +178,7 @@ Main color tokens represent the visual identity of your theme. They are used for
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-on-main-container')}
+              {getCssVariableValue("--color-on-main-container")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -185,7 +194,23 @@ Main color tokens represent the visual identity of your theme. They are used for
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-on-surface')}
+              {getCssVariableValue("--color-on-surface")}
+            </code>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row id="main-9">
+          <Table.Cell>
+            <ColorCell className="bg-surface-inverse text-on-surface-inverse" isText />
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">text-on-surface-inverse</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2">--color-on-surface-inverse</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code className="text-body-2 opacity-dim-2">
+              {getCssVariableValue("--color-on-surface-inverse")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -220,7 +245,7 @@ Support color tokens are used for secondary actions and elements that complement
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-support')}
+              {getCssVariableValue("--color-support")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -236,7 +261,7 @@ Support color tokens are used for secondary actions and elements that complement
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-support-hovered')}
+              {getCssVariableValue("--color-support-hovered")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -252,7 +277,7 @@ Support color tokens are used for secondary actions and elements that complement
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-support-container')}
+              {getCssVariableValue("--color-support-container")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -264,11 +289,13 @@ Support color tokens are used for secondary actions and elements that complement
             <code className="text-body-2">bg-support-container-hovered</code>
           </Table.Cell>
           <Table.Cell>
-            <code className="text-body-2">--color-support-container-hovered</code>
+            <code className="text-body-2">
+              --color-support-container-hovered
+            </code>
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-support-container-hovered')}
+              {getCssVariableValue("--color-support-container-hovered")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -284,13 +311,16 @@ Support color tokens are used for secondary actions and elements that complement
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-on-support')}
+              {getCssVariableValue("--color-on-support")}
             </code>
           </Table.Cell>
         </Table.Row>
         <Table.Row id="support-6">
           <Table.Cell>
-            <ColorCell className="bg-support-container text-on-support-container" isText />
+            <ColorCell
+              className="bg-support-container text-on-support-container"
+              isText
+            />
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2">text-on-support-container</code>
@@ -300,7 +330,7 @@ Support color tokens are used for secondary actions and elements that complement
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-on-support-container')}
+              {getCssVariableValue("--color-on-support-container")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -335,7 +365,7 @@ Accent color tokens are used to draw attention to specific UI elements and highl
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-accent')}
+              {getCssVariableValue("--color-accent")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -351,7 +381,7 @@ Accent color tokens are used to draw attention to specific UI elements and highl
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-accent-hovered')}
+              {getCssVariableValue("--color-accent-hovered")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -367,7 +397,7 @@ Accent color tokens are used to draw attention to specific UI elements and highl
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-accent-container')}
+              {getCssVariableValue("--color-accent-container")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -379,11 +409,13 @@ Accent color tokens are used to draw attention to specific UI elements and highl
             <code className="text-body-2">bg-accent-container-hovered</code>
           </Table.Cell>
           <Table.Cell>
-            <code className="text-body-2">--color-accent-container-hovered</code>
+            <code className="text-body-2">
+              --color-accent-container-hovered
+            </code>
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-accent-container-hovered')}
+              {getCssVariableValue("--color-accent-container-hovered")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -399,13 +431,16 @@ Accent color tokens are used to draw attention to specific UI elements and highl
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-on-accent')}
+              {getCssVariableValue("--color-on-accent")}
             </code>
           </Table.Cell>
         </Table.Row>
         <Table.Row id="accent-6">
           <Table.Cell>
-            <ColorCell className="bg-accent-container text-on-accent-container" isText />
+            <ColorCell
+              className="bg-accent-container text-on-accent-container"
+              isText
+            />
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2">text-on-accent-container</code>
@@ -415,7 +450,7 @@ Accent color tokens are used to draw attention to specific UI elements and highl
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-on-accent-container')}
+              {getCssVariableValue("--color-on-accent-container")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -450,7 +485,7 @@ AI color tokens are designed specifically for AI-powered features and interfaces
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-ai')}
+              {getCssVariableValue("--color-ai")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -466,7 +501,7 @@ AI color tokens are designed specifically for AI-powered features and interfaces
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-ai-hovered')}
+              {getCssVariableValue("--color-ai-hovered")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -482,7 +517,7 @@ AI color tokens are designed specifically for AI-powered features and interfaces
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-ai-container')}
+              {getCssVariableValue("--color-ai-container")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -498,7 +533,7 @@ AI color tokens are designed specifically for AI-powered features and interfaces
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-ai-container-hovered')}
+              {getCssVariableValue("--color-ai-container-hovered")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -514,13 +549,16 @@ AI color tokens are designed specifically for AI-powered features and interfaces
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-on-ai')}
+              {getCssVariableValue("--color-on-ai")}
             </code>
           </Table.Cell>
         </Table.Row>
         <Table.Row id="ai-6">
           <Table.Cell>
-            <ColorCell className="bg-ai-container text-on-ai-container" isText />
+            <ColorCell
+              className="bg-ai-container text-on-ai-container"
+              isText
+            />
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2">text-on-ai-container</code>
@@ -530,7 +568,7 @@ AI color tokens are designed specifically for AI-powered features and interfaces
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-on-ai-container')}
+              {getCssVariableValue("--color-on-ai-container")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -538,7 +576,6 @@ AI color tokens are designed specifically for AI-powered features and interfaces
     </Table.Grid>
   </Table>
 </div>
-
 
 ### Feedback Colors
 
@@ -555,138 +592,158 @@ Feedback colors convey intent status (success, error, alert, info, neutral).
       </Table.Header>
       <Table.Body>
         {[
-          { name: 'success', token: '--color-success', className: 'bg-success' },
           {
-            name: 'success-hovered',
-            token: '--color-success-hovered',
-            className: 'bg-success-hovered',
+            name: "success",
+            token: "--color-success",
+            className: "bg-success",
           },
           {
-            name: 'success-container',
-            token: '--color-success-container',
-            className: 'bg-success-container',
+            name: "success-hovered",
+            token: "--color-success-hovered",
+            className: "bg-success-hovered",
           },
           {
-            name: 'success-container-hovered',
-            token: '--color-success-container-hovered',
-            className: 'bg-success-container-hovered',
+            name: "success-container",
+            token: "--color-success-container",
+            className: "bg-success-container",
           },
           {
-            name: 'on-success',
-            token: '--color-on-success',
-            className: 'bg-success text-on-success',
+            name: "success-container-hovered",
+            token: "--color-success-container-hovered",
+            className: "bg-success-container-hovered",
+          },
+          {
+            name: "on-success",
+            token: "--color-on-success",
+            className: "bg-success text-on-success",
             isText: true,
           },
           {
-            name: 'on-success-container',
-            token: '--color-on-success-container',
-            className: 'bg-success-container text-on-success-container',
+            name: "on-success-container",
+            token: "--color-on-success-container",
+            className: "bg-success-container text-on-success-container",
             isText: true,
           },
-          { name: 'error', token: '--color-error', className: 'bg-error' },
-          { name: 'error-hovered', token: '--color-error-hovered', className: 'bg-error-hovered' },
+          { name: "error", token: "--color-error", className: "bg-error" },
           {
-            name: 'error-container',
-            token: '--color-error-container',
-            className: 'bg-error-container',
+            name: "error-hovered",
+            token: "--color-error-hovered",
+            className: "bg-error-hovered",
           },
           {
-            name: 'error-container-hovered',
-            token: '--color-error-container-hovered',
-            className: 'bg-error-container-hovered',
+            name: "error-container",
+            token: "--color-error-container",
+            className: "bg-error-container",
           },
           {
-            name: 'on-error',
-            token: '--color-on-error',
-            className: 'bg-error text-on-error',
-            isText: true,
+            name: "error-container-hovered",
+            token: "--color-error-container-hovered",
+            className: "bg-error-container-hovered",
           },
           {
-            name: 'on-error-container',
-            token: '--color-on-error-container',
-            className: 'bg-error-container text-on-error-container',
-            isText: true,
-          },
-          { name: 'alert', token: '--color-alert', className: 'bg-alert' },
-          { name: 'alert-hovered', token: '--color-alert-hovered', className: 'bg-alert-hovered' },
-          {
-            name: 'alert-container',
-            token: '--color-alert-container',
-            className: 'bg-alert-container',
-          },
-          {
-            name: 'alert-container-hovered',
-            token: '--color-alert-container-hovered',
-            className: 'bg-alert-container-hovered',
-          },
-          {
-            name: 'on-alert',
-            token: '--color-on-alert',
-            className: 'bg-alert text-on-alert',
+            name: "on-error",
+            token: "--color-on-error",
+            className: "bg-error text-on-error",
             isText: true,
           },
           {
-            name: 'on-alert-container',
-            token: '--color-on-alert-container',
-            className: 'bg-alert-container text-on-alert-container',
+            name: "on-error-container",
+            token: "--color-on-error-container",
+            className: "bg-error-container text-on-error-container",
             isText: true,
           },
-          { name: 'info', token: '--color-info', className: 'bg-info' },
-          { name: 'info-hovered', token: '--color-info-hovered', className: 'bg-info-hovered' },
+          { name: "alert", token: "--color-alert", className: "bg-alert" },
           {
-            name: 'info-container',
-            token: '--color-info-container',
-            className: 'bg-info-container',
+            name: "alert-hovered",
+            token: "--color-alert-hovered",
+            className: "bg-alert-hovered",
           },
           {
-            name: 'info-container-hovered',
-            token: '--color-info-container-hovered',
-            className: 'bg-info-container-hovered',
+            name: "alert-container",
+            token: "--color-alert-container",
+            className: "bg-alert-container",
           },
           {
-            name: 'on-info',
-            token: '--color-on-info',
-            className: 'bg-info text-on-info',
-            isText: true,
+            name: "alert-container-hovered",
+            token: "--color-alert-container-hovered",
+            className: "bg-alert-container-hovered",
           },
           {
-            name: 'on-info-container',
-            token: '--color-on-info-container',
-            className: 'bg-info-container text-on-info-container',
-            isText: true,
-          },
-          { name: 'neutral', token: '--color-neutral', className: 'bg-neutral' },
-          {
-            name: 'neutral-hovered',
-            token: '--color-neutral-hovered',
-            className: 'bg-neutral-hovered',
-          },
-          {
-            name: 'neutral-container',
-            token: '--color-neutral-container',
-            className: 'bg-neutral-container',
-          },
-          {
-            name: 'neutral-container-hovered',
-            token: '--color-neutral-container-hovered',
-            className: 'bg-neutral-container-hovered',
-          },
-          {
-            name: 'on-neutral',
-            token: '--color-on-neutral',
-            className: 'bg-neutral text-on-neutral',
+            name: "on-alert",
+            token: "--color-on-alert",
+            className: "bg-alert text-on-alert",
             isText: true,
           },
           {
-            name: 'on-neutral-container',
-            token: '--color-on-neutral-container',
-            className: 'bg-neutral-container text-on-neutral-container',
+            name: "on-alert-container",
+            token: "--color-on-alert-container",
+            className: "bg-alert-container text-on-alert-container",
+            isText: true,
+          },
+          { name: "info", token: "--color-info", className: "bg-info" },
+          {
+            name: "info-hovered",
+            token: "--color-info-hovered",
+            className: "bg-info-hovered",
+          },
+          {
+            name: "info-container",
+            token: "--color-info-container",
+            className: "bg-info-container",
+          },
+          {
+            name: "info-container-hovered",
+            token: "--color-info-container-hovered",
+            className: "bg-info-container-hovered",
+          },
+          {
+            name: "on-info",
+            token: "--color-on-info",
+            className: "bg-info text-on-info",
             isText: true,
           },
           {
-            name: 'neutral-hovered',
-            token: '--color-neutral-hovered',
-            className: 'bg-neutral-container text-neutral-hovered',
+            name: "on-info-container",
+            token: "--color-on-info-container",
+            className: "bg-info-container text-on-info-container",
+            isText: true,
+          },
+          {
+            name: "neutral",
+            token: "--color-neutral",
+            className: "bg-neutral",
+          },
+          {
+            name: "neutral-hovered",
+            token: "--color-neutral-hovered",
+            className: "bg-neutral-hovered",
+          },
+          {
+            name: "neutral-container",
+            token: "--color-neutral-container",
+            className: "bg-neutral-container",
+          },
+          {
+            name: "neutral-container-hovered",
+            token: "--color-neutral-container-hovered",
+            className: "bg-neutral-container-hovered",
+          },
+          {
+            name: "on-neutral",
+            token: "--color-on-neutral",
+            className: "bg-neutral text-on-neutral",
+            isText: true,
+          },
+          {
+            name: "on-neutral-container",
+            token: "--color-on-neutral-container",
+            className: "bg-neutral-container text-on-neutral-container",
+            isText: true,
+          },
+          {
+            name: "neutral-hovered",
+            token: "--color-neutral-hovered",
+            className: "bg-neutral-container text-neutral-hovered",
             isText: true,
           },
         ].map((item, index) => (
@@ -703,7 +760,9 @@ Feedback colors convey intent status (success, error, alert, info, neutral).
               <code className="text-body-2">{item.token}</code>
             </Table.Cell>
             <Table.Cell>
-              <code className="text-body-2 opacity-dim-2">{getCssVariableValue(item.token)}</code>
+              <code className="text-body-2 opacity-dim-2">
+                {getCssVariableValue(item.token)}
+              </code>
             </Table.Cell>
           </Table.Row>
         ))}
@@ -727,37 +786,45 @@ Base colors for surfaces, backgrounds, and structural elements.
       </Table.Header>
       <Table.Body>
         {[
-          { name: 'background', token: '--color-background', className: 'bg-background' },
           {
-            name: 'background-variant',
-            token: '--color-background-variant',
-            className: 'bg-background-variant',
-          },
-          { name: 'surface', token: '--color-surface', className: 'bg-surface' },
-          {
-            name: 'surface-hovered',
-            token: '--color-surface-hovered',
-            className: 'bg-surface-hovered',
+            name: "background",
+            token: "--color-background",
+            className: "bg-background",
           },
           {
-            name: 'surface-inverse',
-            token: '--color-surface-inverse',
-            className: 'bg-surface-inverse border-outline-high',
+            name: "background-variant",
+            token: "--color-background-variant",
+            className: "bg-background-variant",
           },
           {
-            name: 'surface-inverse-hovered',
-            token: '--color-surface-inverse-hovered',
-            className: 'bg-surface-inverse-hovered border-outline-high',
+            name: "surface",
+            token: "--color-surface",
+            className: "bg-surface",
           },
           {
-            name: 'surface-dark',
-            token: '--color-surface-dark',
-            className: 'bg-surface-dark border-outline-high',
+            name: "surface-hovered",
+            token: "--color-surface-hovered",
+            className: "bg-surface-hovered",
           },
           {
-            name: 'surface-dark-hovered',
-            token: '--color-surface-dark-hovered',
-            className: 'bg-surface-dark-hovered border-outline-high',
+            name: "surface-inverse",
+            token: "--color-surface-inverse",
+            className: "bg-surface-inverse border-outline-high",
+          },
+          {
+            name: "surface-inverse-hovered",
+            token: "--color-surface-inverse-hovered",
+            className: "bg-surface-inverse-hovered border-outline-high",
+          },
+          {
+            name: "surface-dark",
+            token: "--color-surface-dark",
+            className: "bg-surface-dark border-outline-high",
+          },
+          {
+            name: "surface-dark-hovered",
+            token: "--color-surface-dark-hovered",
+            className: "bg-surface-dark-hovered border-outline-high",
           },
         ].map((item, index) => (
           <Table.Row key={item.name} id={`surface-${index}`}>
@@ -771,7 +838,9 @@ Base colors for surfaces, backgrounds, and structural elements.
               <code className="text-body-2">{item.token}</code>
             </Table.Cell>
             <Table.Cell>
-              <code className="text-body-2 opacity-dim-2">{getCssVariableValue(item.token)}</code>
+              <code className="text-body-2 opacity-dim-2">
+                {getCssVariableValue(item.token)}
+              </code>
             </Table.Cell>
           </Table.Row>
         ))}
@@ -804,7 +873,7 @@ Base colors for surfaces, backgrounds, and structural elements.
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-outline')}
+              {getCssVariableValue("--color-outline")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -820,7 +889,7 @@ Base colors for surfaces, backgrounds, and structural elements.
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-outline-high')}
+              {getCssVariableValue("--color-outline-high")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -832,11 +901,13 @@ Base colors for surfaces, backgrounds, and structural elements.
             <code className="text-body-2">bg-overlay/dim-3</code>
           </Table.Cell>
           <Table.Cell>
-            <code className="text-body-2">--color-overlay + --opacity-dim-3</code>
+            <code className="text-body-2">
+              --color-overlay + --opacity-dim-3
+            </code>
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-overlay')}
+              {getCssVariableValue("--color-overlay")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -852,7 +923,7 @@ Base colors for surfaces, backgrounds, and structural elements.
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-focus')}
+              {getCssVariableValue("--color-focus")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -868,7 +939,7 @@ Base colors for surfaces, backgrounds, and structural elements.
           </Table.Cell>
           <Table.Cell>
             <code className="text-body-2 opacity-dim-2">
-              {getCssVariableValue('--color-shadow')}
+              {getCssVariableValue("--color-shadow")}
             </code>
           </Table.Cell>
         </Table.Row>
@@ -1153,14 +1224,14 @@ Comprehensive overview of all color tokens showing how they render across differ
       </Table.Header>
       <Table.Body>
         {[
-          { name: '0', token: '--spacing-0', className: 'size-0' },
-          { name: 'sm', token: '--spacing-sm', className: 'size-sm' },
-          { name: 'md', token: '--spacing-md', className: 'size-md' },
-          { name: 'lg', token: '--spacing-lg', className: 'size-lg' },
-          { name: 'xl', token: '--spacing-xl', className: 'size-xl' },
-          { name: '2xl', token: '--spacing-2xl', className: 'size-2xl' },
-          { name: '3xl', token: '--spacing-3xl', className: 'size-3xl' },
-        ].map(item => (
+          { name: "0", token: "--spacing-0", className: "size-0" },
+          { name: "sm", token: "--spacing-sm", className: "size-sm" },
+          { name: "md", token: "--spacing-md", className: "size-md" },
+          { name: "lg", token: "--spacing-lg", className: "size-lg" },
+          { name: "xl", token: "--spacing-xl", className: "size-xl" },
+          { name: "2xl", token: "--spacing-2xl", className: "size-2xl" },
+          { name: "3xl", token: "--spacing-3xl", className: "size-3xl" },
+        ].map((item) => (
           <Table.Row key={item.name} id={`spacing-${item.name}`}>
             <Table.Cell>
               <div
@@ -1168,14 +1239,16 @@ Comprehensive overview of all color tokens showing how they render across differ
               ></div>
             </Table.Cell>
             <Table.Cell>
-              <code className="text-body-2">p-{item.name}</code>,{' '}
+              <code className="text-body-2">p-{item.name}</code>,{" "}
               <code className="text-body-2">gap-{item.name}</code>
             </Table.Cell>
             <Table.Cell>
               <code className="text-body-2">{item.token}</code>
             </Table.Cell>
             <Table.Cell>
-              <code className="text-body-2 opacity-dim-2">{getSpacingValue(item.token)}</code>
+              <code className="text-body-2 opacity-dim-2">
+                {getSpacingValue(item.token)}
+              </code>
             </Table.Cell>
           </Table.Row>
         ))}
@@ -1203,64 +1276,66 @@ The token name directly reflects its pixel value, e.g., `sz-14` equals 14px (exp
       </Table.Header>
       <Table.Body>
         {[
-          { name: '0', className: 'w-sz-0' },
-          { name: '1', className: 'w-sz-1' },
-          { name: '2', className: 'w-sz-2' },
-          { name: '4', className: 'w-sz-4' },
-          { name: '6', className: 'w-sz-6' },
-          { name: '8', className: 'w-sz-8' },
-          { name: '10', className: 'w-sz-10' },
-          { name: '12', className: 'w-sz-12' },
-          { name: '14', className: 'w-sz-14' },
-          { name: '16', className: 'w-sz-16' },
-          { name: '20', className: 'w-sz-20' },
-          { name: '24', className: 'w-sz-24' },
-          { name: '28', className: 'w-sz-28' },
-          { name: '32', className: 'w-sz-32' },
-          { name: '36', className: 'w-sz-36' },
-          { name: '40', className: 'w-sz-40' },
-          { name: '44', className: 'w-sz-44' },
-          { name: '48', className: 'w-sz-48' },
-          { name: '56', className: 'w-sz-56' },
-          { name: '64', className: 'w-sz-64' },
-          { name: '80', className: 'w-sz-80' },
-          { name: '96', className: 'w-sz-96' },
-          { name: '112', className: 'w-sz-112' },
-          { name: '128', className: 'w-sz-128' },
-          { name: '144', className: 'w-sz-144' },
-          { name: '160', className: 'w-sz-160' },
-          { name: '176', className: 'w-sz-176' },
-          { name: '192', className: 'w-sz-192' },
-          { name: '208', className: 'w-sz-208' },
-          { name: '224', className: 'w-sz-224' },
-          { name: '240', className: 'w-sz-240' },
-          { name: '256', className: 'w-sz-256' },
-          { name: '288', className: 'w-sz-288' },
-          { name: '320', className: 'w-sz-320' },
-          { name: '384', className: 'w-sz-384' },
-          { name: '400', className: 'w-sz-400' },
-          { name: '416', className: 'w-sz-416' },
-          { name: '432', className: 'w-sz-432' },
-          { name: '448', className: 'w-sz-448' },
-          { name: '464', className: 'w-sz-464' },
-          { name: '480', className: 'w-sz-480' },
-          { name: '512', className: 'w-sz-512' },
-          { name: '544', className: 'w-sz-544' },
-          { name: '576', className: 'w-sz-576' },
-          { name: '608', className: 'w-sz-608' },
-          { name: '640', className: 'w-sz-640' },
-          { name: '672', className: 'w-sz-672' },
-          { name: '704', className: 'w-sz-704' },
-          { name: '736', className: 'w-sz-736' },
-          { name: '768', className: 'w-sz-768' },
-          { name: '800', className: 'w-sz-800' },
-          { name: '832', className: 'w-sz-832' },
-          { name: '864', className: 'w-sz-864' },
-        ].map(item => (
+          { name: "0", className: "w-sz-0" },
+          { name: "1", className: "w-sz-1" },
+          { name: "2", className: "w-sz-2" },
+          { name: "4", className: "w-sz-4" },
+          { name: "6", className: "w-sz-6" },
+          { name: "8", className: "w-sz-8" },
+          { name: "10", className: "w-sz-10" },
+          { name: "12", className: "w-sz-12" },
+          { name: "14", className: "w-sz-14" },
+          { name: "16", className: "w-sz-16" },
+          { name: "20", className: "w-sz-20" },
+          { name: "24", className: "w-sz-24" },
+          { name: "28", className: "w-sz-28" },
+          { name: "32", className: "w-sz-32" },
+          { name: "36", className: "w-sz-36" },
+          { name: "40", className: "w-sz-40" },
+          { name: "44", className: "w-sz-44" },
+          { name: "48", className: "w-sz-48" },
+          { name: "56", className: "w-sz-56" },
+          { name: "64", className: "w-sz-64" },
+          { name: "80", className: "w-sz-80" },
+          { name: "96", className: "w-sz-96" },
+          { name: "112", className: "w-sz-112" },
+          { name: "128", className: "w-sz-128" },
+          { name: "144", className: "w-sz-144" },
+          { name: "160", className: "w-sz-160" },
+          { name: "176", className: "w-sz-176" },
+          { name: "192", className: "w-sz-192" },
+          { name: "208", className: "w-sz-208" },
+          { name: "224", className: "w-sz-224" },
+          { name: "240", className: "w-sz-240" },
+          { name: "256", className: "w-sz-256" },
+          { name: "288", className: "w-sz-288" },
+          { name: "320", className: "w-sz-320" },
+          { name: "384", className: "w-sz-384" },
+          { name: "400", className: "w-sz-400" },
+          { name: "416", className: "w-sz-416" },
+          { name: "432", className: "w-sz-432" },
+          { name: "448", className: "w-sz-448" },
+          { name: "464", className: "w-sz-464" },
+          { name: "480", className: "w-sz-480" },
+          { name: "512", className: "w-sz-512" },
+          { name: "544", className: "w-sz-544" },
+          { name: "576", className: "w-sz-576" },
+          { name: "608", className: "w-sz-608" },
+          { name: "640", className: "w-sz-640" },
+          { name: "672", className: "w-sz-672" },
+          { name: "704", className: "w-sz-704" },
+          { name: "736", className: "w-sz-736" },
+          { name: "768", className: "w-sz-768" },
+          { name: "800", className: "w-sz-800" },
+          { name: "832", className: "w-sz-832" },
+          { name: "864", className: "w-sz-864" },
+        ].map((item) => (
           <Table.Row key={item.name} id={`sz-${item.name}`}>
             <Table.Cell>
               <div className="overflow-x-auto max-w-[200px]">
-                <div className={`h-sz-8 bg-main rounded-sm ${item.className}`} />
+                <div
+                  className={`h-sz-8 bg-main rounded-sm ${item.className}`}
+                />
               </div>
             </Table.Cell>
             <Table.Cell>
@@ -1270,7 +1345,9 @@ The token name directly reflects its pixel value, e.g., `sz-14` equals 14px (exp
               <code className="text-body-2">--spacing-sz-{item.name}</code>
             </Table.Cell>
             <Table.Cell>
-              <code className="text-body-2 opacity-dim-2">{getSpacingValue(`--spacing-sz-${item.name}`)}</code>
+              <code className="text-body-2 opacity-dim-2">
+                {getSpacingValue(`--spacing-sz-${item.name}`)}
+              </code>
             </Table.Cell>
           </Table.Row>
         ))}
@@ -1295,22 +1372,22 @@ Spark typography are composite tokens (Tailwindcss utilities) that combines font
       </Table.Header>
       <Table.Body>
         {[
-          { name: 'display-1', className: 'text-display-1' },
-          { name: 'display-2', className: 'text-display-2' },
-          { name: 'display-3', className: 'text-display-3' },
-          { name: 'headline-1', className: 'text-headline-1' },
-          { name: 'headline-2', className: 'text-headline-2' },
-          { name: 'subhead', className: 'text-subhead' },
-          { name: 'body-1', className: 'text-body-1' },
-          { name: 'body-1-highlight', className: 'text-body-1-highlight' },
-          { name: 'body-2', className: 'text-body-2' },
-          { name: 'body-2-highlight', className: 'text-body-2-highlight' },
-          { name: 'caption', className: 'text-caption' },
-          { name: 'caption-highlight', className: 'text-caption-highlight' },
-          { name: 'small', className: 'text-small' },
-          { name: 'small-highlight', className: 'text-small-highlight' },
-          { name: 'callout', className: 'text-callout' },
-        ].map(style => (
+          { name: "display-1", className: "text-display-1" },
+          { name: "display-2", className: "text-display-2" },
+          { name: "display-3", className: "text-display-3" },
+          { name: "headline-1", className: "text-headline-1" },
+          { name: "headline-2", className: "text-headline-2" },
+          { name: "subhead", className: "text-subhead" },
+          { name: "body-1", className: "text-body-1" },
+          { name: "body-1-highlight", className: "text-body-1-highlight" },
+          { name: "body-2", className: "text-body-2" },
+          { name: "body-2-highlight", className: "text-body-2-highlight" },
+          { name: "caption", className: "text-caption" },
+          { name: "caption-highlight", className: "text-caption-highlight" },
+          { name: "small", className: "text-small" },
+          { name: "small-highlight", className: "text-small-highlight" },
+          { name: "callout", className: "text-callout" },
+        ].map((style) => (
           <Table.Row key={style.name} id={`type-${style.name}`}>
             <Table.Cell>
               <span className={style.className}>The quick brown fox</span>
@@ -1320,18 +1397,18 @@ Spark typography are composite tokens (Tailwindcss utilities) that combines font
             </Table.Cell>
             <Table.Cell>
               <code className="text-body-2 opacity-dim-2">
-                {getComputedValue('font-size', style.className)}
+                {getComputedValue("font-size", style.className)}
               </code>
             </Table.Cell>
             <Table.Cell>
               <code className="text-body-2 opacity-dim-2">
                 {getRelativeLineHeight(style.className)} (
-                {getComputedValue('line-height', style.className)})
+                {getComputedValue("line-height", style.className)})
               </code>
             </Table.Cell>
             <Table.Cell>
               <code className="text-body-2 opacity-dim-2">
-                {getComputedValue('font-weight', style.className)}
+                {getComputedValue("font-weight", style.className)}
               </code>
             </Table.Cell>
           </Table.Row>
@@ -1354,14 +1431,28 @@ Spark typography are composite tokens (Tailwindcss utilities) that combines font
       </Table.Header>
       <Table.Body>
         {[
-          { name: 'regular', token: '--font-weight-regular', className: 'font-regular' },
-          { name: 'medium', token: '--font-weight-medium', className: 'font-medium' },
-          { name: 'semi-bold', token: '--font-weight-semi-bold', className: 'font-semi-bold' },
-          { name: 'bold', token: '--font-weight-bold', className: 'font-bold' },
-        ].map(item => (
+          {
+            name: "regular",
+            token: "--font-weight-regular",
+            className: "font-regular",
+          },
+          {
+            name: "medium",
+            token: "--font-weight-medium",
+            className: "font-medium",
+          },
+          {
+            name: "semi-bold",
+            token: "--font-weight-semi-bold",
+            className: "font-semi-bold",
+          },
+          { name: "bold", token: "--font-weight-bold", className: "font-bold" },
+        ].map((item) => (
           <Table.Row key={item.name} id={`weight-${item.name}`}>
             <Table.Cell>
-              <span className={`${item.className} text-body-1`}>The quick brown fox</span>
+              <span className={`${item.className} text-body-1`}>
+                The quick brown fox
+              </span>
             </Table.Cell>
             <Table.Cell>
               <code className="text-body-2">{item.className}</code>
@@ -1370,7 +1461,9 @@ Spark typography are composite tokens (Tailwindcss utilities) that combines font
               <code className="text-body-2">{item.token}</code>
             </Table.Cell>
             <Table.Cell>
-              <code className="text-body-2 opacity-dim-2">{getCssVariableValue(item.token)}</code>
+              <code className="text-body-2 opacity-dim-2">
+                {getCssVariableValue(item.token)}
+              </code>
             </Table.Cell>
           </Table.Row>
         ))}
@@ -1394,16 +1487,18 @@ Spark typography are composite tokens (Tailwindcss utilities) that combines font
       </Table.Header>
       <Table.Body>
         {[
-          { name: 'none', token: '--shadow-none', className: 'shadow-none' },
-          { name: 'xs', token: '--shadow-xs', className: 'shadow-xs' },
-          { name: 'sm', token: '--shadow-sm', className: 'shadow-sm' },
-          { name: 'md', token: '--shadow-md', className: 'shadow-md' },
-          { name: 'lg', token: '--shadow-lg', className: 'shadow-lg' },
-          { name: 'xl', token: '--shadow-xl', className: 'shadow-xl' },
-        ].map(item => (
+          { name: "none", token: "--shadow-none", className: "shadow-none" },
+          { name: "xs", token: "--shadow-xs", className: "shadow-xs" },
+          { name: "sm", token: "--shadow-sm", className: "shadow-sm" },
+          { name: "md", token: "--shadow-md", className: "shadow-md" },
+          { name: "lg", token: "--shadow-lg", className: "shadow-lg" },
+          { name: "xl", token: "--shadow-xl", className: "shadow-xl" },
+        ].map((item) => (
           <Table.Row key={item.name} id={`shadow-${item.name}`}>
             <Table.Cell>
-              <div className={`size-sz-48 rounded-md ${item.className} bg-surface`} />
+              <div
+                className={`size-sz-48 rounded-md ${item.className} bg-surface`}
+              />
             </Table.Cell>
             <Table.Cell>
               <code className="text-body-2">{item.className}</code>
@@ -1412,7 +1507,9 @@ Spark typography are composite tokens (Tailwindcss utilities) that combines font
               <code className="text-body-2">{item.token}</code>
             </Table.Cell>
             <Table.Cell>
-              <code className="text-body-2 opacity-dim-2">{getCssVariableValue(item.token)}</code>
+              <code className="text-body-2 opacity-dim-2">
+                {getCssVariableValue(item.token)}
+              </code>
             </Table.Cell>
           </Table.Row>
         ))}
@@ -1434,15 +1531,37 @@ Spark typography are composite tokens (Tailwindcss utilities) that combines font
       </Table.Header>
       <Table.Body>
         {[
-          { name: 'xs', token: '--inset-shadow-xs', className: 'inset-shadow-xs' },
-          { name: 'sm', token: '--inset-shadow-sm', className: 'inset-shadow-sm' },
-          { name: 'md', token: '--inset-shadow-md', className: 'inset-shadow-md' },
-          { name: 'lg', token: '--inset-shadow-lg', className: 'inset-shadow-lg' },
-          { name: 'xl', token: '--inset-shadow-xl', className: 'inset-shadow-xl' },
-        ].map(item => (
+          {
+            name: "xs",
+            token: "--inset-shadow-xs",
+            className: "inset-shadow-xs",
+          },
+          {
+            name: "sm",
+            token: "--inset-shadow-sm",
+            className: "inset-shadow-sm",
+          },
+          {
+            name: "md",
+            token: "--inset-shadow-md",
+            className: "inset-shadow-md",
+          },
+          {
+            name: "lg",
+            token: "--inset-shadow-lg",
+            className: "inset-shadow-lg",
+          },
+          {
+            name: "xl",
+            token: "--inset-shadow-xl",
+            className: "inset-shadow-xl",
+          },
+        ].map((item) => (
           <Table.Row key={item.name} id={`inset-shadow-${item.name}`}>
             <Table.Cell>
-              <div className={`size-sz-48 rounded-md ${item.className} bg-surface`} />
+              <div
+                className={`size-sz-48 rounded-md ${item.className} bg-surface`}
+              />
             </Table.Cell>
             <Table.Cell>
               <code className="text-body-2">{item.className}</code>
@@ -1451,7 +1570,9 @@ Spark typography are composite tokens (Tailwindcss utilities) that combines font
               <code className="text-body-2">{item.token}</code>
             </Table.Cell>
             <Table.Cell>
-              <code className="text-body-2 opacity-dim-2">{getCssVariableValue(item.token)}</code>
+              <code className="text-body-2 opacity-dim-2">
+                {getCssVariableValue(item.token)}
+              </code>
             </Table.Cell>
           </Table.Row>
         ))}
@@ -1473,13 +1594,13 @@ Spark typography are composite tokens (Tailwindcss utilities) that combines font
       </Table.Header>
       <Table.Body>
         {[
-          { name: '0', token: '--radius-0', className: 'rounded-0' },
-          { name: 'sm', token: '--radius-sm', className: 'rounded-sm' },
-          { name: 'md', token: '--radius-md', className: 'rounded-md' },
-          { name: 'lg', token: '--radius-lg', className: 'rounded-lg' },
-          { name: 'xl', token: '--radius-xl', className: 'rounded-xl' },
-          { name: 'full', token: '--radius-full', className: 'rounded-full' },
-        ].map(item => (
+          { name: "0", token: "--radius-0", className: "rounded-0" },
+          { name: "sm", token: "--radius-sm", className: "rounded-sm" },
+          { name: "md", token: "--radius-md", className: "rounded-md" },
+          { name: "lg", token: "--radius-lg", className: "rounded-lg" },
+          { name: "xl", token: "--radius-xl", className: "rounded-xl" },
+          { name: "full", token: "--radius-full", className: "rounded-full" },
+        ].map((item) => (
           <Table.Row key={item.name} id={`radius-${item.name}`}>
             <Table.Cell>
               <div className={`size-sz-64 bg-main ${item.className}`} />
@@ -1491,7 +1612,9 @@ Spark typography are composite tokens (Tailwindcss utilities) that combines font
               <code className="text-body-2">{item.token}</code>
             </Table.Cell>
             <Table.Cell>
-              <code className="text-body-2 opacity-dim-2">{getCssVariableValue(item.token)}</code>
+              <code className="text-body-2 opacity-dim-2">
+                {getCssVariableValue(item.token)}
+              </code>
             </Table.Cell>
           </Table.Row>
         ))}
@@ -1513,14 +1636,16 @@ Spark typography are composite tokens (Tailwindcss utilities) that combines font
       </Table.Header>
       <Table.Body>
         {[
-          { name: '0', token: '--border-width-0', className: 'border-0' },
-          { name: 'sm', token: '--border-width-sm', className: 'border-sm' },
-          { name: 'md', token: '--border-width-md', className: 'border-md' },
-          { name: 'lg', token: '--border-width-lg', className: 'border-lg' },
-        ].map(item => (
+          { name: "0", token: "--border-width-0", className: "border-0" },
+          { name: "sm", token: "--border-width-sm", className: "border-sm" },
+          { name: "md", token: "--border-width-md", className: "border-md" },
+          { name: "lg", token: "--border-width-lg", className: "border-lg" },
+        ].map((item) => (
           <Table.Row key={item.name} id={`border-${item.name}`}>
             <Table.Cell>
-              <div className={`size-sz-48 ${item.className} border-outline-high rounded-md`} />
+              <div
+                className={`size-sz-48 ${item.className} border-outline-high rounded-md`}
+              />
             </Table.Cell>
             <Table.Cell>
               <code className="text-body-2">{item.className}</code>
@@ -1529,7 +1654,9 @@ Spark typography are composite tokens (Tailwindcss utilities) that combines font
               <code className="text-body-2">{item.token}</code>
             </Table.Cell>
             <Table.Cell>
-              <code className="text-body-2 opacity-dim-2">{getCssVariableValue(item.token)}</code>
+              <code className="text-body-2 opacity-dim-2">
+                {getCssVariableValue(item.token)}
+              </code>
             </Table.Cell>
           </Table.Row>
         ))}
@@ -1553,18 +1680,44 @@ Opacity tokens can be applied as modifiers to color tokens using the `/` syntax,
       </Table.Header>
       <Table.Body>
         {[
-          { name: 'none', token: '--opacity-none', className: 'opacity-none' },
-          { name: 'dim-1', token: '--opacity-dim-1', className: 'opacity-dim-1' },
-          { name: 'dim-2', token: '--opacity-dim-2', className: 'opacity-dim-2' },
-          { name: 'dim-3', token: '--opacity-dim-3', className: 'opacity-dim-3' },
-          { name: 'dim-4', token: '--opacity-dim-4', className: 'opacity-dim-4' },
-          { name: 'dim-5', token: '--opacity-dim-5', className: 'opacity-dim-5' },
-          { name: 'dim-full', token: '--opacity-dim-full', className: 'opacity-dim-full' },
-        ].map(item => (
+          { name: "none", token: "--opacity-none", className: "opacity-none" },
+          {
+            name: "dim-1",
+            token: "--opacity-dim-1",
+            className: "opacity-dim-1",
+          },
+          {
+            name: "dim-2",
+            token: "--opacity-dim-2",
+            className: "opacity-dim-2",
+          },
+          {
+            name: "dim-3",
+            token: "--opacity-dim-3",
+            className: "opacity-dim-3",
+          },
+          {
+            name: "dim-4",
+            token: "--opacity-dim-4",
+            className: "opacity-dim-4",
+          },
+          {
+            name: "dim-5",
+            token: "--opacity-dim-5",
+            className: "opacity-dim-5",
+          },
+          {
+            name: "dim-full",
+            token: "--opacity-dim-full",
+            className: "opacity-dim-full",
+          },
+        ].map((item) => (
           <Table.Row key={item.name} id={`opacity-${item.name}`}>
             <Table.Cell>
               <div className="bg-surface-inverse size-sz-48 rounded-md flex items-center justify-center">
-                <div className={`bg-surface size-sz-32 rounded-sm ${item.className}`} />
+                <div
+                  className={`bg-surface size-sz-32 rounded-sm ${item.className}`}
+                />
               </div>
             </Table.Cell>
             <Table.Cell>
@@ -1574,7 +1727,9 @@ Opacity tokens can be applied as modifiers to color tokens using the `/` syntax,
               <code className="text-body-2">{item.token}</code>
             </Table.Cell>
             <Table.Cell>
-              <code className="text-body-2 opacity-dim-2">{getCssVariableValue(item.token)}</code>
+              <code className="text-body-2 opacity-dim-2">
+                {getCssVariableValue(item.token)}
+              </code>
             </Table.Cell>
           </Table.Row>
         ))}
@@ -1596,18 +1751,38 @@ Opacity tokens can be applied as modifiers to color tokens using the `/` syntax,
       </Table.Header>
       <Table.Body>
         {[
-          { name: 'hide', token: '--z-index-hide', className: 'z-hide' },
-          { name: 'base', token: '--z-index-base', className: 'z-base' },
-          { name: 'raised', token: '--z-index-raised', className: 'z-raised' },
-          { name: 'dropdown', token: '--z-index-dropdown', className: 'z-dropdown' },
-          { name: 'sticky', token: '--z-index-sticky', className: 'z-sticky' },
-          { name: 'overlay', token: '--z-index-overlay', className: 'z-overlay' },
-          { name: 'modal', token: '--z-index-modal', className: 'z-modal' },
-          { name: 'popover', token: '--z-index-popover', className: 'z-popover' },
-          { name: 'skip-link', token: '--z-index-skip-link', className: 'z-skip-link' },
-          { name: 'toast', token: '--z-index-toast', className: 'z-toast' },
-          { name: 'tooltip', token: '--z-index-tooltip', className: 'z-tooltip' },
-        ].map(item => (
+          { name: "hide", token: "--z-index-hide", className: "z-hide" },
+          { name: "base", token: "--z-index-base", className: "z-base" },
+          { name: "raised", token: "--z-index-raised", className: "z-raised" },
+          {
+            name: "dropdown",
+            token: "--z-index-dropdown",
+            className: "z-dropdown",
+          },
+          { name: "sticky", token: "--z-index-sticky", className: "z-sticky" },
+          {
+            name: "overlay",
+            token: "--z-index-overlay",
+            className: "z-overlay",
+          },
+          { name: "modal", token: "--z-index-modal", className: "z-modal" },
+          {
+            name: "popover",
+            token: "--z-index-popover",
+            className: "z-popover",
+          },
+          {
+            name: "skip-link",
+            token: "--z-index-skip-link",
+            className: "z-skip-link",
+          },
+          { name: "toast", token: "--z-index-toast", className: "z-toast" },
+          {
+            name: "tooltip",
+            token: "--z-index-tooltip",
+            className: "z-tooltip",
+          },
+        ].map((item) => (
           <Table.Row key={item.name} id={`z-${item.name}`}>
             <Table.Cell>{item.name}</Table.Cell>
             <Table.Cell>
@@ -1617,7 +1792,9 @@ Opacity tokens can be applied as modifiers to color tokens using the `/` syntax,
               <code className="text-body-2">{item.token}</code>
             </Table.Cell>
             <Table.Cell>
-              <code className="text-body-2 opacity-dim-2">{getCssVariableValue(item.token)}</code>
+              <code className="text-body-2 opacity-dim-2">
+                {getCssVariableValue(item.token)}
+              </code>
             </Table.Cell>
           </Table.Row>
         ))}
@@ -1639,11 +1816,11 @@ Opacity tokens can be applied as modifiers to color tokens using the `/` syntax,
       </Table.Header>
       <Table.Body>
         {[
-          { name: 'sm', token: '--breakpoint-sm' },
-          { name: 'md', token: '--breakpoint-md' },
-          { name: 'lg', token: '--breakpoint-lg' },
-          { name: 'xl', token: '--breakpoint-xl' },
-        ].map(item => (
+          { name: "sm", token: "--breakpoint-sm" },
+          { name: "md", token: "--breakpoint-md" },
+          { name: "lg", token: "--breakpoint-lg" },
+          { name: "xl", token: "--breakpoint-xl" },
+        ].map((item) => (
           <Table.Row key={item.name} id={`breakpoint-${item.name}`}>
             <Table.Cell>{item.name}</Table.Cell>
             <Table.Cell>
@@ -1653,7 +1830,9 @@ Opacity tokens can be applied as modifiers to color tokens using the `/` syntax,
               <code className="text-body-2">{item.token}</code>
             </Table.Cell>
             <Table.Cell>
-              <code className="text-body-2 opacity-dim-2">{getCssVariableValue(item.token)}</code>
+              <code className="text-body-2 opacity-dim-2">
+                {getCssVariableValue(item.token)}
+              </code>
             </Table.Cell>
           </Table.Row>
         ))}
