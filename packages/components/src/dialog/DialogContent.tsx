@@ -5,6 +5,14 @@ import { ComponentProps, Ref, useEffect } from 'react'
 import { dialogContentStyles, type DialogContentStylesProps } from './DialogContent.styles'
 import { useDialog } from './DialogContext'
 
+const FULLSCREEN_BELOW_CLASS = {
+  sm: 'max-sm:[--size:fullscreen]',
+  md: 'max-md:[--size:fullscreen]',
+  lg: 'max-lg:[--size:fullscreen]',
+  xl: 'max-xl:[--size:fullscreen]',
+  always: '[--size:fullscreen]',
+} as const
+
 export interface ContentProps
   extends Omit<ComponentProps<typeof BaseDialog.Popup>, 'render'>, DialogContentStylesProps {
   /**
@@ -12,6 +20,11 @@ export interface ContentProps
    */
   isNarrow?: boolean
   ref?: Ref<HTMLDivElement>
+  /**
+   * Makes the dialog fullscreen at or below the given breakpoint, or always fullscreen when set to "always".
+   * Prefer this over `size="fullscreen"`, which is deprecated.
+   */
+  fullscreenBelow?: keyof typeof FULLSCREEN_BELOW_CLASS
 }
 
 /**
@@ -21,6 +34,7 @@ export const Content = ({
   className,
   isNarrow = false,
   size = 'md',
+  fullscreenBelow,
   ref,
   ...rest
 }: ContentProps) => {
@@ -32,7 +46,7 @@ export const Content = ({
     return () => setIsFullScreen(false)
   }, [setIsFullScreen, size])
 
-  return (
+  const popup = (
     <BaseDialog.Popup
       ref={ref}
       data-spark-component="dialog-content"
@@ -49,6 +63,12 @@ export const Content = ({
       {...rest}
     />
   )
+
+  if (fullscreenBelow) {
+    return <div className={FULLSCREEN_BELOW_CLASS[fullscreenBelow]}>{popup}</div>
+  }
+
+  return popup
 }
 
 Content.displayName = 'Dialog.Content'
