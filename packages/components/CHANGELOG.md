@@ -1,3 +1,19 @@
+## 18.1.4 (2026-10-06)
+
+### 🩹 Fixes
+
+- **components:** keep avatar image visible when loaded from cache ([151f37c83](https://github.com/leboncoin/spark-web/commit/151f37c83))
+
+### 💅 Refactors
+
+- **components:** tweak avatar cache-fix comments and test label ([697ed8598](https://github.com/leboncoin/spark-web/commit/697ed8598))
+
+### ❤️ Thank You
+
+- acd02
+- Christophe Sube
+- Claude Opus 5
+
 ## 18.1.3 (2026-09-10)
 
 ### 🩹 Fixes
