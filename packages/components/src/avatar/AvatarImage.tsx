@@ -1,5 +1,5 @@
 import { cx } from 'class-variance-authority'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { Slot } from '../slot'
 import { useAvatarContext } from './context'
@@ -22,27 +22,26 @@ export const AvatarImage = ({
   const { username, isOnline, onlineText } = useAvatarContext()
   const Comp = asChild ? Slot : 'img'
 
-  const [isVisible, setIsVisible] = useState(false)
+  // Visibility is derived from `loadedSrc === src`, so that a cached image
+  // whose `load` event fires synchronously during commit is never hidden back.
+  const [loadedSrc, setLoadedSrc] = useState<string | undefined>(undefined)
 
   const accessibleName = isOnline && onlineText ? `${username} (${onlineText})` : username
-
-  // Reset visibility when src changes
-  useEffect(() => {
-    setIsVisible(false)
-  }, [src])
 
   // Don't render the image if src is undefined or null
   if (!src) {
     return null
   }
 
+  const isVisible = loadedSrc === src
+
   const handleLoad = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    setIsVisible(true)
+    setLoadedSrc(src)
     onLoad?.(event)
   }
 
   const handleError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    setIsVisible(false)
+    setLoadedSrc(undefined)
     onError?.(event)
   }
 

@@ -2,7 +2,7 @@
 import { ShareOutline } from '@spark-ui/icons/ShareOutline'
 import { act, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
 import { Avatar } from '.'
@@ -367,6 +367,32 @@ describe('Avatar', () => {
       await waitFor(() => {
         expect(image).toHaveClass('block')
       })
+    })
+
+    it('should keep a cached image visible when it loads synchronously during commit', () => {
+      // An image served from the memory cache fires `load` during the React commit.
+      // A layout effect reproduces that ordering.
+      const LoadImageDuringCommit = () => {
+        useLayoutEffect(() => {
+          screen.getByAltText('John Doe').dispatchEvent(new Event('load', { bubbles: true }))
+        }, [])
+
+        return null
+      }
+
+      render(
+        <>
+          <Avatar username="John Doe">
+            <Avatar.User>
+              <Avatar.Placeholder />
+              <Avatar.Image src="avatar.png" />
+            </Avatar.User>
+          </Avatar>
+          <LoadImageDuringCommit />
+        </>
+      )
+
+      expect(screen.getByAltText('John Doe')).toHaveClass('block')
     })
 
     it('should call user-provided onLoad callback when image loads', async () => {
