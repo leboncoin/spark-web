@@ -369,9 +369,9 @@ describe('Avatar', () => {
       })
     })
 
-    it('should keep a cached image visible when it loads before effects are flushed', () => {
-      // An image served from the memory cache fires `load` during the React commit, before
-      // passive effects run. A layout effect reproduces that ordering.
+    it('should keep a cached image visible when it loads synchronously during commit', () => {
+      // An image served from the memory cache fires `load` during the React commit.
+      // A layout effect reproduces that ordering.
       const LoadImageDuringCommit = () => {
         useLayoutEffect(() => {
           screen.getByAltText('John Doe').dispatchEvent(new Event('load', { bubbles: true }))

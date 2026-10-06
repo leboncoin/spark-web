@@ -22,9 +22,8 @@ export const AvatarImage = ({
   const { username, isOnline, onlineText } = useAvatarContext()
   const Comp = asChild ? Slot : 'img'
 
-  // Deriving visibility from the src that actually loaded resets the image on a src change
-  // without an effect, which would run after the commit and race with the `load` event of an
-  // already-cached image.
+  // Visibility is derived from `loadedSrc === src`, so that a cached image
+  // whose `load` event fires synchronously during commit is never hidden back.
   const [loadedSrc, setLoadedSrc] = useState<string | undefined>(undefined)
 
   const accessibleName = isOnline && onlineText ? `${username} (${onlineText})` : username
