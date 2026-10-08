@@ -1,3 +1,13 @@
+## 18.2.0 (2026-10-08)
+
+### 🚀 Features
+
+- **components:** add onCancel callback to FileUpload ([d4ad9f153](https://github.com/leboncoin/spark-web/commit/d4ad9f153))
+
+### ❤️ Thank You
+
+- acd02
+
 ## 18.1.4 (2026-10-06)
 
 ### 🩹 Fixes
