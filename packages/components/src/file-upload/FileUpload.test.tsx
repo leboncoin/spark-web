@@ -432,6 +432,49 @@ describe('FileUpload', () => {
     })
   })
 
+  describe('onCancel callback', () => {
+    it('should call onCancel when the file picker is dismissed', () => {
+      // GIVEN a FileUpload component with onCancel and onFileChange callbacks
+      const onCancel = vi.fn()
+      const onFileChange = vi.fn()
+
+      render(
+        <FileUpload onCancel={onCancel} onFileChange={onFileChange}>
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+
+      // WHEN the file picker is dismissed without selecting a file
+      input.dispatchEvent(new Event('cancel'))
+
+      // THEN onCancel should be called and no file change should occur
+      expect(onCancel).toHaveBeenCalledTimes(1)
+      expect(onFileChange).not.toHaveBeenCalled()
+    })
+
+    it('should stop listening to cancel events after unmount', () => {
+      // GIVEN a mounted FileUpload component with onCancel callback
+      const onCancel = vi.fn()
+
+      const { unmount } = render(
+        <FileUpload onCancel={onCancel}>
+          <FileUpload.Trigger>Upload</FileUpload.Trigger>
+        </FileUpload>
+      )
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement
+
+      // WHEN the component is unmounted and a cancel event is dispatched
+      unmount()
+      input.dispatchEvent(new Event('cancel'))
+
+      // THEN onCancel should not be called
+      expect(onCancel).not.toHaveBeenCalled()
+    })
+  })
+
   describe('Dropzone', () => {
     it('should trigger file selection when dropzone is clicked', async () => {
       // GIVEN a FileUpload component with a dropzone

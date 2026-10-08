@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import { useFormFieldControl } from '@spark-ui/components/form-field'
-import { createContext, ReactNode, Ref, useContext, useId, useRef } from 'react'
+import { createContext, ReactNode, Ref, useContext, useEffect, useId, useRef } from 'react'
 
 import {
   type FileAcceptDetails,
@@ -96,6 +96,10 @@ export interface FileUploadProps {
    * @default Browser locale or 'en' if not available
    */
   locale?: string
+  /**
+   * Callback when the user dismisses the file picker without selecting a file
+   */
+  onCancel?: () => void
 }
 
 export const FileUploadContext = createContext<{
@@ -132,6 +136,7 @@ export const FileUpload = ({
   onFileAccept,
   onFileReject,
   onFileChange,
+  onCancel,
   multiple = true,
   accept,
   maxFiles,
@@ -185,6 +190,16 @@ export const FileUpload = ({
     readOnly,
     locale,
   })
+
+  useEffect(() => {
+    const input = inputRef.current
+
+    if (!input || !onCancel) return
+
+    input.addEventListener('cancel', onCancel)
+
+    return () => input.removeEventListener('cancel', onCancel)
+  }, [onCancel])
 
   // Override clearFiles to also clear deleteButtonRefs
   const clearFiles = () => {
