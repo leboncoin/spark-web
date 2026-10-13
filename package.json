@@ -104,7 +104,7 @@
     "typescript": "6.0.2",
     "vite": "^8.1.5",
     "vite-plugin-dts": "5.0.3",
-    "vitest": "4.1.10"
+    "vitest": "4.1.11"
   },
   "optionalDependencies": {
     "@tailwindcss/oxide-linux-x64-gnu": "4.3.3",
