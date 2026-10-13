@@ -1,3 +1,13 @@
+## 18.2.1 (2026-10-13)
+
+### 🏡 Chore
+
+- bump @base-ui/react from 1.7.0 to 1.9.0 ([95314cd3c](https://github.com/leboncoin/spark-web/commit/95314cd3c))
+
+### ❤️ Thank You
+
+- acd02
+
 ## 18.2.0 (2026-10-08)
 
 ### 🚀 Features
