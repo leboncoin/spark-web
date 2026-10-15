@@ -1,0 +1,14 @@
+name: remove-vercel-project
+on:
+  workflow_dispatch:
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - run: npm i -g vercel@latest
+      - run: vercel whoami --token="$VERCEL_TOKEN"
+      - run: vercel teams ls --token="$VERCEL_TOKEN"
+      - run: vercel project ls --scope=spark-ui --token="$VERCEL_TOKEN"
