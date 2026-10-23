@@ -68,4 +68,25 @@ describe('Breadcrumb', () => {
     // Then separators should be rendered with their custom content
     expect(screen.getAllByText('__')).toHaveLength(2)
   })
+
+  it('should apply link styles without leaking styling props when using asChild', () => {
+    render(
+      <Breadcrumb aria-label="Breadcrumb">
+        <Breadcrumb.Item>
+          <Breadcrumb.Link asChild>
+            <a href="/">Home</a>
+          </Breadcrumb.Link>
+        </Breadcrumb.Item>
+      </Breadcrumb>
+    )
+
+    const link = screen.getByRole('link', { name: 'Home' })
+
+    expect(link).toHaveAttribute('href', '/')
+    expect(link).toHaveAttribute('data-spark-component', 'breadcrumb-link')
+    expect(link).toHaveClass('font-medium', 'underline')
+    expect(link).not.toHaveAttribute('bold')
+    expect(link).not.toHaveAttribute('intent')
+    expect(link).not.toHaveAttribute('underline')
+  })
 })
