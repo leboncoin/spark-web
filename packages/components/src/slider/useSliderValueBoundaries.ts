@@ -5,17 +5,18 @@ import { useLayoutEffect, useState } from 'react'
  * Computes the translateX (in pixels) to apply to the value element so it stays
  * within the horizontal bounds of the slider control when displayed inside the thumb.
  *
- * @param controlRef - Ref to the slider control (track container)
- * @param thumbRef - Ref to the thumb element
- * @param valueRef - Ref to the value label element
- * @param value - Current slider value (0–100 or min–max), used to re-run when thumb moves
+ * The thumb center is derived from `value` rather than measured from the DOM: with edge alignment,
+ * Base UI positions the thumb in its own layout effect, which runs after this (child) one.
+ *
  * @returns translateX in pixels (positive = right, negative = left), or 0 if refs are missing
  */
 export function useSliderValueBoundaries(
   controlRef: RefObject<HTMLElement | null>,
   thumbRef: RefObject<HTMLElement | null>,
   valueRef: RefObject<HTMLElement | null>,
-  value: number
+  value: number,
+  min: number,
+  max: number
 ): number {
   const [translateX, setTranslateX] = useState(0)
   const [refsRetryScheduled, setRefsRetryScheduled] = useState(false)
@@ -40,8 +41,8 @@ export function useSliderValueBoundaries(
     const compute = () => {
       if (cancelled) return
 
-      const controlRect = control.getBoundingClientRect()
-      const thumbRect = thumb.getBoundingClientRect()
+      const controlWidth = control.getBoundingClientRect().width
+      const thumbWidth = thumb.getBoundingClientRect().width
       const valueWidth = valueEl.scrollWidth
 
       // Skip until value label has been laid out (content from render prop may not be ready on first paint)
@@ -51,10 +52,11 @@ export function useSliderValueBoundaries(
         return
       }
 
-      const thumbCenterPx = thumbRect.left - controlRect.left + thumbRect.width / 2
+      const ratio = max > min ? (value - min) / (max - min) : 0
+      const thumbCenterPx = thumbWidth / 2 + (controlWidth - thumbWidth) * ratio
 
       const valueCenterMin = valueWidth / 2
-      const valueCenterMax = controlRect.width - valueWidth / 2
+      const valueCenterMax = controlWidth - valueWidth / 2
 
       const clampedCenter = Math.max(valueCenterMin, Math.min(valueCenterMax, thumbCenterPx))
       const nextTranslateX = clampedCenter - thumbCenterPx
@@ -72,7 +74,7 @@ export function useSliderValueBoundaries(
       cancelled = true
       resizeObserver.disconnect()
     }
-  }, [controlRef, thumbRef, valueRef, value, refsRetryScheduled])
+  }, [controlRef, thumbRef, valueRef, value, min, max, refsRetryScheduled])
 
   return translateX
 }

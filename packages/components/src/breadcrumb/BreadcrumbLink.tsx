@@ -1,7 +1,6 @@
 import { cx } from 'class-variance-authority'
 import { ComponentPropsWithoutRef, Ref } from 'react'
 
-import { Slot } from '../slot'
 import { TextLink } from '../text-link'
 
 export interface LinkProps extends ComponentPropsWithoutRef<typeof TextLink> {
@@ -24,10 +23,9 @@ export const Link = ({
   ref,
   ...rest
 }: LinkProps) => {
-  const Component = asChild ? Slot : TextLink
-
   return (
-    <Component
+    <TextLink
+      asChild={asChild}
       data-spark-component="breadcrumb-link"
       href={href}
       ref={ref}

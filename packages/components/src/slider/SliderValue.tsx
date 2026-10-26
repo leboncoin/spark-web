@@ -2,7 +2,7 @@ import { Slider as BaseSlider } from '@base-ui/react/slider'
 import { useMergeRefs } from '@spark-ui/hooks/use-merge-refs'
 import { cx } from 'class-variance-authority'
 import type { ReactNode } from 'react'
-import { ComponentProps, useCallback, useEffect, useRef, useState } from 'react'
+import { ComponentProps, useCallback, useEffect, useRef } from 'react'
 
 import { useSliderContext } from './SliderContext'
 import { useSliderThumbContext } from './SliderThumbContext'
@@ -16,16 +16,10 @@ export type SliderValueProps = Omit<
 }
 
 /** The current value of the slider. Renders an <output> element. */
-export const SliderValue = ({ className, children, ref, ...rest }: SliderValueProps) => {
-  const { registerValueInThumb, controlRef, thumbRef } = useSliderContext()
+export const SliderValue = ({ className, children, ...rest }: SliderValueProps) => {
+  const { registerValueInThumb } = useSliderContext()
   const thumbContext = useSliderThumbContext()
   const isInsideThumb = thumbContext !== null
-
-  const valueRef = useRef<HTMLOutputElement | null>(null)
-  const mergedRef = useMergeRefs(valueRef, ref)
-
-  const [currentValue, setCurrentValue] = useState(0)
-  const translateX = useSliderValueBoundaries(controlRef, thumbRef, valueRef, currentValue)
 
   useEffect(() => {
     if (!isInsideThumb) return
@@ -44,7 +38,6 @@ export const SliderValue = ({ className, children, ref, ...rest }: SliderValuePr
     (formattedValues: readonly string[], values: readonly number[]) => {
       const formatted = formattedValues[0] ?? String(values[0] ?? '')
       const value = values[0] ?? 0
-      setCurrentValue(value)
       if (typeof children === 'function') {
         return children(formatted, value)
       }
@@ -54,20 +47,39 @@ export const SliderValue = ({ className, children, ref, ...rest }: SliderValuePr
     [children]
   )
 
-  const style = isInsideThumb
-    ? { transform: `translate(calc(0% + ${translateX}px), 0)` }
-    : undefined
-
   return (
     <BaseSlider.Value
       data-spark-component="slider-value"
-      ref={mergedRef}
       className={resolvedClassName}
-      style={style}
+      render={
+        isInsideThumb
+          ? (props, state) => <ThumbValueOutput {...props} value={state.values[0] ?? 0} />
+          : undefined
+      }
       {...rest}
     >
       {normalizedChildren}
     </BaseSlider.Value>
+  )
+}
+
+const ThumbValueOutput = ({
+  value,
+  ref,
+  style,
+  ...htmlProps
+}: ComponentProps<'output'> & { value: number }) => {
+  const { controlRef, thumbRef, min = 0, max = 100 } = useSliderContext()
+  const valueRef = useRef<HTMLOutputElement | null>(null)
+  const mergedRef = useMergeRefs(valueRef, ref)
+  const translateX = useSliderValueBoundaries(controlRef, thumbRef, valueRef, value, min, max)
+
+  return (
+    <output
+      ref={mergedRef}
+      style={{ ...style, transform: `translate(calc(0% + ${translateX}px), 0)` }}
+      {...htmlProps}
+    />
   )
 }
 
