@@ -1,3 +1,14 @@
+## 18.2.2 (2026-10-26)
+
+### 🩹 Fixes
+
+- **components:** avoid setState during render in Slider.Value ([f1cd0a2c7](https://github.com/leboncoin/spark-web/commit/f1cd0a2c7))
+- **components:** keep TextLink styles and props handling when Link uses asChild ([56659872d](https://github.com/leboncoin/spark-web/commit/56659872d))
+
+### ❤️ Thank You
+
+- alexandre cadiot
+
 ## 18.2.1 (2026-10-13)
 
 ### 🏡 Chore
