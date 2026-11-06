@@ -1,3 +1,13 @@
+## 18.2.3 (2026-11-06)
+
+### 🩹 Fixes
+
+- **components:** make SegmentedControl.Indicator SSR-safe ([317f5800d](https://github.com/leboncoin/spark-web/commit/317f5800d))
+
+### ❤️ Thank You
+
+- alexandre cadiot
+
 ## 18.2.2 (2026-10-26)
 
 ### 🩹 Fixes
