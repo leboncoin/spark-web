@@ -1,4 +1,4 @@
-import { type ComponentProps, type CSSProperties, Ref, useEffect, useMemo, useState } from 'react'
+import { type ComponentProps, type CSSProperties, Ref, useEffect, useState } from 'react'
 
 import { indicatorStyles } from './SegmentedControl.styles'
 import { useSegmentedControlContext } from './SegmentedControlContext'
@@ -14,6 +14,20 @@ export interface SegmentedControlIndicatorProps extends ComponentProps<'span'> {
   ref?: Ref<HTMLSpanElement>
 }
 
+/**
+ * Finds an item by comparing `dataset.value` directly, rather than building a selector with
+ * `CSS.escape` (a browser-only global that is unavailable during server-side rendering).
+ */
+const findItemByValue = (container: HTMLElement, value: string | null | undefined) => {
+  if (!value) return null
+
+  return (
+    Array.from(container.querySelectorAll<HTMLElement>('[data-value]')).find(
+      el => el.dataset.value === value
+    ) ?? null
+  )
+}
+
 /** The visual indicator that highlights the selected item. Renders a <span> element. */
 export const SegmentedControlIndicator = ({
   className,
@@ -23,11 +37,6 @@ export const SegmentedControlIndicator = ({
   const { checkedValue, containerRef } = useSegmentedControlContext()
   const [rect, setRect] = useState<IndicatorRect | null>(null)
 
-  const selector = useMemo(
-    () => (checkedValue ? `[data-value="${CSS.escape(checkedValue)}"]` : null),
-    [checkedValue]
-  )
-
   useEffect(() => {
     const container = containerRef.current
 
@@ -35,17 +44,17 @@ export const SegmentedControlIndicator = ({
       return
     }
 
-    const selectedItem = selector ? container.querySelector<HTMLElement>(selector) : null
+    const selectedItem = findItemByValue(container, checkedValue)
 
     const update = () => {
       const currentContainer = containerRef.current
-      if (!currentContainer || !selector) {
+      if (!currentContainer) {
         setRect(null)
 
         return
       }
 
-      const currentSelected = currentContainer.querySelector<HTMLElement>(selector)
+      const currentSelected = findItemByValue(currentContainer, checkedValue)
       if (!currentSelected) {
         setRect(null)
 
@@ -92,7 +101,7 @@ export const SegmentedControlIndicator = ({
       window.removeEventListener('resize', update)
       window.visualViewport?.removeEventListener('resize', update)
     }
-  }, [containerRef, selector])
+  }, [containerRef, checkedValue])
 
   if (!rect) return null
 
