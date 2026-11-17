@@ -8,7 +8,7 @@ export const iconStyles = cva(['fill-current shrink-0'], {
      */
     intent: makeVariants<
       'intent',
-      ['current', 'main', 'support', 'accent', 'success', 'alert', 'error', 'info', 'neutral']
+      ['current', 'main', 'support', 'accent', 'success', 'alert', 'error', 'info', 'neutral', 'ai']
     >({
       current: ['text-current'],
       main: ['text-main'],
@@ -19,6 +19,7 @@ export const iconStyles = cva(['fill-current shrink-0'], {
       error: ['text-error'],
       info: ['text-info'],
       neutral: ['text-neutral'],
+      ai: ['text-ai'],
     }),
     /**
      * Sets the size of the icon.
