@@ -1,3 +1,13 @@
+## 18.3.0 (2026-11-17)
+
+### 🚀 Features
+
+- **components:** add ai intent to Icon ([c90a2a0ac](https://github.com/leboncoin/spark-web/commit/c90a2a0ac))
+
+### ❤️ Thank You
+
+- alexandre cadiot
+
 ## 18.2.3 (2026-11-06)
 
 ### 🩹 Fixes

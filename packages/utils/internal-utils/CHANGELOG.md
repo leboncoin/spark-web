@@ -1,3 +1,7 @@
+## 18.3.0 (2026-11-17)
+
+This was a version bump only for @spark-ui/internal-utils to align it with other projects, there were no code changes.
+
 ## 18.2.3 (2026-11-06)
 
 This was a version bump only for @spark-ui/internal-utils to align it with other projects, there were no code changes.
