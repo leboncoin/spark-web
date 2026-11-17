@@ -57,6 +57,7 @@ const intents: ComponentProps<typeof Icon>['intent'][] = [
   'error',
   'info',
   'neutral',
+  'ai',
 ]
 
 export const Intent: StoryFn = _args => (
