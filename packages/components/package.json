@@ -59,7 +59,7 @@
     "@zag-js/pagination": "1.30.0",
     "@zag-js/react": "1.30.0",
     "class-variance-authority": "0.7.1",
-    "downshift": "9.0.13",
+    "downshift": "9.4.0",
     "emulate-tab": "1.2.1",
     "motion": "12.42.2",
     "radix-ui": "1.4.3",
