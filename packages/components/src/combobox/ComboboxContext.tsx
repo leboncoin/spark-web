@@ -346,6 +346,8 @@ export const ComboboxProvider = ({
       return (item as ComboboxItem)?.text
     },
     isItemDisabled: item => {
+      if (disabled) return true
+
       const isFilteredOut =
         !!inputValue &&
         !filteredItems.some(filteredItem => {

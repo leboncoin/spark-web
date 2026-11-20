@@ -1,7 +1,7 @@
 import { InfoFill } from '@spark-ui/icons/InfoFill'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import { Combobox } from '..'
 import { getInput, getItem, getListbox } from './test-utils'
@@ -33,6 +33,45 @@ describe('Combobox', () => {
     expect(getItem('War and Peace')).toBeInTheDocument()
     expect(getItem('1984')).toBeInTheDocument()
     expect(getItem('Pride and Prejudice')).toBeInTheDocument()
+  })
+
+  it('ignores option selection after an open combobox becomes disabled', async () => {
+    const user = userEvent.setup()
+    const onOpenChange = vi.fn()
+    const onValueChange = vi.fn()
+    const renderCombobox = (open: boolean, disabled: boolean) => (
+      <Combobox
+        disabled={disabled}
+        open={open}
+        onOpenChange={onOpenChange}
+        value="book-1"
+        onValueChange={onValueChange}
+      >
+        <Combobox.Trigger>
+          <Combobox.Input aria-label="Book" />
+        </Combobox.Trigger>
+        <Combobox.Popover>
+          <Combobox.Items>
+            <Combobox.Item value="book-1">War and Peace</Combobox.Item>
+            <Combobox.Item value="book-2">1984</Combobox.Item>
+          </Combobox.Items>
+        </Combobox.Popover>
+      </Combobox>
+    )
+
+    const { rerender } = render(renderCombobox(false, false))
+    const input = getInput('Book')
+    await user.click(input)
+    expect(onOpenChange).toHaveBeenCalledWith(true)
+    rerender(renderCombobox(true, false))
+    expect(input).toHaveAttribute('aria-expanded', 'true')
+
+    rerender(renderCombobox(true, true))
+    expect(input).toBeDisabled()
+    await user.click(getItem('1984'))
+
+    expect(onValueChange).not.toHaveBeenCalled()
+    expect(input).toHaveValue('War and Peace')
   })
 
   describe('Popover behaviour', () => {
