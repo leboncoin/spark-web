@@ -58,7 +58,7 @@
     "@commitlint/cz-commitlint": "21.2.0",
     "@commitlint/prompt-cli": "20.0.0",
     "@nx/devkit": "23.1.0",
-    "@nx/js": "23.1.0",
+    "@nx/js": "23.1.2",
     "@playwright/test": "1.62.0",
     "@spark-ui/cli-utils": "^17.5.3",
     "@storybook/addon-a11y": "10.5.4",
