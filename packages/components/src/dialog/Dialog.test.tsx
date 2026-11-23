@@ -215,4 +215,43 @@ describe('Dialog', () => {
 
     expect(screen.getByText(/Edit profile/i)).toHaveClass('group-has-data-[part=close]:pr-3xl')
   })
+
+  describe('responsive', () => {
+    it('should render a wrapper with the responsive fullscreen class', () => {
+      render(
+        <Dialog defaultOpen>
+          <Dialog.Portal>
+            <Dialog.Content fullscreenBelow="md">
+              <Dialog.Header>
+                <Dialog.Title>Fullscreen test</Dialog.Title>
+              </Dialog.Header>
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog>
+      )
+
+      const wrapper = document.body.querySelector('[class*="max-md"]')
+
+      expect(wrapper).toBeInTheDocument()
+      expect(wrapper).toHaveClass('max-md:[--size:fullscreen]')
+    })
+
+    it('should render a wrapper with the always fullscreen class', () => {
+      render(
+        <Dialog defaultOpen>
+          <Dialog.Portal>
+            <Dialog.Content fullscreenBelow="always">
+              <Dialog.Header>
+                <Dialog.Title>Fullscreen test</Dialog.Title>
+              </Dialog.Header>
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog>
+      )
+
+      const wrapper = document.body.querySelector('[class="[--size:fullscreen]"]')
+
+      expect(wrapper).toBeInTheDocument()
+    })
+  })
 })
