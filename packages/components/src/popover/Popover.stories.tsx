@@ -11,6 +11,7 @@ import { CloseButton } from './PopoverCloseButton'
 import { Content } from './PopoverContent'
 import { type ContentProps } from './PopoverContent'
 import { Header } from './PopoverHeader'
+import { Overlay } from './PopoverOverlay'
 import { Portal } from './PopoverPortal'
 import { Trigger } from './PopoverTrigger'
 
@@ -23,6 +24,7 @@ const meta: Meta<typeof Popover> = {
     'Popover.CloseButton': CloseButton,
     'Popover.Content': Content,
     'Popover.Header': Header,
+    'Popover.Overlay': Overlay,
     'Popover.Portal': Portal,
     'Popover.Trigger': Trigger,
   },
@@ -285,5 +287,76 @@ export const Positionning: StoryFn = _args => {
         </Popover>
       </ShowcaseContainer>
     </div>
+  )
+}
+
+const onboardingSteps = [
+  {
+    title: 'Search',
+    description: 'Find what you are looking for among thousands of ads.',
+  },
+  {
+    title: 'Publish',
+    description: 'Sell the items you no longer use in a few clicks.',
+  },
+] as const
+
+export const Onboarding: StoryFn = () => {
+  const [open, setOpen] = useState(false)
+  const [step, setStep] = useState(0)
+
+  const isLastStep = step === onboardingSteps.length - 1
+  const currentStep = onboardingSteps[step]!
+
+  const start = () => {
+    setStep(0)
+    setOpen(true)
+  }
+
+  const next = () => {
+    if (isLastStep) setOpen(false)
+    else setStep(step + 1)
+  }
+
+  return (
+    <ShowcaseContainer className="gap-lg flex-col">
+      <Popover open={open} onOpenChange={setOpen} modal>
+        <Button design="outlined" onClick={start}>
+          Start onboarding
+        </Button>
+
+        <div className="gap-lg flex">
+          {onboardingSteps.map((item, index) =>
+            index === step ? (
+              <Popover.Anchor key={item.title} asChild>
+                <Button intent="support">{item.title}</Button>
+              </Popover.Anchor>
+            ) : (
+              <Button key={item.title} intent="support">
+                {item.title}
+              </Button>
+            )
+          )}
+        </div>
+
+        <Popover.Overlay spotlight />
+        <Popover.Portal>
+          <Popover.Content key={step} onInteractOutside={e => e.preventDefault()}>
+            <Popover.Header>{currentStep.title}</Popover.Header>
+            <p className="mb-md">{currentStep.description}</p>
+            <div className="gap-md flex items-center justify-between">
+              <span className="text-caption">
+                {step + 1} / {onboardingSteps.length}
+              </span>
+              <Button size="sm" onClick={next}>
+                {isLastStep ? 'Got it' : 'Next'}
+              </Button>
+            </div>
+            <Popover.Arrow />
+            <Popover.CloseButton aria-label="Close the onboarding" />
+          </Popover.Content>
+        </Popover.Portal>
+      </Popover>
+    </ShowcaseContainer>
   )
 }

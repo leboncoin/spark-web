@@ -4,6 +4,7 @@ import { Arrow } from './PopoverArrow'
 import { CloseButton } from './PopoverCloseButton'
 import { Content } from './PopoverContent'
 import { Header } from './PopoverHeader'
+import { Overlay } from './PopoverOverlay'
 import { Portal } from './PopoverPortal'
 import { Trigger } from './PopoverTrigger'
 
@@ -16,6 +17,7 @@ export const Popover: typeof Root & {
   CloseButton: typeof CloseButton
   Content: typeof Content
   Header: typeof Header
+  Overlay: typeof Overlay
   Portal: typeof Portal
   Trigger: typeof Trigger
 } = Object.assign(Root, {
@@ -24,6 +26,7 @@ export const Popover: typeof Root & {
   CloseButton,
   Content,
   Header,
+  Overlay,
   Portal,
   Trigger,
 })
@@ -34,5 +37,6 @@ Arrow.displayName = 'Popover.Arrow'
 CloseButton.displayName = 'Popover.CloseButton'
 Content.displayName = 'Popover.Content'
 Header.displayName = 'Popover.Header'
+Overlay.displayName = 'Popover.Overlay'
 Portal.displayName = 'Popover.Portal'
 Trigger.displayName = 'Popover.Trigger'
