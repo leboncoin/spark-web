@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { cx } from 'class-variance-authority'
-import { PropsWithChildren, Ref, useState } from 'react'
+import { PropsWithChildren, ReactElement, Ref, useState } from 'react'
 
 import { Popover } from '.'
 import { Button } from '../button'
@@ -294,10 +294,17 @@ const onboardingSteps = [
   {
     title: 'Search',
     description: 'Find what you are looking for among thousands of ads.',
+    side: 'bottom',
   },
   {
     title: 'Publish',
     description: 'Sell the items you no longer use in a few clicks.',
+    side: 'bottom',
+  },
+  {
+    title: 'Your ads',
+    description: 'Follow the status of your ads and answer buyers from this panel.',
+    side: 'right',
   },
 ] as const
 
@@ -318,30 +325,44 @@ export const Onboarding: StoryFn = () => {
     else setStep(step + 1)
   }
 
+  /** Attaches the popover (and its spotlight) to the element of the current step. */
+  const stepTarget = (index: number, element: ReactElement) =>
+    index === step ? <Popover.Anchor asChild>{element}</Popover.Anchor> : element
+
   return (
-    <ShowcaseContainer className="gap-lg flex-col">
+    <div className="gap-lg flex flex-col items-start">
       <Popover open={open} onOpenChange={setOpen} modal>
         <Button design="outlined" onClick={start}>
           Start onboarding
         </Button>
 
         <div className="gap-lg flex">
-          {onboardingSteps.map((item, index) =>
-            index === step ? (
-              <Popover.Anchor key={item.title} asChild>
-                <Button intent="support">{item.title}</Button>
-              </Popover.Anchor>
-            ) : (
-              <Button key={item.title} intent="support">
-                {item.title}
-              </Button>
-            )
-          )}
+          {stepTarget(0, <Button intent="support">Search</Button>)}
+          {stepTarget(1, <Button intent="support">Publish</Button>)}
         </div>
+
+        {stepTarget(
+          2,
+          <div
+            className="border-md border-outline bg-surface p-lg gap-md flex flex-col rounded-lg"
+            style={{ width: '420px', height: '600px' }}
+          >
+            <p className="text-headline-2">Your ads</p>
+            {['Bike', 'Sofa', 'Camera'].map(ad => (
+              <div key={ad} className="bg-neutral-container p-md rounded-md">
+                {ad}
+              </div>
+            ))}
+          </div>
+        )}
 
         <Popover.Overlay spotlight />
         <Popover.Portal>
-          <Popover.Content key={step} onInteractOutside={e => e.preventDefault()}>
+          <Popover.Content
+            key={step}
+            side={currentStep.side}
+            onInteractOutside={e => e.preventDefault()}
+          >
             <Popover.Header>{currentStep.title}</Popover.Header>
             <p className="mb-md">{currentStep.description}</p>
             <div className="gap-md flex items-center justify-between">
@@ -357,6 +378,6 @@ export const Onboarding: StoryFn = () => {
           </Popover.Content>
         </Popover.Portal>
       </Popover>
-    </ShowcaseContainer>
+    </div>
   )
 }
