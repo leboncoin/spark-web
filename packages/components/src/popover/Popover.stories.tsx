@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react-vite'
 import { cx } from 'class-variance-authority'
-import { PropsWithChildren, Ref, useState } from 'react'
+import { PropsWithChildren, ReactElement, Ref, useState } from 'react'
 
 import { Popover } from '.'
 import { Button } from '../button'
@@ -11,6 +11,7 @@ import { CloseButton } from './PopoverCloseButton'
 import { Content } from './PopoverContent'
 import { type ContentProps } from './PopoverContent'
 import { Header } from './PopoverHeader'
+import { Overlay } from './PopoverOverlay'
 import { Portal } from './PopoverPortal'
 import { Trigger } from './PopoverTrigger'
 
@@ -23,6 +24,7 @@ const meta: Meta<typeof Popover> = {
     'Popover.CloseButton': CloseButton,
     'Popover.Content': Content,
     'Popover.Header': Header,
+    'Popover.Overlay': Overlay,
     'Popover.Portal': Portal,
     'Popover.Trigger': Trigger,
   },
@@ -284,6 +286,101 @@ export const Positionning: StoryFn = _args => {
           </Popover.Portal>
         </Popover>
       </ShowcaseContainer>
+    </div>
+  )
+}
+
+const onboardingSteps = [
+  {
+    title: 'Search',
+    description: 'Find what you are looking for among thousands of ads.',
+    side: 'bottom',
+  },
+  {
+    title: 'Publish',
+    description: 'Sell the items you no longer use in a few clicks.',
+    side: 'bottom',
+  },
+  {
+    title: 'Your ads',
+    description: 'Follow the status of your ads and answer buyers from this panel.',
+    side: 'right',
+  },
+] as const
+
+export const Onboarding: StoryFn = () => {
+  const [open, setOpen] = useState(false)
+  const [step, setStep] = useState(0)
+
+  const isLastStep = step === onboardingSteps.length - 1
+  const currentStep = onboardingSteps[step]!
+
+  const startOnboarding = () => {
+    setStep(0)
+    setOpen(true)
+  }
+
+  const next = () => {
+    if (isLastStep) setOpen(false)
+    else setStep(step + 1)
+  }
+
+  const prev = () => {
+    setStep(step => Math.max(0, step - 1))
+  }
+
+  /** Attaches the popover (and its spotlight) to the element of the current step. */
+  const stepTarget = (index: number, element: ReactElement) =>
+    index === step ? <Popover.Anchor asChild>{element}</Popover.Anchor> : element
+
+  return (
+    <div className="gap-lg flex flex-col items-start">
+      <Popover open={open} onOpenChange={setOpen} modal disablePointerDismissal>
+        <Button design="outlined" onClick={startOnboarding}>
+          Start onboarding
+        </Button>
+
+        <div className="gap-lg flex">
+          {stepTarget(0, <Button intent="support">Search</Button>)}
+          {stepTarget(1, <Button intent="support">Publish</Button>)}
+        </div>
+
+        {stepTarget(
+          2,
+          <div
+            className="border-md border-outline bg-surface p-lg gap-md flex flex-col rounded-lg"
+            style={{ width: '420px', height: '600px' }}
+          >
+            <p className="text-headline-2">Your ads</p>
+            {['Bike', 'Sofa', 'Camera'].map(ad => (
+              <div key={ad} className="bg-neutral-container p-md rounded-md">
+                {ad}
+              </div>
+            ))}
+          </div>
+        )}
+
+        <Popover.Overlay />
+        <Popover.Portal>
+          <Popover.Content key={step} side={currentStep.side}>
+            <Popover.Header>{currentStep.title}</Popover.Header>
+            <p className="mb-md">{currentStep.description}</p>
+            <div className="gap-md flex items-center justify-between">
+              <span className="text-caption">
+                {step + 1} / {onboardingSteps.length}
+              </span>
+              <Button disabled={step === 0} size="sm" onClick={prev}>
+                Back
+              </Button>
+              <Button size="sm" onClick={next}>
+                {isLastStep ? 'Got it' : 'Next'}
+              </Button>
+            </div>
+            <Popover.Arrow />
+            <Popover.CloseButton aria-label="Close the onboarding" />
+          </Popover.Content>
+        </Popover.Portal>
+      </Popover>
     </div>
   )
 }

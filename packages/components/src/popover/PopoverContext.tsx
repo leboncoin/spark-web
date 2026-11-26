@@ -16,6 +16,15 @@ export interface PopoverContextState {
   headerId: HeaderId
   setHeaderId: (id: HeaderId) => void
   intent: PopoverIntent
+  open: boolean
+  disablePointerDismissal: boolean
+  /**
+   * DOM elements registered by Popover.Anchor and Popover.Trigger, used by Popover.Overlay to highlight them (spotlight).
+   */
+  anchorElement: HTMLElement | null
+  setAnchorElement: (element: HTMLElement | null) => void
+  triggerElement: HTMLElement | null
+  setTriggerElement: (element: HTMLElement | null) => void
 }
 
 const PopoverContext = createContext<PopoverContextState | null>(null)
@@ -25,11 +34,17 @@ export const ID_PREFIX = ':popover'
 export const PopoverProvider = ({
   children,
   intent,
+  open,
+  disablePointerDismissal,
 }: {
   children: ReactNode
   intent: PopoverIntent
+  open: boolean
+  disablePointerDismissal: boolean
 }) => {
   const [headerId, setHeaderId] = useState<HeaderId>(null)
+  const [anchorElement, setAnchorElement] = useState<HTMLElement | null>(null)
+  const [triggerElement, setTriggerElement] = useState<HTMLElement | null>(null)
 
   return (
     <PopoverContext
@@ -37,6 +52,12 @@ export const PopoverProvider = ({
         headerId,
         setHeaderId,
         intent,
+        open,
+        disablePointerDismissal,
+        anchorElement,
+        setAnchorElement,
+        triggerElement,
+        setTriggerElement,
       }}
     >
       {children}

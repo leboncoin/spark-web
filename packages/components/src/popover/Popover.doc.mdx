@@ -34,6 +34,7 @@ import { Popover } from '@spark-ui/components/popover'
 export default () => (
   <Popover>
     <Popover.Trigger />
+    <Popover.Overlay />
     <Popover.Portal>
       <Popover.Content>
         <Popover.Header />
@@ -68,6 +69,14 @@ The button that toggles the popover. By default, the Popover.Content will positi
 An optional element to position the Popover.Content against. If this part is not used, the content will position alongside the Popover.Trigger.
 
 <ArgTypes of={Popover.Anchor} />
+
+
+### _.Overlay
+
+An optional backdrop that dims the rest of the page while the popover is open, typically for onboarding experiences. It keeps the element the popover is attached to highlighted (spotlight).
+It renders in its own portal: place it next to `Popover.Portal`, not inside it.
+
+<ArgTypes of={Popover.Overlay} />
 
 
 ### _.Portal
@@ -167,6 +176,18 @@ By combining `side` and `align` you can achieve many positions for the popover.
 - `align`: The preferred alignment against the anchor. May change when collisions occur.
 
 <Canvas of={stories.Positionning} />
+
+### Onboarding
+
+Use `Popover.Overlay` to focus the user's attention on a popover, for example to guide them through a feature.
+
+- Combine it with `modal` so that focus is trapped inside the popover, page scroll is locked and the rest of the page is hidden from assistive technologies.
+- Clicking the overlay closes the popover (it is an outside interaction). Add `disablePointerDismissal` on `Popover` so that a misclick does not end the onboarding: the popover can then only be closed with the Escape key, `Popover.CloseButton` or the `open` prop.
+- The overlay cuts a hole (spotlight) around the element the popover is attached to: `Popover.Anchor`, or `Popover.Trigger` when no anchor is used. The hole follows the element on scroll/resize, and animates when it moves to another element (ex: next step). Adjust it with `spotlightPadding` and `spotlightRadius`. Without trigger nor anchor, the whole page is dimmed.
+- The highlighted element receives a `data-spotlighted` attribute while highlighted, for custom styling.
+- The highlighted element is visible but follows the `modal` behaviour: it can not be interacted with in modal mode. In non-modal mode, clicking it is an outside interaction and closes the popover (unless `disablePointerDismissal` is used).
+
+<Canvas of={stories.Onboarding} />
 
 ## Accessibility
 
