@@ -32,10 +32,16 @@ export const Content = ({
   sticky = 'partial',
   inset = false,
   elevation = 'popover',
+  onInteractOutside,
   ref,
   ...rest
 }: ContentProps) => {
-  const { headerId, intent } = usePopover()
+  const { headerId, intent, disablePointerDismissal } = usePopover()
+
+  const handleInteractOutside: ContentProps['onInteractOutside'] = event => {
+    onInteractOutside?.(event)
+    if (disablePointerDismissal) event.preventDefault()
+  }
 
   return (
     <RadixPopover.Content
@@ -50,6 +56,7 @@ export const Content = ({
       })}
       data-spark-component="popover-content"
       ref={ref}
+      onInteractOutside={handleInteractOutside}
       {...{
         align,
         arrowPadding,

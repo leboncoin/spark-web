@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react'
+import { act, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { mockResizeObserver } from 'jsdom-testing-mocks'
 import { useState } from 'react'
@@ -330,6 +330,88 @@ describe('Popover', () => {
     })
   })
 
+  describe('disablePointerDismissal', () => {
+    const DismissalImplementation = ({
+      onInteractOutside,
+      onOpenChange,
+    }: {
+      onInteractOutside?: () => void
+      onOpenChange?: (open: boolean) => void
+    }) => (
+      <>
+        <Popover defaultOpen disablePointerDismissal onOpenChange={onOpenChange}>
+          <Popover.Trigger asChild>
+            <button type="button">Click me</button>
+          </Popover.Trigger>
+          <Popover.Content onInteractOutside={onInteractOutside}>
+            Popover content
+            <Popover.CloseButton aria-label="Close" />
+          </Popover.Content>
+        </Popover>
+        <button type="button">Outside</button>
+      </>
+    )
+
+    it('should not close on click outside', async () => {
+      const user = userEvent.setup()
+      const onInteractOutside = vi.fn()
+      const onOpenChange = vi.fn()
+
+      // Given an opened popover that disables pointer dismissal
+      render(
+        <DismissalImplementation
+          onInteractOutside={onInteractOutside}
+          onOpenChange={onOpenChange}
+        />
+      )
+
+      // When the user clicks outside of it
+      await user.click(screen.getByRole('button', { name: 'Outside' }))
+
+      // Then the popover stays open
+      expect(screen.getByText('Popover content')).toBeInTheDocument()
+      expect(onOpenChange).not.toHaveBeenCalled()
+
+      // ...and the consumer handler is still called (pointer down outside, then focus outside)
+      expect(onInteractOutside).toHaveBeenCalled()
+    })
+
+    it('should not close when focus moves outside', () => {
+      // Given an opened popover (non-modal) that disables pointer dismissal
+      render(<DismissalImplementation />)
+
+      // ...focus is inside the popover
+      expect(screen.getByRole('button', { name: 'Close' })).toHaveFocus()
+
+      // When focus moves outside of the popover (Tab loops inside the popover, so we move it programmatically)
+      act(() => screen.getByRole('button', { name: 'Outside' }).focus())
+
+      // Then the popover stays open
+      expect(screen.getByRole('button', { name: 'Outside' })).toHaveFocus()
+      expect(screen.getByText('Popover content')).toBeInTheDocument()
+    })
+
+    it('should still close on Escape (keyboard)', async () => {
+      const user = userEvent.setup()
+
+      render(<DismissalImplementation />)
+
+      await user.keyboard('{Escape}')
+
+      expect(screen.queryByText('Popover content')).not.toBeInTheDocument()
+    })
+
+    it('should still close when clicking on Popover.CloseButton', async () => {
+      const user = userEvent.setup()
+
+      render(<DismissalImplementation />)
+
+      await user.click(screen.getByRole('button', { name: 'Close' }))
+
+      expect(screen.queryByText('Popover content')).not.toBeInTheDocument()
+    })
+  })
+
   it('should render the Popover into the body of the document when using Popover.Portal', () => {
     // Given a popover rendered into a Portal
     render(
@@ -366,5 +448,151 @@ describe('Popover', () => {
     )
 
     expect(screen.getByText(/Popover content/i)).not.toHaveClass('p-lg')
+  })
+  describe('overlay', () => {
+    const getOverlay = () => document.querySelector('[data-spark-component="popover-overlay"]')
+
+    it('should render the overlay only while the popover is open', async () => {
+      const user = userEvent.setup()
+
+      // Given a popover with an overlay (closed by default)
+      render(
+        <Popover modal>
+          <Popover.Trigger asChild>
+            <button type="button">Click me</button>
+          </Popover.Trigger>
+          <Popover.Overlay />
+          <Popover.Portal>
+            <Popover.Content>
+              Popover content
+              <Popover.CloseButton aria-label="Close" />
+            </Popover.Content>
+          </Popover.Portal>
+        </Popover>
+      )
+
+      // ...the overlay is not rendered
+      expect(getOverlay()).toBeNull()
+
+      // When the user opens the popover
+      await user.click(screen.getByText('Click me'))
+
+      // Then the overlay is rendered in the body, hidden from assistive technologies
+      expect(getOverlay()).toBeInTheDocument()
+      expect(getOverlay()).toHaveAttribute('data-state', 'open')
+      expect(getOverlay()).toHaveAttribute('aria-hidden', 'true')
+
+      // When the user closes the popover
+      await user.click(screen.getByRole('button', { name: 'Close' }))
+
+      // Then the overlay is removed
+      expect(screen.queryByText('Popover content')).not.toBeInTheDocument()
+      expect(getOverlay()).toBeNull()
+    })
+
+    it('should close the popover when clicking on the overlay', async () => {
+      const user = userEvent.setup()
+      const onOpenChange = vi.fn()
+
+      // Given an opened popover with an overlay
+      render(
+        <Popover defaultOpen onOpenChange={onOpenChange}>
+          <Popover.Trigger asChild>
+            <button type="button">Click me</button>
+          </Popover.Trigger>
+          <Popover.Overlay />
+          <Popover.Content>Popover content</Popover.Content>
+        </Popover>
+      )
+
+      // When the user clicks on the overlay
+      await user.click(getOverlay() as HTMLElement)
+
+      // Then the popover closes
+      expect(onOpenChange).toHaveBeenCalledWith(false)
+      expect(screen.queryByText('Popover content')).not.toBeInTheDocument()
+      expect(getOverlay()).toBeNull()
+    })
+
+    describe('spotlight', () => {
+      it('should highlight the anchor element', async () => {
+        const user = userEvent.setup()
+
+        // Given a popover with an overlay and an anchor
+        render(
+          <Popover>
+            <Popover.Trigger asChild>
+              <button type="button">Click me</button>
+            </Popover.Trigger>
+            <Popover.Anchor asChild>
+              <span>Anchor</span>
+            </Popover.Anchor>
+            <Popover.Overlay />
+            <Popover.Content>Popover content</Popover.Content>
+          </Popover>
+        )
+
+        // ...nothing is highlighted while closed
+        expect(screen.getByText('Anchor')).not.toHaveAttribute('data-spotlighted')
+
+        // When the popover opens
+        await user.click(screen.getByText('Click me'))
+
+        // Then the anchor (not the trigger) is highlighted
+        expect(getOverlay()).toHaveAttribute('data-spotlight')
+        expect(screen.getByText('Anchor')).toHaveAttribute('data-spotlighted')
+        expect(screen.getByText('Click me')).not.toHaveAttribute('data-spotlighted')
+
+        // When the popover closes
+        await user.keyboard('{Escape}')
+
+        // Then the anchor is no longer highlighted
+        expect(screen.getByText('Anchor')).not.toHaveAttribute('data-spotlighted')
+      })
+
+      it('should highlight the trigger element when there is no anchor', () => {
+        render(
+          <Popover defaultOpen>
+            <Popover.Trigger asChild>
+              <button type="button">Click me</button>
+            </Popover.Trigger>
+            <Popover.Overlay />
+            <Popover.Content>Popover content</Popover.Content>
+          </Popover>
+        )
+
+        expect(screen.getByText('Click me')).toHaveAttribute('data-spotlighted')
+      })
+
+      it('should dim the whole page when there is no trigger or anchor to highlight', () => {
+        // Given a controlled popover without trigger nor anchor
+        render(
+          <Popover open>
+            <Popover.Overlay />
+            <Popover.Content>Popover content</Popover.Content>
+          </Popover>
+        )
+
+        // Then the overlay is rendered without spotlight
+        expect(getOverlay()).toBeInTheDocument()
+        expect(getOverlay()).not.toHaveAttribute('data-spotlight')
+        expect(document.querySelector('[data-spotlighted]')).toBeNull()
+      })
+
+      it('should forward refs to the anchor and trigger elements', () => {
+        const anchorRef = vi.fn()
+        const triggerRef = vi.fn()
+
+        render(
+          <Popover>
+            <Popover.Trigger ref={triggerRef}>Click me</Popover.Trigger>
+            <Popover.Anchor ref={anchorRef}>Anchor</Popover.Anchor>
+          </Popover>
+        )
+
+        expect(triggerRef).toHaveBeenCalledWith(screen.getByText('Click me'))
+        expect(anchorRef).toHaveBeenCalledWith(screen.getByText('Anchor'))
+      })
+    })
   })
 })
